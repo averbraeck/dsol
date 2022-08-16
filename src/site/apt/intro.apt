@@ -1,0 +1,28 @@
+What is DSOL?
+
+	DSOL is an open source, java based, suite for continuous and discrete event simulation. Its first release was introduced at IEEE's Winter Simulation Conference 2002.
+
+
+Why DSOL?
+
+	The hypothesis underlying the development of DSOL is that the web-enabled era has provided us with the tools and techniques to specify the concepts of simulation in a set of loosely-coupled, web-enabled services. An underlying notion on the quality of most current simulation tools is that they lack:
+
+    	* usefulness: with respect to their embedded knowledge of the system under investigation. It is too difficult to link simulation tools to underlying transactional information systems.
+
+    	* usability with respect to coordination of distributed conceptualization and specification of models representing the system under investigation.
+
+    	* usage with respect to their integration and use within (portalled) organizational management information systems.
+
+
+What were the requirements for DSOL?
+
+    * N decision makers should be supported over the internet by the suite;
+
+    * N model formalisms should be supported (continuous, discrete).
+
+    * N experts should be simultaneously be supported in the specification of models.
+
+    * Simulation services should be equipped to be linked to other web-enabled services (reporting, databases).
+
+    * N processors should be accessible for the execution of experiments.
+

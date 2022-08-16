@@ -1,0 +1,1788 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 changes.xsd" xml:space="preserve">
+  
+  <body>
+
+    <!-- PLEASE MAKE SURE THE LINE LENGTH IN XML - EDITOR - FORMATTING IS SET TO 128 -->
+
+    <release version="3.08.01" date="2022-07-XX" description="Simulator and eventlist adapted">
+      <action dev="averbraeck" type="fix">
+        Simulator: Avoid firing START_REPLICATION_EVENT twice.
+      </action>
+      <action dev="averbraeck" type="update">
+        Made the SimEvent itself comparable.
+      </action>
+      <action dev="averbraeck" type="add">
+        Made EventList a separate interface not dependent on SortedSet and added a second EventList implementation
+        based on a PriorityQueue (heap queue structure) that is faster for simulations up to ~ 100,000 events on
+        the eventlist.   
+      </action>
+      <action dev="averbraeck" type="update">
+        A new SimEvent.execute() error handling strategy has been implemented. In order to set the error handling, 
+        the setPauseOnError() and isPauseOnError() methods are deprecated and replaced by new 
+        setErrorStrategy(ErrorStrategy strategy) and getErrorStrategy() methods. ErrorStrategy is an enum. 
+        The log level can be overridden (and even be set to NONE). 
+      </action>
+      <action dev="averbraeck" type="fix">
+        DistWeibull and unit test for DistWeibull: small bug repaired. 
+      </action>
+    </release>
+    
+    <release version="3.08.01" date="2022-02-08" description="Deecoupling of dsol-animation; resources location">
+      <action dev="averbraeck" type="update">
+        The animation has been decoupled from dsol-core, and can now be used to display maps or animations without 
+        having a DSOL simulator present. The animation package is still dependent on dsol-naming, which provides
+        the (remote, file or memory) context in which the animation objects are registered and possibly transferred.  
+      </action>
+      <action dev="averbraeck" type="update">
+        Because of the decoupling of animation from simulation, the Renderable2D classes for simulation objects
+        now have to specify the simulator.getReplication() as the Context. Either they can do so directly, or these
+        classes can extend the SimRenderable2D instead, which takes a simulator as the parameter to indicate where to 
+        find the context.
+      </action>
+      <action dev="averbraeck" type="update">
+        When running a DSOL program in Eclipse, the resources from src/main/resources are placed in /target/classes.
+        When building a Runnable JAR file from Eclipse from the same project, the resources are placed within the jar
+        in the /resources folder, and therefore cannot be found. This disconnect between Eclipse and Maven has existed 
+        for over 10 years and is seen as a 'feature' and not as a bug. Two solutions exist: remove the Exluded: ** in
+        all project properties, Java Build Path, under the source directories of /src/main/resources (then the resource
+        files will be placed in the root in the runnable jar file), but this reverts after a Maven Update of the project.
+        Therefore, we have chosen the opposite solution: all resources are copied to the /target/classes/resources folder
+        in Eclipse, and to the /resources folder within the runnable jar file. Thereby they are always found at the same 
+        location. All URLResource.getResource(...) calls have been changed to have a path starting with "/resources/...".
+        An additional advantage is that the Jar files look less cluttered without all the resources in the root folder. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        The EsriFileXmlParser has been adapted to read shape files from within a jar file. The trick is to not open the 
+        file with URLResource.getResource(...).getPath, but rather with url.openStream(). Streams can usually be read much
+        easier than file names from the file system and jar files (and of course network links).
+      </action>
+      <action dev="averbraeck" type="fix">
+        The OsmFileReader has been adapted to read xml files from within a jar file. Since the Osmosis XmlReader class only 
+        accepts a filename, and not a stream, a new class XmlStreamReader has been added that can read a (compressed) 
+        osm xml file from a stream rather than from a file. 
+      </action>
+    </release>
+    
+    <release version="3.08.00" date="2022-02-01" description="GIS overhaul; OSM files for GIS maps; SimEvent errors">
+      <action dev="averbraeck" type="update">
+        The dsol-animation-gis project has been completely reorganized. The GisFileXMLParser has a new location and is renamed 
+        to EsriFileXmlParser. Generic GIS interfaces have been moved to the dsol-animation project, so the dependency between 
+        dsol-swing and dsol-animation-gis is  not needed anymore. The actual implementation of the shape file parser and the 
+        osm parser have been moved to two new projects: dsol-animation-gis-esri and dsol-animation-gis-osm. This means that 
+        when dsol-swing is loaded, no osmosis or esri dependencies are used, and the osmosis libraries are only included when
+        an OSM file has to be parsed.
+      </action>
+      <action dev="averbraeck" type="update">
+        Code for the ESRI shape parser has been rewritten, with a much lower memory footprint.
+      </action>
+      <action dev="averbraeck" type="add">
+        Map display in a new dsol-animation-gis-osm project can now also parse and display OpenStreetMap files 
+        (.pbf, .osm, .osm.gz and .osm.bz2).
+      </action>
+      <action dev="averbraeck" type="add">
+        Extra parsers for GIS files have been added to the dsol-animation-gis project that work on the basis of a much simpler
+        CSV or TSV file rather than the verbose XML file to specify what has to be read. The XML file still works for 
+        upward compatibility (but is already for a long time not dependent on the relatively heavy Xerces library anymore).
+      </action>
+      <action dev="averbraeck" type="add">
+        Demos for the XML parsers have been added to the dsol-demo project, in the n.t.s.dsol.animation.gis package.
+      </action>
+      <action dev="averbraeck" type="update">
+        The error messages and toString() method of the SimEvent have been improved with clear target and args printing.
+      </action>
+    </release>
+
+    <release version="3.07.06" date="2022-01-22" description="addScheduledMethodOnInitialize(...) added; final methods removed">
+      <action dev="averbraeck" type="add">
+        The addScheduledMethodOnInitialize(...) method has been added that adds a method call that has to be performed 
+        at the end of initialize, and before the model starts. This can, for instance, be used to schedule the 
+        execution of simulation events before initialize has been called, and solved the problem that, for discrete
+        event simulators, the scheduleEvent(...) methods cannot be called before initialize().
+      </action>
+      <action dev="averbraeck" type="update">
+        The 'final' keyword with methods has been removed. It turned out to be a nuisance time after time that methods
+        could not be extended, e.g., to return an object with narrower scope.  
+      </action>
+      <action dev="averbraeck" type="update">
+        The copyright notice has been updated to 2022.
+      </action>
+    </release>
+    
+    <release version="3.07.05" date="2021-04-10" description="ExperimentRunControl added">
+      <action dev="averbraeck" type="add">
+        An ExperimentRunControl object to more easily store offline data for the run control of the experiment 
+        has been created. Internally in the experiment, this object, rather than individual fields, are used 
+        to store the information for the experiment. This makes parsing an experiment from an external source
+        much easier, since the information can be stored in a data object.  
+      </action>
+    </release>
+
+    <release version="3.07.04" date="2021-04-09" description="Offline run control and seed information objects">
+      <action dev="averbraeck" type="add">
+        A RunControl object to more easily store offline data for the RunControl has been created.
+        These objects can now be passed to the constructor of experiments and replications. Internally,
+        these objects, rather than their individual fields, are used to store the information.  
+      </action>
+      <action dev="averbraeck" type="update">
+        The stream management of the DSOLModel interface and AbstractDSOLModel have been streamlined. Within the
+        model, the information about streams is stored in a StreamInfofrmation object rather than in an individual
+        map. This abstracts the implementation from the function of the streams. 
+      </action>
+      <action dev="averbraeck" type="add">
+        A method getDefaultStream() has been added to the model to make it easier to use the streams in easy cases.  
+      </action>
+    </release>
+    
+    <release version="3.07.03" date="2021-04-08" description="Stream management expanded">
+      <action dev="averbraeck" type="add">
+        A class in stream management (dsol-core experiment package) has been added to store predefined seeds
+        for replications. A StreamUpdater has been created that can take these pre-defined seeds and use the
+        SimpleStreamUpdater as a fallback when the information in the StreamSeedInformation class is missing.
+      </action>
+      <action dev="averbraeck" type="update">
+        DSOL has been updated to the 1.06.24 version of djunits where the Space2d and Space3d tagging interfaces have
+        been removed. This caused several generics (Point and Bounds) to be slightly updated.
+      </action>
+      <action dev="averbraeck" type="update">
+        Replaced HashMap and HashSet by LinkedHashMap and LinkedHashSet in all instances of the DSOL code to 
+        increase full reproducibility of the iterators over a HashMap, making them independent of the memory 
+        locations of objects in case the hasCode() function is not implemented for the objects in the HashMap.   
+      </action>
+    </release>
+      
+    <release version="3.07.02" date="2021-04-06" description="Statistics summarizers for multiple replications">
+      <action dev="averbraeck" type="update">
+        The way data is collected after a replication is completely changed. There are two paths towards
+        statistics over multiple replications: (1) the OutputStatistics of a DSOLModel, and (2) all statistics
+        that are stored in the Context. The Experiment now contains summary statistics for the statistics
+        that have been included in the model's OutputStatistics. The original statistics for each replication
+        remain available in the Context until the experiment is cleared.
+      </action>
+      <action dev="averbraeck" type="update">
+        Some further optimizations have been made to the EmpiricalDistribution. One is how to properly transform
+        density functions to a cumulative distribution that uses interpolation. 
+      </action>
+      <action dev="averbraeck" type="update">
+        Unit tests for the EmpiricalDistribution have been expanded.
+      </action>
+      <action dev="averbraeck" type="update">
+        Made it possible to completely replace the random streams in a model by making the streams protected and 
+        removing the final qualifier. This way, the streams can also be set by a main program, or point to a set
+        of streams elsewhere. 
+      </action>
+      <action dev="averbraeck" type="remove">
+        Removes the OutputStatistic class and replace usage by the StatisticsInterface class.
+      </action>
+    </release>
+
+    <release version="3.07.01" date="2021-04-04" description="Experiments and replications completely redesigned">
+      <action dev="averbraeck" type="update">
+        A simpler version of the ExperimentalFrame - Experiment - Treatment - Replication framework has
+        been implemented. For many purposes, this framework was way too complicated and rigid. It is now possible
+        to quickly tell the simulator: run 1 replication of the current model using the SingleReplication class, 
+        or to run n replications of the current model using the Experiment class. The order in which simulator 
+        and experiment need to be created is now totally free; when the simulator.initialize(replication, model) 
+        method is called, both the simulator and the replication need to fully specified, of course. 
+        This is a MAJOR CHANGE that BREAKS UPWARD COMPATIBILITY.
+      </action>
+      <action dev="averbraeck" type="update">
+        The Replication.START_REPLICATION_EVENT, Replication.END_REPLICATION_EVENT, and Replication.WARMUP_EVENT
+        have been moved to ReplicationInterface.START_REPLICATION_EVENT, ReplicationInterface.END_REPLICATION_EVENT 
+        and ReplicationInterface.WARMUP_EVENT.
+      </action>
+      <action dev="averbraeck" type="remove">
+        The ExperimentalFrame class has been removed from DSOL. Instead, a new Experiment class has been introduced. 
+        This experiment class works with a worker thread and interrupts to execute the simulation replications.
+        tests for the new Experiment including stream and seed management and resetting of experiments have been
+        added as well.
+      </action>
+      <action dev="averbraeck" type="remove">
+        The ReplicationMode has been removed from the call to simulator.initialize(...). It was not used and 
+        not stored, and would belong in the Experiment rather than in the call to initialize().
+      </action>
+      <action dev="averbraeck" type="update">
+        Random streams are now stored with the model instead of with the replication. It is the model that
+        knows which streams it needs. Seed management of these streams is done by the Experiment class.  
+        This is a MAJOR CHANGE that BREAKS UPWARD COMPATIBILITY.
+      </action>
+    </release>
+    
+    <release version="3.06.07" date="2021-04-03" description="empirical distributions, TIME_CHANGED_EVENT">
+      <action dev="averbraeck" type="update">
+        The DistEmpirical functions have been completely recoded, since the interface of the distributions
+        themselves and the interface of the Observations class were not clear. Unit tests have been created 
+        for the new classes. Coverage is not yet 100% -- this will be addressed in the next release. 
+      </action>
+      <action dev="averbraeck" type="add">
+        The distributions now have a setter for the random stream. When an experiment changes, a new
+        random stream can be allocated. Alternatively, the random stream can be retrieved, and the seed
+        can be reset. Distributions that have underlying other distributions need to take care that these also
+        change their stream, and when parameters need to be initialized when the stream is set (e.g., in the 
+        Normal distribution), the setStream(..) method also needs to take care of that.
+      </action>
+      <action dev="averbraeck" type="add">
+        Unit tests for SimTime classes. SimTime classes got equals() and hashCode() methods.
+      </action>
+      <action dev="averbraeck" type="add">
+        Unit tests for InputParameter classes. Small changes to some of the InputParameter classes, e.g., to
+        align to changes made in the distributions classes.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The TIME_CHANGED_EVENT should have a null payload, as it is already a TimedEvent that contains the absolute
+        simulation time. In several cases, the time was also added as the payload. This has been repaired. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        The 'observation' parameter in the double probability(observation) function has been changed to long
+        to be consistent with the type of the draw() function. 
+      </action>
+    </release>
+    
+    <release version="3.06.06" date="2021-03-13" description="more distribution functions recoded">
+      <action dev="averbraeck" type="remove">
+        The dependency on the Cern colt library has been taken out since the library is so old, and it is
+        not totally clear what algorithms are used for each function. 
+      </action>
+      <action dev="averbraeck" type="add">
+        Since the dependency on the Cern colt library has been taken out, ProbMath now defines the Gamma and
+        the Beta function for positive reals, as well as the gammaln function ln(gamma(x)). 
+      </action>
+      <action dev="averbraeck" type="update">
+        For several distribution functions it was unclear what the parameters mean, as many distributions have 
+        two forms: a parameter either indicates the rate, or the average (1/rate). Most distributions have been 
+        described in much more detail, and the unit tests for these distribution have been switched on. The ones
+        clarified in this version are: NegBinomial, DistPearson5, DistPearson6, Poisson, Triangular, Uniform,
+        and Weibull.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The DistPearson6 draw function has been changed, since it is described wrongly in Law &amp; Kelton (2ed),
+        and in Banks (2000); a factor beta in the draw() method was missing.  
+      </action>
+      <action dev="averbraeck" type="fix">
+        The DistNormalTrunc has been extensively tested, and several corner cases have been repaired, such as 
+        one-sided sampling and rounding errors close to the max value. Funrthermore, the interpolation from the
+        Z-values table has been replaced by the more precise usage of the erf() and erfInv() functions.   
+      </action>
+      <action dev="averbraeck" type="fix">
+        Some of the names of the test classes did not start or end with "Test" and were therefore skipped. 
+      </action>
+    </release>
+    
+    <release version="3.06.05" date="2021-03-09" description="runUntil; some distribution functions recoded">
+      <action dev="averbraeck" type="update">
+        The RunUntilPanel now works with the Simulator.runUpTo method to stop at the exact right time.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The simulator.run() methods have been updated to not execute till the time of the next event or time tick, 
+        but till the minimum of the runUntil time and the time of the next event or time tick.
+      </action>
+      <action dev="averbraeck" type="update">
+        The Erlang distribution has been changed to accept parameters k and scale that are in line with 
+        literature: scale is the mean of a single exponential distribution (rate or lambda is 1 / mean), and the Erlang 
+        distribution models the sum of k independent drawings from this distribution, with a mean of k * scale.
+        Note: this breaks upward compatibility, therefore the parameters k and scale have been swapped.
+      </action>
+      <action dev="averbraeck" type="update">
+        For several distribution functions it was unclear what the parameters mean, as many distributions have 
+        two forms: a parameter either indicates the rate, or the average (1/rate). Most distributions have been 
+        described in much more detail, and the unit tests for these distribution have been switched on. The ones
+        covered are: Bernoulli, Beta, Binomial, Constant, Erlang, Exponential, Gamma, Geometric, LogNormal, and
+        Normal. The others will be done in the next minor release.  
+      </action>
+      <action dev="averbraeck" type="fix">
+        Code for permutations has been fixed in ProbMath class (the code calculated combinations).
+      </action>
+      <action dev="averbraeck" type="add">
+        Code for combinations added to ProbMath class.
+      </action>
+      <action dev="averbraeck" type="add">
+        Code for error function erf(z) added to ProbMath class, using three different Taylor expansions,
+        which are used depending on the interval of the argument. For most of the interval, the error is
+        less than 1E-10, with a relative error cutoff for the Taylor expansions of 1E-16. 
+      </action>
+      <action dev="averbraeck" type="add">
+        Code for inverse error function erfInv(z) added to ProbMath class, using three different approximations,
+        which are used depending on the interval of the argument. For most of the interval, the error is
+        less than 1E-9.
+      </action>
+      <action dev="averbraeck" type="update">
+        The Normal cumulative probability and inverse cumulative probability functions now use erf() and erfInv()
+        functions instead of a lookup table, and thereby became much more precise.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Fixed a problem in the Renderable2D class. The original affine transform is stored, so it can be reset after 
+        the transformations, rotations, and translations for the drawing the locatable object have been carried out.
+        But because the AffineTransform is MUTABLE, it has to be cloned, in order to store the original transformation
+        matrix. The cloning has now been implemented.    
+      </action>
+    </release>
+        
+    <release version="3.06.04" date="2021-02-24" description="made Renderable2D.destroy() method more robust">
+      <action dev="averbraeck" type="fix">
+        Some extra safeguards have been built into the Renderable2DComparator and the Locatable interface
+        in case the getLocation() method returns null.
+      </action>
+      <action dev="averbraeck" type="fix">
+        When an Renderable2D animation object is removed, its source is set to null to (1) indicate to 
+        the paint() method that the object shouldn't be painted, and (2) allow the source to be destroyed by the GC. 
+      </action>
+    </release>
+    
+    <release version="3.06.03" date="2021-02-23" description="BoundsUtil.zIntersect simplified">
+      <action dev="averbraeck" type="update">
+        The BoundsUtil.zIntersect() method worked in a very intricate way that turned out to be counterproductive.
+        Instead of using the location.getZ() of an object t lift that object it was used to 'slice' through the 3D object,
+        determine the bounds of the slice, and return a bounds based on that operation. The zIntersect method has been
+        replaced with a much simpler method where the bounds projection on the XY-plane is used, possibly transformed
+        by the translation and orientation of the location of the object.
+      </action>
+      <action dev="averbraeck" type="update">
+        The value of getLocation() may now return null, e.g., when the object is still being constructed or being destroyed.
+      </action>
+    </release>
+    
+    <release version="3.06.02" date="2021-02-23" description="error in Renderable2DComparator fixed">
+      <action dev="averbraeck" type="fix">
+        The Renderable2DComparator used getDirZ() for comparison of the z-order instead of getZ().
+      </action>
+    </release>
+    
+    <release version="3.06.01" date="2021-02-20" description="calendar time types removed; dsol-swing further enhanced">
+      <action dev="averbraeck" type="remove">
+        Simplified the time units and removed the Calendar ones, as these easily create offset problems, and can
+        better be implemented with a Time/Duration or a double time unit and a display with an offset. 
+      </action>
+      <action dev="averbraeck" type="add">
+        All elements of the AnimationTab have been coded in separate classes. Panels that are not standard communicate
+        through events, to enable a flexible interface that is dependent on the panels present. An example is handling of
+        shift/mouse click or ctrl/mouse click for specific applications or when certain panels are present. 
+      </action>
+      <action dev="averbraeck" type="add">
+        InputParametersTab displays the input parameters in a ScrollPane.
+      </action>
+      <action dev="averbraeck" type="update">
+        Renderable2DComparator compares on long values, while the implementation of a Renderable2D can generate the value,
+        or use an int internally to conserve memory.
+      </action>
+      <action dev="averbraeck" type="update">
+        The organization of the dsol-swing components has been severely tightened with a very clear hierarchy: The core 
+        DSOLApplication class contains a DSOLPanel for the interaction. DSOLPanel consists of two components: (1) at the top a
+        ControlPanel that contains the ClockSpeedPanel, ControlButtonsPanel, RunUntilPanel, and possible other controls.
+        (2) A TabbedContentPane that can have e.g., console tabs, statistics tabs, an InputParametersTab, and a DSOLAnimationTab.
+        The DSOLAnimationTab consists of a AnimationSettingsPanel at the top, a TogglePanel on the left, a PropertiesPanel
+        on the right, and an AnimationPanel at the center. Of all these panels, different versions can be created and linked 
+        to the component one level up. One example is the AutoPanAnimationPanel that can track a simulation object. This now
+        just replaces the center component in the DSOLAnimationTab. All panels are accessible for making adaptations.
+      </action>
+    </release>
+    
+    <release version="3.05.04" date="2021-01-31" description="separate x/y scaling in animation">
+      <action dev="averbraeck" type="add">
+        For scaling a Renderable2D, several options exist from this version onward:
+        scale: whether to scale the drawing at all; e.g. for a legend, absolute coordinates might be used (scale = false);
+        scaleY: whether to scale differently in X and Y direction, e.g. for a map at higher latitudes (scaleY = true);
+        scaleObject: whether to scale the drawing larger or smaller than the scale factor of the extent (e.g., to draw 
+        an object on a map where the units of the object are in meters, while the map is in lat / lon degrees).
+        The default values are: translate = true; scale = true; flip = false; rotate = true; scaleY = false; scaleObject = false.
+        The settings for scaling are stored in the RenderableScale object. Different RenderableScale objects could exist
+        in one simulation.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Error in Renerable2D for flipping repaired.
+      </action>
+      <action dev="averbraeck" type="update">
+        BoundsUtil has been moved from dsol-base to dsol-animation as it is only used there.
+      </action>
+      <action dev="averbraeck" type="update">
+        Several actions in AnimationPanel, GridPanel, InputListener in dsol-swing updated, for instance to make
+        independent X/Y scaling possible.
+      </action>
+    </release>
+    
+    <release version="3.05.03" date="2021-01-27" description="repaired several GUI primitives">
+      <action dev="averbraeck" type="fix">
+        In AnimationPanel and InputListener in dsol-swing, fixed introspection, dragging, and visible extend using
+        the new Bounds3d classes from djutils-draw.
+      </action>
+      <action dev="averbraeck" type="update">
+        The ImageRenderable does not throw exceptions anymore at constructions but rather logs a warning and 
+        exits gracefully.
+      </action>
+      <action dev="averbraeck" type="add">
+        Built in very strict javadoc checking in each .project file, and repaired javadoc where needed.
+      </action>
+    </release>
+    
+    <release version="3.05.02" date="2021-01-23" description="new drawing primitives">
+      <action dev="averbraeck" type="remove">
+        3d animation has been removed for now, as java3d is not used anymore in DSOL, and there is no good 
+        internal alternative. Possibly an external alternative such as Unity can be explored later. 
+      </action>
+      <action dev="averbraeck" type="update">
+        Update to the latest version of djutils-draw caused DirectedPoint to be renamed to OrientedPoint. 
+      </action>
+      <action dev="averbraeck" type="update">
+        Code for Maps in dsol-animation-gis severely upgraded to match code standards. 
+      </action>
+      <action dev="averbraeck" type="add">
+        GIS demo added for testing purposes in dsol-demo.
+      </action>
+    </release>
+    
+    <release version="3.05.01" date="2021-01-02" description="dsol gui for swing re-implemented">
+      <action dev="averbraeck" type="add">
+        All gui code in dsol-swing has been updated to allow for easier control of the simulation model. This is
+        a major change that needs all interactive code to be changed. See the examples in dsol-demo.
+      </action>
+      <action dev="averbraeck" type="update">
+        The gui code in dsol-swing has been partitioned into a number of packages. 
+      </action>
+      <action dev="averbraeck" type="add">
+        A logger console and a stdout/stderr console have been added to dsol-swing.
+      </action>
+      <action dev="averbraeck" type="update">
+        All interactive examples in dsol-demo have been updated to comply with the changes in dsol-swing. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        All code in dsol-animation-gis has been updated to comply with the changes in dsol-swing. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        The GIS map code that was not yet working in version 3.05.00 has been updated to the latest version. See the
+        GUI demo in dsol-demo for an example of its use. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        In dsol animation, world coordinates are now using djutils-draw primitives. Screen coordinates use 
+        awt/swing primitives.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The DEVSRealTimeAnimator did not fire a SimulatorInterface.TIME_CHANGED_EVENT on every occasion when
+        the simulator time was changed. This has been repaired.
+      </action> 
+      <action dev="averbraeck" type="update">
+        Updated the Renderable2D to not contain anymore: a unique pointer to a logger (8 bytes), a unique long id
+        (8 bytes), and the animation context (8 bytes), saving 24 bytes per animation object. The only change
+        in the interface is tha the destroy() method now needs the simulator as an argument to be able to 
+        find the animation context.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The SimPersistent statistic has been updated to always fire the TIMED_OBSERVATION_ADDED_EVENT event when a new 
+        value is ingested. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The dsol checkstyle is more strict on javadoc, to comply with JDK8+ requirements.
+      </action>
+    </release>
+    
+    <release version="3.05.00" date="2020-12-30" description="dependences, javadocs, gis, djutils-draw">
+      <action dev="averbraeck" type="add">
+        The new dsol project dsol.animation.gis is able to read GIS files from ESRI Shape files, GeoJson and WKT
+        sources. The footprint is a lot lower than the original implementation since xerces is not needed anymore
+        for parsing the XML files. NOTE: this version is not 100% ready in this version of dsol, and will be 
+        completed and fully included in version 3.05.01. 
+      </action>
+      <action dev="averbraeck" type="remove">
+        The ancient gisbeans package has been replaced with a new dsol project dsol.animation.gis. 
+        It still contains some of the gisbeans code, but in an updated form.
+      </action>
+      <action dev="averbraeck" type="update">
+        Updated the ancient java3d 1.5.0 to djutils-draw primitives. This is a major change. Points are now
+        Point2d or Point3d; Bounds and BoundingBox have been replaced by Bounds3d (or Bounds2d); DirectedPoint
+        as it existed in DSOL is now DirectedPoint3d. DirectedPoint2d also exists in djutils-draw. Affine 
+        transformations are done with the Transform2d and Transform3d classes. As a result of these changes,
+        the Locatable interface has been changed in terms of the directed point location and the bounds.
+        Return types are now djutils Bounds for the bounds of the object and djutils Point for the location.   
+      </action>
+      <action dev="averbraeck" type="fix">
+        Fixed an error in the DistNormal getInverseCumulativeProbability function that did not 
+        interpolate between points in the Normal lookup table.
+      </action>
+      <action dev="averbraeck" type="add">
+        Added the DistLogNormalTrunc class, describing a truncated lognormal distribution. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        Changed the name of the probDensity function in the continuous classes to getProbabilityDensity(x)
+        for clarity and symmetry with the getCumulativeProbability(x) and getInverseCumulativeProbability(p)
+        functions.
+      </action>
+    </release>
+
+    <release version="3.04.10" date="2020-08-22" description="dependency versions, javadocs">
+      <action dev="averbraeck" type="update">
+        djutils and djunits dependencies have been updated to the latest version. Maven plugins have been
+        updated.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Javadoc references in the DSOL tree have been updated using offlineLinks during the generation process. 
+        DSOL packages now refer to each other in the Javadocs. 
+      </action>
+    </release>
+
+    <release version="3.04.09" date="2020-08-10" description="new version of djutils">
+      <action dev="averbraeck" type="update">
+        The djutils dependency has been updated to version 1.05.03.
+      </action>
+    </release>
+
+    <release version="3.04.08" date="2020-05-18" description="Simulator.runUntil executed one event always">
+      <action dev="averbraeck" type="fix">
+        The DEVSSimulator, DEVSAnimator, DEVDESSSimulator and DEVDESSAnimator always executed one event
+        at the runUntil() method, also when there was no event to execute. The time could therefore jump 
+        beyond the runUntil time. This has been repaired for these 4 simulators. 
+      </action>
+    </release>
+    
+    <release version="3.04.07" date="2020-05-16" description="djutils with smaller footprint">
+      <action dev="averbraeck" type="update">
+        Updated djutils to 1.05.02 with a much smaller jar footprint.  
+      </action>
+      <action dev="averbraeck" type="remove">
+        Removed xstream from the dsol pom as it is not used anymore.  
+      </action>
+    </release>
+    
+    <release version="3.04.06" date="2020-05-09" description="state machine for the simulators">
+      <action dev="averbraeck" type="remove">
+        Took out the STEP_EVENT. Instead, the step follows the same rule as normal running: the START_EVENT
+        and the STOP_EVENT are fired before/after the execution of the step.  
+      </action>
+      <action dev="averbraeck" type="fix">
+        More clear contract for the old isRunning() method. Created a RunState class and a method 
+        getRunState() that is much more precise in the state of the simulator: NOT_INITIALIZED, INITIALIZED,
+        STARTING, STARTED, STOPPING, STOPPED, ENDED with more precise methods: isStartingOrRunning(), 
+        isStoppingOrStopped(). The Simulator now implements a clear state machine for the run state.
+      </action>
+      <action dev="averbraeck" type="add">
+        Created a clear contract for the Replication state. Created a ReplicationState class and a method 
+        getReplicationState() that is precise in the state of the replication within simulator: 
+        NOT_INITIALIZED, INITIALIZED, STARTED, ENDING, ENDED. The Simulator implements a clear state machine 
+        for the replication state.
+      </action>
+    </release>
+    
+    <release version="3.04.05" date="2020-05-08" description="run until fixed, expiriment / replication flow">
+      <action dev="averbraeck" type="fix">
+        Fixed a bug where the run thread of the simulator / animator does not start very briefly after it has
+        been stopped, since it is possible that the worker thread has not yet stopped while the stop() method
+        has already returned. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        Fixed the way how experiments and replications are triggered and advanced. The old way was to start at 
+        experiment number -1, and replication number -1, and trigger an END_OF_EXPERIMENT_EVENT and an
+        END_OF_REPLICATION_EVENT at the start to advance the experiment and replication both to 0. This
+        has been replaced by a proper start that also triggers the right events.   
+      </action>
+      <action dev="averbraeck" type="add">
+        Events for starting and stopping the simulation have been split into a STARTING_EVENT (Event) that 
+        indicates that an external thread has asked to start the simulator, and a START_EVENT (TimedEvent)
+        that indicates that the run() method of the simulation has actually started. Same for the 
+        STOPPING_EVENT (Event) and the STOP_EVENT (TimedEvent).    
+      </action>
+      <action dev="averbraeck" type="fix">
+        The way events are fired from the Simulator has been made much more precise. Start, stop, end_replication
+        and other events are fired as close as possible to the actual state change that happens. Double firing
+        of events is prevented as much as possible.      
+      </action>
+      <action dev="averbraeck" type="remove">
+        The methods for the simulator start(boolean), step(boolean) and stop(boolean) have been removed. These
+        methods could indicate not to fire a START, STEP or STOP event. Since sending these events is part
+        of the contract for a simulator, the option to not send them has been removed. Instead, startImpl(),
+        stepImpl() and stopImpl() have been created that just do the work without firing events that belong
+        to the user interface thread.
+      </action>
+      <action dev="averbraeck" type="update">
+        The START_REPLICATION_EVENT, WARMUP_EVENT and END_REPLICATION_EVENT are now defined in the Replication  
+        rather than in the SimulatorInterface.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Fixed the BoxAndWhiskerPlot for not listening to TIMED event for timed, weighted tally.      
+      </action>
+    </release>
+
+    <release version="3.04.04" date="2020-05-07" description="event metadata added, differential equations">
+      <action dev="averbraeck" type="update">
+        Updated djutils to 1.05.01, where events have metadata, and TimedEvents are separated from non-timed 
+        Events. All events in DSOL have been given the appropriate metadata that defines the types and names 
+        of the fields in the event. TimedEvents and TimedEventTypes have been properly allocated as well.
+      </action>
+      <action dev="averbraeck" type="update">
+        The dsol-core DifferentialEquation had a VALUE_CHANGED_EVENT array of fixed length 30. In order to
+        give the right length to the array, the constructor of the DifferentialEquation now has the number of
+        variables as one of its arguments. The DifferentialEquationInterface in dsol-core has been removed for
+        now, as it was empty.  
+      </action>
+    </release>
+    
+    <release version="3.04.03" date="2020-03-08" description="base statistics moved to djutils-stats">
+      <action dev="averbraeck" type="remove">
+        The jstats statistics have been moved to a separate project djutils-stats, as their use is independent
+        of simulation and much more generic than dsol itself. As a result, the dsol statistics now extend
+        the djutils-stats statistics. The nl.tudelft.simulation.jstats.statistics package has been
+        removed from dsol-core.  
+      </action>
+      <action dev="averbraeck" type="update">
+        The DSOL statistics have been updated with the more advanced functions of the djutils-stats 
+        project, such as the possibility to show percentiles, skewness and kurtosis.
+      </action>
+      <action dev="averbraeck" type="update">
+        All swing-related classes have been moved from dsol-core to dsol-swing. Also the generic 'Swingable'
+        class is now in dsol-swing. The table representations of dsol-core statistics have stayed, however,
+        in dsol-core because the table representation itself is independent of its rendering (which could
+        be using swing, on the web, or in a file).
+      </action>
+      <action dev="averbraeck" type="update">
+        All demos have been updated to use the new statistics classes.
+      </action>
+    </release>
+
+    <release version="3.04.02" date="2020-02-10" description="dsol-naming updated">
+      <action dev="averbraeck" type="fix">
+        All classes in dsol-naming have been completely re-implemented without using the heavyweight jndi
+        classes. Instead, a lightweight recursive tree structure has been used for the contexts that is better
+        scalable and can be more easily interacted with programmatically.  
+      </action>
+      <action dev="averbraeck" type="update">
+        The DJUTILS version has been updated to 1.04.09, allowing for the newest implementation of 
+        the (remote) event producers and event listeners.
+      </action>
+      <action dev="averbraeck" type="remove">
+        The package nl.tudelft.simulation.naming.context.tree has been removed from the dsol-naming project.
+        The classes in this package were there for a DnD (Drag and Drop) interface for the context, which 
+        would fit better in dsol-swing, and can be added to dsol-swing at a later stage.
+      </action>
+      <action dev="averbraeck" type="remove">
+        Removed specific listeners for context changes. Context listeners are now implemented through 
+        the normal 'notify' method.
+      </action>
+      <action dev="averbraeck" type="add">
+        A simple demo for remote contexts has been added to the dsol-naming project in the test sources.  
+      </action>  
+      <action dev="averbraeck" type="add">
+        Subscriptions for four different ContextScopes have been added: subscriptions for an object, a 
+        level in the tree, a level plus the context object that is the root of this level, and a complete
+        subtree including future additions and deletions. The demo in dsol-naming uses an event producer
+        for the entire context tree.
+      </action>  
+    </release>
+    
+    <release version="3.04.01" date="2020-01-23" description="New DJUTILS version; small update to AnimationPanel">
+      <action dev="averbraeck" type="update">
+        The DJUTILS version has been updated to 1.04.05.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Animation did not always show in applications or web applications. A check on whether the replication
+        initialization event comes from the Simulator has been temporarily removed.  
+      </action>
+    </release>
+        
+    <release version="3.04.00" date="2020-01-22" description="Event project to DJUTILS, new Context implementation">
+      <action dev="averbraeck" type="remove">
+        The event project has been moved to the DJUTILS project and can be found as part of djutils. See 
+        https://djutils.org/manual/djutils-project/event-package for more information. Much of the event package
+        has been re-implemented and streamlined as part of the the transfer to DJUTILS.  
+      </action>
+      <action dev="averbraeck" type="fix">
+        As a result of the transfer of the event project, all references to nl.tudelft.simulation.dsol.event.* had to 
+        be changed to org.djutils.event.*
+      </action>
+      <action dev="averbraeck" type="fix">
+        The DJUNITS event project implements the EventProducer as an abstract class that needs a sourceId for firing events
+        rather than exposing 'this' in each event. Therefore, the constructor of the classes that extend EventProducer
+        had to be changed. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        The DJUNITS event project forces the sourceId and content of an event, and the timestamp of a TimedEvent to be
+        Serializable, because events are often streamed into a database. Several classes had to be updated to reflect
+        this change.  
+      </action>
+      <action dev="averbraeck" type="update">
+        The context package in the dsol-naming project has been completely re-implemented. The dependency on underlying 
+        JNDI classes has been reduced, and the implementation is more lightweight than it was originally. The package 
+        structure has been updated, and several of the classes have moved to new packages. Interfaces with a Name
+        object have been removed; only the String representations have been re-implemented. Many of the other interfaces 
+        of the new context implementation are the same as or similar to the original ones. The new Context implementation
+        has been documented in https://simulation.tudelft.nl/dsol/manual/advanced/naming-context.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Rigid testing of the context package revealed many smaller and bigger mistakes (one of the reasons for
+        re-implementing the entire package).
+      </action>
+      <action dev="averbraeck" type="add">
+        Unit tests have been included for the entire context package and dsol-naming project.
+      </action>
+      <action dev="averbraeck" type="add">
+        A context demo has been added to the dsol-naming project under the test tree (DemoServer and DemoClient classes).
+      </action>
+      <action dev="averbraeck" type="update">
+        The CategoryLogger in DJUTILS has been turned into a singleton rather than a static class. SimLogger implements a 
+        logger with functionality of the CategoryLogger, but the logger is simulator-aware and can print the simulator time 
+        as part of the log message.
+      </action>
+    </release>
+    
+    <release version="3.03.14" date="2019-11-17" description="Optimized differential equations; concurrent unit tests">
+      <action dev="averbraeck" type="update">
+        Changed the short values for NumericalIntegrator into an Enum called NumericalIntegratorType. The constructors
+        of all DifferentialEquation types have been adapted accordingly.
+      </action>
+      <action dev="averbraeck" type="add">
+        Added test code for an ordinary differential equation, and for a stiff set of ODEs.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Repaired the Gill numerical integration method (formula wrongly implemented).
+      </action>
+      <action dev="averbraeck" type="add">
+        Added test code for the simulators using multi-threaded testing.
+      </action>
+      <action dev="averbraeck" type="add">
+        An extended version of ConcurrentUnit for multi-threaded tests has been added to the test code to be able
+        to test running simulators. See https://github.com/jhalterman/concurrentunit for more info. The original pom
+        has not been included because it lacked several tests that we want to include here.
+      </action>
+      <action dev="averbraeck" type="add">
+        Very extensive unit test for random number generators (bins, test on bit level, all drawing methods).
+      </action>
+      <action dev="averbraeck" type="fix">
+        Repaired the DX120 Random Number Generator (average draw was 0.25 instead of 0.5).
+      </action>
+      <action dev="averbraeck" type="fix">
+        Repaired the nextInt(min, max) function in RandomNumberGenerator.
+      </action>
+    </release>
+
+    <release version="3.03.13" date="2019-11-16" description="Full coverage of unit tests in dsol-base">
+      <action dev="averbraeck" type="add">
+        Added unit tests for dsol-base project to increase test coverage. TestCase has been replaced by @Test.
+      </action>
+      <action dev="averbraeck" type="update">
+        Updated the code for differential equations.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Fixed SphericalPoint in ots-base. The translation from a CartesianPoint to a SphericalPoint was wrong. Also,
+        the arguments of the constructor of a SphericalPoint have been changed. The call is now:
+        public SphericalPoint(final double radius, final double theta, final double phi)
+      </action>
+      <action dev="averbraeck" type="fix">
+        Extra equals() methods have been added to DirectedPoint and CartesianPoint in dsol-base. The Tuple3d from
+        which these point types extends have an equals(Tuple3d) method that always wins from the equals(Object)
+        method because it is more specific. Therefore the RotX, RotY and RotZ were not taken into account when 
+        comparing two DirectedPoint objects.   
+      </action>
+      <action dev="averbraeck" type="update">
+        DirectedLine uses an embedded enum for Side instead of int.
+      </action>
+      <action dev="averbraeck" type="update">
+        CompositeFilter uses an embedded enum for Operator instead of int.
+      </action>
+      <action dev="averbraeck" type="update">
+        StateSaver uses byte[] instead of Object as that is the type in which data is stored. This has changed the 
+        interface of StreamInterface in dsol-core.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Several small errors have been repaired in BitUtil in dsol-base.
+      </action>
+      <action dev="averbraeck" type="remove">
+        Since the classes SwingWorker, ScreenManager and JMultiToolbarFrame are not used anymore in dsol, they
+        have been removed from dsol-base. 
+      </action>
+    </release>
+    
+   <release version="3.03.12" date="2019-11-08" description="Test updates; compatibility with Java-9+">
+      <action dev="averbraeck" type="fix">
+        Ensured that "package-list" exists in apidocs for backward compatibility of javadoc linking.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Replaced FindBugs (which already had a problem supporting Java 8) with SpotBugs 
+        (supporting later Java versions as well).
+      </action>
+      <action dev="averbraeck" type="remove">
+        Package nl.tudelft.simulation.dsol.web.peer in dsol-web removed, as this is an internal set 
+        of classes that should not be re-implemented. As of Java-9 they are completely internal-only.
+      </action>
+      <action dev="averbraeck" type="update">
+        The test in dsol-event have been upgraded to the latest JUnit test format.    
+      </action>
+      <action dev="averbraeck" type="update">
+        djunits and djutils have been updated to the latest Java9+ compatible version.    
+      </action>
+      <action dev="averbraeck" type="update">
+        Included jakarta.annotation-api to be compatible with Java 11+.
+      </action>
+      <action dev="averbraeck" type="fix">
+        tt-tag in javadoc replaced by code-tag to be compatible with HTML-5 and Java-11+.
+      </action>
+      <action dev="averbraeck" type="fix">
+        javadoc source version 8 added to pom-file to be compatible with Java-11+.
+      </action>
+   </release>
+
+   <release version="3.03.11" date="2019-10-25" description="New version of djunits, djutils">
+      <action dev="averbraeck" type="update">
+        The versions of djunits and djutils have been updated to the latest version (4.01.00 and 1.03.01).    
+      </action>
+    </release>
+
+    <release version="3.03.10" date="2019-10-20" description="New version of djunits, djutils">
+      <action dev="averbraeck" type="update">
+        The versions of djunits and djutils have been updated to the latest version (4.00.04 and 1.03.00).    
+      </action>
+      <action dev="averbraeck" type="remove">
+        As a result of the new djunits version, the Money distributions have been removed.
+      </action>
+      <action dev="averbraeck" type="add">
+        As a result of the new djunits version, distributions for the following types have been added:
+        AbsorbedDose, AmountOfSubstance, CatalyticActivity, ElectricalCapacitance, ElectricalConductance, 
+        ElectricalInductance, EquivalentDose, Illuminance, LuminousFlux, LuminousIntensity, 
+        MagneticFluxDensity, MagneticFlux, and RadioActivity.
+      </action>
+    </release>
+
+    <release version="3.03.09" date="2019-05-30" description="Extent calculation, InputParameters, distributions">
+      <action dev="averbraeck" type="fix">
+        The calculation of the extent of the animation assumed zero-based coordinates for the calculation
+        of a small area around the total animation picture. This has been replaced by a relative area.    
+      </action>
+      <action dev="averbraeck" type="add">
+        InputParameters can be parsed from a text file or from program arguments (using key.sub=value).     
+      </action>
+       <action dev="averbraeck" type="add">
+        Added unit tests for language.d2 and inputparameters in dsol-base.     
+      </action>
+       <action dev="averbraeck" type="remove">
+        Removed the utility class DirectionalShape from language.d2 in dsol-base. The functionality is
+        well taken care of by the standard Java classes.      
+      </action>
+      <action dev="averbraeck" type="update">
+        djunits version updated to 3.01.04 to allow for value-with-unit parsing of strings.     
+      </action>
+      <action dev="averbraeck" type="fix">
+        Repaired errors with null values in the CollectionRenderer in dsol-swing. toString() is not 
+        called anymore for null values; instead "null" is given as output.     
+      </action>
+      <action dev="averbraeck" type="add">
+        All distribution functions have getters for their parameters.     
+      </action>
+      <action dev="averbraeck" type="add">
+        The truncated Normal distribution function has been added.     
+      </action>
+      <action dev="averbraeck" type="update">
+        Uniform and Triangular distribution functions have been given more clear parameter names.     
+      </action>
+      <action dev="averbraeck" type="fix">
+        The triangular distribution now allows for min == mode, or max == mode but not both.     
+      </action>
+      <action dev="averbraeck" type="update">
+        dsol-web has been expanded with further functions. It is now possible to run and view multiple
+        simulations in parallel by using a token in the web address that uniquely identifies the 
+        simulation session. See AbstractTestDemoServer as a first version in dsol-web.
+      </action>
+      <action dev="averbraeck" type="add">
+        dsol-web allows for reading of the InputParameters from a web page.     
+      </action>
+    </release>
+
+    <release version="3.03.08" date="2019-05-10" description="InputParameters checks for min/max repaired">
+      <action dev="averbraeck" type="fix">
+        The InputParameterDouble and InputParameterFloat did not check for NaN. This has been repaired. 
+        The InputParameyterDoubleScalar and InputParameyterFloatScalar checked for the min/max values
+        in the double/float rather than in the SI values including the unit. This has been repaired.    
+      </action>
+      <action dev="averbraeck" type="update">
+        DJUTILS has been updated to version 1.00.06. This resulted in several imports for the Cat class
+        for logging to be changed.     
+      </action>
+    </release>
+    
+    <release version="3.03.07" date="2019-05-01" description="DEVSRealTimeClock animation 'jumps' repaired">
+      <action dev="averbraeck" type="fix">
+        The 'jumps' that sometimes occurred in the animation of the DEVSRealTimeClock have been repaired.
+        This was due to an accumulating error in the translation of short waits when no events were happening,
+        which was corrected with a time jump when the next event was executed. The code that is responsible
+        for handling this correctly is:
+<![CDATA[
+<pre>
+// make a small time step for the animation during wallclock waiting, but never beyond the next event
+// time. Changed 2019-04-30: this is now recalculated based on latest system time after the 'sleep'.
+synchronized (super.semaphore)
+{
+    A nextEventSimTime = nextEvent.getAbsoluteExecutionTime().get();
+    R deltaToWall0inSimTime = simulatorTimeForWallClockMillis(
+            (System.currentTimeMillis() - wallTime0) * currentSpeedFactor);
+    A currentWallSimTime = simTime0.plus(deltaToWall0inSimTime).get();
+    if (nextEventSimTime.compareTo(currentWallSimTime) &lt; 0)
+    {
+        this.simulatorTime.set(nextEventSimTime);
+        wallMillisNextEventSinceBaseline = 0.0; // force breakout of the loop
+    }
+    else
+    {
+        this.simulatorTime.set(currentWallSimTime);
+    }
+}
+</pre>
+]]>     
+      </action>
+      <action dev="averbraeck" type="add">
+        The DEVSRealTimeClock got an extra setting: public void setAnimation(final boolean animation). This setting
+        indicates whether the animation thread will be started or not. For Web-based applications, the simulation 
+        has to be scaled to the real-time clock, but the animation events do not come from the separate
+        AnimationThread, but from a timer in the Web application. In tat case setAnimation(false) can be
+        called on the DEVSRealTimeClock after constructing it.
+      </action>
+      <action dev="averbraeck" type="fix">
+        A 'ConcurrentModificationException' on the visibilityMap in the AnimationPanel in dsol-swing has been repaired
+        with a 'synchronized' block for its use. The main program thread was still setting the visibility of the
+        classes, while the first animation was already iterating over the visibility to see which classes need to 
+        be drawn on the screen.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The AnimationThread corrects the time between animation updates for the time it takes to draw the animation.
+        It thereby tries to stay as close as possible to the given update frequency.
+      </action>
+    </release>
+    
+    <release version="3.03.06" date="2019-04-19" description="DelegateIntrospection, Map and Immutable introspection">
+      <action dev="averbraeck" type="add">
+        Introspection for Map, ImmutableCollection, and ImmutableMap added.
+      </action>
+      <action dev="averbraeck" type="add">
+        The DelegateIntrospection has been added to introspection. When an object implements the
+        DelegateIntrospection interface, it delegates the introspection to it parent. The implementation
+        has been set up that multiple delegations are handled correctly. The function is to provide
+        intermediate animation objects the option to delegate the introspection to their parent object.
+      </action>
+    </release>
+ 
+     <release version="3.03.05" date="2019-01-18" description="TabbedParameterDialog">
+      <action dev="averbraeck" type="update">
+        TabbedParameterDialog in ots-swing made better accessible for extensions with user-built
+        fields, e.g. for radio buttons (see dsol manual - advanced topics).
+      </action>
+    </release>
+
+    <release version="3.03.04" date="2019-01-17" description="djutils version, copyright">
+      <action dev="averbraeck" type="update">
+        djutils version updated to 1.00.02.
+      </action>
+      <action dev="averbraeck" type="update">
+        Copyright notice updated to 2019.
+      </action>
+    </release>
+
+    <release version="3.03.03" date="2019-01-15" description="dsol-swing, dsol-web, dsol-demo">
+      <action dev="averbraeck" type="fix">
+        AnimationPanel.visibilityMap changed into a synchronized map to avoid ConcurrentModificationException
+        on the call of isShowClass().
+      </action>
+      <action dev="averbraeck" type="update">
+        TabbedParameterDialog updated to be able to easily extend it with different renderings
+        for the data types.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The recursive call of drawGrid() in dsol-swing's gridPanel has been replaced by a while-loop.
+        The recursive version sometimes led to an infinite loop.
+      </action>
+    </release>
+
+    <release version="3.03.02" date="2019-01-03" description="Statistics, dsol-demo, manual">
+      <action dev="averbraeck" type="remove">
+        The XML-parsing has been removed from the dsol-demo project. Instead, interactive applications and 
+        applications using the console or the Web have been created.
+      </action>
+      <action dev="averbraeck" type="add">
+        The site contains a reference to the new DSOL manual at https://simulation.tudelft.nl/dsol/manual/
+      </action>
+      <action dev="averbraeck" type="update">
+        The SimCounter, SimTally and SimPersistent have easy access inner classes such as 
+        SimTally.TimeDoubleUnit to link them strongly typed to the right simulator.
+      </action>
+       <action dev="averbraeck" type="update">
+        The SimPersistent class now handles SimTime objects for the timestamp. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The Persistent class can now also handle Calendar objects for the timestamp.
+      </action>
+      <action dev="averbraeck" type="update">
+        The simulator-aware versions of the Counter, Tally and Persistent have been renamed into
+        SimCounter, SimTally and SimPersistent, to avoid having classes with exactly the same 
+        name within the dsol-core project, which has always been very confusing.
+      </action>
+      <action dev="averbraeck" type="update">
+        The interface for the InputParameter now forces each parameter to return a getCalculatedValue()
+        in addition to the getValue(). This is important, as for the typed selection functions
+        using a map, the getValue() returns the map (the value of that parameter), whereas 
+        getCalculatedValue() returns the value that can be calculated from the map. This is 
+        particularly important for the distribution functions. To enable this and to make it 
+        type-safe, the InputParameter interface got one extra generic to denote the 'calculated' type.
+      </action>
+      <action dev="averbraeck" type="update">
+        The Replication in dsol-core defines a default random stream using a MersenneTwister
+        with the name "default" and a seed equal to the hashCode of the Replication's id. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The Replication in dsol-core now has an id, and requests the id to be used in the constructor.
+        The id can be of type String or of type int.
+      </action>
+    </release>
+      
+    <release version="3.03.01" date="2018-12-08" description="CategoryLogger">
+      <action dev="averbraeck" type="update">
+        The DSOL categories for the CategoryLogger in DJUTILS have been added to dsol-base into
+        the nl.tudelft.simulation.dsol.logger package.
+      </action>
+    </release>
+
+
+    <release version="3.03.00" date="2018-11-17" description="Major refactoring, dsol-web and dsol-animation">
+      <action dev="averbraeck" type="update">
+        Generic classes to multiple projects have been moved to the DJUTILS project. 
+        Examples are the immutable collections, the Throw class, URLResource, Primitive,
+        ClassUtil, and the CategoryLogger for tinylog. See www.djutils.org for more info.
+      </action>
+      <action dev="averbraeck" type="add">
+        Distribution functions for scalars with units have been added. They wrap one of
+        the existing (continuous) distributions. Example:
+<![CDATA[
+  <pre>DistContinuousLength lengthDist = new DistContinuousLength(
+    new DistUniform(stream, 1.0, 2.0), LengthUnit.METER);
+  ...
+  Length length = lengthDist.draw();
+</pre>
+]]>
+      </action>
+      <action dev="averbraeck" type="update">
+        Because of the distribution functions with scalars, the existing distribution class
+        DistContinuousTime has been renamed into DistContinuousSimulationTime.
+      </action>
+      <action dev="averbraeck" type="update">
+        The ExperimentalFrame, Experiment, Replication and Treatment classes have been 
+        provided with generics to make them compatible with the type of time used, and
+        the type of simulator used. Easy access classes for the 8 most common types of
+        simulation time have been provided.
+      </action>
+      <action dev="averbraeck" type="add">
+        Since version 3.03 of DSOL, models have specified input parameters. These can be 
+        shown on the screen for user input, set by reading them from a file, or set in the 
+        user code of the model itself. The input parameters are stored a SortedMap. 
+        Each input parameter has a key (a String without spaces and periods) and a value. 
+        Sorting of the input parameters is done based on a priority variable, currently 
+        implemented as a double (making it easy to insert a parameter between parameter #3 
+        with a priority 3 and parameter #4 with a priority 4 by giving it a priority 
+        value of e.g., 3.5).
+      </action>
+      <action dev="averbraeck" type="update">
+       The DSOLModel interface has convenience methods for the extension classes. So it is now
+       possible to use e.g.:
+<![CDATA[
+<pre>
+    public SimulatorInterface.TimeDouble getSimulator()
+</pre>
+]]>
+      </action>
+      <action dev="averbraeck" type="add">
+        A class AbstractDSOLModel to easily create a model has been added, together with easy 
+        access inner classes. The AbstractDSOLModel contains fields and access methods for the
+        simulator, input parameters, and output statistics. It extends EventProducer to provide
+        statistics to the statistics classes.   
+      </action>
+      <action dev="averbraeck" type="update">
+        The DSOLModel interface has been moved to the nl.tudelft.simulation.dsol.model package. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The ExperimentParser has been moved to the dsol-demo project as it is only used there.
+        Potentially a dsol-experiment project could be created at some point in time with an
+        improved version of the xml parsing classes. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The double entries of the classes 'BoxAndWhiskerChart', 'Histogram' and 'XYChart'
+        have been removed. The classes have been combined into one new class, as they only
+        differed in terms of the constructors.
+      </action>
+      <action dev="averbraeck" type="update">
+        The package names of the swing implementation of the UI have been renamed to contain
+        the word 'swing'.
+      </action>
+      <action dev="averbraeck" type="add">
+        In order to accommodate the dsol-web implementation, the dsol-swing project has
+        been split into a dsol-animation project with the implementation-independent
+        animation classes and a dsol-swing package with the swing-dependent implementation 
+        of the user interface and animation. dol-web contains the Web-specific 
+        implementation of the animation and user interface.
+      </action>
+      <action dev="averbraeck" type="add">
+        The ParamComments utility class has been added to the dsol-build-tools project. 
+        It adds or updates the type for each parameter in the javadoc of all java files in 
+        /src/main/java in all or in selected projects in the workspace. After running the
+        utility, do a refresh on all projects, followed by a Source - Format.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The .classpath files have a classpathentry for /src/main/resources after a Maven Update with
+        an entry 'excluding="**" kind="src"'. The exclusion means that the export of a Runnable jar 
+        in Eclipse does not work. Therefore this update on svn ensures that the export of a jar file
+        works. Ensure that after each Maven Update in Eclipse, the "Excludes:" entry for 
+        /src/main/resources in each project's Properties - Build path - Source is set to (None)
+        before committing the sources!
+      </action>
+      <action dev="averbraeck" type="add">
+        A small program called CleanClassfileFiles has been added to dsol-build-tools to help in
+        setting the exclusions correctly in the build path. After running this program, do a 
+        Project - Clean - All.
+      </action>
+      <action dev="averbraeck" type="update">
+        Several experiments with server-side events (SSE), WebSockets, Ajax/jQuery in dsol-web to see
+        what the best implementation is for the web-based interaction with DSOL models.
+      </action>
+    </release>
+    
+    <release version="3.02.05" date="2018-09-30" description="Javadoc cleaned up">
+      <action dev="averbraeck" type="update">
+        dsol-naming, dsol-event, dsol-interpreter, dsol-introspection were updated with the 
+        correct copyright notice and package-info.java files for each of the packages.
+      </action>
+      <action dev="averbraeck" type="update">
+        The references to java.sun.com in dsol-interpreter have been updated to the SE8 JVM Specification
+        at https://docs.oracle.com/javase/specs/jvms/se8/html/index.html.
+      </action>
+    </release>
+    
+    <release version="3.02.04" date="2018-09-29" description="Simulator events more logical; more non-final methods">
+      <action dev="averbraeck" type="fix">
+        The END_REPLICATION_EVENT was fired twice. Therefore, a special endReplication() method has 
+        been implemented that just takes care of the end of the replication.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The TIME_CHANGED_EVENT of the DEVSSimulator fired at each event, and acted more as a 
+        state changed event. Now, the TIME_CHANGED_EVENT only fires when the time did actually change. 
+      </action>
+      <action dev="averbraeck" type="update">
+        Deleted the dsol-fx project; animation with be done with dsol-swing and dsol-web.
+      </action>
+      <action dev="averbraeck" type="update">
+        dsol-base and dsol-core were updated with the correct copyright notice and package-info.java files
+        for each of the packages.
+      </action>
+      <action dev="averbraeck" type="add">
+        The SimTime classes got two extra methods: A getAbsoluteZero() and R getRelativeZero(). 
+        Method diff(A) has been added. T.diff(A) returns R.
+      </action>
+      <action dev="averbraeck" type="update">
+        The methods T.minus(A):R and T.minus(T):R have been renamed to T.diff(A):R and T.diff(T):R, because
+        the erasure of T.minus(A) and T.minus(R) is the same for the SimTimeDouble, SimTimeFloat and
+        SimTimeLong classes.
+      </action>
+      <action dev="averbraeck" type="update">
+        The DEVS classes in dsol-core have been expanded with generics with respect to SimTime.
+      </action>
+      <action dev="averbraeck" type="update">
+        The flow classes in dsol-core have been expanded with generics with respect to SimTime.
+      </action>
+      <action dev="averbraeck" type="add">
+        The AnimationPanel in dsol-swing has an extra method called 
+        isShowClass(final Class&lt;? extends Locatable&gt; locatableClass);
+      </action>
+      <action dev="averbraeck" type="update">
+        Most of the methods in the AnimationPanel class in dsol-swing have been declared as non-final.
+      </action>
+      <action dev="averbraeck" type="update">
+        The paint() method in Renderable2D in dsol-swing has been declared as non-final.
+      </action>
+      <action dev="averbraeck" type="update">
+        The InputListener in the animation.D2.mouse package in dsol-swing does not select an object when
+        the CTRL-key is pressed during a click on the object.
+      </action>
+    </release>
+      
+    <release version="3.02.03" date="2018-09-23" description="Added CategoryLogger and SimLogger">
+      <action dev="averbraeck" type="add">
+        A CategoryLogger has been added to the logger package in dsol-base. For the CategoryLogger it is
+        possible to turn categories on and off for display, enabling fine-grained debugging and reporting.
+        CategoryLogger uses tinylog's Logger for the actual logging work.  
+      </action>
+      <action dev="averbraeck" type="add">
+        A SimLogger has been added to the logger package in dsol-core. The SimLogger extends the 
+        CategoryLogger and is able to display the simulation time as part of the log message.
+        A SimTimeFormatter class determines how the message with time is formatted. 
+      </action>
+      <action dev="averbraeck" type="update">
+        All calls to printStackTrace() and to older loggers has been replaced by calls to the 
+        CategoryLogger (in dsol-base, dsol-event, dsol-naming, dsol-interpreter, dsol-introspection),
+        or to the SimLogger (in dsol-core, dsol-swing, dsol-web, dsol-demo).
+      </action>
+    </release>
+      
+    <release version="3.02.02" date="2018-09-15" description="Replaced log4j2 with tinylog">
+      <action dev="averbraeck" type="update">
+        As log4j2 is quite complicated to configure, it has been replaced by the faster 
+        and smaller tinylog package. 
+      </action>
+      <action dev="averbraeck" type="fix">
+        The Console in dsol-swing has been repaired so it captures the log stream again. This is done with
+        a second logging Writer that acts in parallel with the system console writer. Levels and message 
+        format strings can be set separately for the system console logger and the swing console logger.  
+        Level and message format can be changed with console.setLogLevel(...) and
+        console.setLogMessageFormat(...).
+      </action>
+      <action dev="averbraeck" type="add">
+        In order to support logging to the console, the DSOLPanel got a getConsole() method.
+      </action>
+      <action dev="averbraeck" type="add">
+        The text colors on the Console in dsol-swing are adapted for the Logger.level.
+      </action>
+      <action dev="averbraeck" type="add">
+          Static helper class ConsoleLogger has been added to easily set or change the logging level 
+          and format for the system console logger. Call first with ConsoleLogger.create(), and
+          do this before any other (parallel) loggers have been created, such as the swing logger.
+          Level and message format can be changed with ConsoleLogger.setLevel(...) and
+          ConsoleLogger.setMessageFormat(...).
+      </action>
+    </release>
+
+    <release version="3.02.01" date="2018-09-09" description="Solved NPE in animation; documentation updated">
+      <action dev="averbraeck" type="fix">
+        The documentation has been repaired. Several links were not working. some inheritance is used
+        in the site.xml file. The site.vm files for Doxia have been updated to the latest version. 
+        Included a relativizeDecorationLinks option set to false in the maven.site section in the pom file
+        to properly render the menus in the site (absolute paths instead of relative ones).
+      </action>
+      <action dev="averbraeck" type="fix">
+        The ImageRenderable in dsol-swing gave a NullPointerException when loading the image. An extra check
+        has been built in.
+      </action>
+      <action dev="averbraeck" type="add">
+        SimEventInterface and LambdaSimEvent got easy access classes for the different types of clocks.
+      </action>
+    </release>
+
+    <release version="3.02.00" date="2018-09-08" description="DJUNITS time units for the Simulator classes">
+      <action dev="averbraeck" type="add">
+        The SimEvent got easy access classes. So you can now, e.g., construct a SimEvent.TimeDouble that
+        takes a double as the execution time.
+      </action>
+      <action dev="averbraeck" type="update">
+        The "easy access" constructors of Treatment and Replication now take parameters in absolute and
+        relative time units rather than SimTime. So a new Treatment.TimeDoubleUnit takes as parameters:
+        (Time startTime, Duration warmupPeriod, Duration runLength). This is a lot more clear than
+        using SimTime wrappers. The general Treatment and Replication constructors still needs a SimTime.
+        Extra methods getStartSimTime(), getWarmupSimTime() and getEndSimTime() have been added to the
+        Treatment in case the wrapper object are needed, e.g., for comparison or adding/subtracting
+        durations.
+      </action>
+      <action dev="averbraeck" type="update">
+        Simulator.getSimulatorTime() returns the absolute time A rather than the SimTime T. This makes
+        coding a lot easier, as the wrapper T is only used to implement the internals of adding and
+        subtracting absolute and relative simulation times, but should actually never be exposed to the
+        user, unless the user is really interested in the wrapper. For this, the method
+        Simulator.getSimTime() has been implemented, which returns a SimTime object.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Utilization in dsol-core now uses generics for time.
+      </action>
+      <action dev="averbraeck" type="update">
+        The Simulator classes do not use the internal TimeUnit classes anymore. Instead, the Time and
+        Duration from DJUNITS have been used. This holds for the TimeDoubleUnit, TimeFloatUnit,
+        CalendarDouble
+        and CalendarFloat. TimeLongUnit has been removed, as it did not really make
+        sense how it was implemented. CalendarLong uses a relative Long to indicate time in milliseconds.
+      </action>
+      <action dev="averbraeck" type="update">
+        Most of the Model and Simulator methods and constructors do not throw RemoteExceptions anymore.
+        RemoteExceptions are only thrown for the Listeners and Context (for the animation), as both of these
+        are expected to be Remote sometimes. This means that statistics like Tally, Persistent, and Counter
+        throw RemoteExceptions on construction and adding series, as these are dependent on (possibly remote)
+        events.
+      </action>
+      <action dev="averbraeck" type="fix">
+        The ImmutableCollections have been updated to avoid accepting a List in the constructor of an ImmutableSet
+        when the copyOrWrap is Immutable.WRAP. The size() of the original List and the ImmutableSet
+        were different in case of duplicates in the List, which was terribly confusing. Therefore, accepting
+        a Collection should always lead to a COPY, whereas a 'compatible' Collection can use the WRAP.
+        In addition, wrapping has become a lot more strict. An ImmutableSortedMap wraps only a SortedMap,
+        whereas an ImmutableHashMap wraps a Map. Originally, they could wrap each other, leading to
+        incompatibilities. The same holds for Lists and Sets.
+      </action>
+      <action dev="averbraeck" type="update">
+        Updated all maven dependencies and libraries to their latest version in the dsol pom-file.
+      </action>
+      <action dev="averbraeck" type="add">
+        StateSaver class included in dsol-base.
+        dsol-core is now not dependent anymore on xstream to do state-save and state-retrieve for rollback.
+      </action>
+    </release>
+
+    <release version="3.01.06" date="2017-04-30" description="dsol-demo repaired and added to project">
+      <action dev="averbraeck" type="add">
+        The dsol-demo project has been repaired and is from now on again a formal part of the dsol framework.
+      </action>
+      <action dev="averbraeck" type="update">
+        Renderable2D.contains() method is made non-final to allow returning false for non-clickable animation items.
+      </action>
+      <action dev="averbraeck" type="add">
+        Added GISRenderable2D constructor with a z-value.
+      </action>
+      <action dev="averbraeck" type="add">
+        Added setBackground(boolean) method in GIS Map.
+      </action>
+    </release>
+
+    <release version="3.01.05" date="2017-04-17" description="Unique id of AbstractSimEvent repaired">
+      <action dev="averbraeck" type="fix">
+        When parallel threads constructed a SimEvent, the uniqueness of the id was not guaranteed.
+        An AtomicLong solves this problem.
+      </action>
+    </release>
+
+    <release version="3.01.04" date="2017-01-26" description="dsol-swing: Renderable2D, map layers">
+      <action dev="averbraeck" type="update">
+        Renderable2D and derived classes can now specify the Locatable as their source.
+      </action>
+      <action dev="averbraeck" type="update">
+        Data that is shown on the screen is not clickable for viewing or displaying.
+      </action>
+      <action dev="averbraeck" type="add">
+        The ESRI Map can return the layers as a Map from String (name) to Layer.
+      </action>
+      <action dev="averbraeck" type="add">
+        The layers in the ESRI Map can be toggled on or off with the showLayer and the hideLayer methods.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Repaired bug for caching of shape-file content for an extent.
+      </action>
+    </release>
+
+    <release version="3.01.03" date="2017-01-14" description="Renderable2D">
+      <action dev="averbraeck" type="update">
+        Renderable2D.destroy() has been made non-final so it can be overridden.
+      </action>
+      <action dev="averbraeck" type="update">
+        A Renderable2D can be added or removed from within the paint() method. This is, however, not really
+        advisable, as this will only be done when the object is visible on the screen.
+      </action>
+      <action dev="averbraeck" type="add">
+        Default log4j-2 configuration file added to dsol-base.
+      </action>
+    </release>
+
+    <release version="3.01.02" date="2016-12-11" description="Immutable collections, toggling of layers in AnimationPanel">
+      <action dev="averbraeck" type="add">
+        The ImmutableCollections from opentrafficsim have been added to dsol-base.
+      </action>
+      <action dev="averbraeck" type="update">
+        The AnimationPanel supports showing and hiding of layers, based on the class of the Locatable object.
+      </action>
+      <action dev="averbraeck" type="update">
+        DSOL is now compiled with Java version 1.8.
+      </action>
+    </release>
+
+    <release version="3.01.01" date="2016-10-23" description="Throw class extended">
+      <action dev="averbraeck" type="update">
+        The Throw class now also is able to return an object (its first parameter) to allow for its use in a
+        super(...) call.
+      </action>
+    </release>
+
+    <release version="3.01.00" date="2016-10-16" description="dsol-base project split, log4j instead of logger">
+      <action dev="averbraeck" type="add">
+        A Throw class with Throw.throw(condition, ...) and Throw.whenNull(object, ...) has been added to dsol-base to
+        easily check pre- and post-conditions in constructors and methods.
+      </action>
+      <action dev="averbraeck" type="update">
+        The dsol-base project is split into dsol-base, dsol-interpreter, dsol-introspection, dsol-event and dsol-naming.
+      </action>
+      <action dev="averbraeck" type="update">
+        The internal dsol logger is retired and replaced by the log4j version 2 logger.
+      </action>
+      <action dev="averbraeck" type="add">
+        The DEVSSimulatorInterface.scheduleXXX methods now return the event that they have scheduled. This enables
+        the user to easily store the event for later cancellation.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Timed events report the time as the absolute time rather than as the time wrapper.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Statistical events sent by Persistent made different from those by Tally. The events within dsol-core are now
+        timed events.
+      </action>
+    </release>
+
+    <release version="3.00.21" date="2016-09-12" description="Simulators with and without firing certain events">
+      <action dev="averbraeck" type="update">
+        DEVSRealTimeClock can fire CHANGE_SPEED_FACTOR_EVENT.
+      </action>
+      <action dev="averbraeck" type="update">
+        Simulator can start() without firing event.
+      </action>
+      <action dev="averbraeck" type="update">
+        Simulator can stop() without firing event.
+      </action>
+      <action dev="averbraeck" type="update">
+        Simulator can step() without firing event.
+      </action>
+    </release>
+
+    <release version="3.00.20" date="2016-04-21" description="Animation classes updated, interface names simplified">
+      <action dev="averbraeck" type="fix">
+        GisRenderable2D uses a self-generated unique id to identify itself in the Context. This avoids problems with
+        Locatable objects that don't have a unique toString() result and therefore could not be
+        distinguished.
+      </action>
+      <action dev="averbraeck" type="update">
+        Renamed LocatableInterface to Locatable.
+      </action>
+      <action dev="averbraeck" type="update">
+        Renamed ModelInterface to DSOLModel.
+      </action>
+      <action dev="averbraeck" type="add">
+        Added a Identifiable&lt;T&gt; to identify instances with a getId() method. Subclasses Long and String have been
+        created as well.
+      </action>
+    </release>
+
+
+    <release version="3.00.19" date="2016-03-28" description="Extra method in DEVSSimulator, zooming and (x,y) in swing">
+      <action dev="averbraeck" type="add">
+        Added the method 'runUpToAndIncluding' in the DEVSSimulatorInterface and implemented the method in
+        all classes that implement this interface.
+      </action>
+      <action dev="averbraeck" type="fix">
+        In the dsol-swing project, changed the zoom with the scroll wheel to scroll around the cursor. The zoom
+        with the plus and minus keys still zoom around the center position of the window.
+      </action>
+      <action dev="averbraeck" type="add">
+        x and y positions of the mouse in world coordinates are shown with a tooltip. The tooltip can be switched
+        on and off.
+      </action>
+      <action dev="averbraeck" type="add">
+        x and y positions of the mouse in world coordinates can be requested with a method to show elsewhere on the
+        control panel of a simulation.
+      </action>
+      <action dev="averbraeck" type="fix">
+        In the dsol-swing project, ensured in the introspection package that no errors will be given when the source
+        has been deleted.
+      </action>
+      <action dev="averbraeck" type="add">
+        In the dsol-swing project, created a method to zoom to the entire animation, and a public callable method to
+        zoom to the whole extent as well as to set the default extent.
+      </action>
+      <action dev="averbraeck" type="fix">
+        In the dsol-swing project, fixed a small error in computeVisibleExtent(...) that caused extent zoom actions
+        to be off sometimes.
+      </action>
+    </release>
+
+
+    <release version="3.00.18" date="2015-12-13" description="DEVSRealTimeClock improved thread-safety">
+      <action dev="averbraeck" type="fix">
+        Improved the thread-safety of the DEVSRealTimeClock.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Improved the alignment of the DEVSRealTimeClock with the wall-clock.
+      </action>
+    </release>
+
+
+    <release version="3.00.17" date="2015-11-30" description="ESRI user-defined transformation">
+      <action dev="averbraeck" type="add">
+        ESRI shape files can be parsed with a user-defined transformation.
+        The old constructors have been kept, so they can also be parsed as before.
+      </action>
+    </release>
+
+
+    <release version="3.00.16" date="2015-11-30" description="Added dsol-akka project, javadoc cleanup">
+      <action dev="averbraeck" type="add">
+        Added the dsol-akka project. Still empty, just as a reference for future developments.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Cleaned up a lot of the outdated javadoc.
+      </action>
+    </release>
+
+
+    <release version="3.00.15" date="2015-09-27" description="Improved website for docs">
+      <action dev="averbraeck" type="update">
+        Site generation has been updated. All DSOL projects now have a site with an adapted Velocity template and
+        CSS updates. The Apache Velocity template has been based on theMaven Stylus Skin, version
+        1.5. A possibility
+        to link to a site in a target="_blank" window has been added to the site.vm file. In addition, several of the menus
+        have been updated, streamlined, and brought up-to-date with the latest changes in the Maven site
+        standards.
+      </action>
+      <action dev="averbraeck" type="update">
+        Simulator class does not throw RemoteExceptions anymore on most common scheduling methods, as this was not needed.
+      </action>
+    </release>
+
+
+    <release version="3.00.14" date="2015-07-05" description="ClassUtil and Renderable2D repaired">
+      <action dev="averbraeck" type="update">
+        Changes file is kept the same for all projects, as all projects increase
+        version numbers at once.
+      </action>
+      <action dev="averbraeck" type="update">
+        ClassUtil: cache the super constructors, methods, fields as well at the super constructors, methods, fields
+        to avoid repetitive lookup of super constructors, methods, and fields, which can take a
+        lot of time.
+      </action>
+      <action dev="averbraeck" type="update">
+        Renderable2D: use the hashCode to store the renderable in the context tree. Guarantee a reproducible hashCode
+        and equals. The toString() also gives the hashCode() as this can be used to identify the
+        Renderable2D
+        in the context tree.
+      </action>
+    </release>
+
+
+    <release version="3.00.13" date="2015-07-05" description="jdepend and javancss code metric tools added">
+      <action dev="averbraeck" type="add">
+        Two code metrics tools are added to the project reports: JDepend and
+        JavaNCSS. They provide information on cyclometric complexity, fan in, fan out, etc.
+      </action>
+    </release>
+
+
+    <release version="3.00.12" date="2015-06-22" description="Context, Replication, and cleaning up memory">
+      <action dev="averbraeck" type="update">
+        Use of Context rationalized and standardized.
+      <![CDATA[
+<pre>
+Context becomes: 
+/experiment_hash_code/replication_number_or_id/animation/2D/renderables
+/experiment_hash_code/replication_number_or_id/animation/3D/renderables
+/experiment_hash_code/replication_number_or_id/statistics/graphs
+
+Code for binding a statistic:
+  Context context = ContextUtil.lookup(simulator.getReplication().getContext(), "/statistics");
+  ContextUtil.bind(context, this);
+
+Code for binding a renderable2D:
+  Context context = ContextUtil.lookup(simulator.getReplication().getContext(), "/animation/2D");
+  ContextUtil.bind(context, this);
+
+Removing the entire tree of an experiment:
+  experiment.removeFromContext();
+or if you just have a simulator:
+  simulator.getReplication().getExperiment().removeFromContext();
+</pre>
+]]>
+      </action>
+      <action dev="averbraeck" type="add">
+        ContextUtil: extended methods to be symmetrical (bind-unbind) and
+        (initial-given) contexts.
+      </action>
+      <action dev="averbraeck" type="update">
+        The Replication caches the context.
+      </action>
+      <action dev="averbraeck" type="remove">
+        Caching a context is removed from the Simulator.
+      </action>
+      <action dev="averbraeck" type="add">
+        ContextUtil.destroySubContext method added to recursively remove subcontexts
+        and bindings.
+      </action>
+      <action dev="averbraeck" type="add">
+        Added a cleanUp() method to the Simulator to explicitly kill the worker
+        thread that takes care of execution.
+      </action>
+      <action dev="averbraeck" type="add">
+        Added a cleanUp() method to the WorkerThread to explicitly kill the worker
+        thread.
+      </action>
+      <action dev="averbraeck" type="add">
+        StatusBar got a cancelTimer() method to dispose of the timer so the StatusBar
+        can be garbage collected.
+      </action>
+    </release>
+
+
+    <release version="3.00.11" date="2015-06-18" description="DSOLPanel, GridPanel changed">
+      <action dev="averbraeck" type="update">
+        Hierarchy for AnimationPanel and GridPanel changed.
+      </action>
+      <action dev="averbraeck" type="update">
+        Several changes in DSOLPanel.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Fixed the jittergrid.
+      </action>
+    </release>
+
+
+    <release version="3.00.10" date="2015-05-20" description="Cobertura added, runUpTo method, GridPanel changed">
+      <action dev="averbraeck" type="add">
+        Cobertura 2.7 used for Java 8.
+      </action>
+      <action dev="averbraeck" type="add">
+        DEVSSimulator has a runUpTo(absoluteTime) method.
+      </action>
+      <action dev="averbraeck" type="add">
+        GridPanel extends a BorderPanel, so panels can be placed N, S, E and W of the
+        animation, e.g. to provide buttons or a legend.
+      </action>
+    </release>
+
+
+    <release version="3.00.09" date="2015-05-01" description="ESDEVS package extended">
+      <action dev="averbraeck" type="add">
+        Several extensions were made in the ESDEVS package:
+        AbstractDEVSPortModel got two new methods:
+<![CDATA[
+<pre>
+    public final Map<String, InputPortInterface<?>> getInputPortMap()
+    public final Map<String, OutputPortInterface<?>> getOutputPortMap()
+</pre>
+]]>
+      </action>
+      <action dev="averbraeck" type="add">
+        CoupledModel got four extra methods:
+<![CDATA[
+<pre>
+    public final Set<IC<?>> getInternalCouplingSet()
+    public final Set<EOC<?>> getExternalOutputCouplingSet()
+    public final Set<EIC<?>> getExternalInputCouplingSet()
+    public final Set<AbstractDEVSModel> getModelComponents()
+</pre>
+]]>
+      </action>
+      <action dev="averbraeck" type="add">
+        Phase got one new method:
+<![CDATA[
+<pre>
+    public final String getName()
+</pre>
+]]>
+      </action>
+    </release>
+
+
+    <release version="3.00.08" date="2015-05-01" description="AtomicModel.initialize() method allows re-initialization">
+      <action dev="averbraeck" type="add">
+        The AtomicModel.initialize() method in ESDEVS has been changed to allow for re-initialization, e.g. after
+        rollback. The method now looks as follows:
+<![CDATA[
+<pre>
+  public void initialize(final double e)
+  {
+    if (this.timeAdvance() != Double.POSITIVE_INFINITY)
+    {
+      try
+      {
+        this.nextEvent = new SimEvent<SimTimeDouble>(
+            this.getSimulator().getSimulatorTime().plus(this.timeAdvance() - e), this, this,
+            "deltaInternalEventHandler", null);
+        this.timeLastEvent = this.getSimulator().getSimulatorTime().get();
+        this.simulator.scheduleEvent(this.nextEvent);
+      }
+      catch (RemoteException | SimRuntimeException exception)
+      {
+        Logger.severe(this, "initialize", exception);
+      }
+    }
+    else
+    {
+      this.nextEvent = null;
+    }
+  }
+</pre>
+]]>
+      </action>
+    </release>
+
+
+    <release version="3.00.07" date="2015-04-29" description="DEVSRealTimeClock added">
+      <action dev="averbraeck" type="add">
+        DEVSRealTimeClock has been added.
+      </action>
+      <action dev="averbraeck" type="add">
+        old RealTimeClock has been removed.
+      </action>
+      <action dev="averbraeck" type="add">
+        DEVSRealTimeClock has been given a speed factor.
+      </action>
+    </release>
+
+
+    <release version="3.00.06" date="2015-04-26" description="Rollbackable random stream">
+      <action dev="averbraeck" type="add">
+        Made it possible to save and restore a state of a RandomStream, e.g. to make
+        a model to rollback to an earlier state.
+      </action>
+      <action dev="averbraeck" type="add">
+        Two methods have been added: saveState() : Object and restoreState(Object o).
+      </action>
+    </release>
+
+
+    <release version="3.00.05" date="2015-04-23" description="ESDEVS additions">
+      <action dev="averbraeck" type="add">
+        ESDEVS formalism files in DSOL-CORE upgraded with comments, final modifiers, and appropriate visibility
+        for
+        modifiers. In addition, the following variables in AtomicModel have changed visibility:
+      <![CDATA[
+      <ol>
+        <li>In AtomicModel.java file, changed private double timeLastEvent; to protected double timeLastEvent</li>
+        <li>In the same file, changed private double timeNextEvent; to protected double timeNextEvent</li>
+        <li>In the same file, changed private double elapsedTime; elapsedTime</li>
+        <li>protected boolean conflictStrategy = AtomicModel.INTERNAL_FIRST; instead of private in AtomicModel</li>
+        <li>non-final public SimEvent<SimTimeDouble> getNextEvent() in AtomicModel</li>
+      </ol>
+      ]]>
+      </action>
+    </release>
+
+
+    <release version="3.00.04" date="2015-04-22" description="Easy access classes updated and extended">
+      <action dev="averbraeck" type="add">
+        Extended Replication, Experiment and Treatement with easy access classes.
+      </action>
+      <action dev="averbraeck" type="add">
+        Repaired a number of dependencies in the easy access classes of Simulators.
+      </action>
+      <action dev="averbraeck" type="update">
+        Comments in dsol-core updated.
+      </action>
+    </release>
+
+
+    <release version="3.00.03" date="2014-09-14" description="Textual changes, small bugs, omissions">
+      <action dev="averbraeck" type="fix">
+        Changes for version 3.00.03. A lot of them are textual, a few to solve minor
+        bugs and omissions.
+      </action>
+    </release>
+
+
+    <release version="3.00.02" date="2014-09-05" description="valueOf() method replaces new Integer()">
+      <action dev="averbraeck" type="update">
+        valueOf() methods instead of new Integer() etc.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Small change in SimTime to satisfy Resource.
+      </action>
+    </release>
+
+    <release version="3.00.01" date="2014-08-12" description="SimTime and Animator classes">
+      <action dev="averbraeck" type="update">
+        Split the Animator into a DEVSAnimator and a DEVDESSAnimator class.
+      </action>
+      <action dev="averbraeck" type="update">
+        SimTime relative number has to extend Number to get values for e.g., graphs.
+      </action>
+      <action dev="averbraeck" type="update">
+        Comments.
+        Final methods.
+        Final fields.
+        Checkstyle conventions.
+      </action>
+    </release>
+
+
+    <release version="3.00.00" date="2014-08-09" description="New version 3.00 release of DSOL">
+      <action dev="averbraeck" type="add">
+        Complete project restructuring compared to DSOL 2.0. See website
+        <![CDATA[<a href="http://simulation.tudelft.nl/simulation/index.php/dsol/dsol-3-java-7">
+        http://simulation.tudelft.nl/simulation/index.php/dsol/dsol-3-java-7</a>]]>
+        for more information.
+      </action>
+    </release>
+
+  </body>
+</document>

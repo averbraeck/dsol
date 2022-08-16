@@ -1,0 +1,1049 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>nl.tudelft.simulation</groupId>
+  <artifactId>dsol</artifactId>
+  <version>4.00.00</version>
+  <packaging>pom</packaging>
+  
+  <name>DSOL version 4</name>
+  <description>Distributed Simulation Object Library version 4</description>
+
+  <url>https://simulation.tudelft.nl/dsol/3.0/dsol</url>
+
+  <organization>
+    <name>Delft University of Technology, Policy Analysis Section</name>
+    <url>https://simulation.tudelft.nl</url>
+  </organization>
+
+  <inceptionYear>2002</inceptionYear>
+
+  <properties>
+    <jdk.version>11</jdk.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>${jdk.version}</maven.compiler.source>
+    <maven.compiler.target>${jdk.version}</maven.compiler.target>
+
+    <dsol-version>${project.version}</dsol-version>
+    <junit.version>4.12</junit.version>
+    <tinylog.version>1.3.6</tinylog.version>
+    <jcommon.version>1.0.24</jcommon.version>
+    <jfreechart.version>1.5.0</jfreechart.version>
+    <djunits.version>4.01.08</djunits.version>
+    <djutils.version>1.06.31</djutils.version>
+    <jetty.version>9.4.25.v20191220</jetty.version>
+    <jakarta.annotation.version>1.3.5</jakarta.annotation.version>
+    <osm.version>0.48.3</osm.version>
+    <fastcsv.version>2.1.0</fastcsv.version>
+
+    <maven.compiler.version>3.8.1</maven.compiler.version>
+    <maven.site.version>3.9.1</maven.site.version>
+    <maven.deploy.version>3.0.0-M1</maven.deploy.version>
+    <maven.install.version>3.0.0-M1</maven.install.version>
+    <maven.source.version>3.2.1</maven.source.version>
+    <maven.javadoc.version>3.2.0</maven.javadoc.version>
+    <maven.resources.version>3.2.0</maven.resources.version>
+    <maven.checkstyle.version>3.1.1</maven.checkstyle.version>
+    <checkstyle.version>8.35</checkstyle.version>
+    <maven.surefire.version>3.0.0-M5</maven.surefire.version>
+    <maven.surefire-report.version>3.0.0-M5</maven.surefire-report.version>
+    <maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
+    <maven.jacoco.version>0.8.6</maven.jacoco.version>
+    <maven.spotbugs.version>4.5.2.0</maven.spotbugs.version>
+    <spotbugs.version>4.5.3</spotbugs.version>
+    <maven.project-info-reports.version>3.1.2</maven.project-info-reports.version>
+    <maven.jxr.version>3.0.0</maven.jxr.version>
+    <maven.taglist.version>3.0.0</maven.taglist.version>
+    <maven.pmd.version>3.13.0</maven.pmd.version>
+    <maven.changes.version>2.12.1</maven.changes.version>
+    <wagon.maven.version>2.0.0</wagon.maven.version>
+    <wagon.ssh.version>3.4.1</wagon.ssh.version>
+    <wagon.ftp.version>3.4.1</wagon.ftp.version>
+
+  </properties>
+
+
+  <!-- Build Settings -->
+
+  <build>
+    <directory>target</directory>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+    <outputDirectory>${basedir}/target/classes</outputDirectory>
+    <testOutputDirectory> ${basedir}/target/test-classes</testOutputDirectory>
+
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>${basedir}/src/test/resources</directory>
+      </testResource>
+    </testResources>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>${wagon.ssh.version}</version>
+      </extension>
+
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+        <version>${wagon.ftp.version}</version>
+      </extension>
+    </extensions>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.version}</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven.resources.version}</version>
+        <executions>
+          <execution>
+            <id>copy-resource-one</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                </resource>
+              </resources>
+              <outputDirectory>${basedir}/target/classes/resources</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-test-resource-one</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/test/resources</directory>
+                </resource>
+              </resources>
+              <outputDirectory>${basedir}/target/test-classes/resources</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-test-resource-two</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                </resource>
+              </resources>
+              <outputDirectory>${basedir}/target/test-classes/resources</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>${maven.site.version}</version>
+        <configuration>
+          <chmod>true</chmod>
+          <relativizeDecorationLinks>false</relativizeDecorationLinks>
+          <inputEncoding>UTF-8</inputEncoding>
+          <outputEncoding>UTF-8</outputEncoding>
+          <templateFile>src/site/site.vm</templateFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-descriptor</id>
+            <goals>
+              <goal>attach-descriptor</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${maven.deploy.version}</version>
+      </plugin>
+
+      <!-- copy files starting with a period in the jacoco folder to the right site location. Normally, files starting with
+        tilde, period or underscore are not copied. These files are also not taken into account when trying to the pages
+        in a subfolder of a Drupal sile, as files and folders starting with a period are filtered with a rewrite rule: RewriteRule "(^|/)\." - [F]
+        To undo this rewrite rule, add a .htaccess file in the site folder with as content: RewriteRule "(^|/)\." - [L] Potentially,
+        there is also a line with Options +Indexes in the .htaccess file. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>wagon-maven-plugin</artifactId>
+        <version>${wagon.maven.version}</version>
+        <executions>
+
+          <execution>
+            <id>upload-jacoco-dot-files</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>upload</goal>
+            </goals>
+            <configuration>
+              <fromDir>${basedir}/target/site/jacoco-ut</fromDir>
+              <includes>.*, .resources/*</includes>
+              <url>scp://simulation.tudelft.nl/home/web/simulation.tudelft.nl/html/dsol/${project.version}/${project.artifactId}</url>
+              <toDir>jacoco-ut</toDir>
+              <serverId>dsol-deployment</serverId>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>upload-license</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>upload</goal>
+            </goals>
+            <configuration>
+              <fromDir>${basedir}/src/main/resources</fromDir>
+              <includes>license.html</includes>
+              <url>scp://simulation.tudelft.nl/home/web/simulation.tudelft.nl/html</url>
+              <toDir>dsol</toDir>
+              <serverId>dsol-deployment</serverId>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>upload-last-site</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>sshexec</goal>
+            </goals>
+            <configuration>
+              <url>scp://simulation.tudelft.nl/home/web/simulation.tudelft.nl/html/dsol</url>
+              <serverId>dsol-deployment</serverId>
+              <commands>
+                <command>cp -f -q /home/web/simulation.tudelft.nl/html/dsol/${project.version}/${project.artifactId}/apidocs/element-list /home/web/simulation.tudelft.nl/html/dsol/${project.version}/${project.artifactId}/apidocs/package-list | true</command>
+                <command>rm -r -f /home/web/simulation.tudelft.nl/html/dsol/3.0</command>
+                <command>mkdir -p /home/web/simulation.tudelft.nl/html/dsol/3.0</command>
+                <command>cp -r -f /home/web/simulation.tudelft.nl/html/dsol/${project.version}/. /home/web/simulation.tudelft.nl/html/dsol/3.0</command>
+              </commands>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>${maven.install.version}</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven.source.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven.javadoc.version}</version>
+        <configuration>
+          <links>
+            <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
+            <link>https://download.java.net/media/java3d/javadoc/1.5.1/</link>
+            <link>https://www.jfree.org/jcommon/api/</link>
+            <link>https://www.jfree.org/jfreechart/api/javadoc/</link>
+            <link>https://x-stream.github.io/javadoc/</link>
+            <link>https://tinylog.org/v1/javadoc/</link>
+            <link>https://djunits.org/docs/current/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils/apidocs//</link>
+            <link>https://djutils.org/docs/current/djutils-cli/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils-data/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils-stats/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils-draw/apidocs/</link>
+          </links>
+          <offlineLinks>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-base/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-base/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-naming/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-naming/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-interpreter/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-interpreter/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-introspection/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-introspection/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-core/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-core/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation-gis/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation-gis/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation-gis-esri/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation-gis-esri/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation-gis-osm/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation-gis-osm/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-swing/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-swing/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-web/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-web/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-demo/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-demo/target/apidocs</location>
+            </offlineLink>
+          </offlineLinks>
+          <minmemory>256m</minmemory>
+          <maxmemory>1g</maxmemory>
+          <show>package</show>
+          <detectJavaApiLink>false</detectJavaApiLink>
+          <detectLinks>true</detectLinks>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven.surefire.version}</version>
+        <configuration>
+          <runOrder>alphabetical</runOrder>
+          <!-- Sets the VM argument line used when unit tests are run. -->
+          <argLine>${surefireArgLine}</argLine>
+          <!-- Skips unit tests if the value of skipTests is true -->
+          <skipTests>false</skipTests>
+          <!-- make sure there is enough memory -->
+          <argLine>-XX:MaxPermSize=4096m -Xmx4096m</argLine>
+          <!-- Excludes integration tests when unit tests are run. -->
+          <excludes>
+            <exclude>**/IT*.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven.failsafe.version}</version>
+        <executions>
+          <!-- Ensures that both integration-test and verify goals of the Failsafe Maven plugin are executed. -->
+          <execution>
+            <id>integration-tests</id>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+            <configuration>
+              <!-- Sets the VM argument line used when integration tests are run. -->
+              <argLine>${failsafeArgLine}</argLine>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${maven.jacoco.version}</version>
+        <executions>
+
+          <!-- Prepares the property pointing to the JaCoCo runtime agent which is passed as VM argument when Maven the Surefire
+            plugin is executed. -->
+          <execution>
+            <id>pre-unit-test</id>
+            <!-- phase>pre-integration-test</phase -->
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <!-- Sets the path to the file which contains the execution data. -->
+              <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+              <!-- Sets the name of the property containing the settings for JaCoCo runtime agent. -->
+              <propertyName>surefireArgLine</propertyName>
+            </configuration>
+          </execution>
+
+          <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run. -->
+          <execution>
+            <id>post-unit-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <!-- Sets the path to the file which contains the execution data. -->
+              <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+              <!-- Sets the output directory for the code coverage report. -->
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+  <reporting>
+    <outputDirectory>${basedir}/target/site</outputDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${maven.project-info-reports.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+              <report>summary</report>
+              <report>dependencies</report>
+              <report>team</report>
+              <report>mailing-lists</report>
+              <report>licenses</report>
+              <report>scm</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven.javadoc.version}</version>
+
+        <configuration>
+          <links>
+            <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
+            <link>https://download.java.net/media/java3d/javadoc/1.5.1/</link>
+            <link>https://www.jfree.org/jcommon/api/</link>
+            <link>https://www.jfree.org/jfreechart/api/javadoc/</link>
+            <link>https://x-stream.github.io/javadoc/</link>
+            <link>https://tinylog.org/v1/javadoc/</link>
+            <link>https://djunits.org/docs/current/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils/apidocs//</link>
+            <link>https://djutils.org/docs/current/djutils-cli/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils-data/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils-stats/apidocs/</link>
+            <link>https://djutils.org/docs/current/djutils-draw/apidocs/</link>
+          </links>
+          <offlineLinks>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-base/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-base/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-naming/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-naming/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-interpreter/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-interpreter/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-introspection/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-introspection/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-core/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-core/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation-gis/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation-gis/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation-gis-esri/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation-gis-esri/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-animation-gis-osm/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-animation-gis-osm/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-swing/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-swing/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-web/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-web/target/apidocs</location>
+            </offlineLink>
+            <offlineLink>
+              <url>https://sg-3.tbm.tudelft.nl/dsol/3.0/dsol-demo/apidocs/</url>
+              <location>${project.build.directory}/../../dsol-demo/target/apidocs</location>
+            </offlineLink>
+          </offlineLinks>
+          <minmemory>256m</minmemory>
+          <maxmemory>1g</maxmemory>
+          <show>package</show>
+          <detectJavaApiLink>false</detectJavaApiLink>
+          <detectLinks>true</detectLinks>
+        </configuration>
+
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
+          <reportSet>
+            <id>test-html</id>
+            <reports>
+              <report>test-javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>${maven.jxr.version}</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.version}</version>
+        <configuration>
+          <configLocation>/src/main/resources/development/dsol-checks.xml</configLocation>
+          <suppressionsLocation>/src/main/resources/development/checkstyle_suppressions.xml</suppressionsLocation>
+          <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <configuration>
+              <enableRulesSummary>true</enableRulesSummary>
+            </configuration>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>${maven.surefire-report.version}</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${maven.jacoco.version}</version>
+        <reportSets>
+          <reportSet>
+            <inherited>true</inherited>
+            <reports>
+              <report>report</report>
+            </reports>
+            <configuration>
+              <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+            </configuration>
+          </reportSet>
+          <!-- Turn this on when JaCoCo Integration tests are run. Otherwise,
+            the unit test report is also not generated. -->
+          <!-- reportSet -->
+          <!-- inherited>true</inherited -->
+          <!-- reports -->
+          <!-- report>report</report -->
+          <!-- /reports -->
+          <!-- configuration -->
+          <!-- dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile -->
+          <!-- outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory -->
+          <!-- /configuration -->
+          <!-- /reportSet -->
+        </reportSets>
+      </plugin>
+
+      <!-- todos -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>taglist-maven-plugin</artifactId>
+        <version>${maven.taglist.version}</version>
+        <configuration>
+          <tagListOptions>
+            <tagClasses>
+              <tagClass>
+                <displayName>Open issues in the code</displayName>
+                <tags>
+                  <tag>
+                    <matchString>TODO</matchString>
+                    <matchType>exact</matchType>
+                  </tag>
+                  <tag>
+                    <matchString>FIXME</matchString>
+                    <matchType>exact</matchType>
+                  </tag>
+                  <tag>
+                    <matchString>XXX</matchString>
+                    <matchType>exact</matchType>
+                  </tag>
+                </tags>
+              </tagClass>
+            </tagClasses>
+          </tagListOptions>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${maven.spotbugs.version}</version>
+        <configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs</artifactId>
+              <version>${spotbugs.version}</version>
+            </dependency>
+          </dependencies>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>${maven.pmd.version}</version>
+        <configuration>
+          <targetJdk>${jdk.version}</targetJdk>
+          <skipEmptyReport>false</skipEmptyReport>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <version>${maven.changes.version}</version>
+        <configuration>
+          <escapeHTML>false</escapeHTML>
+          <xmlPath>../dsol/src/changes/changes.xml</xmlPath>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>changes-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+    </plugins>
+  </reporting>
+
+  <!-- dependency versions for all projects -->
+
+  <dependencies>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog</artifactId>
+      <version>${tinylog.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.djutils</groupId>
+      <artifactId>djutils</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.jfree</groupId>
+        <artifactId>jcommon</artifactId>
+        <version>${jcommon.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jfree</groupId>
+        <artifactId>jfreechart</artifactId>
+        <version>${jfreechart.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-base</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-naming</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-interpreter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-introspection</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-animation</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-animation-gis</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-animation-gis-esri</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-animation-gis-osm</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-swing</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-web</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-demo</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-hla</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>tablelayout</groupId>
+        <artifactId>TableLayout</artifactId>
+        <version>20020517</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.djunits</groupId>
+        <artifactId>djunits</artifactId>
+        <version>${djunits.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.djutils</groupId>
+        <artifactId>djutils</artifactId>
+        <version>${djutils.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.djutils</groupId>
+        <artifactId>djutils-cli</artifactId>
+        <version>${djutils.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.djutils</groupId>
+        <artifactId>djutils-stats</artifactId>
+        <version>${djutils.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.djutils</groupId>
+        <artifactId>djutils-data</artifactId>
+        <version>${djutils.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.djutils</groupId>
+        <artifactId>djutils-draw</artifactId>
+        <version>${djutils.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-server</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>jakarta.annotation</groupId>
+        <artifactId>jakarta.annotation-api</artifactId>
+        <version>${jakarta.annotation.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openstreetmap.osmosis</groupId>
+        <artifactId>osmosis-set</artifactId>
+        <version>${osm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openstreetmap.osmosis</groupId>
+        <artifactId>osmosis-xml</artifactId>
+        <version>${osm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openstreetmap.osmosis</groupId>
+        <artifactId>osmosis-core</artifactId>
+        <version>${osm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openstreetmap.osmosis</groupId>
+        <artifactId>osmosis-osm-binary</artifactId>
+        <version>${osm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openstreetmap.osmosis</groupId>
+        <artifactId>osmosis-pbf</artifactId>
+        <version>${osm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.siegmar</groupId>
+        <artifactId>fastcsv</artifactId>
+        <version>${fastcsv.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <name>DSOL Public Repository</name>
+      <id>dsol</id>
+      <url>https://simulation.tudelft.nl/maven</url>
+    </repository>
+
+    <repository>
+      <name>DJUNITS Public Repository</name>
+      <id>djunits</id>
+      <url>https://djunits.org/maven</url>
+    </repository>
+
+    <repository>
+      <name>DJUTILS Public Repository</name>
+      <id>djutils</id>
+      <url>https://djutils.org/maven</url>
+    </repository>
+
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>apache</id>
+      <name>apache</name>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
+
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>mvnrepository</id>
+      <name>MVN Repository</name>
+      <url>https://mvnrepository.com/artifact</url>
+    </repository>
+
+  </repositories>
+
+
+  <!-- More Project Information -->
+
+  <licenses>
+    <license>
+      <name>BSD-style license</name>
+      <url>https://simulation.tudelft.nl/dsol/3.0/dsol-license.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>PeterJacobs</id>
+      <name>Peter H.M. Jacobs</name>
+      <email>phmjacobs@hotmail.com</email>
+      <organization>Delft University of Technology, the Netherlands</organization>
+      <organizationUrl>https://www.tudelft.nl</organizationUrl>
+      <timezone>1</timezone>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>averbraeck</id>
+      <name>Alexander Verbraeck</name>
+      <email>a.verbraeck@tudelft.nl</email>
+      <url>https://www.tbm.tudelft.nl/averbraeck</url>
+      <organization>Delft University of Technology, the Netherlands</organization>
+      <organizationUrl>https://simulation.tudelft.nl</organizationUrl>
+      <timezone>1</timezone>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+        <role>maintainance</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <contributors>
+    <contributor>
+      <name>Niels Lang</name>
+      <organization>Erasmus University Rotterdam, the Netherlands</organization>
+      <organizationUrl>https://www.rsm.eur.nl</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>1</timezone>
+    </contributor>
+    <contributor>
+      <name>Stijn-Pieter van Houten</name>
+      <organization>Delft University of Technology, the Netherlands</organization>
+      <organizationUrl>https://www.tudelft.nl</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>1</timezone>
+    </contributor>
+    <contributor>
+      <name>Roy Chin</name>
+      <organization>Delft University of Technology, the Netherlands</organization>
+      <organizationUrl>https://www.tudelft.nl</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>1</timezone>
+    </contributor>
+    <contributor>
+      <name>Mamadou Seck</name>
+      <organization>Old Dominion University, USA</organization>
+      <organizationUrl>https://www.odu.edu</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>-5</timezone>
+    </contributor>
+  </contributors>
+  
+  <modules>
+  	<module>dsol-animation</module>
+  	<module>dsol-animation-gis</module>
+  	<module>dsol-animation-gis-esri</module>
+  	<module>dsol-animation-gis-osm</module>
+  	<module>dsol-base</module>
+  	<module>dsol-core</module>
+  	<module>dsol-demo</module>
+  	<module>dsol-interpreter</module>
+  	<module>dsol-introspection</module>
+  	<module>dsol-naming</module>
+  	<module>dsol-swing</module>
+  	<module>dsol-web</module>
+  </modules>
+</project>

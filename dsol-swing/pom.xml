@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>nl.tudelft.simulation</groupId>
+    <artifactId>dsol</artifactId>
+    <version>4.00.00</version>
+  </parent>
+
+  <artifactId>dsol-swing</artifactId>
+  <name>DSOL swing project</name>
+  <description>DSOL classes for statistics display, gui building, and animation; includes sprites, GIS, and drawing in 2D and 3D</description>
+  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-swing</url>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>nl.tudelft.simulation</groupId>
+      <artifactId>dsol-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>nl.tudelft.simulation</groupId>
+      <artifactId>dsol-animation</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>nl.tudelft.simulation</groupId>
+      <artifactId>dsol-introspection</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jfree</groupId>
+      <artifactId>jfreechart</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>tablelayout</groupId>
+      <artifactId>TableLayout</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>jlfgr</groupId>
+      <artifactId>jlfgr</artifactId>
+      <version>1.0</version>
+    </dependency>
+  </dependencies>
+</project>

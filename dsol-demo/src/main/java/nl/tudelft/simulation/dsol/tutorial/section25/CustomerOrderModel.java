@@ -1,0 +1,47 @@
+package nl.tudelft.simulation.dsol.tutorial.section25;
+
+import java.io.Serializable;
+
+import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+
+/**
+ * The Customer Ordering model class as presented in section 2.5 in the DSOL tutorial..
+ * <p>
+ * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
+ * project is distributed under a three-clause BSD-style license, which can be found at
+ * <a href="https://simulation.tudelft.nl/dsol/3.0/license.html" target="_blank">
+ * https://simulation.tudelft.nl/dsol/3.0/license.html</a>.
+ * </p>
+ * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
+ */
+public class CustomerOrderModel extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+{
+    /** The default serial version UID for serializable classes. */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Construct a new customer ordering model.
+     * @param simulator DEVSSimulator<Double>; the simulator
+     */
+    public CustomerOrderModel(final DEVSSimulator<Double> simulator)
+    {
+        super(simulator);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void constructModel()
+    {
+        System.out.println("\nReplication starts...");
+        new Customer(this.simulator);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Serializable getSourceId()
+    {
+        return "CustomerOrderModel";
+    }
+}

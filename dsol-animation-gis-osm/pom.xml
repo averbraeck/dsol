@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>nl.tudelft.simulation</groupId>
+    <artifactId>dsol</artifactId>
+    <version>4.00.00</version>
+  </parent>
+
+  <artifactId>dsol-animation-gis-osm</artifactId>
+  <name>DSOL OpenStreetMap Animation</name>
+  <description>DSOL map animation from OpenStreetMap files</description>
+  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-animation-gis-osm</url>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>nl.tudelft.simulation</groupId>
+      <artifactId>dsol-animation-gis</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openstreetmap.osmosis</groupId>
+      <artifactId>osmosis-set</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openstreetmap.osmosis</groupId>
+      <artifactId>osmosis-xml</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openstreetmap.osmosis</groupId>
+      <artifactId>osmosis-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openstreetmap.osmosis</groupId>
+      <artifactId>osmosis-osm-binary</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openstreetmap.osmosis</groupId>
+      <artifactId>osmosis-pbf</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.siegmar</groupId>
+      <artifactId>fastcsv</artifactId>
+    </dependency>
+
+  </dependencies>
+</project>

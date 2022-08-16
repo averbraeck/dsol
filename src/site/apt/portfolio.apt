@@ -1,0 +1,83 @@
+SNE Comparisons
+
+	Simulation News Europe (SNE) features a series on comparisons of simulation software. 
+	Based on simple, easily comprehensible models special features of modelling and experimentation 
+	within simulation languages, also with respect to an application area, are compared.
+
+	Features are, for instance: modelling technique, event handling, numerical integration, 
+	steady-state calculation, distribution fitting, parameter sweep, output analysis, 
+	animation, complex logic strategies, submodels, macros, statistical features etc.
+
+	Ten comparisons have been defined in Simulation News Europe, the series will be continued. 
+	Furthermore, a special comparison of parallel simulation techniques has been defined.
+
+	For more information you can visit: SNE implementation of DSOL or contact: 
+	{{{mailto:a.verbraeck@tudelft.nl}Alexander Verbraeck}}.
+
+
+
+Supply chain games
+
+	Welcome to the portal of the Global Supply Chain Game (http://www.gscg.org). 
+	The Global Supply Chain Game (GSCG) library is a flexible environment based on the Java programming language 
+	and the DSOL simulation environment to create teaching games within Supply Chain Management using 
+	interactive computer-simulation in a distributed setting.
+	
+	Players have the challenging task to manage a supply chain actor, for example a retailer or a manufacturer, 
+	in a complex and dynamic environment. They have to compete with simulated as well as human controlled actors.
+	
+	Players have different possibilites to play the game. First they may train in an environment where they 
+	solely play against simulated actors. In this way, that will learn the functionalities of the actor they control, 
+	and the way the graphical user interface works. These graphical user interfaces are used by a player to 
+	control a supply chain actor, e.g. a retailer or a manufacturer.
+	
+	For more information you can contact: {{{mailto:s.p.a.vanhouten@tudelft.nl}Stijn-Pieter van Houten}}.
+
+
+
+Termsim
+
+	TermSim (short for Terminal Simulation) is a simulation library for supporting the analysis of 
+	container terminal performance. The library is under development to support a PhD research on simulation 
+	of logistic systems. Specifically, the potential of integrating operational and economic models is explored. 
+	This effort is expected to require the integration of multiple and diverse models, 
+	a task for which DSOL seems well equiped.
+	
+[images/termsim.png] termsim illustration
+	
+	During the last half year, a prototype model has been developed that demonstrated (among other things) 
+	DSOL's ability to interact easily with external databases and spreadsheet applications.
+	
+	Currently, a model is developed to investigate the impact of operational disruptions (e.g. ship delays) on 
+	economic performance. This effort is expected to benefit from DSOL???s ability to support complex systems of statistics.
+	
+	For more information you can visit: {{{http://web.eur.nl/fbk/dep/dep1/Introduction/Staff/People/Lang}Niels Lang's website}}.
+	
+	
+	
+Traffic Control Strategies: a simulation testbed
+
+	A Simulation Test Bed is being developed to support the testing of traffic control strategies. 
+	It offers generic simulation components which are based on DSOL simulation environment to provide a flexible 
+	testing setting for track-oriented infrastructures. A project is being currently carried out at a 
+	tram company in The Hague.
+
+[images/traminfra.gif] tram infrastructure illustration
+
+	The generic simulation components can be fed with user defined data (data for the physical infrastructure 
+	and control strategies) and the results can be assessed by animation and statistics gathered during the 
+	simulation runs.
+
+	The development of this Test Bed is part of a PhD research project. During 2007, we will extend its usage to 
+	real time control in order to provide proactiveness. To that end, the components will be fed either with data 
+	retrieved from other applications (database or others) or gathered in real time from the physical infrastructure.
+
+	For more information you can contact: {{mailto:elisangelak@tbm.tudelft.nl}Elisangela Mieko Kanacilo}}.
+
+
+
+Can I present my DSOL project on this site?
+
+	Yes, we would very much like to present other DSOL projects on this site. Please send a short description with 
+	contact information to {{mailto:a.verbraeck@tudelft.nl}} and your project will be added.
+	

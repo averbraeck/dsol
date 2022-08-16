@@ -1,0 +1,38 @@
+Maven use
+
+	If you want to include dsol-core to run simulations in your project, use the following maven dependency:
+	
++---
+  <dependency>
+    <groupId>dsol</groupId>
+    <artifactId>dsol-core</artifactId>
+    <version>3.02.05</version>
+  </dependency>
++---
+
+
+    If you want to include dsol-swing to run simulations with animation in your project, 
+    use the following maven dependency:
+    
++---
+  <dependency>
+    <groupId>dsol</groupId>
+    <artifactId>dsol-swing</artifactId>
+    <version>3.02.05</version>
+  </dependency>
++---
+
+    All other necessary packages will be downloaded and included when you include dsol-core or dsol-swing.
+    
+    
+    The repository where dsol resides at TU Delft also has to be included in the Maven file:
+         
++---
+  <repositories>
+    <repository>
+      <name>DSOL Public Repository</name>
+      <id>dsol</id>
+      <url>http://simulation.tudelft.nl/maven</url>
+    </repository>
+  </repositories>
++---

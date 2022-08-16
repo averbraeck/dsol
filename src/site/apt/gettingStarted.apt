@@ -1,0 +1,28 @@
+Downloading and starting DSOL
+
+	DSOL is an open source suite and as such published on the open TU Delft SVN. 
+	A download can be obtained from {{https://simulation.tudelft.nl/dsol/3.0/}}.
+	
+
+
+Run the tutorial examples
+
+	In the tutorial section, a number of examples can be run out of the box. 
+	Play around with the different windows, see the animation, and experience what DSOL 
+	can do for simulation studies! In order to run the 2D/3D animation examples, you'll 
+	have to install Java's 3D libraries which you can download from Oracle.
+
+
+
+Develop a model
+
+	After running the web-based tutorial examples, the next task is to see how to develop models. 
+	The maven instructions indicate how to include DSOL in your project. 
+
+
+
+OK, what's next
+
+	Now it is time to read the tutorial and understand the concepts, design guidelines and 
+	language constructs. Have fun and don't forget that DSOL is based on the idea of an 
+	open source community. Your feedback, questions and experiences are more than welcome!

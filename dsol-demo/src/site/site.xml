@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="${artifactId} ${project.version}" xmlns="http://maven.apache.org/DECORATION/1.6.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.6.0 http://maven.apache.org/xsd/decoration-1.6.0.xsd">
+
+  <publishDate position="left" format="dd-MM-yyyy hh:mm" />
+
+  <bannerRight>
+    <name>${artifactId} ${project.version}</name>
+  </bannerRight>
+
+  <body>
+
+    <menu name="DSOL 3.0 MODULES">
+      <item name="dsol" href="https://simulation.tudelft.nl/dsol/${project.version}/index.html" />
+      <item name="dsol-base" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-base/index.html" />
+      <item name="dsol-naming" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-naming/index.html" />
+      <item name="dsol-interpreter" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-interpreter/index.html" />
+      <item name="dsol-introspection" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-introspection/index.html" />
+      <item name="dsol-core" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-core/index.html" />
+      <item name="dsol-swing" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-swing/index.html" />
+      <item name="dsol-animation" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation/index.html" />
+      <item name="dsol-animation-gis" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation-gis/index.html" />
+      <item name="dsol-animation-gis-esri" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation-gis-esri/index.html" />
+      <item name="dsol-animation-gis-osm" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation-gis-osm/index.html" />
+      <item name="dsol-web" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-web/index.html" />
+      <item name="dsol-demo" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-demo/index.html" />
+      <!-- item name="dsol-akka" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-akka/index.html" / -->
+      <!-- item name="dsol-hla" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-hla/index.html" / -->
+      <!-- item name="dsol-zmq" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-zmq/index.html" / -->
+    </menu>
+
+    <menu name="API">
+      <item name="JavaDocs" href="apidocs/index.html" target="_blank" />
+    </menu>
+
+    <menu name="PROJECT REPORTS">
+      <item name="Reports" href="project-reports.html" />
+      <item name="Dependencies" href="dependencies.html" />
+      <item name="Source Xref" href="xref/index.html" target="_blank" />
+      <item name="Test JavaDocs" href="testapidocs/index.html" target="_blank" />
+      <item name="Test Xref" href="xref-test/index.html" target="_blank" />
+      <item name="Checkstyle" href="checkstyle.html" />
+      <item name="Surefire report" href="surefire-report.html" />
+      <item name="JaCoCo" href="jacoco/index.html" target="_blank" />
+      <item name="Tag List" href="taglist.html" />
+      <item name="SpotBugs" href="spotbugs.html" />
+      <item name="CPD" href="cpd.html" />
+      <item name="PMD" href="pmd.html" />
+    </menu>
+
+  </body>
+</project>

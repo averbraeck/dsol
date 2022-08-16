@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>nl.tudelft.simulation</groupId>
+    <artifactId>dsol</artifactId>
+    <version>4.00.00</version>
+  </parent>
+
+  <artifactId>dsol-base</artifactId>
+  <name>DSOL version 3, base classes</name>
+  <description>Base classes for Distributed Simulation Object Library version 3</description>
+  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-base</url>
+
+  <dependencies>
+    <!-- dependency>
+      <groupId>org.scijava</groupId>
+      <artifactId>vecmath</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.scijava</groupId>
+      <artifactId>j3dcore</artifactId>
+    </dependency -->
+
+    <dependency>
+      <groupId>org.djutils</groupId>
+      <artifactId>djutils</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.djutils</groupId>
+      <artifactId>djutils-draw</artifactId>
+    </dependency>
+
+  </dependencies>
+
+</project>

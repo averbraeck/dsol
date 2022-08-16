@@ -1,0 +1,30 @@
+General features
+
+    * Distributed 2D and 3D animation supported.
+    
+    * Continous and discrete statistical distributions in JSTATS package.
+    
+    * Various random number generators (including DX-120 and MersenneTwister).
+    
+    * GIS/CAD files supported.
+    
+    * Statistics, charts included.
+
+
+Discrete Event Simulation features
+
+    * Distributed discrete event formalism specified; event scheduling is specified through scheduled method invokation.
+    
+    * Single threaded Process Interaction formalism specified! The first java single threaded implementation of this formalism through the usage of an interpreter.
+    
+    * Flow "formalism" specified; this is an Arena alike formalism.
+
+
+Continuous simulation features
+
+    * Numerical integration of n-th order ordinary differential equations supported.
+    
+    * Various numerical integrators supported; these include normal and multi step integrators.
+    
+    * Realtime clock simulator for Emulation!
+

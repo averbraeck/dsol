@@ -1,0 +1,14 @@
+Releases
+
+	Releases can be downloaded using Maven from {{https://simulation.tudelft.nl/maven/}}. 
+	
+
+Source files and javadocs 
+
+	The site {{https://simulation.tudelft.nl/dsol/3.0/index.html}} provides javadocs, info and sources.
+
+
+SVN access
+
+	The sources of the latest release can be downloaded through SVN at {{https://svn.tbm.tudelft.nl/DSOL3/trunk}}.
+	Individual versions are at {{https://svn.tbm.tudelft.nl/DSOL3/release}}.
