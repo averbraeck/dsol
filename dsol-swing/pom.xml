@@ -38,11 +38,6 @@
       <groupId>tablelayout</groupId>
       <artifactId>TableLayout</artifactId>
     </dependency>
-    
-    <dependency>
-      <groupId>jlfgr</groupId>
-      <artifactId>jlfgr</artifactId>
-      <version>1.0</version>
-    </dependency>
+
   </dependencies>
 </project>
