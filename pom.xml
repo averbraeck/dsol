@@ -4,6 +4,7 @@
   <groupId>nl.tudelft.simulation</groupId>
   <artifactId>dsol</artifactId>
   <version>4.00.00</version>
+  
   <packaging>pom</packaging>
   
   <name>DSOL version 4</name>
@@ -17,7 +18,23 @@
   </organization>
 
   <inceptionYear>2002</inceptionYear>
-
+  
+  <modules>
+    <module>dsol-animation</module>
+    <module>dsol-animation-gis</module>
+    <module>dsol-animation-gis-esri</module>
+    <module>dsol-animation-gis-osm</module>
+    <module>dsol-base</module>
+    <module>dsol-core</module>
+    <module>dsol-demo</module>
+    <module>dsol-interpreter</module>
+    <module>dsol-introspection</module>
+    <module>dsol-naming</module>
+    <module>dsol-swing</module>
+    <module>dsol-web</module>
+  </modules>
+  
+  
   <properties>
     <jdk.version>11</jdk.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,26 +53,27 @@
     <osm.version>0.48.3</osm.version>
     <fastcsv.version>2.1.0</fastcsv.version>
 
-    <maven.compiler.version>3.8.1</maven.compiler.version>
-    <maven.site.version>3.9.1</maven.site.version>
-    <maven.deploy.version>3.0.0-M1</maven.deploy.version>
-    <maven.install.version>3.0.0-M1</maven.install.version>
+    <maven.compiler.version>3.10.1</maven.compiler.version>
+    <maven.site.version>3.12.1</maven.site.version>
+    <maven.install.version>3.0.1</maven.install.version>
     <maven.source.version>3.2.1</maven.source.version>
-    <maven.javadoc.version>3.2.0</maven.javadoc.version>
-    <maven.resources.version>3.2.0</maven.resources.version>
-    <maven.checkstyle.version>3.1.1</maven.checkstyle.version>
+    <maven.javadoc.version>3.4.1</maven.javadoc.version>
+    <maven.resources.version>3.3.0</maven.resources.version>
+    <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
     <checkstyle.version>8.35</checkstyle.version>
-    <maven.surefire.version>3.0.0-M5</maven.surefire.version>
-    <maven.surefire-report.version>3.0.0-M5</maven.surefire-report.version>
-    <maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
-    <maven.jacoco.version>0.8.6</maven.jacoco.version>
-    <maven.spotbugs.version>4.5.2.0</maven.spotbugs.version>
-    <spotbugs.version>4.5.3</spotbugs.version>
-    <maven.project-info-reports.version>3.1.2</maven.project-info-reports.version>
-    <maven.jxr.version>3.0.0</maven.jxr.version>
+    <maven.surefire.version>3.0.0-M7</maven.surefire.version>
+    <maven.surefire-report.version>3.0.0-M7</maven.surefire-report.version>
+    <maven.failsafe.version>3.0.0-M7</maven.failsafe.version>
+    <maven.jacoco.version>0.8.8</maven.jacoco.version>
+    <maven.spotbugs.version>4.7.1.1</maven.spotbugs.version>
+    <spotbugs.version>4.7.1</spotbugs.version>
+    <maven.project-info-reports.version>3.4.0</maven.project-info-reports.version>
+    <maven.jxr.version>3.2.0</maven.jxr.version>
     <maven.taglist.version>3.0.0</maven.taglist.version>
-    <maven.pmd.version>3.13.0</maven.pmd.version>
+    <maven.pmd.version>3.17.0</maven.pmd.version>
     <maven.changes.version>2.12.1</maven.changes.version>
+
+    <maven.deploy.version>3.0.0</maven.deploy.version>
     <wagon.maven.version>2.0.0</wagon.maven.version>
     <wagon.ssh.version>3.4.1</wagon.ssh.version>
     <wagon.ftp.version>3.4.1</wagon.ftp.version>
@@ -75,11 +93,26 @@
     <resources>
       <resource>
         <directory>${basedir}/src/main/resources</directory>
+        <targetPath>${project.build.directory}/classes/resources</targetPath>
+        <includes>
+          <include>**/*</include>
+        </includes>
       </resource>
     </resources>
     <testResources>
       <testResource>
         <directory>${basedir}/src/test/resources</directory>
+        <targetPath>${project.build.directory}/test-classes/resources</targetPath>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/src/main/resources</directory>
+        <targetPath>${project.build.directory}/test-classes/resources</targetPath>
+        <includes>
+          <include>**/*</include>
+        </includes>
       </testResource>
     </testResources>
 
@@ -108,14 +141,14 @@
         </configuration>
       </plugin>
 
-      <plugin>
+     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven.resources.version}</version>
         <executions>
           <execution>
-            <id>copy-resource-one</id>
-            <phase>generate-sources</phase>
+            <id>default-resources</id>
+            <phase>validate</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -129,8 +162,8 @@
             </configuration>
           </execution>
           <execution>
-            <id>copy-test-resource-one</id>
-            <phase>generate-sources</phase>
+            <id>default-testResources</id>
+            <phase>validate</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -144,8 +177,8 @@
             </configuration>
           </execution>
           <execution>
-            <id>copy-test-resource-two</id>
-            <phase>generate-sources</phase>
+            <id>testResources main</id>
+            <phase>validate</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
@@ -184,76 +217,14 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>${maven.deploy.version}</version>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>${maven.install.version}</version>
       </plugin>
-
-      <!-- copy files starting with a period in the jacoco folder to the right site location. Normally, files starting with
-        tilde, period or underscore are not copied. These files are also not taken into account when trying to the pages
-        in a subfolder of a Drupal sile, as files and folders starting with a period are filtered with a rewrite rule: RewriteRule "(^|/)\." - [F]
-        To undo this rewrite rule, add a .htaccess file in the site folder with as content: RewriteRule "(^|/)\." - [L] Potentially,
-        there is also a line with Options +Indexes in the .htaccess file. -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>wagon-maven-plugin</artifactId>
-        <version>${wagon.maven.version}</version>
-        <executions>
-
-          <execution>
-            <id>upload-jacoco-dot-files</id>
-            <phase>site-deploy</phase>
-            <goals>
-              <goal>upload</goal>
-            </goals>
-            <configuration>
-              <fromDir>${basedir}/target/site/jacoco-ut</fromDir>
-              <includes>.*, .resources/*</includes>
-              <url>scp://simulation.tudelft.nl/home/web/simulation.tudelft.nl/html/dsol/${project.version}/${project.artifactId}</url>
-              <toDir>jacoco-ut</toDir>
-              <serverId>dsol-deployment</serverId>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>upload-license</id>
-            <phase>deploy</phase>
-            <goals>
-              <goal>upload</goal>
-            </goals>
-            <configuration>
-              <fromDir>${basedir}/src/main/resources</fromDir>
-              <includes>license.html</includes>
-              <url>scp://simulation.tudelft.nl/home/web/simulation.tudelft.nl/html</url>
-              <toDir>dsol</toDir>
-              <serverId>dsol-deployment</serverId>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>upload-last-site</id>
-            <phase>site-deploy</phase>
-            <goals>
-              <goal>sshexec</goal>
-            </goals>
-            <configuration>
-              <url>scp://simulation.tudelft.nl/home/web/simulation.tudelft.nl/html/dsol</url>
-              <serverId>dsol-deployment</serverId>
-              <commands>
-                <command>cp -f -q /home/web/simulation.tudelft.nl/html/dsol/${project.version}/${project.artifactId}/apidocs/element-list /home/web/simulation.tudelft.nl/html/dsol/${project.version}/${project.artifactId}/apidocs/package-list | true</command>
-                <command>rm -r -f /home/web/simulation.tudelft.nl/html/dsol/3.0</command>
-                <command>mkdir -p /home/web/simulation.tudelft.nl/html/dsol/3.0</command>
-                <command>cp -r -f /home/web/simulation.tudelft.nl/html/dsol/${project.version}/. /home/web/simulation.tudelft.nl/html/dsol/3.0</command>
-              </commands>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>${maven.install.version}</version>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${maven.deploy.version}</version>
       </plugin>
 
       <plugin>
@@ -342,6 +313,7 @@
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
+          <stylesheetfile>${basedir}/config/javadoc/stylesheet.css</stylesheetfile>
           <detectJavaApiLink>false</detectJavaApiLink>
           <detectLinks>true</detectLinks>
         </configuration>
@@ -546,6 +518,7 @@
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
+          <stylesheetfile>${basedir}/config/javadoc/stylesheet.css</stylesheetfile>
           <detectJavaApiLink>false</detectJavaApiLink>
           <detectLinks>true</detectLinks>
         </configuration>
@@ -576,8 +549,8 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>${maven.checkstyle.version}</version>
         <configuration>
-          <configLocation>/src/main/resources/development/dsol-checks.xml</configLocation>
-          <suppressionsLocation>/src/main/resources/development/checkstyle_suppressions.xml</suppressionsLocation>
+          <configLocation>/config/dsol-checks.xml</configLocation>
+          <suppressionsLocation>/config/checkstyle_suppressions.xml</suppressionsLocation>
           <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
         </configuration>
         <reportSets>
@@ -689,7 +662,7 @@
         <version>${maven.changes.version}</version>
         <configuration>
           <escapeHTML>false</escapeHTML>
-          <xmlPath>../dsol/src/changes/changes.xml</xmlPath>
+          <xmlPath>/src/changes/changes.xml</xmlPath>
         </configuration>
         <reportSets>
           <reportSet>
@@ -914,45 +887,6 @@
     </dependencies>
   </dependencyManagement>
 
-  <repositories>
-    <repository>
-      <name>DSOL Public Repository</name>
-      <id>dsol</id>
-      <url>https://simulation.tudelft.nl/maven</url>
-    </repository>
-
-    <repository>
-      <name>DJUNITS Public Repository</name>
-      <id>djunits</id>
-      <url>https://djunits.org/maven</url>
-    </repository>
-
-    <repository>
-      <name>DJUTILS Public Repository</name>
-      <id>djutils</id>
-      <url>https://djutils.org/maven</url>
-    </repository>
-
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>apache</id>
-      <name>apache</name>
-      <url>https://repo1.maven.org/maven2</url>
-    </repository>
-
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>mvnrepository</id>
-      <name>MVN Repository</name>
-      <url>https://mvnrepository.com/artifact</url>
-    </repository>
-
-  </repositories>
-
 
   <!-- More Project Information -->
 
@@ -1031,19 +965,5 @@
       <timezone>-5</timezone>
     </contributor>
   </contributors>
-  
-  <modules>
-  	<module>dsol-animation</module>
-  	<module>dsol-animation-gis</module>
-  	<module>dsol-animation-gis-esri</module>
-  	<module>dsol-animation-gis-osm</module>
-  	<module>dsol-base</module>
-  	<module>dsol-core</module>
-  	<module>dsol-demo</module>
-  	<module>dsol-interpreter</module>
-  	<module>dsol-introspection</module>
-  	<module>dsol-naming</module>
-  	<module>dsol-swing</module>
-  	<module>dsol-web</module>
-  </modules>
+
 </project>
