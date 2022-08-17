@@ -14,6 +14,6 @@ tool, but rather a programming library to build computer simulation models. Two 
 exist: a Java version [https://github.com/averbraeck/dsol4](https://github.com/averbraeck/dsol4) and
 a python version [https://github.com/averbraeck/pydsol-core](https://github.com/averbraeck/pydsol-core).
 Domain specific libraries can be built on top of these general-purpose simulation libraries, e.g., 
-for traffic modeling ([https://github.com/averbraeck/opentrafficsim1](OpenTrafficSim)), 
-disease spread ([https://github.com/averbraeck/medlabs](MedLabs)) or supply chains (forthcoming). 
+for traffic modeling ([OpenTrafficSim](https://github.com/averbraeck/opentrafficsim2)), 
+disease spread ([MedLabs](https://github.com/averbraeck/medlabs)) or supply chains (forthcoming). 
 
