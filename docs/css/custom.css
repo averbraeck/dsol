@@ -1,0 +1,13 @@
+@media screen and (min-width: 1600px) {
+  .wy-nav-content {
+    max-width: 1200px;
+  }
+@media screen and (min-width: 1400px) {
+  .wy-nav-content {
+    max-width: 1000px;
+  }
+@media screen and (min-width: 1200px) {
+  .wy-nav-content {
+    max-width: 800px;
+  }
+}

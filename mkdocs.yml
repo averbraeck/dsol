@@ -1,0 +1,17 @@
+site_name: DSOL MANUAL
+site_url: https://simulation.tudelft.nl/dsol/manual/
+site_favicon: images/favicon.png
+copyright: (c) 2002-2022 Delft University of Technology
+
+theme: readthedocs
+
+markdown_extensions:
+  - admonition
+  
+extra_css:
+  - custom.css
+    
+nav:
+  - Home: index.md
+  - DSOL documentation: https://simulation.tudelft.nl/dsol/current/index.html
+  - DSOL API: https://simulation.tudelft.nl/dsol/current/apidocs/index.html
