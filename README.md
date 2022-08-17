@@ -7,9 +7,9 @@ The design of the library is rooted in simulation theory, systems thinking, and 
 The four words of the "Distributed Simulation Object Library" have been chosen purposefully:
 
 * **Distributed**. The word 'distributed' in DSOL indicates that the design of the software has 
-  taken distributed models as a starting point, rather than as an afterthought. The implementations
-  make heavy use of the so-called publish-subscribe mechanism, allowing flexible interaction between
-  (remote) components.
+  taken distributed models and distributed services as a starting point, rather than as an afterthought. 
+  The implementations make heavy use of the so-called publish-subscribe mechanism, allowing flexible 
+  interaction between (remote) components.
 * **Simulation**: The software allows for building simulation models in different formalisms, such 
   as discrete-event simulation, differential equations, agent-based modeling, atomic DEVS, and 
   hierarchical DEVS. Different simulation formalisms can co-exist in a single model. 
