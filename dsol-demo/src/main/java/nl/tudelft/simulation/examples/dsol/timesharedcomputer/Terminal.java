@@ -35,7 +35,7 @@ public class Terminal extends Station<Double>
 
     /**
      * constructs a new Terminal.
-     * @param simulator DEVSSimulatorInterface<Double>; the simulator
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      * @param cpu StationInterface; the destination
      * @param thinkDelay DistContinuous; the delay
      * @param jobSize DistContinuous; in time

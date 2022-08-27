@@ -28,7 +28,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
     /**
      * constructs a new Release.
      * @param id the id of the Release block
-     * @param simulator DEVSSimulatorInterface<Double>; the simulator on which to schedule
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator on which to schedule
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to be released
      */
     public Release(final Serializable id, final DEVSSimulatorInterface<Double> simulator,
@@ -40,7 +40,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
     /**
      * constructs a new Release.
      * @param id the id of the Release block
-     * @param simulator DEVSSimulatorInterface<Double>; the simulator on which to schedule
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator on which to schedule
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to be released
      * @param amount double; the amount to be released
      */

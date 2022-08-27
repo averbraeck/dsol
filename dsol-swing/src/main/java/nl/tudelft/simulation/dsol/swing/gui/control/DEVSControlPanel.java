@@ -229,8 +229,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
         /**
          * Construct a DEVS control panel for a Double time unit, with a different set of control buttons. The control panel
          * assumes a DEVSSimulator, but not animation.
-         * @param model DSOLModel<Double>; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSSimulatorInterface<Double>; the simulator. Specified separately, because the model can have been
+         * @param model DSOLModel&lt;Double&gt;; the model for the control panel, to allow a reset of the model
+         * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator. Specified separately, because the model can have been
          *            specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has been
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
@@ -263,8 +263,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
         /**
          * Construct a DEVS control panel for a Float time unit, with a different set of control buttons. The control panel
          * assumes a DEVSSimulator, but not animation.
-         * @param model DSOLModel<Float>; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSSimulatorInterface<Float>; the simulator. Specified separately, because the model can have been
+         * @param model DSOLModel&lt;Float&gt;; the model for the control panel, to allow a reset of the model
+         * @param simulator DEVSSimulatorInterface&lt;Float&gt;; the simulator. Specified separately, because the model can have been
          *            specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has been
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
@@ -297,8 +297,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
         /**
          * Construct a DEVS control panel for a Long time unit, with a different set of control buttons. The control panel
          * assumes a DEVSSimulator, but not animation.
-         * @param model DSOLModel<Long>; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSSimulatorInterface<Long>; the simulator. Specified separately, because the model can have been
+         * @param model DSOLModel&lt;Long&gt;; the model for the control panel, to allow a reset of the model
+         * @param simulator DEVSSimulatorInterface&lt;Long&gt;; the simulator. Specified separately, because the model can have been
          *            specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has been
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
@@ -331,8 +331,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
         /**
          * Construct a DEVS control panel for a djunits double time unit, with a different set of control buttons. The control
          * panel assumes a DEVSSimulator, but not animation.
-         * @param model DSOLModel<Duration>; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSSimulatorInterface<Duration>; the simulator. Specified separately, because the model can have
+         * @param model DSOLModel&lt;Duration&gt;; the model for the control panel, to allow a reset of the model
+         * @param simulator DEVSSimulatorInterface&lt;Duration&gt;; the simulator. Specified separately, because the model can have
          *            been specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has
          *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
@@ -365,8 +365,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
         /**
          * Construct a DEVS control panel for a djunits float time unit, with a different set of control buttons. The control
          * panel assumes a DEVSSimulator, but not animation.
-         * @param model DSOLModel<FloatDuration>; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSSimulatorInterface<FloatDuration>; the simulator. Specified separately, because the model can
+         * @param model DSOLModel&lt;FloatDuration&gt;; the model for the control panel, to allow a reset of the model
+         * @param simulator DEVSSimulatorInterface&lt;FloatDuration&gt;; the simulator. Specified separately, because the model can
          *            have been specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model
          *            has been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment

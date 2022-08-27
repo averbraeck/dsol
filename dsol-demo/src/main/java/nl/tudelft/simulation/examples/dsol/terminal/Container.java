@@ -38,7 +38,7 @@ public class Container implements IntResourceRequestorInterface<Double>
     private int phase = 0;
 
     /**
-     * @param simulator DEVSSimulatorInterface<Double>; the simulator
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      * @param containerNumber int; the container number
      * @param qc QC; the QC resources
      * @param agv AGV; the AGV resources

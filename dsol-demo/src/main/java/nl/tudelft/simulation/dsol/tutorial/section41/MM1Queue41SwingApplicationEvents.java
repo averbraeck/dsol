@@ -41,7 +41,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
     /**
      * @param panel DSOLPanel; the panel
      * @param model MM1Queue41Model; the model
-     * @param devsSimulator DEVSSimulatorInterface<Double>; the simulator
+     * @param devsSimulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
     public MM1Queue41SwingApplicationEvents(final MM1Queue41Panel panel, final MM1Queue41Model model,
             final DEVSSimulator<Double> devsSimulator)
@@ -101,7 +101,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
         private final DEVSSimulator<Double> devsSimulator;
 
         /**
-         * @param devsSimulator DEVSSimulator<Double>; the simulator to provide the events
+         * @param devsSimulator DEVSSimulator&lt;Double&gt;; the simulator to provide the events
          */
         SimulatorEventLogger(final DEVSSimulator<Double> devsSimulator)
         {

@@ -50,7 +50,7 @@ public class WebMM1Queue41Model extends AbstractDSOLModel<Double, DEVSSimulator<
     Utilization<Double> uN;
 
     /**
-     * @param simulator DEVSSimulator<Double>; the simulator to use for this model
+     * @param simulator DEVSSimulator&lt;Double&gt;; the simulator to use for this model
      */
     public WebMM1Queue41Model(final DEVSSimulator<Double> simulator)
     {

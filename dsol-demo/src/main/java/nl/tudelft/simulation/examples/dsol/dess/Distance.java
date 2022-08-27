@@ -24,7 +24,7 @@ public class Distance extends DifferentialEquation<Double>
 
     /**
      * constructs a new Distance.
-     * @param simulator DESSSimulatorInterface<Double>; the simulator
+     * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on network error
      */
     public Distance(final DESSSimulatorInterface<Double> simulator) throws RemoteException

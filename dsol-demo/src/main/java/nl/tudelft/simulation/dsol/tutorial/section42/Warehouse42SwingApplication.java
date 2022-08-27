@@ -78,7 +78,7 @@ public class Warehouse42SwingApplication extends DSOLApplication
 
         /**
          * @param model Warehouse42Model; the model
-         * @param simulator DEVSSimulator<Double>; the simulator
+         * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
          * @throws RemoteException on error
          */
         Warehouse42Panel(final Warehouse42Model model, final DEVSSimulator<Double> simulator) throws RemoteException

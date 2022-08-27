@@ -24,7 +24,7 @@ public class Positioner extends DifferentialEquation<Double>
 
     /**
      * constructs a new Positioner.
-     * @param simulator DESSSimulatorInterface<Double>; the simulator
+     * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on remote error
      */
     public Positioner(final DESSSimulatorInterface<Double> simulator) throws RemoteException

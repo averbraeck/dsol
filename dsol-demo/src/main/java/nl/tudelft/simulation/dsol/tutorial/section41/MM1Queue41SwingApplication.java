@@ -34,7 +34,7 @@ public class MM1Queue41SwingApplication extends DSOLApplication
     /**
      * @param panel DSOLPanel; the panel
      * @param model MM1Queue41Model; the model
-     * @param simulator DEVSSimulatorInterface<Double>; the simulator
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
     public MM1Queue41SwingApplication(final MM1Queue41Panel panel, final MM1Queue41Model model,
             final DEVSSimulator<Double> simulator)

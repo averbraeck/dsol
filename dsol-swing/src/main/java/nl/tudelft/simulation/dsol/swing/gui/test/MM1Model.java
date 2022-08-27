@@ -73,7 +73,7 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
     SimTally<Double> tallyTimeInSystem;
 
     /**
-     * @param simulator DEVSSimulator<Double>;
+     * @param simulator DEVSSimulator&lt;Double&gt;;
      */
     public MM1Model(final DEVSSimulatorInterface<Double> simulator)
     {

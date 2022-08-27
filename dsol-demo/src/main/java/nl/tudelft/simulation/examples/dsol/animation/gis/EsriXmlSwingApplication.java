@@ -91,7 +91,7 @@ public class EsriXmlSwingApplication extends DSOLAnimationApplication
 
         /**
          * constructs a new EmptyModel.
-         * @param simulator DEVSSimulatorInterface<Double>; the simulator
+         * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
          */
         EmptyModel(final DEVSSimulatorInterface<Double> simulator)
         {

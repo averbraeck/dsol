@@ -50,7 +50,7 @@ public class MM1Queue41Model extends AbstractDSOLModel<Double, DEVSSimulator<Dou
     Utilization<Double> uN;
 
     /**
-     * @param simulator DEVSSimulator<Double>; the simulator
+     * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      */
     public MM1Queue41Model(final DEVSSimulator<Double> simulator)
     {

@@ -36,7 +36,7 @@ public class BallAnimation extends SimRenderable2D<Ball>
     /**
      * constructs a new BallAnimation.
      * @param source Locatable; the source
-     * @param simulator SimulatorInterface<Double>; the simulator
+     * @param simulator SimulatorInterface&lt;Double&gt;; the simulator
      * @throws NamingException on registration error
      * @throws RemoteException on remote animation error
      */

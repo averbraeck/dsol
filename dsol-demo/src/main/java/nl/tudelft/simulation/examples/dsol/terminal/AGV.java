@@ -24,7 +24,7 @@ public class AGV extends IntResource<Double>
     private final DistContinuous agvTime;
 
     /**
-     * @param simulator DEVSSimulatorInterface<Double>; the simulator
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      * @param description String; the description
      * @param capacity long; the capacity
      * @param agvTime DistContinuous; AGV time delay

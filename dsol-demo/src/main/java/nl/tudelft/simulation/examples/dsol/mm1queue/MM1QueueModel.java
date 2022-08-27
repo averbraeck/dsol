@@ -53,7 +53,7 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DEVSSimulator<Doubl
 
     /**
      * constructor for the MM1Queue.
-     * @param simulator DEVSSimulator<Double>; the simulator
+     * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      * @throws InputParameterException on parameter error
      */
     public MM1QueueModel(final DEVSSimulator<Double> simulator) throws InputParameterException

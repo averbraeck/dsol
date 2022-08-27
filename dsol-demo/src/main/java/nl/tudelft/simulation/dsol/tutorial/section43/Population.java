@@ -38,7 +38,7 @@ public class Population extends DifferentialEquation<Double>
 
     /**
      * constructs a new Population.
-     * @param simulator DESSSimulatorInterface<Double>; the simulator
+     * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on networn error for the listeners
      */
     public Population(final DESSSimulatorInterface<Double> simulator) throws RemoteException

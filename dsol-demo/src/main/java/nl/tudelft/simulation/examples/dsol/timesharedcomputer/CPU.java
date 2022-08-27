@@ -62,7 +62,7 @@ public class CPU extends Station<Double> implements Locatable
 
     /**
      * constructs a new CPU.
-     * @param simulator DEVSSimulatorInterface<Double>; a devs simulator
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; a devs simulator
      */
     public CPU(final DEVSSimulatorInterface<Double> simulator)
     {

@@ -24,7 +24,7 @@ public class Seize extends nl.tudelft.simulation.dsol.formalisms.flow.Seize<Doub
     /**
      * constructs a new Seize.
      * @param id the id of the Release block
-     * @param simulator DEVSSimulatorInterface<Double>; the devs simulator on which to schedule
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the devs simulator on which to schedule
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to claim
      */
     public Seize(final Serializable id, final DEVSSimulatorInterface<Double> simulator,
@@ -36,7 +36,7 @@ public class Seize extends nl.tudelft.simulation.dsol.formalisms.flow.Seize<Doub
     /**
      * constructs a new Seize.
      * @param id the id of the Release block
-     * @param simulator DEVSSimulatorInterface<Double>; the devs simulator on which to schedule
+     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the devs simulator on which to schedule
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to claim
      * @param requestedCapacity double; the amount to claim
      */
