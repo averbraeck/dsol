@@ -490,7 +490,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
         }
     }
 
-    /** Easy access class RealTimeClock&lt;Long>. */
+    /** Easy access class RealTimeClock&lt;Long&gt;. */
     public abstract static class TimeLong extends DEVSRealTimeAnimator<Long> implements DEVSSimulatorInterface<Long>
     {
         /** */
