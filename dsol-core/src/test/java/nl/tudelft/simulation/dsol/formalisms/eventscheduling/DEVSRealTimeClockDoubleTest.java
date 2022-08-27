@@ -143,7 +143,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListenerInterface
                 sim.start();
             }
         }).start();
-        this.waiter.await(30000);
+        this.waiter.await(60000);
     }
 
     /** the distribution for the work time. 1 in 1000 events take 0.1 sec. */
@@ -203,7 +203,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListenerInterface
             });
         }
         this.devsSimulator.start();
-        this.waiter.await(10000);
+        this.waiter.await(20000);
     }
 
     /**
