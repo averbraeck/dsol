@@ -39,6 +39,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>${jdk.version}</maven.compiler.source>
     <maven.compiler.target>${jdk.version}</maven.compiler.target>
+    <maven.compiler.release>${jdk.version}</maven.compiler.release>
 
     <dsol-version>${project.version}</dsol-version>
     <junit.version>4.12</junit.version>
@@ -452,7 +453,8 @@
           <show>package</show>
           <stylesheetfile>${basedir}/config/javadoc/stylesheet.css</stylesheetfile>
           <detectJavaApiLink>false</detectJavaApiLink>
-          <detectLinks>true</detectLinks>
+          <detectLinks>false</detectLinks>
+          <release>${jdk.version}</release>
         </configuration>
         <executions>
           <execution>
@@ -706,7 +708,8 @@
           <show>package</show>
           <stylesheetfile>${basedir}/config/javadoc/stylesheet.css</stylesheetfile>
           <detectJavaApiLink>false</detectJavaApiLink>
-          <detectLinks>true</detectLinks>
+          <detectLinks>false</detectLinks>
+          <release>${jdk.version}</release>
         </configuration>
         <reportSets>
           <reportSet>
