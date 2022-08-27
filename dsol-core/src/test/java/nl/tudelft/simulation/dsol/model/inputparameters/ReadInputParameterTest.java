@@ -254,7 +254,7 @@ public class ReadInputParameterTest
         conveyor.add(ipSpeed);
         map.add(conveyor);
 
-        ReadInputParameters.loadfromProperties("/paramtest1.properties", map);
+        ReadInputParameters.loadfromProperties("/resources/paramtest1.properties", map);
 
         /*-
         startTime = 1 day
