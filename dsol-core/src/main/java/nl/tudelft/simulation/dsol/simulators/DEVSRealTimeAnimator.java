@@ -442,7 +442,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
     /************************************* EASY ACCESS CLASS EXTENSIONS ****************************************/
     /***********************************************************************************************************/
 
-    /** Easy access class RealTimeClock<Double>. */
+    /** Easy access class RealTimeClock&lt;Double&gt;. */
     public static class TimeDouble extends DEVSRealTimeAnimator<Double> implements DEVSSimulatorInterface<Double>
     {
         /** */
@@ -455,7 +455,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
         private final double msecWallClockToSimTimeUnit;
 
         /**
-         * Construct a DEVSRealTimeClock<Double>.
+         * Construct a DEVSRealTimeClock&lt;Double&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          * @param msecWallClockToSimTimeUnit double; the translation between a millisecond on the clock and '1.0' in the
          *            simulation time.
@@ -474,14 +474,14 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
         }
     }
 
-    /** Easy access class RealTimeClock<Float>. */
+    /** Easy access class RealTimeClock&lt;Float&gt;. */
     public abstract static class TimeFloat extends DEVSRealTimeAnimator<Float> implements DEVSSimulatorInterface<Float>
     {
         /** */
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock<Float>.
+         * Construct a DEVSRealTimeClock&lt;Float&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeFloat(final Serializable id)
@@ -490,14 +490,14 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
         }
     }
 
-    /** Easy access class RealTimeClock<Long>. */
+    /** Easy access class RealTimeClock&lt;Long>. */
     public abstract static class TimeLong extends DEVSRealTimeAnimator<Long> implements DEVSSimulatorInterface<Long>
     {
         /** */
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock<Long>.
+         * Construct a DEVSRealTimeClock&lt;Long&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeLong(final Serializable id)
@@ -506,14 +506,14 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
         }
     }
 
-    /** Easy access class RealTimeClock<Duration>. */
+    /** Easy access class RealTimeClock&lt;Duration&gt;. */
     public static class TimeDoubleUnit extends DEVSRealTimeAnimator<Duration> implements DEVSSimulatorInterface<Duration>
     {
         /** */
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock<Duration>.
+         * Construct a DEVSRealTimeClock&lt;Duration&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeDoubleUnit(final Serializable id)
@@ -529,7 +529,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
         }
     }
 
-    /** Easy access class RealTimeClock<FloatDuration>. */
+    /** Easy access class RealTimeClock&lt;FloatDuration&gt;. */
     public static class TimeFloatUnit extends DEVSRealTimeAnimator<FloatDuration>
             implements DEVSSimulatorInterface<FloatDuration>
     {
@@ -537,7 +537,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock<FloatDuration>.
+         * Construct a DEVSRealTimeClock&lt;FloatDuration&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeFloatUnit(final Serializable id)
