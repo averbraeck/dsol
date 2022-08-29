@@ -441,18 +441,19 @@
             <link>https://www.jfree.org/jfreechart/api/javadoc/</link>
             <link>https://x-stream.github.io/javadoc/</link>
             <link>https://tinylog.org/v1/javadoc/</link>
-            <link>https://djunits.org/docs/current/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils/apidocs//</link>
-            <link>https://djutils.org/docs/current/djutils-cli/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils-data/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils-stats/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils-draw/apidocs/</link>
+            <link>https://djunits.org/docs/latest/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils/apidocs//</link>
+            <link>https://djutils.org/docs/latest/djutils-cli/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils-data/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils-stats/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils-draw/apidocs/</link>
           </links>
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
           <stylesheetfile>${basedir}/config/javadoc/stylesheet.css</stylesheetfile>
           <detectJavaApiLink>false</detectJavaApiLink>
+          <detectOfflineLinks>true</detectOfflineLinks>
           <detectLinks>false</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
@@ -604,7 +605,6 @@
           <relativizeDecorationLinks>false</relativizeDecorationLinks>
           <inputEncoding>UTF-8</inputEncoding>
           <outputEncoding>UTF-8</outputEncoding>
-          <templateFile>src/site/site.vm</templateFile>
         </configuration>
         <executions>
           <execution>
@@ -652,12 +652,6 @@
         <version>${maven.pmd.version}</version>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>${maven.changes.version}</version>
-      </plugin>
-
     </plugins>
 
   </build>
@@ -696,18 +690,19 @@
             <link>https://www.jfree.org/jfreechart/api/javadoc/</link>
             <link>https://x-stream.github.io/javadoc/</link>
             <link>https://tinylog.org/v1/javadoc/</link>
-            <link>https://djunits.org/docs/current/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils/apidocs//</link>
-            <link>https://djutils.org/docs/current/djutils-cli/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils-data/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils-stats/apidocs/</link>
-            <link>https://djutils.org/docs/current/djutils-draw/apidocs/</link>
+            <link>https://djunits.org/docs/latest/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils/apidocs//</link>
+            <link>https://djutils.org/docs/latest/djutils-cli/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils-data/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils-stats/apidocs/</link>
+            <link>https://djutils.org/docs/latest/djutils-draw/apidocs/</link>
           </links>
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
           <stylesheetfile>${basedir}/config/javadoc/stylesheet.css</stylesheetfile>
           <detectJavaApiLink>false</detectJavaApiLink>
+          <detectOfflineLinks>true</detectOfflineLinks>
           <detectLinks>false</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
@@ -839,10 +834,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
         <version>${maven.changes.version}</version>
-        <configuration>
-          <escapeHTML>false</escapeHTML>
-          <xmlPath>/src/changes/changes.xml</xmlPath>
-        </configuration>
         <reportSets>
           <reportSet>
             <reports>
