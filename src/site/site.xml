@@ -9,11 +9,10 @@
 
   <body>
 
-    <menu name="DSOL 3.0 MODULES">
+    <menu name="DSOL MODULES">
       <item name="dsol" href="https://simulation.tudelft.nl/dsol/${project.version}/index.html" />
       <item name="dsol-base" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-base/index.html" />
       <item name="dsol-naming" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-naming/index.html" />
-      <item name="dsol-interpreter" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-interpreter/index.html" />
       <item name="dsol-introspection" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-introspection/index.html" />
       <item name="dsol-core" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-core/index.html" />
       <item name="dsol-animation" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation/index.html" />
@@ -23,9 +22,6 @@
       <item name="dsol-swing" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-swing/index.html" />
       <item name="dsol-web" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-web/index.html" />
       <item name="dsol-demo" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-demo/index.html" />
-      <!-- item name="dsol-akka" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-akka/index.html" / -->
-      <!-- item name="dsol-hla" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-hla/index.html" / -->
-      <!-- item name="dsol-zmq" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-zmq/index.html" / -->
     </menu>
 
     <menu name="DSOL FEATURES">
@@ -50,8 +46,9 @@
 
     <menu name="RELATED" inherit="bottom">
       <item name="Simulation@TU Delft" href="https://simulation.tudelft.nl" target="_blank" />
-      <item name="DSOL 3 Manual" href="https://simulation.tudelft.nl/simulation/index.php/dsol-3-for-java-7" target="_blank" />
+      <item name="DSOL Manual" href="https://simulation.tudelft.nl/dsol/manual/" target="_blank" />
       <item name="DJUNITS project" href="https://djunits.org" target="_blank" />
+      <item name="DJUTILS project" href="https://djutils.org" target="_blank" />
       <item name="Sim0MQ project" href="https://sim0mq.org" target="_blank" />
       <item name="About DSOL" href="index.html" />
     </menu>
