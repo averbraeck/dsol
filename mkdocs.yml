@@ -3,15 +3,23 @@ site_url: https://simulation.tudelft.nl/dsol/manual/
 site_favicon: images/favicon.png
 copyright: (c) 2002-2022 Delft University of Technology
 
-theme: readthedocs
-
+theme:
+  name: readthedocs
+  navigation_depth: 1
+    
 markdown_extensions:
   - admonition
+
+extra_css: 
+  - css/custom.css
   
-extra_css:
-  - custom.css
+extra_javascript:
+  - js/collapse_menu.js
     
 nav:
   - Home: index.md
-  - DSOL documentation: https://simulation.tudelft.nl/dsol/current/index.html
-  - DSOL API: https://simulation.tudelft.nl/dsol/current/apidocs/index.html
+  - Getting started:
+    - Installing Eclipse: eclipse.md
+    - Simulation theory: theory.md
+    - DSOL documentation: https://simulation.tudelft.nl/dsol/latest/index.html
+    - DSOL API: https://simulation.tudelft.nl/dsol/latest/apidocs/index.html
