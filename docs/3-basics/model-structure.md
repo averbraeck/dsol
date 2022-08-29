@@ -7,7 +7,7 @@ In line with the Framework of Modeling &amp; Simulation (Zeigler et al., 2000, p
 * A **Simulator** that can execute the model and advance time. In DSOL, the Simulator has many implementation for different simulation formalisms, such as the `DEVSSimulator` for discrete-event models, the `DESSSimulator` for continuous models, the `DEVSRealTimeClock` for real-time models, and the `DEVDESSSimulator` for mixed DEV&amp;DESS models. 
 * An **Experimental Frame** that describes the conditions under which the system is observed or esperimented with. The Experimental Frame is implemented in DSOL using the ` ExperimentalFrame`, `Experiment`, `Treatment` and `Replication` classes. 
 
-![](../images/zeigler_2000_basic_entities.png?resize=500,350)
+![](../images/zeigler2000-basic-entities.png?resize=500,350)
 <center><font size="2"><i>Basic Entities in Modeling and Simulation and their Relationships (Zeigler et al., 2000, p.26)</i></font></center>
 
 Typically, the abve three elements are created for any simulation to run:
