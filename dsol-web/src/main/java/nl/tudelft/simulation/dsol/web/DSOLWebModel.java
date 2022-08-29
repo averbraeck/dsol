@@ -11,10 +11,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djutils.draw.bounds.Bounds2d;
@@ -24,6 +20,9 @@ import org.djutils.event.EventListenerInterface;
 import org.djutils.event.TimedEvent;
 import org.eclipse.jetty.server.Request;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DInterface;

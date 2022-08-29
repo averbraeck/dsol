@@ -7,10 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.djunits.unit.Unit;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
@@ -31,6 +27,9 @@ import org.eclipse.jetty.server.session.SessionDataStore;
 import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.util.resource.Resource;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
@@ -127,7 +126,15 @@ public abstract class AbstractTestDemoServer
         public Resource getResource(final String path)
         {
             System.out.println(path);
-            return super.getResource(path);
+            try
+            {
+                return super.getResource(path);
+            }
+            catch (IOException exception)
+            {
+                exception.printStackTrace();
+                return null;
+            }
         }
 
         /** {@inheritDoc} */

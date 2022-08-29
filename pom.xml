@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <groupId>nl.tudelft.simulation</groupId>
   <artifactId>dsol</artifactId>
   <version>4.0.0</version>
-  
+
   <packaging>pom</packaging>
-  
+
   <name>DSOL version 4</name>
   <description>Distributed Simulation Object Library version 4</description>
 
@@ -18,7 +18,7 @@
   </organization>
 
   <inceptionYear>2002</inceptionYear>
-  
+
   <modules>
     <module>dsol-animation</module>
     <module>dsol-animation-gis</module>
@@ -32,8 +32,8 @@
     <module>dsol-swing</module>
     <module>dsol-web</module>
   </modules>
-  
-  
+
+
   <properties>
     <jdk.version>11</jdk.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,13 +42,13 @@
     <maven.compiler.release>${jdk.version}</maven.compiler.release>
 
     <dsol-version>${project.version}</dsol-version>
-    <junit.version>4.12</junit.version>
+    <junit.version>4.13.2</junit.version>
     <tinylog.version>1.3.6</tinylog.version>
     <jcommon.version>1.0.24</jcommon.version>
     <jfreechart.version>1.5.0</jfreechart.version>
     <djunits.version>5.0.1</djunits.version>
     <djutils.version>2.0.1</djutils.version>
-    <jetty.version>9.4.25.v20191220</jetty.version>
+    <jetty.version>11.0.11</jetty.version>
     <jakarta.annotation.version>2.1.1</jakarta.annotation.version>
     <osm.version>0.48.3</osm.version>
     <fastcsv.version>2.1.0</fastcsv.version>
@@ -260,6 +260,84 @@
         <groupId>org.openstreetmap.osmosis</groupId>
         <artifactId>osmosis-core</artifactId>
         <version>${osm.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.fasterxml.woodstox</groupId>
+            <artifactId>woodstox-core</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- temporary because of vulnerable and outdated osmosis-core -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>1.21</version>
+      </dependency>
+
+      <!-- temporary because of vulnerable and outdated osmosis-core -->
+      <dependency>
+        <groupId>xerces</groupId>
+        <artifactId>xercesImpl</artifactId>
+        <version>2.12.2</version>
+        <exclusions>
+          <exclusion>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- temporary because of vulnerable and outdated osmosis-core -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>5.3.22</version>
+      </dependency>
+
+      <!-- temporary because of vulnerable and outdated osmosis-core -->
+      <dependency>
+        <groupId>com.fasterxml.woodstox</groupId>
+        <artifactId>woodstox-core</artifactId>
+        <version>6.3.1</version>
+      </dependency>
+
+      <!-- temporary because of vulnerable and outdated osmosis-core -->
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java</artifactId>
+        <version>3.21.5</version>
+      </dependency>
+
+      <!-- temporary because of vulnerable and outdated osmosis-core -->
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.15</version>
       </dependency>
 
       <dependency>
@@ -344,7 +422,7 @@
         </configuration>
       </plugin>
 
-     <plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven.resources.version}</version>
@@ -836,7 +914,7 @@
 
 
   <!-- Profiles for deployment -->
-  
+
   <profiles>
     <profile>
 
