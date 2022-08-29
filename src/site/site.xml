@@ -10,18 +10,18 @@
   <body>
 
     <menu name="DSOL MODULES">
-      <item name="dsol" href="https://simulation.tudelft.nl/dsol/${project.version}/index.html" />
-      <item name="dsol-base" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-base/index.html" />
-      <item name="dsol-naming" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-naming/index.html" />
-      <item name="dsol-introspection" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-introspection/index.html" />
-      <item name="dsol-core" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-core/index.html" />
-      <item name="dsol-animation" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation/index.html" />
-      <item name="dsol-animation-gis" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation-gis/index.html" />
-      <item name="dsol-animation-gis-esri" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation-gis-esri/index.html" />
-      <item name="dsol-animation-gis-osm" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-animation-gis-osm/index.html" />
-      <item name="dsol-swing" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-swing/index.html" />
-      <item name="dsol-web" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-web/index.html" />
-      <item name="dsol-demo" href="https://simulation.tudelft.nl/dsol/${project.version}/dsol-demo/index.html" />
+      <item name="dsol" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/index.html" />
+      <item name="dsol-base" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-base/index.html" />
+      <item name="dsol-naming" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-naming/index.html" />
+      <item name="dsol-introspection" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-introspection/index.html" />
+      <item name="dsol-core" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-core/index.html" />
+      <item name="dsol-animation" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-animation/index.html" />
+      <item name="dsol-animation-gis" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-animation-gis/index.html" />
+      <item name="dsol-animation-gis-esri" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-animation-gis-esri/index.html" />
+      <item name="dsol-animation-gis-osm" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-animation-gis-osm/index.html" />
+      <item name="dsol-swing" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-swing/index.html" />
+      <item name="dsol-web" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-web/index.html" />
+      <item name="dsol-demo" href="https://simulation.tudelft.nl/dsol/docs/${project.version}/dsol-demo/index.html" />
     </menu>
 
     <menu name="DSOL FEATURES">
