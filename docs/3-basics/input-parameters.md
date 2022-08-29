@@ -59,7 +59,7 @@ switch ((String) getInputparameter("country"))
 
 The diagram below specifies a few of the existing input parameter types:
 
-![InputParameter types](input-parameters.png)
+![](../images/input-parameters.png)
 
 The following can be noted from the diagram:
 * The interface `InputParameter` specifies the basic behavior. Parameters have the following properties:
@@ -96,7 +96,7 @@ Another, very specific, example of an `InputParameterSelectionMap` is given in t
 
 The `InputParameterDoubleScalar` is able to store a value from [djunits](https://djunits.org) such as a `Length` or a `Duration`:
 
-![](input-parameters-scalar.png)
+![](../images/input-parameters-scalar.png)
 
 The `InputParameterDoubleScalar` extends a so-called `AbstractInputParameterTypedMap` (see below), which can resurn a single typed value based on multiple input parameters. In this case, a double value and a unit need to be specified to make a DoubleScalar such as a `Duration` or a `Length`. For example, for an `InputParameterDoubleScalar<LengthUnit, Length>`, the user needs to specify **two values**; the numeric value (e.g., 20.0) and the unit (e.g., `LengthUnit.KILOMETER`) to specify a **single** Length. The `AbstractInputParameterTypedMap` is a special `InputParameterMap` where multiple input values, that each can be specified separately, are combined into one types input parameter for the model. The `getValue()` method returns the sub-map with the value and the type. In order to get the (e.g., Length) value, use the `getCalcuatedValue()` method. 
 

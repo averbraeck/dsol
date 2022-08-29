@@ -7,7 +7,7 @@ In line with the Framework of Modeling &amp; Simulation (Zeigler et al., 2000, p
 * A **Simulator** that can execute the model and advance time. In DSOL, the Simulator has many implementation for different simulation formalisms, such as the `DEVSSimulator` for discrete-event models, the `DESSSimulator` for continuous models, the `DEVSRealTimeClock` for real-time models, and the `DEVDESSSimulator` for mixed DEV&amp;DESS models. 
 * An **Experimental Frame** that describes the conditions under which the system is observed or esperimented with. The Experimental Frame is implemented in DSOL using the ` ExperimentalFrame`, `Experiment`, `Treatment` and `Replication` classes. 
 
-![Zeigler et al. (2000), Basic entities in Modeling and Simulation](zeigler_2000_basic_entities.png?resize=500,350)
+![](../images/zeigler_2000_basic_entities.png?resize=500,350)
 <center><font size="2"><i>Basic Entities in Modeling and Simulation and their Relationships (Zeigler et al., 2000, p.26)</i></font></center>
 
 Typically, the abve three elements are created for any simulation to run:
@@ -53,7 +53,7 @@ In this case, no `ExperimentalFrame` is created. The `ExperimentalFrame` class c
 
 The above steps are illustrated by the following sequence diagram:
 
-![DSOL model construction sequence diagram](model-construction.png)
+![](../images/model-construction.png)
 
 
 ## The DSOL model
@@ -157,7 +157,7 @@ An `ExperimentalFrame` is nothing more than a list of Eperiments. When many expe
 
 The relation between the different Experiment classes is shown in the UML diagram below. All public methods of the classes are shown.
 
-![Relation between the different Experiment classes](dsol-experiment.png)
+![](../images/dsol-experiment.png)
 
 It is clear from the diagram that:
 * An `ExperimentalFrame` has zero or more instances of `Experiment`

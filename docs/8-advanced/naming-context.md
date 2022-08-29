@@ -61,7 +61,7 @@ The **`InitialEventContext`** is not a Context itself, but it **contains a point
 
 The picture below shows how an `InitialEventContext` is set-up locally within a JVM, where the `InitialEventContext` points to a `JVMContext` that contains the content. The top part of the diagram shows how the initial context is et-up. The second part shows how a subcontext is created. Below that, the DSOL program, which implements the `EventListenerInterface` subscribes itself to the events within a certain tree in the `JVMContext` by calling the `addContextListener(key, Scope)` method in the `InitialEventContext`. The `InitialEventContext` delegates the actual firing of events to the `JVMContext` object(s) that are part of the scope of the indicated scope when adding the ContextListener. When the DSOL program adds an object to the `JVMContext`, listeners are automatically notified of the change through the `notify(Event)` method (bottom part of the diagram). 
 
-![](JVMContext.png?resize=700,800)
+![](../images/JVMContext.png?resize=700,800)
 
 Types of events that can be communicated to a listener are:
 * `OBJECT_ADDED_EVENT` is fired when an object is added to the Context, to those listeners that have a subscription including this Context. The payload is an `Object[]` containing the context in which the object has been bound, the relative key in the context, and the bound object.
@@ -73,13 +73,13 @@ Types of events that can be communicated to a listener are:
 
 Interacting with a `RemoteContext` is somewhat more complex than interacting with a `JVMContext` as shown above. The picture below shows schematically how a piece of DSOL code, the `InitialEventContext`, a `RemoteContext`, and an embedded `JVMContext` link together and interact. 
 
-![](RemoteEventContext.png)
+![](../images/RemoteEventContext.png)
 
 Code can interact directly with the nodes in the Context tree, as is shown with the top arrow in the middle. Adding subcriptions for changes in a certain part of the tree (one Context object) can also be done directly. In such a case, one of the objects in the DSOL program adds itsef as an `EventListener` to one Context in the `JVMContext`, `FileContext` or `RemoteContext` directly. The `InitialEventContext` is useful if we want to get subscriptions to multiple nodes. We subscribe in such a case to the events at the `InitialEventContext`, which will take care that we receive updates of, e.g., an entire subtree of the Context. 
 
 The above picture is an extreme example. Typically, we will take care that the `RemoteContext` is on the **same** computer as the DSOL program and the `InitialEventContext`. A `RemoteListener` subscribes to updates of the `RemoteContext` that acts as a `RemoteEventProducer`. The embedded `JVMContext` or `FileContext` acts as a normal `EventProducer` and fires its events to the `RemoveEventProducer` that retransmits the event to its `RemoteListeners`. When `RemoteListeners` want to subscribe to a certain scope of the Context tree, a `RemoteInitialEventContext` needs to be set up that registers itself in the RMI registry and can later be found by a `RemoteEventListener`. The way this works is shown conceptually in the following sequence diagram, where the DSOL program sets up a (Remote) `InitialEventContext` that registers itself in the RMI Registry. It creates a `RemoteContext` and an embedded `JVMContext`, where the `RemoteContext` also registers itself in the RMI Registry. The bottom part of the diagram shows that the DSOL program asks the `RemoteContext` to create a child context. The request for this is delegated to the embedded `JVMContext` (the `RemoteContext` acts as an empty shell that delegates most methods, except for the registration of RemoteEventListeners and firing of events to these listeners):
 
-![](SequenceContextSetup.png)
+![](../images/SequenceContextSetup.png)
 
 Each of the JVMContexts is "wrapped" inside a RemoteContext. This is necessary, because 
 

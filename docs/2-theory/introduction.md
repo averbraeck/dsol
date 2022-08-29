@@ -54,7 +54,7 @@ DSOL primarily supports the event scheduling formalism (Jacobs, Lang, & Verbraec
 
 Vangheluwe and Lara (Vangheluwe &amp; de Lara, 2002) published in 2002 a formalism transformation graph (see Figure below). The arrows in this graph denote a behavior-preserving homomorphic relationship using transformations between formalisms. Further development will show to what extent DSOL can implement these relationships and provide the full set of modeling formalisms. In different projects, a large number of formalisms have already been executed by DSOL. Several of these will be shown in the following chapters.
 
-![Formalism transformation graph (Vangheluwe & Lara, 2002)](formalism_transformation_graph.png?resize=640,480)
+![](../images/formalism_transformation_graph.png?resize=640,480)
 <center><font size="2"><i>Formalism transformation graph (Vangheluwe &amp; de Lara, 2002</i></font></center>
 
 Besides the event scheduling formalism for discrete event scheduling, DSOL supports continuous differential equations (DESS), the atomic DEVS formalism, the parallel DEVS formalism, the Port-based DEVS formalism, the hierarchical DEVS formalism, the Dynamic Structure DEVS (DSDEVS) formalism, and the DEV&DESS formalism. Prototype implementations of QDEVS (Quantized DEVS) and Phi-DEVS (Phase-based DEVS) have been made (Seck & Honig, 2012), as well as Agent-based DEVS implementations (Zhang, Verbraeck, Meng, & Qiu, 2015) and BPMN (Business Process Model Notation) model execution (Çetinkaya, 2013; Cetinkaya, Verbraeck, & Seck, 2013).
