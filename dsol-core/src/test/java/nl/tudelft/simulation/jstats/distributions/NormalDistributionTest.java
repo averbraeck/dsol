@@ -72,7 +72,7 @@ public class NormalDistributionTest
             {
                 assertTrue(name + " max: " + d + "<=" + expectedMax, d <= expectedMax);
             }
-            tally.ingest(d);
+            tally.register(d);
         }
         assertEquals(name + " mean", expectedMean, tally.getPopulationMean(), precision);
         assertEquals(name + " stdev", Math.sqrt(expectedVariance), tally.getPopulationStDev(), precision);

@@ -326,7 +326,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         }
         if (!Double.isNaN(value))
         {
-            summaryTally.ingest(value);
+            summaryTally.register(value);
         }
     }
 

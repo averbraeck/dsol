@@ -144,9 +144,9 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
 
     /** {@inheritDoc} */
     @Override
-    public double ingest(final double value)
+    public double register(final double value)
     {
-        super.ingest(value);
+        super.register(value);
         fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
         return value;
     }

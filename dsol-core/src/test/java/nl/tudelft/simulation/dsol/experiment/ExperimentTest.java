@@ -499,10 +499,10 @@ public class ExperimentTest
         /** next method. */
         public void next()
         {
-            this.count.ingest(1);
+            this.count.register(1);
             Entity entity = new Entity(this.simulator.getSimulatorTime());
             this.queue.add(entity);
-            this.nrInQueuePersistent.ingest(10.0, this.queue.size());
+            this.nrInQueuePersistent.register(10.0, this.queue.size());
             getSimulator().scheduleEventRel(this.iatDist.draw(), this, this, "next", null);
             getSimulator().scheduleEventRel(this.procDist.draw(), this, this, "endWait", new Object[] {entity});
         }
@@ -511,8 +511,8 @@ public class ExperimentTest
         protected void endWait(final Entity entity)
         {
             this.queue.remove(entity);
-            this.nrInQueuePersistent.ingest(10.0, this.queue.size());
-            this.queueTimeTally.ingest(this.simulator.getSimulatorTime() - entity.getCreateTime());
+            this.nrInQueuePersistent.register(10.0, this.queue.size());
+            this.queueTimeTally.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
         }
 
         /** {@inheritDoc} */

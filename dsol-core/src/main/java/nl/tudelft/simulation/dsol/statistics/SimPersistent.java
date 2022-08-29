@@ -96,10 +96,10 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /** {@inheritDoc} */
     @Override
-    public <N extends Number & Comparable<N>> double ingest(final N timestamp, final double value)
+    public <N extends Number & Comparable<N>> double register(final N timestamp, final double value)
     {
         fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, timestamp);
-        return super.ingest(timestamp, value);
+        return super.register(timestamp, value);
     }
 
     /** {@inheritDoc} */

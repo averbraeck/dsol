@@ -125,7 +125,7 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
             else
             {
                 // queue
-                this.persistentQueueLength.ingest(getSimulator().getSimulatorTime(), this.queue.size());
+                this.persistentQueueLength.register(getSimulator().getSimulatorTime(), this.queue.size());
                 this.queue.add(new QueueEntry<Entity>(entity, this.simulator.getSimulatorTime()));
                 System.out.println("In Queue: " + entity);
             }
@@ -140,11 +140,11 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
     protected void startProcess(final Entity entity) throws SimRuntimeException
     {
         System.out.println("Start Process: " + entity);
-        this.persistentUtilization.ingest(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
         this.busy++;
-        this.persistentUtilization.ingest(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
         this.simulator.scheduleEventRel(this.processingTime.draw(), this, this, "endProcess", new Object[] {entity});
-        this.tallyTimeInQueue.ingest(this.simulator.getSimulatorTime() - entity.getCreateTime());
+        this.tallyTimeInQueue.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
     }
 
     /**
@@ -154,15 +154,15 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
     protected void endProcess(final Entity entity) throws SimRuntimeException
     {
         System.out.println("End Process: " + entity);
-        this.persistentUtilization.ingest(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
         this.busy--;
-        this.persistentUtilization.ingest(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
         if (!this.queue.isEmpty())
         {
-            this.persistentQueueLength.ingest(getSimulator().getSimulatorTime(), this.queue.size());
+            this.persistentQueueLength.register(getSimulator().getSimulatorTime(), this.queue.size());
             startProcess(this.queue.remove(0).getEntity());
         }
-        this.tallyTimeInSystem.ingest(this.simulator.getSimulatorTime() - entity.getCreateTime());
+        this.tallyTimeInSystem.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
     }
 
     /******************************************************************************************************/

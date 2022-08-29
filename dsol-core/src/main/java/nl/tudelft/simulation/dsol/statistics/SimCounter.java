@@ -104,9 +104,9 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
 
     /** {@inheritDoc} */
     @Override
-    public long ingest(final long value)
+    public long register(final long value)
     {
-        long result = super.ingest(value);
+        long result = super.register(value);
         fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
         return result;
     }
