@@ -1,4 +1,6 @@
-### Theoretical background
+# Structure of a DSOL project
+
+## Theoretical background
 
 In the [Multi Actor Systems Department](https://www.tudelft.nl/en/tbm/about-the-faculty/departments/multi-actor-systems/) of the [Faculty of Technology, Policy and Management](https://www.tudelft.nl/en/tpm/about-the-faculty/) of [Delft University of Technology](https://www.tudelft.nl/en/), simulation is considered to be more than a tool. Simulation is seen as a method of inquiry which supports decision makers in the generation and evaluation of scenarios to deal with ill-structured problems (Sol, 1982). Examples of ill-structured problems are infrastructure planning, supply chain coordination, coordination of business processes, etc. (Keen & Sol, 2008). 
 

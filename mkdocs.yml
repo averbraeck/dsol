@@ -19,10 +19,23 @@ extra_javascript:
 nav:
   - Home: index.md
   - Getting started:
-    - Installing Eclipse: getting-started/eclipse.md
-    - Simulation theory: getting-started/dsol-project.md
+    - Installing Eclipse: 1-getting-started/eclipse.md
+    - Simulation theory: 1-getting-started/dsol-project.md
     - DSOL documentation: https://simulation.tudelft.nl/dsol/latest/index.html
     - DSOL API: https://simulation.tudelft.nl/dsol/latest/apidocs/index.html
   - Simulation theory:
-    - Introduction: theory/introduction.md
+    - Introduction: 2-theory/introduction.md
+  - DSOL basics:
+    - Time in DSOL: 3-basics/time.md
+    - Model structure: 3-basics/model-structure.md
+    - Input parameters: 3-basics/input-parameters.md 
+    - Random numbers: 3-basics/random-numbers.md
+    - Stochastic distributions: 3-basics/stochastic-distributions.md
+    - Output statistics: 3-basics/output-statistics.md
+  - Advanced topics:
+    - Custom Time types: 8-advanced/custom-time.md
+    - Distribution Parameters: 8-advanced/distribution-parameters.md
+    - Custom InputParameter: 8-advanced/custom-parameter.md
+    - Publish-Subscribe: 8-advanced/publish-subscribe.md
+    - Naming Context: 8-advanced/naming-context.md
     
