@@ -149,13 +149,10 @@ Checkstyle is a code checker for the styles that are used in the DSOL code. It p
 Click "Install anyway",and restart Eclipse when asked.
 
 
-### 3. (Optional) Add ObjectAid to Eclipse
-For projects, it can be nice to be able to make UML class diagrams of the classes in DSOL or in a DSOL project. Several tools exist that can help with this. One is ObjectAid, which can not be installed through the Eclipse Marketplace, but has to be installed through 'Help - Install new Software. The manual can be found at [https://www.objectaid.com/install-objectaid](https://www.objectaid.com/install-objectaid). 
+### 3. Check out the DSOL code from SVN 
 
-In short: Add a software location named 'ObjectAid' with location http://www.objectaid.com/update/current. Install the software from that location, and restart Eclipse. You can create a new class diagram with thr right mouse button in a package - New - Other - ObjectAid Class Diagram. Set the properties the way you want them, and drag classes into the diagram. Move them around till you are satisfied, and export a PNG. The classes will be updated with any changes you make.
-
-
-### 4. Check out the DSOL code from SVN
+!!! Warning
+    Outdated: will be updated to github checkout
 
 Create a perspective in Eclipse to be able to browse SVN repositories. Go to the top right of the screen, and click on the plus-sign (add perspective) that is visible there:
 ![eclipse_svn_add_perspective](eclipse_svn_add_perspective.png "eclipse_svn_add_perspective")

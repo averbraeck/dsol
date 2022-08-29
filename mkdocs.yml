@@ -19,7 +19,10 @@ extra_javascript:
 nav:
   - Home: index.md
   - Getting started:
-    - Installing Eclipse: eclipse.md
-    - Simulation theory: theory.md
+    - Installing Eclipse: getting-started/eclipse.md
+    - Simulation theory: getting-started/dsol-project.md
     - DSOL documentation: https://simulation.tudelft.nl/dsol/latest/index.html
     - DSOL API: https://simulation.tudelft.nl/dsol/latest/apidocs/index.html
+  - Simulation theory:
+    - Introduction: theory/introduction.md
+    
