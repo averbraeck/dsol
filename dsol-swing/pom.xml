@@ -10,7 +10,7 @@
   <artifactId>dsol-swing</artifactId>
   <name>DSOL swing project</name>
   <description>DSOL classes for statistics display, gui building, and animation; includes sprites, GIS, and drawing in 2D and 3D</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-swing</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-swing</url>
 
   <dependencies>
 

@@ -10,7 +10,7 @@
   <artifactId>dsol-demo</artifactId>
   <name>DSOL demo project</name>
   <description>DSOL examples, tutorial</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-demo</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-demo</url>
 
   <dependencies>
     <dependency>

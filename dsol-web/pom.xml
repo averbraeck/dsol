@@ -10,7 +10,7 @@
   <artifactId>dsol-web</artifactId>
   <name>DSOL gui project for Web interfaces</name>
   <description>DSOL charts, animation, user interface for Web deployment</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-web</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-web</url>
 
   <dependencies>
 

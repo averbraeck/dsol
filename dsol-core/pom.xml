@@ -10,7 +10,7 @@
   <artifactId>dsol-core</artifactId>
   <name>DSOL core project</name>
   <description>DSOL classes for simulators and experiments for different formalisms</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-core</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-core</url>
 
   <dependencies>
     <dependency>

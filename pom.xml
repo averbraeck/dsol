@@ -7,8 +7,8 @@
 
   <packaging>pom</packaging>
 
-  <name>DSOL version 4</name>
-  <description>Distributed Simulation Object Library version 4</description>
+  <name>DSOL Distributed Simulation Object Library</name>
+  <description>DSOL Distributed Simulation Object Library</description>
 
   <url>https://simulation.tudelft.nl/dsol/manual</url>
 

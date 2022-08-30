@@ -10,7 +10,7 @@
   <artifactId>dsol-naming</artifactId>
   <name>Naming project for DSOL</name>
   <description>JNDI naming services for DSOL to provide (remote) contexts</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-naming</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-naming</url>
 
   <dependencies>
 

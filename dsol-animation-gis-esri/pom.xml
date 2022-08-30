@@ -10,7 +10,7 @@
   <artifactId>dsol-animation-gis-esri</artifactId>
   <name>DSOL ESRI Shape File Map Animation</name>
   <description>DSOL map animation from ESRI Shapefiles</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-animation-gis-esri</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-animation-gis-esri</url>
 
   <dependencies>
 

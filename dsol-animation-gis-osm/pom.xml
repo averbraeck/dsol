@@ -10,7 +10,7 @@
   <artifactId>dsol-animation-gis-osm</artifactId>
   <name>DSOL OpenStreetMap Animation</name>
   <description>DSOL map animation from OpenStreetMap files</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-animation-gis-osm</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-animation-gis-osm</url>
 
   <dependencies>
 

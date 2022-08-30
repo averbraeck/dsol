@@ -10,7 +10,7 @@
   <artifactId>dsol-animation-gis</artifactId>
   <name>DSOL Map Animation</name>
   <description>DSOL map animation from ESRI Shapefile, GeoJson, Json, WKB and WKT</description>
-  <url>https://simulation.tudelft.nl/dsol/3.0/dsol-animation</url>
+  <url>https://simulation.tudelft.nl/dsol/docs/latest/dsol-animation</url>
 
   <dependencies>
 
