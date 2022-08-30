@@ -20,9 +20,9 @@ nav:
   - Home: index.md
   - Getting started:
     - Installing Eclipse: 1-getting-started/eclipse.md
-    - Simulation theory: 1-getting-started/dsol-project.md
-    - DSOL documentation: https://simulation.tudelft.nl/dsol/latest/index.html
-    - DSOL API: https://simulation.tudelft.nl/dsol/latest/apidocs/index.html
+    - DSOL projects: 1-getting-started/dsol-project.md
+    - DSOL technical docs: https://simulation.tudelft.nl/dsol/docs/latest/index.html
+    - API dsol-core: https://simulation.tudelft.nl/dsol/docs/latest/dsol-core/apidocs/index.html
   - Simulation theory:
     - Introduction: 2-theory/introduction.md
   - DSOL basics:
