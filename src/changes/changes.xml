@@ -4,7 +4,51 @@
 
     <!-- PLEASE MAKE SURE THE LINE LENGTH IN XML - EDITOR - FORMATTING IS SET TO 128 -->
 
-    <release version="3.08.01" date="2022-07-XX" description="Simulator and eventlist adapted">
+    <release version="4.0.1" date="2022-08-30" description="Manual to readthedocs; ingest replaced by register">
+      <action dev="averbraeck" type="update">
+        The ingest(..) method of the statistics has been replaced by register(..).
+      </action>
+      <action dev="averbraeck" type="update">
+        Documentation has been adapted for readthedocs.io, and can be compiled with mkdocs. The documentation
+        has been fully integrated with the code base and can be found in the /docs folder in the parent project.
+      </action>
+      <action dev="averbraeck" type="update">
+        Dependencies with vulnerabilities have been replaced by newer versions. This was especially cumbersome for
+        osmosis version 0.48.3, which has more than 5 dependencies that have in total over 20 security 
+        vulnerabilities. This has been solved with exclusions in the pom-file, but it is not elegant...
+      </action>
+      <action dev="averbraeck" type="update">
+        All dependencies have been updated to the latest available version.
+      </action>
+    </release>
+    
+    <release version="4.0.0" date="2022-08-22" description="Major refactor (not upward compatible); Code to github">
+      <action dev="averbraeck" type="update">
+        The dsol project has been turned into a modular project where commands like mvn package can be 
+        called for the top project, and then will be carried out for all modules. 
+      </action>
+      <action dev="averbraeck" type="update">
+        The dsol project has been turned into a modular project where commands like mvn package can be 
+        called for the top project, and then will be carried out for all modules. 
+      </action>
+      <action dev="averbraeck" type="remove">
+        Project dsol-interpreter has been removed. It was not compatible anymore with Java 11 and higher.
+        It will be replaced with project Loom Fibers at a later stage. 
+      </action>
+      <action dev="averbraeck" type="update">
+        Code has been moved to to github.
+      </action>
+      <action dev="averbraeck" type="update">
+        TimeTypes simplified to only the relative type, so &lt;A,R,T&gt; has been changed to &lt;R&gt;. This means 
+        that the special static classes for most of the time-dependent classes have disappeared. The generic is 
+        instead a Double, Float, or Duration. E.g., DEVSSimulator&lt;Double&gt;. 
+      </action>
+      <action dev="averbraeck" type="update">
+        All Maven plugins have been updated to the latest available version.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Simulator: Avoid firing START_REPLICATION_EVENT twice.
+      </action>
       <action dev="averbraeck" type="fix">
         Simulator: Avoid firing START_REPLICATION_EVENT twice.
       </action>
