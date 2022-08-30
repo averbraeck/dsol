@@ -76,11 +76,6 @@
     <nexus-staging.version>1.6.7</nexus-staging.version>
     <maven.gpg.version>1.5</maven.gpg.version>
     <flatten.maven.version>1.3.0</flatten.maven.version>
-
-    <wagon.maven.version>2.0.0</wagon.maven.version>
-    <wagon.ssh.version>3.4.1</wagon.ssh.version>
-    <wagon.ftp.version>3.4.1</wagon.ftp.version>
-
   </properties>
 
 
@@ -396,20 +391,6 @@
         </includes>
       </testResource>
     </testResources>
-
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh</artifactId>
-        <version>${wagon.ssh.version}</version>
-      </extension>
-
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ftp</artifactId>
-        <version>${wagon.ftp.version}</version>
-      </extension>
-    </extensions>
 
     <plugins>
       <plugin>
