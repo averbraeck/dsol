@@ -65,7 +65,14 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
         }
         else if (this.initialized)
         {
-            super.notify(event);
+            if (event.getType().equals(ReplicationInterface.END_REPLICATION_EVENT))
+            {
+                super.endObservations(this.simulator.getSimulatorTime());
+            }
+            else
+            {
+                super.notify(event);
+            }
         }
     }
 }
