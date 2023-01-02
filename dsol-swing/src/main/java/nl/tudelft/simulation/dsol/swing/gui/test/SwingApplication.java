@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.gui.test;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
@@ -77,13 +76,5 @@ public class SwingApplication extends DSOLApplication
         {
             //
         }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "MyModel";
-        }
-
     }
 }

@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.gui.test;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,13 +77,6 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
     public MM1Model(final DEVSSimulatorInterface<Double> simulator)
     {
         super(simulator);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "MM1Model";
     }
 
     /** {@inheritDoc} */

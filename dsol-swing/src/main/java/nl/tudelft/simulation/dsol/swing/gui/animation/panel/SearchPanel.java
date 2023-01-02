@@ -5,11 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
@@ -21,13 +18,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.djutils.event.Event;
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.EventListener;
 import org.djutils.event.EventProducer;
-import org.djutils.event.EventProducerInterface;
 import org.djutils.event.EventType;
-import org.djutils.event.EventTypeInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.LocalEventProducer;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -47,7 +42,7 @@ import nl.tudelft.simulation.dsol.swing.gui.util.Icons;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class SearchPanel extends JPanel implements ActionListener, FocusListener, DocumentListener, EventProducerInterface
+public class SearchPanel extends JPanel implements ActionListener, FocusListener, DocumentListener, EventProducer
 {
     /** */
     private static final long serialVersionUID = 20200127L;
@@ -165,9 +160,9 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
     @Override
     public void actionPerformed(final ActionEvent e)
     {
-        this.searchPanelEventProducer.fireEvent(new Event(ANIMATION_SEARCH_OBJECT_EVENT, getSourceId(),
-                new Object[] {(ObjectKind<?>) this.typeToSearch.getSelectedItem(), this.idTextField.getText(),
-                        this.trackObject.isSelected()}));
+        this.searchPanelEventProducer.fireEvent(
+                new Event(ANIMATION_SEARCH_OBJECT_EVENT, new Object[] {(ObjectKind<?>) this.typeToSearch.getSelectedItem(),
+                        this.idTextField.getText(), this.trackObject.isSelected()}));
     }
 
     /** {@inheritDoc} */
@@ -259,21 +254,14 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    class SearchPanelEventProducer extends EventProducer
+    class SearchPanelEventProducer extends LocalEventProducer
     {
         /** */
         private static final long serialVersionUID = 20210213L;
 
         /** {@inheritDoc} */
         @Override
-        public Serializable getSourceId()
-        {
-            return "SearchPanel.EventProducer";
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public void fireEvent(final EventInterface event)
+        public void fireEvent(final Event event)
         {
             super.fireEvent(event);
         }
@@ -290,69 +278,45 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
 
     /** {@inheritDoc} */
     @Override
-    public Serializable getSourceId()
-    {
-        return this.searchPanelEventProducer.getSourceId();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType) throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType)
     {
         return this.searchPanelEventProducer.addListener(listener, eventType);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType,
-            final ReferenceType referenceType) throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType, final ReferenceType referenceType)
     {
         return this.searchPanelEventProducer.addListener(listener, eventType, referenceType);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType, final int position)
-            throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType, final int position)
     {
         return this.searchPanelEventProducer.addListener(listener, eventType, position);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType, final int position,
-            final ReferenceType referenceType) throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType, final int position,
+            final ReferenceType referenceType)
     {
         return this.searchPanelEventProducer.addListener(listener, eventType, position, referenceType);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean removeListener(final EventListenerInterface listener, final EventTypeInterface eventType)
-            throws RemoteException
+    public boolean removeListener(final EventListener listener, final EventType eventType)
+
     {
         return this.searchPanelEventProducer.removeListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
-    public boolean hasListeners() throws RemoteException
+    public int removeAllListeners()
     {
-        return this.searchPanelEventProducer.hasListeners();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int numberOfListeners(final EventTypeInterface eventType) throws RemoteException
-    {
-        return this.searchPanelEventProducer.numberOfListeners(eventType);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Set<EventTypeInterface> getEventTypesWithListeners() throws RemoteException
-    {
-        return this.searchPanelEventProducer.getEventTypesWithListeners();
+        return this.searchPanelEventProducer.removeAllListeners();
     }
 
 }

@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
-import org.djutils.event.EventInterface;
+import org.djutils.event.Event;
 
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
@@ -134,7 +134,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(DEVSRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT))
         {

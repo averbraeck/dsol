@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
 import org.djutils.event.TimedEvent;
 import org.djutils.logger.CategoryLogger;
@@ -28,7 +28,7 @@ import nl.tudelft.simulation.language.filters.ZeroFilter;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @since 1.5
  */
-public class XYSeries extends AbstractDataset implements EventListenerInterface
+public class XYSeries extends AbstractDataset implements EventListener
 {
     /** serial version UId. */
     private static final long serialVersionUID = 1L;
@@ -75,7 +75,7 @@ public class XYSeries extends AbstractDataset implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void notify(final EventInterface event)
+    public synchronized void notify(final Event event)
     {
         Number timeStamp;
         if (event instanceof TimedEvent)

@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,13 +24,12 @@ import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.event.EventProducer;
-import org.djutils.event.EventProducerInterface;
 import org.djutils.event.EventType;
-import org.djutils.event.EventTypeInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.LocalEventProducer;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
@@ -77,7 +75,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
-public class AnimationPanel extends GridPanel implements EventListenerInterface, EventProducerInterface
+public class AnimationPanel extends GridPanel implements EventListener, EventProducer
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -186,7 +184,7 @@ public class AnimationPanel extends GridPanel implements EventListenerInterface,
         for (Renderable2DInterface<? extends Locatable> element : this.elementList)
         {
             // destroy has been called?
-            if (element.getSource() == null) 
+            if (element.getSource() == null)
             {
                 objectRemoved(element);
             }
@@ -262,7 +260,7 @@ public class AnimationPanel extends GridPanel implements EventListenerInterface,
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(AnimatorInterface.UPDATE_ANIMATION_EVENT) && this.isShowing())
         {
@@ -624,21 +622,14 @@ public class AnimationPanel extends GridPanel implements EventListenerInterface,
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    class AnimationEventProducer extends EventProducer
+    class AnimationEventProducer extends LocalEventProducer
     {
         /** */
         private static final long serialVersionUID = 20210213L;
 
         /** {@inheritDoc} */
         @Override
-        public Serializable getSourceId()
-        {
-            return "AnimationPanel.EventProducer";
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public void fireEvent(final EventInterface event)
+        public void fireEvent(final Event event)
         {
             super.fireEvent(event);
         }
@@ -655,69 +646,44 @@ public class AnimationPanel extends GridPanel implements EventListenerInterface,
 
     /** {@inheritDoc} */
     @Override
-    public Serializable getSourceId()
-    {
-        return this.animationEventProducer.getSourceId();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType) throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType)
     {
         return this.animationEventProducer.addListener(listener, eventType);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType,
-            final ReferenceType referenceType) throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType, final ReferenceType referenceType)
     {
         return this.animationEventProducer.addListener(listener, eventType, referenceType);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType, final int position)
-            throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType, final int position)
     {
         return this.animationEventProducer.addListener(listener, eventType, position);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType, final int position,
-            final ReferenceType referenceType) throws RemoteException
+    public boolean addListener(final EventListener listener, final EventType eventType, final int position,
+            final ReferenceType referenceType)
     {
         return this.animationEventProducer.addListener(listener, eventType, position, referenceType);
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean removeListener(final EventListenerInterface listener, final EventTypeInterface eventType)
-            throws RemoteException
+    public boolean removeListener(final EventListener listener, final EventType eventType)
     {
         return this.animationEventProducer.removeListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
-    public boolean hasListeners() throws RemoteException
+    public int removeAllListeners()
     {
-        return this.animationEventProducer.hasListeners();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int numberOfListeners(final EventTypeInterface eventType) throws RemoteException
-    {
-        return this.animationEventProducer.numberOfListeners(eventType);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Set<EventTypeInterface> getEventTypesWithListeners() throws RemoteException
-    {
-        return this.animationEventProducer.getEventTypesWithListeners();
+        return this.animationEventProducer.removeAllListeners();
     }
 
 }

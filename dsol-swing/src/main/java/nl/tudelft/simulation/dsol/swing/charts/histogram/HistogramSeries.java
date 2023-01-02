@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.swing.charts.histogram;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.jfree.data.general.AbstractDataset;
 
 /**
@@ -20,7 +20,7 @@ import org.jfree.data.general.AbstractDataset;
  *         <a href="https://www.linkedin.com/in/peterhmjacobs"> Peter Jacobs </a>
  * @since 1.5
  */
-public class HistogramSeries extends AbstractDataset implements EventListenerInterface
+public class HistogramSeries extends AbstractDataset implements EventListener
 {
     /** default UId. */
     private static final long serialVersionUID = 1L;
@@ -138,7 +138,7 @@ public class HistogramSeries extends AbstractDataset implements EventListenerInt
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void notify(final EventInterface event)
+    public synchronized void notify(final Event event)
     {
         double value = ((Double) event.getContent()).doubleValue();
         this.bins[this.resolveBin(value)].increase();

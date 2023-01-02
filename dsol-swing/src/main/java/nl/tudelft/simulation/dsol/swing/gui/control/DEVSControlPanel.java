@@ -11,7 +11,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
+import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.RunState;
@@ -83,7 +83,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
                 try
                 {
                     this.stopAtEvent =
-                            new SimEvent<T>(now, SimEventInterface.MIN_PRIORITY, this, this, "autoPauseSimulator", null);
+                            new SimEvent<T>(now, SimEvent.MIN_PRIORITY, this, this, "autoPauseSimulator", null);
                     getSimulator().scheduleEvent(this.stopAtEvent);
                 }
                 catch (SimRuntimeException exception)
@@ -166,7 +166,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
                 try
                 {
                     this.stopAtEvent =
-                            new SimEvent<T>(nextTick, SimEventInterface.MAX_PRIORITY, this, this, "autoPauseSimulator", null);
+                            new SimEvent<T>(nextTick, SimEvent.MAX_PRIORITY, this, this, "autoPauseSimulator", null);
                     getSimulator().scheduleEvent(this.stopAtEvent);
                     getSimulator().start();
                 }

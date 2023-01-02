@@ -14,7 +14,7 @@ import java.util.List;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
-import org.djutils.event.EventInterface;
+import org.djutils.event.Event;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
@@ -193,7 +193,7 @@ public class AutoPanAnimationPanel extends AnimationPanel
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT))
         {

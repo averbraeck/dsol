@@ -8,9 +8,9 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventProducerInterface;
-import org.djutils.event.EventTypeInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.EventProducer;
+import org.djutils.event.EventType;
+import org.djutils.event.reference.ReferenceType;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -150,12 +150,12 @@ public class Histogram implements Swingable, Serializable
      * adds an eventProducer to the histogram dataset. The histogram subscribes its dataset subsequentially to the specified
      * event.
      * @param description String; the description of the eventProducer
-     * @param source EventProducerInterface; the eventproducer which functions as source for this histogram.
+     * @param source EventProducer; the eventproducer which functions as source for this histogram.
      * @param eventType EventType; the eventType.
      * @throws RemoteException on network error for the (possibly remote) event listener
      */
-    public synchronized void add(final String description, final EventProducerInterface source,
-            final EventTypeInterface eventType) throws RemoteException
+    public synchronized void add(final String description, final EventProducer source,
+            final EventType eventType) throws RemoteException
     {
         HistogramSeries set = this.getDataset().addSeries(description);
         source.addListener(set, eventType, ReferenceType.STRONG);

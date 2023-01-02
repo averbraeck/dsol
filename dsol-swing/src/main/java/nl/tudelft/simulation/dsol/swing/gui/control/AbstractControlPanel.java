@@ -15,8 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -42,7 +42,7 @@ import nl.tudelft.simulation.dsol.swing.gui.util.Icons;
  */
 public abstract class AbstractControlPanel<
         T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends JPanel
-        implements ActionListener, WindowListener, EventListenerInterface
+        implements ActionListener, WindowListener, EventListener
 {
     /** */
     private static final long serialVersionUID = 20150617L;
@@ -557,7 +557,7 @@ public abstract class AbstractControlPanel<
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT) || event.getType().equals(SimulatorInterface.STOP_EVENT))
         {

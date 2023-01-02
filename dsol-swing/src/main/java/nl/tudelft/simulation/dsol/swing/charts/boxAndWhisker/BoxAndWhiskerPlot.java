@@ -10,9 +10,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.stats.summarizers.BasicTallyInterface;
 import org.djutils.stats.summarizers.TallyInterface;
 import org.djutils.stats.summarizers.WeightedTallyInterface;
@@ -37,7 +37,7 @@ import org.jfree.chart.plot.PlotState;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @author <a href="mailto:a.verbraeck@tudelft.nl"> Alexander Verbraeck </a>
  */
-public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
+public class BoxAndWhiskerPlot extends Plot implements EventListener
 {
     /** serialversionUId. */
     private static final long serialVersionUID = 1L;
@@ -110,7 +110,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event)
+    public void notify(final Event event)
     {
         this.notifyListeners(new PlotChangeEvent(this));
     }

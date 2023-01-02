@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import javax.swing.JPanel;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 /**
  * The PropertiesPanel displays the properties of one or more selected objects.
@@ -17,7 +17,7 @@ import org.djutils.event.EventListenerInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class PropertiesPanel extends JPanel implements EventListenerInterface
+public class PropertiesPanel extends JPanel implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20210214L;
@@ -41,7 +41,7 @@ public class PropertiesPanel extends JPanel implements EventListenerInterface
     
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         // nothing yet
     }
