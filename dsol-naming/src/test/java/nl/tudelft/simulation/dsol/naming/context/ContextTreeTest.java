@@ -16,7 +16,7 @@ import java.util.Properties;
 
 import javax.naming.NamingException;
 
-import org.djutils.rmi.RMIUtils;
+import org.djutils.rmi.RmiRegistry;
 import org.junit.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -73,23 +73,23 @@ public class ContextTreeTest
         testContextTree(remoteContext);
         try
         {
-            RMIUtils.closeRegistry(remoteContext.getRegistry());
+            RmiRegistry.closeRegistry(remoteContext.getRegistry());
         }
         catch (NoSuchObjectException e)
         {
-            // TODO: research why RMIUtils.closeRegistry(remoteContext.getRegistry()) gives an error
-            System.err.println(e.getMessage()); 
+            // TODO: research why RmiRegistry.closeRegistry(remoteContext.getRegistry()) gives an error
+            System.err.println(e.getMessage());
         }
         remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JVMContext(null, "root"),
                 "remoteEventProducerKey");
         testContextUtil(remoteContext);
         try
         {
-            RMIUtils.closeRegistry(remoteContext.getRegistry());
+            RmiRegistry.closeRegistry(remoteContext.getRegistry());
         }
         catch (NoSuchObjectException e)
         {
-            // TODO: research why RMIUtils.closeRegistry(remoteContext.getRegistry()) gives an error
+            // TODO: research why RmiRegistry.closeRegistry(remoteContext.getRegistry()) gives an error
             System.err.println(e.getMessage());
         }
 
@@ -134,7 +134,6 @@ public class ContextTreeTest
      */
     public void testContextTree(final ContextInterface root) throws NamingException, RemoteException
     {
-        assertEquals("", root.getSourceId());
         assertEquals("", root.getAbsolutePath());
 
         // fill
@@ -148,7 +147,6 @@ public class ContextTreeTest
         ContextInterface c1112 = ContextUtil.lookupSubContext(c11, "111/1112");
         ContextInterface c1112b = ContextUtil.lookupSubContext(root, "/1/11/111/1112");
         assertNotNull(c1112);
-        assertEquals("/1/11/111/1112", c1112.getSourceId());
         assertEquals("/1/11/111/1112", c1112.getAbsolutePath());
         assertEquals(c1112, c1112b);
         c11.bindObject("o11", new Object());

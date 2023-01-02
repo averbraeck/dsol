@@ -1,11 +1,11 @@
 package nl.tudelft.simulation.naming.context.event;
 
-import org.djutils.event.EventProducerInterface;
+import org.djutils.event.EventProducer;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 
 /**
- * EventContext is the tagging interface combining the ContextInterface, EventContextInterface, and EventProducerInterface.
+ * EventContext is the tagging interface combining the ContextInterface, EventContextInterface, and EventProducer.
  * <p>
  * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -15,7 +15,7 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface EventContext extends ContextInterface, EventContextInterface, EventProducerInterface
+public interface EventContext extends ContextInterface, EventContextInterface, EventProducer
 {
     // tagging interface
 }

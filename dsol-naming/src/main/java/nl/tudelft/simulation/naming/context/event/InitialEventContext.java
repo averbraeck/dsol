@@ -2,7 +2,6 @@ package nl.tudelft.simulation.naming.context.event;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.rmi.RemoteException;
@@ -19,9 +18,9 @@ import javax.naming.NamingException;
 import javax.naming.NoInitialContextException;
 import javax.naming.NotContextException;
 
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventTypeInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.EventListener;
+import org.djutils.event.EventType;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.exceptions.Throw;
 import org.djutils.io.URLResource;
 import org.djutils.logger.CategoryLogger;
@@ -287,13 +286,6 @@ public final class InitialEventContext implements EventContext
     public Hashtable<?, ?> getEnvironment()
     {
         return (Hashtable<?, ?>) this.properties.clone();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return ""; // the empty (root) path
     }
 
     /** {@inheritDoc} */
@@ -585,8 +577,7 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType)
-            throws RemoteException
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType);
@@ -595,8 +586,8 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType,
-            final ReferenceType referenceType) throws RemoteException
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType,
+            final ReferenceType referenceType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, referenceType);
@@ -605,8 +596,7 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType,
-            final int position) throws RemoteException
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, position);
@@ -615,8 +605,8 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean addListener(final EventListenerInterface listener, final EventTypeInterface eventType,
-            final int position, final ReferenceType referenceType) throws RemoteException
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position,
+            final ReferenceType referenceType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, position, referenceType);
@@ -625,38 +615,10 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean removeListener(final EventListenerInterface listener, final EventTypeInterface eventType)
-            throws RemoteException
+    public synchronized boolean removeListener(final EventListener listener, final EventType eventType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.removeListener(listener, eventType);
-        throw new RuntimeException(new NoInitialContextException());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean hasListeners() throws RemoteException
-    {
-        if (this.defaultInitCtx != null)
-            return this.defaultInitCtx.hasListeners();
-        throw new RuntimeException(new NoInitialContextException());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public synchronized int numberOfListeners(final EventTypeInterface eventType) throws RemoteException
-    {
-        if (this.defaultInitCtx != null)
-            return this.defaultInitCtx.numberOfListeners(eventType);
-        throw new RuntimeException(new NoInitialContextException());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public synchronized Set<EventTypeInterface> getEventTypesWithListeners() throws RemoteException
-    {
-        if (this.defaultInitCtx != null)
-            return this.defaultInitCtx.getEventTypesWithListeners();
         throw new RuntimeException(new NoInitialContextException());
     }
 
@@ -666,9 +628,9 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope) throws RemoteException, NameNotFoundException, InvalidNameException,
-            NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
+            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
+            NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope);
@@ -677,9 +639,9 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
-            InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
+            NotContextException, NamingException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, referenceType);
@@ -688,9 +650,9 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope, final int position) throws RemoteException, NameNotFoundException,
-            InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final int position) throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException,
+            NamingException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position);
@@ -699,9 +661,9 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope, final int position, final ReferenceType referenceType) throws RemoteException,
-            NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final int position, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
+            InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position, referenceType);
@@ -710,11 +672,20 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public boolean removeListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope) throws RemoteException, InvalidNameException, NullPointerException
+    public boolean removeListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
+            throws RemoteException, InvalidNameException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.removeListener(listener, absolutePath, contextScope);
+        throw new RuntimeException(new NoInitialContextException());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int removeAllListeners()
+    {
+        if (this.defaultInitCtx != null)
+            return this.contextEventProducerImpl.removeAllListeners();
         throw new RuntimeException(new NoInitialContextException());
     }
 

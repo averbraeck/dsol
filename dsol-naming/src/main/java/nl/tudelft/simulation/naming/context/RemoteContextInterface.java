@@ -2,7 +2,7 @@ package nl.tudelft.simulation.naming.context;
 
 import java.rmi.Remote;
 
-import org.djutils.event.remote.RemoteEventProducerInterface;
+import org.djutils.event.EventProducer;
 
 /**
  * RemoteContextInterface is a tagging interface that extends both ContectInterface and Remote, but that does not force any new
@@ -17,7 +17,7 @@ import org.djutils.event.remote.RemoteEventProducerInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface RemoteContextInterface extends ContextInterface, RemoteEventProducerInterface, Remote
+public interface RemoteContextInterface extends ContextInterface, EventProducer, Remote
 {
     // tagging interface that extends both ContectInterface and Remote
 }

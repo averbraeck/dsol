@@ -17,10 +17,10 @@ import java.util.Properties;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventProducerInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.LocalEventProducer;
+import org.djutils.event.reference.ReferenceType;
 import org.junit.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -57,7 +57,6 @@ public class ContextTestPubSub
         assertEquals("root", jvmContext.getAtomicName());
         assertEquals(jvmContext, jvmContext.getRootContext());
         assertEquals("", jvmContext.getAbsolutePath());
-        assertEquals("", jvmContext.getSourceId());
         testContextEvents(jvmContext);
 
         // test FileContext directly
@@ -101,12 +100,12 @@ public class ContextTestPubSub
         TestEventListener listener = new TestEventListener();
         context.addListener(listener, ContextInterface.OBJECT_ADDED_EVENT);
         context.addListener(listener, ContextInterface.OBJECT_REMOVED_EVENT, ReferenceType.WEAK);
-        context.addListener(listener, ContextInterface.OBJECT_CHANGED_EVENT, EventProducerInterface.LAST_POSITION);
+        context.addListener(listener, ContextInterface.OBJECT_CHANGED_EVENT, LocalEventProducer.LAST_POSITION);
 
         listener.setExpectingNotification(true);
         TestObject object1 = new TestObject("object1");
         context.bind("o1", object1);
-        EventInterface event = listener.getReceivedEvent();
+        Event event = listener.getReceivedEvent();
         assertEquals(ContextInterface.OBJECT_ADDED_EVENT, event.getType());
         assertTrue(event.getContent() instanceof Object[]);
         Object[] content = (Object[]) event.getContent();
@@ -114,7 +113,6 @@ public class ContextTestPubSub
         assertEquals(context.getAbsolutePath(), content[0]);
         assertEquals("o1", content[1]);
         assertEquals(object1, content[2]);
-        assertEquals(context.getSourceId(), event.getSourceId());
 
         listener.setExpectingNotification(true);
         ContextInterface sub1 = context.createSubcontext("sub1");
@@ -126,7 +124,6 @@ public class ContextTestPubSub
         assertEquals("", content[0]);
         assertEquals("sub1", content[1]);
         assertEquals(sub1, content[2]);
-        assertEquals(context.getSourceId(), event.getSourceId());
 
         listener.setExpectingNotification(false);
         TestObject object12 = new TestObject("object12");
@@ -144,7 +141,6 @@ public class ContextTestPubSub
         assertEquals("o1", content[1]);
         assertEquals(object1, content[2]);
         assertEquals("CHANGED", object1.getField());
-        assertEquals(context.getSourceId(), event.getSourceId());
 
         listener.setExpectingNotification(true);
         object1.setField("o1"); // fireObjectChangedEventValue uses the toString of object to look up
@@ -158,8 +154,7 @@ public class ContextTestPubSub
         assertEquals("o1", content[1]);
         assertEquals(object1, content[2]);
         assertEquals("o1", object1.getField());
-        assertEquals(context.getSourceId(), event.getSourceId());
-        
+
         try
         {
             context.fireObjectChangedEventKey("xyz");
@@ -220,7 +215,6 @@ public class ContextTestPubSub
         assertEquals(context.getAbsolutePath(), content[0]);
         assertEquals("o1", content[1]);
         assertEquals(object1, content[2]);
-        assertEquals(context.getSourceId(), event.getSourceId());
 
         listener.setExpectingNotification(false);
         sub1.unbindObject("o12");
@@ -235,7 +229,6 @@ public class ContextTestPubSub
         assertEquals(context.getAbsolutePath(), content[0]);
         assertEquals("sub1", content[1]);
         assertEquals(sub1, content[2]);
-        assertEquals(context.getSourceId(), event.getSourceId());
 
         context.removeListener(listener, ContextInterface.OBJECT_ADDED_EVENT);
         context.removeListener(listener, ContextInterface.OBJECT_REMOVED_EVENT);
@@ -243,7 +236,7 @@ public class ContextTestPubSub
     }
 
     /** EventListener to test received events. */
-    protected static class TestEventListener implements EventListenerInterface
+    protected static class TestEventListener implements EventListener
     {
         /** */
         private static final long serialVersionUID = 20191230L;
@@ -252,7 +245,7 @@ public class ContextTestPubSub
         private boolean expectingNotification = true;
 
         /** received event. */
-        private EventInterface receivedEvent;
+        private Event receivedEvent;
 
         /**
          * @param expectingNotification set expectingNotification
@@ -266,14 +259,14 @@ public class ContextTestPubSub
         /**
          * @return receivedEvent
          */
-        public EventInterface getReceivedEvent()
+        public Event getReceivedEvent()
         {
             return this.receivedEvent;
         }
 
         /** {@inheritDoc} */
         @Override
-        public void notify(final EventInterface event) throws RemoteException
+        public void notify(final Event event) throws RemoteException
         {
             if (!this.expectingNotification)
             {
@@ -295,7 +288,7 @@ public class ContextTestPubSub
         /**
          * @param field the field
          */
-        public TestObject(String field)
+        public TestObject(final String field)
         {
             this.field = field;
         }

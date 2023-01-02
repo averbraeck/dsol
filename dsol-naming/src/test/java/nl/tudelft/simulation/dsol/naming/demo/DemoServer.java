@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.naming.demo;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -10,7 +9,7 @@ import java.util.Scanner;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.remote.RemoteEventProducer;
+import org.djutils.event.rmi.RmiEventProducer;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.JVMContext;
@@ -28,7 +27,7 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DemoServer extends RemoteEventProducer implements DemoServerInterface
+public class DemoServer extends RmiEventProducer implements DemoServerInterface
 {
     /** */
     private static final long serialVersionUID = 20200210L;
@@ -139,13 +138,6 @@ public class DemoServer extends RemoteEventProducer implements DemoServerInterfa
         s.close();
         Thread.sleep(1000);
         System.exit(0);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "demoserver";
     }
 
     /**

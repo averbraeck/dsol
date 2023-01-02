@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.naming.demo;
 
+import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
-import org.djutils.event.remote.RemoteEventProducerInterface;
 import org.djutils.metadata.MetaData;
 
 /**
@@ -15,7 +15,7 @@ import org.djutils.metadata.MetaData;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface DemoServerInterface extends RemoteEventProducerInterface
+public interface DemoServerInterface extends EventProducer
 {
     /** the exit event. */
     public static final EventType EXIT_EVENT = new EventType(new MetaData("EXIT", "exit"));

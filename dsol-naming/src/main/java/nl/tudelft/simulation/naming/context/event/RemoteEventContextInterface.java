@@ -2,7 +2,7 @@ package nl.tudelft.simulation.naming.context.event;
 
 import java.rmi.Remote;
 
-import org.djutils.event.remote.RemoteEventProducerInterface;
+import org.djutils.event.EventProducer;
 
 import nl.tudelft.simulation.naming.context.RemoteContextInterface;
 
@@ -18,7 +18,7 @@ import nl.tudelft.simulation.naming.context.RemoteContextInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public interface RemoteEventContextInterface
-        extends RemoteEventProducerInterface, EventContext, RemoteContextInterface, Remote
+        extends EventProducer, EventContext, RemoteContextInterface, Remote
 {
     // tagging interface
 }
