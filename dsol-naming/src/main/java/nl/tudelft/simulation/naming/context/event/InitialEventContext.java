@@ -19,6 +19,7 @@ import javax.naming.NoInitialContextException;
 import javax.naming.NotContextException;
 
 import org.djutils.event.EventListener;
+import org.djutils.event.EventListenerMap;
 import org.djutils.event.EventType;
 import org.djutils.event.reference.ReferenceType;
 import org.djutils.exceptions.Throw;
@@ -577,7 +578,7 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean addListener(final EventListener listener, final EventType eventType)
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType) throws RemoteException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType);
@@ -587,7 +588,7 @@ public final class InitialEventContext implements EventContext
     /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType,
-            final ReferenceType referenceType)
+            final ReferenceType referenceType) throws RemoteException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, referenceType);
@@ -597,6 +598,7 @@ public final class InitialEventContext implements EventContext
     /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position)
+            throws RemoteException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, position);
@@ -606,7 +608,7 @@ public final class InitialEventContext implements EventContext
     /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position,
-            final ReferenceType referenceType)
+            final ReferenceType referenceType) throws RemoteException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, position, referenceType);
@@ -615,10 +617,18 @@ public final class InitialEventContext implements EventContext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean removeListener(final EventListener listener, final EventType eventType)
+    public synchronized boolean removeListener(final EventListener listener, final EventType eventType) throws RemoteException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.removeListener(listener, eventType);
+        throw new RuntimeException(new NoInitialContextException());
+    }
+
+    @Override
+    public EventListenerMap getEventListenerMap() throws RemoteException
+    {
+        if (this.defaultInitCtx != null)
+            return this.defaultInitCtx.getEventListenerMap();
         throw new RuntimeException(new NoInitialContextException());
     }
 
