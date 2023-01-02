@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
@@ -80,12 +78,5 @@ public class Warehouse42Model extends AbstractDSOLModel<Double, DEVSSimulator<Do
         {
             throw new SimRuntimeException(exception);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Warehouse42Model";
     }
 }

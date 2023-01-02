@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.logger.CategoryLogger;
 import org.pmw.tinylog.Level;
 
@@ -92,7 +92,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
     /**
      * Class to catch the events from the Simulator to check that they are right.
      */
-    protected static class SimulatorEventLogger implements EventListenerInterface
+    protected static class SimulatorEventLogger implements EventListener
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -116,7 +116,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
 
         /** {@inheritDoc} */
         @Override
-        public void notify(final EventInterface event) throws RemoteException
+        public void notify(final Event event) throws RemoteException
         {
             this.devsSimulator.getLogger().always().info(event.getType().toString());
         }

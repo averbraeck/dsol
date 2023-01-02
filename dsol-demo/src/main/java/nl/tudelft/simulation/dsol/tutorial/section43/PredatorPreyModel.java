@@ -1,11 +1,10 @@
 package nl.tudelft.simulation.dsol.tutorial.section43;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventProducer;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -89,15 +88,8 @@ public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<D
         return this.chart;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "PredatorPreyModel";
-    }
-
     /** small event producer that fires events for the graph with a lower resolution. */
-    static class SkipEventProducer extends EventProducer implements EventListenerInterface
+    static class SkipEventProducer extends LocalEventProducer implements EventListener
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -119,7 +111,7 @@ public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<D
 
         /** {@inheritDoc} */
         @Override
-        public void notify(final EventInterface event) throws RemoteException
+        public void notify(final Event event) throws RemoteException
         {
             if (this.count % this.skip == 0)
             {
@@ -134,13 +126,6 @@ public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<D
                 this.count = 0;
             }
             this.count++;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "SkipEventProducer";
         }
     }
 

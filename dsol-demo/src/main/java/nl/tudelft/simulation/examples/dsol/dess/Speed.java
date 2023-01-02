@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.dess;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
@@ -34,12 +33,5 @@ public class Speed extends DifferentialEquation<Double>
     public double[] dy(final double x, final double[] y)
     {
         return new double[] {0.5};
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Speed";
     }
 }

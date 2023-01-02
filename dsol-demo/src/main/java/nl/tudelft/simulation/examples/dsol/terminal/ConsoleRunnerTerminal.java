@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
@@ -27,7 +27,7 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs</a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public final class ConsoleRunnerTerminal implements EventListenerInterface
+public final class ConsoleRunnerTerminal implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20220110L;
@@ -77,7 +77,7 @@ public final class ConsoleRunnerTerminal implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void notify(final EventInterface event) throws RemoteException
+    public synchronized void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(Terminal.READY_EVENT))
         {

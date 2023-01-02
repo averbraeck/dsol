@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section43;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
@@ -61,12 +60,5 @@ public class Population extends DifferentialEquation<Double>
         dy[0] = -this.a * y[0] + this.b * y[0] * y[1];
         dy[1] = this.c * y[1] - this.d * y[1] * y[0];
         return dy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Population";
     }
 }

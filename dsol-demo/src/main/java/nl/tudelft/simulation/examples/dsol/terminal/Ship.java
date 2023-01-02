@@ -1,9 +1,7 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import java.io.Serializable;
-
-import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 
 /**
  * <p>
@@ -16,7 +14,7 @@ import org.djutils.event.EventType;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs</a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class Ship extends EventProducer
+public class Ship extends LocalEventProducer
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -60,12 +58,5 @@ public class Ship extends EventProducer
     public int getContainers()
     {
         return this.containers;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Ship";
     }
 }

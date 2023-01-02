@@ -1,9 +1,8 @@
 package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
-import org.djutils.event.EventInterface;
+import org.djutils.event.Event;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
@@ -111,7 +110,7 @@ public class Computer extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
 
         /** {@inheritDoc} */
         @Override
-        public void notify(final EventInterface event)
+        public void notify(final Event event)
         {
             super.notify(event);
             if (getCount() >= NUMBER_OF_JOBS)
@@ -129,12 +128,5 @@ public class Computer extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
                 }
             }
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Computer";
     }
 }

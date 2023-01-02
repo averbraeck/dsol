@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.examples.dsol.animation.gis;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.rmi.RemoteException;
 
@@ -106,20 +105,13 @@ public class EsriCsvSwingApplication extends DSOLAnimationApplication
             System.out.println("ESRI-map file: " + csvUrl.toString());
             try
             {
-                this.gisMap = new EsriRenderable2D(
-                        getSimulator().getReplication(), EsriFileCsvParser.parseMapFile(csvUrl, "TU Delft")); 
+                this.gisMap = new EsriRenderable2D(getSimulator().getReplication(),
+                        EsriFileCsvParser.parseMapFile(csvUrl, "TU Delft"));
             }
             catch (IOException e)
             {
                 throw new SimRuntimeException(e);
             }
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "EmptyModel";
         }
 
         /**

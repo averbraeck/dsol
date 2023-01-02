@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
@@ -25,7 +25,7 @@ public class Terminal extends Station<Double>
     private static final long serialVersionUID = 1L;
 
     /** SERVICE_TIME is fired on job completion. */
-    public static final TimedEventType SERVICE_TIME = new TimedEventType("SERVICE_TIME");
+    public static final EventType SERVICE_TIME = new EventType("SERVICE_TIME");
 
     /** the thinkDelay. */
     private DistContinuous thinkDelay = null;

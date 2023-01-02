@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section25;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 
@@ -36,12 +34,5 @@ public class CustomerOrderModel extends AbstractDSOLModel<Double, DEVSSimulator<
     {
         System.out.println("\nReplication starts...");
         new Customer(this.simulator);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "CustomerOrderModel";
     }
 }

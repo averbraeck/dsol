@@ -1,9 +1,7 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
-import java.io.Serializable;
-
-import org.djutils.event.EventProducer;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
@@ -23,19 +21,19 @@ import nl.tudelft.simulation.dsol.tutorial.section42.policies.StationaryPolicy;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class Retailer extends EventProducer implements BuyerInterface, SellerInterface
+public class Retailer extends LocalEventProducer implements BuyerInterface, SellerInterface
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /** TOTAL_ORDERING_COST_EVENT is fired whenever ordering occurs. */
-    public static final TimedEventType TOTAL_ORDERING_COST_EVENT = new TimedEventType("TOTAL_ORDERING_COST_EVENT");
+    public static final EventType TOTAL_ORDERING_COST_EVENT = new EventType("TOTAL_ORDERING_COST_EVENT");
 
     /** INVENTORY_LEVEL_EVENT is fired on changes in inventory. */
-    public static final TimedEventType INVENTORY_LEVEL_EVENT = new TimedEventType("INVENTORY_LEVEL_EVENT");
+    public static final EventType INVENTORY_LEVEL_EVENT = new EventType("INVENTORY_LEVEL_EVENT");
 
     /** BACKLOG_LEVEL is fired on BACKLOG_LEVEL changes. */
-    public static final TimedEventType BACKLOG_LEVEL = new TimedEventType("BACKLOG_LEVEL");
+    public static final EventType BACKLOG_LEVEL = new EventType("BACKLOG_LEVEL");
 
     /** the actual inventoryLevel. */
     private long inventory = 60L;
@@ -139,13 +137,6 @@ public class Retailer extends EventProducer implements BuyerInterface, SellerInt
         this.fireTimedEvent(INVENTORY_LEVEL_EVENT, this.inventory, this.simulator.getSimulatorTime());
         this.fireTimedEvent(BACKLOG_LEVEL, this.backLog, this.simulator.getSimulatorTime());
         buyer.receiveProduct(actualOrderSize);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Retailer";
     }
 
 }

@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.dess;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DESSSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -70,13 +68,6 @@ public class DESSModel extends AbstractDSOLModel<Double, DESSSimulatorInterface<
     public SimPersistent<Double> getDistancePersistent()
     {
         return this.distancePersistent;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "DESSModel";
     }
 
 }

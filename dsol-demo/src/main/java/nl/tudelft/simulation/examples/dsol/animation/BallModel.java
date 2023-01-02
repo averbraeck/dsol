@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,13 +66,6 @@ public class BallModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface<
         {
             return null;
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "BallModel";
     }
 
 }

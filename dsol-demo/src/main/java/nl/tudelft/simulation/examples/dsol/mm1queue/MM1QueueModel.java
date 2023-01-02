@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.mm1queue;
 
-import java.io.Serializable;
-
 import org.djutils.stats.summarizers.event.StatisticsEvents;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -115,10 +113,9 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DEVSSimulator<Doubl
 
             // Statistics
 
-            new SimCounter<Double>("counting the generator", this.simulator, generator,
-                    Generator.CREATE_EVENT);
-            SimPersistent<Double> persistent = new SimPersistent<Double>("persistent on service time", this.simulator,
-                    release, Release.SERVICE_TIME_EVENT);
+            new SimCounter<Double>("counting the generator", this.simulator, generator, Generator.CREATE_EVENT);
+            SimPersistent<Double> persistent = new SimPersistent<Double>("persistent on service time", this.simulator, release,
+                    Release.SERVICE_TIME_EVENT);
 
             Histogram histogram = new Histogram(this.simulator, "histogram on service time", new double[] {0, 10}, 30);
             histogram.add("histogram on service time", persistent, StatisticsEvents.SAMPLE_MEAN_EVENT);
@@ -134,13 +131,6 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DEVSSimulator<Doubl
         {
             throw new SimRuntimeException(exception);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "MM1QueueModel";
     }
 
 }

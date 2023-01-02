@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
@@ -22,7 +22,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public final class CustomerOrderApp implements EventListenerInterface
+public final class CustomerOrderApp implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public final class CustomerOrderApp implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(ReplicationInterface.END_REPLICATION_EVENT))
         {

@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.examples.dsol.animation.gis;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.rmi.RemoteException;
 
@@ -112,13 +111,6 @@ public class EsriXmlSwingApplication extends DSOLAnimationApplication
             {
                 throw new SimRuntimeException(e);
             }
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "EmptyModel";
         }
 
         /**

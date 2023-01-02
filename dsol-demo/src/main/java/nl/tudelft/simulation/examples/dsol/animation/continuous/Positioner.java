@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.animation.continuous;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
@@ -50,12 +49,5 @@ public class Positioner extends DifferentialEquation<Double>
         dy[0] = 0.5; // a(t) = constant
         dy[1] = y[0]; // v(t) = a(t)
         return dy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Positioner";
     }
 }

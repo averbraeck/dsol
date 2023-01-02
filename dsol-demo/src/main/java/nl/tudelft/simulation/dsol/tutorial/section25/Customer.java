@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.tutorial.section25;
 
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
+import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
 /**
@@ -40,7 +40,7 @@ public class Customer
             System.out.println("ordered " + order + " @ time=" + this.simulator.getSimulatorTime());
 
             // Now we schedule the next action at time = time + 2.0
-            SimEventInterface<Double> simEvent =
+            SimEvent<Double> simEvent =
                     new SimEvent<Double>(this.simulator.getSimulatorTime() + 2.0, this, this, "generateOrder", null);
             this.simulator.scheduleEvent(simEvent);
         }

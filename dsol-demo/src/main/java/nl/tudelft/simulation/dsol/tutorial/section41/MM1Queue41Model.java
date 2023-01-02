@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section41;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
@@ -97,12 +95,5 @@ public class MM1Queue41Model extends AbstractDSOLModel<Double, DEVSSimulator<Dou
         {
             throw new SimRuntimeException(exception);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "MM1Queue41Model";
     }
 }
