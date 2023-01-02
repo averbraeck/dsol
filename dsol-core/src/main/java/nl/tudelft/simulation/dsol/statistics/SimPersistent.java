@@ -10,6 +10,7 @@ import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
 import org.djutils.event.reference.ReferenceType;
+import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedTimestampWeightedTally;
@@ -109,7 +110,14 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     {
         if (event.getType().equals(ReplicationInterface.WARMUP_EVENT))
         {
-            this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+            try
+            {
+                this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+            }
+            catch (RemoteException exception)
+            {
+                CategoryLogger.always().warn(exception);
+            }
             fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
             super.initialize();
             return;

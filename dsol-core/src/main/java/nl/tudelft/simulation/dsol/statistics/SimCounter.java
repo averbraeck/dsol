@@ -8,6 +8,7 @@ import org.djutils.event.Event;
 import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
 import org.djutils.event.reference.ReferenceType;
+import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedCounter;
@@ -120,7 +121,14 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
         if (event.getType().equals(ReplicationInterface.WARMUP_EVENT))
         {
-            this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+            try
+            {
+                this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+            }
+            catch (RemoteException exception)
+            {
+                CategoryLogger.always().warn(exception);
+            }
             super.initialize();
             return;
         }

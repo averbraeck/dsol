@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import org.djutils.event.Event;
 import org.djutils.event.reference.ReferenceType;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
@@ -59,7 +60,14 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
         if (event.getType().equals(ReplicationInterface.WARMUP_EVENT))
         {
             this.initialized = true;
-            this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+            try
+            {
+                this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+            }
+            catch (RemoteException exception)
+            {
+                CategoryLogger.always().warn(exception);
+            }
             super.initialize();
             return;
         }
