@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import javax.swing.event.DocumentListener;
 
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
+import org.djutils.event.EventListenerMap;
 import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
@@ -313,10 +315,18 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
         return this.searchPanelEventProducer.removeListener(listener, eventType);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int removeAllListeners()
     {
         return this.searchPanelEventProducer.removeAllListeners();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public EventListenerMap getEventListenerMap() throws RemoteException
+    {
+        return this.searchPanelEventProducer.getEventListenerMap();
     }
 
 }

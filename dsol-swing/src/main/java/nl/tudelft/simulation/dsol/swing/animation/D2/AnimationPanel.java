@@ -26,6 +26,7 @@ import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
+import org.djutils.event.EventListenerMap;
 import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
@@ -680,10 +681,18 @@ public class AnimationPanel extends GridPanel implements EventListener, EventPro
         return this.animationEventProducer.removeListener(listener, eventType);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int removeAllListeners()
     {
         return this.animationEventProducer.removeAllListeners();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public EventListenerMap getEventListenerMap() throws RemoteException
+    {
+        return this.animationEventProducer.getEventListenerMap();
     }
 
 }
