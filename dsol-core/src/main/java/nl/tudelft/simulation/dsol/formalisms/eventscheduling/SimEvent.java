@@ -55,7 +55,7 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
      */
     public SimEvent(final T executionTime, final Object source, final Object target, final String method, final Object[] args)
     {
-        this(executionTime, SimEventInterface.NORMAL_PRIORITY, source, target, method, args);
+        this(executionTime, SimEvent.NORMAL_PRIORITY, source, target, method, args);
     }
 
     /**

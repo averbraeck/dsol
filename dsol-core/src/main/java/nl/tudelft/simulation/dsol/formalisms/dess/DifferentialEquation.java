@@ -2,10 +2,10 @@ package nl.tudelft.simulation.dsol.formalisms.dess;
 
 import java.rmi.RemoteException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.TimedEventType;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.EventType;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -27,19 +27,19 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class DifferentialEquation<T extends Number & Comparable<T>> extends
-        nl.tudelft.simulation.jstats.ode.DifferentialEquation implements DifferentialEquationInterface, EventListenerInterface
+public abstract class DifferentialEquation<T extends Number & Comparable<T>>
+        extends nl.tudelft.simulation.jstats.ode.DifferentialEquation implements DifferentialEquationInterface, EventListener
 {
     /** */
     private static final long serialVersionUID = 20140804L;
 
     /** VALUE_CHANGED_EVENT is fired on value changes. The array is initialized in the ODE's constructor. */
     @SuppressWarnings({"checkstyle:visibilitymodifier", "checkstyle:membername"})
-    public TimedEventType[] VALUE_CHANGED_EVENT;
+    public EventType[] VALUE_CHANGED_EVENT;
 
     /** FUNCTION_CHANGED_EVENT is fired on function changes. */
     @SuppressWarnings({"checkstyle:visibilitymodifier", "checkstyle:membername"})
-    public TimedEventType FUNCTION_CHANGED_EVENT = new TimedEventType("FUNCTION_CHANGED_EVENT", MetaData.NO_META_DATA);
+    public EventType FUNCTION_CHANGED_EVENT = new EventType("FUNCTION_CHANGED_EVENT", MetaData.NO_META_DATA);
 
     /** simulator. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -96,11 +96,11 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>> ext
         super(timeStep, numericalIntegrator);
         this.simulator = simulator;
         this.numberOfVariables = numberOfVariables;
-        this.VALUE_CHANGED_EVENT = new TimedEventType[this.numberOfVariables];
+        this.VALUE_CHANGED_EVENT = new EventType[this.numberOfVariables];
         for (int i = 0; i < this.numberOfVariables; i++)
         {
             this.VALUE_CHANGED_EVENT[i] =
-                    new TimedEventType(new MetaData("VALUE_CHANGED_EVENT[" + i + "]", "value changed for variable " + i,
+                    new EventType(new MetaData("VALUE_CHANGED_EVENT[" + i + "]", "value changed for variable " + i,
                             new ObjectDescriptor("value_" + i, "value for variable " + i, Double.class)));
         }
         simulator.addListener(this, SimulatorInterface.TIME_CHANGED_EVENT, ReferenceType.STRONG);
@@ -108,10 +108,9 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>> ext
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void notify(final EventInterface event) throws RemoteException
+    public synchronized void notify(final Event event) throws RemoteException
     {
-        if (event.getSourceId().equals(this.simulator.getSourceId())
-                && event.getType().equals(SimulatorInterface.TIME_CHANGED_EVENT))
+        if (event.getType().equals(SimulatorInterface.TIME_CHANGED_EVENT))
         {
             if (this.simulator.getSimulatorTime().doubleValue() < super.lastX || Double.isNaN(super.lastX))
             {

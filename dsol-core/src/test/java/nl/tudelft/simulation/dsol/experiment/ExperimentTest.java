@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -59,7 +58,6 @@ public class ExperimentTest
         expd.removeFromContext(); // should not yet have been added
         assertEquals("Exp 1", expd.getId());
         assertEquals("Exp 1", expd.getDescription());
-        assertEquals("Exp 1", expd.getSourceId());
         expd.setDescription("Experiment 1");
         assertEquals("Experiment 1", expd.getDescription());
         assertEquals(10.0, expd.getStartTime(), 1E-9);
@@ -131,12 +129,6 @@ public class ExperimentTest
                     {
                         //
                     }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "exp";
-                    }
                 };
         Experiment<Double, DEVSSimulatorInterface<Double>> d1 =
                 new Experiment<>("Exp 1", simd, modd, new Double(10.0), 1.0, 12.0, 10);
@@ -157,12 +149,6 @@ public class ExperimentTest
             {
                 //
             }
-
-            @Override
-            public Serializable getSourceId()
-            {
-                return "exp";
-            }
         };
         Experiment<Float, DEVSSimulatorInterface<Float>> f1 =
                 new Experiment<Float, DEVSSimulatorInterface<Float>>("f1", simf, modf, 10.0f, 1.0f, 12.0f, 10);
@@ -182,12 +168,6 @@ public class ExperimentTest
             public void constructModel() throws SimRuntimeException
             {
                 //
-            }
-
-            @Override
-            public Serializable getSourceId()
-            {
-                return "exp";
             }
         };
         Experiment<Long, DEVSSimulatorInterface<Long>> l1 =
@@ -210,12 +190,6 @@ public class ExperimentTest
                     {
                         //
                     }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "exp";
-                    }
                 };
         Experiment<Duration, DEVSSimulatorInterface<Duration>> du1 = new Experiment<Duration, DEVSSimulatorInterface<Duration>>(
                 "du1", simdu, moddu, Duration.ZERO, Duration.ZERO, Duration.instantiateSI(1000.0), 10);
@@ -237,13 +211,6 @@ public class ExperimentTest
                     {
                         //
                     }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "exp";
-                    }
-
                 };
         Experiment<FloatDuration, DEVSSimulatorInterface<FloatDuration>> fu1 = new Experiment<>("du1", simfu, modfu,
                 FloatDuration.ZERO, FloatDuration.ZERO, FloatDuration.instantiateSI(1000.0f), 10);
@@ -414,13 +381,6 @@ public class ExperimentTest
             this.count++;
             this.dataCollector.put(this.id, this.count);
         }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "model";
-        }
     }
 
     /**
@@ -513,13 +473,6 @@ public class ExperimentTest
             this.queue.remove(entity);
             this.nrInQueuePersistent.register(10.0, this.queue.size());
             this.queueTimeTally.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "MM1";
         }
     }
 

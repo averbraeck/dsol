@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.djutils.event.EventProducer;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 import org.djutils.logger.CategoryLogger;
 import org.pmw.tinylog.Level;
@@ -32,7 +32,7 @@ import nl.tudelft.simulation.dsol.model.DSOLModel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a> relative types are the same.
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  */
-public abstract class Simulator<T extends Number & Comparable<T>> extends EventProducer
+public abstract class Simulator<T extends Number & Comparable<T>> extends LocalEventProducer
         implements SimulatorInterface<T>, Runnable
 {
     /** */
@@ -490,13 +490,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
 
     /** {@inheritDoc} */
     @Override
-    public Serializable getSourceId()
-    {
-        return this.id;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public RunState getRunState()
     {
         return this.runState;
@@ -513,7 +506,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
      * fireTimedEvent method to be called for a no-payload TimedEvent.
      * @param event the event to fire at the current time
      */
-    protected void fireTimedEvent(final TimedEventType event)
+    protected void fireTimedEvent(final EventType event)
     {
         fireTimedEvent(event, null, getSimulatorTime());
     }

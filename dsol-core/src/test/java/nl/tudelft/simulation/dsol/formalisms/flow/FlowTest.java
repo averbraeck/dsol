@@ -2,8 +2,6 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.Serializable;
-
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -48,7 +46,6 @@ public class FlowTest
         DistContinuousSimulationTime<Double> delayDistribution =
                 new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 10.0));
         Delay<Double> delay = new Delay<Double>("delay", simulator, delayDistribution);
-        assertEquals("delay", delay.getSourceId());
         assertEquals(simulator, delay.getSimulator());
         assertEquals(nrEvents, simulator.getEventList().size());
 
@@ -97,12 +94,6 @@ public class FlowTest
             public void constructModel() throws SimRuntimeException
             {
                 //
-            }
-
-            @Override
-            public Serializable getSourceId()
-            {
-                return "model";
             }
         };
     }

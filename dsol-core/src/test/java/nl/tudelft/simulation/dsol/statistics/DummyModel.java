@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.statistics;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
@@ -32,13 +30,6 @@ public class DummyModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface
     public void constructModel() throws SimRuntimeException
     {
         //
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "model";
     }
 
 }

@@ -34,7 +34,7 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
 
     /** priority reflects the priority of the event. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected short priority = SimEventInterface.NORMAL_PRIORITY;
+    protected short priority = SimEvent.NORMAL_PRIORITY;
 
     /** the id used in compare statements. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -46,7 +46,7 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
      */
     public AbstractSimEvent(final T executionTime)
     {
-        this(executionTime, SimEventInterface.NORMAL_PRIORITY);
+        this(executionTime, SimEvent.NORMAL_PRIORITY);
     }
 
     /**
@@ -57,10 +57,10 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
     public AbstractSimEvent(final T executionTime, final short priority)
     {
         this.absoluteExecutionTime = executionTime;
-        if (priority < SimEventInterface.MIN_PRIORITY - 1 || priority > SimEventInterface.MAX_PRIORITY + 1)
+        if (priority < SimEvent.MIN_PRIORITY - 1 || priority > SimEvent.MAX_PRIORITY + 1)
         {
-            throw new IllegalArgumentException("priority must be between [" + SimEventInterface.MIN_PRIORITY + ".."
-                    + SimEventInterface.MAX_PRIORITY + "]");
+            throw new IllegalArgumentException("priority must be between [" + SimEvent.MIN_PRIORITY + ".."
+                    + SimEvent.MAX_PRIORITY + "]");
         }
         this.priority = priority;
 

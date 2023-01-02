@@ -1,13 +1,12 @@
 package nl.tudelft.simulation.dsol.formalisms.eventscheduling;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.concurrent.TimeoutException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.junit.Test;
 
 import net.jodah.concurrentunit.Waiter;
@@ -25,7 +24,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DEVSSimulationDoubleTest implements EventListenerInterface
+public class DEVSSimulationDoubleTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -73,7 +72,7 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         this.waiter.resume();
     }
@@ -227,13 +226,6 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
         public void constructModel() throws SimRuntimeException
         {
             //
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "ModelDouble";
         }
     }
 }

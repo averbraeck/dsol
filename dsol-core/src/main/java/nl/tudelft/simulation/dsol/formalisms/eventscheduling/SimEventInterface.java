@@ -5,7 +5,7 @@ import java.io.Serializable;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 
 /**
- * A SimEventInterface embodies the envelope in which the scheduled method invocation information is stored.
+ * A SimEvent embodies the envelope in which the scheduled method invocation information is stored.
  * <p>
  * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL

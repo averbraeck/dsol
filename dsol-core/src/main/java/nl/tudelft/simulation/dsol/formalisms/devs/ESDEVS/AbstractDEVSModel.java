@@ -7,8 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.djutils.event.EventProducer;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.reflection.ClassUtil;
@@ -31,7 +31,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extends EventProducer
+public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extends LocalEventProducer
 {
     /** the default serial version UId. */
     private static final long serialVersionUID = 1L;
@@ -53,7 +53,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
     protected String fullName;
 
     /** event for listeners about state update. */
-    public static final TimedEventType STATE_UPDATE = new TimedEventType(new MetaData("STATE_UPDATE", "State update",
+    public static final EventType STATE_UPDATE = new EventType(new MetaData("STATE_UPDATE", "State update",
             new ObjectDescriptor("stateUpdate", "State update", StateUpdate.class)));
 
     /** map of call classes and fields for which the state will be reported. */

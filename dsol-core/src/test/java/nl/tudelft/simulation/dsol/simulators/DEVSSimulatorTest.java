@@ -3,8 +3,8 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.rmi.RemoteException;
 import java.util.concurrent.TimeoutException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.junit.Test;
 
 import net.jodah.concurrentunit.Waiter;
@@ -21,7 +21,7 @@ import net.jodah.concurrentunit.Waiter;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class DEVSSimulatorTest implements EventListenerInterface
+public class DEVSSimulatorTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -50,7 +50,7 @@ public class DEVSSimulatorTest implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         this.waiter.resume();
     }

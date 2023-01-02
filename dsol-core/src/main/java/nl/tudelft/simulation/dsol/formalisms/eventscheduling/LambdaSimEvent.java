@@ -33,7 +33,7 @@ public class LambdaSimEvent<T extends Number & Comparable<T>> extends AbstractSi
      */
     public LambdaSimEvent(final T executionTime, final Executable executable)
     {
-        this(executionTime, SimEventInterface.NORMAL_PRIORITY, executable);
+        this(executionTime, SimEvent.NORMAL_PRIORITY, executable);
     }
 
     /**

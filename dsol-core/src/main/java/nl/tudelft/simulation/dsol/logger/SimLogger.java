@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.djutils.event.ref.WeakReference;
+import org.djutils.event.reference.WeakReference;
 import org.djutils.immutablecollections.ImmutableSet;
 import org.djutils.logger.CategoryLogger;
 import org.djutils.logger.CategoryLogger.DelegateLogger;

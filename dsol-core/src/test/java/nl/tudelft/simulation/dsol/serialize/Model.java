@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.serialize;
 
-import java.io.Serializable;
 import java.rmi.MarshalledObject;
 import java.rmi.RemoteException;
 
@@ -60,12 +59,5 @@ public class Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Doub
         {
             this.simulator.getLogger().always().warn(exception, "pause");
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Model";
     }
 }

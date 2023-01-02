@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.djutils.event.EventProducer;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.experiment.StreamInformation;
@@ -25,7 +25,7 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator type to use
  */
-public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends EventProducer
+public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
         implements DSOLModel<T, S>
 {
     /** */

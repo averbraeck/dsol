@@ -3,16 +3,15 @@ package nl.tudelft.simulation.dsol.statistics;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventProducer;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
-import org.djutils.event.TimedEventType;
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
@@ -33,7 +32,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @since 1.5
  */
-public class SimCounterTest extends EventProducer
+public class SimCounterTest extends LocalEventProducer
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -61,34 +60,27 @@ public class SimCounterTest extends EventProducer
 
         counter.initialize();
 
-        counter.addListener(new EventListenerInterface()
+        counter.addListener(new EventListener()
         {
             /** */
             private static final long serialVersionUID = 1L;
 
             @Override
-            public void notify(final EventInterface event)
+            public void notify(final Event event)
             {
                 assertTrue(event.getType().equals(SimCounter.TIMED_OBSERVATION_ADDED_EVENT));
                 assertTrue(event.getContent().getClass().equals(Long.class));
             }
         }, SimCounter.TIMED_OBSERVATION_ADDED_EVENT);
 
-        TimedEventType et = new TimedEventType("observation");
+        EventType et = new EventType("observation");
         long value = 0;
         for (int i = 0; i < 100; i++)
         {
-            counter.notify(new TimedEvent<Double>(et, "CounterTest", Long.valueOf(2 * i), 0.1 * i));
+            counter.notify(new TimedEvent<Double>(et, Long.valueOf(2 * i), 0.1 * i));
             value = value + 2 * i;
         }
         assertTrue(counter.getN() == 100);
         assertTrue(counter.getCount() == value);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "CounterTest";
     }
 }

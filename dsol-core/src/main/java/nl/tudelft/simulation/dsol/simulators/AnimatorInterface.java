@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.rmi.RemoteException;
 
 import org.djutils.event.EventType;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -25,7 +25,7 @@ public interface AnimatorInterface
     long DEFAULT_ANIMATION_DELAY = 100L;
 
     /** UPDATE_ANIMATION_EVENT is fired to wake up animatable components. */
-    TimedEventType UPDATE_ANIMATION_EVENT = new TimedEventType(new MetaData("UPDATE_ANIMATION_EVENT", "Animation update"));
+    EventType UPDATE_ANIMATION_EVENT = new EventType(new MetaData("UPDATE_ANIMATION_EVENT", "Animation update"));
 
     /** ANIMATION_DELAY_CHANGED_EVENT is fired when the time step is set. */
     EventType ANIMATION_DELAY_CHANGED_EVENT = new EventType(new MetaData("ANIMATION_DELAY_CHANGED_EVENT",

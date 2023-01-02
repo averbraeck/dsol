@@ -3,8 +3,6 @@ package nl.tudelft.simulation.dsol.simulators;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.io.Serializable;
-
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -125,13 +123,6 @@ public class SimulatorTest
         {
             this.value += 10;
             schedule();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "SimModel";
         }
 
         /**

@@ -2,7 +2,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import java.io.Serializable;
 
-import org.djutils.event.EventProducer;
+import org.djutils.event.LocalEventProducer;
 
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class Station<T extends Number & Comparable<T>> extends EventProducer implements StationInterface<T>
+public abstract class Station<T extends Number & Comparable<T>> extends LocalEventProducer implements StationInterface<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;
@@ -44,13 +44,6 @@ public abstract class Station<T extends Number & Comparable<T>> extends EventPro
     {
         this.id = id;
         this.simulator = simulator;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return this.id;
     }
 
     /** {@inheritDoc} */

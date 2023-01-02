@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
 
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.reflection.ClassUtil;
@@ -36,7 +36,7 @@ public class Generator<T extends Number & Comparable<T>> extends Station<T>
     public static final long serialVersionUID = 20140805L;
 
     /** CREATE_EVENT is fired on creation. */
-    public static final TimedEventType CREATE_EVENT = new TimedEventType(new MetaData("CREATE_EVENT", "Created object(s)",
+    public static final EventType CREATE_EVENT = new EventType(new MetaData("CREATE_EVENT", "Created object(s)",
             new ObjectDescriptor("numberCreated", "number of objects created", Integer.class)));
 
     /** constructorArguments refer to the arguments of the class invoked by the generator. */

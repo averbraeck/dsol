@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,8 +7,8 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.djutils.event.EventProducer;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -29,7 +28,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @param <T> the simulation time type to use.
  * @since 1.5
  */
-public class Resource<T extends Number & Comparable<T>> extends EventProducer
+public class Resource<T extends Number & Comparable<T>> extends LocalEventProducer
 {
     /** */
     private static final long serialVersionUID = 20140805L;
@@ -39,12 +38,12 @@ public class Resource<T extends Number & Comparable<T>> extends EventProducer
     static long counter = 0;
 
     /** UTILIZATION_EVENT is fired on activity. */
-    public static final TimedEventType UTILIZATION_EVENT = new TimedEventType(new MetaData("UTILIZATION_EVENT",
+    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT",
             "Utilization changed", new ObjectDescriptor("newUtilization", "new utilization", Double.class)));
 
     /** RESOURCE_REQUESTED_QUEUE_LENGTH fired on changes in queue length. */
-    public static final TimedEventType RESOURCE_REQUESTED_QUEUE_LENGTH =
-            new TimedEventType(new MetaData("RESOURCE_REQUESTED_QUEUE_LENGTH", "Queue length changed",
+    public static final EventType RESOURCE_REQUESTED_QUEUE_LENGTH =
+            new EventType(new MetaData("RESOURCE_REQUESTED_QUEUE_LENGTH", "Queue length changed",
                     new ObjectDescriptor("newQueueLength", "new queue length", Integer.class)));
 
     /** the minimum priority. */
@@ -88,13 +87,6 @@ public class Resource<T extends Number & Comparable<T>> extends EventProducer
         this.description = description;
         this.simulator = simulator;
         this.capacity = capacity;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return this.description;
     }
 
     /**

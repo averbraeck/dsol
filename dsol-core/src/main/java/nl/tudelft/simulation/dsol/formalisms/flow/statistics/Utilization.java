@@ -2,8 +2,8 @@ package nl.tudelft.simulation.dsol.formalisms.flow.statistics;
 
 import java.rmi.RemoteException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.Event;
+import org.djutils.event.reference.ReferenceType;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
@@ -22,8 +22,7 @@ import nl.tudelft.simulation.dsol.statistics.SimPersistent;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @param <T> the absolute simulation time to use in the warmup event
  */
-public class Utilization<T extends Number & Comparable<T>>
-        extends SimPersistent<T>
+public class Utilization<T extends Number & Comparable<T>> extends SimPersistent<T>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -41,8 +40,8 @@ public class Utilization<T extends Number & Comparable<T>>
      * @param target StationInterface&lt;A,R,T&gt;; the target
      * @throws RemoteException on network error for one of the listeners
      */
-    public Utilization(final String description, final SimulatorInterface<T> simulator,
-            final StationInterface<T> target) throws RemoteException
+    public Utilization(final String description, final SimulatorInterface<T> simulator, final StationInterface<T> target)
+            throws RemoteException
     {
         super(description, simulator);
         this.simulator = simulator;
@@ -55,25 +54,14 @@ public class Utilization<T extends Number & Comparable<T>>
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event)
+    public void notify(final Event event)
     {
-        if (event.getSourceId().equals(this.simulator.getSourceId()))
+        if (event.getType().equals(ReplicationInterface.WARMUP_EVENT))
         {
-            if (event.getType().equals(ReplicationInterface.WARMUP_EVENT))
-            {
-                this.initialized = true;
-                try
-                {
-                    this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
-                }
-                catch (RemoteException exception)
-                {
-                    this.simulator.getLogger().always().warn(exception,
-                            "problem removing Listener for SimulatorIterface.WARMUP_EVENT");
-                }
-                super.initialize();
-                return;
-            }
+            this.initialized = true;
+            this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+            super.initialize();
+            return;
         }
         else if (this.initialized)
         {

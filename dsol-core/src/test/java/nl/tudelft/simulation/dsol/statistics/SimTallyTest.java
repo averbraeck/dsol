@@ -6,14 +6,13 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventProducer;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
-import org.djutils.event.TimedEventType;
 import org.djutils.stats.ConfidenceInterval;
 import org.junit.Test;
 
@@ -34,20 +33,13 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @since 1.5
  */
-public class SimTallyTest extends EventProducer
+public class SimTallyTest extends LocalEventProducer
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /** update event. */
-    private static final TimedEventType UPDATE_EVENT = new TimedEventType("UpdateEvent");
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "TallyTest";
-    }
+    private static final EventType UPDATE_EVENT = new EventType("UpdateEvent");
 
     /**
      * Test the tally.
@@ -166,7 +158,7 @@ public class SimTallyTest extends EventProducer
         // We first fire a wrong event
         try
         {
-            tally.notify(new TimedEvent<String>(UPDATE_EVENT, this, "ERROR", "ERROR"));
+            tally.notify(new TimedEvent<String>(UPDATE_EVENT, "ERROR", "ERROR"));
             fail("tally should react on timed event.value !instanceOf Double");
         }
         catch (Exception exception)
@@ -177,17 +169,17 @@ public class SimTallyTest extends EventProducer
         // Now we fire some events
         try
         {
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.0, 0.1));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.1, 0.2));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.2, 0.3));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.3, 0.4));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.4, 0.5));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.5, 0.6));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.6, 0.7));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.7, 0.8));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.8, 0.9));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 1.9, 1.0));
-            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, "TallyTest", 2.0, 1.1));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.0, 0.1));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.1, 0.2));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.2, 0.3));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.3, 0.4));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.4, 0.5));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.5, 0.6));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.6, 0.7));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.7, 0.8));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.8, 0.9));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.9, 1.0));
+            tally.notify(new TimedEvent<Double>(UPDATE_EVENT, 2.0, 1.1));
         }
         catch (Exception exception)
         {

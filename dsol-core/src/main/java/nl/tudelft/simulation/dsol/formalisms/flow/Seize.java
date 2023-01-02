@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -33,11 +33,11 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     private static final long serialVersionUID = 20140911L;
 
     /** QUEUE_LENGTH_EVENT is fired when the queue length is changed. */
-    public static final TimedEventType QUEUE_LENGTH_EVENT = new TimedEventType(new MetaData("QUEUE_LENGTH_EVENT",
+    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT",
             "Queue length", new ObjectDescriptor("queueLength", "Queue length", Integer.class)));
 
     /** DELAY_TIME is fired when a new delayTime is computed. */
-    public static final TimedEventType DELAY_TIME = new TimedEventType(new MetaData("DELAY_TIME", "Delay time",
+    public static final EventType DELAY_TIME = new EventType(new MetaData("DELAY_TIME", "Delay time",
             new ObjectDescriptor("delayTime", "Delay time (as a double)", Double.class)));
 
     /** queue refers to the list of waiting requestors. */

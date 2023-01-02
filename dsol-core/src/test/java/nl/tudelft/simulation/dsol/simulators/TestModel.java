@@ -1,10 +1,8 @@
 package nl.tudelft.simulation.dsol.simulators;
 
-import java.io.Serializable;
-
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.reference.ReferenceType;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
@@ -21,7 +19,7 @@ import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Double>> implements EventListenerInterface
+public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Double>> implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -55,7 +53,7 @@ public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Doub
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event)
+    public void notify(final Event event)
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT))
         {
@@ -65,12 +63,5 @@ public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Doub
         {
             System.out.println(getSimulator().getReplication() + " stopped @ t=" + getSimulator().getSimulatorTime());
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "TestModel";
     }
 }

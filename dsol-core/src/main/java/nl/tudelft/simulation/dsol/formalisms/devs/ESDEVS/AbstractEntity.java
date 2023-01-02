@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 
 /**
@@ -33,13 +31,6 @@ public class AbstractEntity<T extends Number & Comparable<T>> extends AbstractDE
     public AbstractEntity(final String modelName, final DEVSSimulatorInterface<T> simulator, final CoupledModel<T> parentModel)
     {
         super(modelName, simulator, parentModel);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return this.modelName;
     }
 
     @Override

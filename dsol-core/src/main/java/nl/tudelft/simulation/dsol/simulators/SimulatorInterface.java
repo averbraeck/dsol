@@ -3,9 +3,8 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.io.Serializable;
 import java.rmi.Remote;
 
-import org.djutils.event.EventProducerInterface;
+import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
-import org.djutils.event.TimedEventType;
 import org.djutils.metadata.MetaData;
 import org.pmw.tinylog.Level;
 
@@ -67,22 +66,22 @@ import nl.tudelft.simulation.dsol.model.DSOLModel;
  * @param <T> the extended simulation time type to be able to implement a comparator on the simulation time.
  */
 @SuppressWarnings("checkstyle:linelength")
-public interface SimulatorInterface<T extends Number & Comparable<T>> extends Remote, Serializable, EventProducerInterface
+public interface SimulatorInterface<T extends Number & Comparable<T>> extends Remote, Serializable, EventProducer
 {
     /** STARTING_EVENT is fired when the simulator.start() method is called (the run() method still needs to start). */
     EventType STARTING_EVENT = new EventType(new MetaData("STARTING_EVENT", "simulator starting"));
 
     /** START_EVENT is fired when the simulator is started. */
-    TimedEventType START_EVENT = new TimedEventType(new MetaData("START_EVENT", "simulator started"));
+    EventType START_EVENT = new EventType(new MetaData("START_EVENT", "simulator started"));
 
     /** STOPPING_EVENT is fired when the simulator.stop() method is called (the run() method still needs to be stopped). */
     EventType STOPPING_EVENT = new EventType(new MetaData("STOPPING_EVENT", "simulator stopping"));
 
     /** STOP_EVENT is fired when the simulator is stopped. */
-    TimedEventType STOP_EVENT = new TimedEventType(new MetaData("STOP_EVENT", "simulator stopped"));
+    EventType STOP_EVENT = new EventType(new MetaData("STOP_EVENT", "simulator stopped"));
 
     /** TIME_CHANGED_EVENT is fired when the simulatorTime is updated. */
-    TimedEventType TIME_CHANGED_EVENT = new TimedEventType(new MetaData("TIME_CHANGED_EVENT", "time changed"));
+    EventType TIME_CHANGED_EVENT = new EventType(new MetaData("TIME_CHANGED_EVENT", "time changed"));
 
     /**
      * Returns the absolute simulator time.
@@ -98,8 +97,8 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
 
     /**
      * Returns the currently executed model, or null when the initialize method has not yet been called.
-     * @return DSOLModel&lt;T, ? extends SimulatorInterface&gt;; the currently executed model, or null when the model has
-     *         not yet been initialized
+     * @return DSOLModel&lt;T, ? extends SimulatorInterface&gt;; the currently executed model, or null when the model has not
+     *         yet been initialized
      */
     DSOLModel<T, ? extends SimulatorInterface<T>> getModel();
 
@@ -122,8 +121,8 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * simulator is initialized with the replication. Connecting the statistics objects to the simulation should be done between
      * the initialize(...) method and starting the simulator, or could even be delayed till the WARMUP_EVENT has been fired.
      * @param model DSOLModel&lt;T, S&gt;; the model to initialize
-     * @param replication Replication&lt;T, ? extends SimulatorInterface&lt;T&gt;&gt;; the replication to use for
-     *            running the model
+     * @param replication Replication&lt;T, ? extends SimulatorInterface&lt;T&gt;&gt;; the replication to use for running the
+     *            model
      * @throws SimRuntimeException when the simulator is running
      */
     void initialize(DSOLModel<T, ? extends SimulatorInterface<T>> model, ReplicationInterface<T> replication)
@@ -188,10 +187,6 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * @return SimLogger; the logger that is specific for this simulator
      */
     SimLogger getLogger();
-
-    /** {@inheritDoc} */
-    @Override
-    Serializable getSourceId();
 
     /**
      * Get the run state of the simulator.

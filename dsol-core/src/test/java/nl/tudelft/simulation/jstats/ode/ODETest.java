@@ -2,8 +2,6 @@ package nl.tudelft.simulation.jstats.ode;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.Serializable;
-
 import org.junit.Test;
 
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
@@ -100,13 +98,6 @@ public class ODETest
         {
             return new double[] {x * Math.pow(y[0], 1.0 / 3.0)};
         }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "ODE";
-        }
     }
 
     /** Stiff ODE. */
@@ -131,13 +122,6 @@ public class ODETest
         public double[] dy(final double x, final double[] y)
         {
             return new double[] {y[1], -100 * y[0] - 101 * y[1]};
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "StiffODE";
         }
     }
 }

@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import org.djutils.draw.bounds.Bounds3d;
 import org.djutils.draw.point.OrientedPoint3d;
-import org.djutils.event.EventProducer;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.io.URLResource;
 import org.djutils.logger.CategoryLogger;
 
@@ -26,7 +26,7 @@ import nl.tudelft.simulation.language.d3.CartesianPoint;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @since 1.5
  */
-public abstract class Editable extends EventProducer implements Locatable
+public abstract class Editable extends LocalEventProducer implements Locatable
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

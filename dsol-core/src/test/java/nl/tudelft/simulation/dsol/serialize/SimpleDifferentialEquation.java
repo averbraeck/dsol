@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.serialize;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
@@ -43,12 +42,5 @@ public class SimpleDifferentialEquation extends DifferentialEquation
     public double[] dy(final double arg0, final double[] arg1)
     {
         return new double[] {1.0};
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "ODE";
     }
 }

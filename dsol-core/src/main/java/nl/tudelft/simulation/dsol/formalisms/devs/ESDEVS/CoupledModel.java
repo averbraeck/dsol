@@ -5,9 +5,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
-import org.djutils.event.ref.Reference;
+import org.djutils.event.reference.Reference;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortNotFoundException;
@@ -90,11 +90,11 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Add a listener recursively to the model and all its submodels. Delegate it for this coupled model to the embedded event
      * producer.
-     * @param eli EventListenerInterface; the event listener.
+     * @param eli EventListener; the event listener.
      * @param et EventType; the event type.
      * @return success or failure of adding the listener to all submodels.
      */
-    public boolean addHierarchicalListener(final EventListenerInterface eli, final EventType et)
+    public boolean addHierarchicalListener(final EventListener eli, final EventType et)
     {
         boolean returnBoolean = true;
         returnBoolean &= super.addListener(eli, et);
@@ -277,14 +277,14 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     {
         this.modelComponents.add(model);
 
-        List<Reference<EventListenerInterface>> elis = getListenerReferences(AbstractDEVSModel.STATE_UPDATE);
+        List<Reference<EventListener>> elis = getListenerReferences(AbstractDEVSModel.STATE_UPDATE);
 
         if (elis == null)
         {
             return;
         }
 
-        for (Reference<EventListenerInterface> eli : elis)
+        for (Reference<EventListener> eli : elis)
         {
             model.addListener(eli.get(), AbstractDEVSModel.STATE_UPDATE);
         }

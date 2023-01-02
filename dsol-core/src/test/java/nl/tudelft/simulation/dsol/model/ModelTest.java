@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import org.junit.Test;
@@ -49,12 +48,6 @@ public class ModelTest
                     public void constructModel() throws SimRuntimeException
                     {
                         //
-                    }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "model";
                     }
                 };
         assertEquals(simulator, model.getSimulator());

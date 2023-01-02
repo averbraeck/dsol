@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.jstats.ode;
 
-import org.djutils.event.EventProducer;
+import org.djutils.event.LocalEventProducer;
 
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegrator;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
@@ -17,7 +17,7 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank"> Alexander Verbraeck</a>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public abstract class DifferentialEquation extends EventProducer implements DifferentialEquationInterface
+public abstract class DifferentialEquation extends LocalEventProducer implements DifferentialEquationInterface
 {
     /** */
     private static final long serialVersionUID = 1L;

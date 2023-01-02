@@ -2,8 +2,8 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import java.io.Serializable;
 
-import org.djutils.event.EventProducerInterface;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventProducer;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -22,14 +22,14 @@ import org.djutils.metadata.ObjectDescriptor;
  */
 
 public interface StationInterface<
-        T extends Number & Comparable<T>> extends EventProducerInterface
+        T extends Number & Comparable<T>> extends EventProducer
 {
     /** RECEIVE_EVENT is fired whenever an entity enters the station. */
-    TimedEventType RECEIVE_EVENT = new TimedEventType(new MetaData("RECEIVE_EVENT", "Object received",
+    EventType RECEIVE_EVENT = new EventType(new MetaData("RECEIVE_EVENT", "Object received",
             new ObjectDescriptor("receivedObject", "received object", Serializable.class)));
 
     /** RECEIVE_EVENT is fired whenever an entity leaves the station. */
-    TimedEventType RELEASE_EVENT = new TimedEventType(new MetaData("RELEASE_EVENT", "Object released",
+    EventType RELEASE_EVENT = new EventType(new MetaData("RELEASE_EVENT", "Object released",
             new ObjectDescriptor("releasedObject", "released object", Serializable.class)));
 
     /**

@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 
 import nl.tudelft.simulation.naming.context.Contextualized;
@@ -21,13 +21,13 @@ import nl.tudelft.simulation.naming.context.Contextualized;
 public interface ReplicationInterface<T extends Number & Comparable<T>> extends RunControlInterface<T>, Contextualized
 {
     /** START_REPLICATION_EVENT is fired when a replication is started. */
-    TimedEventType START_REPLICATION_EVENT = new TimedEventType(new MetaData("START_REPLICATION_EVENT", "Replication started"));
+    EventType START_REPLICATION_EVENT = new EventType(new MetaData("START_REPLICATION_EVENT", "Replication started"));
 
     /** END_REPLICATION_EVENT is fired when a replication is finished. */
-    TimedEventType END_REPLICATION_EVENT = new TimedEventType(new MetaData("END_REPLICATION_EVENT", "Replication ended"));
+    EventType END_REPLICATION_EVENT = new EventType(new MetaData("END_REPLICATION_EVENT", "Replication ended"));
 
     /** WARMUP_EVENT is fired when the warmup period is over, and statistics have to be reset. */
-    TimedEventType WARMUP_EVENT = new TimedEventType(new MetaData("WARMUP_EVENT", "warmup time"));
+    EventType WARMUP_EVENT = new EventType(new MetaData("WARMUP_EVENT", "warmup time"));
 
     /**
      * Return the RunControl object.

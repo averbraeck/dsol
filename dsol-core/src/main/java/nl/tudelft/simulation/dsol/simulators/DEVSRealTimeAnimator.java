@@ -6,7 +6,6 @@ import org.djunits.unit.DurationUnit;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
 import org.djutils.event.EventType;
-import org.djutils.event.TimedEventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -35,8 +34,8 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
 
     // TODO: Fire the BACKLOG_EVENT when we are behind in the run thread
     /** the backlog event. */
-    public static final TimedEventType BACKLOG_EVENT =
-            new TimedEventType(new MetaData("BACKLOG_EVENT", "Real time simulation is behind"));
+    public static final EventType BACKLOG_EVENT =
+            new EventType(new MetaData("BACKLOG_EVENT", "Real time simulation is behind"));
 
     /** the speed factor event. */
     public static final EventType CHANGE_SPEED_FACTOR_EVENT = new EventType(new MetaData("CHANGE_SPEED_FACTOR_EVENT",

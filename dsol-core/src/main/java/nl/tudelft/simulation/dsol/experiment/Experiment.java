@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +8,11 @@ import java.util.TreeMap;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventProducer;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.LocalEventProducer;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.exceptions.Throw;
 import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
@@ -43,8 +42,8 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator to use
  */
-public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends EventProducer
-        implements EventListenerInterface, RunControlInterface<T>, Contextualized
+public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
+        implements EventListener, RunControlInterface<T>, Contextualized
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -131,13 +130,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         this.model = model;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return this.runControl.getId();
-    }
-
     /**
      * Return the simulator.
      * @return S; the simulator
@@ -221,7 +213,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(ReplicationInterface.END_REPLICATION_EVENT))
         {
