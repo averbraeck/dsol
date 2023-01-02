@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.web.test.ball;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -42,15 +41,8 @@ public class BallModel extends AbstractDSOLModel<Double, DEVSRealTimeAnimator.Ti
             }
             catch (RemoteException exception)
             {
-                simulator.getLogger().always().error(exception);
+                this.simulator.getLogger().always().error(exception);
             }
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "BallModel";
     }
 }

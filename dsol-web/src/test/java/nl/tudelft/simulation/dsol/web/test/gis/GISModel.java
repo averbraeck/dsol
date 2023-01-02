@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.web.test.gis;
 
-import java.io.Serializable;
 import java.net.URL;
 
 import org.djutils.io.URLResource;
@@ -39,12 +38,5 @@ public class GISModel extends AbstractDSOLModel<Double, DEVSRealTimeAnimator.Tim
         URL gisURL = URLResource.getResource("/resources/gis/map.xml");
         System.err.println("GIS-map file: " + gisURL.toString());
         new GisRenderableNoCache2D(this.simulator, gisURL);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "GISModel";
     }
 }

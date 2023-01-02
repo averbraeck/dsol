@@ -16,8 +16,8 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point2d;
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.event.TimedEvent;
 import org.djutils.io.URLResource;
 import org.eclipse.jetty.server.Handler;
@@ -51,7 +51,7 @@ import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public abstract class DSOLWebServer implements EventListenerInterface
+public abstract class DSOLWebServer implements EventListener
 {
     /** the title for the model window. */
     private final String title;
@@ -71,29 +71,22 @@ public abstract class DSOLWebServer implements EventListenerInterface
      * @param extent Rectangle2D.Double; the extent to use for the graphics (min/max coordinates)
      * @throws Exception in case jetty crashes
      */
-    public DSOLWebServer(final String title, final SimulatorInterface<?> simulator, final Bounds2d extent)
-            throws Exception
+    public DSOLWebServer(final String title, final SimulatorInterface<?> simulator, final Bounds2d extent) throws Exception
     {
         this.title = title;
 
         this.simulator = simulator;
-        try
-        {
-            simulator.addListener(this, SimulatorInterface.START_EVENT);
-            simulator.addListener(this, SimulatorInterface.STOP_EVENT);
-        }
-        catch (RemoteException re)
-        {
-            this.simulator.getLogger().always().warn(re, "Problem adding listeners to Simulator");
-        }
+
+        simulator.addListener(this, SimulatorInterface.START_EVENT);
+        simulator.addListener(this, SimulatorInterface.STOP_EVENT);
 
         if (this.simulator instanceof AnimatorInterface)
         {
             this.animationPanel = new HTMLAnimationPanel(extent, new Dimension(800, 600), this.simulator);
 
             // get the already created elements in context(/animation/D2)
-            this.animationPanel.notify(new TimedEvent(ReplicationInterface.START_REPLICATION_EVENT, this.simulator.getSourceId(), null,
-                    this.simulator.getSimulatorTime()));
+            this.animationPanel.notify(
+                    new TimedEvent(ReplicationInterface.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
         }
 
         new ServerThread().start();
@@ -225,7 +218,7 @@ public abstract class DSOLWebServer implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT))
         {
@@ -266,8 +259,8 @@ public abstract class DSOLWebServer implements EventListenerInterface
         }
 
         @Override
-        public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response)
-                throws IOException, ServletException
+        public void handle(final String target, final Request baseRequest, final HttpServletRequest request,
+                final HttpServletResponse response) throws IOException, ServletException
         {
             // System.out.println("target=" + target);
             // System.out.println("baseRequest=" + baseRequest);

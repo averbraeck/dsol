@@ -15,8 +15,8 @@ import java.util.TreeSet;
 import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DComparator;
@@ -43,7 +43,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
-public class HTMLAnimationPanel extends HTMLGridPanel implements EventListenerInterface
+public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20200108L;
@@ -200,7 +200,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListenerIn
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(ContextInterface.OBJECT_ADDED_EVENT))
         {
