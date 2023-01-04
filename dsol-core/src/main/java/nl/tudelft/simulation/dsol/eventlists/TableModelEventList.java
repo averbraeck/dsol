@@ -34,7 +34,7 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
     public static final EventType EVENTLIST_CHANCED_EVENT = null;
 
     /** The tableHeader. */
-    public static final String[] HEADER = {"Time", "Source", "Target", "Method"};
+    public static final String[] HEADER = {"Time", "Target", "Method"};
 
     /** the tableModel. */
     private DefaultTableModel tableModel = new DefaultTableModel(HEADER, 0);
@@ -78,12 +78,11 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
             {
                 if (simEventInterface instanceof SimEvent)
                 {
-                    Object[] row = new Object[4];
+                    Object[] row = new Object[3];
                     SimEvent<T> event = (SimEvent<T>) simEventInterface;
                     row[0] = event.getAbsoluteExecutionTime().toString();
-                    row[1] = this.formatObject(event.getSource().toString());
-                    row[2] = this.formatObject(event.getTarget().toString());
-                    row[3] = this.formatObject(event.getMethod().toString());
+                    row[1] = this.formatObject(event.getTarget().toString());
+                    row[2] = this.formatObject(event.getMethod().toString());
                     this.tableModel.addRow(row);
                 }
             }
