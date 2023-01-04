@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.djutils.exceptions.Throw;
 import org.djutils.reflection.ClassUtil;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -29,10 +30,6 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
     /** */
     private static final long serialVersionUID = 20140804L;
 
-    /** source the source that created the simevent. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected Object source = null;
-
     /** target the target on which a state change is scheduled. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Object target = null;
@@ -48,34 +45,28 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
     /**
      * The constructor of the event stores the time the event must be executed and the object and method to invoke.
      * @param executionTime T; the absolute time the event has to be executed.
-     * @param source Object; the source that created the method
      * @param target Object; the object on which the method must be invoked.
      * @param method String; the method to invoke
      * @param args Object[]; the arguments the method to invoke with
      */
-    public SimEvent(final T executionTime, final Object source, final Object target, final String method, final Object[] args)
+    public SimEvent(final T executionTime, final Object target, final String method, final Object[] args)
     {
-        this(executionTime, SimEvent.NORMAL_PRIORITY, source, target, method, args);
+        this(executionTime, SimEvent.NORMAL_PRIORITY, target, method, args);
     }
 
     /**
      * The constructor of the event stores the time the event must be executed and the object and method to invoke.
      * @param executionTime T; the time the event has to be executed.
      * @param priority short; the priority of the event
-     * @param source Object; the source that created the method
      * @param target Object; the object on which the method must be invoked.
      * @param method String; the method to invoke
      * @param args Object[]; the arguments the method to invoke with
      */
-    public SimEvent(final T executionTime, final short priority, final Object source, final Object target, final String method,
-            final Object[] args)
+    public SimEvent(final T executionTime, final short priority, final Object target, final String method, final Object[] args)
     {
         super(executionTime, priority);
-        if (source == null || target == null || method == null)
-        {
-            throw new IllegalArgumentException("either source, target or method==null");
-        }
-        this.source = source;
+        Throw.whenNull(target, "SimEvent target is null");
+        Throw.whenNull(method, "SimEvent method is null");
         this.target = target;
         this.methodName = method;
         this.args = args;
@@ -94,22 +85,12 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
                     throw new SimRuntimeException("Invoking a constructor implies that target should be instance of Class");
                 }
                 Constructor<?> constructor = ClassUtil.resolveConstructor((Class<?>) this.target, this.args);
-                if (!ClassUtil.isVisible(constructor, this.source.getClass()))
-                {
-                    throw new SimRuntimeException(
-                            printTarget() + "." + this.methodName + " is not accessible for " + this.source);
-                }
                 constructor.setAccessible(true);
                 constructor.newInstance(this.args);
             }
             else
             {
                 Method method = ClassUtil.resolveMethod(this.target, this.methodName, this.args);
-                if (!ClassUtil.isVisible(method, this.source.getClass()))
-                {
-                    throw new SimRuntimeException(
-                            printTarget() + "." + this.methodName + " is not accessible for " + this.source);
-                }
                 method.setAccessible(true);
                 method.invoke(this.target, this.args);
             }
@@ -136,14 +117,6 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
     public String getMethod()
     {
         return this.methodName;
-    }
-
-    /**
-     * @return Returns the source.
-     */
-    public Object getSource()
-    {
-        return this.source;
     }
 
     /**
@@ -203,8 +176,8 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
     @Override
     public String toString()
     {
-        return "SimEvent[time=" + this.absoluteExecutionTime + "; priority=" + this.priority + "; source=" + this.source
-                + "; target=" + printTarget() + "; method=" + this.methodName + "; args=" + printArgs() + "]";
+        return "SimEvent[time=" + this.absoluteExecutionTime + "; priority=" + this.priority + "; target=" + printTarget()
+                + "; method=" + this.methodName + "; args=" + printArgs() + "]";
     }
 
 }
