@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.rmi.RmiEventProducer;
+import org.djutils.event.EventListenerMap;
+import org.djutils.event.EventProducer;
+import org.djutils.rmi.RmiObject;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.JVMContext;
@@ -27,11 +29,14 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DemoServer extends RmiEventProducer implements DemoServerInterface
+public class DemoServer extends RmiObject implements EventProducer
 {
     /** */
     private static final long serialVersionUID = 20200210L;
 
+    /** */
+    private final EventListenerMap eventListenerMap;
+    
     /**
      * @throws RemoteException on network error
      * @throws AlreadyBoundException on two demo servers being started
@@ -42,6 +47,7 @@ public class DemoServer extends RmiEventProducer implements DemoServerInterface
     public DemoServer() throws RemoteException, AlreadyBoundException, NamingException, IOException, InterruptedException
     {
         super("127.0.0.1", 1099, "demoserver");
+        this.eventListenerMap = new EventListenerMap();
         URL url = new URL("http://127.0.0.1:1099/remoteContext");
         RemoteEventContextInterface remoteContext =
                 new RemoteEventContext(url, new JVMContext("root"), "remoteContext.producer");
@@ -181,6 +187,26 @@ public class DemoServer extends RmiEventProducer implements DemoServerInterface
         {
             System.err.println("ERR " + exception.getMessage());
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        try
+        {
+            return "DemoServer [" + getRegistry().toString() + "]";
+        }
+        catch (RemoteException exception)
+        {
+            return "DemoServer [ERROR = " + exception.getMessage() + "]";
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public EventListenerMap getEventListenerMap() throws RemoteException
+    {
+        return this.eventListenerMap;
     }
 
 }
