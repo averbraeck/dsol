@@ -19,11 +19,11 @@ In DSOL, event listeners have to implement the `org.djutils.event.EventListener`
 The `org.djutils.event.EventProducer` interface and its reference implementation named `LocalEventProducer` have the `addListener` as the most important method. In a sense, with the `addListener` method you ask the `EventProducer` to add you (or another object) as a subscriber to the `EventType` mentioned in the `addListener` call. 
 
 !!! Note
-    that although the `Event` is serializable, the programmer has to take care that each field of the Event 
+    Note that although the `Event` is serializable, the programmer has to take care that each field of the Event 
     itself is serializable as well.
 
 !!! Warning
-    when using remote events over the network, or storing events in a database, make sure that the content of the 
+    When using remote events over the network, or storing events in a database, make sure that the content of the 
     event is simple, in the sense that it does not contain pointers to objects that should not be serialized. 
     There have been examples in simulation where the entire state of a complex model was transmitted with each event...
     
