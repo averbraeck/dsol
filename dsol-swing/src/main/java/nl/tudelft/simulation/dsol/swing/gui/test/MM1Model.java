@@ -122,7 +122,7 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
                 System.out.println("In Queue: " + entity);
             }
         }
-        this.simulator.scheduleEventRel(this.interarrivalTime.draw(), this, this, "generate", null);
+        this.simulator.scheduleEventRel(this.interarrivalTime.draw(), this, "generate", null);
     }
 
     /**
@@ -135,7 +135,7 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
         this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
         this.busy++;
         this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
-        this.simulator.scheduleEventRel(this.processingTime.draw(), this, this, "endProcess", new Object[] {entity});
+        this.simulator.scheduleEventRel(this.processingTime.draw(), this, "endProcess", new Object[] {entity});
         this.tallyTimeInQueue.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
     }
 

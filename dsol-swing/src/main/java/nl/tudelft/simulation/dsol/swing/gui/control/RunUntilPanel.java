@@ -258,7 +258,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
             try
             {
                 double t = Double.parseDouble(simulationTimeString);
-                return t > 0.0 ? new Double(t) : null;
+                return t > 0.0 ? t : null;
             }
             catch (Exception exception)
             {
@@ -305,7 +305,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
             try
             {
                 float t = Float.parseFloat(simulationTimeString);
-                return t > 0.0f ? new Float(t) : null;
+                return t > 0.0f ? t : null;
             }
             catch (Exception exception)
             {
@@ -352,7 +352,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
             try
             {
                 long t = Long.parseLong(simulationTimeString);
-                return t > 0L ? new Long(t) : null;
+                return t > 0L ? t : null;
             }
             catch (Exception exception)
             {
