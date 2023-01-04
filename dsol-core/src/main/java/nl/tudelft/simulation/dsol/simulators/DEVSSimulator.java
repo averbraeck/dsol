@@ -75,9 +75,9 @@ public class DEVSSimulator<T extends Number & Comparable<T>> extends Simulator<T
             this.eventList.clear();
             super.initialize(model, replication);
             this.scheduleEvent(new SimEvent<T>(this.getReplication().getWarmupSimTime(),
-                    (short) (SimEventInterface.MAX_PRIORITY + 1), this, this, "warmup", null));
+                    (short) (SimEventInterface.MAX_PRIORITY + 1), this, "warmup", null));
             this.scheduleEvent(new SimEvent<T>(this.getReplication().getEndSimTime(),
-                    (short) (SimEventInterface.MIN_PRIORITY - 1), this, this, "endReplication", null));
+                    (short) (SimEventInterface.MIN_PRIORITY - 1), this, "endReplication", null));
         }
     }
 
@@ -99,61 +99,61 @@ public class DEVSSimulator<T extends Number & Comparable<T>> extends Simulator<T
 
     /** {@inheritDoc} */
     @Override
-    public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final short priority, final Object source,
-            final Object target, final String method, final Object[] args) throws SimRuntimeException
+    public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final short priority, final Object target,
+            final String method, final Object[] args) throws SimRuntimeException
     {
         synchronized (super.semaphore)
         {
             T absEventTime = SimTime.plus(this.simulatorTime, relativeDelay);
-            return scheduleEvent(new SimEvent<T>(absEventTime, priority, source, target, method, args));
+            return scheduleEvent(new SimEvent<T>(absEventTime, priority, target, method, args));
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final Object source, final Object target,
-            final String method, final Object[] args) throws SimRuntimeException
+    public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final Object target, final String method,
+            final Object[] args) throws SimRuntimeException
     {
-        return scheduleEventRel(relativeDelay, SimEventInterface.NORMAL_PRIORITY, source, target, method, args);
+        return scheduleEventRel(relativeDelay, SimEventInterface.NORMAL_PRIORITY, target, method, args);
     }
 
     /** {@inheritDoc} */
     @Override
-    public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final short priority, final Object source,
-            final Object target, final String method, final Object[] args) throws SimRuntimeException
+    public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final short priority, final Object target,
+            final String method, final Object[] args) throws SimRuntimeException
     {
         synchronized (super.semaphore)
         {
-            return scheduleEvent(new SimEvent<T>(absoluteTime, priority, source, target, method, args));
+            return scheduleEvent(new SimEvent<T>(absoluteTime, priority, target, method, args));
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final Object source, final Object target,
-            final String method, final Object[] args) throws SimRuntimeException
+    public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final Object target, final String method,
+            final Object[] args) throws SimRuntimeException
     {
-        return scheduleEventAbs(absoluteTime, SimEventInterface.NORMAL_PRIORITY, source, target, method, args);
+        return scheduleEventAbs(absoluteTime, SimEventInterface.NORMAL_PRIORITY, target, method, args);
     }
 
     /** {@inheritDoc} */
     @Override
-    public SimEventInterface<T> scheduleEventNow(final short priority, final Object source, final Object target,
-            final String method, final Object[] args) throws SimRuntimeException
+    public SimEventInterface<T> scheduleEventNow(final short priority, final Object target, final String method,
+            final Object[] args) throws SimRuntimeException
     {
         synchronized (super.semaphore)
         {
             T absEventTime = SimTime.copy(this.simulatorTime);
-            return scheduleEvent(new SimEvent<T>(absEventTime, priority, source, target, method, args));
+            return scheduleEvent(new SimEvent<T>(absEventTime, priority, target, method, args));
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public SimEventInterface<T> scheduleEventNow(final Object source, final Object target, final String method,
-            final Object[] args) throws SimRuntimeException
+    public SimEventInterface<T> scheduleEventNow(final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
     {
-        return scheduleEventNow(SimEventInterface.NORMAL_PRIORITY, source, target, method, args);
+        return scheduleEventNow(SimEventInterface.NORMAL_PRIORITY, target, method, args);
     }
 
     /** {@inheritDoc} */

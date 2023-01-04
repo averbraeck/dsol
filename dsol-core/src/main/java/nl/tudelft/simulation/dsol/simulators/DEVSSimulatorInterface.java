@@ -53,80 +53,73 @@ public interface DEVSSimulatorInterface<T extends Number & Comparable<T>> extend
      * schedules a methodCall at a relative duration. The executionTime is thus simulator.getSimulatorTime()+relativeDuration.
      * @param relativeDelay T; the relativeDelay in timeUnits of the simulator.
      * @param priority short; the priority compared to other events scheduled at the same time.
-     * @param source Object; the source of the event
      * @param target Object; the target
      * @param method String; the method
      * @param args Object[]; the arguments.
      * @return the simulation event so it can be cancelled later
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
-    SimEventInterface<T> scheduleEventRel(T relativeDelay, short priority, Object source, Object target, String method,
-            Object[] args) throws SimRuntimeException;
+    SimEventInterface<T> scheduleEventRel(T relativeDelay, short priority, Object target, String method, Object[] args)
+            throws SimRuntimeException;
 
     /**
      * schedules a methodCall at a relative duration. The executionTime is thus simulator.getSimulatorTime()+relativeDuration.
      * @param relativeDelay T; the relativeDelay in timeUnits of the simulator.
-     * @param source Object; the source of the event
      * @param target Object; the target
      * @param method String; the method
      * @param args Object[]; the arguments.
      * @return the simulation event so it can be cancelled later
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
-    SimEventInterface<T> scheduleEventRel(T relativeDelay, Object source, Object target, String method, Object[] args)
+    SimEventInterface<T> scheduleEventRel(T relativeDelay, Object target, String method, Object[] args)
             throws SimRuntimeException;
 
     /**
      * schedules a methodCall at an absolute time.
      * @param absoluteTime T; the exact time to schedule the method on the simulator.
      * @param priority short; the priority compared to other events scheduled at the same time.
-     * @param source Object; the source of the event
      * @param target Object; the target
      * @param method String; the method
      * @param args Object[]; the arguments.
      * @return the simulation event so it can be cancelled later
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
-    SimEventInterface<T> scheduleEventAbs(T absoluteTime, short priority, Object source, Object target, String method,
-            Object[] args) throws SimRuntimeException;
+    SimEventInterface<T> scheduleEventAbs(T absoluteTime, short priority, Object target, String method, Object[] args)
+            throws SimRuntimeException;
 
     /**
      * schedules a methodCall at an absolute time.
      * @param absoluteTime T; the exact time to schedule the method on the simulator.
-     * @param source Object; the source of the event
      * @param target Object; the target
      * @param method String; the method
      * @param args Object[]; the arguments.
      * @return the simulation event so it can be cancelled later
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
-    SimEventInterface<T> scheduleEventAbs(T absoluteTime, Object source, Object target, String method, Object[] args)
+    SimEventInterface<T> scheduleEventAbs(T absoluteTime, Object target, String method, Object[] args)
             throws SimRuntimeException;
 
     /**
      * schedules a methodCall immediately.
      * @param priority short; the priority compared to other events scheduled at the same time.
-     * @param source Object; the source of the event
      * @param target Object; the target
      * @param method String; the method
      * @param args Object[]; the arguments.
      * @return the simulation event so it can be cancelled later
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
-    SimEventInterface<T> scheduleEventNow(short priority, Object source, Object target, String method, Object[] args)
+    SimEventInterface<T> scheduleEventNow(short priority, Object target, String method, Object[] args)
             throws SimRuntimeException;
 
     /**
      * schedules a methodCall immediately.
-     * @param source Object; the source of the event
      * @param target Object; the target
      * @param method String; the method
      * @param args Object[]; the arguments.
      * @return the simulation event so it can be cancelled later
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
-    SimEventInterface<T> scheduleEventNow(Object source, Object target, String method, Object[] args)
-            throws SimRuntimeException;
+    SimEventInterface<T> scheduleEventNow(Object target, String method, Object[] args) throws SimRuntimeException;
 
     /**
      * schedules a lambda expression at a relative duration. The executionTime is thus
@@ -205,4 +198,114 @@ public interface DEVSSimulatorInterface<T extends Number & Comparable<T>> extend
      */
     @Deprecated
     void setPauseOnError(boolean pauseOnError);
+
+    /**
+     * DEPRECATED: source field is no longer used.<br>
+     * schedules a methodCall at a relative duration. The executionTime is thus simulator.getSimulatorTime()+relativeDuration.
+     * @param relativeDelay T; the relativeDelay in timeUnits of the simulator.
+     * @param priority short; the priority compared to other events scheduled at the same time.
+     * @param source Object; the source of the event
+     * @param target Object; the target
+     * @param method String; the method
+     * @param args Object[]; the arguments.
+     * @return the simulation event so it can be cancelled later
+     * @throws SimRuntimeException whenever the event is scheduled in the past.
+     */
+    @Deprecated
+    default SimEventInterface<T> scheduleEventRel(final T relativeDelay, final short priority, final Object source, final Object target, final String method,
+            final Object[] args) throws SimRuntimeException
+    {
+        return scheduleEventRel(relativeDelay, priority, target, method, args);
+    }
+
+    /**
+     * DEPRECATED: source field is no longer used.<br>
+     * schedules a methodCall at a relative duration. The executionTime is thus simulator.getSimulatorTime()+relativeDuration.
+     * @param relativeDelay T; the relativeDelay in timeUnits of the simulator.
+     * @param source Object; the source of the event
+     * @param target Object; the target
+     * @param method String; the method
+     * @param args Object[]; the arguments.
+     * @return the simulation event so it can be cancelled later
+     * @throws SimRuntimeException whenever the event is scheduled in the past.
+     */
+    @Deprecated
+    default SimEventInterface<T> scheduleEventRel(final T relativeDelay, final Object source, final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
+    {
+        return scheduleEventRel(relativeDelay, target, method, args);
+    }
+
+    /**
+     * DEPRECATED: source field is no longer used.<br>
+     * schedules a methodCall at an absolute time.
+     * @param absoluteTime T; the exact time to schedule the method on the simulator.
+     * @param priority short; the priority compared to other events scheduled at the same time.
+     * @param source Object; the source of the event
+     * @param target Object; the target
+     * @param method String; the method
+     * @param args Object[]; the arguments.
+     * @return the simulation event so it can be cancelled later
+     * @throws SimRuntimeException whenever the event is scheduled in the past.
+     */
+    @Deprecated
+    default SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final short priority, final Object source, final Object target, final String method,
+            final Object[] args) throws SimRuntimeException
+    {
+        return scheduleEventAbs(absoluteTime, priority, target, method, args);
+    }
+
+    /**
+     * DEPRECATED: source field is no longer used.<br>
+     * schedules a methodCall at an absolute time.
+     * @param absoluteTime T; the exact time to schedule the method on the simulator.
+     * @param source Object; the source of the event
+     * @param target Object; the target
+     * @param method String; the method
+     * @param args Object[]; the arguments.
+     * @return the simulation event so it can be cancelled later
+     * @throws SimRuntimeException whenever the event is scheduled in the past.
+     */
+    @Deprecated
+    default SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final Object source, final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
+    {
+        return scheduleEventAbs(absoluteTime, target, method, args);
+    }
+
+    /**
+     * DEPRECATED: source field is no longer used.<br>
+     * schedules a methodCall immediately.
+     * @param priority short; the priority compared to other events scheduled at the same time.
+     * @param source Object; the source of the event
+     * @param target Object; the target
+     * @param method String; the method
+     * @param args Object[]; the arguments.
+     * @return the simulation event so it can be cancelled later
+     * @throws SimRuntimeException whenever the event is scheduled in the past.
+     */
+    @Deprecated
+    default SimEventInterface<T> scheduleEventNow(final short priority, final Object source, final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
+    {
+        return scheduleEventNow(priority, target, method, args);
+    }
+
+    /**
+     * DEPRECATED: source field is no longer used.<br>
+     * schedules a methodCall immediately.
+     * @param source Object; the source of the event
+     * @param target Object; the target
+     * @param method String; the method
+     * @param args Object[]; the arguments.
+     * @return the simulation event so it can be cancelled later
+     * @throws SimRuntimeException whenever the event is scheduled in the past.
+     */
+    @Deprecated
+    default SimEventInterface<T> scheduleEventNow(final Object source, final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
+    {
+        return scheduleEventNow(target, method, args);
+    }
+
 }
