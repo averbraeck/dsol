@@ -151,10 +151,10 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** {@inheritDoc} */
     @Override
-    public void addScheduledMethodOnInitialize(final Object source, final Object target, final String method,
+    public void addScheduledMethodOnInitialize(final Object target, final String method,
             final Object[] args) throws SimRuntimeException
     {
-        this.initialmethodCalls.add(new SimEvent<Long>(0L, source, target, method, args));
+        this.initialmethodCalls.add(new SimEvent<Long>(0L, target, method, args));
     }
 
     /**
