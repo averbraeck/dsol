@@ -29,14 +29,14 @@ public class RunControlTest
     @Test
     public void testRunControl()
     {
-        RunControl<Double> rcdg = new RunControl<>("rcdg", new Double(10.0), 5.0, 20.0);
+        RunControl<Double> rcdg = new RunControl<>("rcdg", 10.0, 5.0, 20.0);
         assertEquals("rcdg", rcdg.getId());
         assertEquals("rcdg", rcdg.getDescription());
         rcdg.setDescription("description");
         assertEquals("description", rcdg.getDescription());
-        assertEquals(new Double(10.0), rcdg.getStartSimTime());
-        assertEquals(new Double(30.0), rcdg.getEndSimTime());
-        assertEquals(new Double(15.0), rcdg.getWarmupSimTime());
+        assertEquals(Double.valueOf(10.0), rcdg.getStartSimTime());
+        assertEquals(Double.valueOf(30.0), rcdg.getEndSimTime());
+        assertEquals(Double.valueOf(15.0), rcdg.getWarmupSimTime());
         assertEquals(10.0, rcdg.getStartTime(), 1E-6);
         assertEquals(30.0, rcdg.getEndTime(), 1E-6);
         assertEquals(15.0, rcdg.getWarmupTime(), 1E-6);
@@ -101,14 +101,14 @@ public class RunControlTest
     @Test
     public void testExperimentRunControl()
     {
-        ExperimentRunControl<Double> rcdg = new ExperimentRunControl<>("rcdg", new Double(10.0), 5.0, 20.0, 10);
+        ExperimentRunControl<Double> rcdg = new ExperimentRunControl<>("rcdg", 10.0, 5.0, 20.0, 10);
         assertEquals("rcdg", rcdg.getId());
         assertEquals("rcdg", rcdg.getDescription());
         rcdg.setDescription("description");
         assertEquals("description", rcdg.getDescription());
-        assertEquals(new Double(10.0), rcdg.getStartSimTime());
-        assertEquals(new Double(30.0), rcdg.getEndSimTime());
-        assertEquals(new Double(15.0), rcdg.getWarmupSimTime());
+        assertEquals(Double.valueOf(10.0), rcdg.getStartSimTime());
+        assertEquals(Double.valueOf(30.0), rcdg.getEndSimTime());
+        assertEquals(Double.valueOf(15.0), rcdg.getWarmupSimTime());
         assertEquals(10.0, rcdg.getStartTime(), 1E-6);
         assertEquals(30.0, rcdg.getEndTime(), 1E-6);
         assertEquals(15.0, rcdg.getWarmupTime(), 1E-6);

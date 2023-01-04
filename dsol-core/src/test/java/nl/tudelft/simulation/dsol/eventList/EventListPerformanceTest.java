@@ -55,7 +55,7 @@ public final class EventListPerformanceTest
                 DistUniform dist = new DistUniform(stream, 1.0, 1000.0);
                 for (int i = 0; i < max; i++)
                 {
-                    elist.add(new SimEvent<Double>(dist.draw(), this, test, "mArg1", new Object[] {12.7}));
+                    elist.add(new SimEvent<Double>(dist.draw(), test, "mArg1", new Object[] {12.7}));
                 }
                 long t1 = System.currentTimeMillis();
                 line[eventlistCount] = Double.toString((t1 - t0) / 1000.0);

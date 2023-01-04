@@ -69,7 +69,7 @@ public class SimulatorTest
             try
             {
                 // this should fail
-                getSimulator().scheduleEventAbs(5.0, this, this, "loop", new Object[] {});
+                getSimulator().scheduleEventAbs(5.0, this, "loop", new Object[] {});
                 fail("call to ScheduleMethod in constructor of model should fail");
             }
             catch (Exception e)
@@ -77,9 +77,9 @@ public class SimulatorTest
                 // expected
             }
             // use scheduled initialization instead
-            simulator.addScheduledMethodOnInitialize(this, this, "add", new Object[] {1});
-            simulator.addScheduledMethodOnInitialize(this, this, "add", new Object[] {2});
-            simulator.addScheduledMethodOnInitialize(this, this, "schedule", new Object[] {});
+            simulator.addScheduledMethodOnInitialize(this,"add", new Object[] {1});
+            simulator.addScheduledMethodOnInitialize(this,"add", new Object[] {2});
+            simulator.addScheduledMethodOnInitialize(this,"schedule", new Object[] {});
 
         }
 
@@ -90,7 +90,7 @@ public class SimulatorTest
             try
             {
                 // this should succeed
-                getSimulator().scheduleEventAbs(10.0, this, this, "test", new Object[] {});
+                getSimulator().scheduleEventAbs(10.0, this, "test", new Object[] {});
             }
             catch (Exception e)
             {
@@ -115,7 +115,7 @@ public class SimulatorTest
         /** */
         void schedule()
         {
-            getSimulator().scheduleEventRel(10.0, this, this, "loop", new Object[] {});
+            getSimulator().scheduleEventRel(10.0, this, "loop", new Object[] {});
         }
 
         /** */

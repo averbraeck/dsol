@@ -80,7 +80,7 @@ public class ReplicationTest
         assertEquals(new FloatDuration(22.0f, DurationUnit.HOUR).si, srfu.getEndTime().si, 1E-6);
 
         // Generic type
-        SingleReplication<Double> sr = new SingleReplication<>("srd", new Double(10.0), 1.0, 12.0);
+        SingleReplication<Double> sr = new SingleReplication<>("srd", 10.0, 1.0, 12.0);
         assertEquals(10.0, sr.getStartTime(), 1E-9);
         assertEquals(10.0, sr.getStartSimTime(), 1E-9);
         assertEquals(22.0, sr.getEndTime(), 1E-9);

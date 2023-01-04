@@ -54,7 +54,7 @@ public class DEVSSimulationDoubleTest implements EventListener
         ModelDouble model = new ModelDouble(this.devsSimulator);
         ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
         this.devsSimulator.initialize(model, rep);
-        this.devsSimulator.scheduleEventAbs(1.0, this, this, "step1", new Object[] {1.0});
+        this.devsSimulator.scheduleEventAbs(1.0, this, "step1", new Object[] {1.0});
         this.devsSimulator.start();
         this.waiter.await(10000);
     }
@@ -67,7 +67,7 @@ public class DEVSSimulationDoubleTest implements EventListener
     protected void step1(final double checkTime) throws SimRuntimeException
     {
         this.waiter.assertEquals(this.devsSimulator.getSimulatorTime(), checkTime, 0.0001);
-        this.devsSimulator.scheduleEventRel(1.0, this, this, "step1", new Object[] {checkTime + 1.0});
+        this.devsSimulator.scheduleEventRel(1.0, this, "step1", new Object[] {checkTime + 1.0});
     }
 
     /** {@inheritDoc} */
@@ -108,7 +108,7 @@ public class DEVSSimulationDoubleTest implements EventListener
                 for (int i = 0; i < 10000; i++)
                 {
                     double time = dist.draw();
-                    sim.scheduleEventAbs(time, this, target, "doWork", new Object[] {time});
+                    sim.scheduleEventAbs(time, target, "doWork", new Object[] {time});
                 }
                 for (double t = 0.0; t < 1000.0; t += 1.0)
                 {

@@ -47,7 +47,7 @@ public class SerializeTest
 
         // The DEVS formalism
         new MarshalledObject(new RedBlackTree());
-        new MarshalledObject(new SimEvent(new Double(1.1), "Peter", "Peter", "toString", null));
+        new MarshalledObject(new SimEvent(new Double(1.1), "Peter", "toString", null));
 
         // The DESS formalism
         new MarshalledObject(

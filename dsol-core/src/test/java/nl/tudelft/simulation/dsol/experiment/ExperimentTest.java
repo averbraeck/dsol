@@ -131,7 +131,7 @@ public class ExperimentTest
                     }
                 };
         Experiment<Double, DEVSSimulatorInterface<Double>> d1 =
-                new Experiment<>("Exp 1", simd, modd, new Double(10.0), 1.0, 12.0, 10);
+                new Experiment<>("Exp 1", simd, modd, 10.0, 1.0, 12.0, 10);
         assertEquals(22.0, d1.getEndTime(), 1E-6);
         assertEquals(modd, d1.getModel());
         d1.makeExperimentReplication();
@@ -377,7 +377,7 @@ public class ExperimentTest
         /** next method. */
         public void next()
         {
-            getSimulator().scheduleEventRel(1.0, this, this, "next", null);
+            getSimulator().scheduleEventRel(1.0, this, "next", null);
             this.count++;
             this.dataCollector.put(this.id, this.count);
         }
@@ -463,8 +463,8 @@ public class ExperimentTest
             Entity entity = new Entity(this.simulator.getSimulatorTime());
             this.queue.add(entity);
             this.nrInQueuePersistent.register(10.0, this.queue.size());
-            getSimulator().scheduleEventRel(this.iatDist.draw(), this, this, "next", null);
-            getSimulator().scheduleEventRel(this.procDist.draw(), this, this, "endWait", new Object[] {entity});
+            getSimulator().scheduleEventRel(this.iatDist.draw(), this, "next", null);
+            getSimulator().scheduleEventRel(this.procDist.draw(), this, "endWait", new Object[] {entity});
         }
 
         /** @param entity the entity that is ready */

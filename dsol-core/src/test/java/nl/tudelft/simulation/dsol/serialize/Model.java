@@ -37,7 +37,7 @@ public class Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Doub
     @Override
     public void constructModel() throws SimRuntimeException
     {
-        getSimulator().scheduleEventAbs(new Double(10.0), this, this, "pause", null);
+        getSimulator().scheduleEventAbs(10.0, this, "pause", null);
     }
 
     /**
