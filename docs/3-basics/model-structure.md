@@ -4,52 +4,46 @@
 
 In line with the Framework of Modeling &amp; Simulation (Zeigler et al., 2000, p.26) as depicted in the Figure below, a Simulation consists of the following elements:
 * A **Model** that contains the logic to execute the required state changes over time. In DSOL, the Model is represented by the `Model` interface and `AbstractModel` reference implementation.
-* A **Simulator** that can execute the model and advance time. In DSOL, the Simulator has many implementation for different simulation formalisms, such as the `DEVSSimulator` for discrete-event models, the `DESSSimulator` for continuous models, the `DEVSRealTimeClock` for real-time models, and the `DEVDESSSimulator` for mixed DEV&amp;DESS models. 
-* An **Experimental Frame** that describes the conditions under which the system is observed or esperimented with. The Experimental Frame is implemented in DSOL using the ` ExperimentalFrame`, `Experiment`, `Treatment` and `Replication` classes. 
+* A **Simulator** that can execute the model and advance time. In DSOL, the Simulator has many implementation for different simulation formalisms, such as the `DEVSSimulator` for discrete-event models, the `DESSSimulator` for continuous models, the `DEVSRealTimeAnimaor` for real-time models, and the `DEVDESSSimulator` for mixed DEV&amp;DESS models. 
+* An **Experimental Frame** that describes the conditions under which the system is observed or esperimented with. The Experimental Frame is implemented in DSOL using the `Experiment`, `RunControl` and `Replication` classes. 
 
 ![](../images/zeigler2000-basic-entities.png?resize=500,350)
 <center><font size="2"><i>Basic Entities in Modeling and Simulation and their Relationships (Zeigler et al., 2000, p.26)</i></font></center>
 
-Typically, the abve three elements are created for any simulation to run:
+Typically, the above three elements are created for any simulation to run:
 
 ```java
 public MM1Application() throws SimRuntimeException, RemoteException, NamingException
 {
-    DEVSSimulator.TimeDouble simulator = new DEVSSimulator.TimeDouble();
-    DSOLModel.TimeDouble<DEVSSimulator.TimeDouble> model = new MM1Model(simulator);
-    Replication.TimeDouble<DEVSSimulator.TimeDouble> replication =
-            Replication.TimeDouble.create("rep1", 0.0, 0.0, 100.0, model);
-    simulator.initialize(replication, ReplicationMode.TERMINATING);
+    DEVSSimulator<Double> simulator = new DEVSSimulator<>("mm1");
+    MM1Model model = new MM1Model(simulator);
+    ReplicationInterface<Double> replication = 
+        new SingleReplication<>("rep1", 0.0, 0.0, 100.0);
+    simulator.initialize(model, replication);
     simulator.start();
 }
 ```
 
 In words, the above code does the following:
 
-1. Make an instance of a simulator with double floating point variables as the absolute and relative time
+1. Make an instance of a simulator with double floating point variables as the simulation time
 2. Make an instance of a model with the same time units
 3. Make an instance of a replication for the model that runs from time 0.0 till 100.0 without warm-up time
 4. Have the simulator build and initialize the model for the given replication
-5. Start the simulator, which will execute alle events between times 0.0 and 100.0
+5. Start the simulator, which will execute all events between times 0.0 and 100.0
 
-In step 3 above, implicitly an `Experiment` and `Treatment` are also generated. Behind the scenes, the following code is executed in the `Replication.TimeDouble.create(...)` method call:
+In step 3 above, implicitly an `RunControl` object is also generated. Behind the scenes, the following code is executed in the `new SingleReplication<>(...)` method call:
 
 ```java
-public static <S extends SimulatorInterface.TimeDouble> Replication.TimeDouble<S> 
-    create(final String id, final double startTime, final double warmupPeriod, 
-    final double runLength, final DSOLModel.TimeDouble<S> model)
-    throws NamingException
-{
-    Experiment.TimeDouble<S> experiment = new Experiment.TimeDouble<S>();
-    experiment.setModel(model);
-    Treatment.TimeDouble treatment = new Treatment.TimeDouble(experiment, 
-        "Treatment for " + id, startTime, warmupPeriod, runLength);
-    experiment.setTreatment(treatment);
-    return new Replication.TimeDouble<S>(experiment);
+    public SingleReplication(final String id, final T startTime, 
+        final T warmupPeriod, final T runLength)
+    {
+        this(new RunControl<T>(id, startTime, warmupPeriod, runLength));
+    }
 }
 ```
 
-In this case, no `ExperimentalFrame` is created. The `ExperimentalFrame` class can take care of executing multiple experiments, each with their own set of input parameters.
+In this case, no `Experiment` is created. The `Experiment` class can take care of executing multiple replications, each with their own seed for the random number generator. The replications inside an experiment are of type `ExperimentReplication` with a corresponding `ExperimentRunControl`.
 
 The above steps are illustrated by the following sequence diagram:
 
@@ -61,8 +55,7 @@ The above steps are illustrated by the following sequence diagram:
 The `DSOLModel` interface forces the following methods to be in place:
 
 ```java
-public interface DSOLModel<A extends Comparable<A>, R extends Number & Comparable<R>, T extends SimTime<A, R, T>,
-        S extends SimulatorInterface<A, R, T>> extends Serializable
+public interface DSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>>
 {
     /**
      * construct a model on a simulator.
@@ -84,21 +77,37 @@ public interface DSOLModel<A extends Comparable<A>, R extends Number & Comparabl
 
     /**
      * Get the output statistics for this model.
-     * @return List&lt;OutputStatistic&gt; the output statistics for this model
+     * @return List&lt;StatisticsInterface&gt; the output statistics for this model
      */
-    List<OutputStatistic<?>> getOutputStatistics();
+    List<StatisticsInterface<T>> getOutputStatistics();
+
+    /**
+     * Set the initial streams of the model based on a StreamInformation object.
+     * @param streamInformation StreamInformation; the random streams to use
+     */
+    void setStreamInformation(StreamInformation streamInformation);
+
+    /**
+     * Return the available streams of the model stored in a StreamInformation object.
+     * @return streamInformation StreamInformation; the random streams used by the model
+     */
+    StreamInformation getStreamInformation();
 }
 ```
 
-* The `constructModel()` method that is called whenever a `Replication` is initialized. In essence, the `constructModel()` method does exactly what the name suggests: it builds a new, blank version of the model. When multiple replications are carries out with a model, we have to be able to ensure that the model is blank when initialized (at least when the replication mode is equal to `ReplicationMode.TERMINATING`; see below under replication modes for more explanation). When expensive calculations have to be made to construct the model, these can of course be cached. The constructore of the model class can take care of the one-off initializations that will speed up the model construction.
-* The `getSimulator()` method that can tell on which simulator the model runs. In the code, simulation time can be requested by `getSimulator().getSimulatorTime()` to retrieve the absolute time, or `getSimulator().getSimTime()` to retrieve the wrapping `SimTime` object. Depending on the simulator, events can be scheduled on the event list, or other time-state related activities can be carried out. The `AbstractDSOLModel` class makes a reference implementation of the `getSimulator()` method, so when extending the model fro, `AbstractDSOLModel`, this method is already implemented.
+* The `constructModel()` method that is called whenever a `Replication` is initialized. In essence, the `constructModel()` method does exactly what the name suggests: it builds a new, blank version of the model. When multiple replications are carried out with a model, we have to be able to ensure that the model is blank when initialized (at least when the replication mode is equal to `ReplicationMode.TERMINATING`; see below under replication modes for more explanation). When expensive calculations have to be made to construct the model, these can of course be cached. The constructore of the model class can take care of the one-off initializations that will speed up the model construction.
+* The `getSimulator()` method that can tell on which simulator the model runs. In the code, simulation time can be requested by `getSimulator().getSimulatorTime()` to retrieve the time. Depending on the simulator, events can be scheduled on the event list, or other time-state related activities can be carried out. The `AbstractDSOLModel` class makes a reference implementation of the `getSimulator()` method, so when extending the model from `AbstractDSOLModel`, this method is already implemented.
 * The `getInputParameterMap()` method that is able to retrieve the input parameters for which the model runs. Typically, the `Treatment` for the `Experiment` specifies which input parameters are used for the execution of each of the replications in the experiment. Input parameters are those things that the modeler wants to be able to set to carry out `what-if` experiments with the model.
-* The `getOutputStatistics()` method that is able to report the output statistics that the model can calculate. This can be important for setting up a flexible user interface, where output statistics are shown to the user. 
+* The `getOutputStatistics()` method that is able to report the output statistics that the model can calculate. This can be important for setting up a flexible user interface, where output statistics are shown to the user, or for exporting the output statistics at the end of a run to a file or database. 
+* The `setStreamInformation(...)` and `getStreamInformation()` methods are used for providing the simulation with the correct random number generators (RNGs) and the appropriate seeds for the simulation to run.
 
 
-## ExperimentalFrame - Experiment - Treatment - Replication
+## Experiment - Replication - RunControl
 
-The four classes ExperimentalFrame - Experiment - Treatment - Replication take care of specifying exectly under what conditions an experiment of a model is carried out. Each of these four classes has a number of unique features. These are explained below.
+The three classes `Experiment`, `Replication`, and `RunControl` take care of specifying exactly under what conditions an experiment of a model is carried out. Each of these classes has a number of unique features. These are explained below.
+
+!!! Warning
+    The below information still needs to be updated with the changes in DSOL 4.0 and DSOL 4.1.
 
 ### Replication
 
