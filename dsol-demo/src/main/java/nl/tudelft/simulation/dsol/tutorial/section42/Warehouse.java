@@ -44,8 +44,8 @@ public class Warehouse implements SellerInterface
     {
         try
         {
-            this.simulator.scheduleEvent(new SimEvent<Double>(this.simulator.getSimulatorTime() + this.leadTime.draw(), this,
-                    buyer, "receiveProduct", new Long[] {Long.valueOf(amount)}));
+            this.simulator.scheduleEvent(new SimEvent<Double>(this.simulator.getSimulatorTime() + this.leadTime.draw(), buyer,
+                    "receiveProduct", new Long[] {Long.valueOf(amount)}));
         }
         catch (Exception exception)
         {

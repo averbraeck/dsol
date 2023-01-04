@@ -71,7 +71,7 @@ public class Customer implements BuyerInterface
         try
         {
             this.simulator.scheduleEvent(new SimEvent<Double>(this.simulator.getSimulatorTime() + this.intervalTime.draw(),
-                    this, this, "createOrder", null));
+                    this,"createOrder", null));
         }
         catch (Exception exception)
         {

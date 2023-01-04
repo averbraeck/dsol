@@ -116,7 +116,7 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
         try
         {
             this.simulator.scheduleEvent(
-                    new SimEvent<Double>(this.simulator.getSimulatorTime() + 1.0, this, this, "reviewInventory", null));
+                    new SimEvent<Double>(this.simulator.getSimulatorTime() + 1.0, this,"reviewInventory", null));
         }
         catch (Exception exception)
         {

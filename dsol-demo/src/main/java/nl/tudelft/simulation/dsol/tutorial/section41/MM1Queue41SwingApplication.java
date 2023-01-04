@@ -43,7 +43,7 @@ public class MM1Queue41SwingApplication extends DSOLApplication
         this.model = model;
         try
         {
-            simulator.scheduleEventAbs(1000.0, this, this, "terminate", null);
+            simulator.scheduleEventAbs(1000.0, this, "terminate", null);
         }
         catch (SimRuntimeException exception)
         {

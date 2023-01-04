@@ -54,7 +54,7 @@ public final class ConsoleRunnerTerminal implements EventListener
         ((InputParameterInteger) parameters.get("numQC")).setIntValue(numQC);
         ((InputParameterInteger) parameters.get("numAGV")).setIntValue(numAGV);
         simulator.initialize(model, replication);
-        simulator.scheduleEventAbs(runtime - 0.00001, this, this, "terminate", new Object[] {simulator, numQC, numAGV, rep});
+        simulator.scheduleEventAbs(runtime - 0.00001, this, "terminate", new Object[] {simulator, numQC, numAGV, rep});
         model.addListener(this, Terminal.READY_EVENT);
         simulator.start();
     }

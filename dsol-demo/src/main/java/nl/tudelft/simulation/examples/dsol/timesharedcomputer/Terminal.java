@@ -59,8 +59,8 @@ public class Terminal extends Station<Double>
         try
         {
             Object[] args = {object};
-            this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + this.thinkDelay.draw(), this, this,
-                    "releaseObject", args);
+            this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + this.thinkDelay.draw(), this, "releaseObject",
+                    args);
         }
         catch (SimRuntimeException exception)
         {

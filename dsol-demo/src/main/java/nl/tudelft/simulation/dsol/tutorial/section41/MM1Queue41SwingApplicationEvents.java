@@ -51,7 +51,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
         this.logger = devsSimulator.getLogger();
         try
         {
-            devsSimulator.scheduleEventAbs(1000.0, this, this, "terminate", null);
+            devsSimulator.scheduleEventAbs(1000.0, this, "terminate", null);
         }
         catch (SimRuntimeException exception)
         {

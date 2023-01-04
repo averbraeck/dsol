@@ -77,7 +77,7 @@ public class DiscreteBall extends Ball
         this.destination = new CartesianPoint(-100 + stream.nextInt(0, 200), -100 + stream.nextInt(0, 200), 0);
         this.startTime = this.simulator.getSimulatorTime();
         this.stopTime = this.startTime + Math.abs(new DistUniform(stream, 2.0, 20.0).draw());
-        this.simulator.scheduleEventAbs(this.stopTime, this, this, "next", null);
+        this.simulator.scheduleEventAbs(this.stopTime, this, "next", null);
     }
 
     /** {@inheritDoc} */

@@ -131,15 +131,14 @@ public class CPU extends Station<Double> implements Locatable
             {
                 job.setServiceTime(job.getServiceTime() - QUANTUM);
                 Object[] args = {job};
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, this, "receiveObject",
-                        args);
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, this, "next", null);
+                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, "receiveObject", args);
+                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, "next", null);
             }
             else
             {
                 Object[] args = {job};
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + job.getServiceTime() + SWAP, this, this,
-                        "releaseObject", args);
+                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + job.getServiceTime() + SWAP, this, "releaseObject",
+                        args);
             }
         }
         else

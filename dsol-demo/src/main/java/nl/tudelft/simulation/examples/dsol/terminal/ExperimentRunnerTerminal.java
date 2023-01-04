@@ -85,8 +85,7 @@ public class ExperimentRunnerTerminal implements EventListener
                     model.addListener(this, Terminal.READY_EVENT);
                     this.numruns++;
                     simulator.start();
-                    simulator.scheduleEventAbs(runtime - 0.00001, this, this, "terminate",
-                            new Object[] {simulator, numQC, numAGV, rep, model});
+                    simulator.scheduleEventAbs(runtime - 0.00001, this, "terminate", new Object[] {simulator, numQC, numAGV, rep, model});
                 }
             }
         }

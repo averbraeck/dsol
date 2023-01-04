@@ -61,7 +61,7 @@ public class Container implements IntResourceRequestorInterface<Double>
                     System.out.println(
                             "T = " + this.simulator.getSimulatorTime() + ", Claim AGV for container " + this.containerNumber);
                 }
-                this.simulator.scheduleEventAbs(39.0 * 60.0, this, this, "checkPhase", null);
+                this.simulator.scheduleEventAbs(39.0 * 60.0, this, "checkPhase", null);
                 this.agv.requestCapacity(1, this);
                 this.phase++;
             }
@@ -82,7 +82,7 @@ public class Container implements IntResourceRequestorInterface<Double>
             if (resource instanceof AGV)
             {
                 this.phase++;
-                this.simulator.scheduleEventRel(this.agv.drawDelay(), this, this, "agvReady", null);
+                this.simulator.scheduleEventRel(this.agv.drawDelay(), this, "agvReady", null);
             }
 
             if (resource instanceof QC)
@@ -93,7 +93,7 @@ public class Container implements IntResourceRequestorInterface<Double>
                             "T = " + this.simulator.getSimulatorTime() + ", Claim QC for container " + this.containerNumber);
                 }
                 this.phase++;
-                this.simulator.scheduleEventRel(this.qc.drawDelay(), this, this, "qcReady", null);
+                this.simulator.scheduleEventRel(this.qc.drawDelay(), this, "qcReady", null);
             }
         }
         catch (SimRuntimeException e)

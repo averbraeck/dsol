@@ -193,8 +193,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
         if ((this.claimedCapacity + amount) <= this.capacity)
         {
             this.alterClaimedCapacity(amount);
-            this.simulator.scheduleEventNow(this, requestor, "receiveRequestedResource",
-                    new Object[] {Long.valueOf(amount), this});
+            this.simulator.scheduleEventNow(requestor, "receiveRequestedResource", new Object[] {Long.valueOf(amount), this});
         }
         else
         {
