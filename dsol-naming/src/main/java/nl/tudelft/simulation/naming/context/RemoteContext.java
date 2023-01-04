@@ -452,52 +452,11 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
          * Transmit an changed event with a serializable object as payload to all interested listeners.
          * @param eventType EventType; the eventType of the event
          * @param value Serializable; the object sent with the event
+         * @throws RemoteException on network error
          */
-        protected void fireChangedEvent(final EventType eventType, final Serializable value)
+        protected void fireChangedEvent(final EventType eventType, final Serializable value) throws RemoteException
         {
             super.fireEvent(eventType, value);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public synchronized int removeAllListeners()
-        {
-            return super.removeAllListeners();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public synchronized int removeAllListeners(final Class<?> ofClass)
-        {
-            return super.removeAllListeners(ofClass);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public boolean hasListeners()
-        {
-            return super.hasListeners();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public synchronized int numberOfListeners(final EventType eventType)
-        {
-            return super.numberOfListeners(eventType);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public synchronized Set<EventType> getEventTypesWithListeners()
-        {
-            return super.getEventTypesWithListeners();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public List<Reference<EventListener>> getListenerReferences(final EventType eventType)
-        {
-            return super.getListenerReferences(eventType);
         }
     }
 

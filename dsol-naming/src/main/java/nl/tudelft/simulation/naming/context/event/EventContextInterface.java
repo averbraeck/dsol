@@ -1,5 +1,6 @@
 package nl.tudelft.simulation.naming.context.event;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import javax.naming.InvalidNameException;
@@ -23,7 +24,7 @@ import org.djutils.event.reference.ReferenceType;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface EventContextInterface
+public interface EventContextInterface extends Remote
 {
     /**
      * Add a listener for the provided scope as strong reference to the BEGINNING of a queue of listeners.
