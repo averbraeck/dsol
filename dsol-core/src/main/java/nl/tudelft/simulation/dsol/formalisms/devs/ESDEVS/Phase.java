@@ -8,7 +8,7 @@ import java.io.Serializable;
  * idle, active, or failed. There are explicit events to transfer the model from one phase to another. A model or component is
  * always in exactly one phase, and a transition diagram can be used to depict the transitions between phases.
  * <p>
- * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">

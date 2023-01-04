@@ -15,7 +15,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
  * A TableModel implementation of an eventlist is an extionsion of the eventlist which upholds its own TableModel. This
  * implementation is used to graphically display the events in the tree.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">

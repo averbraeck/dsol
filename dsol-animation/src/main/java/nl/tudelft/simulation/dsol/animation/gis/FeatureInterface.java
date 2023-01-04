@@ -10,7 +10,7 @@ import org.djutils.draw.bounds.Bounds2d;
  * Feature contains an element of a layer, defined by a key value combination, with its own colors.<br>
  * TODO: minimum scale and maximum scale to draw features has to be added again, but first, scale needs to be defined properly.
  * <p>
- * Copyright (c) 2021-2021 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
