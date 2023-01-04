@@ -86,7 +86,7 @@ public class Schedule<T extends Number & Comparable<T>> extends Generator<T>
                 this.simulator.cancelEvent(super.nextEvent);
                 this.interval = this.schedule.values().iterator().next();
                 this.schedule.remove(this.schedule.firstKey());
-                this.simulator.scheduleEvent(new SimEvent<T>(this.schedule.firstKey(), this, this, "changeIntervalTime", null));
+                this.simulator.scheduleEvent(new SimEvent<T>(this.schedule.firstKey(), this,"changeIntervalTime", null));
                 this.generate(this.constructorArguments);
                 this.simulator.getLogger().filter(Cat.DSOL).trace("changeIntervalTime: set the intervalTime to {}",
                         this.interval);

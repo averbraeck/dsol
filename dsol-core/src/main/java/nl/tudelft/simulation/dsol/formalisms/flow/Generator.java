@@ -126,7 +126,7 @@ public class Generator<T extends Number & Comparable<T>> extends Station<T>
                     this.releaseObject(object);
                 }
                 this.nextEvent = new SimEvent<T>(SimTime.plus(this.simulator.getSimulatorTime(), this.interval.draw()), this,
-                        this, "generate", null);
+                        "generate", null);
                 this.simulator.scheduleEvent(this.nextEvent);
             }
         }
@@ -215,7 +215,7 @@ public class Generator<T extends Number & Comparable<T>> extends Station<T>
         this.startTime = startTime;
         try
         {
-            this.nextEvent = new SimEvent<T>(startTime.draw(), this, this, "generate", null);
+            this.nextEvent = new SimEvent<T>(startTime.draw(), this, "generate", null);
             this.simulator.scheduleEvent(this.nextEvent);
         }
         catch (Exception exception)

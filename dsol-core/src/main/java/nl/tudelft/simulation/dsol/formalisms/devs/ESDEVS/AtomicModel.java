@@ -171,7 +171,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
             {
                 this.nextEvent =
                         new SimEvent<T>(SimTime.minus(SimTime.plus(getSimulator().getSimulatorTime(), this.timeAdvance()), e),
-                                this, this, "deltaInternalEventHandler", null);
+                                this,"deltaInternalEventHandler", null);
                 this.timeLastEvent = this.getSimulator().getSimulatorTime();
                 this.simulator.scheduleEvent(this.nextEvent);
             }
@@ -214,7 +214,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
                 {
                     this.nextEvent =
                             new SimEvent<T>((SimTime.plus(SimTime.minus(this.simulator.getSimulatorTime(), this.timeAdvance()),
-                                    this.elapsedTime)), this, this, "deltaInternalEventHandler", null);
+                                    this.elapsedTime)), this,"deltaInternalEventHandler", null);
                     this.timeLastEvent = this.simulator.getSimulatorTime();
                     this.simulator.getLogger().filter(Cat.DSOL).trace("schedule {}", this.nextEvent.toString());
                     this.simulator.scheduleEvent(this.nextEvent);

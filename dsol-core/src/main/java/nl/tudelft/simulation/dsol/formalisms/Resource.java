@@ -196,8 +196,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
         if ((this.claimedCapacity + amount) <= this.capacity)
         {
             this.alterClaimedCapacity(amount);
-            this.simulator.scheduleEventNow(this, requestor, "receiveRequestedResource",
-                    new Object[] {Double.valueOf(amount), this});
+            this.simulator.scheduleEventNow(requestor, "receiveRequestedResource", new Object[] {Double.valueOf(amount), this});
         }
         else
         {

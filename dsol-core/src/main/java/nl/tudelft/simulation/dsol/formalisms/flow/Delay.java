@@ -47,7 +47,7 @@ public class Delay<T extends Number & Comparable<T>> extends Station<T>
         super.receiveObject(object);
         try
         {
-            this.simulator.scheduleEventRel(this.delayDistribution.draw(), this, this, "releaseObject", new Object[] {object});
+            this.simulator.scheduleEventRel(this.delayDistribution.draw(), this, "releaseObject", new Object[] {object});
         }
         catch (Exception exception)
         {
