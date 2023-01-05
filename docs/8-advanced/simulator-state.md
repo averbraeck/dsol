@@ -72,7 +72,7 @@ issue a `Thread.wait()`, waiting for an interrupt. When the `start()` method on 
 in blue in the Figure below) thread is called, the interrupt is sent and the `SimulatorWorkerThread` 
 starts the `run()` method of the simulator (in red in the Figure below).
 
-![](../images/simulator-run-till-endreplication.png)
+![](../images/8-advanced/simulator-run-till-endreplication.png)
 
 This Figure shows a situation where the simulation run continues till the end of the simulation time 
 is reached or where the event list gets empty.
@@ -84,7 +84,7 @@ Calling `stop()` from the main or GUI thhred causes the simulation run to stop. 
 immediately, as the main/GUI thread and the `SimulatorWorkerThread` run in parallel. In this case, 
 the `stop()` method sets the `RunState` to `STOPPING`, as can be seen in the Figure below.
 
-![](../images/simulator-run-till-stop.png)
+![](../images/8-advanced/simulator-run-till-stop.png)
 
 After finishing the Simulator's `run()` method, the `SimulatorWorkerThread`'s `run()` method gets into a 
 `wait()` state again, waiting for a next `start()` [or cleanup()] call.
@@ -95,7 +95,7 @@ After finishing the Simulator's `run()` method, the `SimulatorWorkerThread`'s `r
 The problem is that after calling `stop()`, `start()` can be called by the GUI or main thread before 
 the `SimulatorWorkerThread` is in the `wait()` state, as illustrated below in black.
 
-![](../images/simulator-stop-start-problem.png)
+![](../images/8-advanced/simulator-stop-start-problem.png)
 
 The `STARTING` state is overruled by the STOPPED state of the other thread, and the `Thread.wakeup()` 
 call is done too early. Similar concurrency problems can uccur by calling `start()` before 
@@ -111,7 +111,7 @@ Is correct. It is not sufficient to set a boolean (like 'running') in the `Simul
 because the 'if not running' test can happen between setting `running = false` and the `wait()` 
 operation...
 
-![](../images/simulator-stop-start-solution.png)
+![](../images/8-advanced/simulator-stop-start-solution.png)
 
 The `initialize()` and `stop()` methods wait till the `SimulatorWorkerThread` is waiting or terminated 
 (in the case of a very short simulation run). The `start()` method works with a runflag semaphore 

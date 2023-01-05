@@ -10,7 +10,7 @@ DSOL provides three standard statistics classes: the `Counter`, the `Tally`, and
 
 The classes have the following relations:
 
-![](../images/jstats-statistics.png)
+![](../images/3-basics/jstats-statistics.png)
 
 
 ## Use of events in statistics classes
