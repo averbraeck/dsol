@@ -52,10 +52,10 @@ Both `RunState` and `ReplicationState` remain in the `RUNNING` state. The `Simul
 continues as if the error did not occur.
 * **warn and pause**: Send the error to logger as ERROR and print the exception on stderr The 
 `RunState` goes to `STOPPING`, leading to the stop of the loop in the `Simulator.run()` method and a 
-subsequent STOPPED state in the `SimulatorWorkerThread`.`run()` method. The `SimulatorWorkerThread` will 
-go into a Thread.`wait()`, to wait for start (or cleanup).
+subsequent STOPPED state in the `SimulatorWorkerThread.run()` method. The `SimulatorWorkerThread` will 
+go into a `Thread.wait()`, to wait for start (or cleanup).
 * **warn and end**: Send the error to logger as SEVERE and print the exception on stderr The 
-`Simulator.cleanup()` method is called to ensure the `SimulatorWorkerThread`.`run()` method completely 
+`Simulator.cleanup()` method is called to ensure the `SimulatorWorkerThread.run()` method completely 
 ends and can be garbage collected. If there is a UI thread, it will keep running.
 * **warn and exit**: Send the error to logger as SEVERE and print the exception on stderr The 
 `Simulator.cleanup()` method is called to ensure the stop of the `run()` in `SimulatorWorkerThread`; the 
@@ -125,11 +125,11 @@ deadlocks.
 The waiting behavior of the `SimulatorWorkerThread` is implemented as an Event called
 `wakeup_flag` in Python:
 
-* `wakeup_flag.`wait()` for waiting
+* `wakeup_flag.wait()` for waiting
 * `wakeup_flag.set()` for waking up
 * `bool _finalized` to determine if run is over
 * `bool method is_waiting()` to determine if the `run()` method is in the `wait()` state implemented by 
-`len(self.  wakeup_flag._cond._waiters) > 0`
+`len(self.wakeup_flag._cond._waiters) > 0`
 * if necessary, we can also check for self.is_alive() state to see if the `run()` method -- and 
 thereby the whole thread -- has terminated or not
 
