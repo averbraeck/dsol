@@ -37,5 +37,5 @@ nav:
     - Custom InputParameter: 8-advanced/custom-parameter.md
     - Publish-Subscribe: 8-advanced/publish-subscribe.md
     - Naming Context: 8-advanced/naming-context.md
-    - Simulator state: 8-advanced/simulator-state.md
+    - Simulator State Machine: 8-advanced/simulator-state.md
     
