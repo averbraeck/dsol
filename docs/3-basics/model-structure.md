@@ -47,7 +47,7 @@ In this case, no `Experiment` is created. The `Experiment` class can take care o
 
 The above steps are illustrated by the following sequence diagram:
 
-![](../images/model-construction.png)
+![](../images/model-replication.png)
 
 
 ## The DSOL model
