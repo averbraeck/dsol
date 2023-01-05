@@ -95,7 +95,7 @@ After finishing the Simulator's `run()` method, the `SimulatorWorkerThread`'s `r
 The problem is that after calling `stop()`, `start()` can be called by the GUI or main thread before 
 the `SimulatorWorkerThread` is in the `wait()` state, as illustrated below in black.
 
-![](../images/simulatorstop-start-problem.png)
+![](../images/simulator-stop-start-problem.png)
 
 The `STARTING` state is overruled by the STOPPED state of the other thread, and the `Thread.wakeup()` 
 call is done too early. Similar concurrency problems can uccur by calling `start()` before 
@@ -111,7 +111,7 @@ Is correct. It is not sufficient to set a boolean (like 'running') in the `Simul
 because the 'if not running' test can happen between setting `running = false` and the `wait()` 
 operation...
 
-![](../images/simulatorstop-start-solution.png)
+![](../images/simulator-stop-start-solution.png)
 
 The `initialize()` and `stop()` methods wait till the `SimulatorWorkerThread` is waiting or terminated 
 (in the case of a very short simulation run). The `start()` method works with a runflag semaphore 
