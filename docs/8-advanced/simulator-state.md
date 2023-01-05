@@ -41,7 +41,7 @@ A setting of `ENDING` for the `ReplicationState` is (and should) always be mirro
 
 
 
-##Errors during simulation event execution
+## Errors during simulation event execution
 
 The following strategies exist when the execution of an event leads to an exception:
 
