@@ -192,3 +192,112 @@ Replication replication = Replication.TimeDoubleUnit.create("rep1",
 
 which means that the model will be executed for a single replication by the simulator from time zero, without warmup time, for 100 minutes.
 
+
+##Errors during simulation event execution
+
+The following strategies exist when the execution of an event leads to an exception:
+
+* **log and continue**: Send the error to the logger as WARNING. Both `RunState` and `ReplicationState` 
+remain in the `RUNNING` state. The `Simulator.run()` continues as if the error did not occur.
+* **warn and continue**: Send the error to logger as ERROR and print the exception on stderr.
+Both `RunState` and `ReplicationState` remain in the `RUNNING` state. The `Simulator.run()`
+continues as if the error did not occur.
+* **warn and pause**: Send the error to logger as ERROR and print the exception on stderr The 
+`RunState` goes to `STOPPING`, leading to the stop of the loop in the `Simulator.run()` method and a 
+subsequent STOPPED state in the `SimulatorWorkerThread`.`run()` method. The `SimulatorWorkerThread` will 
+go into a Thread.`wait()`, to wait for start (or cleanup).
+* **warn and end**: Send the error to logger as SEVERE and print the exception on stderr The 
+`Simulator.cleanup()` method is called to ensure the `SimulatorWorkerThread`.`run()` method completely 
+ends and can be garbage collected. If there is a UI thread, it will keep running.
+* **warn and exit**: Send the error to logger as SEVERE and print the exception on stderr The 
+`Simulator.cleanup()` method is called to ensure the stop of the `run()` in `SimulatorWorkerThread`; the 
+`System.exit()` method is called to end the complete program.
+
+In order to set the error handling, the setPauseOnError() and isPauseOnError() methods are 
+deprecated and replaced by new setErrorStrategy(ErrorStrategy strategy) and getErrorStrategy() 
+methods. ErrorStrategy is an enum. The log level can be overridden (and even be set to NONE).
+
+## Use of the worker thread -- complete run till end of replication
+
+At `initialize()`, a `SimulatorWorkerThread` is instantiated. It starts its `run()` method, where it will 
+issue a `Thread.wait()`, waiting for an interrupt. When the `start()` method on the regular (UI / main, 
+in blue in the Figure below) thread is called, the interrupt is sent and the `SimulatorWorkerThread` 
+starts the `run()` method of the simuator (in red in the Figure below).
+
+[]() FIGURE
+
+This Figure shows a situation where the simulation run continues till the end of the simulation time 
+is reached or where the event list gets empty.
+
+
+## Use of the worker thread -- partial run till stop() is called
+
+Calling `stop()` from the main or GUI thhred causes the simulation run to stop. This does not happen 
+immediately, as the main/GUI thread and the `SimulatorWorkerThread` run in parallel. In this case, 
+the `stop()` method sets the `RunState` to `STOPPING`, as can be seen in the Figure below.
+
+[]() FIGURE
+
+After finishing the Simulator's `run()` method, the `SimulatorWorkerThread`'s `run()` method gets into a 
+`wait()` state again, waiting for a next `start()` [or cleanup()] call.
+
+
+## Concurrency problem of the use of the worker thread
+
+The problem is that after calling `stop()`, `start()` can be called by the GUI or main thread before 
+the `SimulatorWorkerThread` is in the `wait()` state, as illustrated below in black.
+
+[]() FIGURE
+
+The `STARTING` state is overruled by the STOPPED state of the other thread, and the `Thread.wakeup()` 
+call is done too early. Similar concurrency problems can uccur by calling `start()` before 
+`initialize()` has finished. Calling `stop()` before the `start()` has completed can cause the `STOPPING`
+state to be set before the `STARTED` state is set by the other thread.
+
+
+## Solution
+
+The problem is caused by the main/GUI thread exiting its methods before the right state has been 
+reached. So these methods have to pause before exiting till the state of the `SimulatorWorkerThread` 
+Is correct. It is not sufficient to set a boolean (like 'running') in the `SimulatorWorkerThread`, 
+because the 'if not running' test can happen between setting `running = false` and the `wait()` 
+operation...
+
+[]() FIGURE
+
+The `initialize()` and `stop()` methods wait till the `SimulatorWorkerThread` is waiting or terminated 
+(in the case of a very short simulation run). The `start()` method works with a runflag semaphore 
+that indicates that the `run()` method has started (and could still be running or might have finished 
+when we check). `start()` then clears the runflag. This should prevent too early calls as well as 
+deadlocks.
+
+
+## Implementation in Python
+
+The waiting behavior of the `SimulatorWorkerThread` is implemented as an Event called
+`wakeup_flag` in Python:
+
+* `wakeup_flag.`wait()` for waiting
+* `wakeup_flag.set()` for waking up
+* `bool _finalized` to determine if run is over
+* `bool method is_waiting()` to determine if the `run()` method is in the `wait()` state implemented by 
+`len(self.  wakeup_flag._cond._waiters) > 0`
+* if necessary, we can also check for self.is_alive() state to see if the `run()` method -- and 
+thereby the whole thread -- has terminated or not
+
+
+
+## Implementation in Java
+
+The waiting behavior of the `SimulatorWorkerThread` is implemented as an ordinary `wait()` in the `run()` 
+method of the `SimulatorWorkerThread`:
+
+* `wait()` for waiting
+* `notify()` for waking up
+* `boolean _finalized` to determine if run is over
+* `boolean is_waiting()` method to determine if the `run()` method is in the `wait()` state implemented 
+by  `getState().equals(ThreadState.WAITING)`
+* if necessary, we can also check for `getState().equals(ThreadState.TERMINATED)` to see
+if the `run()` method -- and thereby the whole thread -- has terminated or not
+
+
