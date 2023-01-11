@@ -1,6 +1,7 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
 import java.rmi.RemoteException;
+import java.util.Locale;
 
 import org.djutils.draw.bounds.Bounds2d;
 import org.pmw.tinylog.Level;
@@ -77,6 +78,8 @@ public class BallSwingApplication extends DSOLAnimationApplication
      */
     public static void main(final String[] args) throws Exception
     {
+        Locale.setDefault(new Locale("en", "US"));
+
         DEVSRealTimeAnimator.TimeDouble simulator = new DEVSRealTimeAnimator.TimeDouble("BallSwingApplication", 0.001);
         BallModel model = new BallModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
