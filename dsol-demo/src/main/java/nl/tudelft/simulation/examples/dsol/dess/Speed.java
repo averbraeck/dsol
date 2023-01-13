@@ -3,7 +3,7 @@ package nl.tudelft.simulation.examples.dsol.dess;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
-import nl.tudelft.simulation.dsol.simulators.DessxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 
 /**
  * <p>
@@ -23,7 +23,7 @@ public class Speed extends DifferentialEquation<Double>
      * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on network failureS
      */
-    public Speed(final DessxSimulatorInterface<Double> simulator) throws RemoteException
+    public Speed(final DessSimulatorInterface<Double> simulator) throws RemoteException
     {
         super(simulator, 1);
     }

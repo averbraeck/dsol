@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.tutorial.section43;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
-import nl.tudelft.simulation.dsol.simulators.DessxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 
 /**
@@ -40,7 +40,7 @@ public class Population extends DifferentialEquation<Double>
      * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on networn error for the listeners
      */
-    public Population(final DessxSimulatorInterface<Double> simulator) throws RemoteException
+    public Population(final DessSimulatorInterface<Double> simulator) throws RemoteException
     {
         super(simulator, simulator.getTimeStep(), NumericalIntegratorType.ADAMS, 2);
         double predator = 10;

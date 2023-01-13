@@ -3,7 +3,7 @@ package nl.tudelft.simulation.examples.dsol.animation.continuous;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
-import nl.tudelft.simulation.dsol.simulators.DessxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 
 /**
  * A Positioner.
@@ -26,7 +26,7 @@ public class Positioner extends DifferentialEquation<Double>
      * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on remote error
      */
-    public Positioner(final DessxSimulatorInterface<Double> simulator) throws RemoteException
+    public Positioner(final DessSimulatorInterface<Double> simulator) throws RemoteException
     {
         super(simulator, 2);
         this.initialize(0.0, new double[] {0.0, 0.0});

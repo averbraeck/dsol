@@ -18,7 +18,7 @@ package nl.tudelft.simulation.dsol.simulators;
  */
 @SuppressWarnings("linelength")
 public interface DEVDESSSimulatorInterface<T extends Number & Comparable<T>>
-        extends DevsSimulatorInterface<T>, DessxSimulatorInterface<T>
+        extends DevsSimulatorInterface<T>, DessSimulatorInterface<T>
 {
     // This interface combines the DESS and DEVS interfaces and does not add any operations.
 }

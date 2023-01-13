@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.serialize;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
-import nl.tudelft.simulation.dsol.simulators.DessxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 
 /**
@@ -31,7 +31,7 @@ public class SimpleDifferentialEquation extends DifferentialEquation
      * @param numberOfVariables the number of variabes in the equation
      * @throws RemoteException on network error
      */
-    public SimpleDifferentialEquation(final DessxSimulatorInterface simulator, final double timeStep,
+    public SimpleDifferentialEquation(final DessSimulatorInterface simulator, final double timeStep,
             final NumericalIntegratorType numericalIntegrator, final int numberOfVariables) throws RemoteException
     {
         super(simulator, timeStep, numericalIntegrator, numberOfVariables);
