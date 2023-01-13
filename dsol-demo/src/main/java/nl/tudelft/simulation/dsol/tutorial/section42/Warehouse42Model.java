@@ -6,7 +6,7 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterLong;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
 
@@ -21,7 +21,7 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class Warehouse42Model extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
+public class Warehouse42Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class Warehouse42Model extends AbstractDSOLModel<Double, DevsxSimulator<D
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      * @throws InputParameterException on parameter error
      */
-    public Warehouse42Model(final DevsxSimulator<Double> simulator) throws InputParameterException
+    public Warehouse42Model(final DevsSimulator<Double> simulator) throws InputParameterException
     {
         super(simulator);
         InputParameterMap retailerMap = new InputParameterMap("retailer", "Retailer", "Retailer", 1.0);

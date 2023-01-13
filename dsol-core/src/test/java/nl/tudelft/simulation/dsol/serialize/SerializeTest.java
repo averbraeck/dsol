@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.simulators.DESSSimulator;
 import nl.tudelft.simulation.dsol.simulators.DEVDESSAnimator;
 import nl.tudelft.simulation.dsol.simulators.DEVDESSSimulator;
 import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 
 /**
@@ -37,7 +37,7 @@ public class SerializeTest
     public void testSerializability() throws IOException
     {
         // We start with the simulators.
-        new MarshalledObject(new DevsxSimulator("SerializeTest"));
+        new MarshalledObject(new DevsSimulator("SerializeTest"));
         new MarshalledObject(new DESSSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DEVDESSSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DEVDESSAnimator("SerializeTest", 0.1));

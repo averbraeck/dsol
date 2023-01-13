@@ -7,7 +7,7 @@ import org.djutils.event.Event;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -28,7 +28,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Computer extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
+public class Computer extends AbstractDSOLModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class Computer extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
      * constructs a new Computer.
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      */
-    public Computer(final DevsxSimulator<Double> simulator)
+    public Computer(final DevsSimulator<Double> simulator)
     {
         super(simulator);
     }

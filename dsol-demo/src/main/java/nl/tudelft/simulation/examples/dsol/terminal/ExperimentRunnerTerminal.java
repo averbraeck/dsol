@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
@@ -74,7 +74,7 @@ public class ExperimentRunnerTerminal implements EventListener
                     }
 
                     double runtime = 40 * 60;
-                    DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("ExperimentRunnerTerminal");
+                    DevsSimulator<Double> simulator = new DevsSimulator<Double>("ExperimentRunnerTerminal");
                     Terminal model = new Terminal(simulator, rep);
                     ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, runtime);
                     model.getStreams().put("default", new MersenneTwister(seed++));
@@ -100,7 +100,7 @@ public class ExperimentRunnerTerminal implements EventListener
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      */
-    public synchronized void terminate(final DevsxSimulator<Double> simulator, final int numQC, final int numAGV,
+    public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV,
             final int rep, final Terminal model) throws SimRuntimeException, RemoteException
     {
         simulator.stop();

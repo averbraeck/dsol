@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
@@ -44,7 +44,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
      * @param devsSimulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
     public MM1Queue41SwingApplicationEvents(final MM1Queue41Panel panel, final MM1Queue41Model model,
-            final DevsxSimulator<Double> devsSimulator)
+            final DevsSimulator<Double> devsSimulator)
     {
         super(panel, "MM1Queue41SwingApplicationEvents");
         this.model = model;
@@ -72,7 +72,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DSOLException
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
-        DevsxSimulator<Double> devsSimulator = new DevsxSimulator<Double>("MM1Queue41SwingApplicationEvents");
+        DevsSimulator<Double> devsSimulator = new DevsSimulator<Double>("MM1Queue41SwingApplicationEvents");
         MM1Queue41Model model = new MM1Queue41Model(devsSimulator);
         new SimulatorEventLogger(devsSimulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
@@ -98,12 +98,12 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
         private static final long serialVersionUID = 1L;
 
         /** */
-        private final DevsxSimulator<Double> devsSimulator;
+        private final DevsSimulator<Double> devsSimulator;
 
         /**
          * @param devsSimulator DEVSSimulator&lt;Double&gt;; the simulator to provide the events
          */
-        SimulatorEventLogger(final DevsxSimulator<Double> devsSimulator)
+        SimulatorEventLogger(final DevsSimulator<Double> devsSimulator)
         {
             this.devsSimulator = devsSimulator;
             devsSimulator.addListener(this, ReplicationInterface.START_REPLICATION_EVENT);

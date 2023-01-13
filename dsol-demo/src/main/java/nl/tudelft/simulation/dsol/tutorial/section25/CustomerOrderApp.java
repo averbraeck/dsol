@@ -9,7 +9,7 @@ import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 
 /**
  * A Simple console app to run the Customer-Order model.
@@ -33,7 +33,7 @@ public final class CustomerOrderApp implements EventListener
      */
     private CustomerOrderApp() throws NamingException
     {
-        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("CustomerOrderApp");
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("CustomerOrderApp");
         CustomerOrderModel model = new CustomerOrderModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
         simulator.initialize(model, replication);

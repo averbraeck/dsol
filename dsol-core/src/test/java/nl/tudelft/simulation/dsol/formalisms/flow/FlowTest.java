@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
@@ -35,7 +35,7 @@ public class FlowTest
     @Test
     public void delayTest()
     {
-        DevsSimulatorInterface<Double> simulator = new DevsxSimulator<Double>("sim");
+        DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
         DSOLModel<Double, DevsSimulatorInterface<Double>> model = makeModelDouble(simulator);
         SingleReplication<Double> replication = new SingleReplication<Double>("replication", 0.0, 0.0, 100.0);
         simulator.initialize(model, replication);

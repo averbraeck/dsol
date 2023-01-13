@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
@@ -49,7 +49,7 @@ public class DEVSSimulationDoubleTest implements EventListener
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DevsxSimulator<Double>("testDEVSSimulationDouble");
+        this.devsSimulator = new DevsSimulator<Double>("testDEVSSimulationDouble");
         this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
         ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
@@ -89,7 +89,7 @@ public class DEVSSimulationDoubleTest implements EventListener
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DevsxSimulator<Double>("testRunUpTo");
+        this.devsSimulator = new DevsSimulator<Double>("testRunUpTo");
         this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
         ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
@@ -183,7 +183,7 @@ public class DEVSSimulationDoubleTest implements EventListener
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DevsxSimulator<Double>("testSimLambda");
+        this.devsSimulator = new DevsSimulator<Double>("testSimLambda");
         this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
         ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);

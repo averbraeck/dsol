@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.tutorial.section25;
 
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 
 /**
  * The Customer Ordering model class as presented in section 2.5 in the DSOL tutorial..
@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class CustomerOrderModel extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
+public class CustomerOrderModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class CustomerOrderModel extends AbstractDSOLModel<Double, DevsxSimulator
      * Construct a new customer ordering model.
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      */
-    public CustomerOrderModel(final DevsxSimulator<Double> simulator)
+    public CustomerOrderModel(final DevsSimulator<Double> simulator)
     {
         super(simulator);
     }
