@@ -5,7 +5,7 @@ import java.io.Serializable;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The exit station on which statistics are updated and entities destroyed.
+ * The Destroy station on which entities will be destroyed from the model.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -23,7 +23,7 @@ public class Destroy<T extends Number & Comparable<T>> extends Station<T>
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for Departure.
+     * Constructor for Destroy station.
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
      */
