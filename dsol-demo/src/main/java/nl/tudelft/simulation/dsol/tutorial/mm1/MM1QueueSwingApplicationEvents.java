@@ -30,10 +30,10 @@ import nl.tudelft.simulation.language.DSOLException;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1Queue41SwingApplicationEvents extends DSOLApplication
+public class MM1QueueSwingApplicationEvents extends DSOLApplication
 {
     /** the model. */
-    private MM1Queue41Model model;
+    private MM1QueueModel model;
 
     /** logger. */
     private SimLogger logger;
@@ -43,7 +43,7 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
      * @param model MM1Queue41Model; the model
      * @param devsSimulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
-    public MM1Queue41SwingApplicationEvents(final MM1Queue41Panel panel, final MM1Queue41Model model,
+    public MM1QueueSwingApplicationEvents(final MM1QueuePanel panel, final MM1QueueModel model,
             final DevsSimulator<Double> devsSimulator)
     {
         super(panel, "MM1Queue41SwingApplicationEvents");
@@ -73,12 +73,12 @@ public class MM1Queue41SwingApplicationEvents extends DSOLApplication
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
         DevsSimulator<Double> devsSimulator = new DevsSimulator<Double>("MM1Queue41SwingApplicationEvents");
-        MM1Queue41Model model = new MM1Queue41Model(devsSimulator);
+        MM1QueueModel model = new MM1QueueModel(devsSimulator);
         new SimulatorEventLogger(devsSimulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         devsSimulator.initialize(model, replication);
         DEVSControlPanel.TimeDouble controlPanel = new DEVSControlPanel.TimeDouble(model, devsSimulator);
-        new MM1Queue41SwingApplicationEvents(new MM1Queue41Panel(controlPanel, model), model, devsSimulator);
+        new MM1QueueSwingApplicationEvents(new MM1QueuePanel(controlPanel, model), model, devsSimulator);
     }
 
     /** stop the simulation. */
