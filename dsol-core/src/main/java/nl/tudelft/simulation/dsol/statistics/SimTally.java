@@ -51,27 +51,26 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
      * constructs a new SimTally.
      * @param description String; refers to the description of this Tally.
      * @param simulator SimulatorInterface&lt;T&gt;; the simulator to schedule on.
-     * @throws RemoteException on network error for one of the listeners
      */
-    public SimTally(final String description, final SimulatorInterface<T> simulator) throws RemoteException
+    public SimTally(final String description, final SimulatorInterface<T> simulator)
     {
         super(description);
         this.simulator = simulator;
-        if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
-        {
-            this.initialize();
-        }
-        else
-        {
-            this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
-        }
         try
         {
+            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
+            {
+                this.initialize();
+            }
+            else
+            {
+                this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
+            }
             ContextInterface context =
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");
             context.bindObject(this);
         }
-        catch (NamingException exception)
+        catch (NamingException | RemoteException exception)
         {
             this.simulator.getLogger().always().warn(exception, "<init>");
         }
@@ -83,13 +82,19 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
      * @param simulator SimulatorInterface&lt;T&gt;; the simulator to schedule on
      * @param target EventProducer; the target on which to subscribe
      * @param eventType EventType; the eventType for which statistics are sampled
-     * @throws RemoteException on network error for one of the listeners
      */
     public SimTally(final String description, final SimulatorInterface<T> simulator, final EventProducer target,
-            final EventType eventType) throws RemoteException
+            final EventType eventType)
     {
         this(description, simulator);
-        target.addListener(this, eventType, ReferenceType.STRONG);
+        try
+        {
+            target.addListener(this, eventType, ReferenceType.STRONG);
+        }
+        catch (RemoteException exception)
+        {
+            this.simulator.getLogger().always().warn(exception, "<init>");
+        }
     }
 
     /** {@inheritDoc} */

@@ -53,28 +53,27 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
      * constructs a new SimPersistent.
      * @param description String; refers to the description of this SimPersistent
      * @param simulator SimulatorInterface&lt;T&gt;; the simulator
-     * @throws RemoteException on network error for one of the listeners
      */
-    public SimPersistent(final String description, final SimulatorInterface<T> simulator) throws RemoteException
+    public SimPersistent(final String description, final SimulatorInterface<T> simulator)
     {
         super(description);
         this.simulator = simulator;
-        if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
-        {
-            fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
-        }
-        else
-        {
-            this.simulator.addListener(this, Replication.WARMUP_EVENT, LocalEventProducer.FIRST_POSITION,
-                    ReferenceType.STRONG);
-        }
         try
         {
+            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
+            {
+                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+            }
+            else
+            {
+                this.simulator.addListener(this, Replication.WARMUP_EVENT, LocalEventProducer.FIRST_POSITION,
+                        ReferenceType.STRONG);
+            }
             ContextInterface context =
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");
             context.bindObject(this);
         }
-        catch (NamingException exception)
+        catch (NamingException | RemoteException exception)
         {
             this.simulator.getLogger().always().warn(exception, "<init>");
         }
@@ -86,13 +85,19 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
      * @param description String; the description
      * @param target EventProducer; the target on which to collect statistics
      * @param eventType EventType; the eventType for which statistics are sampled
-     * @throws RemoteException on network error for one of the listeners
      */
     public SimPersistent(final String description, final SimulatorInterface<T> simulator, final EventProducer target,
-            final EventType eventType) throws RemoteException
+            final EventType eventType)
     {
         this(description, simulator);
-        target.addListener(this, eventType, ReferenceType.STRONG);
+        try
+        {
+            target.addListener(this, eventType, ReferenceType.STRONG);
+        }
+        catch (RemoteException exception)
+        {
+            this.simulator.getLogger().always().warn(exception, "<init>");
+        }
     }
 
     /** {@inheritDoc} */

@@ -130,8 +130,7 @@ public class ExperimentTest
                         //
                     }
                 };
-        Experiment<Double, DevsSimulatorInterface<Double>> d1 =
-                new Experiment<>("Exp 1", simd, modd, 10.0, 1.0, 12.0, 10);
+        Experiment<Double, DevsSimulatorInterface<Double>> d1 = new Experiment<>("Exp 1", simd, modd, 10.0, 1.0, 12.0, 10);
         assertEquals(22.0, d1.getEndTime(), 1E-6);
         assertEquals(modd, d1.getModel());
         d1.makeExperimentReplication();
@@ -434,25 +433,17 @@ public class ExperimentTest
         @Override
         public void constructModel() throws SimRuntimeException
         {
-            try
-            {
-                this.queue = new ArrayList<>();
-                this.outputStatistics.clear();
-                this.count = new SimCounter("arrivals", this.simulator);
-                this.count.initialize();
-                this.outputStatistics.add(this.count);
-                this.queueTimeTally = new SimTally<Double>("timeInQueue", this.simulator);
-                this.queueTimeTally.initialize();
-                this.outputStatistics.add(this.queueTimeTally);
-                this.nrInQueuePersistent = new SimPersistent<Double>("nrInQueue", this.simulator);
-                this.nrInQueuePersistent.initialize();
-                this.outputStatistics.add(this.nrInQueuePersistent);
-            }
-            catch (RemoteException rme)
-            {
-                throw new SimRuntimeException(rme);
-            }
-
+            this.queue = new ArrayList<>();
+            this.outputStatistics.clear();
+            this.count = new SimCounter("arrivals", this.simulator);
+            this.count.initialize();
+            this.outputStatistics.add(this.count);
+            this.queueTimeTally = new SimTally<Double>("timeInQueue", this.simulator);
+            this.queueTimeTally.initialize();
+            this.outputStatistics.add(this.queueTimeTally);
+            this.nrInQueuePersistent = new SimPersistent<Double>("nrInQueue", this.simulator);
+            this.nrInQueuePersistent.initialize();
+            this.outputStatistics.add(this.nrInQueuePersistent);
             next();
         }
 

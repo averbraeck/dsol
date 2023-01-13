@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.gui.test;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,17 +82,10 @@ public class MM1Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<D
     @Override
     public void constructModel() throws SimRuntimeException
     {
-        try
-        {
-            this.persistentUtilization = new SimPersistent<Double>("utilization", this.simulator);
-            this.persistentQueueLength = new SimPersistent<Double>("queue length", this.simulator);
-            this.tallyTimeInQueue = new SimTally<Double>("time in queue", this.simulator);
-            this.tallyTimeInSystem = new SimTally<Double>("time in system", this.simulator);
-        }
-        catch (RemoteException exception)
-        {
-            exception.printStackTrace();
-        }
+        this.persistentUtilization = new SimPersistent<Double>("utilization", this.simulator);
+        this.persistentQueueLength = new SimPersistent<Double>("queue length", this.simulator);
+        this.tallyTimeInQueue = new SimTally<Double>("time in queue", this.simulator);
+        this.tallyTimeInSystem = new SimTally<Double>("time in system", this.simulator);
 
         generate();
     }

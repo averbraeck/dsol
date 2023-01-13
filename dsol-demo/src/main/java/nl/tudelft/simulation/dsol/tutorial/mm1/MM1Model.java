@@ -85,15 +85,8 @@ public class MM1Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
         server.setDestination(release);
 
         // Statistics
-        try
-        {
-            this.dN = new SimTally<Double>("d(n)", this.simulator, queue, Seize.DELAY_TIME);
-            this.qN = new SimPersistent<Double>("q(n)", this.simulator, queue, Seize.QUEUE_LENGTH_EVENT);
-            this.uN = new Utilization<>("u(n)", this.simulator, server);
-        }
-        catch (Exception exception)
-        {
-            throw new SimRuntimeException(exception);
-        }
+        this.dN = new SimTally<Double>("d(n)", this.simulator, queue, Seize.DELAY_TIME);
+        this.qN = new SimPersistent<Double>("q(n)", this.simulator, queue, Seize.QUEUE_LENGTH_EVENT);
+        this.uN = new Utilization<>("u(n)", this.simulator, server);
     }
 }

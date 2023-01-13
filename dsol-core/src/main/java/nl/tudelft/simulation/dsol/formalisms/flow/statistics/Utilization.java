@@ -39,18 +39,23 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
      * @param description String; the description of this utilization
      * @param simulator SimulatorInterface&lt;T&gt;; the simulator
      * @param target Station&lt;T&gt;; the target
-     * @throws RemoteException on network error for one of the listeners
      */
     public Utilization(final String description, final SimulatorInterface<T> simulator, final Station<T> target)
-            throws RemoteException
     {
         super(description, simulator);
         this.simulator = simulator;
-        target.addListener(this, Station.RECEIVE_EVENT, ReferenceType.STRONG);
-        target.addListener(this, Station.RELEASE_EVENT, ReferenceType.STRONG);
-        this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
-        this.simulator.addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
-        // object is already bound, because SimPersistend (super) bound the statistic to the Context
+        try
+        {
+            target.addListener(this, Station.RECEIVE_EVENT, ReferenceType.STRONG);
+            target.addListener(this, Station.RELEASE_EVENT, ReferenceType.STRONG);
+            this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
+            this.simulator.addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
+            // object is already bound, because SimPersistend (super) bound the statistic to the Context
+        }
+        catch (RemoteException exception)
+        {
+            this.simulator.getLogger().always().warn(exception, "<init>");
+        }
     }
 
     /** {@inheritDoc} */

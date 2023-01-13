@@ -8,9 +8,11 @@ import org.djutils.logger.CategoryLogger;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
+import nl.tudelft.simulation.dsol.experiment.Experiment;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
  * <p>
@@ -38,22 +40,11 @@ public class MM1ExperimentApplication
      */
     protected MM1ExperimentApplication() throws SimRuntimeException, RemoteException, NamingException
     {
-        this.simulator = new DevsSimulator<Double>("MM1Application");
+        this.simulator = new DevsSimulator<Double>("MM1ExperimentApplication");
         this.model = new MM1Model(this.simulator);
-        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
-        this.simulator.initialize(this.model, replication);
-        this.simulator.scheduleEventAbs(1000.0, this, "terminate", null);
-        this.simulator.start();
-    }
-
-    /** stop the simulation. */
-    public void terminate()
-    {
-        System.out.println("average queue length = " + this.model.qN.getWeightedSampleMean());
-        System.out.println("average queue wait   = " + this.model.dN.getSampleMean());
-        System.out.println("average utilization  = " + this.model.uN.getWeightedSampleMean());
-
-        System.exit(0);
+        Experiment<Double, SimulatorInterface<Double>> experiment =
+                new Experiment<>("mm1", this.simulator, this.model, 0.0, 0.0, 1000.0, 10);
+        experiment.start();
     }
 
     /**
@@ -64,7 +55,7 @@ public class MM1ExperimentApplication
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
-        CategoryLogger.setAllLogLevel(Level.TRACE);
+        CategoryLogger.setAllLogLevel(Level.WARNING);
         new MM1ExperimentApplication();
     }
 
