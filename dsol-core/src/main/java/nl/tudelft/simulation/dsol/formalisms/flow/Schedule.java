@@ -29,7 +29,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public class Schedule<T extends Number & Comparable<T>> extends Generator<T>
+public class Schedule<T extends Number & Comparable<T>> extends Generate<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;

@@ -10,7 +10,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * A station is an object which can accept other objects.
+ * A station is an object which can receive and/or release other objects that are often called entities.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -111,6 +111,13 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
     public Serializable getId()
     {
         return this.id;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "Station [id=" + this.id + "]";
     }
 
 }

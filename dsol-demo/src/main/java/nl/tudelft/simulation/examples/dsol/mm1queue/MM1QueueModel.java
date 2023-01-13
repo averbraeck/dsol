@@ -5,7 +5,7 @@ import org.djutils.stats.summarizers.event.StatisticsEvents;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
-import nl.tudelft.simulation.dsol.formalisms.flow.Generator;
+import nl.tudelft.simulation.dsol.formalisms.flow.Generate;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
@@ -80,7 +80,7 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DevsSimulator<Doubl
             InputParameterMap parameters = this.simulator.getModel().getInputParameterMap();
 
             // The Generator
-            Generator<Double> generator = new Generator<Double>("Generator", this.simulator, Customer.class, null);
+            Generate<Double> generator = new Generate<Double>("Generator", this.simulator, Customer.class, null);
             DistContinuousSimulationTime<Double> intervalTime = new DistContinuousSimulationTime.TimeDouble(
                     new DistExponential(defaultStream, (Double) parameters.get("generator.intervalTime").getCalculatedValue()));
             generator.setInterval(intervalTime);
@@ -113,7 +113,7 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DevsSimulator<Doubl
 
             // Statistics
 
-            new SimCounter<Double>("counting the generator", this.simulator, generator, Generator.CREATE_EVENT);
+            new SimCounter<Double>("counting the generator", this.simulator, generator, Generate.CREATE_EVENT);
             SimPersistent<Double> persistent = new SimPersistent<Double>("persistent on service time", this.simulator, release,
                     Release.SERVICE_TIME_EVENT);
 

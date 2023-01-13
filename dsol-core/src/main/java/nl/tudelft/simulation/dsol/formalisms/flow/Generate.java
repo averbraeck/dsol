@@ -30,7 +30,7 @@ import nl.tudelft.simulation.language.reflection.SerializableConstructor;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public class Generator<T extends Number & Comparable<T>> extends Station<T>
+public class Generate<T extends Number & Comparable<T>> extends Station<T>
 {
     /** */
     public static final long serialVersionUID = 20140805L;
@@ -80,7 +80,7 @@ public class Generator<T extends Number & Comparable<T>> extends Station<T>
      *            <code>constructorArgument[n]=Integer.valueOf(12)</code> may have constructorArgumentClasses[n]=int.class;
      * @throws SimRuntimeException on constructor invocation.
      */
-    public Generator(final Serializable id, final DevsSimulatorInterface<T> simulator, final Class<?> myClass,
+    public Generate(final Serializable id, final DevsSimulatorInterface<T> simulator, final Class<?> myClass,
             final Object[] constructorArguments) throws SimRuntimeException
     {
         super(id, simulator);
@@ -122,7 +122,7 @@ public class Generator<T extends Number & Comparable<T>> extends Station<T>
                     Object object = this.constructor.deSerialize().newInstance(specialConstructorArguments);
                     this.simulator.getLogger().filter(Cat.DSOL).trace("generate created {}th instance of {}", this.number,
                             this.constructor.deSerialize().getDeclaringClass());
-                    this.fireTimedEvent(Generator.CREATE_EVENT, 1, this.simulator.getSimulatorTime());
+                    this.fireTimedEvent(Generate.CREATE_EVENT, 1, this.simulator.getSimulatorTime());
                     this.releaseObject(object);
                 }
                 this.nextEvent = new SimEvent<T>(SimTime.plus(this.simulator.getSimulatorTime(), this.interval.draw()), this,

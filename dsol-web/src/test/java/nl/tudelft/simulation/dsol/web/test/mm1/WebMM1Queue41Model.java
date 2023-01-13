@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.web.test.mm1;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
-import nl.tudelft.simulation.dsol.formalisms.flow.Generator;
+import nl.tudelft.simulation.dsol.formalisms.flow.Generate;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
@@ -62,7 +62,7 @@ public class WebMM1Queue41Model extends AbstractDSOLModel<Double, DevsSimulator<
         StreamInterface defaultStream = new MersenneTwister();
 
         // The Generator
-        Generator<Double> generator = new Generator<Double>("Generator", getSimulator(), Object.class, null);
+        Generate<Double> generator = new Generate<Double>("Generator", getSimulator(), Object.class, null);
         generator.setInterval(new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, 1.0)));
         generator.setStartTime(new DistContinuousSimulationTime.TimeDouble(new DistConstant(defaultStream, 0.0)));
         generator.setBatchSize(new DistDiscreteConstant(defaultStream, 1));
