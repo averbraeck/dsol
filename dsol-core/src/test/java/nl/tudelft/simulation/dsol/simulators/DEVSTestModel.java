@@ -23,7 +23,7 @@ public class DEVSTestModel extends TestModel
      * constructs a new DEVSTestModel.
      * @param simulator the simulator
      */
-    public DEVSTestModel(final DEVSSimulatorInterface<Double> simulator)
+    public DEVSTestModel(final DevsxSimulatorInterface<Double> simulator)
     {
         super(simulator);
     }
@@ -32,7 +32,7 @@ public class DEVSTestModel extends TestModel
     @Override
     public void constructModel()
     {
-        DEVSSimulatorInterface<Double> devsSimulator = (DEVSSimulatorInterface<Double>) getSimulator();
+        DevsxSimulatorInterface<Double> devsSimulator = (DevsxSimulatorInterface<Double>) getSimulator();
         super.constructModel();
         for (int i = 0; i < 100; i++)
         {

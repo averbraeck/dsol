@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
 /**
@@ -29,7 +29,7 @@ public class QC extends IntResource<Double>
      * @param capacity long; the capacity
      * @param qcTime DistContinuous; QC time delay
      */
-    public QC(final DEVSSimulatorInterface<Double> simulator, final String description, final long capacity,
+    public QC(final DevsxSimulatorInterface<Double> simulator, final String description, final long capacity,
             final DistContinuous qcTime)
     {
         super(simulator, description, capacity);

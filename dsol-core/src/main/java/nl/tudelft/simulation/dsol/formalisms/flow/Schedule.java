@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The schedule is an extension to the generate which accepts a schedule of interarrival times. Instead of generating with a
@@ -49,7 +49,7 @@ public class Schedule<T extends Number & Comparable<T>> extends Generator<T>
      *            <code>constructorArgument[n]=Integer.valueOf(12)</code> may have constructorArgumentClasses[n]=int.class;
      * @throws SimRuntimeException on constructor invocation.
      */
-    public Schedule(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Class<?> myClass,
+    public Schedule(final Serializable id, final DevsxSimulatorInterface<T> simulator, final Class<?> myClass,
             final Object[] constructorArguments) throws SimRuntimeException
     {
         super(id, simulator, myClass, constructorArguments);

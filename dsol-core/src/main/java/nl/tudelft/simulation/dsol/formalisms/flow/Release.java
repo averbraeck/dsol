@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 import java.io.Serializable;
 
 import nl.tudelft.simulation.dsol.formalisms.Resource;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The release station releases a given quantity of a claimed resource.
@@ -35,7 +35,7 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
      * @param resource Resource&lt;A,R,T&gt;; which is released
      */
-    public Release(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Resource<T> resource)
+    public Release(final Serializable id, final DevsxSimulatorInterface<T> simulator, final Resource<T> resource)
     {
         this(id, simulator, resource, 1.0);
     }
@@ -47,7 +47,7 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
      * @param resource Resource&lt;A,R,T&gt;; which is released
      * @param amount double; of resource which is released
      */
-    public Release(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Resource<T> resource,
+    public Release(final Serializable id, final DevsxSimulatorInterface<T> simulator, final Resource<T> resource,
             final double amount)
     {
         super(id, simulator);

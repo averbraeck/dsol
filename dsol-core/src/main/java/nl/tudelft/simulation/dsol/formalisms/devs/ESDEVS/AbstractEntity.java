@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * AbstractEntity class. The AbstractEntity takes care of modeling components without behaviour but with state within coupled
@@ -28,7 +28,7 @@ public class AbstractEntity<T extends Number & Comparable<T>> extends AbstractDE
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator for this model.
      * @param parentModel CoupledModel&lt;A,R,T&gt;; the parent model we are part of (can be null for highest level model).
      */
-    public AbstractEntity(final String modelName, final DEVSSimulatorInterface<T> simulator, final CoupledModel<T> parentModel)
+    public AbstractEntity(final String modelName, final DevsxSimulatorInterface<T> simulator, final CoupledModel<T> parentModel)
     {
         super(modelName, simulator, parentModel);
     }

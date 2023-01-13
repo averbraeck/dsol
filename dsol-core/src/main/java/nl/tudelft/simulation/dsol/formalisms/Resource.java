@@ -13,7 +13,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * A resource defines a shared and limited amount.
@@ -69,7 +69,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
 
     /** simulator defines the simulator on which is scheduled. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DEVSSimulatorInterface<T> simulator;
+    protected DevsxSimulatorInterface<T> simulator;
 
     /** the description of the resource. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -81,7 +81,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
      * @param description String; the description of this resource
      * @param capacity double; of the resource
      */
-    public Resource(final DEVSSimulatorInterface<T> simulator, final String description, final double capacity)
+    public Resource(final DevsxSimulatorInterface<T> simulator, final String description, final double capacity)
     {
         super();
         this.description = description;
@@ -94,7 +94,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
      * @param capacity double; of the resource
      */
-    public Resource(final DEVSSimulatorInterface<T> simulator, final double capacity)
+    public Resource(final DevsxSimulatorInterface<T> simulator, final double capacity)
     {
         this(simulator, "resource", capacity);
     }

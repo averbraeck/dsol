@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 import java.io.Serializable;
 import java.rmi.MarshalledObject;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * A duplicate station duplicates incoming objects and sends them to their alternative destination.
@@ -35,7 +35,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
      * @param duplicateDestination StationInterface&lt;A,R,T&gt;; the duplicate destination
      */
-    public Duplicate(final Serializable id, final DEVSSimulatorInterface<T> simulator,
+    public Duplicate(final Serializable id, final DevsxSimulatorInterface<T> simulator,
             final StationInterface<T> duplicateDestination)
     {
         this(id, simulator, duplicateDestination, 1);
@@ -48,7 +48,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
      * @param duplicateDestination StationInterface&lt;A,R,T&gt;; which is the duplicate definition
      * @param numberCopies int; the number of copies
      */
-    public Duplicate(final Serializable id, final DEVSSimulatorInterface<T> simulator,
+    public Duplicate(final Serializable id, final DevsxSimulatorInterface<T> simulator,
             final StationInterface<T> duplicateDestination, final int numberCopies)
     {
         super(id, simulator);

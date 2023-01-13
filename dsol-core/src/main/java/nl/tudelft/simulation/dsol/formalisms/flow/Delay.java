@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 import java.io.Serializable;
 
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The Delay object is a station which delays an entity by some time units. When an entity arrives at a delay object, dsol
@@ -33,7 +33,7 @@ public class Delay<T extends Number & Comparable<T>> extends Station<T>
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; is the simulator
      * @param delayDistribution DistContinuousSimulationTime&lt;R&gt;; is the delayDistribution
      */
-    public Delay(final Serializable id, final DEVSSimulatorInterface<T> simulator,
+    public Delay(final Serializable id, final DevsxSimulatorInterface<T> simulator,
             final DistContinuousSimulationTime<T> delayDistribution)
     {
         super(id, simulator);

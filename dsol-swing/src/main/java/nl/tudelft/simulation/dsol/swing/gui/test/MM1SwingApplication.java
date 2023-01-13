@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
 
@@ -45,7 +45,7 @@ public class MM1SwingApplication extends DSOLApplication
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
         DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("MM1SwingApplication.Simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new MM1Model(simulator);
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new MM1Model(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
         DEVSControlPanel.TimeDouble controlPanel = new DEVSControlPanel.TimeDouble(model, simulator);

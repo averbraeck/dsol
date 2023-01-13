@@ -30,7 +30,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * @param <T> the simulation time type based on the absolute and relative time.
  * @since 1.5
  */
-public class DEVSSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DEVSSimulatorInterface<T>
+public class DEVSSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DevsxSimulatorInterface<T>
 {
     /** */
     private static final long serialVersionUID = 20140804L;

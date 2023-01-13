@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistDiscrete;
 import nl.tudelft.simulation.language.reflection.SerializableConstructor;
 
@@ -80,7 +80,7 @@ public class Generator<T extends Number & Comparable<T>> extends Station<T>
      *            <code>constructorArgument[n]=Integer.valueOf(12)</code> may have constructorArgumentClasses[n]=int.class;
      * @throws SimRuntimeException on constructor invocation.
      */
-    public Generator(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Class<?> myClass,
+    public Generator(final Serializable id, final DevsxSimulatorInterface<T> simulator, final Class<?> myClass,
             final Object[] constructorArguments) throws SimRuntimeException
     {
         super(id, simulator);

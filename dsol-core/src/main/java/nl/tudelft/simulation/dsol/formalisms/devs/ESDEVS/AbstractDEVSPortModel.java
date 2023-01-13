@@ -5,7 +5,7 @@ import java.util.Map;
 
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortNotFoundException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * AbstractDEVSPortModel class. Adds named ports to the abstract DEVS model.
@@ -41,7 +41,7 @@ public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> ex
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule the events on.
      * @param parentModel CoupledModel&lt;A,R,T&gt;; the parent model we are part of.
      */
-    public AbstractDEVSPortModel(final String modelName, final DEVSSimulatorInterface<T> simulator,
+    public AbstractDEVSPortModel(final String modelName, final DevsxSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
     {
         super(modelName, simulator, parentModel);

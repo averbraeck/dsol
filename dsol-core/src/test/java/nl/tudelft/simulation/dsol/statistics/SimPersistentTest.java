@@ -18,7 +18,7 @@ import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The SimPersistentTest test the SimPersistent.
@@ -49,8 +49,8 @@ public class SimPersistentTest extends LocalEventProducer
     @Test
     public void testSimPersistent() throws NamingException, RemoteException
     {
-        DEVSSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new DummyModel(simulator);
+        DevsxSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new DummyModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 

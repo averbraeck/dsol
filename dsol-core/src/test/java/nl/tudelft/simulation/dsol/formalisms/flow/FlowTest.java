@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -35,8 +35,8 @@ public class FlowTest
     @Test
     public void delayTest()
     {
-        DEVSSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = makeModelDouble(simulator);
+        DevsxSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = makeModelDouble(simulator);
         SingleReplication<Double> replication = new SingleReplication<Double>("replication", 0.0, 0.0, 100.0);
         simulator.initialize(model, replication);
         simulator.runUpTo(1.0);
@@ -82,10 +82,10 @@ public class FlowTest
      * @param simulator the simulator
      * @return DSOLModel<Double>
      */
-    private DSOLModel<Double, DEVSSimulatorInterface<Double>> makeModelDouble(
-            final DEVSSimulatorInterface<Double> simulator)
+    private DSOLModel<Double, DevsxSimulatorInterface<Double>> makeModelDouble(
+            final DevsxSimulatorInterface<Double> simulator)
     {
-        return new AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>(simulator)
+        return new AbstractDSOLModel<Double, DevsxSimulatorInterface<Double>>(simulator)
         {
             /** */
             private static final long serialVersionUID = 1L;

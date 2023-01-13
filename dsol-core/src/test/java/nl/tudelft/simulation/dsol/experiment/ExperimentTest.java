@@ -22,7 +22,7 @@ import nl.tudelft.simulation.dsol.Sleep;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
@@ -51,8 +51,8 @@ public class ExperimentTest
     public void testDoubleExperiment()
     {
         DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new CountModel(simulator, new LinkedHashMap<>());
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new CountModel(simulator, new LinkedHashMap<>());
+        Experiment<Double, DevsxSimulatorInterface<Double>> expd =
                 new Experiment<>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
 
         expd.removeFromContext(); // should not yet have been added
@@ -83,31 +83,31 @@ public class ExperimentTest
 
         // errors
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>(null, simulator, model, 0.0, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>(null, simulator, model, 0.0, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", null, model, 0.0, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", null, model, 0.0, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, null, 0.0, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, null, 0.0, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, (Double) null, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, (Double) null, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, (Double) null, 20.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, 0.0, (Double) null, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, (Double) null, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, (Double) null, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, -10.0, 20.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, 0.0, -10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 0.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 0.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, -20.0, 10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, -20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, 0); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, 0); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, -10); });
+        { new Experiment<Double, DevsxSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, -10); });
 
         // should be ok
-        new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp1a", simulator, model, 0.0, 0.0, 20.0, 10);
-        new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp1a", simulator, model, -10.0, 0.0, 20.0, 10);
+        new Experiment<Double, DevsxSimulatorInterface<Double>>("Exp1a", simulator, model, 0.0, 0.0, 20.0, 10);
+        new Experiment<Double, DevsxSimulatorInterface<Double>>("Exp1a", simulator, model, -10.0, 0.0, 20.0, 10);
     }
 
     /**
@@ -118,8 +118,8 @@ public class ExperimentTest
     {
         // generic experiment
         DEVSSimulator<Double> simd = new DEVSSimulator<>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> modd =
-                new AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>(simd)
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> modd =
+                new AbstractDSOLModel<Double, DevsxSimulatorInterface<Double>>(simd)
                 {
                     /** */
                     private static final long serialVersionUID = 1L;
@@ -130,7 +130,7 @@ public class ExperimentTest
                         //
                     }
                 };
-        Experiment<Double, DEVSSimulatorInterface<Double>> d1 =
+        Experiment<Double, DevsxSimulatorInterface<Double>> d1 =
                 new Experiment<>("Exp 1", simd, modd, 10.0, 1.0, 12.0, 10);
         assertEquals(22.0, d1.getEndTime(), 1E-6);
         assertEquals(modd, d1.getModel());
@@ -138,7 +138,7 @@ public class ExperimentTest
 
         // float experiment
         DEVSSimulator<Float> simf = new DEVSSimulator<Float>("simulator");
-        DSOLModel<Float, DEVSSimulatorInterface<Float>> modf = new AbstractDSOLModel<Float, DEVSSimulatorInterface<Float>>(simf)
+        DSOLModel<Float, DevsxSimulatorInterface<Float>> modf = new AbstractDSOLModel<Float, DevsxSimulatorInterface<Float>>(simf)
         {
 
             /** */
@@ -150,15 +150,15 @@ public class ExperimentTest
                 //
             }
         };
-        Experiment<Float, DEVSSimulatorInterface<Float>> f1 =
-                new Experiment<Float, DEVSSimulatorInterface<Float>>("f1", simf, modf, 10.0f, 1.0f, 12.0f, 10);
+        Experiment<Float, DevsxSimulatorInterface<Float>> f1 =
+                new Experiment<Float, DevsxSimulatorInterface<Float>>("f1", simf, modf, 10.0f, 1.0f, 12.0f, 10);
         assertEquals(22.0f, f1.getEndTime(), 1E-6);
         assertEquals(modf, f1.getModel());
         f1.makeExperimentReplication();
 
         // long experiment
         DEVSSimulator<Long> siml = new DEVSSimulator<Long>("simulator");
-        DSOLModel<Long, DEVSSimulatorInterface<Long>> modl = new AbstractDSOLModel<Long, DEVSSimulatorInterface<Long>>(siml)
+        DSOLModel<Long, DevsxSimulatorInterface<Long>> modl = new AbstractDSOLModel<Long, DevsxSimulatorInterface<Long>>(siml)
         {
 
             /** */
@@ -170,16 +170,16 @@ public class ExperimentTest
                 //
             }
         };
-        Experiment<Long, DEVSSimulatorInterface<Long>> l1 =
-                new Experiment<Long, DEVSSimulatorInterface<Long>>("l1", siml, modl, 10L, 1L, 12L, 10);
+        Experiment<Long, DevsxSimulatorInterface<Long>> l1 =
+                new Experiment<Long, DevsxSimulatorInterface<Long>>("l1", siml, modl, 10L, 1L, 12L, 10);
         assertEquals(22L, l1.getEndTime().longValue());
         assertEquals(modl, l1.getModel());
         l1.makeExperimentReplication();
 
         // double unit experiment
         DEVSSimulator<Duration> simdu = new DEVSSimulator<Duration>("simulator");
-        DSOLModel<Duration, DEVSSimulatorInterface<Duration>> moddu =
-                new AbstractDSOLModel<Duration, DEVSSimulatorInterface<Duration>>(simdu)
+        DSOLModel<Duration, DevsxSimulatorInterface<Duration>> moddu =
+                new AbstractDSOLModel<Duration, DevsxSimulatorInterface<Duration>>(simdu)
                 {
 
                     /** */
@@ -191,7 +191,7 @@ public class ExperimentTest
                         //
                     }
                 };
-        Experiment<Duration, DEVSSimulatorInterface<Duration>> du1 = new Experiment<Duration, DEVSSimulatorInterface<Duration>>(
+        Experiment<Duration, DevsxSimulatorInterface<Duration>> du1 = new Experiment<Duration, DevsxSimulatorInterface<Duration>>(
                 "du1", simdu, moddu, Duration.ZERO, Duration.ZERO, Duration.instantiateSI(1000.0), 10);
         assertEquals(1000.0, du1.getEndTime().doubleValue(), 1E-6);
         assertEquals(moddu, du1.getModel());
@@ -199,8 +199,8 @@ public class ExperimentTest
 
         // float unit experiment
         DEVSSimulator<FloatDuration> simfu = new DEVSSimulator<FloatDuration>("simulator");
-        DSOLModel<FloatDuration, DEVSSimulatorInterface<FloatDuration>> modfu =
-                new AbstractDSOLModel<FloatDuration, DEVSSimulatorInterface<FloatDuration>>(simfu)
+        DSOLModel<FloatDuration, DevsxSimulatorInterface<FloatDuration>> modfu =
+                new AbstractDSOLModel<FloatDuration, DevsxSimulatorInterface<FloatDuration>>(simfu)
                 {
 
                     /** */
@@ -212,7 +212,7 @@ public class ExperimentTest
                         //
                     }
                 };
-        Experiment<FloatDuration, DEVSSimulatorInterface<FloatDuration>> fu1 = new Experiment<>("du1", simfu, modfu,
+        Experiment<FloatDuration, DevsxSimulatorInterface<FloatDuration>> fu1 = new Experiment<>("du1", simfu, modfu,
                 FloatDuration.ZERO, FloatDuration.ZERO, FloatDuration.instantiateSI(1000.0f), 10);
         assertEquals(1000.0f, fu1.getEndTime().floatValue(), 1E-6);
         assertEquals(modfu, fu1.getModel());
@@ -228,9 +228,9 @@ public class ExperimentTest
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
         DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
-                new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
+        Experiment<Double, DevsxSimulatorInterface<Double>> expd =
+                new Experiment<Double, DevsxSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
 
         expd.start();
         int count = 0;
@@ -280,7 +280,7 @@ public class ExperimentTest
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
         DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
         StreamSeedInformation streamInformation = new StreamSeedInformation();
         streamInformation.addStream("default", new MersenneTwister(10L));
         streamInformation.addStream("iatStream", new MersenneTwister(20L));
@@ -293,8 +293,8 @@ public class ExperimentTest
         seedMap.put(1, 200L);
         streamInformation.putSeedMap("default", seedMap);
         model.setStreamInformation(streamInformation);
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
-                new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
+        Experiment<Double, DevsxSimulatorInterface<Double>> expd =
+                new Experiment<Double, DevsxSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
         expd.setStreamUpdater(new StreamSeedUpdater(streamInformation.getStreamSeedMap()));
 
         expd.start();
@@ -321,9 +321,9 @@ public class ExperimentTest
     public void testSummaryStatistics() throws RemoteException
     {
         DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new MM1Model(simulator);
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
-                new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 10.0, 20.0, 10);
+        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new MM1Model(simulator);
+        Experiment<Double, DevsxSimulatorInterface<Double>> expd =
+                new Experiment<Double, DevsxSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 10.0, 20.0, 10);
 
         expd.start();
         int count = 0;
@@ -341,7 +341,7 @@ public class ExperimentTest
     /**
      * Model class.
      */
-    public static class CountModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+    public static class CountModel extends AbstractDSOLModel<Double, DevsxSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -359,7 +359,7 @@ public class ExperimentTest
          * @param simulator the simulator
          * @param dataCollector the data collector
          */
-        public CountModel(final DEVSSimulatorInterface<Double> simulator, final Map<Integer, Integer> dataCollector)
+        public CountModel(final DevsxSimulatorInterface<Double> simulator, final Map<Integer, Integer> dataCollector)
         {
             super(simulator);
             this.dataCollector = dataCollector;
@@ -386,7 +386,7 @@ public class ExperimentTest
     /**
      * Quick and dirty MM1 queuing system Model class.
      */
-    public static class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+    public static class MM1Model extends AbstractDSOLModel<Double, DevsxSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -412,7 +412,7 @@ public class ExperimentTest
         /**
          * @param simulator the simulator
          */
-        public MM1Model(final DEVSSimulatorInterface<Double> simulator)
+        public MM1Model(final DevsxSimulatorInterface<Double> simulator)
         {
             super(simulator);
             this.iatDist = new DistExponential(getStream("default"), 1.0);
@@ -423,7 +423,7 @@ public class ExperimentTest
          * @param simulator the simulator
          * @param streamInformation the streams to use
          */
-        public MM1Model(final DEVSSimulatorInterface<Double> simulator, final StreamInformation streamInformation)
+        public MM1Model(final DevsxSimulatorInterface<Double> simulator, final StreamInformation streamInformation)
         {
             super(simulator, streamInformation);
             this.iatDist = new DistExponential(getStream("iatStream"), 1.0);

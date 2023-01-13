@@ -14,7 +14,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * A resource defines a shared and limited amount..
@@ -67,7 +67,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
             Collections.synchronizedSortedSet(new TreeSet<Request<T>>(new RequestComparator()));
 
     /** simulator defines the simulator on which is scheduled. */
-    protected DEVSSimulatorInterface<T> simulator;
+    protected DevsxSimulatorInterface<T> simulator;
 
     /** the description of the resource. */
     protected String description = "resource";
@@ -78,7 +78,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
      * @param description String; the description of this resource
      * @param capacity long; of the resource
      */
-    public IntResource(final DEVSSimulatorInterface<T> simulator, final String description, final long capacity)
+    public IntResource(final DevsxSimulatorInterface<T> simulator, final String description, final long capacity)
     {
         super();
         this.description = description;
@@ -91,7 +91,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
      * @param capacity long; of the resource
      */
-    public IntResource(final DEVSSimulatorInterface<T> simulator, final long capacity)
+    public IntResource(final DevsxSimulatorInterface<T> simulator, final long capacity)
     {
         this(simulator, "resource", capacity);
     }

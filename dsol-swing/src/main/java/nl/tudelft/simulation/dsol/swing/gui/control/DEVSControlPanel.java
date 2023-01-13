@@ -12,7 +12,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.RunState;
 
 /**
@@ -27,7 +27,7 @@ import nl.tudelft.simulation.dsol.simulators.RunState;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator type to use
  */
-public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSimulatorInterface<T>>
+public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsxSimulatorInterface<T>>
         extends AbstractControlPanel<T, S>
 {
     /** */
@@ -46,7 +46,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
-    public DEVSControlPanel(final DSOLModel<T, ? extends DEVSSimulatorInterface<T>> model, final S simulator)
+    public DEVSControlPanel(final DSOLModel<T, ? extends DevsxSimulatorInterface<T>> model, final S simulator)
             throws RemoteException
     {
         super(model, simulator);
@@ -220,7 +220,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeDouble extends DEVSControlPanel<Double, DEVSSimulatorInterface<Double>>
+    public static class TimeDouble extends DEVSControlPanel<Double, DevsxSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -234,8 +234,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeDouble(final DSOLModel<Double, ? extends DEVSSimulatorInterface<Double>> model,
-                final DEVSSimulatorInterface<Double> simulator) throws RemoteException
+        public TimeDouble(final DSOLModel<Double, ? extends DevsxSimulatorInterface<Double>> model,
+                final DevsxSimulatorInterface<Double> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDouble(getSimulator()));
@@ -254,7 +254,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeFloat extends DEVSControlPanel<Float, DEVSSimulatorInterface<Float>>
+    public static class TimeFloat extends DEVSControlPanel<Float, DevsxSimulatorInterface<Float>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -268,8 +268,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeFloat(final DSOLModel<Float, ? extends DEVSSimulatorInterface<Float>> model,
-                final DEVSSimulatorInterface<Float> simulator) throws RemoteException
+        public TimeFloat(final DSOLModel<Float, ? extends DevsxSimulatorInterface<Float>> model,
+                final DevsxSimulatorInterface<Float> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloat(getSimulator()));
@@ -288,7 +288,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeLong extends DEVSControlPanel<Long, DEVSSimulatorInterface<Long>>
+    public static class TimeLong extends DEVSControlPanel<Long, DevsxSimulatorInterface<Long>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -302,8 +302,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeLong(final DSOLModel<Long, ? extends DEVSSimulatorInterface<Long>> model,
-                final DEVSSimulatorInterface<Long> simulator) throws RemoteException
+        public TimeLong(final DSOLModel<Long, ? extends DevsxSimulatorInterface<Long>> model,
+                final DevsxSimulatorInterface<Long> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeLong(getSimulator()));
@@ -322,7 +322,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeDoubleUnit extends DEVSControlPanel<Duration, DEVSSimulatorInterface<Duration>>
+    public static class TimeDoubleUnit extends DEVSControlPanel<Duration, DevsxSimulatorInterface<Duration>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -336,8 +336,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
          *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeDoubleUnit(final DSOLModel<Duration, ? extends DEVSSimulatorInterface<Duration>> model,
-                final DEVSSimulatorInterface<Duration> simulator) throws RemoteException
+        public TimeDoubleUnit(final DSOLModel<Duration, ? extends DevsxSimulatorInterface<Duration>> model,
+                final DevsxSimulatorInterface<Duration> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDoubleUnit(getSimulator()));
@@ -356,7 +356,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeFloatUnit extends DEVSControlPanel<FloatDuration, DEVSSimulatorInterface<FloatDuration>>
+    public static class TimeFloatUnit extends DEVSControlPanel<FloatDuration, DevsxSimulatorInterface<FloatDuration>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -370,8 +370,8 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DEVSSi
          *            has been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeFloatUnit(final DSOLModel<FloatDuration, ? extends DEVSSimulatorInterface<FloatDuration>> model,
-                final DEVSSimulatorInterface<FloatDuration> simulator) throws RemoteException
+        public TimeFloatUnit(final DSOLModel<FloatDuration, ? extends DevsxSimulatorInterface<FloatDuration>> model,
+                final DevsxSimulatorInterface<FloatDuration> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloatUnit(getSimulator()));

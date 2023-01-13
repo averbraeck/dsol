@@ -13,7 +13,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The CPU example as published in Simulation Modeling and Analysis by A.M. Law &amp; W.D. Kelton section 1.4 and 2.4. .
@@ -64,7 +64,7 @@ public class CPU extends Station<Double> implements Locatable
      * constructs a new CPU.
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; a devs simulator
      */
-    public CPU(final DEVSSimulatorInterface<Double> simulator)
+    public CPU(final DevsxSimulatorInterface<Double> simulator)
     {
         super("CPU", simulator);
         this.fireTimedEvent(UTILIZATION_EVENT, 0.0, simulator.getSimulatorTime());

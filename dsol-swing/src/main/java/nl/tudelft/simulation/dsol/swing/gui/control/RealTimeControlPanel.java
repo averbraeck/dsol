@@ -13,7 +13,7 @@ import org.djutils.event.Event;
 
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.RunState;
 
 /**
@@ -50,7 +50,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
-    public RealTimeControlPanel(final DSOLModel<T, ? extends DEVSSimulatorInterface<T>> model, final S simulator)
+    public RealTimeControlPanel(final DSOLModel<T, ? extends DevsxSimulatorInterface<T>> model, final S simulator)
             throws RemoteException
     {
         super(model, simulator);
@@ -169,7 +169,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeDouble(final DSOLModel<Double, ? extends DEVSSimulatorInterface<Double>> model,
+        public TimeDouble(final DSOLModel<Double, ? extends DevsxSimulatorInterface<Double>> model,
                 final DEVSRealTimeAnimator<Double> simulator) throws RemoteException
         {
             super(model, simulator);
@@ -204,7 +204,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeFloat(final DSOLModel<Float, ? extends DEVSSimulatorInterface<Float>> model,
+        public TimeFloat(final DSOLModel<Float, ? extends DevsxSimulatorInterface<Float>> model,
                 final DEVSRealTimeAnimator<Float> simulator) throws RemoteException
         {
             super(model, simulator);
@@ -239,7 +239,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeLong(final DSOLModel<Long, ? extends DEVSSimulatorInterface<Long>> model,
+        public TimeLong(final DSOLModel<Long, ? extends DevsxSimulatorInterface<Long>> model,
                 final DEVSRealTimeAnimator<Long> simulator) throws RemoteException
         {
             super(model, simulator);
@@ -274,7 +274,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeDoubleUnit(final DSOLModel<Duration, ? extends DEVSSimulatorInterface<Duration>> model,
+        public TimeDoubleUnit(final DSOLModel<Duration, ? extends DevsxSimulatorInterface<Duration>> model,
                 final DEVSRealTimeAnimator<Duration> simulator) throws RemoteException
         {
             super(model, simulator);
@@ -309,7 +309,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeFloatUnit(final DSOLModel<FloatDuration, ? extends DEVSSimulatorInterface<FloatDuration>> model,
+        public TimeFloatUnit(final DSOLModel<FloatDuration, ? extends DevsxSimulatorInterface<FloatDuration>> model,
                 final DEVSRealTimeAnimator<FloatDuration> simulator) throws RemoteException
         {
             super(model, simulator);

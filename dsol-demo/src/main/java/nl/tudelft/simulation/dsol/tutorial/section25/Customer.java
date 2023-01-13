@@ -2,7 +2,7 @@ package nl.tudelft.simulation.dsol.tutorial.section25;
 
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The Customer class as presented in section 2.5 in the DSOL tutorial..
@@ -18,13 +18,13 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
 public class Customer
 {
     /** the simulator we can schedule on. */
-    private DEVSSimulatorInterface<Double> simulator = null;
+    private DevsxSimulatorInterface<Double> simulator = null;
 
     /**
      * constructs a new Customer.
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; The simulator to use.
      */
-    public Customer(final DEVSSimulatorInterface<Double> simulator)
+    public Customer(final DevsxSimulatorInterface<Double> simulator)
     {
         super();
         this.simulator = simulator;

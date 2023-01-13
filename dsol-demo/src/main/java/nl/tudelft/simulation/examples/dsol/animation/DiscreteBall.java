@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 import org.djutils.draw.point.OrientedPoint3d;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
@@ -30,7 +30,7 @@ public class DiscreteBall extends Ball
     private CartesianPoint destination = new CartesianPoint(0, 0, 0);
 
     /** the simulator. */
-    private DEVSSimulatorInterface<Double> simulator = null;
+    private DevsxSimulatorInterface<Double> simulator = null;
 
     /** the start time. */
     private double startTime = Double.NaN;
@@ -48,7 +48,7 @@ public class DiscreteBall extends Ball
      * @throws RemoteException on remote failure
      * @throws SimRuntimeException on schedule failure
      */
-    public DiscreteBall(final int nr, final DEVSSimulatorInterface<Double> simulator)
+    public DiscreteBall(final int nr, final DevsxSimulatorInterface<Double> simulator)
             throws RemoteException, SimRuntimeException
     {
         super(nr);

@@ -2,7 +2,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import java.io.Serializable;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The exit station on which statistics are updated and entities destroyed.
@@ -27,7 +27,7 @@ public class Departure<T extends Number & Comparable<T>> extends Station<T>
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
      */
-    public Departure(final Serializable id, final DEVSSimulatorInterface<T> simulator)
+    public Departure(final Serializable id, final DevsxSimulatorInterface<T> simulator)
     {
         super(id, simulator);
     }

@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
 /**
@@ -29,7 +29,7 @@ public class AGV extends IntResource<Double>
      * @param capacity long; the capacity
      * @param agvTime DistContinuous; AGV time delay
      */
-    public AGV(final DEVSSimulatorInterface<Double> simulator, final String description, final long capacity,
+    public AGV(final DevsxSimulatorInterface<Double> simulator, final String description, final long capacity,
             final DistContinuous agvTime)
     {
         super(simulator, description, capacity);

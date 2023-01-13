@@ -3,7 +3,7 @@ package nl.tudelft.simulation.examples.dsol.mm1queue;
 import java.io.Serializable;
 
 import nl.tudelft.simulation.dsol.formalisms.Resource;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 
 /**
  * The Seize is an extended Seize block whic sets delay times on arriving customers..
@@ -27,7 +27,7 @@ public class Seize extends nl.tudelft.simulation.dsol.formalisms.flow.Seize<Doub
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the devs simulator on which to schedule
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to claim
      */
-    public Seize(final Serializable id, final DEVSSimulatorInterface<Double> simulator,
+    public Seize(final Serializable id, final DevsxSimulatorInterface<Double> simulator,
             final Resource<Double> resource)
     {
         super(id, simulator, resource);
@@ -40,7 +40,7 @@ public class Seize extends nl.tudelft.simulation.dsol.formalisms.flow.Seize<Doub
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to claim
      * @param requestedCapacity double; the amount to claim
      */
-    public Seize(final Serializable id, final DEVSSimulatorInterface<Double> simulator,
+    public Seize(final Serializable id, final DevsxSimulatorInterface<Double> simulator,
             final Resource<Double> resource, final double requestedCapacity)
     {
         super(id, simulator, resource, requestedCapacity);
