@@ -20,7 +20,8 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public class DEVDESSSimulator<T extends Number & Comparable<T>> extends DevsSimulator<T> implements DEVDESSSimulatorInterface<T>
+public class DevDessxSimulator<T extends Number & Comparable<T>> extends DevsSimulator<T>
+        implements DevsSimulatorInterface<T>, DessSimulatorInterface<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;
@@ -35,7 +36,7 @@ public class DEVDESSSimulator<T extends Number & Comparable<T>> extends DevsSimu
      * @param id the id of the simulator, used in logging and firing of events.
      * @throws SimRuntimeException when initialTimeStep &lt;= 0, NaN, or Infinity
      */
-    public DEVDESSSimulator(final Serializable id, final T initialTimeStep) throws SimRuntimeException
+    public DevDessxSimulator(final Serializable id, final T initialTimeStep) throws SimRuntimeException
     {
         super(id);
         setTimeStep(initialTimeStep);

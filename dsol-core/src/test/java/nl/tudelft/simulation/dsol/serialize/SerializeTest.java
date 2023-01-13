@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.eventlists.RedBlackTree;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.simulators.DessSimulator;
 import nl.tudelft.simulation.dsol.simulators.DEVDESSAnimator;
-import nl.tudelft.simulation.dsol.simulators.DEVDESSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevDessxSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
@@ -39,7 +39,7 @@ public class SerializeTest
         // We start with the simulators.
         new MarshalledObject(new DevsSimulator("SerializeTest"));
         new MarshalledObject(new DessSimulator("SerializeTest", 0.1));
-        new MarshalledObject(new DEVDESSSimulator("SerializeTest", 0.1));
+        new MarshalledObject(new DevDessxSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DEVDESSAnimator("SerializeTest", 0.1));
         new MarshalledObject(new DevsRealTimeAnimator.TimeDoubleUnit("SerializeTest"));
 
