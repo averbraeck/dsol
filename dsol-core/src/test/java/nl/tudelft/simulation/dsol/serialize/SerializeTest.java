@@ -8,7 +8,7 @@ import org.junit.Test;
 import nl.tudelft.simulation.dsol.eventlists.RedBlackTree;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.simulators.DessSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVDESSAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevDessxAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevDessSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
@@ -40,7 +40,7 @@ public class SerializeTest
         new MarshalledObject(new DevsSimulator("SerializeTest"));
         new MarshalledObject(new DessSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DevDessSimulator("SerializeTest", 0.1));
-        new MarshalledObject(new DEVDESSAnimator("SerializeTest", 0.1));
+        new MarshalledObject(new DevDessxAnimator("SerializeTest", 0.1));
         new MarshalledObject(new DevsRealTimeAnimator.TimeDoubleUnit("SerializeTest"));
 
         // ---------- Let's test the formalisms ----------------
