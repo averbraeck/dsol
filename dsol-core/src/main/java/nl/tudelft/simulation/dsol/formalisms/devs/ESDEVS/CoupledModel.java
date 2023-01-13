@@ -114,7 +114,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * The transfer function takes care of transferring a value from this coupled model to the outside world.
      * @param <TYPE> the type of message / event being transferred
-     * @param x OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port through which the transfer takes place
+     * @param x OutputPortInterface&lt;T,TYPE&gt;; the output port through which the transfer takes place
      * @param y TYPE; the value being transferred
      * @throws RemoteException remote exception
      * @throws SimRuntimeException simulation run time exception
@@ -144,9 +144,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * @param <TYPE> the type of message / event for which the coupling is added.
-     * @param fromPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port of an internal component that transfers the
+     * @param fromPort OutputPortInterface&lt;T,TYPE&gt;; the output port of an internal component that transfers the
      *            message / event to another internal component (start of the coupling)
-     * @param toPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port of an internal component that receives a message /
+     * @param toPort InputPortInterface&lt;T,TYPE&gt;; the input port of an internal component that receives a message /
      *            event from the other componet (end of the coupling)
      */
     public <TYPE> void addInternalCoupling(final OutputPortInterface<T, TYPE> fromPort,
@@ -165,9 +165,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * @param <TYPE> the type of message / event for which the coupling is removed.
-     * @param fromPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port of an internal component that transfers the
+     * @param fromPort OutputPortInterface&lt;T,TYPE&gt;; the output port of an internal component that transfers the
      *            message / event to another internal component (start of the coupling)
-     * @param toPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port of an internal component that receives a message /
+     * @param toPort InputPortInterface&lt;T,TYPE&gt;; the input port of an internal component that receives a message /
      *            event from the other componet (end of the coupling)
      */
     public <TYPE> void removeInternalCoupling(final OutputPortInterface<T, TYPE> fromPort,
@@ -186,9 +186,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Add an IOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is added.
-     * @param fromPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port of this coupled model that transfers the message /
+     * @param fromPort InputPortInterface&lt;T,TYPE&gt;; the input port of this coupled model that transfers the message /
      *            event to the internal component (start of the coupling)
-     * @param toPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port of the internal component that receives a message /
+     * @param toPort InputPortInterface&lt;T,TYPE&gt;; the input port of the internal component that receives a message /
      *            event from the overarching coupled model (end of the coupling)
      */
     public <TYPE> void addExternalInputCoupling(final InputPortInterface<T, TYPE> fromPort,
@@ -207,9 +207,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Remove an IOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is removed.
-     * @param fromPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port of this coupled model that transfers the message /
+     * @param fromPort InputPortInterface&lt;T,TYPE&gt;; the input port of this coupled model that transfers the message /
      *            event to the internal component (start of the coupling)
-     * @param toPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port of the internal component that receives a message /
+     * @param toPort InputPortInterface&lt;T,TYPE&gt;; the input port of the internal component that receives a message /
      *            event from the overarching coupled model (end of the coupling)
      */
     public <TYPE> void removeExternalInputCoupling(final InputPortInterface<T, TYPE> fromPort,
@@ -227,9 +227,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Add an EOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is added.
-     * @param fromPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port of the internal component that produces an event
+     * @param fromPort OutputPortInterface&lt;T,TYPE&gt;; the output port of the internal component that produces an event
      *            for the outside of the overarching coupled model (start of the coupling)
-     * @param toPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port of this coupled model that transfers the message /
+     * @param toPort OutputPortInterface&lt;T,TYPE&gt;; the output port of this coupled model that transfers the message /
      *            event to the outside (end of the coupling)
      */
     public <TYPE> void addExternalOutputCoupling(final OutputPortInterface<T, TYPE> fromPort,
@@ -248,9 +248,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Remove an EOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is removed.
-     * @param fromPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port of the internal component that produces an event
+     * @param fromPort OutputPortInterface&lt;T,TYPE&gt;; the output port of the internal component that produces an event
      *            for the outside of the overarching coupled model (start of the coupling)
-     * @param toPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port of this coupled model that transfers the message /
+     * @param toPort OutputPortInterface&lt;T,TYPE&gt;; the output port of this coupled model that transfers the message /
      *            event to the outside (end of the coupling)
      */
     public <TYPE> void removeExternalOutputCoupling(final OutputPortInterface<T, TYPE> fromPort,

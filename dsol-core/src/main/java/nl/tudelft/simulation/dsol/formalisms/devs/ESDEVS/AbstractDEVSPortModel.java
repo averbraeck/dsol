@@ -50,7 +50,7 @@ public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> ex
     /**
      * Add an input port to the model. Use a name to be able to identify the port later.
      * @param name String; the (unique) name of the input port
-     * @param inputPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port to add
+     * @param inputPort InputPortInterface&lt;T,TYPE&gt;; the input port to add
      * @param <TYPE> the type of variable of the input port
      * @throws PortAlreadyDefinedException in case the port name already exist for the model
      */
@@ -68,7 +68,7 @@ public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> ex
     /**
      * Add an output port to the model. Use a name to be able to identify the port later.
      * @param name String; the (unique) name of the output port
-     * @param outputPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port to add
+     * @param outputPort OutputPortInterface&lt;T,TYPE&gt;; the output port to add
      * @param <TYPE> the type of variable of the output port
      * @throws PortAlreadyDefinedException in case the port name already exist for the model
      */
