@@ -4,7 +4,7 @@ import org.djutils.event.EventType;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
-import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
+import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
@@ -36,11 +36,11 @@ public class Terminal extends Station<Double>
     /**
      * constructs a new Terminal.
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
-     * @param cpu StationInterface; the destination
+     * @param cpu Station; the destination
      * @param thinkDelay DistContinuous; the delay
      * @param jobSize DistContinuous; in time
      */
-    public Terminal(final DevsSimulatorInterface<Double> simulator, final StationInterface cpu,
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final Station cpu,
             final DistContinuous thinkDelay, final DistContinuous jobSize)
     {
         super("Terminal", simulator);
@@ -73,7 +73,7 @@ public class Terminal extends Station<Double>
     public synchronized void releaseObject(final Object object)
     {
         Job job = new Job(this.jobSize, this, this.simulator.getSimulatorTime());
-        this.fireTimedEvent(StationInterface.RELEASE_EVENT, 1, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(Station.RELEASE_EVENT, 1, this.simulator.getSimulatorTime());
         super.destination.receiveObject(job);
     }
 }

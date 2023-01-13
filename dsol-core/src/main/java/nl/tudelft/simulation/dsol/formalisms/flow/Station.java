@@ -2,7 +2,10 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import java.io.Serializable;
 
+import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
+import org.djutils.metadata.MetaData;
+import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
@@ -19,7 +22,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class Station<T extends Number & Comparable<T>> extends LocalEventProducer implements StationInterface<T>
+public abstract class Station<T extends Number & Comparable<T>> extends LocalEventProducer
 {
     /** */
     private static final long serialVersionUID = 20140805L;
@@ -30,10 +33,18 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
 
     /** destination refers to the next station in the process-model chain. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected StationInterface<T> destination;
+    protected Station<T> destination;
 
     /** the id of the Station. */
-    private Serializable id;
+    private final Serializable id;
+
+    /** RECEIVE_EVENT is fired whenever an entity enters the station. */
+    public static final EventType RECEIVE_EVENT = new EventType(new MetaData("RECEIVE_EVENT", "Object received",
+            new ObjectDescriptor("receivedObject", "received object", Serializable.class)));
+
+    /** RECEIVE_EVENT is fired whenever an entity leaves the station. */
+    public static final EventType RELEASE_EVENT = new EventType(new MetaData("RELEASE_EVENT", "Object released",
+            new ObjectDescriptor("releasedObject", "released object", Serializable.class)));
 
     /**
      * constructs a new Station.
@@ -46,16 +57,20 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
         this.simulator = simulator;
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * receives an object is invoked whenever an entity arrives.
+     * @param object Object; is the entity
+     */
     public void receiveObject(final Object object)
     {
-        this.fireTimedEvent(StationInterface.RECEIVE_EVENT, 1.0, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(RECEIVE_EVENT, 1.0, this.simulator.getSimulatorTime());
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public void setDestination(final StationInterface<T> destination)
+    /**
+     * sets the destination of this object.
+     * @param destination Station&lt;A,R,T&gt;; defines the next station in the model
+     */
+    public void setDestination(final Station<T> destination)
     {
         this.destination = destination;
     }
@@ -66,16 +81,18 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
      */
     protected synchronized void releaseObject(final Object object)
     {
-        this.fireTimedEvent(StationInterface.RELEASE_EVENT, 0.0, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(RELEASE_EVENT, 0.0, this.simulator.getSimulatorTime());
         if (this.destination != null)
         {
             this.destination.receiveObject(object);
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public StationInterface<T> getDestination()
+    /**
+     * Method getDestination.
+     * @return Station is the destination of this station
+     */
+    public Station<T> getDestination()
     {
         return this.destination;
     }
@@ -86,6 +103,14 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
     public DevsSimulatorInterface<T> getSimulator()
     {
         return this.simulator;
+    }
+
+    /**
+     * @return id
+     */
+    public Serializable getId()
+    {
+        return this.id;
     }
 
 }

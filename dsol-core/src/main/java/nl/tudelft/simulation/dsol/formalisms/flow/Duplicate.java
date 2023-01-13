@@ -24,7 +24,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
     private static final long serialVersionUID = 1L;
 
     /** DuplicateDestination which is the duplicate definition. */
-    private StationInterface<T> duplicateDestination;
+    private Station<T> duplicateDestination;
 
     /** numberCopies refers to the number of duplicates. */
     private int numberCopies;
@@ -33,10 +33,10 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
      * Creates a new Duplicate that makes 1 copy.
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param duplicateDestination StationInterface&lt;A,R,T&gt;; the duplicate destination
+     * @param duplicateDestination Station&lt;A,R,T&gt;; the duplicate destination
      */
     public Duplicate(final Serializable id, final DevsSimulatorInterface<T> simulator,
-            final StationInterface<T> duplicateDestination)
+            final Station<T> duplicateDestination)
     {
         this(id, simulator, duplicateDestination, 1);
     }
@@ -45,11 +45,11 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
      * Create a new Duplicate that makes numberCopies copies.
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param duplicateDestination StationInterface&lt;A,R,T&gt;; which is the duplicate definition
+     * @param duplicateDestination Station&lt;A,R,T&gt;; which is the duplicate definition
      * @param numberCopies int; the number of copies
      */
     public Duplicate(final Serializable id, final DevsSimulatorInterface<T> simulator,
-            final StationInterface<T> duplicateDestination, final int numberCopies)
+            final Station<T> duplicateDestination, final int numberCopies)
     {
         super(id, simulator);
         this.duplicateDestination = duplicateDestination;
@@ -69,7 +69,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
                 for (int i = 0; i < this.numberCopies; i++)
                 {
                     Object clone = new MarshalledObject<Object>(object).get();
-                    this.fireTimedEvent(StationInterface.RELEASE_EVENT, 1, getSimulator().getSimulatorTime());
+                    this.fireTimedEvent(Station.RELEASE_EVENT, 1, getSimulator().getSimulatorTime());
                     this.duplicateDestination.receiveObject(clone);
                 }
             }

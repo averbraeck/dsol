@@ -7,7 +7,8 @@ import org.djutils.event.reference.ReferenceType;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
-import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
+import nl.tudelft.simulation.dsol.formalisms.flow.Station;
+import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 
@@ -38,16 +39,16 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
      * constructs a new Utilization.
      * @param description String; the description of this utilization
      * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator
-     * @param target StationInterface&lt;A,R,T&gt;; the target
+     * @param target Station&lt;A,R,T&gt;; the target
      * @throws RemoteException on network error for one of the listeners
      */
-    public Utilization(final String description, final SimulatorInterface<T> simulator, final StationInterface<T> target)
+    public Utilization(final String description, final SimulatorInterface<T> simulator, final Station<T> target)
             throws RemoteException
     {
         super(description, simulator);
         this.simulator = simulator;
-        target.addListener(this, StationInterface.RECEIVE_EVENT, ReferenceType.STRONG);
-        target.addListener(this, StationInterface.RELEASE_EVENT, ReferenceType.STRONG);
+        target.addListener(this, Station.RECEIVE_EVENT, ReferenceType.STRONG);
+        target.addListener(this, Station.RELEASE_EVENT, ReferenceType.STRONG);
         this.simulator.addListener(this, ReplicationInterface.WARMUP_EVENT, ReferenceType.STRONG);
         this.simulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT, ReferenceType.STRONG);
         // object is already bound, because SimPersistend (super) bound the statistic to the Context

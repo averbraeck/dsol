@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 
-import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
+import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
 /**
@@ -19,15 +19,15 @@ public class Job
     private double serviceTime = Double.NaN;
 
     /** source refers to the source of the job. */
-    private StationInterface source;
+    private Station source;
 
     /**
      * constructs a new Job.
      * @param serviceTimeDistribution DistContinuous; the distribution from which to draw the serviceTime
-     * @param source StationInterface; the source of the job
+     * @param source Station; the source of the job
      * @param creationTime double; time of creation
      */
-    public Job(final DistContinuous serviceTimeDistribution, final StationInterface source, final double creationTime)
+    public Job(final DistContinuous serviceTimeDistribution, final Station source, final double creationTime)
     {
         this.source = source;
         this.serviceTime = serviceTimeDistribution.draw();
@@ -63,9 +63,9 @@ public class Job
 
     /**
      * returns the source.
-     * @return StationInterface the owning terminal
+     * @return Station the owning terminal
      */
-    public StationInterface getOwner()
+    public Station getOwner()
     {
         return this.source;
     }

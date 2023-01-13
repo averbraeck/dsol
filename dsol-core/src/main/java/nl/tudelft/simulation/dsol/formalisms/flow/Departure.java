@@ -36,8 +36,8 @@ public class Departure<T extends Number & Comparable<T>> extends Station<T>
     @Override
     public synchronized void receiveObject(final Object object)
     {
-        this.fireTimedEvent(StationInterface.RECEIVE_EVENT, (Serializable) object, getSimulator().getSimulatorTime());
-        this.fireTimedEvent(StationInterface.RELEASE_EVENT, (Serializable) object, getSimulator().getSimulatorTime());
+        this.fireTimedEvent(Station.RECEIVE_EVENT, (Serializable) object, getSimulator().getSimulatorTime());
+        this.fireTimedEvent(Station.RELEASE_EVENT, (Serializable) object, getSimulator().getSimulatorTime());
     }
 
 }

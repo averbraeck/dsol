@@ -6,7 +6,7 @@ import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
 import nl.tudelft.simulation.dsol.formalisms.flow.Generator;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
-import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
+import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
@@ -71,13 +71,13 @@ public class MM1Queue41Model extends AbstractDSOLModel<Double, DevsSimulator<Dou
         Resource<Double> resource = new Resource<>(this.simulator, 1.0);
 
         // created a resource
-        StationInterface<Double> queue = new Seize<Double>("Seize", this.simulator, resource);
-        StationInterface<Double> release = new Release<Double>("Release", this.simulator, resource, 1.0);
+        Station<Double> queue = new Seize<Double>("Seize", this.simulator, resource);
+        Station<Double> release = new Release<Double>("Release", this.simulator, resource, 1.0);
 
         // The server
         DistContinuousSimulationTime<Double> serviceTime =
                 new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, 0.5));
-        StationInterface<Double> server = new Delay<Double>("Delay", this.simulator, serviceTime);
+        Station<Double> server = new Delay<Double>("Delay", this.simulator, serviceTime);
 
         // The flow
         generator.setDestination(queue);
