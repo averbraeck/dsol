@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public class DevsxAnimator<T extends Number & Comparable<T>> extends DevsSimulator<T> implements AnimatorInterface
+public class DevsAnimator<T extends Number & Comparable<T>> extends DevsSimulator<T> implements AnimatorInterface
 {
     /** */
     private static final long serialVersionUID = 20140804L;
@@ -28,7 +28,7 @@ public class DevsxAnimator<T extends Number & Comparable<T>> extends DevsSimulat
      * Create a new DEVSAnimator.
      * @param id the id of the simulator, used in logging and firing of events.
      */
-    public DevsxAnimator(final Serializable id)
+    public DevsAnimator(final Serializable id)
     {
         super(id);
     }
