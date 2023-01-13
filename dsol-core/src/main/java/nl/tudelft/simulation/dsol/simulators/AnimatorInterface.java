@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.rmi.RemoteException;
 
 import org.djutils.event.EventType;
-import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
