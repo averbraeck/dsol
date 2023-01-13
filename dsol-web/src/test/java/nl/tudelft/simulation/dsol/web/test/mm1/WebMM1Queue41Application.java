@@ -35,13 +35,13 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  * possibility of such damage.
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class WebMM1Queue41Application
+public class WebMM1Application
 {
     /** */
     private DevsSimulator<Double> simulator;
 
     /** */
-    private WebMM1Queue41Model model;
+    private WebMM1Model model;
 
     /**
      * Construct a console application.
@@ -49,10 +49,10 @@ public class WebMM1Queue41Application
      * @throws RemoteException on error
      * @throws NamingException on error
      */
-    protected WebMM1Queue41Application() throws SimRuntimeException, RemoteException, NamingException
+    protected WebMM1Application() throws SimRuntimeException, RemoteException, NamingException
     {
-        this.simulator = new DevsSimulator<Double>("WebMM1Queue41Application");
-        this.model = new WebMM1Queue41Model(this.simulator);
+        this.simulator = new DevsSimulator<Double>("WebMM1Application");
+        this.model = new WebMM1Model(this.simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         this.simulator.initialize(this.model, replication);
         this.simulator.scheduleEventAbs(1000.0, this, "terminate", null);
@@ -77,7 +77,7 @@ public class WebMM1Queue41Application
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
-        new WebMM1Queue41Application();
+        new WebMM1Application();
     }
 
 }

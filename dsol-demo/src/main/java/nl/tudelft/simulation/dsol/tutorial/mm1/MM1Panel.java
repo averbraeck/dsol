@@ -33,7 +33,7 @@ public class MM1Panel extends DSOLPanel
 
     /**
      * @param controlPanel DEVSControlPanel; the control panel
-     * @param model MM1Queue41Model; the model
+     * @param model MM1Model; the model
      * @throws DSOLException on error
      * @throws RemoteException on error
      */
@@ -47,7 +47,7 @@ public class MM1Panel extends DSOLPanel
 
     /**
      * add a number of charts for the demo.
-     * @param model MM1Queue41Model; the model from which to take the statistics
+     * @param model MM1Model; the model from which to take the statistics
      */
     public void addTabs(final MM1Model model)
     {

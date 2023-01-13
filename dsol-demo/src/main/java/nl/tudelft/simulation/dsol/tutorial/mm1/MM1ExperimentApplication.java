@@ -22,7 +22,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1Application
+public class MM1ExperimentApplication
 {
     /** */
     private DevsSimulator<Double> simulator;
@@ -36,7 +36,7 @@ public class MM1Application
      * @throws RemoteException on error
      * @throws NamingException on error
      */
-    protected MM1Application() throws SimRuntimeException, RemoteException, NamingException
+    protected MM1ExperimentApplication() throws SimRuntimeException, RemoteException, NamingException
     {
         this.simulator = new DevsSimulator<Double>("MM1Application");
         this.model = new MM1Model(this.simulator);
@@ -65,7 +65,7 @@ public class MM1Application
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
-        new MM1Application();
+        new MM1ExperimentApplication();
     }
 
 }

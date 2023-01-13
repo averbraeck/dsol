@@ -40,13 +40,13 @@ public class MM1SwingApplicationEvents extends DSOLApplication
 
     /**
      * @param panel DSOLPanel; the panel
-     * @param model MM1Queue41Model; the model
+     * @param model MM1Model; the model
      * @param devsSimulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
     public MM1SwingApplicationEvents(final MM1Panel panel, final MM1Model model,
             final DevsSimulator<Double> devsSimulator)
     {
-        super(panel, "MM1Queue41SwingApplicationEvents");
+        super(panel, "MM1SwingApplicationEvents");
         this.model = model;
         this.logger = devsSimulator.getLogger();
         try
@@ -72,7 +72,7 @@ public class MM1SwingApplicationEvents extends DSOLApplication
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DSOLException
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
-        DevsSimulator<Double> devsSimulator = new DevsSimulator<Double>("MM1Queue41SwingApplicationEvents");
+        DevsSimulator<Double> devsSimulator = new DevsSimulator<Double>("MM1SwingApplicationEvents");
         MM1Model model = new MM1Model(devsSimulator);
         new SimulatorEventLogger(devsSimulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
