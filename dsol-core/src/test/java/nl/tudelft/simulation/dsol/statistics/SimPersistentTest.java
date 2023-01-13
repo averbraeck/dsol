@@ -14,7 +14,7 @@ import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
 import org.junit.Test;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
@@ -51,7 +51,7 @@ public class SimPersistentTest extends LocalEventProducer
     {
         DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
         DSOLModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 
         String description = "THIS PERSISTENT IS TESTED";

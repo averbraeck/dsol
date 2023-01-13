@@ -7,7 +7,7 @@ import org.djutils.exceptions.Throw;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.eventlists.EventListInterface;
 import nl.tudelft.simulation.dsol.eventlists.RedBlackTree;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.Executable;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.LambdaSimEvent;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
@@ -65,7 +65,7 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"hiding", "checkstyle:hiddenfield"})
-    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final ReplicationInterface<T> replication)
+    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
             throws SimRuntimeException
     {
         // this check HAS to be done BEFORE clearing the event list
@@ -74,9 +74,9 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         {
             this.eventList.clear();
             super.initialize(model, replication);
-            this.scheduleEvent(new SimEvent<T>(this.getReplication().getWarmupSimTime(),
+            this.scheduleEvent(new SimEvent<T>(this.getReplication().getWarmupTime(),
                     (short) (SimEventInterface.MAX_PRIORITY + 1), this, "warmup", null));
-            this.scheduleEvent(new SimEvent<T>(this.getReplication().getEndSimTime(),
+            this.scheduleEvent(new SimEvent<T>(this.getReplication().getEndTime(),
                     (short) (SimEventInterface.MIN_PRIORITY - 1), this, "endReplication", null));
         }
     }

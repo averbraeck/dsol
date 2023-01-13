@@ -61,11 +61,11 @@ public class ExperimentTest
         expd.setDescription("Experiment 1");
         assertEquals("Experiment 1", expd.getDescription());
         assertEquals(10.0, expd.getStartTime(), 1E-9);
-        assertEquals(10.0, expd.getStartSimTime(), 1E-9);
+        assertEquals(10.0, expd.getStartTime(), 1E-9);
         assertEquals(22.0, expd.getEndTime(), 1E-9);
-        assertEquals(22.0, expd.getEndSimTime(), 1E-9);
+        assertEquals(22.0, expd.getEndTime(), 1E-9);
         assertEquals(11.0, expd.getWarmupTime(), 1E-9);
-        assertEquals(11.0, expd.getWarmupSimTime(), 1E-9);
+        assertEquals(11.0, expd.getWarmupTime(), 1E-9);
         assertEquals(12.0, expd.getRunLength(), 1E-9);
         assertEquals(1.0, expd.getWarmupPeriod(), 1E-9);
         assertNotNull(expd.getStreamUpdater());

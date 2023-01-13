@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
 import nl.tudelft.simulation.dsol.animation.gis.esri.EsriFileXmlParser;
 import nl.tudelft.simulation.dsol.animation.gis.esri.EsriRenderable2D;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
@@ -67,7 +67,7 @@ public class EsriXmlSwingApplication extends DSOLAnimationApplication
     {
         DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("EsriSwingApplication", 0.001);
         EmptyModel model = new EmptyModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
 
         DSOLPanel panel = new DSOLPanel(new RealTimeControlPanel.TimeDouble(model, simulator));

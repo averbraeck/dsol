@@ -4,7 +4,7 @@ import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.reference.ReferenceType;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 
 /**
@@ -39,8 +39,8 @@ public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Doub
     {
         try
         {
-            getSimulator().addListener(this, ReplicationInterface.END_REPLICATION_EVENT, ReferenceType.STRONG);
-            getSimulator().addListener(this, ReplicationInterface.START_REPLICATION_EVENT, ReferenceType.STRONG);
+            getSimulator().addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
+            getSimulator().addListener(this, Replication.START_REPLICATION_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, SimulatorInterface.START_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, SimulatorInterface.STOP_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, SimulatorInterface.TIME_CHANGED_EVENT, ReferenceType.STRONG);

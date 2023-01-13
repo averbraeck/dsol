@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 
@@ -53,7 +53,7 @@ public class WebMM1Queue41Application
     {
         this.simulator = new DevsSimulator<Double>("WebMM1Queue41Application");
         this.model = new WebMM1Queue41Model(this.simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         this.simulator.initialize(this.model, replication);
         this.simulator.scheduleEventAbs(1000.0, this, "terminate", null);
         this.simulator.start();

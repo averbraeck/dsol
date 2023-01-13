@@ -23,7 +23,7 @@ import org.djutils.event.EventListener;
 import org.djutils.event.TimedEvent;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationPanel;
@@ -170,7 +170,7 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
 
         // Tell the animation to build the list of animation objects.
         this.animationPanel
-                .notify(new TimedEvent(ReplicationInterface.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
+                .notify(new TimedEvent(Replication.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
 
         // do not show the X and Y coordinates in a tooltip.
         this.animationPanel.setShowToolTip(false);

@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.animation.D2.Renderable2DComparator;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.web.animation.HTMLGraphics2D;
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -107,7 +107,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
         super(extent, size);
         super.showGrid = true;
         this.simulator = simulator;
-        simulator.addListener(this, ReplicationInterface.START_REPLICATION_EVENT);
+        simulator.addListener(this, Replication.START_REPLICATION_EVENT);
     }
 
     /** {@inheritDoc} */
@@ -213,7 +213,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
         }
 
         else if // (this.simulator.getSourceId().equals(event.getSourceId()) && // TODO: improve check
-        (event.getType().equals(ReplicationInterface.START_REPLICATION_EVENT))
+        (event.getType().equals(Replication.START_REPLICATION_EVENT))
         {
             synchronized (this.elementList)
             {

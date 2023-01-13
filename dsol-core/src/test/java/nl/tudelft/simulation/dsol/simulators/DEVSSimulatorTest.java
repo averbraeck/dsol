@@ -41,7 +41,7 @@ public class DEVSSimulatorTest implements EventListener
     {
 //        this.waiter = new Waiter();
 //        DEVSSimulatorInterface<Double> devsSimulator = new DEVSSimulator<Double>("DEVSSimulatorTest");
-//        devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+//        devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
 //        ExperimentalFrame experimentalFrame =
 //                ExperimentUtilDouble.createExperimentalFrame(devsSimulator, new DEVSTestModel(devsSimulator));
 //        experimentalFrame.start();

@@ -20,7 +20,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type, e.g., Double, Long, Duration
  */
-public class SingleReplication<T extends Number & Comparable<T>> extends AbstractReplication<T>
+public class SingleReplication<T extends Number & Comparable<T>> extends Replication<T>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 20210404L;
@@ -28,7 +28,7 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Abstrac
     /**
      * construct a stand-alone replication.
      * @param id String; the id of the replication; should be unique within the experiment.
-     * @param startTime T; the start time as a time object.
+     * @param startTime T; the start time of the simulation.
      * @param warmupPeriod R; the warmup period, included in the runlength (!)
      * @param runLength R; the total length of the run, including the warm-up period.
      * @throws NullPointerException when id, startTime, warmupPeriod or runLength is null
@@ -45,7 +45,7 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Abstrac
      * @param runControl RunControlInterface; the run control for the replication
      * @throws NullPointerException when runControl is null
      */
-    public SingleReplication(final RunControlInterface<T> runControl)
+    public SingleReplication(final RunControl<T> runControl)
     {
         super(runControl);
         setContext();
@@ -60,7 +60,7 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Abstrac
         try
         {
             ContextInterface rootContext = InitialEventContext.instantiate("root");
-            this.context = ContextUtil.lookupOrCreateSubContext(rootContext, getId());
+            setContext(ContextUtil.lookupOrCreateSubContext(rootContext, getId()));
         }
         catch (RemoteException | NamingException exception)
         {
@@ -76,22 +76,16 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Abstrac
     {
         try
         {
-            if (this.context != null)
+            if (getContext() != null)
             {
                 ContextInterface rootContext = InitialEventContext.instantiate("root");
                 ContextUtil.destroySubContext(rootContext, getId());
+                setContext(null); // to avoid removing twice
             }
         }
         catch (RemoteException | NamingException exception)
         {
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public RunControlInterface<T> getRunControl()
-    {
-        return this.runControl;
     }
 }

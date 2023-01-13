@@ -33,7 +33,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DInterface;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
@@ -86,7 +86,7 @@ public abstract class DSOLWebServer implements EventListener
 
             // get the already created elements in context(/animation/D2)
             this.animationPanel.notify(
-                    new TimedEvent(ReplicationInterface.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
+                    new TimedEvent(Replication.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
         }
 
         new ServerThread().start();

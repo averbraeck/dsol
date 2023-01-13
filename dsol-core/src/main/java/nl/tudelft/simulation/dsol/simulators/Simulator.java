@@ -15,7 +15,7 @@ import org.pmw.tinylog.Level;
 import org.pmw.tinylog.Logger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
@@ -60,7 +60,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** The currently active replication; is null before initialize() has been called. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected ReplicationInterface<T> replication = null;
+    protected Replication<T> replication = null;
 
     /** The model that is currently active; is null before initialize() has been called. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -106,7 +106,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** {@inheritDoc} */
     @Override
-    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final ReplicationInterface<T> replication)
+    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
             throws SimRuntimeException
     {
         Throw.whenNull(model, "Simulator.initialize: model cannot be null");
@@ -121,7 +121,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             this.worker = new SimulatorWorkerThread(this.id.toString(), this);
             this.replication = replication;
             this.model = model;
-            this.simulatorTime = replication.getStartSimTime();
+            this.simulatorTime = replication.getStartTime();
             model.constructModel();
             this.runState = RunState.INITIALIZED;
             this.replicationState = ReplicationState.INITIALIZED;
@@ -168,14 +168,14 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         Throw.when(
                 !(this.replicationState == ReplicationState.INITIALIZED || this.replicationState == ReplicationState.STARTED),
                 SimRuntimeException.class, "State of the replication should be INITIALIZED or STARTED to run a simulationF");
-        Throw.when(this.simulatorTime.compareTo(this.replication.getEndSimTime()) >= 0, SimRuntimeException.class,
+        Throw.when(this.simulatorTime.compareTo(this.replication.getEndTime()) >= 0, SimRuntimeException.class,
                 "Cannot start simulator : simulatorTime >= runLength");
         synchronized (this.semaphore)
         {
             this.runState = RunState.STARTING;
             if (this.replicationState == ReplicationState.INITIALIZED)
             {
-                fireTimedEvent(ReplicationInterface.START_REPLICATION_EVENT, null, getSimulatorTime());
+                fireTimedEvent(Replication.START_REPLICATION_EVENT, null, getSimulatorTime());
                 this.replicationState = ReplicationState.STARTED;
             }
             this.fireEvent(SimulatorInterface.STARTING_EVENT, null);
@@ -204,7 +204,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     @Override
     public void start() throws SimRuntimeException
     {
-        this.runUntilTime = this.replication.getEndSimTime();
+        this.runUntilTime = this.replication.getEndTime();
         this.runUntilIncluding = true;
         startImpl();
     }
@@ -244,7 +244,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         Throw.when(
                 !(this.replicationState == ReplicationState.INITIALIZED || this.replicationState == ReplicationState.STARTED),
                 SimRuntimeException.class, "State of the replication should be INITIALIZED or STARTED to run a simulation");
-        Throw.when(this.simulatorTime.compareTo(this.replication.getEndSimTime()) >= 0, SimRuntimeException.class,
+        Throw.when(this.simulatorTime.compareTo(this.replication.getEndTime()) >= 0, SimRuntimeException.class,
                 "Cannot step simulator : simulatorTime >= runLength");
         try
         {
@@ -252,7 +252,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             {
                 if (this.replicationState == ReplicationState.INITIALIZED)
                 {
-                    fireTimedEvent(ReplicationInterface.START_REPLICATION_EVENT, null, getSimulatorTime());
+                    fireTimedEvent(Replication.START_REPLICATION_EVENT, null, getSimulatorTime());
                     this.replicationState = ReplicationState.STARTED;
                 }
                 this.runState = RunState.STARTED;
@@ -305,7 +305,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
      */
     public void warmup()
     {
-        fireTimedEvent(ReplicationInterface.WARMUP_EVENT, null, getSimulatorTime());
+        fireTimedEvent(Replication.WARMUP_EVENT, null, getSimulatorTime());
     }
 
     /** {@inheritDoc} */
@@ -340,11 +340,11 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             this.runState = RunState.STOPPING;
         }
         this.worker.interrupt(); // just to be sure that the run will end, and the state will be moved to 'ENDED'
-        if (this.simulatorTime.compareTo(this.getReplication().getEndSimTime()) < 0)
+        if (this.simulatorTime.compareTo(this.getReplication().getEndTime()) < 0)
         {
             Logger.warn("endReplication executed, but the simulation time " + this.simulatorTime
-                    + " is earlier than the replication length " + this.getReplication().getEndSimTime());
-            this.simulatorTime = this.getReplication().getEndSimTime();
+                    + " is earlier than the replication length " + this.getReplication().getEndTime());
+            this.simulatorTime = this.getReplication().getEndTime();
         }
         // sleep maximally 1 second till the SimulatorWorkerThread finalizes
         int count = 0;
@@ -468,7 +468,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** {@inheritDoc} */
     @Override
-    public ReplicationInterface<T> getReplication()
+    public Replication<T> getReplication()
     {
         return this.replication;
     }
@@ -534,7 +534,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         {
             this.id = (Serializable) in.readObject();
             this.simulatorTime = (T) in.readObject();
-            this.replication = (ReplicationInterface<T>) in.readObject();
+            this.replication = (Replication<T>) in.readObject();
             this.semaphore = new Object();
             this.worker = new SimulatorWorkerThread(this.id.toString(), this);
             this.logger = new SimLogger(this);
@@ -636,7 +636,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                         {
                             this.job.replicationState = ReplicationState.ENDED;
                             this.job.runState = RunState.ENDED;
-                            this.job.fireTimedEvent(ReplicationInterface.END_REPLICATION_EVENT);
+                            this.job.fireTimedEvent(Replication.END_REPLICATION_EVENT);
                             this.finalized = true;
                         }
                     }

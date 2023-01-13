@@ -6,7 +6,7 @@ import org.djutils.event.Event;
 import org.djutils.event.reference.ReferenceType;
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
@@ -49,8 +49,8 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
         this.simulator = simulator;
         target.addListener(this, Station.RECEIVE_EVENT, ReferenceType.STRONG);
         target.addListener(this, Station.RELEASE_EVENT, ReferenceType.STRONG);
-        this.simulator.addListener(this, ReplicationInterface.WARMUP_EVENT, ReferenceType.STRONG);
-        this.simulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT, ReferenceType.STRONG);
+        this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
+        this.simulator.addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
         // object is already bound, because SimPersistend (super) bound the statistic to the Context
     }
 
@@ -58,12 +58,12 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
     @Override
     public void notify(final Event event)
     {
-        if (event.getType().equals(ReplicationInterface.WARMUP_EVENT))
+        if (event.getType().equals(Replication.WARMUP_EVENT))
         {
             this.initialized = true;
             try
             {
-                this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+                this.simulator.removeListener(this, Replication.WARMUP_EVENT);
             }
             catch (RemoteException exception)
             {
@@ -74,7 +74,7 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
         }
         else if (this.initialized)
         {
-            if (event.getType().equals(ReplicationInterface.END_REPLICATION_EVENT))
+            if (event.getType().equals(Replication.END_REPLICATION_EVENT))
             {
                 super.endObservations(this.simulator.getSimulatorTime());
             }

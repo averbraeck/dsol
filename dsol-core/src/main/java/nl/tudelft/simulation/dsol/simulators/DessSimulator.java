@@ -69,9 +69,9 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
     protected void stepImpl()
     {
         this.simulatorTime = SimTime.plus(this.simulatorTime, this.timeStep);
-        if (this.simulatorTime.compareTo(this.replication.getEndSimTime()) > 0)
+        if (this.simulatorTime.compareTo(this.replication.getEndTime()) > 0)
         {
-            this.simulatorTime = SimTime.copy(this.replication.getEndSimTime());
+            this.simulatorTime = SimTime.copy(this.replication.getEndTime());
             this.endReplication();
         }
         this.fireUnverifiedTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, this.simulatorTime);

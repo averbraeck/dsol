@@ -30,7 +30,7 @@ import org.eclipse.jetty.util.resource.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
@@ -180,7 +180,7 @@ public abstract class AbstractTestDemoServer
                     SimulatorInterface<Duration> simulator = model.getSimulator();
                     try
                     {
-                        ReplicationInterface<Duration> newReplication = new SingleReplication<Duration>("rep 1",
+                        Replication<Duration> newReplication = new SingleReplication<Duration>("rep 1",
                                 Duration.ZERO, Duration.ZERO, Duration.instantiateSI(3600.0));
                         simulator.initialize(model, newReplication);
                         DSOLWebModel webModel = new DSOLWebModel(model.toString(), simulator);

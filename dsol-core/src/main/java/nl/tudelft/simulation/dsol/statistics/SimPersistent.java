@@ -15,7 +15,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedTimestampWeightedTally;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -59,13 +59,13 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     {
         super(description);
         this.simulator = simulator;
-        if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupSimTime()) > 0)
+        if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
         {
             fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
         }
         else
         {
-            this.simulator.addListener(this, ReplicationInterface.WARMUP_EVENT, LocalEventProducer.FIRST_POSITION,
+            this.simulator.addListener(this, Replication.WARMUP_EVENT, LocalEventProducer.FIRST_POSITION,
                     ReferenceType.STRONG);
         }
         try
@@ -108,11 +108,11 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
     public void notify(final Event event)
     {
-        if (event.getType().equals(ReplicationInterface.WARMUP_EVENT))
+        if (event.getType().equals(Replication.WARMUP_EVENT))
         {
             try
             {
-                this.simulator.removeListener(this, ReplicationInterface.WARMUP_EVENT);
+                this.simulator.removeListener(this, Replication.WARMUP_EVENT);
             }
             catch (RemoteException exception)
             {

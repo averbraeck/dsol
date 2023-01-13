@@ -71,7 +71,7 @@ public class DevDessSimulator<T extends Number & Comparable<T>> extends DevsSimu
         // set the run flag semaphore to signal to startImpl() that the run method has started
         this.runflag = true;
         while (!isStoppingOrStopped() && !this.eventList.isEmpty()
-                && this.simulatorTime.compareTo(this.replication.getEndSimTime()) <= 0)
+                && this.simulatorTime.compareTo(this.replication.getEndTime()) <= 0)
         {
             synchronized (super.semaphore)
             {

@@ -34,9 +34,9 @@ public class RunControlTest
         assertEquals("rcdg", rcdg.getDescription());
         rcdg.setDescription("description");
         assertEquals("description", rcdg.getDescription());
-        assertEquals(Double.valueOf(10.0), rcdg.getStartSimTime());
-        assertEquals(Double.valueOf(30.0), rcdg.getEndSimTime());
-        assertEquals(Double.valueOf(15.0), rcdg.getWarmupSimTime());
+        assertEquals(Double.valueOf(10.0), rcdg.getStartTime());
+        assertEquals(Double.valueOf(30.0), rcdg.getEndTime());
+        assertEquals(Double.valueOf(15.0), rcdg.getWarmupTime());
         assertEquals(10.0, rcdg.getStartTime(), 1E-6);
         assertEquals(30.0, rcdg.getEndTime(), 1E-6);
         assertEquals(15.0, rcdg.getWarmupTime(), 1E-6);
@@ -106,9 +106,9 @@ public class RunControlTest
         assertEquals("rcdg", rcdg.getDescription());
         rcdg.setDescription("description");
         assertEquals("description", rcdg.getDescription());
-        assertEquals(Double.valueOf(10.0), rcdg.getStartSimTime());
-        assertEquals(Double.valueOf(30.0), rcdg.getEndSimTime());
-        assertEquals(Double.valueOf(15.0), rcdg.getWarmupSimTime());
+        assertEquals(Double.valueOf(10.0), rcdg.getStartTime());
+        assertEquals(Double.valueOf(30.0), rcdg.getEndTime());
+        assertEquals(Double.valueOf(15.0), rcdg.getWarmupTime());
         assertEquals(10.0, rcdg.getStartTime(), 1E-6);
         assertEquals(30.0, rcdg.getEndTime(), 1E-6);
         assertEquals(15.0, rcdg.getWarmupTime(), 1E-6);

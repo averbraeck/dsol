@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 
@@ -35,9 +35,9 @@ public final class CustomerOrderApp implements EventListener
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("CustomerOrderApp");
         CustomerOrderModel model = new CustomerOrderModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
         simulator.initialize(model, replication);
-        simulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+        simulator.addListener(this, Replication.END_REPLICATION_EVENT);
         simulator.start();
     }
 
@@ -45,7 +45,7 @@ public final class CustomerOrderApp implements EventListener
     @Override
     public void notify(final Event event) throws RemoteException
     {
-        if (event.getType().equals(ReplicationInterface.END_REPLICATION_EVENT))
+        if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         {
             System.exit(0);
         }

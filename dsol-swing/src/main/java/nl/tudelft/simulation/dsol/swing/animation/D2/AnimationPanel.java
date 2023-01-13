@@ -38,7 +38,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DComparator;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DInterface;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.D2.actions.IntrospectionAction;
@@ -158,7 +158,7 @@ public class AnimationPanel extends GridPanel implements EventListener, EventPro
         this.addMouseWheelListener(listener);
         this.addKeyListener(listener);
         simulator.addListener(this, AnimatorInterface.UPDATE_ANIMATION_EVENT);
-        simulator.addListener(this, ReplicationInterface.START_REPLICATION_EVENT);
+        simulator.addListener(this, Replication.START_REPLICATION_EVENT);
     }
 
     /** {@inheritDoc} */
@@ -282,7 +282,7 @@ public class AnimationPanel extends GridPanel implements EventListener, EventPro
             objectRemoved((Renderable2DInterface<? extends Locatable>) ((Object[]) event.getContent())[2]);
         }
 
-        else if (event.getType().equals(ReplicationInterface.START_REPLICATION_EVENT))
+        else if (event.getType().equals(Replication.START_REPLICATION_EVENT))
         {
             synchronized (this.elementList)
             {

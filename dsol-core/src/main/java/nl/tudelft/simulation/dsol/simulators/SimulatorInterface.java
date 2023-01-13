@@ -9,7 +9,7 @@ import org.djutils.metadata.MetaData;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 
@@ -91,9 +91,9 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
 
     /**
      * Returns the currently executed replication, or null when the initialize method has not yet been called.
-     * @return ReplicationInterface&lt;T&gt;; the current replication, or null when the model has not yet been initialized
+     * @return Replication&lt;T&gt;; the current replication, or null when the model has not yet been initialized
      */
-    ReplicationInterface<T> getReplication();
+    Replication<T> getReplication();
 
     /**
      * Returns the currently executed model, or null when the initialize method has not yet been called.
@@ -141,7 +141,7 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      *            model
      * @throws SimRuntimeException when the simulator is running
      */
-    void initialize(DSOLModel<T, ? extends SimulatorInterface<T>> model, ReplicationInterface<T> replication)
+    void initialize(DSOLModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication)
             throws SimRuntimeException;
 
     /**

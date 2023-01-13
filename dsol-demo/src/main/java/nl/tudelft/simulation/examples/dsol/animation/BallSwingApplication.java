@@ -6,7 +6,7 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleLogger;
@@ -79,7 +79,7 @@ public class BallSwingApplication extends DSOLAnimationApplication
     {
         DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("BallSwingApplication", 0.001);
         BallModel model = new BallModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
         DSOLPanel panel = new DSOLPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
         panel.addTab("logger", new ConsoleLogger(Level.INFO));

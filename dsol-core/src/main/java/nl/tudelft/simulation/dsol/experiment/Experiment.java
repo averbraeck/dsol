@@ -43,7 +43,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @param <S> the simulator to use
  */
 public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
-        implements EventListener, RunControlInterface<T>, Contextualized
+        implements EventListener, Treatment<T>, Contextualized
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -99,7 +99,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
      * @param id String; the id of the experiment
      * @param simulator S; the simulator
      * @param model DSOLModel&lt;T, S&gt;; the model to experiment with
-     * @param startTime T; the start time as a time object.
+     * @param startTime T; the start time of the simulation.
      * @param warmupPeriod R; the warmup period, included in the runlength (!)
      * @param runLength R; the total length of the run, including the warm-up period.
      * @param numberOfReplications int; the number of replications to execute
@@ -128,6 +128,13 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         this.runControl = runControl;
         this.simulator = simulator;
         this.model = model;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RunControl<T> getRunControl()
+    {
+        return this.runControl;
     }
 
     /**
@@ -188,7 +195,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         this.startedReplications.add(replication);
         this.streamUpdater.updateSeeds(this.model.getStreams(), this.currentReplicationNumber);
         this.simulator.initialize(getModel(), replication);
-        this.simulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT, ReferenceType.STRONG);
+        this.simulator.addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
         this.simulator.start();
     }
 
@@ -207,7 +214,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
      */
     protected ExperimentReplication<T, S> makeExperimentReplication()
     {
-        return new ExperimentReplication<T, S>("Replication " + this.currentReplicationNumber, getStartSimTime(),
+        return new ExperimentReplication<T, S>("Replication " + this.currentReplicationNumber, getStartTime(),
                 getWarmupPeriod(), getRunLength(), this);
     }
 
@@ -215,7 +222,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
     @Override
     public void notify(final Event event) throws RemoteException
     {
-        if (event.getType().equals(ReplicationInterface.END_REPLICATION_EVENT))
+        if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         {
             endReplication();
             this.experimentThread.interrupt();
@@ -337,27 +344,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         return this.summaryStatistics;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public String getId()
-    {
-        return this.runControl.getId();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getDescription()
-    {
-        return this.runControl.getDescription();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void setDescription(final String description)
-    {
-        this.runControl.setDescription(description);
-    }
-
     /**
      * Return the current (running or finished) replication.
      * @return int; the current replication (still running or finished in case of last replication)
@@ -403,27 +389,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         {
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public T getStartSimTime()
-    {
-        return this.runControl.getStartSimTime();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public T getEndSimTime()
-    {
-        return this.runControl.getEndSimTime();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public T getWarmupSimTime()
-    {
-        return this.runControl.getWarmupSimTime();
     }
 
     /**

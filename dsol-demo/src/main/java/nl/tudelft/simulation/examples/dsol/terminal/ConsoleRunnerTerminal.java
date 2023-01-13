@@ -8,7 +8,7 @@ import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
@@ -48,7 +48,7 @@ public final class ConsoleRunnerTerminal implements EventListener
         double runtime = 40 * 60;
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("ConsoleRunnerTerminal");
         Terminal model = new Terminal(simulator, rep);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, runtime);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, runtime);
         model.getStreams().put("default", new MersenneTwister(seed++));
         InputParameterMap parameters = model.getInputParameterMap();
         ((InputParameterInteger) parameters.get("numQC")).setIntValue(numQC);

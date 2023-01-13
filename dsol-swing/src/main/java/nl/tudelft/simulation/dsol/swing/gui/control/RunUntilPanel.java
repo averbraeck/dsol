@@ -110,7 +110,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
                 String stopTimeValue = (String) this.textField.getValue();
                 this.runUntilTime = parseSimulationTime(stopTimeValue);
                 if (this.runUntilTime == null || getSimulator().getSimulatorTime().compareTo(this.runUntilTime) >= 0
-                        || getSimulator().getReplication().getEndSimTime().compareTo(this.runUntilTime) < 0)
+                        || getSimulator().getReplication().getEndTime().compareTo(this.runUntilTime) < 0)
                 {
                     cancel();
                     return;

@@ -40,7 +40,7 @@ public class DESSSimulatorTest implements EventListener
     {
 //        this.waiter = new Waiter();
 //        DESSSimulatorInterface<Double> dessSimulator = new DESSSimulator<Double>("DESSSimulatorTest", 0.1);
-//        dessSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+//        dessSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
 //        ExperimentalFrame experimentalFrame =
 //                ExperimentUtilDouble.createExperimentalFrame(dessSimulator, new TestModel(dessSimulator));
 //        experimentalFrame.start();

@@ -8,7 +8,7 @@ import org.djutils.stats.summarizers.event.StatisticsEvents;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
@@ -58,7 +58,7 @@ public class Warehouse42SwingApplication extends DSOLApplication
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("Warehouse42SwingApplication");
         Warehouse42Model model = new Warehouse42Model(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 5 * 24.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 5 * 24.0);
         simulator.initialize(model, replication);
         new TabbedParameterDialog(model.getInputParameterMap());
         new Warehouse42SwingApplication("MM1 Queue model", new Warehouse42Panel(model, simulator));

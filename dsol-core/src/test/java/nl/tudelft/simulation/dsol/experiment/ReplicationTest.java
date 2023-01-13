@@ -35,11 +35,11 @@ public class ReplicationTest
         srd.setDescription("single replication");
         assertEquals("single replication", srd.getDescription());
         assertEquals(10.0, srd.getStartTime(), 1E-9);
-        assertEquals(10.0, srd.getStartSimTime(), 1E-9);
+        assertEquals(10.0, srd.getStartTime(), 1E-9);
         assertEquals(22.0, srd.getEndTime(), 1E-9);
-        assertEquals(22.0, srd.getEndSimTime(), 1E-9);
+        assertEquals(22.0, srd.getEndTime(), 1E-9);
         assertEquals(11.0, srd.getWarmupTime(), 1E-9);
-        assertEquals(11.0, srd.getWarmupSimTime(), 1E-9);
+        assertEquals(11.0, srd.getWarmupTime(), 1E-9);
         assertEquals(12.0, srd.getRunLength(), 1E-9);
         assertEquals(1.0, srd.getWarmupPeriod(), 1E-9);
         assertTrue(srd.toString().contains("single replication"));
@@ -82,11 +82,11 @@ public class ReplicationTest
         // Generic type
         SingleReplication<Double> sr = new SingleReplication<>("srd", 10.0, 1.0, 12.0);
         assertEquals(10.0, sr.getStartTime(), 1E-9);
-        assertEquals(10.0, sr.getStartSimTime(), 1E-9);
+        assertEquals(10.0, sr.getStartTime(), 1E-9);
         assertEquals(22.0, sr.getEndTime(), 1E-9);
-        assertEquals(22.0, sr.getEndSimTime(), 1E-9);
+        assertEquals(22.0, sr.getEndTime(), 1E-9);
         assertEquals(11.0, sr.getWarmupTime(), 1E-9);
-        assertEquals(11.0, sr.getWarmupSimTime(), 1E-9);
+        assertEquals(11.0, sr.getWarmupTime(), 1E-9);
         assertEquals(12.0, sr.getRunLength(), 1E-9);
         assertEquals(1.0, sr.getWarmupPeriod(), 1E-9);
 

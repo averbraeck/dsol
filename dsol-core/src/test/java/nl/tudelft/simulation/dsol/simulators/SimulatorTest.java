@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.Sleep;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 
@@ -40,7 +40,7 @@ public class SimulatorTest
         {
             DevsSimulator<Double> simulator = new DevsSimulator<Double>("sim");
             TestModel model = new TestModel(simulator);
-            ReplicationInterface<Double> replication = new SingleReplication<Double>("rep", 0.0, 0.0, 100.0);
+            Replication<Double> replication = new SingleReplication<Double>("rep", 0.0, 0.0, 100.0);
             simulator.initialize(model, replication);
             simulator.start();
             while (simulator.isStartingOrRunning())

@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import org.djutils.draw.bounds.Bounds2d;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.web.DSOLWebServer;
@@ -52,7 +52,7 @@ public class GISWebApplication extends DSOLWebServer
     {
         DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("GISWebApplication", 0.01);
         GISModel model = new GISModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
         new GISWebApplication("GIS Animation model", simulator);
     }
