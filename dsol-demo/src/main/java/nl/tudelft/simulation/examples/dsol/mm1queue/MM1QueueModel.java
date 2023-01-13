@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.swing.charts.boxAndWhisker.BoxAndWhiskerChart;
@@ -36,7 +36,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class MM1QueueModel extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+public class MM1QueueModel extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DEVSSimulator<Doubl
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      * @throws InputParameterException on parameter error
      */
-    public MM1QueueModel(final DEVSSimulator<Double> simulator) throws InputParameterException
+    public MM1QueueModel(final DevsxSimulator<Double> simulator) throws InputParameterException
     {
         super(simulator);
         InputParameterMap generatorMap = new InputParameterMap("generator", "Generator", "Generator", 1.0);

@@ -30,7 +30,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * @param <T> the simulation time type based on the absolute and relative time.
  * @since 1.5
  */
-public class DEVSSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DevsSimulatorInterface<T>
+public class DevsxSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DevsSimulatorInterface<T>
 {
     /** */
     private static final long serialVersionUID = 20140804L;
@@ -43,7 +43,7 @@ public class DEVSSimulator<T extends Number & Comparable<T>> extends Simulator<T
      * Constructs a new DEVSSimulator.
      * @param id the id of the simulator, used in logging and firing of events.
      */
-    public DEVSSimulator(final Serializable id)
+    public DevsxSimulator(final Serializable id)
     {
         super(id);
     }

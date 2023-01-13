@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
@@ -46,7 +46,7 @@ public class SwingApplication extends DSOLApplication
      */
     public static void main(final String[] args) throws NamingException, RemoteException
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("simulator");
         MyModel model = new MyModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
@@ -57,7 +57,7 @@ public class SwingApplication extends DSOLApplication
     }
 
     /** */
-    static class MyModel extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+    static class MyModel extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -65,7 +65,7 @@ public class SwingApplication extends DSOLApplication
         /**
          * @param simulator the simulator
          */
-        MyModel(final DEVSSimulator<Double> simulator)
+        MyModel(final DevsxSimulator<Double> simulator)
         {
             super(simulator);
         }

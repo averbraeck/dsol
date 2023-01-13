@@ -10,7 +10,7 @@ import org.pmw.tinylog.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 
 /**
  * <p>
@@ -25,7 +25,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 public class MM1Queue41Application
 {
     /** */
-    private DEVSSimulator<Double> simulator;
+    private DevsxSimulator<Double> simulator;
 
     /** */
     private MM1Queue41Model model;
@@ -38,7 +38,7 @@ public class MM1Queue41Application
      */
     protected MM1Queue41Application() throws SimRuntimeException, RemoteException, NamingException
     {
-        this.simulator = new DEVSSimulator<Double>("MM1Queue41Application");
+        this.simulator = new DevsxSimulator<Double>("MM1Queue41Application");
         this.model = new MM1Queue41Model(this.simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         this.simulator.initialize(this.model, replication);

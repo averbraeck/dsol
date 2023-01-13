@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 
 /**
  * <p>
@@ -38,7 +38,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
 public class WebMM1Queue41Application
 {
     /** */
-    private DEVSSimulator<Double> simulator;
+    private DevsxSimulator<Double> simulator;
 
     /** */
     private WebMM1Queue41Model model;
@@ -51,7 +51,7 @@ public class WebMM1Queue41Application
      */
     protected WebMM1Queue41Application() throws SimRuntimeException, RemoteException, NamingException
     {
-        this.simulator = new DEVSSimulator<Double>("WebMM1Queue41Application");
+        this.simulator = new DevsxSimulator<Double>("WebMM1Queue41Application");
         this.model = new WebMM1Queue41Model(this.simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         this.simulator.initialize(this.model, replication);

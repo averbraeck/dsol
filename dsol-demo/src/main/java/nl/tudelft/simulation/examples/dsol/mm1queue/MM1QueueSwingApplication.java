@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
@@ -53,7 +53,7 @@ public class MM1QueueSwingApplication extends DSOLApplication
     public static void main(final String[] args)
             throws SimRuntimeException, RemoteException, NamingException, InterruptedException, InputParameterException
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("MM1QueueSwingApplication");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("MM1QueueSwingApplication");
         MM1QueueModel model = new MM1QueueModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
         simulator.initialize(model, replication);
@@ -78,7 +78,7 @@ public class MM1QueueSwingApplication extends DSOLApplication
          * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
          * @throws RemoteException on error
          */
-        MM1QueuePanel(final MM1QueueModel model, final DEVSSimulator<Double> simulator) throws RemoteException
+        MM1QueuePanel(final MM1QueueModel model, final DevsxSimulator<Double> simulator) throws RemoteException
         {
             super(new DEVSControlPanel.TimeDouble(model, simulator));
             addTabs(model);

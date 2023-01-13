@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
 import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
 import nl.tudelft.simulation.jstats.distributions.DistConstant;
@@ -30,7 +30,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class WebMM1Queue41Model extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+public class WebMM1Queue41Model extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -50,7 +50,7 @@ public class WebMM1Queue41Model extends AbstractDSOLModel<Double, DEVSSimulator<
     /**
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator to use for this model
      */
-    public WebMM1Queue41Model(final DEVSSimulator<Double> simulator)
+    public WebMM1Queue41Model(final DevsxSimulator<Double> simulator)
     {
         super(simulator);
     }

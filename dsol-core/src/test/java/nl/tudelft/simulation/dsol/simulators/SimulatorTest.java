@@ -38,7 +38,7 @@ public class SimulatorTest
         /** */
         TestScheduledInitMethods()
         {
-            DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("sim");
+            DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("sim");
             TestModel model = new TestModel(simulator);
             ReplicationInterface<Double> replication = new SingleReplication<Double>("rep", 0.0, 0.0, 100.0);
             simulator.initialize(model, replication);
@@ -52,7 +52,7 @@ public class SimulatorTest
     }
 
     /** */
-    static class TestModel extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+    static class TestModel extends AbstractDSOLModel<Double, DevsxSimulator<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -63,7 +63,7 @@ public class SimulatorTest
         /**
          * @param simulator the simulator
          */
-        TestModel(final DEVSSimulator<Double> simulator)
+        TestModel(final DevsxSimulator<Double> simulator)
         {
             super(simulator);
             try

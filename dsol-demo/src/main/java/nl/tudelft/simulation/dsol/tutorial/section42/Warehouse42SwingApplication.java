@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
@@ -56,7 +56,7 @@ public class Warehouse42SwingApplication extends DSOLApplication
     public static void main(final String[] args)
             throws SimRuntimeException, RemoteException, NamingException, InterruptedException, InputParameterException
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("Warehouse42SwingApplication");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("Warehouse42SwingApplication");
         Warehouse42Model model = new Warehouse42Model(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 5 * 24.0);
         simulator.initialize(model, replication);
@@ -81,7 +81,7 @@ public class Warehouse42SwingApplication extends DSOLApplication
          * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
          * @throws RemoteException on error
          */
-        Warehouse42Panel(final Warehouse42Model model, final DEVSSimulator<Double> simulator) throws RemoteException
+        Warehouse42Panel(final Warehouse42Model model, final DevsxSimulator<Double> simulator) throws RemoteException
         {
             super(new DEVSControlPanel.TimeDouble(model, simulator));
             addTabs(model);

@@ -21,7 +21,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.Sleep;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -50,7 +50,7 @@ public class ExperimentTest
     @SuppressWarnings("null")
     public void testDoubleExperiment()
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("simulator");
         DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, new LinkedHashMap<>());
         Experiment<Double, DevsSimulatorInterface<Double>> expd =
                 new Experiment<>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
@@ -117,7 +117,7 @@ public class ExperimentTest
     public void testExperimentTypes()
     {
         // generic experiment
-        DEVSSimulator<Double> simd = new DEVSSimulator<>("simulator");
+        DevsxSimulator<Double> simd = new DevsxSimulator<>("simulator");
         DSOLModel<Double, DevsSimulatorInterface<Double>> modd =
                 new AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>(simd)
                 {
@@ -137,7 +137,7 @@ public class ExperimentTest
         d1.makeExperimentReplication();
 
         // float experiment
-        DEVSSimulator<Float> simf = new DEVSSimulator<Float>("simulator");
+        DevsxSimulator<Float> simf = new DevsxSimulator<Float>("simulator");
         DSOLModel<Float, DevsSimulatorInterface<Float>> modf = new AbstractDSOLModel<Float, DevsSimulatorInterface<Float>>(simf)
         {
 
@@ -157,7 +157,7 @@ public class ExperimentTest
         f1.makeExperimentReplication();
 
         // long experiment
-        DEVSSimulator<Long> siml = new DEVSSimulator<Long>("simulator");
+        DevsxSimulator<Long> siml = new DevsxSimulator<Long>("simulator");
         DSOLModel<Long, DevsSimulatorInterface<Long>> modl = new AbstractDSOLModel<Long, DevsSimulatorInterface<Long>>(siml)
         {
 
@@ -177,7 +177,7 @@ public class ExperimentTest
         l1.makeExperimentReplication();
 
         // double unit experiment
-        DEVSSimulator<Duration> simdu = new DEVSSimulator<Duration>("simulator");
+        DevsxSimulator<Duration> simdu = new DevsxSimulator<Duration>("simulator");
         DSOLModel<Duration, DevsSimulatorInterface<Duration>> moddu =
                 new AbstractDSOLModel<Duration, DevsSimulatorInterface<Duration>>(simdu)
                 {
@@ -198,7 +198,7 @@ public class ExperimentTest
         du1.makeExperimentReplication();
 
         // float unit experiment
-        DEVSSimulator<FloatDuration> simfu = new DEVSSimulator<FloatDuration>("simulator");
+        DevsxSimulator<FloatDuration> simfu = new DevsxSimulator<FloatDuration>("simulator");
         DSOLModel<FloatDuration, DevsSimulatorInterface<FloatDuration>> modfu =
                 new AbstractDSOLModel<FloatDuration, DevsSimulatorInterface<FloatDuration>>(simfu)
                 {
@@ -227,7 +227,7 @@ public class ExperimentTest
     public void testExperimentRun() throws RemoteException
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("simulator");
         DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
         Experiment<Double, DevsSimulatorInterface<Double>> expd =
                 new Experiment<Double, DevsSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
@@ -279,7 +279,7 @@ public class ExperimentTest
     public void testExperimentRunSeedUpdater() throws RemoteException
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("simulator");
         DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
         StreamSeedInformation streamInformation = new StreamSeedInformation();
         streamInformation.addStream("default", new MersenneTwister(10L));
@@ -320,7 +320,7 @@ public class ExperimentTest
     @Test
     public void testSummaryStatistics() throws RemoteException
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("simulator");
         DSOLModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
         Experiment<Double, DevsSimulatorInterface<Double>> expd =
                 new Experiment<Double, DevsSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 10.0, 20.0, 10);

@@ -10,7 +10,7 @@ import org.pmw.tinylog.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsxSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
 import nl.tudelft.simulation.language.DSOLException;
@@ -37,7 +37,7 @@ public class MM1Queue41SwingApplication extends DSOLApplication
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
     public MM1Queue41SwingApplication(final MM1Queue41Panel panel, final MM1Queue41Model model,
-            final DEVSSimulator<Double> simulator)
+            final DevsxSimulator<Double> simulator)
     {
         super(panel, "MM1Queue41SwingApplication");
         this.model = model;
@@ -64,7 +64,7 @@ public class MM1Queue41SwingApplication extends DSOLApplication
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DSOLException
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("MM1Queue41SwingApplication");
+        DevsxSimulator<Double> simulator = new DevsxSimulator<Double>("MM1Queue41SwingApplication");
         MM1Queue41Model model = new MM1Queue41Model(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
