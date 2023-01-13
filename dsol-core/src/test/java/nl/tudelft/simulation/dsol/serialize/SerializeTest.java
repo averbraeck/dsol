@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.simulators.DESSSimulator;
 import nl.tudelft.simulation.dsol.simulators.DEVDESSAnimator;
 import nl.tudelft.simulation.dsol.simulators.DEVDESSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 
@@ -41,7 +41,7 @@ public class SerializeTest
         new MarshalledObject(new DESSSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DEVDESSSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DEVDESSAnimator("SerializeTest", 0.1));
-        new MarshalledObject(new DevsxRealTimeAnimator.TimeDoubleUnit("SerializeTest"));
+        new MarshalledObject(new DevsRealTimeAnimator.TimeDoubleUnit("SerializeTest"));
 
         // ---------- Let's test the formalisms ----------------
 

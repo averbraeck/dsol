@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
@@ -50,7 +50,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DevsxRealTimeAnimator.TimeDouble("testDEVSSimulationDouble", 0.1);
+        this.devsSimulator = new DevsRealTimeAnimator.TimeDouble("testDEVSSimulationDouble", 0.1);
         this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
         ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
@@ -90,7 +90,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DevsxRealTimeAnimator.TimeDouble("testRunUpTo", 0.1);
+        this.devsSimulator = new DevsRealTimeAnimator.TimeDouble("testRunUpTo", 0.1);
         this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
         ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);

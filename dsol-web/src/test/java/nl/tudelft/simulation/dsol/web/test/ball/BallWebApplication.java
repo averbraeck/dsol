@@ -4,7 +4,7 @@ import org.djutils.draw.bounds.Bounds2d;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.web.DSOLWebServer;
 
 /**
@@ -24,7 +24,7 @@ public class BallWebApplication extends DSOLWebServer
      * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
      * @throws Exception on jetty error
      */
-    public BallWebApplication(final String title, final DevsxRealTimeAnimator.TimeDouble simulator) throws Exception
+    public BallWebApplication(final String title, final DevsRealTimeAnimator.TimeDouble simulator) throws Exception
     {
         super(title, simulator, new Bounds2d(-100, 100, -100, 100));
     }
@@ -35,7 +35,7 @@ public class BallWebApplication extends DSOLWebServer
      */
     public static void main(final String[] args) throws Exception
     {
-        DevsxRealTimeAnimator.TimeDouble simulator = new DevsxRealTimeAnimator.TimeDouble("BallWebApplication", 0.01);
+        DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("BallWebApplication", 0.01);
         BallModel model = new BallModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);

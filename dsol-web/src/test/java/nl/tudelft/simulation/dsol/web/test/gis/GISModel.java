@@ -6,7 +6,7 @@ import org.djutils.io.URLResource;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 
 /**
  * <p>
@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  */
-public class GISModel extends AbstractDSOLModel<Double, DevsxRealTimeAnimator.TimeDouble>
+public class GISModel extends AbstractDSOLModel<Double, DevsRealTimeAnimator.TimeDouble>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -26,7 +26,7 @@ public class GISModel extends AbstractDSOLModel<Double, DevsxRealTimeAnimator.Ti
      * constructs a new GISModel.
      * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
      */
-    public GISModel(final DevsxRealTimeAnimator.TimeDouble simulator)
+    public GISModel(final DevsRealTimeAnimator.TimeDouble simulator)
     {
         super(simulator);
     }
