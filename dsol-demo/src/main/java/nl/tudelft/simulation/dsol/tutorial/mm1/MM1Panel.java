@@ -26,7 +26,7 @@ import nl.tudelft.simulation.language.DSOLException;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1QueuePanel extends DSOLPanel
+public class MM1Panel extends DSOLPanel
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -37,7 +37,7 @@ public class MM1QueuePanel extends DSOLPanel
      * @throws DSOLException on error
      * @throws RemoteException on error
      */
-    public MM1QueuePanel(final DEVSControlPanel.TimeDouble controlPanel, final MM1QueueModel model)
+    public MM1Panel(final DEVSControlPanel.TimeDouble controlPanel, final MM1Model model)
             throws RemoteException, DSOLException
     {
         super(controlPanel);
@@ -49,7 +49,7 @@ public class MM1QueuePanel extends DSOLPanel
      * add a number of charts for the demo.
      * @param model MM1Queue41Model; the model from which to take the statistics
      */
-    public void addTabs(final MM1QueueModel model)
+    public void addTabs(final MM1Model model)
     {
         TablePanel charts = new TablePanel(4, 3);
         getTabbedPane().addTab("statistics", charts);

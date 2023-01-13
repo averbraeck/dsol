@@ -30,7 +30,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class MM1QueueModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
+public class MM1Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -50,7 +50,7 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DevsSimulator<Doubl
     /**
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      */
-    public MM1QueueModel(final DevsSimulator<Double> simulator)
+    public MM1Model(final DevsSimulator<Double> simulator)
     {
         super(simulator);
     }

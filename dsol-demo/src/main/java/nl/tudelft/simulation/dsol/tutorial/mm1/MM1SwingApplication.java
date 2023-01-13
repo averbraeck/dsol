@@ -26,17 +26,17 @@ import nl.tudelft.simulation.language.DSOLException;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1QueueSwingApplication extends DSOLApplication
+public class MM1SwingApplication extends DSOLApplication
 {
     /** the model. */
-    private MM1QueueModel model;
+    private MM1Model model;
 
     /**
      * @param panel DSOLPanel; the panel
      * @param model MM1Queue41Model; the model
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
-    public MM1QueueSwingApplication(final MM1QueuePanel panel, final MM1QueueModel model,
+    public MM1SwingApplication(final MM1Panel panel, final MM1Model model,
             final DevsSimulator<Double> simulator)
     {
         super(panel, "MM1Queue41SwingApplication");
@@ -65,11 +65,11 @@ public class MM1QueueSwingApplication extends DSOLApplication
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("MM1Queue41SwingApplication");
-        MM1QueueModel model = new MM1QueueModel(simulator);
+        MM1Model model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
         DEVSControlPanel.TimeDouble controlPanel = new DEVSControlPanel.TimeDouble(model, simulator);
-        new MM1QueueSwingApplication(new MM1QueuePanel(controlPanel, model), model, simulator);
+        new MM1SwingApplication(new MM1Panel(controlPanel, model), model, simulator);
     }
 
     /** stop the simulation. */

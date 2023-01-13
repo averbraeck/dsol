@@ -22,13 +22,13 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1QueueApplication
+public class MM1Application
 {
     /** */
     private DevsSimulator<Double> simulator;
 
     /** */
-    private MM1QueueModel model;
+    private MM1Model model;
 
     /**
      * Construct a console application.
@@ -36,10 +36,10 @@ public class MM1QueueApplication
      * @throws RemoteException on error
      * @throws NamingException on error
      */
-    protected MM1QueueApplication() throws SimRuntimeException, RemoteException, NamingException
+    protected MM1Application() throws SimRuntimeException, RemoteException, NamingException
     {
         this.simulator = new DevsSimulator<Double>("MM1Queue41Application");
-        this.model = new MM1QueueModel(this.simulator);
+        this.model = new MM1Model(this.simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         this.simulator.initialize(this.model, replication);
         this.simulator.scheduleEventAbs(1000.0, this, "terminate", null);
@@ -65,7 +65,7 @@ public class MM1QueueApplication
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
-        new MM1QueueApplication();
+        new MM1Application();
     }
 
 }
