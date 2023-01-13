@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.eventlists.RedBlackTree;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
-import nl.tudelft.simulation.dsol.simulators.DessxSimulator;
+import nl.tudelft.simulation.dsol.simulators.DessSimulator;
 import nl.tudelft.simulation.dsol.simulators.DEVDESSAnimator;
 import nl.tudelft.simulation.dsol.simulators.DEVDESSSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
@@ -38,7 +38,7 @@ public class SerializeTest
     {
         // We start with the simulators.
         new MarshalledObject(new DevsSimulator("SerializeTest"));
-        new MarshalledObject(new DessxSimulator("SerializeTest", 0.1));
+        new MarshalledObject(new DessSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DEVDESSSimulator("SerializeTest", 0.1));
         new MarshalledObject(new DEVDESSAnimator("SerializeTest", 0.1));
         new MarshalledObject(new DevsRealTimeAnimator.TimeDoubleUnit("SerializeTest"));
@@ -51,7 +51,7 @@ public class SerializeTest
 
         // The DESS formalism
         new MarshalledObject(
-                new SimpleDifferentialEquation(new DessxSimulator("SerializeTest", 0.1), 0.1, NumericalIntegratorType.ADAMS, 1));
+                new SimpleDifferentialEquation(new DessSimulator("SerializeTest", 0.1), 0.1, NumericalIntegratorType.ADAMS, 1));
 
         // The process interaction formalism
         // XXX: gives error; first check interpreter package: new Process(new DEVSSimulator());
