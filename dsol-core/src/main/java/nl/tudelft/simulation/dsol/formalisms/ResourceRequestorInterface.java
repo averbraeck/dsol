@@ -21,7 +21,7 @@ public interface ResourceRequestorInterface<T extends Number & Comparable<T>>
     /**
      * receive the requested resource.
      * @param requestedCapacity double; reflects the amount requested.
-     * @param resource Resource&lt;A,R,T&gt;; the requested resource.
+     * @param resource Resource&lt;T&gt;; the requested resource.
      * @throws RemoteException on network failure.
      */
     void receiveRequestedResource(double requestedCapacity, Resource<T> resource) throws RemoteException;

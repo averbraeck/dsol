@@ -52,7 +52,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     /**
      * constructs a new SimPersistent.
      * @param description String; refers to the description of this SimPersistent
-     * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator
+     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
      * @throws RemoteException on network error for one of the listeners
      */
     public SimPersistent(final String description, final SimulatorInterface<T> simulator) throws RemoteException
@@ -82,7 +82,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /**
      * constructs a new SimPersistent.
-     * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator of this model
+     * @param simulator SimulatorInterface&lt;T&gt;; the simulator of this model
      * @param description String; the description
      * @param target EventProducer; the target on which to collect statistics
      * @param eventType EventType; the eventType for which statistics are sampled

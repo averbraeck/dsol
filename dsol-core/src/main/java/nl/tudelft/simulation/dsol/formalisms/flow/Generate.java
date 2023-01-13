@@ -74,7 +74,7 @@ public class Generate<T extends Number & Comparable<T>> extends Station<T>
      * Generator when a destination has been indicated with the setDestination method. This constructor has a maximum number of
      * entities generated, which results in stopping the generator when the maximum number of entities has been reached.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; is the on which the construction of the objects must be scheduled.
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
      * @param myClass Class&lt;?&gt;; is the class of which entities are created
      * @param constructorArguments Object[]; are the parameters for the constructor of myClass. of arguments.
      *            <code>constructorArgument[n]=Integer.valueOf(12)</code> may have constructorArgumentClasses[n]=int.class;
@@ -208,7 +208,7 @@ public class Generate<T extends Number & Comparable<T>> extends Station<T>
 
     /**
      * sets the startTime.
-     * @param startTime DistContinuousSimTime&lt;A,R,T&gt;; is the absolute startTime
+     * @param startTime DistContinuousSimTime&lt;T&gt;; is the absolute startTime
      */
     public synchronized void setStartTime(final DistContinuousSimulationTime<T> startTime)
     {

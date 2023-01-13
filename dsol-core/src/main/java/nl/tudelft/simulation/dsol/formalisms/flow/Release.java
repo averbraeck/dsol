@@ -32,8 +32,8 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
     /**
      * Constructor for Release.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is released
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param resource Resource&lt;T&gt;; which is released
      */
     public Release(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
     {
@@ -43,8 +43,8 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
     /**
      * Constructor for Release.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is released
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param resource Resource&lt;T&gt;; which is released
      * @param amount double; of resource which is released
      */
     public Release(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,

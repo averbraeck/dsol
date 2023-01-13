@@ -43,7 +43,7 @@ public class Schedule<T extends Number & Comparable<T>> extends Generate<T>
     /**
      * constructs a new Schedule.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; is the on which the construction of the objects must be scheduled.
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
      * @param myClass Class&lt;?&gt;; is the class of which entities are created
      * @param constructorArguments Object[]; are the parameters for the constructor of myClass. of arguments.
      *            <code>constructorArgument[n]=Integer.valueOf(12)</code> may have constructorArgumentClasses[n]=int.class;

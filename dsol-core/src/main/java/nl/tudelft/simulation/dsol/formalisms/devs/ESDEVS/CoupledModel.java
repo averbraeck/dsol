@@ -65,7 +65,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * The constructor of a coupled model within another coupled model.
      * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the parent coupled model for this model.
+     * @param parentModel CoupledModel&lt;T&gt;; the parent coupled model for this model.
      */
     public CoupledModel(final String modelName, final CoupledModel<T> parentModel)
     {
@@ -79,7 +79,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Constructor of a high-level coupled model without a parent model.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule events on.
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule events on.
      */
     public CoupledModel(final String modelName, final DevsSimulatorInterface<T> simulator)
     {
@@ -271,7 +271,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * Add a model component to this coupled model.
-     * @param model AbstractDEVSModel&lt;A,R,T&gt;; the component to add.
+     * @param model AbstractDEVSModel&lt;T&gt;; the component to add.
      */
     public void addModelComponent(final AbstractDEVSModel<T> model)
     {
@@ -292,7 +292,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * Remove a model component from a coupled model, including all its couplings (internal, external in, and external out).
-     * @param model AbstractDEVSModel&lt;A,R,T&gt;; the component to remove.
+     * @param model AbstractDEVSModel&lt;T&gt;; the component to remove.
      */
     public void removeModelComponent(final AbstractDEVSModel<T> model)
     {

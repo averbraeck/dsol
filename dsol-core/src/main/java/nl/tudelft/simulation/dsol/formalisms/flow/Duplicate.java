@@ -32,8 +32,8 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
     /**
      * Creates a new Duplicate that makes 1 copy.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param duplicateDestination Station&lt;A,R,T&gt;; the duplicate destination
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param duplicateDestination Station&lt;T&gt;; the duplicate destination
      */
     public Duplicate(final Serializable id, final DevsSimulatorInterface<T> simulator,
             final Station<T> duplicateDestination)
@@ -44,8 +44,8 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
     /**
      * Create a new Duplicate that makes numberCopies copies.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param duplicateDestination Station&lt;A,R,T&gt;; which is the duplicate definition
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param duplicateDestination Station&lt;T&gt;; which is the duplicate definition
      * @param numberCopies int; the number of copies
      */
     public Duplicate(final Serializable id, final DevsSimulatorInterface<T> simulator,

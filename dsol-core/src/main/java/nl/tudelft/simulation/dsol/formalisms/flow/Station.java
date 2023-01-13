@@ -49,7 +49,7 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
     /**
      * constructs a new Station.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; is the simulator on which behavior is scheduled
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; is the simulator on which behavior is scheduled
      */
     public Station(final Serializable id, final DevsSimulatorInterface<T> simulator)
     {
@@ -68,7 +68,7 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
 
     /**
      * sets the destination of this object.
-     * @param destination Station&lt;A,R,T&gt;; defines the next station in the model
+     * @param destination Station&lt;T&gt;; defines the next station in the model
      */
     public void setDestination(final Station<T> destination)
     {

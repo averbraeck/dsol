@@ -21,7 +21,7 @@ public interface IntResourceRequestorInterface<T extends Number & Comparable<T>>
     /**
      * receive the requested resource.
      * @param requestedCapacity long; reflects the amount requested.
-     * @param resource IntResource&lt;A,R,T&gt;; the requested resource.
+     * @param resource IntResource&lt;T&gt;; the requested resource.
      * @throws RemoteException on network failure.
      */
     void receiveRequestedResource(long requestedCapacity, IntResource<T> resource) throws RemoteException;
@@ -29,7 +29,7 @@ public interface IntResourceRequestorInterface<T extends Number & Comparable<T>>
     /**
      * receive the requested resource.
      * @param requestedCapacity int; reflects the amount requested.
-     * @param resource IntResource&lt;A,R,T&gt;; the requested resource.
+     * @param resource IntResource&lt;T&gt;; the requested resource.
      * @throws RemoteException on network failure.
      */
     default void receiveRequestedResource(final int requestedCapacity, final IntResource<T> resource) throws RemoteException

@@ -50,7 +50,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
     /**
      * constructs a new SimTally.
      * @param description String; refers to the description of this Tally.
-     * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on.
+     * @param simulator SimulatorInterface&lt;T&gt;; the simulator to schedule on.
      * @throws RemoteException on network error for one of the listeners
      */
     public SimTally(final String description, final SimulatorInterface<T> simulator) throws RemoteException
@@ -80,7 +80,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
     /**
      * constructs a new SimTally based on an eventType for which statistics are sampled.
      * @param description String; the description of this tally.
-     * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
+     * @param simulator SimulatorInterface&lt;T&gt;; the simulator to schedule on
      * @param target EventProducer; the target on which to subscribe
      * @param eventType EventType; the eventType for which statistics are sampled
      * @throws RemoteException on network error for one of the listeners

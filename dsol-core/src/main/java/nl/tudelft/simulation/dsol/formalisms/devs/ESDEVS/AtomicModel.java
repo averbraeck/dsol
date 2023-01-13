@@ -78,7 +78,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for a stand-alone atomic model with explicit phases.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule on
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model
      */
@@ -90,7 +90,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for an atomic model within a coupled model with explicit phases.
      * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the coupled model this atomic model is part of
+     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model
      */
@@ -101,7 +101,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the coupled model this atomic model is part of
+     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
      */
     public AtomicModel(final String modelName, final CoupledModel<T> parentModel)
     {
@@ -111,7 +111,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule on
      */
     public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator)
     {
@@ -121,7 +121,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for a stand-alone atomic model with explicit phases and a conflict strategy.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule on
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model to use for explicit phase models
      * @param conflictStrategy boolean; the conflict strategy to use when internal and external events take place at the same
@@ -140,7 +140,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for an atomic model within a coupled model with explicit phases and a conflict strategy.
      * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the coupled model this atomic model is part of
+     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model to use for explicit phase models
      * @param conflictStrategy boolean; the conflict strategy to use when internal and external events take place at the same

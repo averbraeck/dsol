@@ -90,8 +90,8 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
      * Constructor for an abstract DEVS model: we have to indicate the simulator to schedule the events on, and the parent model
      * we are part of. A parent model of null means that we are the top model.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule the events on.
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the parent model we are part of.
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule the events on.
+     * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of.
      */
     public AbstractDEVSModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
@@ -120,7 +120,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
     }
 
     /**
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to use from now on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to use from now on
      */
     public void setSimulator(final DevsSimulatorInterface<T> simulator)
     {

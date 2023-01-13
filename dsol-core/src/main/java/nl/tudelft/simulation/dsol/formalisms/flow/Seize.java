@@ -52,8 +52,8 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     /**
      * Constructor for Seize.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which behavior is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is claimed
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which behavior is scheduled
+     * @param resource Resource&lt;T&gt;; which is claimed
      */
     public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
     {
@@ -63,8 +63,8 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     /**
      * Constructor for Seize.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which behavior is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is claimed
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which behavior is scheduled
+     * @param resource Resource&lt;T&gt;; which is claimed
      * @param requestedCapacity double; is the amount which is claimed by the seize
      */
     public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
@@ -113,7 +113,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
 
     /**
      * sets the queue to this seize. This enables seize blocks to share one queue.
-     * @param queue List&lt;Request&lt;A,R,T&gt;&gt;; is a new queue.
+     * @param queue List&lt;Request&lt;T&gt;&gt;; is a new queue.
      */
     public void setQueue(final List<Request<T>> queue)
     {

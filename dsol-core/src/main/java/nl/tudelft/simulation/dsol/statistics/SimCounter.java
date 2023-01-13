@@ -52,7 +52,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     /**
      * constructs a new SimCounter.
      * @param description String; refers to the description of this counter
-     * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator
+     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
      * @throws RemoteException on network error for one of the listeners
      */
     public SimCounter(final String description, final SimulatorInterface<T> simulator) throws RemoteException
@@ -82,7 +82,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     /**
      * constructs a new SimCounter.
      * @param description String; the description
-     * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator of this model
+     * @param simulator SimulatorInterface&lt;T&gt;; the simulator of this model
      * @param target EventProducer; the target on which to count
      * @param eventType EventType; the EventType for which counting takes place
      * @throws RemoteException on network error for one of the listeners

@@ -77,7 +77,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param description String; the description of this resource
      * @param capacity double; of the resource
      */
@@ -91,7 +91,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param capacity double; of the resource
      */
     public Resource(final DevsSimulatorInterface<T> simulator, final double capacity)
@@ -168,7 +168,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
     /**
      * requests an amount of capacity from the resource.
      * @param amount double; the requested amount
-     * @param requestor ResourceRequestorInterface&lt;A,R,T&gt;; the RequestorInterface requesting the amount
+     * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
      * @throws RemoteException on network failure
      * @throws SimRuntimeException on other failures
      */
@@ -181,7 +181,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
     /**
      * requests an amount of capacity from the resource.
      * @param amount double; the requested amount
-     * @param requestor ResourceRequestorInterface&lt;A,R,T&gt;; the RequestorInterface requesting the amount
+     * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
      * @param priority int; the priority of the request
      * @throws RemoteException on network failure
      * @throws SimRuntimeException on other failures
@@ -304,7 +304,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
 
         /**
          * constructs a new Request.
-         * @param requestor ResourceRequestorInterface&lt;A,R,T&gt;; the requestor
+         * @param requestor ResourceRequestorInterface&lt;T&gt;; the requestor
          * @param amount double; the requested amount
          * @param priority int; the priority of the request
          */

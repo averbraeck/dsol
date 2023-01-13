@@ -38,8 +38,8 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
     /**
      * constructs a new Utilization.
      * @param description String; the description of this utilization
-     * @param simulator SimulatorInterface&lt;A,R,T&gt;; the simulator
-     * @param target Station&lt;A,R,T&gt;; the target
+     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+     * @param target Station&lt;T&gt;; the target
      * @throws RemoteException on network error for one of the listeners
      */
     public Utilization(final String description, final SimulatorInterface<T> simulator, final Station<T> target)
