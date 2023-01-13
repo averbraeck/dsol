@@ -105,7 +105,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"hiding", "checkstyle:hiddenfield"})
     @Override
     public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final ReplicationInterface<T> replication)
             throws SimRuntimeException
@@ -151,8 +150,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** {@inheritDoc} */
     @Override
-    public void addScheduledMethodOnInitialize(final Object target, final String method,
-            final Object[] args) throws SimRuntimeException
+    public void addScheduledMethodOnInitialize(final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
     {
         this.initialmethodCalls.add(new SimEvent<Long>(0L, target, method, args));
     }
