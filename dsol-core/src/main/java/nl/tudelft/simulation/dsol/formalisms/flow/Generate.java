@@ -18,7 +18,7 @@ import nl.tudelft.simulation.jstats.distributions.DistDiscrete;
 import nl.tudelft.simulation.language.reflection.SerializableConstructor;
 
 /**
- * This class defines a generator.
+ * The Generate station generates objects with a certain inter-arrival time.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -70,8 +70,8 @@ public class Generate<T extends Number & Comparable<T>> extends Station<T>
     protected SimEvent<T> nextEvent = null;
 
     /**
-     * constructs a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the
-     * Generator when a destination has been indicated with the setDestination method. This constructor has a maximum number of
+     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Generate
+     * station when a destination has been indicated with the setDestination method. This constructor has a maximum number of
      * entities generated, which results in stopping the generator when the maximum number of entities has been reached.
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.

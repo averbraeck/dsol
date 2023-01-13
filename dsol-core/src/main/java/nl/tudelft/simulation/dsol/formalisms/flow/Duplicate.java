@@ -6,7 +6,7 @@ import java.rmi.MarshalledObject;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * A duplicate station duplicates incoming objects and sends them to their alternative destination.
+ * The Duplicate station makes copies of incoming objects and sends them to their destination.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL

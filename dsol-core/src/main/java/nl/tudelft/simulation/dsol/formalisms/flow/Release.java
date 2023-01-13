@@ -6,7 +6,7 @@ import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The release station releases a given quantity of a claimed resource.
+ * The Release station releases a given quantity of a claimed resource.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -30,7 +30,7 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
     private double amount = 1.0;
 
     /**
-     * Constructor for Release.
+     * Construct a Release station to release seized resource units.
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param resource Resource&lt;T&gt;; which is released
