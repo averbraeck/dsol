@@ -6,7 +6,7 @@ import org.djutils.draw.bounds.Bounds2d;
 
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
 import nl.tudelft.simulation.dsol.web.DSOLWebServer;
 
 /**
@@ -38,7 +38,7 @@ public class GISWebApplication extends DSOLWebServer
      * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
      * @throws Exception on jetty error
      */
-    public GISWebApplication(final String title, final DEVSRealTimeAnimator.TimeDouble simulator) throws Exception
+    public GISWebApplication(final String title, final DevsxRealTimeAnimator.TimeDouble simulator) throws Exception
     {
         super(title, simulator, extent);
         getAnimationPanel().setSize(new Dimension(800, 600));
@@ -50,7 +50,7 @@ public class GISWebApplication extends DSOLWebServer
      */
     public static void main(final String[] args) throws Exception
     {
-        DEVSRealTimeAnimator.TimeDouble simulator = new DEVSRealTimeAnimator.TimeDouble("GISWebApplication", 0.01);
+        DevsxRealTimeAnimator.TimeDouble simulator = new DevsxRealTimeAnimator.TimeDouble("GISWebApplication", 0.01);
         GISModel model = new GISModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);

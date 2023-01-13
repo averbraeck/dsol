@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> extends DevsAnimator<T>
+public abstract class DevsxRealTimeAnimator<T extends Number & Comparable<T>> extends DevsAnimator<T>
         implements DevsSimulatorInterface<T>
 {
     /** */
@@ -77,7 +77,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
      * Constructs a new DEVSRealTimeClock.
      * @param id the id of the simulator, used in logging and firing of events.
      */
-    public DEVSRealTimeAnimator(final Serializable id)
+    public DevsxRealTimeAnimator(final Serializable id)
     {
         super(id);
     }
@@ -442,7 +442,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
     /***********************************************************************************************************/
 
     /** Easy access class RealTimeClock&lt;Double&gt;. */
-    public static class TimeDouble extends DEVSRealTimeAnimator<Double> implements DevsSimulatorInterface<Double>
+    public static class TimeDouble extends DevsxRealTimeAnimator<Double> implements DevsSimulatorInterface<Double>
     {
         /** */
         private static final long serialVersionUID = 20140805L;
@@ -474,7 +474,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
     }
 
     /** Easy access class RealTimeClock&lt;Float&gt;. */
-    public abstract static class TimeFloat extends DEVSRealTimeAnimator<Float> implements DevsSimulatorInterface<Float>
+    public abstract static class TimeFloat extends DevsxRealTimeAnimator<Float> implements DevsSimulatorInterface<Float>
     {
         /** */
         private static final long serialVersionUID = 20140805L;
@@ -490,7 +490,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
     }
 
     /** Easy access class RealTimeClock&lt;Long&gt;. */
-    public abstract static class TimeLong extends DEVSRealTimeAnimator<Long> implements DevsSimulatorInterface<Long>
+    public abstract static class TimeLong extends DevsxRealTimeAnimator<Long> implements DevsSimulatorInterface<Long>
     {
         /** */
         private static final long serialVersionUID = 20140805L;
@@ -506,7 +506,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
     }
 
     /** Easy access class RealTimeClock&lt;Duration&gt;. */
-    public static class TimeDoubleUnit extends DEVSRealTimeAnimator<Duration> implements DevsSimulatorInterface<Duration>
+    public static class TimeDoubleUnit extends DevsxRealTimeAnimator<Duration> implements DevsSimulatorInterface<Duration>
     {
         /** */
         private static final long serialVersionUID = 20140805L;
@@ -529,7 +529,7 @@ public abstract class DEVSRealTimeAnimator<T extends Number & Comparable<T>> ext
     }
 
     /** Easy access class RealTimeClock&lt;FloatDuration&gt;. */
-    public static class TimeFloatUnit extends DEVSRealTimeAnimator<FloatDuration>
+    public static class TimeFloatUnit extends DevsxRealTimeAnimator<FloatDuration>
             implements DevsSimulatorInterface<FloatDuration>
     {
         /** */

@@ -35,7 +35,7 @@ import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DInterface;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.web.animation.D2.HTMLAnimationPanel;
 import nl.tudelft.simulation.dsol.web.animation.D2.HTMLGridPanel;
@@ -210,9 +210,9 @@ public abstract class DSOLWebServer implements EventListener
      */
     protected void setSpeedFactor(final double speedFactor)
     {
-        if (this.simulator instanceof DEVSRealTimeAnimator)
+        if (this.simulator instanceof DevsxRealTimeAnimator)
         {
-            ((DEVSRealTimeAnimator<?>) this.simulator).setSpeedFactor(speedFactor);
+            ((DevsxRealTimeAnimator<?>) this.simulator).setSpeedFactor(speedFactor);
         }
     }
 

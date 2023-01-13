@@ -8,7 +8,7 @@ import org.pmw.tinylog.Level;
 import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleLogger;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleOutput;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
@@ -77,7 +77,7 @@ public class BallSwingApplication extends DSOLAnimationApplication
      */
     public static void main(final String[] args) throws Exception
     {
-        DEVSRealTimeAnimator.TimeDouble simulator = new DEVSRealTimeAnimator.TimeDouble("BallSwingApplication", 0.001);
+        DevsxRealTimeAnimator.TimeDouble simulator = new DevsxRealTimeAnimator.TimeDouble("BallSwingApplication", 0.001);
         BallModel model = new BallModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);

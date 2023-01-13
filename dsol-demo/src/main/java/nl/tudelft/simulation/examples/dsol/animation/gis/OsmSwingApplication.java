@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.animation.gis.osm.OsmRenderable2D;
 import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationApplication;
@@ -65,7 +65,7 @@ public class OsmSwingApplication extends DSOLAnimationApplication
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DSOLException
     {
-        DEVSRealTimeAnimator.TimeDouble simulator = new DEVSRealTimeAnimator.TimeDouble("OSMSwingApplication", 0.001);
+        DevsxRealTimeAnimator.TimeDouble simulator = new DevsxRealTimeAnimator.TimeDouble("OSMSwingApplication", 0.001);
         EmptyModel model = new EmptyModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);

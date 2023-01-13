@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsxRealTimeAnimator;
 
 /**
  * <p>
@@ -15,7 +15,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  */
-public class BallModel extends AbstractDSOLModel<Double, DEVSRealTimeAnimator.TimeDouble>
+public class BallModel extends AbstractDSOLModel<Double, DevsxRealTimeAnimator.TimeDouble>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -24,7 +24,7 @@ public class BallModel extends AbstractDSOLModel<Double, DEVSRealTimeAnimator.Ti
      * constructs a new BallModel.
      * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
      */
-    public BallModel(final DEVSRealTimeAnimator.TimeDouble simulator)
+    public BallModel(final DevsxRealTimeAnimator.TimeDouble simulator)
     {
         super(simulator);
     }
