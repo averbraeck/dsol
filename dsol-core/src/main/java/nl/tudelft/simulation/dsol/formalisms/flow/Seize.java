@@ -15,7 +15,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The Seize requests a resource and releases an entity whenever this resource is actually claimed.
+ * The Seize station requests a resource and keeps the entity within the station's queue until the resource is actually claimed.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -33,8 +33,8 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     private static final long serialVersionUID = 20140911L;
 
     /** QUEUE_LENGTH_EVENT is fired when the queue length is changed. */
-    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT",
-            "Queue length", new ObjectDescriptor("queueLength", "Queue length", Integer.class)));
+    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length",
+            new ObjectDescriptor("queueLength", "Queue length", Integer.class)));
 
     /** DELAY_TIME is fired when a new delayTime is computed. */
     public static final EventType DELAY_TIME = new EventType(new MetaData("DELAY_TIME", "Delay time",
@@ -50,7 +50,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     private Resource<T> resource;
 
     /**
-     * Constructor for Seize.
+     * Constructor for Seize station.
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which behavior is scheduled
      * @param resource Resource&lt;T&gt;; which is claimed
@@ -61,7 +61,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     }
 
     /**
-     * Constructor for Seize.
+     * Constructor for Seize station.
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which behavior is scheduled
      * @param resource Resource&lt;T&gt;; which is claimed
@@ -80,7 +80,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     }
 
     /**
-     * receives an object which request an amount.
+     * Receive an object that requests an amount of units from a resource.
      * @param object Object; the object
      * @param pRequestedCapacity double; the requested capacity
      */
@@ -121,8 +121,8 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     }
 
     /**
-     * returns the queue.
-     * @return List the queue
+     * Return the queue.
+     * @return List&lt;Request&lt;T&gt;&gt;; the queue with requests to claim the resource
      */
     public List<Request<T>> getQueue()
     {
@@ -152,7 +152,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     }
 
     /**
-     * The private RequestClass defines the requests for resource.
+     * The Request Class defines the requests for resource.
      * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
      */
     public static class Request<T extends Number & Comparable<T>>
