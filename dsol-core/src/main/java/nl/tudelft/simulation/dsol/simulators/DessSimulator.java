@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  */
-public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DESSSimulatorInterface<T>
+public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DessxSimulatorInterface<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;

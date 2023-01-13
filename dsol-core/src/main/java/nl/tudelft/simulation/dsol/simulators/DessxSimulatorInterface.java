@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
  * @since 1.5
  */
 
-public interface DESSSimulatorInterface<T extends Number & Comparable<T>> extends SimulatorInterface<T>
+public interface DessxSimulatorInterface<T extends Number & Comparable<T>> extends SimulatorInterface<T>
 {
     /** TIME_STEP_CHANGED_EVENT is fired when the time step is set. */
     EventType TIME_STEP_CHANGED_EVENT = new EventType(new MetaData("TIME_STEP_CHANGED_EVENT", "Timestep for integrator changed",
