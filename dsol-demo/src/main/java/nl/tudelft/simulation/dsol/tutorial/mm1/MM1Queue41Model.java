@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.tutorial.section41;
+package nl.tudelft.simulation.dsol.tutorial.mm1;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.Resource;
