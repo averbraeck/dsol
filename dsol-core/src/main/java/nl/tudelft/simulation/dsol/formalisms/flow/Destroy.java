@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public class Departure<T extends Number & Comparable<T>> extends Station<T>
+public class Destroy<T extends Number & Comparable<T>> extends Station<T>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class Departure<T extends Number & Comparable<T>> extends Station<T>
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
      */
-    public Departure(final Serializable id, final DevsSimulatorInterface<T> simulator)
+    public Destroy(final Serializable id, final DevsSimulatorInterface<T> simulator)
     {
         super(id, simulator);
     }

@@ -49,7 +49,7 @@ public class FlowTest
         assertEquals(simulator, delay.getSimulator());
         assertEquals(nrEvents, simulator.getEventList().size());
 
-        Departure<Double> departure = new Departure<Double>("departure", simulator);
+        Destroy<Double> departure = new Destroy<Double>("departure", simulator);
         delay.setDestination(departure);
         assertEquals(departure, delay.getDestination());
         String object = "abc";
