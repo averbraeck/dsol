@@ -6,7 +6,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
 import nl.tudelft.simulation.language.DSOLRuntimeException;
 
 /**
- * SimTime contains a number of static methods to deal with adding and ubstracting simulation times.
+ * SimTime contains a number of static methods to deal with adding and substracting simulation times.
  * <p>
  * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
