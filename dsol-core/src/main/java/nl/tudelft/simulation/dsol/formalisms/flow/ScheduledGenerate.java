@@ -12,12 +12,12 @@ import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The schedule is an extension to the generate which accepts a schedule of interarrival times. Instead of generating with a
- * continuous interarrival distribution we submit a map consiting of keys (execution times). Each key indicates the <i>starting
- * time </i> of a new interval, while the value in the map is the continuous distribution function to use to draw the
- * interarrival times. If no values have to be generated in a certain interval, use a large interarrival time value in the
- * distribution function, or use DistConstant(stream, 1E20) to indicate that the next drawing will take place <i>after </i> the
- * end of the interval.
+ * The ScheduledGenerate is an extension to the Generate station which accepts a schedule of inter-arrival times. Instead of
+ * generating with a continuous interarrival distribution we submit a map consisting of keys (execution times). Each key
+ * indicates the <i>starting time </i> of a new interval, while the value in the map is the continuous distribution function to
+ * use to draw the interarrival times. If no values have to be generated in a certain interval, use a large inter-arrival time
+ * value in the distribution function, or use DistConstant(stream, 1E20) to indicate that the next drawing will take place
+ * <i>after </i> the end of the interval.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -29,7 +29,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public class Schedule<T extends Number & Comparable<T>> extends Generate<T>
+public class ScheduledGenerate<T extends Number & Comparable<T>> extends Generate<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;
@@ -49,7 +49,7 @@ public class Schedule<T extends Number & Comparable<T>> extends Generate<T>
      *            <code>constructorArgument[n]=Integer.valueOf(12)</code> may have constructorArgumentClasses[n]=int.class;
      * @throws SimRuntimeException on constructor invocation.
      */
-    public Schedule(final Serializable id, final DevsSimulatorInterface<T> simulator, final Class<?> myClass,
+    public ScheduledGenerate(final Serializable id, final DevsSimulatorInterface<T> simulator, final Class<?> myClass,
             final Object[] constructorArguments) throws SimRuntimeException
     {
         super(id, simulator, myClass, constructorArguments);
