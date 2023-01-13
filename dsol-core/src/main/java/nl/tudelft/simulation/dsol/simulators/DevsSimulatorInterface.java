@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public interface DevsxSimulatorInterface<T extends Number & Comparable<T>> extends SimulatorInterface<T>
+public interface DevsSimulatorInterface<T extends Number & Comparable<T>> extends SimulatorInterface<T>
 {
     /** The EVENTLIST_CHANGED_EVENT is fired when the eventList is changed. */
     EventType EVENTLIST_CHANGED_EVENT = new EventType(new MetaData("EVENTLIST_CHANGED_EVENT", "Eventlist changed"));

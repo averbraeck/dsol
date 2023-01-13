@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.djutils.event.LocalEventProducer;
 
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * A station is an object which can accept other objects.
@@ -26,7 +26,7 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
 
     /** simulator is the simulator on which behavior is scheduled. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DevsxSimulatorInterface<T> simulator;
+    protected DevsSimulatorInterface<T> simulator;
 
     /** destination refers to the next station in the process-model chain. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -40,7 +40,7 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
      * @param id Serializable; the id of the Station
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; is the simulator on which behavior is scheduled
      */
-    public Station(final Serializable id, final DevsxSimulatorInterface<T> simulator)
+    public Station(final Serializable id, final DevsSimulatorInterface<T> simulator)
     {
         this.id = id;
         this.simulator = simulator;
@@ -83,7 +83,7 @@ public abstract class Station<T extends Number & Comparable<T>> extends LocalEve
     /**
      * @return simulator
      */
-    public DevsxSimulatorInterface<T> getSimulator()
+    public DevsSimulatorInterface<T> getSimulator()
     {
         return this.simulator;
     }

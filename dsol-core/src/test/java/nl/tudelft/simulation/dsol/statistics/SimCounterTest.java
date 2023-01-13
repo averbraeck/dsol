@@ -18,7 +18,7 @@ import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The counterTest test the counter.
@@ -45,8 +45,8 @@ public class SimCounterTest extends LocalEventProducer
     @Test
     public void test() throws RemoteException, NamingException
     {
-        DevsxSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
-        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new DummyModel(simulator);
+        DevsSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
         ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 

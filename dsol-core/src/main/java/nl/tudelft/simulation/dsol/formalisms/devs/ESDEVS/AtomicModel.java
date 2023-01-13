@@ -6,7 +6,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * AtomicModel class. Implements the Classic Parallel DEVS Atomic Model with Ports cf Zeigler et al (2000), section 4.2.2. and
@@ -82,7 +82,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model
      */
-    public AtomicModel(final String modelName, final DevsxSimulatorInterface<T> simulator, final T e, final Phase initphase)
+    public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator, final T e, final Phase initphase)
     {
         this(modelName, simulator, e, initphase, AtomicModel.INTERNAL_FIRST);
     }
@@ -113,7 +113,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @param modelName String; the name of this component
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
      */
-    public AtomicModel(final String modelName, final DevsxSimulatorInterface<T> simulator)
+    public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator)
     {
         this(modelName, simulator, SimTime.zero(simulator.getSimulatorTime()), new Phase(""), AtomicModel.INTERNAL_FIRST);
     }
@@ -127,7 +127,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @param conflictStrategy boolean; the conflict strategy to use when internal and external events take place at the same
      *            time
      */
-    public AtomicModel(final String modelName, final DevsxSimulatorInterface<T> simulator, final T e, final Phase initphase,
+    public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator, final T e, final Phase initphase,
             final boolean conflictStrategy)
     {
         super(modelName, simulator, null);

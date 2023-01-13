@@ -7,7 +7,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.formalisms.Resource;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The Seize is an extended Seize block which computes the servicetime. <br>
@@ -31,7 +31,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator on which to schedule
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to be released
      */
-    public Release(final Serializable id, final DevsxSimulatorInterface<Double> simulator,
+    public Release(final Serializable id, final DevsSimulatorInterface<Double> simulator,
             final Resource<Double> resource)
     {
         super(id, simulator, resource);
@@ -44,7 +44,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to be released
      * @param amount double; the amount to be released
      */
-    public Release(final Serializable id, final DevsxSimulatorInterface<Double> simulator,
+    public Release(final Serializable id, final DevsSimulatorInterface<Double> simulator,
             final Resource<Double> resource, final double amount)
     {
         super(id, simulator, resource, amount);

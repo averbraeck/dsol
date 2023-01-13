@@ -2,7 +2,7 @@ package nl.tudelft.simulation.dsol.tutorial.section42;
 
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistDiscrete;
 import nl.tudelft.simulation.jstats.distributions.DistEmpiricalDiscreteLong;
@@ -25,7 +25,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 public class Customer implements BuyerInterface
 {
     /** the simulator to schedule on. */
-    private DevsxSimulatorInterface<Double> simulator = null;
+    private DevsSimulatorInterface<Double> simulator = null;
 
     /** the retailer by whom we order our product. */
     private SellerInterface retailer = null;
@@ -42,7 +42,7 @@ public class Customer implements BuyerInterface
      * @param retailer SellerInterface; the retailer to buy at. In more advanced examples, we would look up this retailer at a
      *            yellow page.
      */
-    public Customer(final DevsxSimulatorInterface<Double> simulator, final SellerInterface retailer)
+    public Customer(final DevsSimulatorInterface<Double> simulator, final SellerInterface retailer)
     {
         super();
         this.simulator = simulator;

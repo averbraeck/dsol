@@ -12,7 +12,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.ResourceRequestorInterface;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The Seize requests a resource and releases an entity whenever this resource is actually claimed.
@@ -55,7 +55,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which behavior is scheduled
      * @param resource Resource&lt;A,R,T&gt;; which is claimed
      */
-    public Seize(final Serializable id, final DevsxSimulatorInterface<T> simulator, final Resource<T> resource)
+    public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
     {
         this(id, simulator, resource, 1.0);
     }
@@ -67,7 +67,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
      * @param resource Resource&lt;A,R,T&gt;; which is claimed
      * @param requestedCapacity double; is the amount which is claimed by the seize
      */
-    public Seize(final Serializable id, final DevsxSimulatorInterface<T> simulator, final Resource<T> resource,
+    public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
             final double requestedCapacity)
     {
         super(id, simulator);

@@ -11,7 +11,7 @@ import org.djutils.event.reference.Reference;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortNotFoundException;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * CoupledModel class. This class implements the classic parallel DEVS coupled model with ports conform Zeigler et al. (2000),
@@ -81,7 +81,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
      * @param modelName String; the name of this component
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule events on.
      */
-    public CoupledModel(final String modelName, final DevsxSimulatorInterface<T> simulator)
+    public CoupledModel(final String modelName, final DevsSimulatorInterface<T> simulator)
     {
         super(modelName, simulator, null);
 

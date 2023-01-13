@@ -16,7 +16,7 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -32,7 +32,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
 
     /** */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DevsxSimulatorInterface<Double> devsSimulator;
+    protected DevsSimulatorInterface<Double> devsSimulator;
 
     /** the Waiter from ConcurrentUnit that catches AssertionErrors in other threads. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -95,7 +95,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
         ModelDouble model = new ModelDouble(this.devsSimulator);
         ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         this.devsSimulator.initialize(model, rep);
-        final DevsxSimulatorInterface<Double> sim = this.devsSimulator;
+        final DevsSimulatorInterface<Double> sim = this.devsSimulator;
         final Waiter w = this.waiter;
         final Object target = this;
 
@@ -208,7 +208,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
     /**
      * THE MODEL.
      */
-    public static class ModelDouble extends AbstractDSOLModel<Double, DevsxSimulatorInterface<Double>>
+    public static class ModelDouble extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -216,7 +216,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
         /**
          * @param simulator the simulator.
          */
-        public ModelDouble(final DevsxSimulatorInterface<Double> simulator)
+        public ModelDouble(final DevsSimulatorInterface<Double> simulator)
         {
             super(simulator);
         }

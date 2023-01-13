@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The histogram specifies a histogram chart for the DSOL framework.
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs"> Peter Jacobs </a>
  * @since 1.5
  */
-public class Model extends AbstractDSOLModel<Double, DevsxSimulatorInterface<Double>>
+public class Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class Model extends AbstractDSOLModel<Double, DevsxSimulatorInterface<Dou
      * constructs a new Model.
      * @param simulator the simulator
      */
-    public Model(final DevsxSimulatorInterface<Double> simulator)
+    public Model(final DevsSimulatorInterface<Double> simulator)
     {
         super(simulator);
     }

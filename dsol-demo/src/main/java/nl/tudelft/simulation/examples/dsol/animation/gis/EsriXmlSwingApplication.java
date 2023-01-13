@@ -18,7 +18,7 @@ import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationApplication;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationGisTab;
@@ -80,7 +80,7 @@ public class EsriXmlSwingApplication extends DSOLAnimationApplication
     }
 
     /** The empty model -- this demo is just to show a map on the screen. */
-    static class EmptyModel extends AbstractDSOLModel<Double, DevsxSimulatorInterface<Double>>
+    static class EmptyModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
     {
         /** The default serial version UID for serializable classes. */
         private static final long serialVersionUID = 1L;
@@ -92,7 +92,7 @@ public class EsriXmlSwingApplication extends DSOLAnimationApplication
          * constructs a new EmptyModel.
          * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
          */
-        EmptyModel(final DevsxSimulatorInterface<Double> simulator)
+        EmptyModel(final DevsSimulatorInterface<Double> simulator)
         {
             super(simulator);
         }

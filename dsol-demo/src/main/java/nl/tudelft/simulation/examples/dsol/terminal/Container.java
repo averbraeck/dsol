@@ -3,7 +3,7 @@ package nl.tudelft.simulation.examples.dsol.terminal;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The 'active' container object.
@@ -20,7 +20,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
 public class Container implements IntResourceRequestorInterface<Double>
 {
     /** the simulator. */
-    private final DevsxSimulatorInterface<Double> simulator;
+    private final DevsSimulatorInterface<Double> simulator;
 
     /** the container number. */
     private final int containerNumber;
@@ -44,7 +44,7 @@ public class Container implements IntResourceRequestorInterface<Double>
      * @param agv AGV; the AGV resources
      * @param ship Ship; the ship
      */
-    public Container(final DevsxSimulatorInterface<Double> simulator, final int containerNumber, final QC qc, final AGV agv,
+    public Container(final DevsSimulatorInterface<Double> simulator, final int containerNumber, final QC qc, final AGV agv,
             final Ship ship)
     {
         this.simulator = simulator;

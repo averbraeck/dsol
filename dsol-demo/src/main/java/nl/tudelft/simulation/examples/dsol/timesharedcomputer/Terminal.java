@@ -5,7 +5,7 @@ import org.djutils.event.EventType;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
 /**
@@ -40,7 +40,7 @@ public class Terminal extends Station<Double>
      * @param thinkDelay DistContinuous; the delay
      * @param jobSize DistContinuous; in time
      */
-    public Terminal(final DevsxSimulatorInterface<Double> simulator, final StationInterface cpu,
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final StationInterface cpu,
             final DistContinuous thinkDelay, final DistContinuous jobSize)
     {
         super("Terminal", simulator);

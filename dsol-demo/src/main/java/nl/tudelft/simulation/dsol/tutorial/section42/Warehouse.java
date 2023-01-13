@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
@@ -20,7 +20,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 public class Warehouse implements SellerInterface
 {
     /** simulator. the simulator to schedule on. */
-    private DevsxSimulatorInterface<Double> simulator = null;
+    private DevsSimulatorInterface<Double> simulator = null;
 
     /** the delivery or leadTime. */
     private DistContinuous leadTime = null;
@@ -29,7 +29,7 @@ public class Warehouse implements SellerInterface
      * constructs a new Warehouse.
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator to schedule on
      */
-    public Warehouse(final DevsxSimulatorInterface<Double> simulator)
+    public Warehouse(final DevsSimulatorInterface<Double> simulator)
     {
         super();
         this.simulator = simulator;

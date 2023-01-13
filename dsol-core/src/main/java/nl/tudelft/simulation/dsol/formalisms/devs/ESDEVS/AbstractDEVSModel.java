@@ -13,7 +13,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.reflection.ClassUtil;
 
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * AbstractDEVSModel class. The basic model or component from which the AtomicModel, the CoupledModel, and the AbstractEntity
@@ -42,7 +42,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
 
     /** the simulator this model or component will schedule its events on. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DevsxSimulatorInterface<T> simulator;
+    protected DevsSimulatorInterface<T> simulator;
 
     /** all DEVS models are named - this is the component name. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -93,7 +93,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule the events on.
      * @param parentModel CoupledModel&lt;A,R,T&gt;; the parent model we are part of.
      */
-    public AbstractDEVSModel(final String modelName, final DevsxSimulatorInterface<T> simulator,
+    public AbstractDEVSModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
     {
         this.modelName = modelName;
@@ -114,7 +114,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
     /**
      * @return the simulator this model schedules its events on.
      */
-    public DevsxSimulatorInterface<T> getSimulator()
+    public DevsSimulatorInterface<T> getSimulator()
     {
         return this.simulator;
     }
@@ -122,7 +122,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
     /**
      * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to use from now on
      */
-    public void setSimulator(final DevsxSimulatorInterface<T> simulator)
+    public void setSimulator(final DevsSimulatorInterface<T> simulator)
     {
         this.simulator = simulator;
     }

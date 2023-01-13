@@ -15,7 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * JPanel that contains a JSider for setting the speed of the simulation using a logarithmic scale
@@ -52,7 +52,7 @@ public class RunSpeedSliderPanel extends JPanel
      * @param simulator DEVSSimulatorInterface&lt;?, ?, ?&gt;; the simulator to change the speed of
      */
     RunSpeedSliderPanel(final double minimum, final double maximum, final double initialValue, final int ticksPerDecade,
-            final DevsxSimulatorInterface<?> simulator)
+            final DevsSimulatorInterface<?> simulator)
     {
         if (minimum <= 0 || minimum > initialValue || initialValue > maximum)
         {

@@ -6,7 +6,7 @@ import org.djutils.event.LocalEventProducer;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.tutorial.section42.policies.OrderingPolicy;
 import nl.tudelft.simulation.dsol.tutorial.section42.policies.StationaryPolicy;
 
@@ -42,7 +42,7 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
     private long backLog = 0L;
 
     /** the simulator on which to schedule. */
-    private DevsxSimulatorInterface<Double> simulator = null;
+    private DevsSimulatorInterface<Double> simulator = null;
 
     /** the warehouse we use. */
     private SellerInterface warehouse = null;
@@ -67,7 +67,7 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator on which we can schedule
      * @param warehouse SellerInterface; the warehouse to buy at
      */
-    public Retailer(final DevsxSimulatorInterface<Double> simulator, final SellerInterface warehouse)
+    public Retailer(final DevsSimulatorInterface<Double> simulator, final SellerInterface warehouse)
     {
         super();
         this.simulator = simulator;

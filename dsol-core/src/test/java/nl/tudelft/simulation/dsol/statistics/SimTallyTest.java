@@ -19,7 +19,7 @@ import org.junit.Test;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The SimTallyTest tests the SimTally.
@@ -49,8 +49,8 @@ public class SimTallyTest extends LocalEventProducer
     @Test
     public void testTallTimeDouble() throws RemoteException, NamingException
     {
-        DevsxSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
-        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new DummyModel(simulator);
+        DevsSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
         SingleReplication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 
@@ -84,8 +84,8 @@ public class SimTallyTest extends LocalEventProducer
     @Test
     public void testTallyEventProduceTimeDouble() throws RemoteException, NamingException
     {
-        DevsxSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
-        DSOLModel<Double, DevsxSimulatorInterface<Double>> model = new DummyModel(simulator);
+        DevsSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
         SingleReplication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 

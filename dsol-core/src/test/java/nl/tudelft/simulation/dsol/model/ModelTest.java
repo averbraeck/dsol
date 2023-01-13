@@ -12,7 +12,7 @@ import nl.tudelft.simulation.dsol.experiment.StreamInformation;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DevsxSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
@@ -37,7 +37,7 @@ public class ModelTest
     @Test
     public void testDSOLModel() throws InputParameterException
     {
-        DevsxSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
+        DevsSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
         DSOLModel<Double, SimulatorInterface<Double>> model =
                 new AbstractDSOLModel<Double, SimulatorInterface<Double>>(simulator)
                 {
