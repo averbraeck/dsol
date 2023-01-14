@@ -31,35 +31,48 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
     /** the experiment to which this replication belongs. */
     private final Experiment<T, S> experiment;
 
+    /** the replication number within the experiment. */
+    final int replicationNr;
+
     /**
      * Construct a replication to be used in an experiment.
      * @param id String; the id of the replication; should be unique within the experiment.
      * @param startTime T; the start time of the simulation.
      * @param warmupPeriod T; the warmup period, included in the runlength (!)
-     * @param runLength T; the total length of the run, including the warm-up period.
+     * @param runLength T; the total length of the run, including the warm-up period
      * @param experiment Experiment; the experiment to which this replication belongs
+     * @param replicationNr int; the replication number within the experiment
      * @throws NullPointerException when id, startTime, warmupPeriod, runLength or experiment is null
      * @throws IllegalArgumentException when warmup period is negative, or run length is zero or negative, or when the warmup
      *             time is longer than or equal to the runlength, or when a context for the replication cannot be created
      */
     public ExperimentReplication(final String id, final T startTime, final T warmupPeriod, final T runLength,
-            final Experiment<T, S> experiment)
+            final Experiment<T, S> experiment, final int replicationNr)
     {
-        this(new RunControl<T>(id, startTime, warmupPeriod, runLength), experiment);
+        this(new RunControl<T>(id, startTime, warmupPeriod, runLength), experiment, replicationNr);
     }
 
     /**
      * Construct a replication to be used in an experiment, using a RunControl to store the run information.
      * @param runControl RunControlInterface; the run control for the replication
      * @param experiment Experiment; the experiment to which this replication belongs
+     * @param replicationNr int; the replication number within the experiment
      * @throws NullPointerException when runControl or experiment is null
      */
-    public ExperimentReplication(final RunControl<T> runControl, final Experiment<T, S> experiment)
+    public ExperimentReplication(final RunControl<T> runControl, final Experiment<T, S> experiment, final int replicationNr)
     {
         super(runControl);
         Throw.whenNull(experiment, "experiment cannot be null");
         this.experiment = experiment;
+        this.replicationNr = replicationNr;
         setContext();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String getId()
+    {
+        return super.getId() + "." + this.replicationNr;
     }
 
     /**
@@ -99,13 +112,13 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public String toString()
     {
         return "ExperimentReplication [id=" + getId() + ", startTime=" + getStartTime() + ", warmupTime=" + getWarmupTime()
-                + ", endTime=" + getEndTime() + "]";
+                + ", endTime=" + getEndTime() + ", replicationNr=" + this.replicationNr + "]";
     }
 
 }

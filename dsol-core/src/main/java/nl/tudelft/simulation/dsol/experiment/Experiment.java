@@ -214,8 +214,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
      */
     protected ExperimentReplication<T, S> makeExperimentReplication()
     {
-        return new ExperimentReplication<T, S>("Replication " + this.currentReplicationNumber, getStartTime(),
-                getWarmupPeriod(), getRunLength(), this);
+        return new ExperimentReplication<T, S>(this.runControl, this, this.currentReplicationNumber);
     }
 
     /** {@inheritDoc} */
