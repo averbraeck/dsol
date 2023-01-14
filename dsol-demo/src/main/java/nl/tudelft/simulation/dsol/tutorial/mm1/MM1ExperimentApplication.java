@@ -1,16 +1,19 @@
 package nl.tudelft.simulation.dsol.tutorial.mm1;
 
 import java.rmi.RemoteException;
+import java.util.SortedMap;
 
 import javax.naming.NamingException;
 
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.logger.CategoryLogger;
+import org.djutils.stats.summarizers.Tally;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Experiment;
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
@@ -24,13 +27,19 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1ExperimentApplication
+public class MM1ExperimentApplication implements EventListener
 {
+    /** */
+    private static final long serialVersionUID = 20230114L;
+
     /** */
     private DevsSimulator<Double> simulator;
 
     /** */
     private MM1Model model;
+
+    /** */
+    private Experiment<Double, SimulatorInterface<Double>> experiment;
 
     /**
      * Construct a console application.
@@ -42,9 +51,57 @@ public class MM1ExperimentApplication
     {
         this.simulator = new DevsSimulator<Double>("MM1ExperimentApplication");
         this.model = new MM1Model(this.simulator);
-        Experiment<Double, SimulatorInterface<Double>> experiment =
-                new Experiment<>("mm1", this.simulator, this.model, 0.0, 0.0, 1000.0, 10);
-        experiment.start();
+        this.experiment = new Experiment<>("mm1", this.simulator, this.model, 0.0, 0.0, 1000.0, 10);
+        this.experiment.addListener(this, Experiment.END_EXPERIMENT_EVENT);
+        this.experiment.addListener(this, Replication.END_REPLICATION_EVENT);
+        this.experiment.start();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void notify(final Event event) throws RemoteException
+    {
+        if (event.getType().equals(Replication.END_REPLICATION_EVENT))
+        {
+            reportReplicationStatistics();
+        }
+        if (event.getType().equals(Experiment.END_EXPERIMENT_EVENT))
+        {
+            reportFinalStatistics();
+        }
+    }
+
+    /**
+     * Report statistics at the end of the run.
+     */
+    protected void reportReplicationStatistics()
+    {
+        System.out.println("Statistics replication:");
+        System.out.println("average queue length = " + this.model.qN.getWeightedSampleMean());
+        System.out.println("average queue wait   = " + this.model.dN.getSampleMean());
+        System.out.println("average utilization  = " + this.model.uN.getWeightedSampleMean());
+        System.out.println();
+    }
+    
+    /**
+     * Report statistics at the end of the run.
+     */
+    protected void reportFinalStatistics()
+    {
+        System.out.println("Final statistics:");
+        SortedMap<String, SortedMap<String, Tally>> stats = this.experiment.getSummaryStatistics();
+        for (String statMapKey : stats.keySet())
+        {
+            SortedMap<String, Tally> statMap = stats.get(statMapKey);
+            for (String statKey : statMap.keySet())
+            {
+                Tally stat = statMap.get(statKey);
+                System.out.println(stat);
+                System.out.println();
+            }
+        }
+        
+        System.exit(0);
     }
 
     /**
