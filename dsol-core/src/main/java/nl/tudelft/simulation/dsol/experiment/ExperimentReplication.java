@@ -99,4 +99,13 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "ExperimentReplication [id=" + getId() + ", startTime=" + getStartTime() + ", warmupTime=" + getWarmupTime()
+                + ", endTime=" + getEndTime() + "]";
+    }
+
 }

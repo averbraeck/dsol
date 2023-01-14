@@ -88,4 +88,12 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Replica
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "SingleReplication [id=" + getId() + ", startTime=" + getStartTime() + ", warmupTime=" + getWarmupTime()
+                + ", endTime=" + getEndTime() + "]";
+    }
 }

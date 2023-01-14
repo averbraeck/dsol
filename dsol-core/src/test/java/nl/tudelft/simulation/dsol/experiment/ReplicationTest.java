@@ -42,7 +42,7 @@ public class ReplicationTest
         assertEquals(11.0, srd.getWarmupTime(), 1E-9);
         assertEquals(12.0, srd.getRunLength(), 1E-9);
         assertEquals(1.0, srd.getWarmupPeriod(), 1E-9);
-        assertTrue(srd.toString().contains("single replication"));
+        assertTrue(srd.toString().contains("SingleReplication"));
         assertNotNull(srd.getContext());
 
         // errors
