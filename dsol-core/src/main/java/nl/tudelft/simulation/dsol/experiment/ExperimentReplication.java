@@ -113,6 +113,24 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
         }
     }
 
+    /**
+     * Return the experiment to which this replication belongs.
+     * @return experiment Experiment; experiment to which this replication belongs.
+     */
+    public Experiment<T, S> getExperiment()
+    {
+        return this.experiment;
+    }
+
+    /**
+     * Return the replication number within the experiment.
+     * @return replicationNr int; the replication number within the experiment
+     */
+    public int getReplicationNr()
+    {
+        return this.replicationNr;
+    }
+
     /** {@inheritDoc} */
     @Override
     public String toString()
