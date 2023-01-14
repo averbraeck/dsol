@@ -224,6 +224,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         {
             endReplication();
+            fireEvent(event); // propagate the END_REPLICATION_EVENT from the experiment
             this.experimentThread.interrupt();
         }
     }
