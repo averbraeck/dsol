@@ -41,7 +41,7 @@ public class DESSModel extends AbstractDSOLModel<Double, DessSimulatorInterface<
         {
             Distance distance = new Distance(this.simulator);
             this.distancePersistent =
-                    new SimPersistent<>("persistent on distance", this.simulator, distance, distance.VALUE_CHANGED_EVENT[0]);
+                    new SimPersistent<>("persistent on distance", this, distance, distance.VALUE_CHANGED_EVENT[0]);
         }
         catch (Exception exception)
         {

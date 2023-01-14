@@ -8,6 +8,7 @@ import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
+import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 
@@ -31,30 +32,27 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
     /** initialzed the tally. */
     private boolean initialized = false;
 
-    /** the simulator. */
-    private SimulatorInterface<T> simulator = null;
-
     /**
      * constructs a new Utilization.
      * @param description String; the description of this utilization
-     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      * @param target Station&lt;T&gt;; the target
      */
-    public Utilization(final String description, final SimulatorInterface<T> simulator, final Station<T> target)
+    public Utilization(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model,
+            final Station<T> target)
     {
-        super(description, simulator);
-        this.simulator = simulator;
+        super(description, model);
         try
         {
             target.addListener(this, Station.RECEIVE_EVENT, ReferenceType.STRONG);
             target.addListener(this, Station.RELEASE_EVENT, ReferenceType.STRONG);
-            this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
-            this.simulator.addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
+            getSimulator().addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
+            getSimulator().addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
             // object is already bound, because SimPersistend (super) bound the statistic to the Context
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "<init>");
+            getSimulator().getLogger().always().warn(exception, "<init>");
         }
     }
 
@@ -67,7 +65,7 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
             this.initialized = true;
             try
             {
-                this.simulator.removeListener(this, Replication.WARMUP_EVENT);
+                getSimulator().removeListener(this, Replication.WARMUP_EVENT);
             }
             catch (RemoteException exception)
             {
@@ -80,7 +78,7 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
         {
             if (event.getType().equals(Replication.END_REPLICATION_EVENT))
             {
-                super.endObservations(this.simulator.getSimulatorTime());
+                super.endObservations(getSimulator().getSimulatorTime());
             }
             else
             {

@@ -7,8 +7,8 @@ import org.djutils.event.Event;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
-import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.swing.charts.boxAndWhisker.BoxAndWhiskerChart;
@@ -61,8 +61,8 @@ public class Computer extends AbstractDSOLModel<Double, DevsSimulator<Double>>
         try
         {
             // First the statistics
-            SimPersistent<Double> persistent = new SimPersistent<>("service time", this.simulator);
-            ExitCounter exitCounter = new ExitCounter("counter", this.simulator);
+            SimPersistent<Double> persistent = new SimPersistent<>("service time", this);
+            ExitCounter exitCounter = new ExitCounter("counter", this);
 
             // Now the charts
             Histogram histogram = new Histogram(this.simulator, "service time", new double[] {0, 200}, 200);
@@ -93,19 +93,16 @@ public class Computer extends AbstractDSOLModel<Double, DevsSimulator<Double>>
         /** */
         private static final long serialVersionUID = 1L;
 
-        /** simulator refers to the simulator. */
-        private SimulatorInterface<Double> simulator = null;
-
         /**
          * constructs a new ExitCounter.
          * @param description String; the description of the counter
-         * @param simulator SimulatorInterface&lt;Double&gt;; the simulator
+         * @param model DSOLModel&lt;Double, SimulatorInterface&lt;Double&gt;&gt;; the model to register the OutputStatistics
          * @throws RemoteException on network failure
          */
-        public ExitCounter(final String description, final SimulatorInterface<Double> simulator) throws RemoteException
+        public ExitCounter(final String description, final DSOLModel<Double, DevsSimulator<Double>> model)
+                throws RemoteException
         {
-            super(description, simulator);
-            this.simulator = simulator;
+            super(description, model);
         }
 
         /** {@inheritDoc} */
@@ -117,14 +114,14 @@ public class Computer extends AbstractDSOLModel<Double, DevsSimulator<Double>>
             {
                 try
                 {
-                    if (this.simulator.isStartingOrRunning())
+                    if (getSimulator().isStartingOrRunning())
                     {
-                        this.simulator.stop();
+                        getSimulator().stop();
                     }
                 }
                 catch (SimRuntimeException exception)
                 {
-                    this.simulator.getLogger().always().error(exception);
+                    getSimulator().getLogger().always().error(exception);
                 }
             }
         }

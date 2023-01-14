@@ -82,10 +82,10 @@ public class MM1Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<D
     @Override
     public void constructModel() throws SimRuntimeException
     {
-        this.persistentUtilization = new SimPersistent<Double>("utilization", this.simulator);
-        this.persistentQueueLength = new SimPersistent<Double>("queue length", this.simulator);
-        this.tallyTimeInQueue = new SimTally<Double>("time in queue", this.simulator);
-        this.tallyTimeInSystem = new SimTally<Double>("time in system", this.simulator);
+        this.persistentUtilization = new SimPersistent<Double>("utilization", this);
+        this.persistentQueueLength = new SimPersistent<Double>("queue length", this);
+        this.tallyTimeInQueue = new SimTally<Double>("time in queue", this);
+        this.tallyTimeInSystem = new SimTally<Double>("time in system", this);
 
         generate();
     }

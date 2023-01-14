@@ -55,7 +55,7 @@ public class SimTallyTest extends LocalEventProducer
         simulator.initialize(model, replication);
 
         String description = "THIS TALLY IS TESTED";
-        SimTally<Double> tally = new SimTally<Double>(description, simulator);
+        SimTally<Double> tally = new SimTally<Double>(description, model);
 
         // check uninitialized tally
         checkBefore(tally);
@@ -90,7 +90,7 @@ public class SimTallyTest extends LocalEventProducer
         simulator.initialize(model, replication);
 
         String description = "THIS TALLY IS TESTED";
-        SimTally<Double> tally = new SimTally<Double>(description, simulator, this, UPDATE_EVENT);
+        SimTally<Double> tally = new SimTally<Double>(description, model, this, UPDATE_EVENT);
 
         // check uninitialized tally
         checkBefore(tally);

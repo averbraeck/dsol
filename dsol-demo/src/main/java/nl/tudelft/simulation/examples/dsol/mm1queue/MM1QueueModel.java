@@ -113,9 +113,9 @@ public class MM1QueueModel extends AbstractDSOLModel<Double, DevsSimulator<Doubl
 
             // Statistics
 
-            new SimCounter<Double>("counting the generator", this.simulator, generator, Generate.CREATE_EVENT);
-            SimPersistent<Double> persistent = new SimPersistent<Double>("persistent on service time", this.simulator, release,
-                    Release.SERVICE_TIME_EVENT);
+            new SimCounter<Double>("counting the generator", this, generator, Generate.CREATE_EVENT);
+            SimPersistent<Double> persistent =
+                    new SimPersistent<Double>("persistent on service time", this, release, Release.SERVICE_TIME_EVENT);
 
             Histogram histogram = new Histogram(this.simulator, "histogram on service time", new double[] {0, 10}, 30);
             histogram.add("histogram on service time", persistent, StatisticsEvents.SAMPLE_MEAN_EVENT);

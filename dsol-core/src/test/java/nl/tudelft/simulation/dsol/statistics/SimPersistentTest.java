@@ -55,7 +55,7 @@ public class SimPersistentTest extends LocalEventProducer
         simulator.initialize(model, replication);
 
         String description = "THIS PERSISTENT IS TESTED";
-        SimPersistent<Double> persistent = new SimPersistent<Double>(description, simulator);
+        SimPersistent<Double> persistent = new SimPersistent<Double>(description, model);
 
         // check the description
         assertEquals(description, persistent.getDescription());

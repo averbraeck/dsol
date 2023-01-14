@@ -8,12 +8,14 @@ import org.djutils.event.Event;
 import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
 import org.djutils.event.reference.ReferenceType;
+import org.djutils.exceptions.Throw;
 import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedCounter;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
+import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -50,14 +52,16 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     private boolean stopped = false;
 
     /**
-     * constructs a new SimCounter.
+     * Construct a new SimCounter, and register the counter in the OutputStatistics of the model.
      * @param description String; refers to the description of this counter
-     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      */
-    public SimCounter(final String description, final SimulatorInterface<T> simulator)
+    public SimCounter(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model)
     {
         super(description);
-        this.simulator = simulator;
+        Throw.whenNull(model, "model cannot be null");
+        model.getOutputStatistics().add(this);
+        this.simulator = model.getSimulator();
         try
         {
             if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) >= 0)
@@ -81,14 +85,14 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     /**
      * constructs a new SimCounter.
      * @param description String; the description
-     * @param simulator SimulatorInterface&lt;T&gt;; the simulator of this model
+     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      * @param target EventProducer; the target on which to count
      * @param eventType EventType; the EventType for which counting takes place
      */
-    public SimCounter(final String description, final SimulatorInterface<T> simulator, final EventProducer target,
-            final EventType eventType)
+    public SimCounter(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model,
+            final EventProducer target, final EventType eventType)
     {
-        this(description, simulator);
+        this(description, model);
         try
         {
             target.addListener(this, eventType, ReferenceType.STRONG);

@@ -10,12 +10,14 @@ import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
 import org.djutils.event.reference.ReferenceType;
+import org.djutils.exceptions.Throw;
 import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedTimestampWeightedTally;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
+import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -52,12 +54,14 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     /**
      * constructs a new SimPersistent.
      * @param description String; refers to the description of this SimPersistent
-     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      */
-    public SimPersistent(final String description, final SimulatorInterface<T> simulator)
+    public SimPersistent(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model)
     {
         super(description);
-        this.simulator = simulator;
+        Throw.whenNull(model, "model cannot be null");
+        model.getOutputStatistics().add(this);
+        this.simulator = model.getSimulator();
         try
         {
             if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
@@ -81,15 +85,15 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /**
      * constructs a new SimPersistent.
-     * @param simulator SimulatorInterface&lt;T&gt;; the simulator of this model
+     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      * @param description String; the description
      * @param target EventProducer; the target on which to collect statistics
      * @param eventType EventType; the eventType for which statistics are sampled
      */
-    public SimPersistent(final String description, final SimulatorInterface<T> simulator, final EventProducer target,
-            final EventType eventType)
+    public SimPersistent(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model,
+            final EventProducer target, final EventType eventType)
     {
-        this(description, simulator);
+        this(description, model);
         try
         {
             target.addListener(this, eventType, ReferenceType.STRONG);

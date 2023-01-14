@@ -88,9 +88,9 @@ public class WebMM1Model extends AbstractDSOLModel<Double, DevsSimulator<Double>
         // Statistics
         try
         {
-            this.dN = new SimTally<Double>("d(n)", getSimulator(), queue, Seize.DELAY_TIME);
-            this.qN = new SimPersistent<Double>("q(n)", getSimulator(), queue, Seize.QUEUE_LENGTH_EVENT);
-            this.uN = new Utilization<>("u(n)", getSimulator(), server);
+            this.dN = new SimTally<Double>("d(n)", this, queue, Seize.DELAY_TIME);
+            this.qN = new SimPersistent<Double>("q(n)", this, queue, Seize.QUEUE_LENGTH_EVENT);
+            this.uN = new Utilization<>("u(n)", this, server);
         }
         catch (Exception exception)
         {
