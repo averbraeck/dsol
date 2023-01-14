@@ -16,7 +16,6 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
 import nl.tudelft.simulation.jstats.distributions.DistConstant;
 import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
-import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
@@ -59,7 +58,7 @@ public class MM1Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
     @Override
     public void constructModel() throws SimRuntimeException
     {
-        StreamInterface defaultStream = new MersenneTwister(2L);
+        StreamInterface defaultStream = getDefaultStream();
 
         // The Generator
         Generate<Double> generator = new Generate<Double>("Generator", this.simulator, Object.class, null);
@@ -88,5 +87,8 @@ public class MM1Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
         this.dN = new SimTally<Double>("d(n)", this.simulator, queue, Seize.DELAY_TIME);
         this.qN = new SimPersistent<Double>("q(n)", this.simulator, queue, Seize.QUEUE_LENGTH_EVENT);
         this.uN = new Utilization<>("u(n)", this.simulator, server);
+        this.outputStatistics.add(this.dN);
+        this.outputStatistics.add(this.qN);
+        this.outputStatistics.add(this.uN);
     }
 }
