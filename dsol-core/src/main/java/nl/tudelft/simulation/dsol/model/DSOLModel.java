@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.StreamInformation;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.statistics.StatisticsInterface;
+import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
@@ -52,7 +52,7 @@ public interface DSOLModel<T extends Number & Comparable<T>, S extends Simulator
      * Get the output statistics for this model.
      * @return List&lt;StatisticsInterface&gt; the output statistics for this model
      */
-    List<StatisticsInterface<T>> getOutputStatistics();
+    List<SimulationStatistic<T>> getOutputStatistics();
 
     /**
      * Set the initial streams of the model based on a StreamInformation object. This method can be called right after the

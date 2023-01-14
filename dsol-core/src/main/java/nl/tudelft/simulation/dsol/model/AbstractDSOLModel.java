@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.model.inputparameters.AbstractInputParameter;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.statistics.StatisticsInterface;
+import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
@@ -41,7 +41,7 @@ public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S exte
 
     /** the output statistics. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected List<StatisticsInterface<T>> outputStatistics = new ArrayList<>();
+    protected List<SimulationStatistic<T>> outputStatistics = new ArrayList<>();
 
     /** streams used in the replication. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -124,7 +124,7 @@ public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S exte
 
     /** {@inheritDoc} */
     @Override
-    public List<StatisticsInterface<T>> getOutputStatistics()
+    public List<SimulationStatistic<T>> getOutputStatistics()
     {
         return this.outputStatistics;
     }

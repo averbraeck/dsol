@@ -32,7 +32,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @param <T> the absolute simulation time to use in the warmup event
  */
-public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCounter implements StatisticsInterface<T>
+public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCounter implements SimulationStatistic<T>
 {
     /** */
     private static final long serialVersionUID = 20140804L;

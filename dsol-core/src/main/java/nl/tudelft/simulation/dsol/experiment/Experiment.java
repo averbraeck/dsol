@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
-import nl.tudelft.simulation.dsol.statistics.StatisticsInterface;
+import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
@@ -248,7 +248,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
      */
     protected void endReplication()
     {
-        for (StatisticsInterface<T> stat : this.model.getOutputStatistics())
+        for (SimulationStatistic<T> stat : this.model.getOutputStatistics())
         {
             if (stat instanceof SimCounter)
             {
