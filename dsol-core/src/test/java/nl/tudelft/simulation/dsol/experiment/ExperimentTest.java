@@ -47,7 +47,6 @@ public class ExperimentTest
      * Test the Experiment object.
      */
     @Test
-    @SuppressWarnings("null")
     public void testDoubleExperiment()
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
@@ -247,10 +246,8 @@ public class ExperimentTest
         }
 
         // test failure
-        Try.testFail(() ->
-        { expd.start(); });
-        Try.testFail(() ->
-        { expd.startNextReplication(); });
+        Try.testFail(() -> expd.start());
+        Try.testFail(() -> expd.startNextReplication());
 
         // reset and do again
         dataCollector.clear();
@@ -435,7 +432,7 @@ public class ExperimentTest
         {
             this.queue = new ArrayList<>();
             this.outputStatistics.clear();
-            this.count = new SimCounter("arrivals", this.simulator);
+            this.count = new SimCounter<Double>("arrivals", this.simulator);
             this.count.initialize();
             this.outputStatistics.add(this.count);
             this.queueTimeTally = new SimTally<Double>("timeInQueue", this.simulator);
