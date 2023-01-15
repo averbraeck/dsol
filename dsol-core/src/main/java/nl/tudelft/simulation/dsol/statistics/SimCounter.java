@@ -64,11 +64,8 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         this.simulator = model.getSimulator();
         try
         {
-            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) >= 0)
-            {
-                this.initialize();
-            }
-            else
+            // only if we are before the warmup time, subscribe to the warmul event 
+            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) < 0)
             {
                 this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
             }
@@ -108,7 +105,18 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     public void initialize()
     {
         super.initialize();
-        fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+        // note that when initialize() is called from the (super) constructor, there cannot be listeners yet
+        if (this.simulator != null)
+        {
+            try
+            {
+                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+            }
+            catch (RemoteException exception)
+            {
+                this.simulator.getLogger().always().warn(exception, "initialize()");
+            }
+        }
     }
 
     /** {@inheritDoc} */
@@ -116,7 +124,14 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     public long register(final long value)
     {
         long result = super.register(value);
-        fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
+        try
+        {
+            fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
+        }
+        catch (RemoteException exception)
+        {
+            this.simulator.getLogger().always().warn(exception, "register()");
+        }
         return result;
     }
 

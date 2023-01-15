@@ -39,7 +39,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
     private static final long serialVersionUID = 20140804L;
 
     /** the simulator. */
-    private final SimulatorInterface<T> simulator;
+    private SimulatorInterface<T> simulator = null;
 
     /** OBSERVATION_ADDED_EVENT is fired whenever an observation is processed. */
     public static final EventType TIMED_OBSERVATION_ADDED_EVENT = new EventType(new MetaData("TIMED_OBSERVATION_ADDED_EVENT",
@@ -62,11 +62,8 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         this.simulator = model.getSimulator();
         try
         {
-            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
-            {
-                this.initialize();
-            }
-            else
+            // only if we are before the warmup time, subscribe to the warmul event
+            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) < 0)
             {
                 this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
             }
@@ -106,7 +103,18 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
     public void initialize()
     {
         super.initialize();
-        fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+        // note that when initialize() is called from the (super) constructor, there cannot be listeners yet
+        if (this.simulator != null)
+        {
+            try
+            {
+                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+            }
+            catch (RemoteException exception)
+            {
+                this.simulator.getLogger().always().warn(exception, "initialize()");
+            }
+        }
     }
 
     /** {@inheritDoc} */
@@ -151,7 +159,14 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
     public double register(final double value)
     {
         super.register(value);
-        fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
+        try
+        {
+            fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
+        }
+        catch (RemoteException exception)
+        {
+            this.simulator.getLogger().always().warn(exception, "register()");
+        }
         return value;
     }
 

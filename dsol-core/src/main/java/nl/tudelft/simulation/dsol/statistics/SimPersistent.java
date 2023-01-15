@@ -64,11 +64,8 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         this.simulator = model.getSimulator();
         try
         {
-            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) > 0)
-            {
-                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
-            }
-            else
+            // only if we are before the warmup time, subscribe to the warmul event
+            if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) < 0)
             {
                 this.simulator.addListener(this, Replication.WARMUP_EVENT, LocalEventProducer.FIRST_POSITION,
                         ReferenceType.STRONG);
@@ -106,15 +103,41 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /** {@inheritDoc} */
     @Override
-    public <N extends Number & Comparable<N>> double register(final N timestamp, final double value)
+    public void initialize()
     {
-        fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, timestamp);
+        super.initialize();
+        // note that when initialize() is called from the (super) constructor, there cannot be listeners yet
+        if (this.simulator != null)
+        {
+            try
+            {
+                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+            }
+            catch (RemoteException exception)
+            {
+                this.simulator.getLogger().always().warn(exception, "initialize()");
+            }
+        }
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public double register(final Number timestamp, final double value)
+    {
+        try
+        {
+            fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, (T) timestamp);
+        }
+        catch (RemoteException exception)
+        {
+            this.simulator.getLogger().always().warn(exception, "register()");
+        }
         return super.register(timestamp, value);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
     public void notify(final Event event)
     {
         if (event.getType().equals(Replication.WARMUP_EVENT))
@@ -122,14 +145,14 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
             try
             {
                 this.simulator.removeListener(this, Replication.WARMUP_EVENT);
+                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+                super.initialize();
+                return;
             }
             catch (RemoteException exception)
             {
                 CategoryLogger.always().warn(exception);
             }
-            fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
-            super.initialize();
-            return;
         }
         else if (isActive())
         {
