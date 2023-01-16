@@ -82,7 +82,7 @@ public class MM1ExperimentApplication implements EventListener
         System.out.println("average utilization  = " + this.model.uN.getWeightedSampleMean());
         System.out.println();
     }
-    
+
     /**
      * Report statistics at the end of the run.
      */
@@ -92,15 +92,19 @@ public class MM1ExperimentApplication implements EventListener
         SortedMap<String, SortedMap<String, Tally>> stats = this.experiment.getSummaryStatistics();
         for (String statMapKey : stats.keySet())
         {
+            System.out.println("\nSummary statistic for: " + statMapKey);
+            System.out
+                    .println("-".repeat(113) + String.format("%n| %-48.48s | %6.6s | %10.10s | %10.10s | %10.10s | %10.10s |%n",
+                            "Tally name", "n", "mean", "st.dev", "minimum", "maximum") + "-".repeat(113));
             SortedMap<String, Tally> statMap = stats.get(statMapKey);
             for (String statKey : statMap.keySet())
             {
                 Tally stat = statMap.get(statKey);
-                System.out.println(stat);
-                System.out.println();
+                System.out.println(stat.reportLine());
             }
+            System.out.println("-".repeat(113));
         }
-        
+
         System.exit(0);
     }
 
