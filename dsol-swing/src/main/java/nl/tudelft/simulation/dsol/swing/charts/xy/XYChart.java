@@ -245,8 +245,9 @@ public class XYChart implements Swingable, Serializable
     /**
      * adds a tally to the xyChart.
      * @param persistent Persistent; the persistent
+     * @throws RemoteException on network failure
      */
-    public void add(final SimPersistent<?> persistent)
+    public void add(final SimPersistent<?> persistent) throws RemoteException
     {
         XYSeries set = new XYSeries(persistent.getDescription(), this.simulator, this.axisType, this.period);
         persistent.addListener(set, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT, ReferenceType.STRONG);
