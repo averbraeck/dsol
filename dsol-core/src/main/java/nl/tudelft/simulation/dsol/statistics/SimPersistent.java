@@ -137,6 +137,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     }
 
     /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
     @Override
     public void notify(final Event event)
     {
