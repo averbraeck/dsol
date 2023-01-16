@@ -139,8 +139,9 @@ public class Histogram implements Swingable, Serializable
      * adds a counter to the histogramdataset. This histogram then subscribes its dataset to the
      * <code>Counter.COUNT_EVENT</code>.
      * @param counter Counter; the counter to add.
+     * @throws RemoteException on network failure
      */
-    public synchronized void add(final SimCounter<?> counter)
+    public synchronized void add(final SimCounter<?> counter) throws RemoteException
     {
         HistogramSeries set = this.getDataset().addSeries(counter.getDescription());
         counter.addListener(set, SimCounter.TIMED_OBSERVATION_ADDED_EVENT, ReferenceType.STRONG);
