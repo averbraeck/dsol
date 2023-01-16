@@ -80,8 +80,9 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a tally to the chart.
      * @param tally EventBasedTally; the tally to be added
+     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedTally tally)
+    public void add(final EventBasedTally tally) throws RemoteException
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }
@@ -89,8 +90,9 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a weighted tally to the chart.
      * @param tally EventBasedWeightedTally; the tally to be added
+     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedWeightedTally tally)
+    public void add(final EventBasedWeightedTally tally) throws RemoteException
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }
@@ -98,8 +100,9 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a weighted tally to the chart.
      * @param tally EventBasedTimestampWeightedTally; the tally to be added
+     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedTimestampWeightedTally tally)
+    public void add(final EventBasedTimestampWeightedTally tally) throws RemoteException
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }
