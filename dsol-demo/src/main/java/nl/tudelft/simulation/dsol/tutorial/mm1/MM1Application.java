@@ -64,7 +64,7 @@ public class MM1Application
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
-        CategoryLogger.setAllLogLevel(Level.TRACE);
+        CategoryLogger.setAllLogLevel(Level.WARNING);
         new MM1Application();
     }
 
