@@ -9,6 +9,7 @@ import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.Tally;
+import org.djutils.stats.summarizers.TimestampWeightedTally;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -77,9 +78,14 @@ public class MM1ExperimentApplication implements EventListener
     protected void reportReplicationStatistics()
     {
         System.out.println("Statistics replication:");
-        System.out.println("average queue length = " + this.model.qN.getWeightedSampleMean());
-        System.out.println("average queue wait   = " + this.model.dN.getSampleMean());
-        System.out.println("average utilization  = " + this.model.uN.getWeightedSampleMean());
+        System.out.println(Tally.reportHeader());
+        System.out.println(this.model.dN.reportLine());
+        System.out.println(Tally.reportFooter());
+        System.out.println();
+        System.out.println(TimestampWeightedTally.reportHeader());
+        System.out.println(this.model.qN.reportLine());
+        System.out.println(this.model.uN.reportLine());
+        System.out.println(TimestampWeightedTally.reportFooter());
         System.out.println();
     }
 
@@ -93,16 +99,14 @@ public class MM1ExperimentApplication implements EventListener
         for (String statMapKey : stats.keySet())
         {
             System.out.println("\nSummary statistic for: " + statMapKey);
-            System.out
-                    .println("-".repeat(113) + String.format("%n| %-48.48s | %6.6s | %10.10s | %10.10s | %10.10s | %10.10s |%n",
-                            "Tally name", "n", "mean", "st.dev", "minimum", "maximum") + "-".repeat(113));
+            System.out.println(Tally.reportHeader());
             SortedMap<String, Tally> statMap = stats.get(statMapKey);
             for (String statKey : statMap.keySet())
             {
                 Tally stat = statMap.get(statKey);
                 System.out.println(stat.reportLine());
             }
-            System.out.println("-".repeat(113));
+            System.out.println(Tally.reportFooter());
         }
 
         System.exit(0);
