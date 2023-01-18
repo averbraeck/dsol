@@ -122,7 +122,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             this.replication = replication;
             this.model = model;
             this.simulatorTime = replication.getStartTime();
-            model.constructModel();
+            this.model.getOutputStatistics().clear();
+            this.model.constructModel();
             this.runState = RunState.INITIALIZED;
             this.replicationState = ReplicationState.INITIALIZED;
             this.runflag = false;
