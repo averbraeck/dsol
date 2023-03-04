@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.swing.charts.histogram;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.jfree.data.general.AbstractDataset;
 
 /**
@@ -10,7 +10,7 @@ import org.jfree.data.general.AbstractDataset;
  * copyright (c) 2002-2021 <a href="https://simulation.tudelft.nl">Delft University of Technology </a>, the Netherlands. <br>
  * See for project information <a href="https://simulation.tudelft.nl"> www.simulation.tudelft.nl </a>.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -20,7 +20,7 @@ import org.jfree.data.general.AbstractDataset;
  *         <a href="https://www.linkedin.com/in/peterhmjacobs"> Peter Jacobs </a>
  * @since 1.5
  */
-public class HistogramSeries extends AbstractDataset implements EventListenerInterface
+public class HistogramSeries extends AbstractDataset implements EventListener
 {
     /** default UId. */
     private static final long serialVersionUID = 1L;
@@ -138,7 +138,7 @@ public class HistogramSeries extends AbstractDataset implements EventListenerInt
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void notify(final EventInterface event)
+    public synchronized void notify(final Event event)
     {
         double value = ((Double) event.getContent()).doubleValue();
         this.bins[this.resolveBin(value)].increase();

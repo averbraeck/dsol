@@ -7,9 +7,9 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleLogger;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleOutput;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
@@ -21,7 +21,7 @@ import nl.tudelft.simulation.language.DSOLException;
 
 /**
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -79,10 +79,9 @@ public class BallSwingApplication extends DSOLAnimationApplication
     public static void main(final String[] args) throws Exception
     {
         Locale.setDefault(new Locale("en", "US"));
-
-        DEVSRealTimeAnimator.TimeDouble simulator = new DEVSRealTimeAnimator.TimeDouble("BallSwingApplication", 0.001);
+        DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("BallSwingApplication", 0.001);
         BallModel model = new BallModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
         DSOLPanel panel = new DSOLPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
         panel.addTab("logger", new ConsoleLogger(Level.INFO));

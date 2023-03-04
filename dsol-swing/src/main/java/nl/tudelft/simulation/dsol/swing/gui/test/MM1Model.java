@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.gui.test;
 
-import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,7 @@ import org.djutils.logger.CategoryLogger;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
@@ -21,14 +19,14 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * Simple M/M/1 queuing model, which can be changed into a X/X/c model by changing the parameters.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+public class MM1Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -75,33 +73,19 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
     /**
      * @param simulator DEVSSimulator&lt;Double&gt;;
      */
-    public MM1Model(final DEVSSimulatorInterface<Double> simulator)
+    public MM1Model(final DevsSimulatorInterface<Double> simulator)
     {
         super(simulator);
     }
 
     /** {@inheritDoc} */
     @Override
-    public Serializable getSourceId()
-    {
-        return "MM1Model";
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public void constructModel() throws SimRuntimeException
     {
-        try
-        {
-            this.persistentUtilization = new SimPersistent<Double>("utilization", this.simulator);
-            this.persistentQueueLength = new SimPersistent<Double>("queue length", this.simulator);
-            this.tallyTimeInQueue = new SimTally<Double>("time in queue", this.simulator);
-            this.tallyTimeInSystem = new SimTally<Double>("time in system", this.simulator);
-        }
-        catch (RemoteException exception)
-        {
-            exception.printStackTrace();
-        }
+        this.persistentUtilization = new SimPersistent<Double>("utilization", this);
+        this.persistentQueueLength = new SimPersistent<Double>("queue length", this);
+        this.tallyTimeInQueue = new SimTally<Double>("time in queue", this);
+        this.tallyTimeInSystem = new SimTally<Double>("time in system", this);
 
         generate();
     }
@@ -130,7 +114,7 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
                 System.out.println("In Queue: " + entity);
             }
         }
-        this.simulator.scheduleEventRel(this.interarrivalTime.draw(), this, this, "generate", null);
+        this.simulator.scheduleEventRel(this.interarrivalTime.draw(), this, "generate", null);
     }
 
     /**
@@ -143,7 +127,7 @@ public class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
         this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
         this.busy++;
         this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
-        this.simulator.scheduleEventRel(this.processingTime.draw(), this, this, "endProcess", new Object[] {entity});
+        this.simulator.scheduleEventRel(this.processingTime.draw(), this, "endProcess", new Object[] {entity});
         this.tallyTimeInQueue.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
     }
 

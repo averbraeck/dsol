@@ -14,7 +14,7 @@ import java.util.List;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
-import org.djutils.event.EventInterface;
+import org.djutils.event.Event;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
@@ -26,7 +26,7 @@ import nl.tudelft.simulation.language.DSOLException;
 /**
  * Animation panel that adds autopan functionality. Code based on OpenTrafficSim project component with the same purpose.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
  * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
  * DSOL project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -193,7 +193,7 @@ public class AutoPanAnimationPanel extends AnimationPanel
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT))
         {

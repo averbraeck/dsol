@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * coupled model. For a coupled model, the input message is passed on to the external input couplings (EIC), for an atomic
  * model, the external event handler is called (or the confluent event handler in case of a conflict).
  * <p>
- * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -34,7 +34,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
 
     /**
      * Constructor for the input port where the model is a coupled model.
-     * @param coupledModel CoupledModel&lt;A,R,T&gt;; the coupled model to which the port is added.
+     * @param coupledModel CoupledModel&lt;T&gt;; the coupled model to which the port is added.
      */
     public InputPort(final CoupledModel<T> coupledModel)
     {
@@ -44,7 +44,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
 
     /**
      * Constructor for the input port where the model is an atomic model.
-     * @param atomicModel AtomicModel&lt;A,R,T&gt;; the atomic model to which the port is added.
+     * @param atomicModel AtomicModel&lt;T&gt;; the atomic model to which the port is added.
      */
     public InputPort(final AtomicModel<T> atomicModel)
     {

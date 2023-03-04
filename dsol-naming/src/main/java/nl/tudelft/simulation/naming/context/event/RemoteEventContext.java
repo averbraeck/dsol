@@ -10,8 +10,8 @@ import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.naming.NotContextException;
 
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.EventListener;
+import org.djutils.event.reference.ReferenceType;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.RemoteContext;
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.naming.context.RemoteContext;
 /**
  * RemoteEventContext.java.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -80,7 +80,7 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
+    public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope) throws RemoteException, NameNotFoundException, InvalidNameException,
             NotContextException, NamingException, NullPointerException
     {
@@ -89,7 +89,7 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
+    public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
             InvalidNameException, NotContextException, NamingException, NullPointerException
     {
@@ -98,7 +98,7 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
+    public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope, final int position) throws RemoteException, NameNotFoundException,
             InvalidNameException, NotContextException, NamingException, NullPointerException
     {
@@ -107,7 +107,7 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
 
     /** {@inheritDoc} */
     @Override
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
+    public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope, final int position, final ReferenceType referenceType) throws RemoteException,
             NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
@@ -116,7 +116,7 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
 
     /** {@inheritDoc} */
     @Override
-    public boolean removeListener(final EventListenerInterface listener, final String absolutePath,
+    public boolean removeListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope) throws RemoteException, InvalidNameException, NullPointerException
     {
         return this.contextEventProducerImpl.removeListener(listener, absolutePath, contextScope);

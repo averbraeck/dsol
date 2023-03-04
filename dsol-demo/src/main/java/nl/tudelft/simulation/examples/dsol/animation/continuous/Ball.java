@@ -6,14 +6,14 @@ import javax.naming.NamingException;
 
 import org.djutils.draw.point.OrientedPoint3d;
 
-import nl.tudelft.simulation.dsol.simulators.DESSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.examples.dsol.animation.BallAnimation;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
 
 /**
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
  * <p>
  * See for project information <a href="https://simulation.tudelft.nl/" target="_blank"> www.simulation.tudelft.nl</a>.
  * <p>
@@ -34,7 +34,7 @@ public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
     private double angle = 0.0;
 
     /** the simulator to use. */
-    private DESSSimulatorInterface<Double> simulator = null;
+    private DessSimulatorInterface<Double> simulator = null;
 
     /**
      * constructs a new Ball.
@@ -43,7 +43,7 @@ public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
      * @throws RemoteException on network exception
      * @throws NamingException on animation error
      */
-    public Ball(final int nr, final DESSSimulatorInterface<Double> simulator) throws RemoteException, NamingException
+    public Ball(final int nr, final DessSimulatorInterface<Double> simulator) throws RemoteException, NamingException
     {
         super(nr);
         this.simulator = simulator;

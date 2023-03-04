@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.djutils.event.EventProducer;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 import org.djutils.logger.CategoryLogger;
 import org.pmw.tinylog.Level;
 import org.pmw.tinylog.Logger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.model.DSOLModel;
 /**
  * The Simulator class is an abstract implementation of the SimulatorInterface.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -32,7 +32,7 @@ import nl.tudelft.simulation.dsol.model.DSOLModel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a> relative types are the same.
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  */
-public abstract class Simulator<T extends Number & Comparable<T>> extends EventProducer
+public abstract class Simulator<T extends Number & Comparable<T>> extends LocalEventProducer
         implements SimulatorInterface<T>, Runnable
 {
     /** */
@@ -60,7 +60,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
 
     /** The currently active replication; is null before initialize() has been called. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected ReplicationInterface<T> replication = null;
+    protected Replication<T> replication = null;
 
     /** The model that is currently active; is null before initialize() has been called. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -105,9 +105,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"hiding", "checkstyle:hiddenfield"})
     @Override
-    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final ReplicationInterface<T> replication)
+    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
             throws SimRuntimeException
     {
         Throw.whenNull(model, "Simulator.initialize: model cannot be null");
@@ -122,8 +121,9 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
             this.worker = new SimulatorWorkerThread(this.id.toString(), this);
             this.replication = replication;
             this.model = model;
-            this.simulatorTime = replication.getStartSimTime();
-            model.constructModel();
+            this.simulatorTime = replication.getStartTime();
+            this.model.getOutputStatistics().clear();
+            this.model.constructModel();
             this.runState = RunState.INITIALIZED;
             this.replicationState = ReplicationState.INITIALIZED;
             this.runflag = false;
@@ -151,10 +151,10 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
 
     /** {@inheritDoc} */
     @Override
-    public void addScheduledMethodOnInitialize(final Object source, final Object target, final String method,
-            final Object[] args) throws SimRuntimeException
+    public void addScheduledMethodOnInitialize(final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
     {
-        this.initialmethodCalls.add(new SimEvent<Long>(0L, source, target, method, args));
+        this.initialmethodCalls.add(new SimEvent<Long>(0L, target, method, args));
     }
 
     /**
@@ -169,14 +169,14 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
         Throw.when(
                 !(this.replicationState == ReplicationState.INITIALIZED || this.replicationState == ReplicationState.STARTED),
                 SimRuntimeException.class, "State of the replication should be INITIALIZED or STARTED to run a simulationF");
-        Throw.when(this.simulatorTime.compareTo(this.replication.getEndSimTime()) >= 0, SimRuntimeException.class,
+        Throw.when(this.simulatorTime.compareTo(this.replication.getEndTime()) >= 0, SimRuntimeException.class,
                 "Cannot start simulator : simulatorTime >= runLength");
         synchronized (this.semaphore)
         {
             this.runState = RunState.STARTING;
             if (this.replicationState == ReplicationState.INITIALIZED)
             {
-                fireTimedEvent(ReplicationInterface.START_REPLICATION_EVENT, null, getSimulatorTime());
+                fireTimedEvent(Replication.START_REPLICATION_EVENT, null, getSimulatorTime());
                 this.replicationState = ReplicationState.STARTED;
             }
             this.fireEvent(SimulatorInterface.STARTING_EVENT, null);
@@ -205,7 +205,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
     @Override
     public void start() throws SimRuntimeException
     {
-        this.runUntilTime = this.replication.getEndSimTime();
+        this.runUntilTime = this.replication.getEndTime();
         this.runUntilIncluding = true;
         startImpl();
     }
@@ -245,7 +245,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
         Throw.when(
                 !(this.replicationState == ReplicationState.INITIALIZED || this.replicationState == ReplicationState.STARTED),
                 SimRuntimeException.class, "State of the replication should be INITIALIZED or STARTED to run a simulation");
-        Throw.when(this.simulatorTime.compareTo(this.replication.getEndSimTime()) >= 0, SimRuntimeException.class,
+        Throw.when(this.simulatorTime.compareTo(this.replication.getEndTime()) >= 0, SimRuntimeException.class,
                 "Cannot step simulator : simulatorTime >= runLength");
         try
         {
@@ -253,7 +253,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
             {
                 if (this.replicationState == ReplicationState.INITIALIZED)
                 {
-                    fireTimedEvent(ReplicationInterface.START_REPLICATION_EVENT, null, getSimulatorTime());
+                    fireTimedEvent(Replication.START_REPLICATION_EVENT, null, getSimulatorTime());
                     this.replicationState = ReplicationState.STARTED;
                 }
                 this.runState = RunState.STARTED;
@@ -306,7 +306,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
      */
     public void warmup()
     {
-        fireTimedEvent(ReplicationInterface.WARMUP_EVENT, null, getSimulatorTime());
+        fireTimedEvent(Replication.WARMUP_EVENT, null, getSimulatorTime());
     }
 
     /** {@inheritDoc} */
@@ -341,11 +341,11 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
             this.runState = RunState.STOPPING;
         }
         this.worker.interrupt(); // just to be sure that the run will end, and the state will be moved to 'ENDED'
-        if (this.simulatorTime.compareTo(this.getReplication().getEndSimTime()) < 0)
+        if (this.simulatorTime.compareTo(this.getReplication().getEndTime()) < 0)
         {
             Logger.warn("endReplication executed, but the simulation time " + this.simulatorTime
-                    + " is earlier than the replication length " + this.getReplication().getEndSimTime());
-            this.simulatorTime = this.getReplication().getEndSimTime();
+                    + " is earlier than the replication length " + this.getReplication().getEndTime());
+            this.simulatorTime = this.getReplication().getEndTime();
         }
         // sleep maximally 1 second till the SimulatorWorkerThread finalizes
         int count = 0;
@@ -469,7 +469,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
 
     /** {@inheritDoc} */
     @Override
-    public ReplicationInterface<T> getReplication()
+    public Replication<T> getReplication()
     {
         return this.replication;
     }
@@ -490,13 +490,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
 
     /** {@inheritDoc} */
     @Override
-    public Serializable getSourceId()
-    {
-        return this.id;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public RunState getRunState()
     {
         return this.runState;
@@ -513,7 +506,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
      * fireTimedEvent method to be called for a no-payload TimedEvent.
      * @param event the event to fire at the current time
      */
-    protected void fireTimedEvent(final TimedEventType event)
+    protected void fireTimedEvent(final EventType event)
     {
         fireTimedEvent(event, null, getSimulatorTime());
     }
@@ -542,7 +535,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
         {
             this.id = (Serializable) in.readObject();
             this.simulatorTime = (T) in.readObject();
-            this.replication = (ReplicationInterface<T>) in.readObject();
+            this.replication = (Replication<T>) in.readObject();
             this.semaphore = new Object();
             this.worker = new SimulatorWorkerThread(this.id.toString(), this);
             this.logger = new SimLogger(this);
@@ -644,7 +637,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends EventP
                         {
                             this.job.replicationState = ReplicationState.ENDED;
                             this.job.runState = RunState.ENDED;
-                            this.job.fireTimedEvent(ReplicationInterface.END_REPLICATION_EVENT);
+                            this.job.fireTimedEvent(Replication.END_REPLICATION_EVENT);
                             this.finalized = true;
                         }
                     }

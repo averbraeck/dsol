@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.logger.Cat;
  * OutputPort class. The output port transfers the event (message) to the next receiver. In case there is no next receiver (e.g.
  * in case of the model being the highest coupled model in the simulation, the event is currently not transferred.
  * <p>
- * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -27,7 +27,7 @@ public class OutputPort<T extends Number & Comparable<T>, TYPE> implements Outpu
 
     /**
      * Constructor for the output port where the model is a coupled model.
-     * @param coupledModel CoupledModel&lt;A,R,T&gt;; the coupled model.
+     * @param coupledModel CoupledModel&lt;T&gt;; the coupled model.
      */
     public OutputPort(final CoupledModel<T> coupledModel)
     {
@@ -36,7 +36,7 @@ public class OutputPort<T extends Number & Comparable<T>, TYPE> implements Outpu
 
     /**
      * Constructor for the output port where the model is an atomic model.
-     * @param atomicModel AtomicModel&lt;A,R,T&gt;; the atomic model.
+     * @param atomicModel AtomicModel&lt;T&gt;; the atomic model.
      */
     public OutputPort(final AtomicModel<T> atomicModel)
     {

@@ -5,12 +5,12 @@ import java.util.Map;
 
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortNotFoundException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * AbstractDEVSPortModel class. Adds named ports to the abstract DEVS model.
  * <p>
- * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -38,10 +38,10 @@ public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> ex
      * Constructor for an abstract DEVS model with ports: we have to indicate the simulator to schedule the events on, and the
      * parent model we are part of. A parent model of null means that we are the top model.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule the events on.
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the parent model we are part of.
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule the events on.
+     * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of.
      */
-    public AbstractDEVSPortModel(final String modelName, final DEVSSimulatorInterface<T> simulator,
+    public AbstractDEVSPortModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
     {
         super(modelName, simulator, parentModel);
@@ -50,7 +50,7 @@ public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> ex
     /**
      * Add an input port to the model. Use a name to be able to identify the port later.
      * @param name String; the (unique) name of the input port
-     * @param inputPort InputPortInterface&lt;A,R,T,TYPE&gt;; the input port to add
+     * @param inputPort InputPortInterface&lt;T,TYPE&gt;; the input port to add
      * @param <TYPE> the type of variable of the input port
      * @throws PortAlreadyDefinedException in case the port name already exist for the model
      */
@@ -68,7 +68,7 @@ public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> ex
     /**
      * Add an output port to the model. Use a name to be able to identify the port later.
      * @param name String; the (unique) name of the output port
-     * @param outputPort OutputPortInterface&lt;A,R,T,TYPE&gt;; the output port to add
+     * @param outputPort OutputPortInterface&lt;T,TYPE&gt;; the output port to add
      * @param <TYPE> the type of variable of the output port
      * @throws PortAlreadyDefinedException in case the port name already exist for the model
      */

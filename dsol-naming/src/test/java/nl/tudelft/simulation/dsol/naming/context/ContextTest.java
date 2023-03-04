@@ -25,9 +25,9 @@ import javax.naming.NamingException;
 import javax.naming.NoInitialContextException;
 import javax.naming.NotContextException;
 
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.exceptions.Try;
-import org.djutils.rmi.RMIUtils;
+import org.djutils.rmi.RmiRegistry;
 import org.junit.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -41,7 +41,7 @@ import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 /**
  * Tests the context.
  * <p>
- * Copyright (c) 2004-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2004-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -85,7 +85,7 @@ public class ContextTest
         testContext(remoteContext, embeddedContext, true);
         try
         {
-            RMIUtils.closeRegistry(remoteContext.getRegistry());
+            RmiRegistry.closeRegistry(remoteContext.getRegistry());
         }
         catch (NoSuchObjectException e)
         {
@@ -142,7 +142,7 @@ public class ContextTest
      * @throws RemoteException on RMI error
      * @throws NamingException on error
      */
-    public void testContext(final ContextInterface context, final ContextInterface expectedRootContext, boolean testSub)
+    public void testContext(final ContextInterface context, final ContextInterface expectedRootContext, final boolean testSub)
             throws NamingException, RemoteException
     {
         testContextBindUnbind(context, context, "", 0, expectedRootContext);
@@ -254,7 +254,8 @@ public class ContextTest
         context.unbind(absrel + "key2");
 
         // get an non-existing object
-        Try.testFail(() -> { context.get(absrel + "key2"); });
+        Try.testFail(() ->
+        { context.get(absrel + "key2"); });
 
         // test the current context and root context
         if (!(expectedRootContext instanceof RemoteContextInterface))
@@ -280,11 +281,13 @@ public class ContextTest
         assertEquals("value2", context.get(absrel + "key2"));
 
         // test already bound exception
-        Try.testFail(() -> { context.bind(absrel + "key2", "newobject"); }, NameAlreadyBoundException.class);
+        Try.testFail(() ->
+        { context.bind(absrel + "key2", "newobject"); }, NameAlreadyBoundException.class);
 
         // create a name clash for rename
         context.bind(absrel + "key1", "value1");
-        Try.testFail(() -> { context.rename(absrel + "key1", absrel + "key2"); }, NameAlreadyBoundException.class);
+        Try.testFail(() ->
+        { context.rename(absrel + "key1", absrel + "key2"); }, NameAlreadyBoundException.class);
 
         // clean up
         context.unbind(absrel + "key1");
@@ -320,45 +323,50 @@ public class ContextTest
         // Checking empty name, null name, slash for get
         for (String wrong : new String[] {"//", null})
         {
-            Try.testFail(() -> { subContext.get(wrong); }, "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { subContext.get(wrong); }, "test should have failed for name [" + wrong + "]");
         }
 
         // Checking empty name, null name, slash for exists
         for (String wrong : new String[] {"//", null})
         {
-            Try.testFail(() -> { subContext.exists(wrong); }, "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { subContext.exists(wrong); }, "test should have failed for name [" + wrong + "]");
         }
 
         // Checking empty name, null name, slash for hasKey
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            Try.testFail(() -> { subContext.hasKey(wrong); }, "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { subContext.hasKey(wrong); }, "test should have failed for name [" + wrong + "]");
         }
 
         // Checking empty name, null name, slash for getObject
         for (String wrong : new String[] {"", "//", "/", null})
         {
-            Try.testFail(() -> { subContext.getObject(wrong); }, "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { subContext.getObject(wrong); }, "test should have failed for name [" + wrong + "]");
         }
 
         // Checking empty name, null name, slash for bindObject
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            Try.testFail(() -> { subContext.bindObject(wrong, "newobject"); },
-                    "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { subContext.bindObject(wrong, "newobject"); }, "test should have failed for name [" + wrong + "]");
         }
 
         // Checking empty name, null name, slash for rebindObject
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            Try.testFail(() -> { subContext.rebindObject(wrong, "newobject"); },
-                    "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { subContext.rebindObject(wrong, "newobject"); }, "test should have failed for name [" + wrong + "]");
         }
 
         // Checking empty name, null name, slash for unbindObject
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            Try.testFail(() -> { subContext.unbindObject(wrong); }, "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { subContext.unbindObject(wrong); }, "test should have failed for name [" + wrong + "]");
         }
     }
 
@@ -396,32 +404,39 @@ public class ContextTest
         assertTrue(level1.toString().contains("atomicName=level1"));
 
         // name clash with existing subcontext
-        Try.testFail(() -> { context.createSubcontext("/level1"); });
+        Try.testFail(() ->
+        { context.createSubcontext("/level1"); });
 
         // try to remove non-existing subcontext
-        Try.testFail(() -> { context.destroySubcontext("/level3"); });
+        Try.testFail(() ->
+        { context.destroySubcontext("/level3"); });
 
         // name clash with existing key
         context.bind("key1", "value1");
-        Try.testFail(() -> { context.createSubcontext("/key1"); }, NameAlreadyBoundException.class);
+        Try.testFail(() ->
+        { context.createSubcontext("/key1"); }, NameAlreadyBoundException.class);
 
         // try to remove subcontext that points to key
-        Try.testFail(() -> { context.destroySubcontext("/key1"); }, NotContextException.class);
+        Try.testFail(() ->
+        { context.destroySubcontext("/key1"); }, NotContextException.class);
 
         // Checking empty name, null name, slash for createSubcontext
         for (String wrong : new String[] {"", "//", "/", null})
         {
-            Try.testFail(() -> { context.createSubcontext(wrong); }, "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { context.createSubcontext(wrong); }, "test should have failed for name [" + wrong + "]");
         }
 
         // Checking empty name, null name, slash for destroySubcontext
         for (String wrong : new String[] {"", "//", "/", null})
         {
-            Try.testFail(() -> { context.destroySubcontext(wrong); }, "test should have failed for name [" + wrong + "]");
+            Try.testFail(() ->
+            { context.destroySubcontext(wrong); }, "test should have failed for name [" + wrong + "]");
         }
 
         // use a key as part of the path
-        Try.testFail(() -> { context.get("/key1/level2"); }, NameNotFoundException.class);
+        Try.testFail(() ->
+        { context.get("/key1/level2"); }, NameNotFoundException.class);
 
         // TODO: test circular references when check has been implemented
 
@@ -479,7 +494,7 @@ public class ContextTest
         /**
          * @param field the field
          */
-        public TestObject(String field)
+        public TestObject(final String field)
         {
             this.field = field;
         }
@@ -812,36 +827,6 @@ public class ContextTest
         try
         {
             ctx.removeListener(null, ContextInterface.OBJECT_ADDED_EVENT);
-            fail("should have thrown exception");
-        }
-        catch (RuntimeException rte)
-        {
-            // ok
-        }
-
-        try
-        {
-            ctx.hasListeners();
-            fail("should have thrown exception");
-        }
-        catch (RuntimeException rte)
-        {
-            // ok
-        }
-
-        try
-        {
-            ctx.numberOfListeners(ContextInterface.OBJECT_ADDED_EVENT);
-            fail("should have thrown exception");
-        }
-        catch (RuntimeException rte)
-        {
-            // ok
-        }
-
-        try
-        {
-            ctx.getEventTypesWithListeners();
             fail("should have thrown exception");
         }
         catch (RuntimeException rte)

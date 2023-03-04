@@ -4,21 +4,21 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -27,7 +27,7 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs</a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public final class ConsoleRunnerTerminal implements EventListenerInterface
+public final class ConsoleRunnerTerminal implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20220110L;
@@ -46,15 +46,15 @@ public final class ConsoleRunnerTerminal implements EventListenerInterface
         int numQC = 5;
         int numAGV = 42;
         double runtime = 40 * 60;
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("ConsoleRunnerTerminal");
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("ConsoleRunnerTerminal");
         Terminal model = new Terminal(simulator, rep);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, runtime);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, runtime);
         model.getStreams().put("default", new MersenneTwister(seed++));
         InputParameterMap parameters = model.getInputParameterMap();
         ((InputParameterInteger) parameters.get("numQC")).setIntValue(numQC);
         ((InputParameterInteger) parameters.get("numAGV")).setIntValue(numAGV);
         simulator.initialize(model, replication);
-        simulator.scheduleEventAbs(runtime - 0.00001, this, this, "terminate", new Object[] {simulator, numQC, numAGV, rep});
+        simulator.scheduleEventAbs(runtime - 0.00001, this, "terminate", new Object[] {simulator, numQC, numAGV, rep});
         model.addListener(this, Terminal.READY_EVENT);
         simulator.start();
     }
@@ -67,7 +67,7 @@ public final class ConsoleRunnerTerminal implements EventListenerInterface
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      */
-    public synchronized void terminate(final DEVSSimulator<Double> simulator, final int numQC, final int numAGV,
+    public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV,
             final int rep) throws SimRuntimeException, RemoteException
     {
         simulator.stop();
@@ -77,7 +77,7 @@ public final class ConsoleRunnerTerminal implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void notify(final EventInterface event) throws RemoteException
+    public synchronized void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(Terminal.READY_EVENT))
         {

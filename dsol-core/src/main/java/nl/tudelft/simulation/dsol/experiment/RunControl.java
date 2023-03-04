@@ -1,5 +1,7 @@
 package nl.tudelft.simulation.dsol.experiment;
 
+import java.util.Objects;
+
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.simtime.SimTime;
@@ -8,16 +10,15 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * RunControl is a data object that contains off-line run control information. It can be fed to an Experiment or a Replication
  * to set the run control parameters for a simulation run.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- *            relative types are the same.
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a> relative types are the same.
  * @param <T> the simulation time type to be able to implement a comparator on the simulation time.
  */
-public class RunControl<T extends Number & Comparable<T>> implements RunControlInterface<T>
+public class RunControl<T extends Number & Comparable<T>> implements Treatment<T>
 {
     /** */
     private static final long serialVersionUID = 20210409L;
@@ -41,9 +42,9 @@ public class RunControl<T extends Number & Comparable<T>> implements RunControlI
      * Construct an object with off-line run control information.
      * @param id String; the id of the run control that will be used as the id for the replication; should be unique within the
      *            experiment.
-     * @param startTime T; the start time as a time object.
+     * @param startTime T; the start time of the simulation
      * @param warmupPeriod T; the warmup period, included in the runlength (!)
-     * @param runLength T; the total length of the run, including the warm-up period.
+     * @param runLength T; the total length of the run, including the warm-up period
      * @throws NullPointerException when id, startTime, warmupPeriod or runLength is null
      * @throws IllegalArgumentException when warmup period is negative, or run length is zero or negative, or when the warmup
      *             time is longer than or equal to the runlength
@@ -64,6 +65,13 @@ public class RunControl<T extends Number & Comparable<T>> implements RunControlI
         this.startTime = startTime;
         this.endTime = SimTime.plus(startTime, runLength);
         this.warmupTime = SimTime.plus(startTime, warmupPeriod);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RunControl<T> getRunControl()
+    {
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -89,21 +97,21 @@ public class RunControl<T extends Number & Comparable<T>> implements RunControlI
 
     /** {@inheritDoc} */
     @Override
-    public T getStartSimTime()
+    public T getStartTime()
     {
         return this.startTime;
     }
 
     /** {@inheritDoc} */
     @Override
-    public T getEndSimTime()
+    public T getEndTime()
     {
         return this.endTime;
     }
 
     /** {@inheritDoc} */
     @Override
-    public T getWarmupSimTime()
+    public T getWarmupTime()
     {
         return this.warmupTime;
     }
@@ -112,18 +120,11 @@ public class RunControl<T extends Number & Comparable<T>> implements RunControlI
     @Override
     public int hashCode()
     {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + this.endTime.hashCode();
-        result = prime * result + this.id.hashCode();
-        result = prime * result + this.startTime.hashCode();
-        result = prime * result + this.warmupTime.hashCode();
-        return result;
+        return Objects.hash(this.endTime, this.id, this.startTime, this.warmupTime);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("checkstyle:needbraces")
     public boolean equals(final Object obj)
     {
         if (this == obj)
@@ -133,22 +134,16 @@ public class RunControl<T extends Number & Comparable<T>> implements RunControlI
         if (getClass() != obj.getClass())
             return false;
         RunControl<?> other = (RunControl<?>) obj;
-        if (!this.startTime.equals(other.startTime))
-            return false;
-        if (!this.endTime.equals(other.endTime))
-            return false;
-        if (!this.id.equals(other.id))
-            return false;
-        if (!this.warmupTime.equals(other.warmupTime))
-            return false;
-        return true;
+        return Objects.equals(this.endTime, other.endTime) && Objects.equals(this.id, other.id)
+                && Objects.equals(this.startTime, other.startTime) && Objects.equals(this.warmupTime, other.warmupTime);
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString()
     {
-        return "RunControl " + this.getId();
+        return "RunControl [id=" + this.id + ", startTime=" + this.startTime + ", warmupTime=" + this.warmupTime + ", endTime="
+                + this.endTime + "]";
     }
 
 }

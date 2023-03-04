@@ -1,14 +1,12 @@
 package nl.tudelft.simulation.dsol.tutorial.section25;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 
 /**
  * The Customer Ordering model class as presented in section 2.5 in the DSOL tutorial..
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -16,7 +14,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class CustomerOrderModel extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+public class CustomerOrderModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -25,7 +23,7 @@ public class CustomerOrderModel extends AbstractDSOLModel<Double, DEVSSimulator<
      * Construct a new customer ordering model.
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      */
-    public CustomerOrderModel(final DEVSSimulator<Double> simulator)
+    public CustomerOrderModel(final DevsSimulator<Double> simulator)
     {
         super(simulator);
     }
@@ -36,12 +34,5 @@ public class CustomerOrderModel extends AbstractDSOLModel<Double, DEVSSimulator<
     {
         System.out.println("\nReplication starts...");
         new Customer(this.simulator);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "CustomerOrderModel";
     }
 }

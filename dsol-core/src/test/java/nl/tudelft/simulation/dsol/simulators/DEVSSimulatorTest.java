@@ -3,8 +3,8 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.rmi.RemoteException;
 import java.util.concurrent.TimeoutException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.junit.Test;
 
 import net.jodah.concurrentunit.Waiter;
@@ -12,7 +12,7 @@ import net.jodah.concurrentunit.Waiter;
 /**
  * The DEVSSimulatorTest test the DEVS Simulator.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -21,7 +21,7 @@ import net.jodah.concurrentunit.Waiter;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class DEVSSimulatorTest implements EventListenerInterface
+public class DEVSSimulatorTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -41,7 +41,7 @@ public class DEVSSimulatorTest implements EventListenerInterface
     {
 //        this.waiter = new Waiter();
 //        DEVSSimulatorInterface<Double> devsSimulator = new DEVSSimulator<Double>("DEVSSimulatorTest");
-//        devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+//        devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
 //        ExperimentalFrame experimentalFrame =
 //                ExperimentUtilDouble.createExperimentalFrame(devsSimulator, new DEVSTestModel(devsSimulator));
 //        experimentalFrame.start();
@@ -50,7 +50,7 @@ public class DEVSSimulatorTest implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         this.waiter.resume();
     }

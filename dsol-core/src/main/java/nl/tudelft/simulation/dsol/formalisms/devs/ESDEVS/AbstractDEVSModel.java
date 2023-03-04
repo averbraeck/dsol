@@ -7,20 +7,20 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.djutils.event.EventProducer;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.reflection.ClassUtil;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * AbstractDEVSModel class. The basic model or component from which the AtomicModel, the CoupledModel, and the AbstractEntity
  * are derived. The DEVSModel provides basic functionality for reporting its state changes through the publish/subscribe
  * mechanism.
  * <p>
- * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -31,7 +31,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extends EventProducer
+public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extends LocalEventProducer
 {
     /** the default serial version UId. */
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
 
     /** the simulator this model or component will schedule its events on. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DEVSSimulatorInterface<T> simulator;
+    protected DevsSimulatorInterface<T> simulator;
 
     /** all DEVS models are named - this is the component name. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -53,7 +53,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
     protected String fullName;
 
     /** event for listeners about state update. */
-    public static final TimedEventType STATE_UPDATE = new TimedEventType(new MetaData("STATE_UPDATE", "State update",
+    public static final EventType STATE_UPDATE = new EventType(new MetaData("STATE_UPDATE", "State update",
             new ObjectDescriptor("stateUpdate", "State update", StateUpdate.class)));
 
     /** map of call classes and fields for which the state will be reported. */
@@ -90,10 +90,10 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
      * Constructor for an abstract DEVS model: we have to indicate the simulator to schedule the events on, and the parent model
      * we are part of. A parent model of null means that we are the top model.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule the events on.
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the parent model we are part of.
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule the events on.
+     * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of.
      */
-    public AbstractDEVSModel(final String modelName, final DEVSSimulatorInterface<T> simulator,
+    public AbstractDEVSModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
     {
         this.modelName = modelName;
@@ -114,15 +114,15 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
     /**
      * @return the simulator this model schedules its events on.
      */
-    public DEVSSimulatorInterface<T> getSimulator()
+    public DevsSimulatorInterface<T> getSimulator()
     {
         return this.simulator;
     }
 
     /**
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to use from now on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to use from now on
      */
-    public void setSimulator(final DEVSSimulatorInterface<T> simulator)
+    public void setSimulator(final DevsSimulatorInterface<T> simulator)
     {
         this.simulator = simulator;
     }
@@ -231,7 +231,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
     /**
      * StateUpdate class. Reports a state update. Right now, it is a modelname - variable name - value tuple.
      * <p>
-     * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>.
      * The DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">

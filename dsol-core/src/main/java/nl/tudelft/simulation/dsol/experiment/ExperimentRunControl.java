@@ -5,7 +5,7 @@ import org.djutils.exceptions.Throw;
 /**
  * ExperimentRunControl.java.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -25,7 +25,7 @@ public class ExperimentRunControl<T extends Number & Comparable<T>> extends RunC
      * Construct an object with off-line run control information for an experiment.
      * @param id String; the id of the run control that will be used as the id for the replication; should be unique within the
      *            experiment.
-     * @param startTime T; the start time as a time object.
+     * @param startTime T; the start time of the simulation.
      * @param warmupPeriod T; the warmup period, included in the runlength (!)
      * @param runLength T; the total length of the run, including the warm-up period.
      * @param numberOfReplications int; the number of replications to execute

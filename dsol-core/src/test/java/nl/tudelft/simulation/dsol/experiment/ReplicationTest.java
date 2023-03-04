@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * ReplicationTest tests the SingleReplication and AbstractReplication objects.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -35,14 +35,14 @@ public class ReplicationTest
         srd.setDescription("single replication");
         assertEquals("single replication", srd.getDescription());
         assertEquals(10.0, srd.getStartTime(), 1E-9);
-        assertEquals(10.0, srd.getStartSimTime(), 1E-9);
+        assertEquals(10.0, srd.getStartTime(), 1E-9);
         assertEquals(22.0, srd.getEndTime(), 1E-9);
-        assertEquals(22.0, srd.getEndSimTime(), 1E-9);
+        assertEquals(22.0, srd.getEndTime(), 1E-9);
         assertEquals(11.0, srd.getWarmupTime(), 1E-9);
-        assertEquals(11.0, srd.getWarmupSimTime(), 1E-9);
+        assertEquals(11.0, srd.getWarmupTime(), 1E-9);
         assertEquals(12.0, srd.getRunLength(), 1E-9);
         assertEquals(1.0, srd.getWarmupPeriod(), 1E-9);
-        assertTrue(srd.toString().contains("single replication"));
+        assertTrue(srd.toString().contains("SingleReplication"));
         assertNotNull(srd.getContext());
 
         // errors
@@ -80,13 +80,13 @@ public class ReplicationTest
         assertEquals(new FloatDuration(22.0f, DurationUnit.HOUR).si, srfu.getEndTime().si, 1E-6);
 
         // Generic type
-        SingleReplication<Double> sr = new SingleReplication<>("srd", new Double(10.0), 1.0, 12.0);
+        SingleReplication<Double> sr = new SingleReplication<>("srd", 10.0, 1.0, 12.0);
         assertEquals(10.0, sr.getStartTime(), 1E-9);
-        assertEquals(10.0, sr.getStartSimTime(), 1E-9);
+        assertEquals(10.0, sr.getStartTime(), 1E-9);
         assertEquals(22.0, sr.getEndTime(), 1E-9);
-        assertEquals(22.0, sr.getEndSimTime(), 1E-9);
+        assertEquals(22.0, sr.getEndTime(), 1E-9);
         assertEquals(11.0, sr.getWarmupTime(), 1E-9);
-        assertEquals(11.0, sr.getWarmupSimTime(), 1E-9);
+        assertEquals(11.0, sr.getWarmupTime(), 1E-9);
         assertEquals(12.0, sr.getRunLength(), 1E-9);
         assertEquals(1.0, sr.getWarmupPeriod(), 1E-9);
 

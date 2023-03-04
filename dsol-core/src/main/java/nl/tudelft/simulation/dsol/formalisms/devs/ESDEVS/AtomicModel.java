@@ -6,13 +6,13 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * AtomicModel class. Implements the Classic Parallel DEVS Atomic Model with Ports cf Zeigler et al (2000), section 4.2.2. and
  * section 4.3 (pp. 84 ff). The algorithms for parallel DEVS are explained in Chapters 6 and 7.
  * <p>
- * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -78,11 +78,11 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for a stand-alone atomic model with explicit phases.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule on
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model
      */
-    public AtomicModel(final String modelName, final DEVSSimulatorInterface<T> simulator, final T e, final Phase initphase)
+    public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator, final T e, final Phase initphase)
     {
         this(modelName, simulator, e, initphase, AtomicModel.INTERNAL_FIRST);
     }
@@ -90,7 +90,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for an atomic model within a coupled model with explicit phases.
      * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the coupled model this atomic model is part of
+     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model
      */
@@ -101,7 +101,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the coupled model this atomic model is part of
+     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
      */
     public AtomicModel(final String modelName, final CoupledModel<T> parentModel)
     {
@@ -111,9 +111,9 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule on
      */
-    public AtomicModel(final String modelName, final DEVSSimulatorInterface<T> simulator)
+    public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator)
     {
         this(modelName, simulator, SimTime.zero(simulator.getSimulatorTime()), new Phase(""), AtomicModel.INTERNAL_FIRST);
     }
@@ -121,13 +121,13 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for a stand-alone atomic model with explicit phases and a conflict strategy.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; the simulator to schedule on
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule on
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model to use for explicit phase models
      * @param conflictStrategy boolean; the conflict strategy to use when internal and external events take place at the same
      *            time
      */
-    public AtomicModel(final String modelName, final DEVSSimulatorInterface<T> simulator, final T e, final Phase initphase,
+    public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator, final T e, final Phase initphase,
             final boolean conflictStrategy)
     {
         super(modelName, simulator, null);
@@ -140,7 +140,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Constructor for an atomic model within a coupled model with explicit phases and a conflict strategy.
      * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;A,R,T&gt;; the coupled model this atomic model is part of
+     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
      * @param e T; initial elapsed time
      * @param initphase Phase; the initial phase of the model to use for explicit phase models
      * @param conflictStrategy boolean; the conflict strategy to use when internal and external events take place at the same
@@ -171,7 +171,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
             {
                 this.nextEvent =
                         new SimEvent<T>(SimTime.minus(SimTime.plus(getSimulator().getSimulatorTime(), this.timeAdvance()), e),
-                                this, this, "deltaInternalEventHandler", null);
+                                this,"deltaInternalEventHandler", null);
                 this.timeLastEvent = this.getSimulator().getSimulatorTime();
                 this.simulator.scheduleEvent(this.nextEvent);
             }
@@ -214,7 +214,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
                 {
                     this.nextEvent =
                             new SimEvent<T>((SimTime.plus(SimTime.minus(this.simulator.getSimulatorTime(), this.timeAdvance()),
-                                    this.elapsedTime)), this, this, "deltaInternalEventHandler", null);
+                                    this.elapsedTime)), this,"deltaInternalEventHandler", null);
                     this.timeLastEvent = this.simulator.getSimulatorTime();
                     this.simulator.getLogger().filter(Cat.DSOL).trace("schedule {}", this.nextEvent.toString());
                     this.simulator.scheduleEvent(this.nextEvent);

@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.naming.context;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,7 +13,7 @@ import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.naming.NotContextException;
 
-import org.djutils.event.EventProducer;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 import org.djutils.logger.CategoryLogger;
 
@@ -23,7 +22,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 /**
  * The JVMContext is an in-memory, thread-safe context implementation of the ContextInterface.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -31,7 +30,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class JVMContext extends EventProducer implements ContextInterface
+public class JVMContext extends LocalEventProducer implements ContextInterface
 {
     /** */
     private static final long serialVersionUID = 20200101L;
@@ -55,13 +54,6 @@ public class JVMContext extends EventProducer implements ContextInterface
     public JVMContext(final String atomicName)
     {
         this(null, atomicName);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return this.absolutePath;
     }
 
     /**
@@ -224,7 +216,7 @@ public class JVMContext extends EventProducer implements ContextInterface
 
     /** {@inheritDoc} */
     @Override
-    public void unbindObject(String key) throws NamingException, RemoteException
+    public void unbindObject(final String key) throws NamingException, RemoteException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -246,7 +238,7 @@ public class JVMContext extends EventProducer implements ContextInterface
 
     /** {@inheritDoc} */
     @Override
-    public void rebindObject(String key, final Object object) throws NamingException, RemoteException
+    public void rebindObject(final String key, final Object object) throws NamingException, RemoteException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -575,7 +567,7 @@ public class JVMContext extends EventProducer implements ContextInterface
     /**
      * Record with Context and Name combination.
      * <p>
-     * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>.
      * The DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">

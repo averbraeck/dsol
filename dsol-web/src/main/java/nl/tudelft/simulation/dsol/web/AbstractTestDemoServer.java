@@ -30,7 +30,7 @@ import org.eclipse.jetty.util.resource.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
@@ -47,13 +47,13 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterSelectionList;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterSelectionMap;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterString;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
  * DSOLWebServer.java. <br>
  * <br>
- * Copyright (c) 2003-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -157,7 +157,7 @@ public abstract class AbstractTestDemoServer
                 if (!AbstractTestDemoServer.this.sessionModelMap.containsKey(sessionId))
                 {
                     System.out.println("parameters: " + modelId);
-                    DEVSRealTimeAnimator<Duration> simulator = new DEVSRealTimeAnimator.TimeDoubleUnit(modelId);
+                    DevsRealTimeAnimator<Duration> simulator = new DevsRealTimeAnimator.TimeDoubleUnit(modelId);
                     simulator.setAnimation(false);
                     DSOLModel<Duration, SimulatorInterface<Duration>> model = instantiateModel(modelId);
                     if (model != null)
@@ -180,7 +180,7 @@ public abstract class AbstractTestDemoServer
                     SimulatorInterface<Duration> simulator = model.getSimulator();
                     try
                     {
-                        ReplicationInterface<Duration> newReplication = new SingleReplication<Duration>("rep 1",
+                        Replication<Duration> newReplication = new SingleReplication<Duration>("rep 1",
                                 Duration.ZERO, Duration.ZERO, Duration.instantiateSI(3600.0));
                         simulator.initialize(model, newReplication);
                         DSOLWebModel webModel = new DSOLWebModel(model.toString(), simulator);
@@ -208,7 +208,7 @@ public abstract class AbstractTestDemoServer
     /**
      * Answer handles the events from the web-based user interface for a demo. <br>
      * <br>
-     * Copyright (c) 2003-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>.
      * The source code and binary code of this software is proprietary information of Delft University of Technology.
      * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>

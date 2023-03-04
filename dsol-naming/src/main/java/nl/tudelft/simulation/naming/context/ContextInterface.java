@@ -11,7 +11,7 @@ import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.naming.NotContextException;
 
-import org.djutils.event.EventProducerInterface;
+import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
@@ -19,7 +19,7 @@ import org.djutils.metadata.ObjectDescriptor;
 /**
  * ContextInterface is the lightweight and simplified version of the JNDI EventContext interface in the standard Java
  * distribution. It just contains the services for binding and unbinding of objects, for retrieving objects and Context trees,
- * and for creating an initial context and creating and removing subcontexts. As it extends the EventProducerInterface, it is
+ * and for creating an initial context and creating and removing subcontexts. As it extends the EventProducer, it is
  * able to fire events for adding and removing of elements in the Context.
  * <p>
  * A name for a Context can be compound, i.e. consisting of parts separated by a separator string. Usually the separator string
@@ -36,7 +36,7 @@ import org.djutils.metadata.ObjectDescriptor;
  * serialize the values when storing them, so serializability of the Context's content is a necessary property.
  * </p>
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -44,7 +44,7 @@ import org.djutils.metadata.ObjectDescriptor;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface ContextInterface extends EventProducerInterface, Serializable
+public interface ContextInterface extends EventProducer, Serializable
 {
     /** The default root sign for a context. */
     public static final String ROOT = "/";

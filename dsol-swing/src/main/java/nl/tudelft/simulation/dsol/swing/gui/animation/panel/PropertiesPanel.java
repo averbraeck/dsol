@@ -4,20 +4,20 @@ import java.rmi.RemoteException;
 
 import javax.swing.JPanel;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 /**
  * The PropertiesPanel displays the properties of one or more selected objects.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class PropertiesPanel extends JPanel implements EventListenerInterface
+public class PropertiesPanel extends JPanel implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20210214L;
@@ -41,7 +41,7 @@ public class PropertiesPanel extends JPanel implements EventListenerInterface
     
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         // nothing yet
     }

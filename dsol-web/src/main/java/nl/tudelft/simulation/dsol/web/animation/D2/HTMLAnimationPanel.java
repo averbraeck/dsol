@@ -15,15 +15,15 @@ import java.util.TreeSet;
 import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DComparator;
 import nl.tudelft.simulation.dsol.animation.D2.Renderable2DInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.web.animation.HTMLGraphics2D;
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -35,7 +35,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * copyright (c) 2002-2021 <a href="https://simulation.tudelft.nl">Delft University of Technology </a>, the Netherlands. <br>
  * See for project information <a href="https://simulation.tudelft.nl">www.simulation.tudelft.nl </a>.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -43,7 +43,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
-public class HTMLAnimationPanel extends HTMLGridPanel implements EventListenerInterface
+public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20200108L;
@@ -107,7 +107,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListenerIn
         super(extent, size);
         super.showGrid = true;
         this.simulator = simulator;
-        simulator.addListener(this, ReplicationInterface.START_REPLICATION_EVENT);
+        simulator.addListener(this, Replication.START_REPLICATION_EVENT);
     }
 
     /** {@inheritDoc} */
@@ -200,7 +200,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListenerIn
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(ContextInterface.OBJECT_ADDED_EVENT))
         {
@@ -213,7 +213,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListenerIn
         }
 
         else if // (this.simulator.getSourceId().equals(event.getSourceId()) && // TODO: improve check
-        (event.getType().equals(ReplicationInterface.START_REPLICATION_EVENT))
+        (event.getType().equals(Replication.START_REPLICATION_EVENT))
         {
             synchronized (this.elementList)
             {

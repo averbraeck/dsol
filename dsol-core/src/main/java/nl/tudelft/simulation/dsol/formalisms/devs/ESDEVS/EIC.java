@@ -4,7 +4,7 @@ package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
  * EIC class. EIC stands for External Input Coupling, which is a coupling between the outside of a coupled model and a component
  * within that coupled model. The definition can be found in Zeigler et al. (2000), p. 86-87.
  * <p>
- * Copyright (c) 2009-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -25,8 +25,8 @@ public class EIC<T extends Number & Comparable<T>, P>
 
     /**
      * Make the wiring between output and input.
-     * @param fromPort InputPortInterface&lt;A,R,T,P&gt;; the output port of the sending component
-     * @param toPort InputPortInterface&lt;A,R,T,P&gt;; input port of the receiving component
+     * @param fromPort InputPortInterface&lt;T,P&gt;; the output port of the sending component
+     * @param toPort InputPortInterface&lt;T,P&gt;; input port of the receiving component
      * @throws Exception in case of wiring to self
      */
     public EIC(final InputPortInterface<T, P> fromPort, final InputPortInterface<T, P> toPort) throws Exception

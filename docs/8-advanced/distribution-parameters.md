@@ -4,7 +4,7 @@
 
 The user-based (interactive) entry of distribution functions makes heavy use of the `InputParameterSelectionMap` and the `AbstractInputParameterTypedMap`. This is because it is impossible for the user to enter a distribution function and its parameters in a user interface (unless we ask to enter the distribution function as a string and then parse the string). In a 'friendly' environment, the user will have to select a **type** of distribution function first, followed by the specification of one or more **parameters** for that distribution function. The `InputParameterMapDistContinuous` and `InputParameterDistContinuousSelection` classes have been created for that purpose:
 
-![](../images/input-parameters-dist.png)
+![](../images/8-advanced/input-parameters-dist.png)
 
 The `InputParameterMapDistContinuous` is an `InputParameterMap` analogous to the `InputParameterDistContinuous` as it contains a random stream, and the distribution can be retrieved. The `InputParameterDistContinuousSelection` class allows the user to choose one of the `InputParameterDistContinuous` maps and specify the corresponding parameters for the distribution. The `InputParameterDistContinuousSelection` is therefore defined as follows:
 

@@ -1,12 +1,12 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
 /**
  * The QCs modeled as resources.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -29,7 +29,7 @@ public class QC extends IntResource<Double>
      * @param capacity long; the capacity
      * @param qcTime DistContinuous; QC time delay
      */
-    public QC(final DEVSSimulatorInterface<Double> simulator, final String description, final long capacity,
+    public QC(final DevsSimulatorInterface<Double> simulator, final String description, final long capacity,
             final DistContinuous qcTime)
     {
         super(simulator, description, capacity);

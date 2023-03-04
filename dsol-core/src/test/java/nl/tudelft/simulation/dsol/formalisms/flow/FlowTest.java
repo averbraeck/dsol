@@ -2,8 +2,6 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.Serializable;
-
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -12,8 +10,8 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -22,7 +20,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * FlowTest tests the flow objects, such as Station, Seize, Delay, Release.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -37,8 +35,8 @@ public class FlowTest
     @Test
     public void delayTest()
     {
-        DEVSSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = makeModelDouble(simulator);
+        DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = makeModelDouble(simulator);
         SingleReplication<Double> replication = new SingleReplication<Double>("replication", 0.0, 0.0, 100.0);
         simulator.initialize(model, replication);
         simulator.runUpTo(1.0);
@@ -48,11 +46,10 @@ public class FlowTest
         DistContinuousSimulationTime<Double> delayDistribution =
                 new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 10.0));
         Delay<Double> delay = new Delay<Double>("delay", simulator, delayDistribution);
-        assertEquals("delay", delay.getSourceId());
         assertEquals(simulator, delay.getSimulator());
         assertEquals(nrEvents, simulator.getEventList().size());
 
-        Departure<Double> departure = new Departure<Double>("departure", simulator);
+        Destroy<Double> departure = new Destroy<Double>("departure", simulator);
         delay.setDestination(departure);
         assertEquals(departure, delay.getDestination());
         String object = "abc";
@@ -85,10 +82,10 @@ public class FlowTest
      * @param simulator the simulator
      * @return DSOLModel<Double>
      */
-    private DSOLModel<Double, DEVSSimulatorInterface<Double>> makeModelDouble(
-            final DEVSSimulatorInterface<Double> simulator)
+    private DSOLModel<Double, DevsSimulatorInterface<Double>> makeModelDouble(
+            final DevsSimulatorInterface<Double> simulator)
     {
-        return new AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>(simulator)
+        return new AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             /** */
             private static final long serialVersionUID = 1L;
@@ -97,12 +94,6 @@ public class FlowTest
             public void constructModel() throws SimRuntimeException
             {
                 //
-            }
-
-            @Override
-            public Serializable getSourceId()
-            {
-                return "model";
             }
         };
     }

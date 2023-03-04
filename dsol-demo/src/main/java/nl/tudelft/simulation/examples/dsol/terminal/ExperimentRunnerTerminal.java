@@ -4,21 +4,21 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -27,7 +27,7 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs</a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class ExperimentRunnerTerminal implements EventListenerInterface
+public class ExperimentRunnerTerminal implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -74,9 +74,9 @@ public class ExperimentRunnerTerminal implements EventListenerInterface
                     }
 
                     double runtime = 40 * 60;
-                    DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("ExperimentRunnerTerminal");
+                    DevsSimulator<Double> simulator = new DevsSimulator<Double>("ExperimentRunnerTerminal");
                     Terminal model = new Terminal(simulator, rep);
-                    ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, runtime);
+                    Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, runtime);
                     model.getStreams().put("default", new MersenneTwister(seed++));
                     InputParameterMap parameters = model.getInputParameterMap();
                     ((InputParameterInteger) parameters.get("numQC")).setIntValue(numQC);
@@ -85,8 +85,7 @@ public class ExperimentRunnerTerminal implements EventListenerInterface
                     model.addListener(this, Terminal.READY_EVENT);
                     this.numruns++;
                     simulator.start();
-                    simulator.scheduleEventAbs(runtime - 0.00001, this, this, "terminate",
-                            new Object[] {simulator, numQC, numAGV, rep, model});
+                    simulator.scheduleEventAbs(runtime - 0.00001, this, "terminate", new Object[] {simulator, numQC, numAGV, rep, model});
                 }
             }
         }
@@ -101,7 +100,7 @@ public class ExperimentRunnerTerminal implements EventListenerInterface
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      */
-    public synchronized void terminate(final DEVSSimulator<Double> simulator, final int numQC, final int numAGV,
+    public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV,
             final int rep, final Terminal model) throws SimRuntimeException, RemoteException
     {
         simulator.stop();
@@ -116,7 +115,7 @@ public class ExperimentRunnerTerminal implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void notify(final EventInterface event) throws RemoteException
+    public synchronized void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(Terminal.READY_EVENT))
         {

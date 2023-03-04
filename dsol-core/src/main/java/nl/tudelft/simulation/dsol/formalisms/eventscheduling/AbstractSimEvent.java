@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
  * The AbstractSimEvent forms the basement for SimEvents and defines a compare method by which eventLists can compare priority
  * of the event.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -34,7 +34,7 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
 
     /** priority reflects the priority of the event. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected short priority = SimEventInterface.NORMAL_PRIORITY;
+    protected short priority = SimEvent.NORMAL_PRIORITY;
 
     /** the id used in compare statements. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -46,7 +46,7 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
      */
     public AbstractSimEvent(final T executionTime)
     {
-        this(executionTime, SimEventInterface.NORMAL_PRIORITY);
+        this(executionTime, SimEvent.NORMAL_PRIORITY);
     }
 
     /**
@@ -57,10 +57,10 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
     public AbstractSimEvent(final T executionTime, final short priority)
     {
         this.absoluteExecutionTime = executionTime;
-        if (priority < SimEventInterface.MIN_PRIORITY - 1 || priority > SimEventInterface.MAX_PRIORITY + 1)
+        if (priority < SimEvent.MIN_PRIORITY - 1 || priority > SimEvent.MAX_PRIORITY + 1)
         {
-            throw new IllegalArgumentException("priority must be between [" + SimEventInterface.MIN_PRIORITY + ".."
-                    + SimEventInterface.MAX_PRIORITY + "]");
+            throw new IllegalArgumentException("priority must be between [" + SimEvent.MIN_PRIORITY + ".."
+                    + SimEvent.MAX_PRIORITY + "]");
         }
         this.priority = priority;
 

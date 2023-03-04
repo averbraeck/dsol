@@ -14,7 +14,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * EventListPerformanceTest.java.
  * <p>
- * Copyright (c) 2021-2021 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -55,7 +55,7 @@ public final class EventListPerformanceTest
                 DistUniform dist = new DistUniform(stream, 1.0, 1000.0);
                 for (int i = 0; i < max; i++)
                 {
-                    elist.add(new SimEvent<Double>(dist.draw(), this, test, "mArg1", new Object[] {12.7}));
+                    elist.add(new SimEvent<Double>(dist.draw(), test, "mArg1", new Object[] {12.7}));
                 }
                 long t1 = System.currentTimeMillis();
                 line[eventlistCount] = Double.toString((t1 - t0) / 1000.0);

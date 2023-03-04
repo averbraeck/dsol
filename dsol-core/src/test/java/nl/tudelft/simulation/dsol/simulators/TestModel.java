@@ -1,18 +1,16 @@
 package nl.tudelft.simulation.dsol.simulators;
 
-import java.io.Serializable;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.reference.ReferenceType;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.ref.ReferenceType;
-
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 
 /**
  * The TestModel.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -21,7 +19,7 @@ import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Double>> implements EventListenerInterface
+public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Double>> implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -41,8 +39,8 @@ public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Doub
     {
         try
         {
-            getSimulator().addListener(this, ReplicationInterface.END_REPLICATION_EVENT, ReferenceType.STRONG);
-            getSimulator().addListener(this, ReplicationInterface.START_REPLICATION_EVENT, ReferenceType.STRONG);
+            getSimulator().addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
+            getSimulator().addListener(this, Replication.START_REPLICATION_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, SimulatorInterface.START_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, SimulatorInterface.STOP_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, SimulatorInterface.TIME_CHANGED_EVENT, ReferenceType.STRONG);
@@ -55,7 +53,7 @@ public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Doub
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event)
+    public void notify(final Event event)
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT))
         {
@@ -65,12 +63,5 @@ public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Doub
         {
             System.out.println(getSimulator().getReplication() + " stopped @ t=" + getSimulator().getSimulatorTime());
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "TestModel";
     }
 }

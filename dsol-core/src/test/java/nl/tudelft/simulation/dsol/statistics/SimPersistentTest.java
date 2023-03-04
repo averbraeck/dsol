@@ -5,25 +5,25 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventProducer;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
 import org.junit.Test;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The SimPersistentTest test the SimPersistent.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -32,18 +32,14 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @since 1.5
  */
-public class SimPersistentTest extends EventProducer
+public class SimPersistentTest extends LocalEventProducer
 {
 
     /** */
     private static final long serialVersionUID = 1L;
 
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "SimPersistentTest";
-    }
+    /** update event. */
+    private static final EventType UPDATE_EVENT = new EventType("UpdateEvent");
 
     /**
      * Test the SimPersistent.
@@ -53,13 +49,13 @@ public class SimPersistentTest extends EventProducer
     @Test
     public void testSimPersistent() throws NamingException, RemoteException
     {
-        DEVSSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new DummyModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
+        DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 
         String description = "THIS PERSISTENT IS TESTED";
-        SimPersistent<Double> persistent = new SimPersistent<Double>(description, simulator);
+        SimPersistent<Double> persistent = new SimPersistent<Double>(description, model);
 
         // check the description
         assertEquals(description, persistent.getDescription());
@@ -86,12 +82,12 @@ public class SimPersistentTest extends EventProducer
         assertEquals(0L, persistent.getN());
 
         // We fire a first event
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.0, 0.0));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.0, 0.0));
 
         // We fire a wrong event
         try
         {
-            persistent.notify(new TimedEvent<String>(null, this, "ERROR", "ERROR"));
+            persistent.notify(new TimedEvent<String>(UPDATE_EVENT, "ERROR", "ERROR"));
             fail("persistent should react on events.value !instanceOf Double");
         }
         catch (Exception exception)
@@ -100,16 +96,16 @@ public class SimPersistentTest extends EventProducer
         }
 
         // Now we fire some more events
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.1, 0.1));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.2, 0.2));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.3, 0.3));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.4, 0.4));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.5, 0.5));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.6, 0.6));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.7, 0.7));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.8, 0.8));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 1.9, 0.9));
-        persistent.notify(new TimedEvent<Double>(null, "SimPersistentTest", 2.0, 1.0));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.1, 0.1));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.2, 0.2));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.3, 0.3));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.4, 0.4));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.5, 0.5));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.6, 0.6));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.7, 0.7));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.8, 0.8));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 1.9, 0.9));
+        persistent.notify(new TimedEvent<Double>(UPDATE_EVENT, 2.0, 1.0));
         persistent.endObservations(1.1);
 
         // Now we check the persistent

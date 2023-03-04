@@ -10,11 +10,11 @@ import java.rmi.registry.Registry;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.remote.RemoteEventListenerInterface;
-import org.djutils.event.remote.RemoteEventProducerInterface;
-import org.djutils.rmi.RMIObject;
-import org.djutils.rmi.RMIUtils;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.EventProducer;
+import org.djutils.rmi.RmiObject;
+import org.djutils.rmi.RmiRegistry;
 
 import nl.tudelft.simulation.naming.context.event.ContextScope;
 import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
@@ -22,7 +22,7 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
 /**
  * DemoClient sets up a connection to the remote context at DemoServer and periodically prints the results.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -30,7 +30,7 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DemoClient extends RMIObject implements RemoteEventListenerInterface
+public class DemoClient extends RmiObject implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20200210L;
@@ -54,7 +54,7 @@ public class DemoClient extends RMIObject implements RemoteEventListenerInterfac
     {
         super("127.0.0.1", 1099, "democlient");
 
-        RemoteEventProducerInterface demoServer = (RemoteEventProducerInterface) RMIUtils.lookup(getRegistry(), "demoserver");
+        EventProducer demoServer = (EventProducer) RmiRegistry.lookup(getRegistry(), "demoserver");
         demoServer.addListener(this, DemoServerInterface.EXIT_EVENT);
 
         URL url = new URL("http://127.0.0.1:1099/remoteContext");
@@ -74,7 +74,7 @@ public class DemoClient extends RMIObject implements RemoteEventListenerInterfac
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(DemoServerInterface.EXIT_EVENT))
         {

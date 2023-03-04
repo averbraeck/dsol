@@ -2,12 +2,12 @@ package nl.tudelft.simulation.examples.dsol.mm1queue;
 
 import java.io.Serializable;
 
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.formalisms.Resource;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The Seize is an extended Seize block which computes the servicetime. <br>
@@ -22,7 +22,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
     private static final long serialVersionUID = 1L;
 
     /** SERVICE_TIME_EVENT is fired when a customer is released. */
-    public static final TimedEventType SERVICE_TIME_EVENT = new TimedEventType(new MetaData("SERVICE_TIME_EVENT",
+    public static final EventType SERVICE_TIME_EVENT = new EventType(new MetaData("SERVICE_TIME_EVENT",
             "Service Time observation", new ObjectDescriptor("serviceTime", "Service time", Double.class)));
 
     /**
@@ -31,7 +31,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator on which to schedule
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to be released
      */
-    public Release(final Serializable id, final DEVSSimulatorInterface<Double> simulator,
+    public Release(final Serializable id, final DevsSimulatorInterface<Double> simulator,
             final Resource<Double> resource)
     {
         super(id, simulator, resource);
@@ -44,7 +44,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
      * @param resource Resource&lt;Double,Double,Double&gt;; the resource to be released
      * @param amount double; the amount to be released
      */
-    public Release(final Serializable id, final DEVSSimulatorInterface<Double> simulator,
+    public Release(final Serializable id, final DevsSimulatorInterface<Double> simulator,
             final Resource<Double> resource, final double amount)
     {
         super(id, simulator, resource, amount);

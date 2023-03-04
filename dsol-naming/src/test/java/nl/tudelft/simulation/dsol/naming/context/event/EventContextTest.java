@@ -13,10 +13,10 @@ import java.util.Hashtable;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventProducerInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.LocalEventProducer;
+import org.djutils.event.reference.ReferenceType;
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.naming.context.ContextTestUtil;
@@ -29,7 +29,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 /**
  * EventContextTest.java.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -193,8 +193,8 @@ public class EventContextTest
             context.addListener(listenerObject, "/1/11/o111", ContextScope.OBJECT_SCOPE);
             context.addListener(listenerLevel, "/1/11", ContextScope.LEVEL_SCOPE, ReferenceType.WEAK);
             context.addListener(listenerLevelObject, "/1/11", ContextScope.LEVEL_OBJECT_SCOPE,
-                    EventProducerInterface.LAST_POSITION);
-            context.addListener(listenerSubTree, "/1/11", ContextScope.SUBTREE_SCOPE, EventProducerInterface.FIRST_POSITION,
+                    LocalEventProducer.LAST_POSITION);
+            context.addListener(listenerSubTree, "/1/11", ContextScope.SUBTREE_SCOPE, LocalEventProducer.FIRST_POSITION,
                     ReferenceType.STRONG);
 
             // add an object to c11. Expected behavior: O: no, L: yes, LO: yes, ST: yes
@@ -204,7 +204,7 @@ public class EventContextTest
             listenerSubTree.setExpectingNotification(true);
             TestObject object112 = new TestObject("object112");
             c11.bind("o112", object112);
-            EventInterface eventLevel = listenerLevel.getReceivedEvent();
+            Event eventLevel = listenerLevel.getReceivedEvent();
             assertEquals(ContextInterface.OBJECT_ADDED_EVENT, eventLevel.getType());
             assertTrue(eventLevel.getContent() instanceof Object[]);
             Object[] content = (Object[]) eventLevel.getContent();
@@ -212,10 +212,9 @@ public class EventContextTest
             assertEquals(c11.getAbsolutePath(), content[0]);
             assertEquals("o112", content[1]);
             assertEquals(object112, content[2]);
-            assertEquals(c11.getSourceId(), eventLevel.getSourceId());
-            EventInterface eventLevelObject = listenerLevelObject.getReceivedEvent();
+            Event eventLevelObject = listenerLevelObject.getReceivedEvent();
             assertEquals(eventLevel, eventLevelObject);
-            EventInterface eventSubTree = listenerLevelObject.getReceivedEvent();
+            Event eventSubTree = listenerLevelObject.getReceivedEvent();
             assertEquals(eventLevel, eventSubTree);
 
             // add an object to c12. Expected behavior: O: no, L: no, LO: no, ST: no
@@ -240,7 +239,6 @@ public class EventContextTest
             assertEquals(c11.getAbsolutePath(), content[0]);
             assertEquals("111", content[1]);
             assertEquals(c111, content[2]);
-            assertEquals(c11.getSourceId(), eventLevel.getSourceId());
             eventLevelObject = listenerLevelObject.getReceivedEvent();
             assertEquals(eventLevel, eventLevelObject);
             eventSubTree = listenerLevelObject.getReceivedEvent();
@@ -261,7 +259,6 @@ public class EventContextTest
             assertEquals(c111.getAbsolutePath(), content[0]);
             assertEquals("o111x", content[1]);
             assertEquals(object111x, content[2]);
-            assertEquals(c111.getSourceId(), eventSubTree.getSourceId());
 
             // add an subcontext to c111. Expected behavior: O: no, L: no, LO: no, ST: yes
             listenerObject.setExpectingNotification(false);
@@ -277,7 +274,6 @@ public class EventContextTest
             assertEquals(c111.getAbsolutePath(), content[0]);
             assertEquals("1111", content[1]);
             assertEquals(c1111, content[2]);
-            assertEquals(c111.getSourceId(), eventSubTree.getSourceId());
 
             // change an object in c11. Expected behavior: O: no, L: yes, LO: yes, ST: yes
             listenerObject.setExpectingNotification(false);
@@ -293,7 +289,6 @@ public class EventContextTest
             assertEquals(c11.getAbsolutePath(), content[0]);
             assertEquals("o112", content[1]);
             assertEquals(object112, content[2]);
-            assertEquals(c11.getSourceId(), eventLevel.getSourceId());
             eventLevelObject = listenerLevelObject.getReceivedEvent();
             assertEquals(eventLevel, eventLevelObject);
             eventSubTree = listenerLevelObject.getReceivedEvent();
@@ -320,7 +315,6 @@ public class EventContextTest
             assertEquals(c111.getAbsolutePath(), content[0]);
             assertEquals("o111x", content[1]);
             assertEquals(object111x, content[2]);
-            assertEquals(c111.getSourceId(), eventSubTree.getSourceId());
 
             // remove an object from c12. Expected behavior: O: no, L: no, LO: no, ST: no
             listenerObject.setExpectingNotification(false);
@@ -343,7 +337,6 @@ public class EventContextTest
             assertEquals(c111.getAbsolutePath(), content[0]);
             assertEquals("o111x", content[1]);
             assertEquals(object111x, content[2]);
-            assertEquals(c111.getSourceId(), eventSubTree.getSourceId());
 
             // remove object o111. Expected behavior: O: yes, L: yes, LO: yes, ST: yes
             listenerObject.setExpectingNotification(true);
@@ -359,14 +352,13 @@ public class EventContextTest
             assertEquals(c11.getAbsolutePath(), content[0]);
             assertEquals("o111", content[1]);
             assertEquals(object111, content[2]);
-            assertEquals(c11.getSourceId(), eventLevel.getSourceId());
             eventLevelObject = listenerLevelObject.getReceivedEvent();
             assertEquals(eventLevel, eventLevelObject);
             eventSubTree = listenerLevelObject.getReceivedEvent();
             assertEquals(eventLevel, eventSubTree);
-            EventInterface eventObject = listenerObject.getReceivedEvent();
+            Event eventObject = listenerObject.getReceivedEvent();
             assertEquals(eventLevel, eventObject);
-            
+
             // remove context 111. Expected behavior: O: no, L: yes, LO: yes, ST: yes
             listenerObject.setExpectingNotification(false);
             listenerLevel.setExpectingNotification(true);
@@ -381,7 +373,6 @@ public class EventContextTest
             assertEquals(c11.getAbsolutePath(), content[0]);
             assertEquals("111", content[1]);
             assertEquals(c111, content[2]);
-            assertEquals(c11.getSourceId(), eventLevel.getSourceId());
             eventLevelObject = listenerLevelObject.getReceivedEvent();
             assertEquals(eventLevel, eventLevelObject);
             eventSubTree = listenerLevelObject.getReceivedEvent();
@@ -405,7 +396,6 @@ public class EventContextTest
             assertEquals(c1.getAbsolutePath(), content[0]);
             assertEquals("11", content[1]);
             assertEquals(c11, content[2]);
-            assertEquals(c1.getSourceId(), eventSubTree.getSourceId());
             eventLevelObject = listenerLevelObject.getReceivedEvent();
             assertEquals(eventSubTree, eventLevelObject);
 
@@ -442,7 +432,7 @@ public class EventContextTest
     }
 
     /** EventListener to test received events. */
-    protected static class TestEventListener implements EventListenerInterface
+    protected static class TestEventListener implements EventListener
     {
         /** */
         private static final long serialVersionUID = 20191230L;
@@ -451,8 +441,8 @@ public class EventContextTest
         private boolean expectingNotification = true;
 
         /** received event. */
-        private EventInterface receivedEvent;
-        
+        private Event receivedEvent;
+
         /** the scope for reporting. */
         private final ContextScope contextScope;
 
@@ -476,14 +466,14 @@ public class EventContextTest
         /**
          * @return receivedEvent
          */
-        public EventInterface getReceivedEvent()
+        public Event getReceivedEvent()
         {
             return this.receivedEvent;
         }
 
         /** {@inheritDoc} */
         @Override
-        public void notify(final EventInterface event) throws RemoteException
+        public void notify(final Event event) throws RemoteException
         {
             if (!this.expectingNotification)
             {
@@ -505,7 +495,7 @@ public class EventContextTest
         /**
          * @param field the field
          */
-        public TestObject(String field)
+        public TestObject(final String field)
         {
             this.field = field;
         }

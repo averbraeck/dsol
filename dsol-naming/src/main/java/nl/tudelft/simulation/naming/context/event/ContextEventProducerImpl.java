@@ -12,11 +12,10 @@ import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.naming.NotContextException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventProducer;
-import org.djutils.event.EventProducerInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.LocalEventProducer;
+import org.djutils.event.reference.ReferenceType;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -69,7 +68,7 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
  * "/simulation1/sub1(/.*)?". The context "sub1" itself is also included, with or without a forward slash at the end.</li>
  * </ul>
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -77,7 +76,7 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class ContextEventProducerImpl extends EventProducer implements EventListenerInterface
+public class ContextEventProducerImpl extends LocalEventProducer implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20200209L;
@@ -115,21 +114,7 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
 
     /** {@inheritDoc} */
     @Override
-    public Serializable getSourceId()
-    {
-        try
-        {
-            return this.parent.getSourceId();
-        }
-        catch (RemoteException exception)
-        {
-            throw new RuntimeException(exception);
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         Object[] content = (Object[]) event.getContent();
         if (event.getType().equals(ContextInterface.OBJECT_ADDED_EVENT))
@@ -252,7 +237,7 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
 
     /**
      * Add a listener for the provided scope as strong reference to the BEGINNING of a queue of listeners.
-     * @param listener EventListenerInterface; the listener which is interested at events of eventType.
+     * @param listener EventListener; the listener which is interested at events of eventType.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -266,16 +251,16 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs.
      */
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope) throws RemoteException, NameNotFoundException, InvalidNameException,
-            NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
+            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
+            NullPointerException
     {
-        return addListener(listener, absolutePath, contextScope, EventProducerInterface.FIRST_POSITION, ReferenceType.STRONG);
+        return addListener(listener, absolutePath, contextScope, LocalEventProducer.FIRST_POSITION, ReferenceType.STRONG);
     }
 
     /**
      * Add a listener for the provided scope to the BEGINNING of a queue of listeners.
-     * @param listener EventListenerInterface; the listener which is interested at events of eventType.
+     * @param listener EventListener; the listener which is interested at events of eventType.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -289,18 +274,17 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs.
-     * @see org.djutils.event.ref.Reference
      */
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
-            InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
+            NotContextException, NamingException, NullPointerException
     {
-        return addListener(listener, absolutePath, contextScope, EventProducerInterface.FIRST_POSITION, referenceType);
+        return addListener(listener, absolutePath, contextScope, LocalEventProducer.FIRST_POSITION, referenceType);
     }
 
     /**
      * Add a listener for the provided scope as strong reference to the specified position of a queue of listeners.
-     * @param listener EventListenerInterface; the listener which is interested at events of eventType.
+     * @param listener EventListener; the listener which is interested at events of eventType.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -316,16 +300,16 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs.
      */
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope, final int position) throws RemoteException, NameNotFoundException,
-            InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final int position) throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException,
+            NamingException, NullPointerException
     {
         return addListener(listener, absolutePath, contextScope, position, ReferenceType.STRONG);
     }
 
     /**
      * Add a listener for the provided scope to the specified position of a queue of listeners.
-     * @param listener EventListenerInterface; which is interested at certain events,
+     * @param listener EventListener; which is interested at certain events,
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -336,11 +320,10 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
      * @throws InvalidNameException when the path does not start with a slash
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs
-     * @see org.djutils.event.ref.Reference
      */
-    public boolean addListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope, final int position, final ReferenceType referenceType) throws RemoteException,
-            InvalidNameException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final int position, final ReferenceType referenceType)
+            throws RemoteException, InvalidNameException, NullPointerException
     {
         Throw.when(listener == null, NullPointerException.class, "listener cannot be null");
         Throw.when(absolutePath == null, NullPointerException.class, "absolutePath cannot be null");
@@ -360,7 +343,7 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
 
     /**
      * Remove the subscription of a listener for the provided scope for a specific event.
-     * @param listener EventListenerInterface; which is no longer interested.
+     * @param listener EventListener; which is no longer interested.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope;the scope which is of no interest any more.
      * @return the success of removing the listener. If a listener was not subscribed false is returned.
@@ -368,16 +351,15 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs
      */
-    public boolean removeListener(final EventListenerInterface listener, final String absolutePath,
-            final ContextScope contextScope) throws RemoteException, InvalidNameException,
-            NullPointerException
+    public boolean removeListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
+            throws RemoteException, InvalidNameException, NullPointerException
     {
         Throw.when(listener == null, NullPointerException.class, "listener cannot be null");
         Throw.when(absolutePath == null, NullPointerException.class, "absolutePath cannot be null");
         Throw.when(contextScope == null, NullPointerException.class, "contextScope cannot be null");
         Throw.when(!absolutePath.startsWith("/"), InvalidNameException.class, "absolute path %s does not start with '/'",
                 absolutePath);
-        
+
         String registryKey = makeRegistryKey(absolutePath, contextScope);
         boolean removed = this.registryMap.containsKey(registryKey);
         this.regExpListenerMap.remove(registryKey);
@@ -388,7 +370,7 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
     /**
      * Pair of regular expression pattern and event listener.
      * <p>
-     * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>.
      * The DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -405,14 +387,14 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
         private final Pattern pattern;
 
         /** the event listener for this pattern. */
-        private final EventListenerInterface listener;
+        private final EventListener listener;
 
         /**
          * Construct a pattern - listener pair.
          * @param pattern Pattern; the compiled pattern
-         * @param listener EventListenerInterface; the registered listener for this pattern
+         * @param listener EventListener; the registered listener for this pattern
          */
-        public PatternListener(Pattern pattern, EventListenerInterface listener)
+        public PatternListener(final Pattern pattern, final EventListener listener)
         {
             super();
             this.pattern = pattern;
@@ -430,9 +412,9 @@ public class ContextEventProducerImpl extends EventProducer implements EventList
 
         /**
          * Return the registered listener for this pattern.
-         * @return EventListenerInterface; the registered listener for this pattern
+         * @return EventListener; the registered listener for this pattern
          */
-        public EventListenerInterface getListener()
+        public EventListener getListener()
         {
             return this.listener;
         }

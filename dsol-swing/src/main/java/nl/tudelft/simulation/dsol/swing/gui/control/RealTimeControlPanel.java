@@ -9,17 +9,17 @@ import javax.swing.JButton;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
-import org.djutils.event.EventInterface;
+import org.djutils.event.Event;
 
 import nl.tudelft.simulation.dsol.model.DSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.RunState;
 
 /**
  * ControlPanel container for the a DEVS simulator, with clocks for different time units.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -28,7 +28,7 @@ import nl.tudelft.simulation.dsol.simulators.RunState;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator type to use
  */
-public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DEVSRealTimeAnimator<T>>
+public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DevsRealTimeAnimator<T>>
         extends DEVSControlPanel<T, S> implements PropertyChangeListener
 {
     /** */
@@ -50,7 +50,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
-    public RealTimeControlPanel(final DSOLModel<T, ? extends DEVSSimulatorInterface<T>> model, final S simulator)
+    public RealTimeControlPanel(final DSOLModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator)
             throws RemoteException
     {
         super(model, simulator);
@@ -61,7 +61,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
         this.runSpeedSliderPanel = new RunSpeedSliderPanel(0.1, 1000, 1, 3, getSimulator());
         add(this.runSpeedSliderPanel);
 
-        getSimulator().addListener(this, DEVSRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT);
+        getSimulator().addListener(this, DevsRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT);
     }
 
     /** {@inheritDoc} */
@@ -134,9 +134,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
-        if (event.getType().equals(DEVSRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT))
+        if (event.getType().equals(DevsRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT))
         {
             this.runSpeedSliderPanel.setSpeedFactor((Double) event.getContent());
             fixButtons();
@@ -147,14 +147,14 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
     /**
      * DEVS Real Time ControlPanel for a Double timeunit.
      * <p>
-     * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeDouble extends RealTimeControlPanel<Double, DEVSRealTimeAnimator<Double>>
+    public static class TimeDouble extends RealTimeControlPanel<Double, DevsRealTimeAnimator<Double>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -169,8 +169,8 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeDouble(final DSOLModel<Double, ? extends DEVSSimulatorInterface<Double>> model,
-                final DEVSRealTimeAnimator<Double> simulator) throws RemoteException
+        public TimeDouble(final DSOLModel<Double, ? extends DevsSimulatorInterface<Double>> model,
+                final DevsRealTimeAnimator<Double> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDouble(getSimulator()));
@@ -182,14 +182,14 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
     /**
      * DEVS Real Time ControlPanel for a Float timeunit.
      * <p>
-     * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeFloat extends RealTimeControlPanel<Float, DEVSRealTimeAnimator<Float>>
+    public static class TimeFloat extends RealTimeControlPanel<Float, DevsRealTimeAnimator<Float>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -204,8 +204,8 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeFloat(final DSOLModel<Float, ? extends DEVSSimulatorInterface<Float>> model,
-                final DEVSRealTimeAnimator<Float> simulator) throws RemoteException
+        public TimeFloat(final DSOLModel<Float, ? extends DevsSimulatorInterface<Float>> model,
+                final DevsRealTimeAnimator<Float> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloat(getSimulator()));
@@ -217,14 +217,14 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
     /**
      * DEVS Real Time ControlPanel for a Long timeunit.
      * <p>
-     * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeLong extends RealTimeControlPanel<Long, DEVSRealTimeAnimator<Long>>
+    public static class TimeLong extends RealTimeControlPanel<Long, DevsRealTimeAnimator<Long>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -239,8 +239,8 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeLong(final DSOLModel<Long, ? extends DEVSSimulatorInterface<Long>> model,
-                final DEVSRealTimeAnimator<Long> simulator) throws RemoteException
+        public TimeLong(final DSOLModel<Long, ? extends DevsSimulatorInterface<Long>> model,
+                final DevsRealTimeAnimator<Long> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeLong(getSimulator()));
@@ -252,14 +252,14 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
     /**
      * DEVS Real Time ControlPanel for a djunits double timeunit.
      * <p>
-     * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeDoubleUnit extends RealTimeControlPanel<Duration, DEVSRealTimeAnimator<Duration>>
+    public static class TimeDoubleUnit extends RealTimeControlPanel<Duration, DevsRealTimeAnimator<Duration>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -274,8 +274,8 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeDoubleUnit(final DSOLModel<Duration, ? extends DEVSSimulatorInterface<Duration>> model,
-                final DEVSRealTimeAnimator<Duration> simulator) throws RemoteException
+        public TimeDoubleUnit(final DSOLModel<Duration, ? extends DevsSimulatorInterface<Duration>> model,
+                final DevsRealTimeAnimator<Duration> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDoubleUnit(getSimulator()));
@@ -287,14 +287,14 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
     /**
      * DEVS Real Time ControlPanel for a djunits float timeunit.
      * <p>
-     * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeFloatUnit extends RealTimeControlPanel<FloatDuration, DEVSRealTimeAnimator<FloatDuration>>
+    public static class TimeFloatUnit extends RealTimeControlPanel<FloatDuration, DevsRealTimeAnimator<FloatDuration>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -309,8 +309,8 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DE
          *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
-        public TimeFloatUnit(final DSOLModel<FloatDuration, ? extends DEVSSimulatorInterface<FloatDuration>> model,
-                final DEVSRealTimeAnimator<FloatDuration> simulator) throws RemoteException
+        public TimeFloatUnit(final DSOLModel<FloatDuration, ? extends DevsSimulatorInterface<FloatDuration>> model,
+                final DevsRealTimeAnimator<FloatDuration> simulator) throws RemoteException
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloatUnit(getSimulator()));

@@ -8,9 +8,9 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventProducerInterface;
-import org.djutils.event.EventTypeInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.EventProducer;
+import org.djutils.event.EventType;
+import org.djutils.event.reference.ReferenceType;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -29,7 +29,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * copyright (c) 2002-2021 <a href="https://simulation.tudelft.nl">Delft University of Technology </a>, the Netherlands. <br>
  * See for project information <a href="https://simulation.tudelft.nl"> www.simulation.tudelft.nl </a>.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -139,8 +139,9 @@ public class Histogram implements Swingable, Serializable
      * adds a counter to the histogramdataset. This histogram then subscribes its dataset to the
      * <code>Counter.COUNT_EVENT</code>.
      * @param counter Counter; the counter to add.
+     * @throws RemoteException on network failure
      */
-    public synchronized void add(final SimCounter<?> counter)
+    public synchronized void add(final SimCounter<?> counter) throws RemoteException
     {
         HistogramSeries set = this.getDataset().addSeries(counter.getDescription());
         counter.addListener(set, SimCounter.TIMED_OBSERVATION_ADDED_EVENT, ReferenceType.STRONG);
@@ -150,12 +151,12 @@ public class Histogram implements Swingable, Serializable
      * adds an eventProducer to the histogram dataset. The histogram subscribes its dataset subsequentially to the specified
      * event.
      * @param description String; the description of the eventProducer
-     * @param source EventProducerInterface; the eventproducer which functions as source for this histogram.
+     * @param source EventProducer; the eventproducer which functions as source for this histogram.
      * @param eventType EventType; the eventType.
      * @throws RemoteException on network error for the (possibly remote) event listener
      */
-    public synchronized void add(final String description, final EventProducerInterface source,
-            final EventTypeInterface eventType) throws RemoteException
+    public synchronized void add(final String description, final EventProducer source,
+            final EventType eventType) throws RemoteException
     {
         HistogramSeries set = this.getDataset().addSeries(description);
         source.addListener(set, eventType, ReferenceType.STRONG);

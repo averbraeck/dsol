@@ -2,8 +2,8 @@ package nl.tudelft.simulation.examples.dsol.terminal;
 
 import java.io.Serializable;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.distributions.DistTriangular;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * License of use: <a href="http://www.gnu.org/copyleft/gpl.html">General Public License (GPL) </a>, no warranty <br>
  * @author <a href="http://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class Terminal extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>> implements EventListenerInterface
+public class Terminal extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>> implements EventListener
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -52,7 +52,7 @@ public class Terminal extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
      * @param rep int; the replication number
      * @throws InputParameterException on input parameter error
      */
-    public Terminal(final DEVSSimulatorInterface<Double> simulator, final int rep) throws InputParameterException
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final int rep) throws InputParameterException
     {
         super(simulator);
         this.rep = rep;
@@ -102,7 +102,7 @@ public class Terminal extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event)
+    public void notify(final Event event)
     {
         if (event.getType().equals(Ship.SHIP_FULL_EVENT))
         {
@@ -130,13 +130,6 @@ public class Terminal extends AbstractDSOLModel<Double, DEVSSimulatorInterface<D
                 getSimulator().getLogger().always().error(exception);
             }
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Terminal";
     }
 
     /** */

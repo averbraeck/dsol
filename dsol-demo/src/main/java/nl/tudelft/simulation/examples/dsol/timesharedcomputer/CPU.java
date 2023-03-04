@@ -6,19 +6,19 @@ import java.util.List;
 
 import org.djutils.draw.bounds.Bounds3d;
 import org.djutils.draw.point.OrientedPoint3d;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The CPU example as published in Simulation Modeling and Analysis by A.M. Law &amp; W.D. Kelton section 1.4 and 2.4. .
  * <p>
- * Copyright (c) 2003-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -32,11 +32,11 @@ public class CPU extends Station<Double> implements Locatable
     private static final long serialVersionUID = 1L;
 
     /** UTILIZATION_EVENT are fired on utilization. */
-    public static final TimedEventType UTILIZATION_EVENT = new TimedEventType(new MetaData("UTILIZATION_EVENT",
+    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT",
             "Utilization change", new ObjectDescriptor("utilization", "Current utilization", Double.class)));
 
     /** QUEUE_LENGTH_EVENT is fired on changes in the Queue length. */
-    public static final TimedEventType QUEUE_LENGTH_EVENT = new TimedEventType(new MetaData("QUEUE_LENGTH_EVENT",
+    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT",
             "Queue length change", new ObjectDescriptor("queueLength", "New queue length", Integer.class)));
 
     /** QUANTUM is the QUANTUM of the CPU. */
@@ -64,7 +64,7 @@ public class CPU extends Station<Double> implements Locatable
      * constructs a new CPU.
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; a devs simulator
      */
-    public CPU(final DEVSSimulatorInterface<Double> simulator)
+    public CPU(final DevsSimulatorInterface<Double> simulator)
     {
         super("CPU", simulator);
         this.fireTimedEvent(UTILIZATION_EVENT, 0.0, simulator.getSimulatorTime());
@@ -131,15 +131,14 @@ public class CPU extends Station<Double> implements Locatable
             {
                 job.setServiceTime(job.getServiceTime() - QUANTUM);
                 Object[] args = {job};
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, this, "receiveObject",
-                        args);
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, this, "next", null);
+                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, "receiveObject", args);
+                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, "next", null);
             }
             else
             {
                 Object[] args = {job};
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + job.getServiceTime() + SWAP, this, this,
-                        "releaseObject", args);
+                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + job.getServiceTime() + SWAP, this, "releaseObject",
+                        args);
             }
         }
         else

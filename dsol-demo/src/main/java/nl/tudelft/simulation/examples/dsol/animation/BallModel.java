@@ -1,24 +1,23 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  */
-public class BallModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+public class BallModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -30,7 +29,7 @@ public class BallModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface<
      * constructs a new BallModel.
      * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
      */
-    public BallModel(final DEVSSimulatorInterface<Double> simulator)
+    public BallModel(final DevsSimulatorInterface<Double> simulator)
     {
         super(simulator);
     }
@@ -67,13 +66,6 @@ public class BallModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface<
         {
             return null;
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "BallModel";
     }
 
 }

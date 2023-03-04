@@ -1,22 +1,21 @@
 package nl.tudelft.simulation.dsol.tutorial.section43;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.EventProducer;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DESSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DessSimulator;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
 
 /**
  * A Predator-Prey model with a graph.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -24,7 +23,7 @@ import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<Double>>
+public class PredatorPreyModel extends AbstractDSOLModel<Double, DessSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -36,7 +35,7 @@ public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<D
      * constructs a new Life.
      * @param simulator DESSSimulator&lt;Double&gt;; the continuous simulator
      */
-    public PredatorPreyModel(final DESSSimulator<Double> simulator)
+    public PredatorPreyModel(final DessSimulator<Double> simulator)
     {
         super(simulator);
     }
@@ -89,15 +88,8 @@ public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<D
         return this.chart;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "PredatorPreyModel";
-    }
-
     /** small event producer that fires events for the graph with a lower resolution. */
-    static class SkipEventProducer extends EventProducer implements EventListenerInterface
+    static class SkipEventProducer extends LocalEventProducer implements EventListener
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -119,7 +111,7 @@ public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<D
 
         /** {@inheritDoc} */
         @Override
-        public void notify(final EventInterface event) throws RemoteException
+        public void notify(final Event event) throws RemoteException
         {
             if (this.count % this.skip == 0)
             {
@@ -134,13 +126,6 @@ public class PredatorPreyModel extends AbstractDSOLModel<Double, DESSSimulator<D
                 this.count = 0;
             }
             this.count++;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "SkipEventProducer";
         }
     }
 

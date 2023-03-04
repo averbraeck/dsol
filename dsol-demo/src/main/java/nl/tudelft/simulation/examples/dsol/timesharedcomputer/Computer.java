@@ -1,15 +1,14 @@
 package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
-import org.djutils.event.EventInterface;
+import org.djutils.event.Event;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.formalisms.flow.StationInterface;
+import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
+import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.swing.charts.boxAndWhisker.BoxAndWhiskerChart;
@@ -21,7 +20,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * The Computer example as published in Simulation Modeling and Analysis by A.M. Law &amp; W.D. Kelton section 1.4 and 2.4..
  * <p>
- * Copyright (c) 2003-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -29,7 +28,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Computer extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+public class Computer extends AbstractDSOLModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -44,7 +43,7 @@ public class Computer extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
      * constructs a new Computer.
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      */
-    public Computer(final DEVSSimulator<Double> simulator)
+    public Computer(final DevsSimulator<Double> simulator)
     {
         super(simulator);
     }
@@ -62,8 +61,8 @@ public class Computer extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
         try
         {
             // First the statistics
-            SimPersistent<Double> persistent = new SimPersistent<>("service time", this.simulator);
-            ExitCounter exitCounter = new ExitCounter("counter", this.simulator);
+            SimPersistent<Double> persistent = new SimPersistent<>("service time", this);
+            ExitCounter exitCounter = new ExitCounter("counter", this);
 
             // Now the charts
             Histogram histogram = new Histogram(this.simulator, "service time", new double[] {0, 200}, 200);
@@ -76,7 +75,7 @@ public class Computer extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
             for (int i = 0; i < NUMBER_OF_TERMINALS; i++)
             {
                 Terminal terminal = new Terminal(this.simulator, cpu, thinkDelay, processDelay);
-                terminal.addListener(exitCounter, StationInterface.RELEASE_EVENT);
+                terminal.addListener(exitCounter, Station.RELEASE_EVENT);
                 terminal.addListener(persistent, Terminal.SERVICE_TIME);
             }
         }
@@ -94,47 +93,37 @@ public class Computer extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
         /** */
         private static final long serialVersionUID = 1L;
 
-        /** simulator refers to the simulator. */
-        private SimulatorInterface<Double> simulator = null;
-
         /**
          * constructs a new ExitCounter.
          * @param description String; the description of the counter
-         * @param simulator SimulatorInterface&lt;Double&gt;; the simulator
+         * @param model DSOLModel&lt;Double, SimulatorInterface&lt;Double&gt;&gt;; the model to register the OutputStatistics
          * @throws RemoteException on network failure
          */
-        public ExitCounter(final String description, final SimulatorInterface<Double> simulator) throws RemoteException
+        public ExitCounter(final String description, final DSOLModel<Double, DevsSimulator<Double>> model)
+                throws RemoteException
         {
-            super(description, simulator);
-            this.simulator = simulator;
+            super(description, model);
         }
 
         /** {@inheritDoc} */
         @Override
-        public void notify(final EventInterface event)
+        public void notify(final Event event)
         {
             super.notify(event);
             if (getCount() >= NUMBER_OF_JOBS)
             {
                 try
                 {
-                    if (this.simulator.isStartingOrRunning())
+                    if (getSimulator().isStartingOrRunning())
                     {
-                        this.simulator.stop();
+                        getSimulator().stop();
                     }
                 }
                 catch (SimRuntimeException exception)
                 {
-                    this.simulator.getLogger().always().error(exception);
+                    getSimulator().getLogger().always().error(exception);
                 }
             }
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Computer";
     }
 }

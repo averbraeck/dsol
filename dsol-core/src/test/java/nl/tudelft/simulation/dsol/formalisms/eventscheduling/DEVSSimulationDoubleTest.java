@@ -1,22 +1,21 @@
 package nl.tudelft.simulation.dsol.formalisms.eventscheduling;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.concurrent.TimeoutException;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.junit.Test;
 
 import net.jodah.concurrentunit.Waiter;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -25,14 +24,14 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DEVSSimulationDoubleTest implements EventListenerInterface
+public class DEVSSimulationDoubleTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /** */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DEVSSimulatorInterface<Double> devsSimulator;
+    protected DevsSimulatorInterface<Double> devsSimulator;
 
     /** the Waiter from ConcurrentUnit that catches AssertionErrors in other threads. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -50,12 +49,12 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DEVSSimulator<Double>("testDEVSSimulationDouble");
-        this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+        this.devsSimulator = new DevsSimulator<Double>("testDEVSSimulationDouble");
+        this.devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
-        ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
+        Replication<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
         this.devsSimulator.initialize(model, rep);
-        this.devsSimulator.scheduleEventAbs(1.0, this, this, "step1", new Object[] {1.0});
+        this.devsSimulator.scheduleEventAbs(1.0, this, "step1", new Object[] {1.0});
         this.devsSimulator.start();
         this.waiter.await(10000);
     }
@@ -68,12 +67,12 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
     protected void step1(final double checkTime) throws SimRuntimeException
     {
         this.waiter.assertEquals(this.devsSimulator.getSimulatorTime(), checkTime, 0.0001);
-        this.devsSimulator.scheduleEventRel(1.0, this, this, "step1", new Object[] {checkTime + 1.0});
+        this.devsSimulator.scheduleEventRel(1.0, this, "step1", new Object[] {checkTime + 1.0});
     }
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         this.waiter.resume();
     }
@@ -90,12 +89,12 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DEVSSimulator<Double>("testRunUpTo");
-        this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+        this.devsSimulator = new DevsSimulator<Double>("testRunUpTo");
+        this.devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
-        ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
+        Replication<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         this.devsSimulator.initialize(model, rep);
-        final DEVSSimulatorInterface<Double> sim = this.devsSimulator;
+        final DevsSimulatorInterface<Double> sim = this.devsSimulator;
         final Waiter w = this.waiter;
         final Object target = this;
 
@@ -109,7 +108,7 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
                 for (int i = 0; i < 10000; i++)
                 {
                     double time = dist.draw();
-                    sim.scheduleEventAbs(time, this, target, "doWork", new Object[] {time});
+                    sim.scheduleEventAbs(time, target, "doWork", new Object[] {time});
                 }
                 for (double t = 0.0; t < 1000.0; t += 1.0)
                 {
@@ -184,10 +183,10 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DEVSSimulator<Double>("testSimLambda");
-        this.devsSimulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+        this.devsSimulator = new DevsSimulator<Double>("testSimLambda");
+        this.devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
-        ReplicationInterface<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
+        Replication<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
         this.devsSimulator.initialize(model, rep);
 
         for (int i = 0; i < 10; i++)
@@ -209,7 +208,7 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
     /**
      * THE MODEL.
      */
-    public static class ModelDouble extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+    public static class ModelDouble extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -217,7 +216,7 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
         /**
          * @param simulator the simulator.
          */
-        public ModelDouble(final DEVSSimulatorInterface<Double> simulator)
+        public ModelDouble(final DevsSimulatorInterface<Double> simulator)
         {
             super(simulator);
         }
@@ -227,13 +226,6 @@ public class DEVSSimulationDoubleTest implements EventListenerInterface
         public void constructModel() throws SimRuntimeException
         {
             //
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "ModelDouble";
         }
     }
 }

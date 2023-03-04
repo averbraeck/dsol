@@ -3,14 +3,13 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.io.Serializable;
 import java.rmi.Remote;
 
-import org.djutils.event.EventProducerInterface;
+import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
-import org.djutils.event.TimedEventType;
 import org.djutils.metadata.MetaData;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 
@@ -57,7 +56,7 @@ import nl.tudelft.simulation.dsol.model.DSOLModel;
  * END_EXPERIMENTALFRAME_EVENT
  * </pre>
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -67,22 +66,22 @@ import nl.tudelft.simulation.dsol.model.DSOLModel;
  * @param <T> the extended simulation time type to be able to implement a comparator on the simulation time.
  */
 @SuppressWarnings("checkstyle:linelength")
-public interface SimulatorInterface<T extends Number & Comparable<T>> extends Remote, Serializable, EventProducerInterface
+public interface SimulatorInterface<T extends Number & Comparable<T>> extends Remote, Serializable, EventProducer
 {
     /** STARTING_EVENT is fired when the simulator.start() method is called (the run() method still needs to start). */
     EventType STARTING_EVENT = new EventType(new MetaData("STARTING_EVENT", "simulator starting"));
 
     /** START_EVENT is fired when the simulator is started. */
-    TimedEventType START_EVENT = new TimedEventType(new MetaData("START_EVENT", "simulator started"));
+    EventType START_EVENT = new EventType(new MetaData("START_EVENT", "simulator started"));
 
     /** STOPPING_EVENT is fired when the simulator.stop() method is called (the run() method still needs to be stopped). */
     EventType STOPPING_EVENT = new EventType(new MetaData("STOPPING_EVENT", "simulator stopping"));
 
     /** STOP_EVENT is fired when the simulator is stopped. */
-    TimedEventType STOP_EVENT = new TimedEventType(new MetaData("STOP_EVENT", "simulator stopped"));
+    EventType STOP_EVENT = new EventType(new MetaData("STOP_EVENT", "simulator stopped"));
 
     /** TIME_CHANGED_EVENT is fired when the simulatorTime is updated. */
-    TimedEventType TIME_CHANGED_EVENT = new TimedEventType(new MetaData("TIME_CHANGED_EVENT", "time changed"));
+    EventType TIME_CHANGED_EVENT = new EventType(new MetaData("TIME_CHANGED_EVENT", "time changed"));
 
     /**
      * Returns the absolute simulator time.
@@ -92,14 +91,14 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
 
     /**
      * Returns the currently executed replication, or null when the initialize method has not yet been called.
-     * @return ReplicationInterface&lt;T&gt;; the current replication, or null when the model has not yet been initialized
+     * @return Replication&lt;T&gt;; the current replication, or null when the model has not yet been initialized
      */
-    ReplicationInterface<T> getReplication();
+    Replication<T> getReplication();
 
     /**
      * Returns the currently executed model, or null when the initialize method has not yet been called.
-     * @return DSOLModel&lt;T, ? extends SimulatorInterface&gt;; the currently executed model, or null when the model has
-     *         not yet been initialized
+     * @return DSOLModel&lt;T, ? extends SimulatorInterface&gt;; the currently executed model, or null when the model has not
+     *         yet been initialized
      */
     DSOLModel<T, ? extends SimulatorInterface<T>> getModel();
 
@@ -107,13 +106,29 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * Add a method call that has to be performed at the end if initialize, and before the model starts. This can, for instance,
      * be used to schedule the execution of simulation events before initialize has been called, and solved the problem that,
      * for discrete event simulators, the scheduleEvent(...) methods cannot be called before initialize().
-     * @param source Object; the object that added the scheduled method call, for debugging purposes (typically 'this')
      * @param target Object; the target on which the method needs to be executed
      * @param method String; the name of the method to call on initialization of the model
      * @param args Object[]; the arguments of the method. Use <code>new Object[] {}</code> for no arguments.
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
-    void addScheduledMethodOnInitialize(Object source, Object target, String method, Object[] args) throws SimRuntimeException;
+    void addScheduledMethodOnInitialize(Object target, String method, Object[] args) throws SimRuntimeException;
+
+    /**
+     * Add a method call that has to be performed at the end if initialize, and before the model starts. This can, for instance,
+     * be used to schedule the execution of simulation events before initialize has been called, and solved the problem that,
+     * for discrete event simulators, the scheduleEvent(...) methods cannot be called before initialize().
+     * @param source Object; the source of the scheduled event
+     * @param target Object; the target on which the method needs to be executed
+     * @param method String; the name of the method to call on initialization of the model
+     * @param args Object[]; the arguments of the method. Use <code>new Object[] {}</code> for no arguments.
+     * @throws SimRuntimeException whenever the event is scheduled in the past.
+     */
+    @Deprecated
+    default void addScheduledMethodOnInitialize(final Object source, final Object target, final String method, final Object[] args)
+            throws SimRuntimeException
+    {
+        addScheduledMethodOnInitialize(target, method, args);
+    }
 
     /**
      * Initializes the simulator with a replication for a model. It immediately fires a START_REPLICATION_EVENT and a
@@ -122,11 +137,11 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * simulator is initialized with the replication. Connecting the statistics objects to the simulation should be done between
      * the initialize(...) method and starting the simulator, or could even be delayed till the WARMUP_EVENT has been fired.
      * @param model DSOLModel&lt;T, S&gt;; the model to initialize
-     * @param replication Replication&lt;T, ? extends SimulatorInterface&lt;T&gt;&gt;; the replication to use for
-     *            running the model
+     * @param replication Replication&lt;T, ? extends SimulatorInterface&lt;T&gt;&gt;; the replication to use for running the
+     *            model
      * @throws SimRuntimeException when the simulator is running
      */
-    void initialize(DSOLModel<T, ? extends SimulatorInterface<T>> model, ReplicationInterface<T> replication)
+    void initialize(DSOLModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication)
             throws SimRuntimeException;
 
     /**
@@ -188,10 +203,6 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * @return SimLogger; the logger that is specific for this simulator
      */
     SimLogger getLogger();
-
-    /** {@inheritDoc} */
-    @Override
-    Serializable getSourceId();
 
     /**
      * Get the run state of the simulator.

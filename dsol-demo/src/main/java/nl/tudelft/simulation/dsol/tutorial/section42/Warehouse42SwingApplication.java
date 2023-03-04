@@ -8,10 +8,10 @@ import org.djutils.stats.summarizers.event.StatisticsEvents;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
@@ -22,7 +22,7 @@ import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialo
 
 /**
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -56,9 +56,9 @@ public class Warehouse42SwingApplication extends DSOLApplication
     public static void main(final String[] args)
             throws SimRuntimeException, RemoteException, NamingException, InterruptedException, InputParameterException
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("Warehouse42SwingApplication");
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("Warehouse42SwingApplication");
         Warehouse42Model model = new Warehouse42Model(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 5 * 24.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 5 * 24.0);
         simulator.initialize(model, replication);
         new TabbedParameterDialog(model.getInputParameterMap());
         new Warehouse42SwingApplication("MM1 Queue model", new Warehouse42Panel(model, simulator));
@@ -81,7 +81,7 @@ public class Warehouse42SwingApplication extends DSOLApplication
          * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
          * @throws RemoteException on error
          */
-        Warehouse42Panel(final Warehouse42Model model, final DEVSSimulator<Double> simulator) throws RemoteException
+        Warehouse42Panel(final Warehouse42Model model, final DevsSimulator<Double> simulator) throws RemoteException
         {
             super(new DEVSControlPanel.TimeDouble(model, simulator));
             addTabs(model);

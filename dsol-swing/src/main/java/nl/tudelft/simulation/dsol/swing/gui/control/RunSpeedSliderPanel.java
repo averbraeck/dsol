@@ -14,13 +14,13 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * JPanel that contains a JSider for setting the speed of the simulation using a logarithmic scale
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -52,7 +52,7 @@ public class RunSpeedSliderPanel extends JPanel
      * @param simulator DEVSSimulatorInterface&lt;?, ?, ?&gt;; the simulator to change the speed of
      */
     RunSpeedSliderPanel(final double minimum, final double maximum, final double initialValue, final int ticksPerDecade,
-            final DEVSSimulatorInterface<?> simulator)
+            final DevsSimulatorInterface<?> simulator)
     {
         if (minimum <= 0 || minimum > initialValue || initialValue > maximum)
         {
@@ -127,9 +127,9 @@ public class RunSpeedSliderPanel extends JPanel
          */
 
         // initial value of simulation speed
-        if (simulator instanceof DEVSRealTimeAnimator)
+        if (simulator instanceof DevsRealTimeAnimator)
         {
-            DEVSRealTimeAnimator<?> clock = (DEVSRealTimeAnimator<?>) simulator;
+            DevsRealTimeAnimator<?> clock = (DevsRealTimeAnimator<?>) simulator;
             clock.setSpeedFactor(RunSpeedSliderPanel.this.tickValues.get(this.slider.getValue()));
         }
 
@@ -140,9 +140,9 @@ public class RunSpeedSliderPanel extends JPanel
             public void stateChanged(final ChangeEvent ce)
             {
                 JSlider source = (JSlider) ce.getSource();
-                if (!source.getValueIsAdjusting() && simulator instanceof DEVSRealTimeAnimator)
+                if (!source.getValueIsAdjusting() && simulator instanceof DevsRealTimeAnimator)
                 {
-                    DEVSRealTimeAnimator<?> clock = (DEVSRealTimeAnimator<?>) simulator;
+                    DevsRealTimeAnimator<?> clock = (DevsRealTimeAnimator<?>) simulator;
                     clock.setSpeedFactor(((RunSpeedSliderPanel) source.getParent()).getTickValues().get(source.getValue()));
                 }
             }

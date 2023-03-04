@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
 /**
  * This class defines the JUnit test for the TreeMapEventListOld.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -50,8 +50,7 @@ public class EventListTest
         // between [0..200]
         for (int i = 0; i < 500; i++)
         {
-            eventList
-                    .add(new SimEvent<Double>(new Double(200 * Math.random()), this, new String(), "trim", null));
+            eventList.add(new SimEvent<Double>(200 * Math.random(), new String(), "trim", null));
         }
 
         // Now we assert some getters on the eventList
@@ -74,7 +73,7 @@ public class EventListTest
         // Now we fill the eventList with a number of events with different priorities on time=0.0
         for (int i = 1; i < 10; i++)
         {
-            eventList.add(new SimEvent<Double>(new Double(0.0), (short) i, this, new String(), "trim", null));
+            eventList.add(new SimEvent<Double>(0.0, (short) i, new String(), "trim", null));
         }
         short priority = SimEventInterface.MAX_PRIORITY;
 
@@ -96,13 +95,12 @@ public class EventListTest
         // Let's check the empty eventList
         assertTrue(eventList.isEmpty());
         assertNull(eventList.first());
-        assertFalse(eventList
-                .remove(new SimEvent<Double>(new Double(200 * Math.random()), this, new String(), "trim", null)));
+        assertFalse(eventList.remove(new SimEvent<Double>(200 * Math.random(), new String(), "trim", null)));
         eventList.clear();
 
         // Let's cancel an event
-        eventList.add(new SimEvent<Double>(new Double(100), this, this, "toString", null));
-        SimEventInterface<Double> simEvent = new SimEvent<>(new Double(100), this, this, "toString", null);
+        eventList.add(new SimEvent<Double>(100.0, this, "toString", null));
+        SimEventInterface<Double> simEvent = new SimEvent<>(100.0, this, "toString", null);
         eventList.add(simEvent);
         assertTrue(eventList.remove(simEvent));
 

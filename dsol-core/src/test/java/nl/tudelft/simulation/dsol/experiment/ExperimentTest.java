@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -22,8 +21,8 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.Sleep;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
@@ -35,7 +34,7 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
 /**
  * ExperimentTest tests the correct working of the Experiment object.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -48,26 +47,24 @@ public class ExperimentTest
      * Test the Experiment object.
      */
     @Test
-    @SuppressWarnings("null")
     public void testDoubleExperiment()
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new CountModel(simulator, new LinkedHashMap<>());
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, new LinkedHashMap<>());
+        Experiment<Double, DevsSimulatorInterface<Double>> expd =
                 new Experiment<>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
 
         expd.removeFromContext(); // should not yet have been added
         assertEquals("Exp 1", expd.getId());
         assertEquals("Exp 1", expd.getDescription());
-        assertEquals("Exp 1", expd.getSourceId());
         expd.setDescription("Experiment 1");
         assertEquals("Experiment 1", expd.getDescription());
         assertEquals(10.0, expd.getStartTime(), 1E-9);
-        assertEquals(10.0, expd.getStartSimTime(), 1E-9);
+        assertEquals(10.0, expd.getStartTime(), 1E-9);
         assertEquals(22.0, expd.getEndTime(), 1E-9);
-        assertEquals(22.0, expd.getEndSimTime(), 1E-9);
+        assertEquals(22.0, expd.getEndTime(), 1E-9);
         assertEquals(11.0, expd.getWarmupTime(), 1E-9);
-        assertEquals(11.0, expd.getWarmupSimTime(), 1E-9);
+        assertEquals(11.0, expd.getWarmupTime(), 1E-9);
         assertEquals(12.0, expd.getRunLength(), 1E-9);
         assertEquals(1.0, expd.getWarmupPeriod(), 1E-9);
         assertNotNull(expd.getStreamUpdater());
@@ -85,31 +82,31 @@ public class ExperimentTest
 
         // errors
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>(null, simulator, model, 0.0, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>(null, simulator, model, 0.0, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", null, model, 0.0, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", null, model, 0.0, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, null, 0.0, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, null, 0.0, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, (Double) null, 10.0, 20.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, (Double) null, 10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, (Double) null, 20.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, (Double) null, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, (Double) null, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, (Double) null, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, -10.0, 20.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, -10.0, 20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 0.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 0.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, -20.0, 10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, -20.0, 10); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, 0); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, 0); });
         Try.testFail(() ->
-        { new Experiment<Double, DEVSSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, -10); });
+        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, -10); });
 
         // should be ok
-        new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp1a", simulator, model, 0.0, 0.0, 20.0, 10);
-        new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp1a", simulator, model, -10.0, 0.0, 20.0, 10);
+        new Experiment<Double, DevsSimulatorInterface<Double>>("Exp1a", simulator, model, 0.0, 0.0, 20.0, 10);
+        new Experiment<Double, DevsSimulatorInterface<Double>>("Exp1a", simulator, model, -10.0, 0.0, 20.0, 10);
     }
 
     /**
@@ -119,9 +116,9 @@ public class ExperimentTest
     public void testExperimentTypes()
     {
         // generic experiment
-        DEVSSimulator<Double> simd = new DEVSSimulator<>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> modd =
-                new AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>(simd)
+        DevsSimulator<Double> simd = new DevsSimulator<>("simulator");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> modd =
+                new AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>(simd)
                 {
                     /** */
                     private static final long serialVersionUID = 1L;
@@ -131,22 +128,15 @@ public class ExperimentTest
                     {
                         //
                     }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "exp";
-                    }
                 };
-        Experiment<Double, DEVSSimulatorInterface<Double>> d1 =
-                new Experiment<>("Exp 1", simd, modd, new Double(10.0), 1.0, 12.0, 10);
+        Experiment<Double, DevsSimulatorInterface<Double>> d1 = new Experiment<>("Exp 1", simd, modd, 10.0, 1.0, 12.0, 10);
         assertEquals(22.0, d1.getEndTime(), 1E-6);
         assertEquals(modd, d1.getModel());
         d1.makeExperimentReplication();
 
         // float experiment
-        DEVSSimulator<Float> simf = new DEVSSimulator<Float>("simulator");
-        DSOLModel<Float, DEVSSimulatorInterface<Float>> modf = new AbstractDSOLModel<Float, DEVSSimulatorInterface<Float>>(simf)
+        DevsSimulator<Float> simf = new DevsSimulator<Float>("simulator");
+        DSOLModel<Float, DevsSimulatorInterface<Float>> modf = new AbstractDSOLModel<Float, DevsSimulatorInterface<Float>>(simf)
         {
 
             /** */
@@ -157,22 +147,16 @@ public class ExperimentTest
             {
                 //
             }
-
-            @Override
-            public Serializable getSourceId()
-            {
-                return "exp";
-            }
         };
-        Experiment<Float, DEVSSimulatorInterface<Float>> f1 =
-                new Experiment<Float, DEVSSimulatorInterface<Float>>("f1", simf, modf, 10.0f, 1.0f, 12.0f, 10);
+        Experiment<Float, DevsSimulatorInterface<Float>> f1 =
+                new Experiment<Float, DevsSimulatorInterface<Float>>("f1", simf, modf, 10.0f, 1.0f, 12.0f, 10);
         assertEquals(22.0f, f1.getEndTime(), 1E-6);
         assertEquals(modf, f1.getModel());
         f1.makeExperimentReplication();
 
         // long experiment
-        DEVSSimulator<Long> siml = new DEVSSimulator<Long>("simulator");
-        DSOLModel<Long, DEVSSimulatorInterface<Long>> modl = new AbstractDSOLModel<Long, DEVSSimulatorInterface<Long>>(siml)
+        DevsSimulator<Long> siml = new DevsSimulator<Long>("simulator");
+        DSOLModel<Long, DevsSimulatorInterface<Long>> modl = new AbstractDSOLModel<Long, DevsSimulatorInterface<Long>>(siml)
         {
 
             /** */
@@ -183,23 +167,17 @@ public class ExperimentTest
             {
                 //
             }
-
-            @Override
-            public Serializable getSourceId()
-            {
-                return "exp";
-            }
         };
-        Experiment<Long, DEVSSimulatorInterface<Long>> l1 =
-                new Experiment<Long, DEVSSimulatorInterface<Long>>("l1", siml, modl, 10L, 1L, 12L, 10);
+        Experiment<Long, DevsSimulatorInterface<Long>> l1 =
+                new Experiment<Long, DevsSimulatorInterface<Long>>("l1", siml, modl, 10L, 1L, 12L, 10);
         assertEquals(22L, l1.getEndTime().longValue());
         assertEquals(modl, l1.getModel());
         l1.makeExperimentReplication();
 
         // double unit experiment
-        DEVSSimulator<Duration> simdu = new DEVSSimulator<Duration>("simulator");
-        DSOLModel<Duration, DEVSSimulatorInterface<Duration>> moddu =
-                new AbstractDSOLModel<Duration, DEVSSimulatorInterface<Duration>>(simdu)
+        DevsSimulator<Duration> simdu = new DevsSimulator<Duration>("simulator");
+        DSOLModel<Duration, DevsSimulatorInterface<Duration>> moddu =
+                new AbstractDSOLModel<Duration, DevsSimulatorInterface<Duration>>(simdu)
                 {
 
                     /** */
@@ -210,23 +188,17 @@ public class ExperimentTest
                     {
                         //
                     }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "exp";
-                    }
                 };
-        Experiment<Duration, DEVSSimulatorInterface<Duration>> du1 = new Experiment<Duration, DEVSSimulatorInterface<Duration>>(
+        Experiment<Duration, DevsSimulatorInterface<Duration>> du1 = new Experiment<Duration, DevsSimulatorInterface<Duration>>(
                 "du1", simdu, moddu, Duration.ZERO, Duration.ZERO, Duration.instantiateSI(1000.0), 10);
         assertEquals(1000.0, du1.getEndTime().doubleValue(), 1E-6);
         assertEquals(moddu, du1.getModel());
         du1.makeExperimentReplication();
 
         // float unit experiment
-        DEVSSimulator<FloatDuration> simfu = new DEVSSimulator<FloatDuration>("simulator");
-        DSOLModel<FloatDuration, DEVSSimulatorInterface<FloatDuration>> modfu =
-                new AbstractDSOLModel<FloatDuration, DEVSSimulatorInterface<FloatDuration>>(simfu)
+        DevsSimulator<FloatDuration> simfu = new DevsSimulator<FloatDuration>("simulator");
+        DSOLModel<FloatDuration, DevsSimulatorInterface<FloatDuration>> modfu =
+                new AbstractDSOLModel<FloatDuration, DevsSimulatorInterface<FloatDuration>>(simfu)
                 {
 
                     /** */
@@ -237,15 +209,8 @@ public class ExperimentTest
                     {
                         //
                     }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "exp";
-                    }
-
                 };
-        Experiment<FloatDuration, DEVSSimulatorInterface<FloatDuration>> fu1 = new Experiment<>("du1", simfu, modfu,
+        Experiment<FloatDuration, DevsSimulatorInterface<FloatDuration>> fu1 = new Experiment<>("du1", simfu, modfu,
                 FloatDuration.ZERO, FloatDuration.ZERO, FloatDuration.instantiateSI(1000.0f), 10);
         assertEquals(1000.0f, fu1.getEndTime().floatValue(), 1E-6);
         assertEquals(modfu, fu1.getModel());
@@ -260,10 +225,10 @@ public class ExperimentTest
     public void testExperimentRun() throws RemoteException
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
-                new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
+        Experiment<Double, DevsSimulatorInterface<Double>> expd =
+                new Experiment<Double, DevsSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
 
         expd.start();
         int count = 0;
@@ -281,10 +246,8 @@ public class ExperimentTest
         }
 
         // test failure
-        Try.testFail(() ->
-        { expd.start(); });
-        Try.testFail(() ->
-        { expd.startNextReplication(); });
+        Try.testFail(() -> expd.start());
+        Try.testFail(() -> expd.startNextReplication());
 
         // reset and do again
         dataCollector.clear();
@@ -312,8 +275,8 @@ public class ExperimentTest
     public void testExperimentRunSeedUpdater() throws RemoteException
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
         StreamSeedInformation streamInformation = new StreamSeedInformation();
         streamInformation.addStream("default", new MersenneTwister(10L));
         streamInformation.addStream("iatStream", new MersenneTwister(20L));
@@ -326,8 +289,8 @@ public class ExperimentTest
         seedMap.put(1, 200L);
         streamInformation.putSeedMap("default", seedMap);
         model.setStreamInformation(streamInformation);
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
-                new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
+        Experiment<Double, DevsSimulatorInterface<Double>> expd =
+                new Experiment<Double, DevsSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
         expd.setStreamUpdater(new StreamSeedUpdater(streamInformation.getStreamSeedMap()));
 
         expd.start();
@@ -353,10 +316,10 @@ public class ExperimentTest
     @Test
     public void testSummaryStatistics() throws RemoteException
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
-        DSOLModel<Double, DEVSSimulatorInterface<Double>> model = new MM1Model(simulator);
-        Experiment<Double, DEVSSimulatorInterface<Double>> expd =
-                new Experiment<Double, DEVSSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 10.0, 20.0, 10);
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
+        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
+        Experiment<Double, DevsSimulatorInterface<Double>> expd =
+                new Experiment<Double, DevsSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 10.0, 20.0, 10);
 
         expd.start();
         int count = 0;
@@ -374,7 +337,7 @@ public class ExperimentTest
     /**
      * Model class.
      */
-    public static class CountModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+    public static class CountModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -392,7 +355,7 @@ public class ExperimentTest
          * @param simulator the simulator
          * @param dataCollector the data collector
          */
-        public CountModel(final DEVSSimulatorInterface<Double> simulator, final Map<Integer, Integer> dataCollector)
+        public CountModel(final DevsSimulatorInterface<Double> simulator, final Map<Integer, Integer> dataCollector)
         {
             super(simulator);
             this.dataCollector = dataCollector;
@@ -410,23 +373,16 @@ public class ExperimentTest
         /** next method. */
         public void next()
         {
-            getSimulator().scheduleEventRel(1.0, this, this, "next", null);
+            getSimulator().scheduleEventRel(1.0, this, "next", null);
             this.count++;
             this.dataCollector.put(this.id, this.count);
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "model";
         }
     }
 
     /**
      * Quick and dirty MM1 queuing system Model class.
      */
-    public static class MM1Model extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+    public static class MM1Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -452,7 +408,7 @@ public class ExperimentTest
         /**
          * @param simulator the simulator
          */
-        public MM1Model(final DEVSSimulatorInterface<Double> simulator)
+        public MM1Model(final DevsSimulatorInterface<Double> simulator)
         {
             super(simulator);
             this.iatDist = new DistExponential(getStream("default"), 1.0);
@@ -463,7 +419,7 @@ public class ExperimentTest
          * @param simulator the simulator
          * @param streamInformation the streams to use
          */
-        public MM1Model(final DEVSSimulatorInterface<Double> simulator, final StreamInformation streamInformation)
+        public MM1Model(final DevsSimulatorInterface<Double> simulator, final StreamInformation streamInformation)
         {
             super(simulator, streamInformation);
             this.iatDist = new DistExponential(getStream("iatStream"), 1.0);
@@ -474,25 +430,17 @@ public class ExperimentTest
         @Override
         public void constructModel() throws SimRuntimeException
         {
-            try
-            {
-                this.queue = new ArrayList<>();
-                this.outputStatistics.clear();
-                this.count = new SimCounter("arrivals", this.simulator);
-                this.count.initialize();
-                this.outputStatistics.add(this.count);
-                this.queueTimeTally = new SimTally<Double>("timeInQueue", this.simulator);
-                this.queueTimeTally.initialize();
-                this.outputStatistics.add(this.queueTimeTally);
-                this.nrInQueuePersistent = new SimPersistent<Double>("nrInQueue", this.simulator);
-                this.nrInQueuePersistent.initialize();
-                this.outputStatistics.add(this.nrInQueuePersistent);
-            }
-            catch (RemoteException rme)
-            {
-                throw new SimRuntimeException(rme);
-            }
-
+            this.queue = new ArrayList<>();
+            this.outputStatistics.clear();
+            this.count = new SimCounter<Double>("arrivals", this);
+            this.count.initialize();
+            this.outputStatistics.add(this.count);
+            this.queueTimeTally = new SimTally<Double>("timeInQueue", this);
+            this.queueTimeTally.initialize();
+            this.outputStatistics.add(this.queueTimeTally);
+            this.nrInQueuePersistent = new SimPersistent<Double>("nrInQueue", this);
+            this.nrInQueuePersistent.initialize();
+            this.outputStatistics.add(this.nrInQueuePersistent);
             next();
         }
 
@@ -503,8 +451,8 @@ public class ExperimentTest
             Entity entity = new Entity(this.simulator.getSimulatorTime());
             this.queue.add(entity);
             this.nrInQueuePersistent.register(10.0, this.queue.size());
-            getSimulator().scheduleEventRel(this.iatDist.draw(), this, this, "next", null);
-            getSimulator().scheduleEventRel(this.procDist.draw(), this, this, "endWait", new Object[] {entity});
+            getSimulator().scheduleEventRel(this.iatDist.draw(), this, "next", null);
+            getSimulator().scheduleEventRel(this.procDist.draw(), this, "endWait", new Object[] {entity});
         }
 
         /** @param entity the entity that is ready */
@@ -513,13 +461,6 @@ public class ExperimentTest
             this.queue.remove(entity);
             this.nrInQueuePersistent.register(10.0, this.queue.size());
             this.queueTimeTally.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "MM1";
         }
     }
 

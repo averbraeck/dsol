@@ -10,7 +10,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.StreamInformation;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.statistics.StatisticsInterface;
+import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
@@ -18,7 +18,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * return it to anyone interested. Through the Simulator, the Replication can be requested and through that the Experiment and
  * the Treatment under which the simulation is running.
  * <p>
- * Copyright (c) 2003-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -52,7 +52,7 @@ public interface DSOLModel<T extends Number & Comparable<T>, S extends Simulator
      * Get the output statistics for this model.
      * @return List&lt;StatisticsInterface&gt; the output statistics for this model
      */
-    List<StatisticsInterface<T>> getOutputStatistics();
+    List<SimulationStatistic<T>> getOutputStatistics();
 
     /**
      * Set the initial streams of the model based on a StreamInformation object. This method can be called right after the

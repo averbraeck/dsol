@@ -2,15 +2,15 @@ package nl.tudelft.simulation.dsol.statistics.table;
 
 import java.rmi.RemoteException;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.Event;
+import org.djutils.event.EventType;
 
 import nl.tudelft.simulation.dsol.statistics.SimTally;
 
 /**
  * TallyTableModel maintains a table with all statistics data from the SimTally.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2020-2023 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/current/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -36,14 +36,14 @@ public class TallyTableModel extends StatisticsTableModel
     public TallyTableModel(final SimTally<?> tally) throws RemoteException
     {
         super(COLUMN_NAMES, 10, tally,
-                new TimedEventType[] {SimTally.TIMED_INITIALIZED_EVENT, SimTally.TIMED_OBSERVATION_ADDED_EVENT});
+                new EventType[] {SimTally.TIMED_INITIALIZED_EVENT, SimTally.TIMED_OBSERVATION_ADDED_EVENT});
         this.tally = tally;
         notify(null);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         setValueAt("name", 0, 0);
         setValueAt("n", 1, 0);

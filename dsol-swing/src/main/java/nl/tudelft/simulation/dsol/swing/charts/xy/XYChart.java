@@ -10,9 +10,10 @@ import javax.naming.NamingException;
 import javax.swing.BorderFactory;
 import javax.swing.border.EtchedBorder;
 
-import org.djutils.event.EventProducerInterface;
-import org.djutils.event.EventTypeInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.EventProducer;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
+import org.djutils.event.reference.ReferenceType;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -29,7 +30,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 /**
  * The xyChart specifies the xyChart in DSOL.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -244,8 +245,9 @@ public class XYChart implements Swingable, Serializable
     /**
      * adds a tally to the xyChart.
      * @param persistent Persistent; the persistent
+     * @throws RemoteException on network failure
      */
-    public void add(final SimPersistent<?> persistent)
+    public void add(final SimPersistent<?> persistent) throws RemoteException
     {
         XYSeries set = new XYSeries(persistent.getDescription(), this.simulator, this.axisType, this.period);
         persistent.addListener(set, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT, ReferenceType.STRONG);
@@ -255,15 +257,15 @@ public class XYChart implements Swingable, Serializable
     /**
      * adds an eventProducer to the xyChart.
      * @param description String; the description of the eventProducer
-     * @param source EventProducerInterface; the source
+     * @param source EventProducer; the source
      * @param eventType EventType; the event
      * @throws RemoteException on network failure
      */
-    public void add(final String description, final EventProducerInterface source, final EventTypeInterface eventType)
+    public void add(final String description, final EventProducer source, final EventType eventType)
             throws RemoteException
     {
         XYSeries set = new XYSeries(description, this.simulator, this.axisType, this.period);
-        source.addListener(set, eventType, EventProducerInterface.FIRST_POSITION, ReferenceType.STRONG);
+        source.addListener(set, eventType, LocalEventProducer.FIRST_POSITION, ReferenceType.STRONG);
         this.getDataset().addSeries(set);
     }
 

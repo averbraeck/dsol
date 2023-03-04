@@ -3,20 +3,18 @@ package nl.tudelft.simulation.dsol.simulators;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.io.Serializable;
-
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.Sleep;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 
 /**
  * SimulatorTest tests the simulator.addScheduledMethodOnInitialize method.
  * <p>
- * Copyright (c) 2021-2021 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -40,9 +38,9 @@ public class SimulatorTest
         /** */
         TestScheduledInitMethods()
         {
-            DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("sim");
+            DevsSimulator<Double> simulator = new DevsSimulator<Double>("sim");
             TestModel model = new TestModel(simulator);
-            ReplicationInterface<Double> replication = new SingleReplication<Double>("rep", 0.0, 0.0, 100.0);
+            Replication<Double> replication = new SingleReplication<Double>("rep", 0.0, 0.0, 100.0);
             simulator.initialize(model, replication);
             simulator.start();
             while (simulator.isStartingOrRunning())
@@ -54,7 +52,7 @@ public class SimulatorTest
     }
 
     /** */
-    static class TestModel extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+    static class TestModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -65,13 +63,13 @@ public class SimulatorTest
         /**
          * @param simulator the simulator
          */
-        TestModel(final DEVSSimulator<Double> simulator)
+        TestModel(final DevsSimulator<Double> simulator)
         {
             super(simulator);
             try
             {
                 // this should fail
-                getSimulator().scheduleEventAbs(5.0, this, this, "loop", new Object[] {});
+                getSimulator().scheduleEventAbs(5.0, this, "loop", new Object[] {});
                 fail("call to ScheduleMethod in constructor of model should fail");
             }
             catch (Exception e)
@@ -79,9 +77,9 @@ public class SimulatorTest
                 // expected
             }
             // use scheduled initialization instead
-            simulator.addScheduledMethodOnInitialize(this, this, "add", new Object[] {1});
-            simulator.addScheduledMethodOnInitialize(this, this, "add", new Object[] {2});
-            simulator.addScheduledMethodOnInitialize(this, this, "schedule", new Object[] {});
+            simulator.addScheduledMethodOnInitialize(this,"add", new Object[] {1});
+            simulator.addScheduledMethodOnInitialize(this,"add", new Object[] {2});
+            simulator.addScheduledMethodOnInitialize(this,"schedule", new Object[] {});
 
         }
 
@@ -92,7 +90,7 @@ public class SimulatorTest
             try
             {
                 // this should succeed
-                getSimulator().scheduleEventAbs(10.0, this, this, "test", new Object[] {});
+                getSimulator().scheduleEventAbs(10.0, this, "test", new Object[] {});
             }
             catch (Exception e)
             {
@@ -117,7 +115,7 @@ public class SimulatorTest
         /** */
         void schedule()
         {
-            getSimulator().scheduleEventRel(10.0, this, this, "loop", new Object[] {});
+            getSimulator().scheduleEventRel(10.0, this, "loop", new Object[] {});
         }
 
         /** */
@@ -125,13 +123,6 @@ public class SimulatorTest
         {
             this.value += 10;
             schedule();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "SimModel";
         }
 
         /**

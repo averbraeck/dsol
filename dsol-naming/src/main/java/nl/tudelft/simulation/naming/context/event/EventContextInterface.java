@@ -1,5 +1,6 @@
 package nl.tudelft.simulation.naming.context.event;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import javax.naming.InvalidNameException;
@@ -7,15 +8,15 @@ import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.naming.NotContextException;
 
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.ref.ReferenceType;
+import org.djutils.event.EventListener;
+import org.djutils.event.reference.ReferenceType;
 
 /**
  * EventContextInterface specifies the subscription methods for a part of the context tree. The ContextScope in each method
  * indicates for which part of the tree notifications will be triggered. The listeners will be subscribed to three events for
  * the part of the context: OBJECT_ADDED_EVENT, OBJECT_REMOVED_EVENT and OBJECT_CHANGED_EVENT.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -23,11 +24,11 @@ import org.djutils.event.ref.ReferenceType;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface EventContextInterface
+public interface EventContextInterface extends Remote
 {
     /**
      * Add a listener for the provided scope as strong reference to the BEGINNING of a queue of listeners.
-     * @param listener EventListenerInterface; the listener which is interested at events of eventType.
+     * @param listener EventListener; the listener which is interested at events of eventType.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -40,14 +41,13 @@ public interface EventContextInterface
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs.
-     * @see org.djutils.event.ref.WeakReference
      */
-    boolean addListener(EventListenerInterface listener, String absolutePath, ContextScope contextScope) throws RemoteException,
+    boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope) throws RemoteException,
             NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException;
 
     /**
      * Add a listener for the provided scope to the BEGINNING of a queue of listeners.
-     * @param listener EventListenerInterface; the listener which is interested at events of eventType.
+     * @param listener EventListener; the listener which is interested at events of eventType.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -61,15 +61,14 @@ public interface EventContextInterface
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs.
-     * @see org.djutils.event.ref.Reference
      */
-    boolean addListener(EventListenerInterface listener, String absolutePath, ContextScope contextScope,
-            ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
-            NotContextException, NamingException, NullPointerException;
+    boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope, ReferenceType referenceType)
+            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
+            NullPointerException;
 
     /**
      * Add a listener for the provided scope as strong reference to the specified position of a queue of listeners.
-     * @param listener EventListenerInterface; the listener which is interested at events of eventType.
+     * @param listener EventListener; the listener which is interested at events of eventType.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -85,13 +84,13 @@ public interface EventContextInterface
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs.
      */
-    boolean addListener(EventListenerInterface listener, String absolutePath, ContextScope contextScope, int position)
+    boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope, int position)
             throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
             NullPointerException;
 
     /**
      * Add a listener for the provided scope to the specified position of a queue of listeners.
-     * @param listener EventListenerInterface; which is interested at certain events,
+     * @param listener EventListener; which is interested at certain events,
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
@@ -107,15 +106,14 @@ public interface EventContextInterface
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs.
-     * @see org.djutils.event.ref.Reference
      */
-    boolean addListener(EventListenerInterface listener, String absolutePath, ContextScope contextScope, int position,
+    boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope, int position,
             ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
             NotContextException, NamingException, NullPointerException;
 
     /**
      * Remove the subscription of a listener for the provided scope for a specific event.
-     * @param listener EventListenerInterface; which is no longer interested.
+     * @param listener EventListener; which is no longer interested.
      * @param absolutePath String; the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope;the scope which is of no interest any more.
      * @return the success of removing the listener. If a listener was not subscribed false is returned.
@@ -123,7 +121,7 @@ public interface EventContextInterface
      * @throws NullPointerException when one of the arguments is null
      * @throws RemoteException if a network connection failure occurs
      */
-    boolean removeListener(EventListenerInterface listener, String absolutePath, ContextScope contextScope)
+    boolean removeListener(EventListener listener, String absolutePath, ContextScope contextScope)
             throws RemoteException, InvalidNameException, NullPointerException;
 
 }

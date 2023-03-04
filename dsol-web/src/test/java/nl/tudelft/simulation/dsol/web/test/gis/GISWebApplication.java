@@ -4,14 +4,14 @@ import java.awt.Dimension;
 
 import org.djutils.draw.bounds.Bounds2d;
 
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.simulators.DEVSRealTimeAnimator;
+import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.web.DSOLWebServer;
 
 /**
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -38,7 +38,7 @@ public class GISWebApplication extends DSOLWebServer
      * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
      * @throws Exception on jetty error
      */
-    public GISWebApplication(final String title, final DEVSRealTimeAnimator.TimeDouble simulator) throws Exception
+    public GISWebApplication(final String title, final DevsRealTimeAnimator.TimeDouble simulator) throws Exception
     {
         super(title, simulator, extent);
         getAnimationPanel().setSize(new Dimension(800, 600));
@@ -50,9 +50,9 @@ public class GISWebApplication extends DSOLWebServer
      */
     public static void main(final String[] args) throws Exception
     {
-        DEVSRealTimeAnimator.TimeDouble simulator = new DEVSRealTimeAnimator.TimeDouble("GISWebApplication", 0.01);
+        DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("GISWebApplication", 0.01);
         GISModel model = new GISModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
         new GISWebApplication("GIS Animation model", simulator);
     }

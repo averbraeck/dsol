@@ -15,12 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.model.DSOLModel;
 import nl.tudelft.simulation.dsol.simulators.RunState;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
@@ -30,7 +30,7 @@ import nl.tudelft.simulation.dsol.swing.gui.util.Icons;
 /**
  * Simulation control panel. Code based on OpenTrafficSim project component with the same purpose.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -42,7 +42,7 @@ import nl.tudelft.simulation.dsol.swing.gui.util.Icons;
  */
 public abstract class AbstractControlPanel<
         T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends JPanel
-        implements ActionListener, WindowListener, EventListenerInterface
+        implements ActionListener, WindowListener, EventListener
 {
     /** */
     private static final long serialVersionUID = 20150617L;
@@ -108,7 +108,7 @@ public abstract class AbstractControlPanel<
 
         installWindowCloseHandler();
 
-        this.simulator.addListener(this, ReplicationInterface.END_REPLICATION_EVENT);
+        this.simulator.addListener(this, Replication.END_REPLICATION_EVENT);
         this.simulator.addListener(this, SimulatorInterface.START_EVENT);
         this.simulator.addListener(this, SimulatorInterface.STOP_EVENT);
     }
@@ -557,13 +557,13 @@ public abstract class AbstractControlPanel<
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT) || event.getType().equals(SimulatorInterface.STOP_EVENT))
         {
             fixButtons();
         }
-        if (event.getType().equals(ReplicationInterface.END_REPLICATION_EVENT))
+        if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         {
             invalidateButtons();
         }

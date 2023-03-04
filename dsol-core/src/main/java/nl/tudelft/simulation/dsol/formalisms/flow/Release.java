@@ -3,12 +3,12 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 import java.io.Serializable;
 
 import nl.tudelft.simulation.dsol.formalisms.Resource;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The release station releases a given quantity of a claimed resource.
+ * The Release station releases a given quantity of a claimed resource.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -30,12 +30,12 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
     private double amount = 1.0;
 
     /**
-     * Constructor for Release.
+     * Construct a Release station to release seized resource units.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is released
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param resource Resource&lt;T&gt;; which is released
      */
-    public Release(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Resource<T> resource)
+    public Release(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
     {
         this(id, simulator, resource, 1.0);
     }
@@ -43,11 +43,11 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
     /**
      * Constructor for Release.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is released
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param resource Resource&lt;T&gt;; which is released
      * @param amount double; of resource which is released
      */
-    public Release(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Resource<T> resource,
+    public Release(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
             final double amount)
     {
         super(id, simulator);

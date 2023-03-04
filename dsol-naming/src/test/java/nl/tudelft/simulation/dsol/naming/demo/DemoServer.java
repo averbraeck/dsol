@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.naming.demo;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -10,7 +9,9 @@ import java.util.Scanner;
 
 import javax.naming.NamingException;
 
-import org.djutils.event.remote.RemoteEventProducer;
+import org.djutils.event.EventListenerMap;
+import org.djutils.event.EventProducer;
+import org.djutils.rmi.RmiObject;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.JVMContext;
@@ -20,7 +21,7 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
 /**
  * DemoServer sets up a context with a few items and subcontexts to which a DemoClient can subscribe.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -28,11 +29,14 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DemoServer extends RemoteEventProducer implements DemoServerInterface
+public class DemoServer extends RmiObject implements EventProducer
 {
     /** */
     private static final long serialVersionUID = 20200210L;
 
+    /** */
+    private final EventListenerMap eventListenerMap;
+    
     /**
      * @throws RemoteException on network error
      * @throws AlreadyBoundException on two demo servers being started
@@ -43,6 +47,7 @@ public class DemoServer extends RemoteEventProducer implements DemoServerInterfa
     public DemoServer() throws RemoteException, AlreadyBoundException, NamingException, IOException, InterruptedException
     {
         super("127.0.0.1", 1099, "demoserver");
+        this.eventListenerMap = new EventListenerMap();
         URL url = new URL("http://127.0.0.1:1099/remoteContext");
         RemoteEventContextInterface remoteContext =
                 new RemoteEventContext(url, new JVMContext("root"), "remoteContext.producer");
@@ -141,13 +146,6 @@ public class DemoServer extends RemoteEventProducer implements DemoServerInterfa
         System.exit(0);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "demoserver";
-    }
-
     /**
      * @param args empty
      * @throws NamingException on context error
@@ -189,6 +187,26 @@ public class DemoServer extends RemoteEventProducer implements DemoServerInterfa
         {
             System.err.println("ERR " + exception.getMessage());
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        try
+        {
+            return "DemoServer [" + getRegistry().toString() + "]";
+        }
+        catch (RemoteException exception)
+        {
+            return "DemoServer [ERROR = " + exception.getMessage() + "]";
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public EventListenerMap getEventListenerMap() throws RemoteException
+    {
+        return this.eventListenerMap;
     }
 
 }

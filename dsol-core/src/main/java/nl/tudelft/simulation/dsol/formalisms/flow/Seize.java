@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.ResourceRequestorInterface;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The Seize requests a resource and releases an entity whenever this resource is actually claimed.
+ * The Seize station requests a resource and keeps the entity within the station's queue until the resource is actually claimed.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -33,11 +33,11 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     private static final long serialVersionUID = 20140911L;
 
     /** QUEUE_LENGTH_EVENT is fired when the queue length is changed. */
-    public static final TimedEventType QUEUE_LENGTH_EVENT = new TimedEventType(new MetaData("QUEUE_LENGTH_EVENT",
-            "Queue length", new ObjectDescriptor("queueLength", "Queue length", Integer.class)));
+    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length",
+            new ObjectDescriptor("queueLength", "Queue length", Integer.class)));
 
     /** DELAY_TIME is fired when a new delayTime is computed. */
-    public static final TimedEventType DELAY_TIME = new TimedEventType(new MetaData("DELAY_TIME", "Delay time",
+    public static final EventType DELAY_TIME = new EventType(new MetaData("DELAY_TIME", "Delay time",
             new ObjectDescriptor("delayTime", "Delay time (as a double)", Double.class)));
 
     /** queue refers to the list of waiting requestors. */
@@ -50,24 +50,24 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     private Resource<T> resource;
 
     /**
-     * Constructor for Seize.
+     * Constructor for Seize station.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which behavior is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is claimed
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which behavior is scheduled
+     * @param resource Resource&lt;T&gt;; which is claimed
      */
-    public Seize(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Resource<T> resource)
+    public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
     {
         this(id, simulator, resource, 1.0);
     }
 
     /**
-     * Constructor for Seize.
+     * Constructor for Seize station.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which behavior is scheduled
-     * @param resource Resource&lt;A,R,T&gt;; which is claimed
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which behavior is scheduled
+     * @param resource Resource&lt;T&gt;; which is claimed
      * @param requestedCapacity double; is the amount which is claimed by the seize
      */
-    public Seize(final Serializable id, final DEVSSimulatorInterface<T> simulator, final Resource<T> resource,
+    public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
             final double requestedCapacity)
     {
         super(id, simulator);
@@ -80,7 +80,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     }
 
     /**
-     * receives an object which request an amount.
+     * Receive an object that requests an amount of units from a resource.
      * @param object Object; the object
      * @param pRequestedCapacity double; the requested capacity
      */
@@ -113,7 +113,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
 
     /**
      * sets the queue to this seize. This enables seize blocks to share one queue.
-     * @param queue List&lt;Request&lt;A,R,T&gt;&gt;; is a new queue.
+     * @param queue List&lt;Request&lt;T&gt;&gt;; is a new queue.
      */
     public void setQueue(final List<Request<T>> queue)
     {
@@ -121,8 +121,8 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     }
 
     /**
-     * returns the queue.
-     * @return List the queue
+     * Return the queue.
+     * @return List&lt;Request&lt;T&gt;&gt;; the queue with requests to claim the resource
      */
     public List<Request<T>> getQueue()
     {
@@ -152,7 +152,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     }
 
     /**
-     * The private RequestClass defines the requests for resource.
+     * The Request Class defines the requests for resource.
      * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
      */
     public static class Request<T extends Number & Comparable<T>>

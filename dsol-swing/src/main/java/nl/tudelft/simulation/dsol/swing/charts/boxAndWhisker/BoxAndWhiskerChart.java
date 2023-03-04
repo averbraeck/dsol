@@ -27,7 +27,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 /**
  * The BoxAndWhiskerChart specifies a Box-and-Whisker chart.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -80,8 +80,9 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a tally to the chart.
      * @param tally EventBasedTally; the tally to be added
+     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedTally tally)
+    public void add(final EventBasedTally tally) throws RemoteException
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }
@@ -89,8 +90,9 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a weighted tally to the chart.
      * @param tally EventBasedWeightedTally; the tally to be added
+     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedWeightedTally tally)
+    public void add(final EventBasedWeightedTally tally) throws RemoteException
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }
@@ -98,8 +100,9 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a weighted tally to the chart.
      * @param tally EventBasedTimestampWeightedTally; the tally to be added
+     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedTimestampWeightedTally tally)
+    public void add(final EventBasedTimestampWeightedTally tally) throws RemoteException
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }

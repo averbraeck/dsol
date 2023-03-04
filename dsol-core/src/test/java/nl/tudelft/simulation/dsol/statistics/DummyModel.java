@@ -1,20 +1,18 @@
 package nl.tudelft.simulation.dsol.statistics;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * DummyModel acts as an 'empty' DSOL model for the statistics tests.
  * <p>
- * Copyright (c) 2019-2022 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2023 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DummyModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface<Double>>
+public class DummyModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -22,7 +20,7 @@ public class DummyModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface
     /**
      * @param simulator the simulator
      */
-    public DummyModel(final DEVSSimulatorInterface<Double> simulator)
+    public DummyModel(final DevsSimulatorInterface<Double> simulator)
     {
         super(simulator);
     }
@@ -32,13 +30,6 @@ public class DummyModel extends AbstractDSOLModel<Double, DEVSSimulatorInterface
     public void constructModel() throws SimRuntimeException
     {
         //
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "model";
     }
 
 }

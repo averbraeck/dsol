@@ -3,14 +3,13 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.rmi.RemoteException;
 
 import org.djutils.event.EventType;
-import org.djutils.event.TimedEventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 /**
  * The AnimatorInterface defines the methods for a DEVSDESS simulator with wallclock delay between the consecutive time steps.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -25,7 +24,7 @@ public interface AnimatorInterface
     long DEFAULT_ANIMATION_DELAY = 100L;
 
     /** UPDATE_ANIMATION_EVENT is fired to wake up animatable components. */
-    TimedEventType UPDATE_ANIMATION_EVENT = new TimedEventType(new MetaData("UPDATE_ANIMATION_EVENT", "Animation update"));
+    EventType UPDATE_ANIMATION_EVENT = new EventType(new MetaData("UPDATE_ANIMATION_EVENT", "Animation update"));
 
     /** ANIMATION_DELAY_CHANGED_EVENT is fired when the time step is set. */
     EventType ANIMATION_DELAY_CHANGED_EVENT = new EventType(new MetaData("ANIMATION_DELAY_CHANGED_EVENT",
@@ -53,7 +52,7 @@ public interface AnimatorInterface
     /**
      * The separate thread that takes care of the animation.
      * <p>
-     * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>.
      * The DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">

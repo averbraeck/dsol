@@ -33,9 +33,9 @@ nav:
     - Stochastic distributions: 3-basics/stochastic-distributions.md
     - Output statistics: 3-basics/output-statistics.md
   - Advanced topics:
-    - Custom Time types: 8-advanced/custom-time.md
     - Distribution Parameters: 8-advanced/distribution-parameters.md
     - Custom InputParameter: 8-advanced/custom-parameter.md
     - Publish-Subscribe: 8-advanced/publish-subscribe.md
     - Naming Context: 8-advanced/naming-context.md
+    - Simulator State Machine: 8-advanced/simulator-state.md
     

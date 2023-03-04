@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.gui.test;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
@@ -8,10 +7,10 @@ import javax.naming.NamingException;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
@@ -19,7 +18,7 @@ import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
 /**
  * SwingApplication.java.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -47,9 +46,9 @@ public class SwingApplication extends DSOLApplication
      */
     public static void main(final String[] args) throws NamingException, RemoteException
     {
-        DEVSSimulator<Double> simulator = new DEVSSimulator<Double>("simulator");
+        DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
         MyModel model = new MyModel(simulator);
-        ReplicationInterface<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
+        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
         DEVSControlPanel.TimeDouble controlPanel = new DEVSControlPanel.TimeDouble(model, simulator);
         DSOLPanel panel = new DSOLPanel(controlPanel);
@@ -58,7 +57,7 @@ public class SwingApplication extends DSOLApplication
     }
 
     /** */
-    static class MyModel extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+    static class MyModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -66,7 +65,7 @@ public class SwingApplication extends DSOLApplication
         /**
          * @param simulator the simulator
          */
-        MyModel(final DEVSSimulator<Double> simulator)
+        MyModel(final DevsSimulator<Double> simulator)
         {
             super(simulator);
         }
@@ -77,13 +76,5 @@ public class SwingApplication extends DSOLApplication
         {
             //
         }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "MyModel";
-        }
-
     }
 }

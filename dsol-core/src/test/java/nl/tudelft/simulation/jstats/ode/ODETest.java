@@ -2,8 +2,6 @@ package nl.tudelft.simulation.jstats.ode;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.Serializable;
-
 import org.junit.Test;
 
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
@@ -11,7 +9,7 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 /**
  * The test script for the ODE package.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -100,13 +98,6 @@ public class ODETest
         {
             return new double[] {x * Math.pow(y[0], 1.0 / 3.0)};
         }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "ODE";
-        }
     }
 
     /** Stiff ODE. */
@@ -131,13 +122,6 @@ public class ODETest
         public double[] dy(final double x, final double[] y)
         {
             return new double[] {y[1], -100 * y[0] - 101 * y[1]};
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Serializable getSourceId()
-        {
-            return "StiffODE";
         }
     }
 }

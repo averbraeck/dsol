@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.djutils.event.EventProducer;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.experiment.StreamInformation;
@@ -11,21 +11,21 @@ import nl.tudelft.simulation.dsol.model.inputparameters.AbstractInputParameter;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.statistics.StatisticsInterface;
+import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
  * AbstractDSOLModel, an abstract helper class to easily construct a DSOLModel. The model automatically acts as an
  * EventProducer, so events can be sent to statistics gathering classes. <br>
  * <br>
- * Copyright (c) 2003-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator type to use
  */
-public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends EventProducer
+public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
         implements DSOLModel<T, S>
 {
     /** */
@@ -41,7 +41,7 @@ public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S exte
 
     /** the output statistics. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected List<StatisticsInterface<T>> outputStatistics = new ArrayList<>();
+    protected List<SimulationStatistic<T>> outputStatistics = new ArrayList<>();
 
     /** streams used in the replication. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -124,7 +124,7 @@ public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S exte
 
     /** {@inheritDoc} */
     @Override
-    public List<StatisticsInterface<T>> getOutputStatistics()
+    public List<SimulationStatistic<T>> getOutputStatistics()
     {
         return this.outputStatistics;
     }

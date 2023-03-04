@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * RunControlTest tests the RunControl object.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -29,14 +29,14 @@ public class RunControlTest
     @Test
     public void testRunControl()
     {
-        RunControl<Double> rcdg = new RunControl<>("rcdg", new Double(10.0), 5.0, 20.0);
+        RunControl<Double> rcdg = new RunControl<>("rcdg", 10.0, 5.0, 20.0);
         assertEquals("rcdg", rcdg.getId());
         assertEquals("rcdg", rcdg.getDescription());
         rcdg.setDescription("description");
         assertEquals("description", rcdg.getDescription());
-        assertEquals(new Double(10.0), rcdg.getStartSimTime());
-        assertEquals(new Double(30.0), rcdg.getEndSimTime());
-        assertEquals(new Double(15.0), rcdg.getWarmupSimTime());
+        assertEquals(Double.valueOf(10.0), rcdg.getStartTime());
+        assertEquals(Double.valueOf(30.0), rcdg.getEndTime());
+        assertEquals(Double.valueOf(15.0), rcdg.getWarmupTime());
         assertEquals(10.0, rcdg.getStartTime(), 1E-6);
         assertEquals(30.0, rcdg.getEndTime(), 1E-6);
         assertEquals(15.0, rcdg.getWarmupTime(), 1E-6);
@@ -101,14 +101,14 @@ public class RunControlTest
     @Test
     public void testExperimentRunControl()
     {
-        ExperimentRunControl<Double> rcdg = new ExperimentRunControl<>("rcdg", new Double(10.0), 5.0, 20.0, 10);
+        ExperimentRunControl<Double> rcdg = new ExperimentRunControl<>("rcdg", 10.0, 5.0, 20.0, 10);
         assertEquals("rcdg", rcdg.getId());
         assertEquals("rcdg", rcdg.getDescription());
         rcdg.setDescription("description");
         assertEquals("description", rcdg.getDescription());
-        assertEquals(new Double(10.0), rcdg.getStartSimTime());
-        assertEquals(new Double(30.0), rcdg.getEndSimTime());
-        assertEquals(new Double(15.0), rcdg.getWarmupSimTime());
+        assertEquals(Double.valueOf(10.0), rcdg.getStartTime());
+        assertEquals(Double.valueOf(30.0), rcdg.getEndTime());
+        assertEquals(Double.valueOf(15.0), rcdg.getWarmupTime());
         assertEquals(10.0, rcdg.getStartTime(), 1E-6);
         assertEquals(30.0, rcdg.getEndTime(), 1E-6);
         assertEquals(15.0, rcdg.getWarmupTime(), 1E-6);

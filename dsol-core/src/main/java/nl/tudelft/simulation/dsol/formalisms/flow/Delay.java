@@ -3,13 +3,13 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 import java.io.Serializable;
 
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * The Delay object is a station which delays an entity by some time units. When an entity arrives at a delay object, dsol
  * delays the entity by the resulting time period. During the time delay, the entity is held in the delay object.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -30,10 +30,10 @@ public class Delay<T extends Number & Comparable<T>> extends Station<T>
     /**
      * Constructor for Delay.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; is the simulator
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; is the simulator
      * @param delayDistribution DistContinuousSimulationTime&lt;R&gt;; is the delayDistribution
      */
-    public Delay(final Serializable id, final DEVSSimulatorInterface<T> simulator,
+    public Delay(final Serializable id, final DevsSimulatorInterface<T> simulator,
             final DistContinuousSimulationTime<T> delayDistribution)
     {
         super(id, simulator);
@@ -47,7 +47,7 @@ public class Delay<T extends Number & Comparable<T>> extends Station<T>
         super.receiveObject(object);
         try
         {
-            this.simulator.scheduleEventRel(this.delayDistribution.draw(), this, this, "releaseObject", new Object[] {object});
+            this.simulator.scheduleEventRel(this.delayDistribution.draw(), this, "releaseObject", new Object[] {object});
         }
         catch (Exception exception)
         {

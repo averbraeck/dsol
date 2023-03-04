@@ -1,21 +1,19 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterLong;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
 
 /**
  * A BoatModel.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -23,7 +21,7 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class Warehouse42Model extends AbstractDSOLModel<Double, DEVSSimulator<Double>>
+public class Warehouse42Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -45,7 +43,7 @@ public class Warehouse42Model extends AbstractDSOLModel<Double, DEVSSimulator<Do
      * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
      * @throws InputParameterException on parameter error
      */
-    public Warehouse42Model(final DEVSSimulator<Double> simulator) throws InputParameterException
+    public Warehouse42Model(final DevsSimulator<Double> simulator) throws InputParameterException
     {
         super(simulator);
         InputParameterMap retailerMap = new InputParameterMap("retailer", "Retailer", "Retailer", 1.0);
@@ -71,21 +69,14 @@ public class Warehouse42Model extends AbstractDSOLModel<Double, DEVSSimulator<Do
         try
         {
             this.orderingCosts =
-                    new SimTally<Double>("orderingCosts", this.simulator, retailer, Retailer.TOTAL_ORDERING_COST_EVENT);
+                    new SimTally<Double>("orderingCosts", this, retailer, Retailer.TOTAL_ORDERING_COST_EVENT);
             this.inventory =
-                    new SimPersistent<Double>("inventory level", this.simulator, retailer, Retailer.INVENTORY_LEVEL_EVENT);
-            this.backlog = new SimPersistent<Double>("backlog level", this.simulator, retailer, Retailer.BACKLOG_LEVEL);
+                    new SimPersistent<Double>("inventory level", this, retailer, Retailer.INVENTORY_LEVEL_EVENT);
+            this.backlog = new SimPersistent<Double>("backlog level", this, retailer, Retailer.BACKLOG_LEVEL);
         }
         catch (Exception exception)
         {
             throw new SimRuntimeException(exception);
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Warehouse42Model";
     }
 }

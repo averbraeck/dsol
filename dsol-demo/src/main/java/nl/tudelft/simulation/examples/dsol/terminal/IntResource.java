@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,18 +8,18 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.djutils.event.EventProducer;
-import org.djutils.event.TimedEventType;
+import org.djutils.event.EventType;
+import org.djutils.event.LocalEventProducer;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
  * A resource defines a shared and limited amount..
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -30,7 +29,7 @@ import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
  * @param <T> the simulation time type to use.
  * @since 1.5
  */
-public class IntResource<T extends Number & Comparable<T>> extends EventProducer
+public class IntResource<T extends Number & Comparable<T>> extends LocalEventProducer
 {
     /** */
     private static final long serialVersionUID = 20140805L;
@@ -40,12 +39,12 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
     static AtomicLong counter = new AtomicLong(0); // XXX: OUCH
 
     /** UTILIZATION_EVENT is fired on activity. */
-    public static final TimedEventType UTILIZATION_EVENT = new TimedEventType(new MetaData("UTILIZATION_EVENT",
-            "Utilization changed", new ObjectDescriptor("newUtilization", "new utilization", Long.class)));
+    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT", "Utilization changed",
+            new ObjectDescriptor("newUtilization", "new utilization", Long.class)));
 
     /** RESOURCE_REQUESTED_QUEUE_LENGTH fired on changes in queue length. */
-    public static final TimedEventType RESOURCE_REQUESTED_QUEUE_LENGTH =
-            new TimedEventType(new MetaData("RESOURCE_REQUESTED_QUEUE_LENGTH", "Queue length changed",
+    public static final EventType RESOURCE_REQUESTED_QUEUE_LENGTH =
+            new EventType(new MetaData("RESOURCE_REQUESTED_QUEUE_LENGTH", "Queue length changed",
                     new ObjectDescriptor("newQueueLength", "new queue length", Long.class)));
 
     /** the minimum priority. */
@@ -68,18 +67,18 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
             Collections.synchronizedSortedSet(new TreeSet<Request<T>>(new RequestComparator()));
 
     /** simulator defines the simulator on which is scheduled. */
-    protected DEVSSimulatorInterface<T> simulator;
+    protected DevsSimulatorInterface<T> simulator;
 
     /** the description of the resource. */
     protected String description = "resource";
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param description String; the description of this resource
      * @param capacity long; of the resource
      */
-    public IntResource(final DEVSSimulatorInterface<T> simulator, final String description, final long capacity)
+    public IntResource(final DevsSimulatorInterface<T> simulator, final String description, final long capacity)
     {
         super();
         this.description = description;
@@ -89,10 +88,10 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;A,R,T&gt;; on which is scheduled
+     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param capacity long; of the resource
      */
-    public IntResource(final DEVSSimulatorInterface<T> simulator, final long capacity)
+    public IntResource(final DevsSimulatorInterface<T> simulator, final long capacity)
     {
         this(simulator, "resource", capacity);
     }
@@ -166,7 +165,7 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
     /**
      * requests an amount of capacity from the resource.
      * @param amount long; the requested amount
-     * @param requestor IntResourceRequestorInterface&lt;A,R,T&gt;; the RequestorInterface requesting the amount
+     * @param requestor IntResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
      * @throws RemoteException on network failure
      * @throws SimRuntimeException on other failures
      */
@@ -179,7 +178,7 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
     /**
      * requests an amount of capacity from the resource.
      * @param amount long; the requested amount
-     * @param requestor IntResourceRequestorInterface&lt;A,R,T&gt;; the RequestorInterface requesting the amount
+     * @param requestor IntResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
      * @param priority int; the priority of the request
      * @throws RemoteException on network failure
      * @throws SimRuntimeException on other failures
@@ -194,8 +193,7 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
         if ((this.claimedCapacity + amount) <= this.capacity)
         {
             this.alterClaimedCapacity(amount);
-            this.simulator.scheduleEventNow(this, requestor, "receiveRequestedResource",
-                    new Object[] {Long.valueOf(amount), this});
+            this.simulator.scheduleEventNow(requestor, "receiveRequestedResource", new Object[] {Long.valueOf(amount), this});
         }
         else
         {
@@ -245,13 +243,6 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
                 }
             }
         }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "IntResource";
     }
 
     /** {@inheritDoc} */
@@ -310,7 +301,7 @@ public class IntResource<T extends Number & Comparable<T>> extends EventProducer
 
         /**
          * constructs a new Request.
-         * @param requestor IntResourceRequestorInterface&lt;A,R,T&gt;; the requestor
+         * @param requestor IntResourceRequestorInterface&lt;T&gt;; the requestor
          * @param amount long; the requested amount
          * @param priority int; the priority of the request
          */

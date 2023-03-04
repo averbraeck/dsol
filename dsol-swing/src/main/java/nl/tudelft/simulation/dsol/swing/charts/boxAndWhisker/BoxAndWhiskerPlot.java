@@ -6,16 +6,17 @@ import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.rmi.RemoteException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
-import org.djutils.event.ref.ReferenceType;
-import org.djutils.stats.summarizers.BasicTallyInterface;
-import org.djutils.stats.summarizers.TallyInterface;
-import org.djutils.stats.summarizers.WeightedTallyInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
+import org.djutils.event.reference.ReferenceType;
+import org.djutils.stats.summarizers.Tally;
+import org.djutils.stats.summarizers.TallyStatistic;
+import org.djutils.stats.summarizers.WeightedTally;
 import org.djutils.stats.summarizers.event.EventBasedTally;
 import org.djutils.stats.summarizers.event.EventBasedTimestampWeightedTally;
 import org.djutils.stats.summarizers.event.EventBasedWeightedTally;
@@ -28,7 +29,7 @@ import org.jfree.chart.plot.PlotState;
 /**
  * The Summary chart class defines a summary chart..
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -37,7 +38,7 @@ import org.jfree.chart.plot.PlotState;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @author <a href="mailto:a.verbraeck@tudelft.nl"> Alexander Verbraeck </a>
  */
-public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
+public class BoxAndWhiskerPlot extends Plot implements EventListener
 {
     /** serialversionUId. */
     private static final long serialVersionUID = 1L;
@@ -55,7 +56,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
     public static final Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
 
     /** target is the tally to represent. */
-    protected List<BasicTallyInterface> tallies = new ArrayList<>();
+    protected List<TallyStatistic> tallies = new ArrayList<>();
 
     /** formatter formats the text. */
     protected NumberFormat formatter = NumberFormat.getInstance();
@@ -74,8 +75,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
     /**
      * adds a tally to the array of targets.
      * @param tally Tally; the tally to be summarized
+     * @throws RemoteException on network failure
      */
-    public synchronized void add(final EventBasedTally tally)
+    public synchronized void add(final EventBasedTally tally) throws RemoteException
     {
         tally.addListener(this, StatisticsEvents.SAMPLE_MEAN_EVENT, ReferenceType.STRONG);
         this.tallies.add(tally);
@@ -84,8 +86,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
     /**
      * adds a tally to the array of targets.
      * @param tally EventBasedWeightedTally; the tally to be summarized
+     * @throws RemoteException on network failure
      */
-    public synchronized void add(final EventBasedWeightedTally tally)
+    public synchronized void add(final EventBasedWeightedTally tally) throws RemoteException
     {
         tally.addListener(this, StatisticsEvents.WEIGHTED_SAMPLE_MEAN_EVENT, ReferenceType.STRONG);
         this.tallies.add(tally);
@@ -94,8 +97,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
     /**
      * adds a tally to the array of targets.
      * @param tally EventBasedTimestampWeightedTally; the tally to be summarized
+     * @throws RemoteException on network failure
      */
-    public synchronized void add(final EventBasedTimestampWeightedTally tally)
+    public synchronized void add(final EventBasedTimestampWeightedTally tally) throws RemoteException
     {
         tally.addListener(this, StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT, ReferenceType.STRONG);
         this.tallies.add(tally);
@@ -110,7 +114,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event)
+    public void notify(final Event event)
     {
         this.notifyListeners(new PlotChangeEvent(this));
     }
@@ -122,7 +126,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
      * @param tallies Tally[]; the range of tallies
      * @return double[min,max]
      */
-    private static double[] extent(final List<BasicTallyInterface> tallies)
+    private static double[] extent(final List<TallyStatistic> tallies)
     {
         double[] result = {Double.MAX_VALUE, -Double.MAX_VALUE};
         for (int i = 0; i < tallies.size(); i++)
@@ -146,7 +150,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
      * @param tallyList Tally[]; tallies
      * @return double[] the extent
      */
-    private double[] borders(final Graphics2D g2, final FontRenderContext context, final List<BasicTallyInterface> tallyList)
+    private double[] borders(final Graphics2D g2, final FontRenderContext context, final List<TallyStatistic> tallyList)
     {
         double[] result = {0, 0};
         for (int i = 0; i < tallyList.size(); i++)
@@ -199,8 +203,8 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
      * @param leftBorder double; the left border
      * @param scale double; the scale
      */
-    private void paintTally(final Graphics2D g2, final Rectangle2D rectangle, final BasicTallyInterface tally,
-            final double leftX, final double leftBorder, final double scale)
+    private void paintTally(final Graphics2D g2, final Rectangle2D rectangle, final TallyStatistic tally, final double leftX,
+            final double leftBorder, final double scale)
     {
         this.fillRectangle(g2, rectangle, Color.WHITE);
         g2.setColor(Color.BLACK);
@@ -224,9 +228,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
         g2.drawLine(tallyMin, middle + 6, tallyMin, middle - 6);
         g2.drawLine(tallyMin, middle, tallyMax, middle);
         g2.drawLine(tallyMax, middle + 6, tallyMax, middle - 6);
-        if (tally instanceof TallyInterface)
+        if (tally instanceof Tally) // EventBasedTally extends Tally
         {
-            TallyInterface unweightedTally = (TallyInterface) tally;
+            Tally unweightedTally = (Tally) tally;
             double[] confidence = unweightedTally.getConfidenceInterval(this.confidenceInterval);
             int middleX = (int) Math.round((unweightedTally.getSampleMean() - leftX) * scale + tallyMin);
             g2.fillRect(middleX, middle - 6, 2, 12);
@@ -247,9 +251,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListenerInterface
                 g2.drawString(label, Math.round(confX + confWidth), (int) Math.round(middle + 8 + bounds.getHeight()));
             }
         }
-        else if (tally instanceof WeightedTallyInterface)
+        else if (tally instanceof WeightedTally) // EventBasedWeightedTally and Timestamp classes extend WeightedTally
         {
-            WeightedTallyInterface weightedTally = (WeightedTallyInterface) tally;
+            WeightedTally weightedTally = (WeightedTally) tally;
             int middleX = (int) Math.round((weightedTally.getWeightedSampleMean() - leftX) * scale + tallyMin);
             g2.fillRect(middleX, middle - 6, 2, 12);
             label = this.formatter.format(weightedTally.getWeightedSampleMean());

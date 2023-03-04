@@ -16,7 +16,7 @@ import java.util.Properties;
 
 import javax.naming.NamingException;
 
-import org.djutils.rmi.RMIUtils;
+import org.djutils.rmi.RmiRegistry;
 import org.junit.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -29,7 +29,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 /**
  * Tests the context where larger parts of the tree are evaluated.
  * <p>
- * Copyright (c) 2004-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2004-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -73,23 +73,23 @@ public class ContextTreeTest
         testContextTree(remoteContext);
         try
         {
-            RMIUtils.closeRegistry(remoteContext.getRegistry());
+            RmiRegistry.closeRegistry(remoteContext.getRegistry());
         }
         catch (NoSuchObjectException e)
         {
-            // TODO: research why RMIUtils.closeRegistry(remoteContext.getRegistry()) gives an error
-            System.err.println(e.getMessage()); 
+            // TODO: research why RmiRegistry.closeRegistry(remoteContext.getRegistry()) gives an error
+            System.err.println(e.getMessage());
         }
         remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JVMContext(null, "root"),
                 "remoteEventProducerKey");
         testContextUtil(remoteContext);
         try
         {
-            RMIUtils.closeRegistry(remoteContext.getRegistry());
+            RmiRegistry.closeRegistry(remoteContext.getRegistry());
         }
         catch (NoSuchObjectException e)
         {
-            // TODO: research why RMIUtils.closeRegistry(remoteContext.getRegistry()) gives an error
+            // TODO: research why RmiRegistry.closeRegistry(remoteContext.getRegistry()) gives an error
             System.err.println(e.getMessage());
         }
 
@@ -134,7 +134,6 @@ public class ContextTreeTest
      */
     public void testContextTree(final ContextInterface root) throws NamingException, RemoteException
     {
-        assertEquals("", root.getSourceId());
         assertEquals("", root.getAbsolutePath());
 
         // fill
@@ -148,7 +147,6 @@ public class ContextTreeTest
         ContextInterface c1112 = ContextUtil.lookupSubContext(c11, "111/1112");
         ContextInterface c1112b = ContextUtil.lookupSubContext(root, "/1/11/111/1112");
         assertNotNull(c1112);
-        assertEquals("/1/11/111/1112", c1112.getSourceId());
         assertEquals("/1/11/111/1112", c1112.getAbsolutePath());
         assertEquals(c1112, c1112b);
         c11.bindObject("o11", new Object());

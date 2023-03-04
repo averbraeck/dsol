@@ -18,13 +18,12 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.event.EventInterface;
-import org.djutils.event.EventListenerInterface;
+import org.djutils.event.Event;
+import org.djutils.event.EventListener;
 import org.djutils.event.TimedEvent;
-import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.experiment.ReplicationInterface;
+import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationPanel;
@@ -41,7 +40,7 @@ import nl.tudelft.simulation.language.DSOLException;
  * Animation panel with various controls. Code based on OpenTrafficSim project and Meslabs project component with the same
  * purpose.
  * <p>
- * Copyright (c) 2020-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -49,7 +48,7 @@ import nl.tudelft.simulation.language.DSOLException;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DSOLAnimationTab extends JPanel implements ActionListener, EventListenerInterface
+public class DSOLAnimationTab extends JPanel implements ActionListener, EventListener
 {
     /** */
     private static final long serialVersionUID = 20150617L;
@@ -170,8 +169,8 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
         this.animationControlPanel.add(this.infoTextPanel);
 
         // Tell the animation to build the list of animation objects.
-        this.animationPanel.notify(new TimedEvent(ReplicationInterface.START_REPLICATION_EVENT, this.simulator.getSourceId(), null,
-                this.simulator.getSimulatorTime()));
+        this.animationPanel
+                .notify(new TimedEvent(Replication.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
 
         // do not show the X and Y coordinates in a tooltip.
         this.animationPanel.setShowToolTip(false);
@@ -185,26 +184,19 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
      */
     public void setSearchPanel(final SearchPanel searchPanel)
     {
-        try
+        if (this.searchPanel != null)
         {
-            if (this.searchPanel != null)
-            {
-                this.animationControlPanel.remove(this.searchPanel);
-                this.searchPanel.removeListener(this.animationPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
-                if (this.propertiesPanel != null)
-                {
-                    this.searchPanel.removeListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
-                }
-            }
-            searchPanel.addListener(this.animationPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
+            this.animationControlPanel.remove(this.searchPanel);
+            this.searchPanel.removeListener(this.animationPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
             if (this.propertiesPanel != null)
             {
-                this.searchPanel.addListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
+                this.searchPanel.removeListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
             }
         }
-        catch (RemoteException exception)
+        searchPanel.addListener(this.animationPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
+        if (this.propertiesPanel != null)
         {
-            CategoryLogger.always().warn(exception);
+            this.searchPanel.addListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
         }
         this.searchPanel = searchPanel;
         this.searchPanel.setMinimumSize(new Dimension(500, 10));
@@ -391,7 +383,7 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
 
     /** {@inheritDoc} */
     @Override
-    public void notify(final EventInterface event) throws RemoteException
+    public void notify(final Event event) throws RemoteException
     {
         // At the moment there are no notifications for this tab.
     }

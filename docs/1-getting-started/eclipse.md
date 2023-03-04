@@ -43,7 +43,7 @@ After installation of Java and Eclipse, everything should be ready to go. Start 
 
 In order to get started, create a new **Maven project**, not a 'normal' Java project. Maven projects can be created by using 'File' - 'New' - 'Other' - 'Maven' - 'Maven Project'. Type 'Next&gt;'. Select: 'Create a simple project':
 
-![](../images/eclipse_create_maven_project1.png)
+![](../images/1-getting-started/eclipse_create_maven_project1.png)
 
 A Maven project name consists of three classifiers:
 * a **group id**, which is an identifier of a group of projects that belong together, e.g. within an organization (the group id could be `nl.tudelft` or `nl.tudelft.tbm.ba` or `nl.tudelft.simulation`), or within a logical group of projects (the group id could be `simulation` or `dsol` or `tudelft-hospital`). Choose a logical name that 'binds' the group of projects within the workspace you are using.
@@ -52,11 +52,11 @@ A Maven project name consists of three classifiers:
 
 In addition, give a clear name and description to the project:
 
-![](../images/eclipse_create_maven_project2.png)
+![](../images/1-getting-started/eclipse_create_maven_project2.png)
 
 After pressing "Finish", the project and its default structure will be created. The default project structure contains four major folders:
 
-![](../images/maven_folder_structure5.png)
+![](../images/1-getting-started/maven_folder_structure5.png)
 
 * **src/main/java** where the packages and classes within the packages are placed;
 * **src/main/resources** where the other files (XML, properties, pictures, etc.) that are not Java code are placed;
@@ -70,11 +70,11 @@ In this case, the JRE System Library indicates that version 5 of Java is used fo
 
 The first (and preferred) way how to do this is to double click on the `pom.xml` file in the Package Explorer in Eclipse. The Overview screen of the pom-file opens. Open 'properties' and click 'Create...'. Add a property with the name `jdk.version` and value: `11`:
 
-![](../images/pom-jdk-version.png)
+![](../images/1-getting-started/pom-jdk-version.png)
 
 Similarly, add a property `maven.compiler.source` with value `11`, and a property `maven.compiler.target` with value `11`. The properties should now look as follows:
 
-![](../images/pom-jdk-properties.png)
+![](../images/1-getting-started/pom-jdk-properties.png)
 
 Save the pom-file (by pressing Ctrl/S, or by selecting the 'Save' icon in the top toolbar, or by selecting the 'File' menu and using 'Save'). Then right-click on the project name (in this case: `dsol-tutorial`), select 'Maven', Update Project, and click 'Ok'. The version should be updated to JavaSE-1.8.
 
@@ -106,11 +106,11 @@ Save the pom.xml file. Right-click on the project name in the Package Explorer a
 
 The second way how to change this is to right-click the JRE System Library entry in the Eclipse Package Explorer. Select 'Build Path - Configure Build Path'. Click on the JRE System Library in the tab 'Libraries':
 
-![](../images/maven_system_library_5.png)
+![](../images/1-getting-started/maven_system_library_5.png)
 
 Click 'Edit', and select the Workspace default JRE:
 
-![](../images/maven_system_library_8.png)
+![](../images/1-getting-started/maven_system_library_8.png)
 
 Click 'Finish' to save the changes. Note that when Maven does an update, it is possible that the default Java version is changed back to version 1.5 instead of 11 (or higher). Therefore, the first method where the changes were made in the pom.xml file, is preferred.
 
@@ -119,7 +119,7 @@ Click 'Finish' to save the changes. Note that when Maven does an update, it is p
 
 In either case, the JRE System Library should now be correct:
 
-![](../images/maven_folder_structure8.png)
+![](../images/1-getting-started/maven_folder_structure8.png)
 
 
 
@@ -138,17 +138,17 @@ If you want to check out and study or enhance the DSOL Java code itself, take th
 
 Currently the code is stored in SVN (the DSOL project will be moved to Git in 2021). An SVN client has to be present in Eclipse to do the checkout of the code. Go to the Eclipse marketplace, and search for "SVN" (press "Go" to search). Scroll down until you see Subclipse, and press "Install". Select all features and Confirm:
 
-![](../images/eclipse_subclipse.png "eclipse_subclipse")
+![](../images/1-getting-started/eclipse_subclipse.png "eclipse_subclipse")
 
 Accept the license agreement and confirm installation of unsigned software (select "Install anyway"). Restart Eclipse when asked.
 
-![](../images/eclipse_svn_installation_warning.png "eclipse_svn_installation_warning")
+![](../images/1-getting-started/eclipse_svn_installation_warning.png "eclipse_svn_installation_warning")
 
 
 ### 2. (Optional) Add Checkstyle to Eclipse
 
 Checkstyle is a code checker for the styles that are used in the DSOL code. It provides information, warnings, and errors for code style violations. In order to install this plugin, go to the Eclipse Marketplace via the Help menu, and search for checkstyle. Install the checkstyle plugin:
-![](../images/eclipse-checkstyle-plugin.png "eclipse-checkstyle-plugin")
+![](../images/1-getting-started/eclipse-checkstyle-plugin.png "eclipse-checkstyle-plugin")
 Click "Install anyway",and restart Eclipse when asked.
 
 
@@ -159,35 +159,35 @@ Click "Install anyway",and restart Eclipse when asked.
 
 Create a perspective in Eclipse to be able to browse SVN repositories. Go to the top right of the screen, and click on the plus-sign (add perspective) that is visible there:
 
-![](../images/eclipse_svn_add_perspective.png "eclipse_svn_add_perspective")
+![](../images/1-getting-started/eclipse_svn_add_perspective.png "eclipse_svn_add_perspective")
 
 Select the 'SVN Repository browsing' perspective:
 
-![](../images/eclipse_svn_perspective_svn.png "eclipse_svn_perspective_svn")
+![](../images/1-getting-started/eclipse_svn_perspective_svn.png "eclipse_svn_perspective_svn")
 
 The SVN repository browsing perspective will be opened. You can go back to the Java perspective at any time by clicking the 'J' con next to the '+' icon at the top right. In order to open the DSOL-3 repository, click with your right mouse button in the 'SVN repositories' part of the screen and select 'New Repository location' (or click the 'Add SVN Repository' icon in the SVN repositories bar -- the icon has the text 'SVN' and a plus sign):
 
-![](../images/eclipse_svn_new_location.png "eclipse_svn_new_location")
+![](../images/1-getting-started/eclipse_svn_new_location.png "eclipse_svn_new_location")
 
 The SVN repository for DSOL-3 is at https://svn.tbm.tudelft.nl/DSOL3 - fill that in the new Repository Location screen:
 
-![](../images/eclipse_svn_add_location.png "eclipse_svn_add_location")
+![](../images/1-getting-started/eclipse_svn_add_location.png "eclipse_svn_add_location")
 
 The repository will be added, and you can click open the 'trunk', which contains the latest version (which could be unstable), or 'release' which contains all stable released versions until now. If you want to work with the version under development, select and open the 'trunk'. If you want to work with the latest stable version, select 'releases' and open the release you want (typically the latest):
 
-![](../images/eclipse_svn_dsol_trunk.png "eclipse_svn_dsol_trunk")
+![](../images/1-getting-started/eclipse_svn_dsol_trunk.png "eclipse_svn_dsol_trunk")
 
 Select the following dsol (sub)projects: dsol, dsol-animation, dsol-animation-gis, dsol-base, dsol-build-tools, dsol-core, dsol-demo, dsol-interpreter, dsol-introspection, dsol-naming, dsol-swing, and dsol-web. Press right mouse button and checkout:
 
-![](../images/eclipse-svn-dsol-checkout1.png "eclipse-svn-dsol-checkout1")
+![](../images/1-getting-started/eclipse-svn-dsol-checkout1.png "eclipse-svn-dsol-checkout1")
 
 Confirm the following dialog:
 
-![](../images/eclipse-svn-dsol-checkout2.png "eclipse-svn-dsol-checkout2")
+![](../images/1-getting-started/eclipse-svn-dsol-checkout2.png "eclipse-svn-dsol-checkout2")
 
 And return to the Java perspective (square J icon at the top right of the screen), and the projects will be there:
 
-![](../images/eclipse-dsol-projects.png "eclipse-dsol-projects")
+![](../images/1-getting-started/eclipse-dsol-projects.png "eclipse-dsol-projects")
 
 You can find the source of the main dsol simulation classses in the project 'dsol-core' under /src/main/java.
 

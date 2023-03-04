@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import org.junit.Test;
@@ -12,8 +11,8 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.StreamInformation;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulator;
-import nl.tudelft.simulation.dsol.simulators.DEVSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
@@ -21,7 +20,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * ModelTest.java.
  * <p>
- * Copyright (c) 2021-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
@@ -38,7 +37,7 @@ public class ModelTest
     @Test
     public void testDSOLModel() throws InputParameterException
     {
-        DEVSSimulatorInterface<Double> simulator = new DEVSSimulator<Double>("sim");
+        DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
         DSOLModel<Double, SimulatorInterface<Double>> model =
                 new AbstractDSOLModel<Double, SimulatorInterface<Double>>(simulator)
                 {
@@ -49,12 +48,6 @@ public class ModelTest
                     public void constructModel() throws SimRuntimeException
                     {
                         //
-                    }
-
-                    @Override
-                    public Serializable getSourceId()
-                    {
-                        return "model";
                     }
                 };
         assertEquals(simulator, model.getSimulator());

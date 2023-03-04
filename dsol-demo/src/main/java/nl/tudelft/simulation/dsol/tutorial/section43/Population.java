@@ -1,16 +1,15 @@
 package nl.tudelft.simulation.dsol.tutorial.section43;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
-import nl.tudelft.simulation.dsol.simulators.DESSSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 
 /**
  * The population differential equation.
  * <p>
- * Copyright (c) 2002-2022 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
@@ -41,7 +40,7 @@ public class Population extends DifferentialEquation<Double>
      * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on networn error for the listeners
      */
-    public Population(final DESSSimulatorInterface<Double> simulator) throws RemoteException
+    public Population(final DessSimulatorInterface<Double> simulator) throws RemoteException
     {
         super(simulator, simulator.getTimeStep(), NumericalIntegratorType.ADAMS, 2);
         double predator = 10;
@@ -61,12 +60,5 @@ public class Population extends DifferentialEquation<Double>
         dy[0] = -this.a * y[0] + this.b * y[0] * y[1];
         dy[1] = this.c * y[1] - this.d * y[1] * y[0];
         return dy;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public Serializable getSourceId()
-    {
-        return "Population";
     }
 }

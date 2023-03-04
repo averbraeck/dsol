@@ -1,0 +1,85 @@
+@startuml
+
+skinparam class {
+  BackgroundColor BUSINESS
+}
+
+skinparam genericDisplay old
+
+
+class Experiment<T> extends LocalEventProducer implements EventListener, Treatment, Contextualized
+{
+  + Experiment(String id, S simulator, DSOLModel<T, S> model,\n    T startTime, T warmupPeriod, T runLength, int numberOfReplications)
+  + Experiment(S simulator, DSOLModel<T, ? extends S> model,\n    ExperimentRunControl<T> runControl)
+  + RunControl<T> getRunControl()
+  + S getSimulator()
+  + DSOLModel<T, S> getModel()
+  + List<ExperimentReplication<T, S>> getStartedReplications()
+  + start()
+  + startNextReplication()
+  + endExperiment()
+  + reset()
+  # ExperimentReplication<T, S> makeExperimentReplication()
+}
+
+interface Contextualized
+{
+  + ContextInterface getContext();
+}
+
+class LocalEventProducer implements EventProducer
+
+interface EventProducer
+
+interface EventListener
+{
+  void notify(Event event);
+}
+
+interface Treatment<T>
+{
+  + RunControl<T> getRunControl()
+  + String getId()
+  + setDescription(String description)
+  + String getDescription()
+  + T getRunLength()
+  + T getWarmupPeriod()
+  + T getStartTime()
+  + T getEndTime()
+  + T getWarmupTime()
+}
+
+class RunControl<T> implements Treatment
+{
+  + RunControl(String id, T startTime, T warmupPeriod, T runLength)
+  + RunControl<T> getRunControl()
+}
+
+abstract class Replication<T> implements Contextualized, Treatment
+{
+  + Replication(String id, T startTime, T warmupPeriod, T runLength)
+  + Replication(RunControl<T> runControl)
+  + RunControl<T> getRunControl()
+  # setContext(ContextInterface context)
+}
+
+class SingleReplication<T> extends Replication
+{
+  + SingleReplication(String id, T startTime, T warmupPeriod, T runLength)
+  + SingleReplication(RunControl<T> runControl)
+  # void setContext()
+  + void removeFromContext()
+}
+
+class ExperimentReplication<T> extends Replication
+{
+  + ExperimentReplication(String id, T startTime, T warmupPeriod,\n    T runLength, Experiment<T, S> experiment, int replicationNr)
+  + ExperimentReplication(RunControl<T> runControl, \n    Experiment<T, S> experiment, int replicationNr)
+  + String getId()
+  + Experiment<T, S> getExperiment()
+  + int getReplicationNr()
+  # void setContext()
+  + void removeFromContext()
+}
+
+@enduml
