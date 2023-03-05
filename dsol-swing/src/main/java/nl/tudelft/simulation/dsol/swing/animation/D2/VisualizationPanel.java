@@ -28,7 +28,7 @@ import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
  * @author Niels Lang
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
-public abstract class VisualizationPanel extends JPanel
+public class VisualizationPanel extends JPanel
 {
     /** */
     private static final long serialVersionUID = 1L;
