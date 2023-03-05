@@ -32,7 +32,7 @@ import nl.tudelft.simulation.dsol.swing.introspection.gui.IntrospectionDialog;
 public class InputListener implements MouseListener, MouseWheelListener, MouseMotionListener, KeyListener
 {
     /** the panel to use. */
-    private final AnimationPanel panel;
+    private final VisualizationPanel panel;
 
     /** the mouseClicked point in screen coordinates. */
     private Point2D mouseClicked = null;
@@ -47,7 +47,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
      * constructs a new InputListener.
      * @param panel AnimationPanel; the panel
      */
-    public InputListener(final AnimationPanel panel)
+    public InputListener(final VisualizationPanel panel)
     {
         this.panel = panel;
     }
