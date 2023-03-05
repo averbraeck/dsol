@@ -49,8 +49,29 @@ import nl.tudelft.simulation.dsol.swing.animation.D2.actions.IntrospectionAction
 import nl.tudelft.simulation.naming.context.ContextInterface;
 
 /**
- * The VisualizationPanel implements the basic functions to show animations: toggle grid on/off, zooming, panning, translation
- * between world coordinates and screen coordinates, and changing the displayed extent such as the home extent.
+ * The VisualizationPanel implements the basic functions to visualize Locatable objects on the screen. It also allows for
+ * toggling a grid on/off, zooming, panning, translation between world coordinates and screen coordinates, and changing the
+ * displayed extent such as the home extent.
+ * <p>
+ * The screen has the possibility to witch layers on and off. <br>
+ * <br>
+ * <b>Asynchronous and synchronous calls:</b><br>
+ * The internal functions of the AnimationPanel are handled in a synchronous way inside the animation panel, possibly through
+ * (mouse or keyboard) listeners and handlers that implement the functions.There are several exceptions, though:
+ * <ul>
+ * <li><i>Clicking on one or more objects:</i> what has to happen is very much dependent on the implementation. Therefore, the
+ * click on an object will lead to firing of an event, where the listener(s), if any, can decide what to do. This can be
+ * dependent on whether CTRL, SHIFT, or ALT were pressed at the same time as the mouse button. Example behaviors could be:
+ * pop-up with properties of the object; showing properties in a special pane; highlighting the object; or setting the auto-pan
+ * on the clicked object. The event to use is the ANIMATION_MOUSE_CLICK_EVENT.</li>
+ * <li><i>Right click on one or more objects:</i> what has to happen is very much dependent on the implementation. Therefore,
+ * the click on an object will lead to firing of an event, where the listener(s), if any, can decide what to do. The event to
+ * use is the ANIMATION_MOUSE_POPUP_EVENT.</li>
+ * </ul>
+ * Furthermore, the AnimationPanel is an event listener, and listens, e.g., to the event of a searched object: the
+ * ANIMATION_SEARCH_OBJECT_EVENT to highlight the object, or, in case of an AutoPanAnimationPanel, to keep the object in the
+ * middle of the screen.
+ * </p>
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
