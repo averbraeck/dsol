@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import org.djutils.io.URLResource;
 
-import nl.tudelft.simulation.dsol.swing.animation.D2.GridPanel;
+import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 
 /**
  * The ZoomIn action.
@@ -27,13 +27,13 @@ public class ZoomInAction extends AbstractAction
     private static final long serialVersionUID = 20140909L;
 
     /** the panel to zoom in. */
-    private GridPanel panel = null;
+    private VisualizationPanel panel = null;
 
     /**
      * constructs a new ZoomInAction.
      * @param panel GridPanel; the target
      */
-    public ZoomInAction(final GridPanel panel)
+    public ZoomInAction(final VisualizationPanel panel)
     {
         super("ZoomIn");
         this.panel = panel;
@@ -47,7 +47,7 @@ public class ZoomInAction extends AbstractAction
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
-        this.panel.zoom(1.0 / GridPanel.ZOOMFACTOR);
+        this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR);
         this.panel.requestFocus();
     }
 }

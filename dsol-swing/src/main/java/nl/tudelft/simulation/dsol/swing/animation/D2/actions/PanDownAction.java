@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import org.djutils.io.URLResource;
 
-import nl.tudelft.simulation.dsol.swing.animation.D2.GridPanel;
+import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 
 /**
  * The PanLeftAction.
@@ -28,13 +28,13 @@ public class PanDownAction extends AbstractAction
     private static final long serialVersionUID = 20140909L;
 
     /** the panel to pan. */
-    private GridPanel panel = null;
+    private VisualizationPanel panel = null;
 
     /**
      * constructs a new PanDown.
      * @param panel GridPanel; the target
      */
-    public PanDownAction(final GridPanel panel)
+    public PanDownAction(final VisualizationPanel panel)
     {
         super("PanDown");
         this.panel = panel;
@@ -49,7 +49,7 @@ public class PanDownAction extends AbstractAction
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
-        this.panel.pan(GridPanel.DOWN, 0.1);
+        this.panel.pan(VisualizationPanel.DOWN, 0.1);
         this.panel.requestFocus();
     }
 }

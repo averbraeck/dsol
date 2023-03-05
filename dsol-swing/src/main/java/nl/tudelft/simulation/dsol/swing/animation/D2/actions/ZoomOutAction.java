@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import org.djutils.io.URLResource;
 
-import nl.tudelft.simulation.dsol.swing.animation.D2.GridPanel;
+import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 
 /**
  * The ZoomOut action.
@@ -27,13 +27,13 @@ public class ZoomOutAction extends AbstractAction
     private static final long serialVersionUID = 20140909L;
 
     /** the panel to zoom out. */
-    private GridPanel panel = null;
+    private VisualizationPanel panel = null;
 
     /**
      * constructs a new ZoomOutAction.
      * @param panel GridPanel; the target
      */
-    public ZoomOutAction(final GridPanel panel)
+    public ZoomOutAction(final VisualizationPanel panel)
     {
         super("ZoomOut");
         this.panel = panel;
@@ -48,7 +48,7 @@ public class ZoomOutAction extends AbstractAction
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
-        this.panel.zoom(GridPanel.ZOOMFACTOR);
+        this.panel.zoom(VisualizationPanel.ZOOMFACTOR);
         this.panel.requestFocus();
     }
 }

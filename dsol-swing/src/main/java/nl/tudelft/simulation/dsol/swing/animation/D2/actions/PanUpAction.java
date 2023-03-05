@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import org.djutils.io.URLResource;
 
-import nl.tudelft.simulation.dsol.swing.animation.D2.GridPanel;
+import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 
 /**
  * The PanUpAction.
@@ -27,13 +27,13 @@ public class PanUpAction extends AbstractAction
     private static final long serialVersionUID = 20140909L;
 
     /** the panel to pan up. */
-    private GridPanel panel = null;
+    private VisualizationPanel panel = null;
 
     /**
      * constructs a new PanUp.
      * @param panel GridPanel; the target
      */
-    public PanUpAction(final GridPanel panel)
+    public PanUpAction(final VisualizationPanel panel)
     {
         super("PanUp");
         this.panel = panel;
@@ -47,7 +47,7 @@ public class PanUpAction extends AbstractAction
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
-        this.panel.pan(GridPanel.UP, 0.1);
+        this.panel.pan(VisualizationPanel.UP, 0.1);
         this.panel.requestFocus();
     }
 }

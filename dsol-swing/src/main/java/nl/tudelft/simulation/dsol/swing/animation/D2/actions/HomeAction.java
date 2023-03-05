@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import org.djutils.io.URLResource;
 
-import nl.tudelft.simulation.dsol.swing.animation.D2.GridPanel;
+import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 
 /**
  * The Nome action, restoring the viewport to the original extent.
@@ -26,13 +26,13 @@ public class HomeAction extends AbstractAction
     private static final long serialVersionUID = 20140909L;
 
     /** target of the gridpanel. */
-    private GridPanel panel = null;
+    private VisualizationPanel panel = null;
 
     /**
      * constructs a new ZoomIn.
      * @param panel GridPanel; the target
      */
-    public HomeAction(final GridPanel panel)
+    public HomeAction(final VisualizationPanel panel)
     {
         super("Home");
         this.panel = panel;

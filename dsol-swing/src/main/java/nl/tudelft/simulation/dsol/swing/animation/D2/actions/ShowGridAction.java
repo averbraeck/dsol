@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import nl.tudelft.simulation.dsol.swing.animation.D2.GridPanel;
+import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 
 /**
  * Show or hide the grid.
@@ -22,13 +22,13 @@ public class ShowGridAction extends AbstractAction
     private static final long serialVersionUID = 20140909L;
 
     /** the panel to show the grid on. */
-    private GridPanel panel = null;
+    private VisualizationPanel panel = null;
 
     /**
      * constructs a new ShowGridAction.
      * @param panel GridPanel; the target
      */
-    public ShowGridAction(final GridPanel panel)
+    public ShowGridAction(final VisualizationPanel panel)
     {
         super("ShowGrid");
         this.panel = panel;

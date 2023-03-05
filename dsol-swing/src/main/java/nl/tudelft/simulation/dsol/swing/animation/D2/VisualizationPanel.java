@@ -28,7 +28,7 @@ import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
  * @author Niels Lang
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
-public abstract class GridPanel extends JPanel
+public abstract class VisualizationPanel extends JPanel
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -94,7 +94,7 @@ public abstract class GridPanel extends JPanel
      * constructs a new GridPanel.
      * @param homeExtent Bounds2d; the initial extent.
      */
-    public GridPanel(final Bounds2d homeExtent)
+    public VisualizationPanel(final Bounds2d homeExtent)
     {
         this.renderableScale = new RenderableScale();
         this.homeExtent = homeExtent;

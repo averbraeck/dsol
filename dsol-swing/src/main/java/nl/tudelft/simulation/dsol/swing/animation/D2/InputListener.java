@@ -122,11 +122,11 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         int amount = e.getUnitsToScroll();
         if (amount > 0)
         {
-            this.panel.zoom(GridPanel.ZOOMFACTOR, e.getX(), e.getY());
+            this.panel.zoom(VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
         }
         else if (amount < 0)
         {
-            this.panel.zoom(1.0 / GridPanel.ZOOMFACTOR, e.getX(), e.getY());
+            this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
         }
     }
 
@@ -191,10 +191,10 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
                 new PanDownAction(this.panel).actionPerformed(new ActionEvent(this, 0, "DOWN"));
                 break;
             case KeyEvent.VK_MINUS:
-                this.panel.zoom(GridPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
+                this.panel.zoom(VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
                 break;
             case KeyEvent.VK_PLUS:
-                this.panel.zoom(1.0 / GridPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
+                this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
                 break;
             default:
         }

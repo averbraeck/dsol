@@ -76,7 +76,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
-public class AnimationPanel extends GridPanel implements EventListener, EventProducer
+public class AnimationPanel extends VisualizationPanel implements EventListener, EventProducer
 {
     /** */
     private static final long serialVersionUID = 1L;
