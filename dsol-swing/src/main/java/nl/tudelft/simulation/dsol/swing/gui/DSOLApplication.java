@@ -1,6 +1,7 @@
 package nl.tudelft.simulation.dsol.swing.gui;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.MouseAdapter;
@@ -71,6 +72,7 @@ public class DSOLApplication extends JFrame
      */
     public DSOLApplication(final DSOLPanel panel, final String title)
     {
+        setPreferredSize(new Dimension(1024, 768));
         this.panel = panel;
         setTitle(title);
         setContentPane(panel);

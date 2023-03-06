@@ -209,6 +209,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      */
     public VisualizationPanel(final Bounds2d homeExtent, final EventProducer producer) throws RemoteException
     {
+        setPreferredSize(new Dimension(1024, 768));
         this.animationEventProducer = new AnimationEventProducer();
         this.showGrid = true;
         InputListener listener = new InputListener(this);

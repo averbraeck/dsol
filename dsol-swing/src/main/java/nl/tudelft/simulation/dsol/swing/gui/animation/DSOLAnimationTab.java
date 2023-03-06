@@ -112,6 +112,7 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
     public DSOLAnimationTab(final SimulatorInterface<?> simulator, final AnimationPanel animationPanel)
             throws RemoteException, DSOLException
     {
+        setPreferredSize(new Dimension(1024, 768));
         if (!(simulator instanceof AnimatorInterface))
         {
             throw new DSOLException("DSOLAnimationTab: simulator is not an instance of AnimatorInterface");

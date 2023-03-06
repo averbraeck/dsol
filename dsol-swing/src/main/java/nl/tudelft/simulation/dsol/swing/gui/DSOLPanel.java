@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.swing.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.rmi.RemoteException;
 
@@ -52,6 +53,7 @@ public class DSOLPanel extends JPanel implements AppearanceControl
      */
     public DSOLPanel(final AbstractControlPanel<?, ?> controlPanel) throws RemoteException
     {
+        setPreferredSize(new Dimension(1024, 768));
         this.tabbedPane = new AppearanceControlTabbedContentPane(SwingConstants.BOTTOM);
         setLayout(new BorderLayout());
 
