@@ -19,7 +19,7 @@
 
   <inceptionYear>2002</inceptionYear>
 
-  <!--modules>
+  <modules>
     <module>dsol-animation</module>
     <module>dsol-animation-gis</module>
     <module>dsol-animation-gis-esri</module>
@@ -31,7 +31,7 @@
     <module>dsol-naming</module>
     <module>dsol-swing</module>
     <module>dsol-web</module>
-  </modules-->
+  </modules>
 
 
   <properties>
