@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Created by Alexander Verbraeck on Apr 30, 2014 -->
-<map xmlns:gismap="http://www.simulation.tudelft.nl/gis">
+<map xmlns:gismap="http://www.simulation.tudelft.nl/resources/gis">
 
 	<!-- We start with the global map attributes -->
 	<name>sunnyvale</name>
@@ -27,7 +27,7 @@
 	<layer>
 		<name>roads</name>
 		<data>
-			<shapeFile>/gis/sunnyvale/roads.shp</shapeFile>
+			<shapeFile>/resources/gis/sunnyvale/roads.shp</shapeFile>
 		</data>
 		<fillColor>
 			<r>120</r>
@@ -45,7 +45,7 @@
 	<layer>
 		<name>buildings</name>
 		<data>
-			<shapeFile>/gis/sunnyvale/buildings.shp</shapeFile>
+			<shapeFile>/resources/gis/sunnyvale/buildings.shp</shapeFile>
 		</data>
 		<fillColor>
 			<r>200</r>
@@ -63,7 +63,7 @@
 	<layer>
 		<name>natural</name>
 		<data>
-			<shapeFile>/gis/sunnyvale/natural.shp</shapeFile>
+			<shapeFile>/resources/gis/sunnyvale/natural.shp</shapeFile>
 		</data>
 		<fillColor>
 			<r>127</r>
@@ -81,7 +81,7 @@
 	<layer>
 		<name>railways</name>
 		<data>
-			<shapeFile>/gis/sunnyvale/railways.shp</shapeFile>
+			<shapeFile>/resources/gis/sunnyvale/railways.shp</shapeFile>
 		</data>
 		<fillColor>
 			<r>0</r>
@@ -99,7 +99,7 @@
 	<layer>
 		<name>waterways</name>
 		<data>
-			<shapeFile>/gis/sunnyvale/waterways.shp</shapeFile>
+			<shapeFile>/resources/gis/sunnyvale/waterways.shp</shapeFile>
 		</data>
 		<fillColor>
 			<r>0</r>
