@@ -26,7 +26,7 @@ public class DESSPanel extends DSOLPanel
 
     /**
      * @param model DESSModel; the model
-     * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator DessSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on error
      */
     public DESSPanel(final DESSModel model, final DessSimulatorInterface<Double> simulator) throws RemoteException

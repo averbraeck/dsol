@@ -20,7 +20,7 @@ public class Speed extends DifferentialEquation<Double>
 
     /**
      * constructs a new Speed.
-     * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator DessSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on network failureS
      */
     public Speed(final DessSimulatorInterface<Double> simulator) throws RemoteException

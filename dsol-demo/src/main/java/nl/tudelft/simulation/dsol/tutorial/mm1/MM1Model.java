@@ -47,7 +47,7 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
     Utilization<Double> uN;
 
     /**
-     * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
+     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
      */
     public MM1Model(final DevsSimulator<Double> simulator)
     {

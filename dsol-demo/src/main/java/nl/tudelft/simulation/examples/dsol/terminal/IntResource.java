@@ -74,7 +74,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param description String; the description of this resource
      * @param capacity long; of the resource
      */
@@ -88,7 +88,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param capacity long; of the resource
      */
     public IntResource(final DevsSimulatorInterface<T> simulator, final long capacity)

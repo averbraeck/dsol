@@ -85,7 +85,7 @@ public abstract class AbstractControlPanel<
      * @param model DsolModel&lt;T, ? extends SimulationInterface&lt;T&gt;&gt;; the model for the control panel, to
      *            allow a reset of the model
      * @param simulator S; the simulator. Specified separately, because the model can have been specified with a superclass of
-     *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DEVSAnimator,
+     *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
      */

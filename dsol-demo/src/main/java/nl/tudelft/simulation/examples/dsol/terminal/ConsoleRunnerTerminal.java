@@ -60,7 +60,7 @@ public final class ConsoleRunnerTerminal implements EventListener
     }
 
     /**
-     * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
+     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
      * @param numQC int; num QC
      * @param numAGV int; num AGV
      * @param rep int; replication number

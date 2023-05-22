@@ -75,7 +75,7 @@ public class MM1QueueSwingApplication extends DSOLApplication
 
         /**
          * @param model MM1QueueModel; the model
-         * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
+         * @param simulator DevsSimulator&lt;Double&gt;; the simulator
          * @throws RemoteException on error
          */
         MM1QueuePanel(final MM1QueueModel model, final DevsSimulator<Double> simulator) throws RemoteException

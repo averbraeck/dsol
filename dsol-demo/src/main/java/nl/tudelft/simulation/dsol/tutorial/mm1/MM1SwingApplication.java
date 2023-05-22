@@ -34,7 +34,7 @@ public class MM1SwingApplication extends DSOLApplication
     /**
      * @param panel DSOLPanel; the panel
      * @param model MM1Model; the model
-     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
      */
     public MM1SwingApplication(final MM1Panel panel, final MM1Model model,
             final DevsSimulator<Double> simulator)

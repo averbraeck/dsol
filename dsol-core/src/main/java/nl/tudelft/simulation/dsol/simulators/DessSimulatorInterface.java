@@ -7,7 +7,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 
 /**
- * The DESSSimulatorInterface defines the methods for a DESS simulator. DESS stands for the Differential Equation System
+ * The DessSimulatorInterface defines the methods for a DESS simulator. DESS stands for the Differential Equation System
  * Specification. More information on Modeling and Simulation can be found in "Theory of Modeling and Simulation" by Bernard
  * Zeigler et.al.
  * <p>

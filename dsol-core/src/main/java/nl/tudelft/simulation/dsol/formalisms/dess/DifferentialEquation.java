@@ -60,7 +60,7 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
     /**
      * Construct a new DifferentialEquation with a step size equal to the simulator time step, and Runge-Kutta4 as the default
      * integrator. Indicate the number of variables that the differential qquation will use.
-     * @param simulator DESSSimulatorInterface&lt;T&gt;; the simulator
+     * @param simulator DessSimulatorInterface&lt;T&gt;; the simulator
      * @param numberOfVariables int; the number of variables in the equation
      * @throws RemoteException on remote network exception for the listener
      */
@@ -71,7 +71,7 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
 
     /**
      * constructs a new DifferentialEquation with a step size equal to the simulator timestep.
-     * @param simulator DESSSimulatorInterface&lt;T&gt;; the simulator
+     * @param simulator DessSimulatorInterface&lt;T&gt;; the simulator
      * @param numericalIntegrator NumericalIntegrator; the actual integrator to be used.
      * @param numberOfVariables int; the number of variables in the equation
      * @throws RemoteException on remote network exception for the listener
@@ -84,7 +84,7 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
 
     /**
      * constructs a new DifferentialEquation.
-     * @param simulator DESSSimulatorInterface&lt;T&gt;; the simulator.
+     * @param simulator DessSimulatorInterface&lt;T&gt;; the simulator.
      * @param timeStep double; the timeStep for ODE estimation.
      * @param numericalIntegrator NumericalIntegrator; the actual integrator to be used.
      * @param numberOfVariables int; the number of variables in the equation

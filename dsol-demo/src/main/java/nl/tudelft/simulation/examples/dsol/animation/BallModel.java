@@ -27,7 +27,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
 
     /**
      * constructs a new BallModel.
-     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
      */
     public BallModel(final DevsSimulatorInterface<Double> simulator)
     {

@@ -21,7 +21,7 @@ import net.jodah.concurrentunit.Waiter;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class DESSSimulatorTest implements EventListener
+public class DessSimulatorTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -30,16 +30,16 @@ public class DESSSimulatorTest implements EventListener
     private Waiter waiter;
 
     /**
-     * DESSSimulatorTest.
+     * DessSimulatorTest.
      * @throws InterruptedException on error
      * @throws TimeoutException on error
      * @throws RemoteException on error
      */
     @Test
-    public void testDESSSimulator() throws TimeoutException, InterruptedException, RemoteException
+    public void testDessSimulator() throws TimeoutException, InterruptedException, RemoteException
     {
 //        this.waiter = new Waiter();
-//        DESSSimulatorInterface<Double> dessSimulator = new DESSSimulator<Double>("DESSSimulatorTest", 0.1);
+//        DessSimulatorInterface<Double> dessSimulator = new DessSimulator<Double>("DessSimulatorTest", 0.1);
 //        dessSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
 //        ExperimentalFrame experimentalFrame =
 //                ExperimentUtilDouble.createExperimentalFrame(dessSimulator, new TestModel(dessSimulator));

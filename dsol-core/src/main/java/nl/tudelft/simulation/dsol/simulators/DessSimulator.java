@@ -29,7 +29,7 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
     protected T timeStep;
 
     /**
-     * Construct a DESSSimulator with an initial time step for the integration process.
+     * Construct a DessSimulator with an initial time step for the integration process.
      * @param initialTimeStep T; the initial time step to use in the integration.
      * @param id the id of the simulator, used in logging and firing of events.
      * @throws SimRuntimeException when initialTimeStep &lt;=0, NaN, or Infinity
@@ -57,7 +57,7 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
                     || Double.isInfinite(timeStep.doubleValue()))
             {
                 throw new SimRuntimeException(
-                        "DESSSimulator.setTimeStep: timeStep <= 0, NaN, or Infinity. Value provided = : " + timeStep);
+                        "DessSimulator.setTimeStep: timeStep <= 0, NaN, or Infinity. Value provided = : " + timeStep);
             }
             this.timeStep = timeStep;
             this.fireEvent(TIME_STEP_CHANGED_EVENT, timeStep);

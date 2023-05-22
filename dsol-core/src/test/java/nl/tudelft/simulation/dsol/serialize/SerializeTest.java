@@ -54,7 +54,7 @@ public class SerializeTest
                 new SimpleDifferentialEquation(new DessSimulator("SerializeTest", 0.1), 0.1, NumericalIntegratorType.ADAMS, 1));
 
         // The process interaction formalism
-        // XXX: gives error; first check interpreter package: new Process(new DEVSSimulator());
+        // XXX: gives error; first check interpreter package: new Process(new DevsSimulator());
 
     }
 }

@@ -48,7 +48,7 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
 
     /**
      * constructor for the Container Terminal.
-     * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
      * @param rep int; the replication number
      * @throws InputParameterException on input parameter error
      */

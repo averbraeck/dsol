@@ -41,12 +41,12 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     private long savedAnimationDelay = 100L;
 
     /**
-     * Generic control panel with a different set of control buttons. The control panel assumes a RealTimeDEVSAnimator and
+     * Generic control panel with a different set of control buttons. The control panel assumes a RealTimeDevsAnimator and
      * animation, but the model specification is not necessarily specified as "real time"; its execution is.
-     * @param model DsolModel&lt;T, ? extends DEVSSimulationInterface&lt;T&gt;&gt;; the model for the control panel, to allow a
+     * @param model DsolModel&lt;T, ? extends DevsSimulationInterface&lt;T&gt;&gt;; the model for the control panel, to allow a
      *            reset of the model
      * @param simulator S; the simulator. Specified separately, because the model can have been specified with a superclass of
-     *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DEVSAnimator,
+     *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
@@ -161,12 +161,12 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
 
         /**
          * Construct a real time control panel for a Double time unit, with a different set of control buttons. The control
-         * panel assumes a DEVSSimulator and animation. The model specification is not necessarily specified as "real time"; its
+         * panel assumes a DevsSimulator and animation. The model specification is not necessarily specified as "real time"; its
          * execution is.
          * @param model DsolModel&lt;Double&gt;; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSRealTimeAnimator.TimeDouble; the simulator. Specified separately, because the model can have
+         * @param simulator DevsRealTimeAnimator.TimeDouble; the simulator. Specified separately, because the model can have
          *            been specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has
-         *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
+         *            been specified with a DevsAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeDouble(final DsolModel<Double, ? extends DevsSimulatorInterface<Double>> model,
@@ -196,12 +196,12 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
 
         /**
          * Construct a real time control panel for a Float time unit, with a different set of control buttons. The control panel
-         * assumes a DEVSSimulator and animation. The model specification is not necessarily specified as "real time"; its
+         * assumes a DevsSimulator and animation. The model specification is not necessarily specified as "real time"; its
          * execution is.
          * @param model DsolModel&lt;Float&gt;; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSRealTimeAnimator&lt;Float&gt;; the simulator. Specified separately, because the model can have been
+         * @param simulator DevsRealTimeAnimator&lt;Float&gt;; the simulator. Specified separately, because the model can have been
          *            specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has been
-         *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
+         *            specified with a DevsAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeFloat(final DsolModel<Float, ? extends DevsSimulatorInterface<Float>> model,
@@ -231,12 +231,12 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
 
         /**
          * Construct a real time control panel for a Long time unit, with a different set of control buttons. The control panel
-         * assumes a DEVSSimulator and animation. The model specification is not necessarily specified as "real time"; its
+         * assumes a DevsSimulator and animation. The model specification is not necessarily specified as "real time"; its
          * execution is.
          * @param model DsolModel&lt;Long&gt;; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSRealTimeAnimator&lt;Long&gt;; the simulator. Specified separately, because the model can have been
+         * @param simulator DevsRealTimeAnimator&lt;Long&gt;; the simulator. Specified separately, because the model can have been
          *            specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has been
-         *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
+         *            specified with a DevsAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeLong(final DsolModel<Long, ? extends DevsSimulatorInterface<Long>> model,
@@ -266,12 +266,12 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
 
         /**
          * Construct a real time control panel for a djunits double time unit, with a different set of control buttons. The
-         * control panel assumes a DEVSSimulator and animation. The model specification is not necessarily specified as "real
+         * control panel assumes a DevsSimulator and animation. The model specification is not necessarily specified as "real
          * time"; its execution is.
          * @param model DsolModel&lt;Duration&gt;; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSRealTimeAnimator&lt;Duration&gt;; the simulator. Specified separately, because the model can have been
+         * @param simulator DevsRealTimeAnimator&lt;Duration&gt;; the simulator. Specified separately, because the model can have been
          *            specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has been
-         *            specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
+         *            specified with a DevsAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeDoubleUnit(final DsolModel<Duration, ? extends DevsSimulatorInterface<Duration>> model,
@@ -301,12 +301,12 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
 
         /**
          * Construct a real time control panel for a djunits float time unit, with a different set of control buttons. The
-         * control panel assumes a DEVSSimulator and animation. The model specification is not necessarily specified as "real
+         * control panel assumes a DevsSimulator and animation. The model specification is not necessarily specified as "real
          * time"; its execution is.
          * @param model DsolModel&lt;FloatDuration&gt;; the model for the control panel, to allow a reset of the model
-         * @param simulator DEVSRealTimeAnimator&lt;FloatDuration&gt;; the simulator. Specified separately, because the model can have
+         * @param simulator DevsRealTimeAnimator&lt;FloatDuration&gt;; the simulator. Specified separately, because the model can have
          *            been specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has
-         *            been specified with a DEVSAnimator, whereas the panel needs a RealTimeControlAnimator)
+         *            been specified with a DevsAnimator, whereas the panel needs a RealTimeControlAnimator)
          * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeFloatUnit(final DsolModel<FloatDuration, ? extends DevsSimulatorInterface<FloatDuration>> model,

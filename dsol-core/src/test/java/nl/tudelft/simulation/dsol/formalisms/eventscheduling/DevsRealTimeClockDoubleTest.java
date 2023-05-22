@@ -25,7 +25,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DEVSRealTimeClockDoubleTest implements EventListener
+public class DevsRealTimeClockDoubleTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -46,11 +46,11 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
      * @throws TimeoutException on error
      */
     @Test
-    public void testDEVSRealTimeClockDouble()
+    public void testDevsRealTimeClockDouble()
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DevsRealTimeAnimator.TimeDouble("testDEVSSimulationDouble", 0.1);
+        this.devsSimulator = new DevsRealTimeAnimator.TimeDouble("testDevsSimulationDouble", 0.1);
         this.devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
         Replication<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
@@ -196,8 +196,8 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
                 @Override
                 public void execute()
                 {
-                    DEVSRealTimeClockDoubleTest.this.waiter
-                            .assertTrue(DEVSRealTimeClockDoubleTest.this.devsSimulator.getSimulatorTime() <= 10.0);
+                    DevsRealTimeClockDoubleTest.this.waiter
+                            .assertTrue(DevsRealTimeClockDoubleTest.this.devsSimulator.getSimulatorTime() <= 10.0);
                 }
             });
         }

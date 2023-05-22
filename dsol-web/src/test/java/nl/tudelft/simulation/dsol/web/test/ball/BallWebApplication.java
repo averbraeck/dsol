@@ -21,7 +21,7 @@ public class BallWebApplication extends DSOLWebServer
 {
     /**
      * @param title String; the tile for the model
-     * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
+     * @param simulator DevsRealTimeClock&lt;Double&gt;; the simulator
      * @throws Exception on jetty error
      */
     public BallWebApplication(final String title, final DevsRealTimeAnimator.TimeDouble simulator) throws Exception

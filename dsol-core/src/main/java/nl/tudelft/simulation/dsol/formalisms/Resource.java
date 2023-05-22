@@ -77,7 +77,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param description String; the description of this resource
      * @param capacity double; of the resource
      */
@@ -91,7 +91,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
 
     /**
      * Method Resource.
-     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param capacity double; of the resource
      */
     public Resource(final DevsSimulatorInterface<T> simulator, final double capacity)

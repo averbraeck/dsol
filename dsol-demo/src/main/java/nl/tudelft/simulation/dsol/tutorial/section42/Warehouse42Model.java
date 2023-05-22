@@ -40,7 +40,7 @@ public class Warehouse42Model extends AbstractDsolModel<Double, DevsSimulator<Do
 
     /**
      * constructs a new BoatModel.
-     * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
+     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
      * @throws InputParameterException on parameter error
      */
     public Warehouse42Model(final DevsSimulator<Double> simulator) throws InputParameterException

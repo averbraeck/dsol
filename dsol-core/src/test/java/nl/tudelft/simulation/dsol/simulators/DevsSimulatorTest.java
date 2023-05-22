@@ -10,7 +10,7 @@ import org.junit.Test;
 import net.jodah.concurrentunit.Waiter;
 
 /**
- * The DEVSSimulatorTest test the DEVS Simulator.
+ * The DevsSimulatorTest test the DEVS Simulator.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -21,7 +21,7 @@ import net.jodah.concurrentunit.Waiter;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class DEVSSimulatorTest implements EventListener
+public class DevsSimulatorTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -31,16 +31,16 @@ public class DEVSSimulatorTest implements EventListener
     protected Waiter waiter;
 
     /**
-     * DEVSSimulatorTest.
+     * DevsSimulatorTest.
      * @throws InterruptedException on error
      * @throws TimeoutException on error
      * @throws RemoteException on error
      */
     @Test
-    public void testDEVSSimulator() throws TimeoutException, InterruptedException, RemoteException
+    public void testDevsSimulator() throws TimeoutException, InterruptedException, RemoteException
     {
 //        this.waiter = new Waiter();
-//        DEVSSimulatorInterface<Double> devsSimulator = new DEVSSimulator<Double>("DEVSSimulatorTest");
+//        DevsSimulatorInterface<Double> devsSimulator = new DevsSimulator<Double>("DevsSimulatorTest");
 //        devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
 //        ExperimentalFrame experimentalFrame =
 //                ExperimentUtilDouble.createExperimentalFrame(devsSimulator, new DEVSTestModel(devsSimulator));

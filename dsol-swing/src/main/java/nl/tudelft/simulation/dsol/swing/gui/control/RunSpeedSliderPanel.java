@@ -49,7 +49,7 @@ public class RunSpeedSliderPanel extends JPanel
      *            value)
      * @param initialValue double; the initially selected value on the scale
      * @param ticksPerDecade int; the number of steps per decade
-     * @param simulator DEVSSimulatorInterface&lt;?, ?, ?&gt;; the simulator to change the speed of
+     * @param simulator DevsSimulatorInterface&lt;?, ?, ?&gt;; the simulator to change the speed of
      */
     RunSpeedSliderPanel(final double minimum, final double maximum, final double initialValue, final int ticksPerDecade,
             final DevsSimulatorInterface<?> simulator)

@@ -79,7 +79,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Constructor of a high-level coupled model without a parent model.
      * @param modelName String; the name of this component
-     * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule events on.
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator to schedule events on.
      */
     public CoupledModel(final String modelName, final DevsSimulatorInterface<T> simulator)
     {

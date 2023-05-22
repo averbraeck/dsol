@@ -24,7 +24,7 @@ public class GISModel extends AbstractDsolModel<Double, DevsRealTimeAnimator.Tim
 
     /**
      * constructs a new GISModel.
-     * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
+     * @param simulator DevsRealTimeClock&lt;Double&gt;; the simulator
      */
     public GISModel(final DevsRealTimeAnimator.TimeDouble simulator)
     {

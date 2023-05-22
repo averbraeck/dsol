@@ -39,7 +39,7 @@ public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
     /**
      * constructs a new Ball.
      * @param nr int; the ball number
-     * @param simulator DESSSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator DessSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on network exception
      * @throws NamingException on animation error
      */

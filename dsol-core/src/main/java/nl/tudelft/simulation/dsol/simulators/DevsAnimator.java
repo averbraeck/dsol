@@ -25,7 +25,7 @@ public class DevsAnimator<T extends Number & Comparable<T>> extends DevsSimulato
     private static final long serialVersionUID = 20140804L;
 
     /**
-     * Create a new DEVSAnimator.
+     * Create a new DevsAnimator.
      * @param id the id of the simulator, used in logging and firing of events.
      */
     public DevsAnimator(final Serializable id)

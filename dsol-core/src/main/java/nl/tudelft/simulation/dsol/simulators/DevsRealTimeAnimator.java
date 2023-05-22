@@ -65,7 +65,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
 
     /**
      * Calculate the how much simulation duration corresponds to the number of wall clock milliseconds indicated in the
-     * parameter. When the DEVSRealTimeClock works with djunits Time or Duration, and the simulation is scaled to milliseconds,
+     * parameter. When the DevsRealTimeClock works with djunits Time or Duration, and the simulation is scaled to milliseconds,
      * the simulatorTimeForWallClockMillis of a millisecond is a Duration of 1 millisecond. When 1 simulated time unit stands
      * for a second, the simulatorTimeForWallClockMillis is 0.001.
      * @param wallMilliseconds double; the number of milliseconds to calculate the corresponding simulation time for
@@ -74,7 +74,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     protected abstract T simulatorTimeForWallClockMillis(final double wallMilliseconds);
 
     /**
-     * Constructs a new DEVSRealTimeClock.
+     * Constructs a new DevsRealTimeClock.
      * @param id the id of the simulator, used in logging and firing of events.
      */
     public DevsRealTimeAnimator(final Serializable id)
@@ -454,7 +454,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         private final double msecWallClockToSimTimeUnit;
 
         /**
-         * Construct a DEVSRealTimeClock&lt;Double&gt;.
+         * Construct a DevsRealTimeClock&lt;Double&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          * @param msecWallClockToSimTimeUnit double; the translation between a millisecond on the clock and '1.0' in the
          *            simulation time.
@@ -480,7 +480,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock&lt;Float&gt;.
+         * Construct a DevsRealTimeClock&lt;Float&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeFloat(final Serializable id)
@@ -496,7 +496,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock&lt;Long&gt;.
+         * Construct a DevsRealTimeClock&lt;Long&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeLong(final Serializable id)
@@ -512,7 +512,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock&lt;Duration&gt;.
+         * Construct a DevsRealTimeClock&lt;Duration&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeDoubleUnit(final Serializable id)
@@ -536,7 +536,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * Construct a DEVSRealTimeClock&lt;FloatDuration&gt;.
+         * Construct a DevsRealTimeClock&lt;FloatDuration&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
          */
         public TimeFloatUnit(final Serializable id)

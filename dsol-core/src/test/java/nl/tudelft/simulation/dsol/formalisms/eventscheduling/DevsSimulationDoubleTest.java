@@ -24,7 +24,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DEVSSimulationDoubleTest implements EventListener
+public class DevsSimulationDoubleTest implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -45,11 +45,11 @@ public class DEVSSimulationDoubleTest implements EventListener
      * @throws TimeoutException on error
      */
     @Test
-    public void testDEVSSimulationDouble()
+    public void testDevsSimulationDouble()
             throws SimRuntimeException, RemoteException, NamingException, TimeoutException, InterruptedException
     {
         this.waiter = new Waiter();
-        this.devsSimulator = new DevsSimulator<Double>("testDEVSSimulationDouble");
+        this.devsSimulator = new DevsSimulator<Double>("testDevsSimulationDouble");
         this.devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
         ModelDouble model = new ModelDouble(this.devsSimulator);
         Replication<Double> rep = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
@@ -196,8 +196,8 @@ public class DEVSSimulationDoubleTest implements EventListener
                 @Override
                 public void execute()
                 {
-                    DEVSSimulationDoubleTest.this.waiter
-                            .assertTrue(DEVSSimulationDoubleTest.this.devsSimulator.getSimulatorTime() <= 10.0);
+                    DevsSimulationDoubleTest.this.waiter
+                            .assertTrue(DevsSimulationDoubleTest.this.devsSimulator.getSimulatorTime() <= 10.0);
                 }
             });
         }

@@ -25,7 +25,7 @@ public class Destroy<T extends Number & Comparable<T>> extends Station<T>
     /**
      * Constructor for Destroy station.
      * @param id Serializable; the id of the Station
-     * @param simulator DEVSSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      */
     public Destroy(final Serializable id, final DevsSimulatorInterface<T> simulator)
     {

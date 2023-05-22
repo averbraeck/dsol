@@ -41,7 +41,7 @@ public class MM1SwingApplicationEvents extends DSOLApplication
     /**
      * @param panel DSOLPanel; the panel
      * @param model MM1Model; the model
-     * @param devsSimulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
+     * @param devsSimulator DevsSimulatorInterface&lt;Double&gt;; the simulator
      */
     public MM1SwingApplicationEvents(final MM1Panel panel, final MM1Model model,
             final DevsSimulator<Double> devsSimulator)
@@ -101,7 +101,7 @@ public class MM1SwingApplicationEvents extends DSOLApplication
         private final DevsSimulator<Double> devsSimulator;
 
         /**
-         * @param devsSimulator DEVSSimulator&lt;Double&gt;; the simulator to provide the events
+         * @param devsSimulator DevsSimulator&lt;Double&gt;; the simulator to provide the events
          */
         SimulatorEventLogger(final DevsSimulator<Double> devsSimulator)
         {

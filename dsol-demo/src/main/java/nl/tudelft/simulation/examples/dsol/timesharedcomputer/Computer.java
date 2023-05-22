@@ -41,7 +41,7 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
 
     /**
      * constructs a new Computer.
-     * @param simulator DEVSSimulator&lt;Double&gt;; the simulator
+     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
      */
     public Computer(final DevsSimulator<Double> simulator)
     {

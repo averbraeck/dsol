@@ -90,7 +90,7 @@ public class EsriCsvSwingApplication extends DSOLAnimationApplication
 
         /**
          * constructs a new EmptyModel.
-         * @param simulator DEVSSimulatorInterface&lt;Double&gt;; the simulator
+         * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
          */
         EmptyModel(final DevsSimulatorInterface<Double> simulator)
         {

@@ -22,7 +22,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsRealTimeAnimator.Ti
 
     /**
      * constructs a new BallModel.
-     * @param simulator DEVSRealTimeClock&lt;Double&gt;; the simulator
+     * @param simulator DevsRealTimeClock&lt;Double&gt;; the simulator
      */
     public BallModel(final DevsRealTimeAnimator.TimeDouble simulator)
     {

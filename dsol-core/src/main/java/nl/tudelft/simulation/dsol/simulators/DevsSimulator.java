@@ -40,7 +40,7 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
     protected EventListInterface<T> eventList = new RedBlackTree<T>();
 
     /**
-     * Constructs a new DEVSSimulator.
+     * Constructs a new DevsSimulator.
      * @param id the id of the simulator, used in logging and firing of events.
      */
     public DevsSimulator(final Serializable id)

@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.simulators;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 
 /**
- * The DEVSSimulatorTestmodel specifies the model.
+ * The DevsSimulatorTestmodel specifies the model.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class DEVSTestModel extends TestModel
+public class DevsTestModel extends TestModel
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class DEVSTestModel extends TestModel
      * constructs a new DEVSTestModel.
      * @param simulator the simulator
      */
-    public DEVSTestModel(final DevsSimulatorInterface<Double> simulator)
+    public DevsTestModel(final DevsSimulatorInterface<Double> simulator)
     {
         super(simulator);
     }
