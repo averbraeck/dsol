@@ -8,9 +8,9 @@ theme:
   navigation_depth: 1
     
 markdown_extensions:
-  - admonition
   - pymdownx.arithmatex:
       generic: true
+  - admonition
 
 extra_css: 
   - css/custom.css
@@ -20,7 +20,7 @@ extra_javascript:
   - js/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  
+
 nav:
   - Home: index.md
   - Getting started:
