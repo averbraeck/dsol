@@ -8,7 +8,7 @@ import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortNotFound
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * AbstractDEVSPortModel class. Adds named ports to the abstract DEVS model.
+ * AbstractDevsPortModel class. Adds named ports to the abstract DEVS model.
  * <p>
  * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
