@@ -14,10 +14,10 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
-import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
 
 /**
@@ -30,13 +30,13 @@ import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialo
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class Warehouse42SwingApplication extends DSOLApplication
+public class Warehouse42SwingApplication extends DsolApplication
 {
     /**
      * @param title String; the title
-     * @param panel DSOLPanel&lt;Double,Double,Double&gt;; the panel
+     * @param panel DsolPanel&lt;Double,Double,Double&gt;; the panel
      */
-    public Warehouse42SwingApplication(final String title, final DSOLPanel panel)
+    public Warehouse42SwingApplication(final String title, final DsolPanel panel)
     {
         super(panel, title);
         panel.enableSimulationControlButtons();
@@ -71,7 +71,7 @@ public class Warehouse42SwingApplication extends DSOLApplication
      * <br>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    protected static class Warehouse42Panel extends DSOLPanel
+    protected static class Warehouse42Panel extends DsolPanel
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -83,7 +83,7 @@ public class Warehouse42SwingApplication extends DSOLApplication
          */
         Warehouse42Panel(final Warehouse42Model model, final DevsSimulator<Double> simulator) throws RemoteException
         {
-            super(new DEVSControlPanel.TimeDouble(model, simulator));
+            super(new DevsControlPanel.TimeDouble(model, simulator));
             addTabs(model);
         }
 

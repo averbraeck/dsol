@@ -11,9 +11,9 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleLogger;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleOutput;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
-import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationApplication;
-import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationTab;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
+import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationApplication;
+import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationTab;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel.ObjectKind;
 import nl.tudelft.simulation.dsol.swing.gui.control.RealTimeControlPanel;
 import nl.tudelft.simulation.language.DsolException;
@@ -28,22 +28,22 @@ import nl.tudelft.simulation.language.DsolException;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class BallSwingApplication extends DSOLAnimationApplication
+public class BallSwingApplication extends DsolAnimationApplication
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /**
      * @param title String; the title
-     * @param panel DSOLPanel; the panel
+     * @param panel DsolPanel; the panel
      * @throws DsolException when simulator is not an animator
      * @throws IllegalArgumentException for illegal bounds
      * @throws RemoteException on network error
      */
-    public BallSwingApplication(final String title, final DSOLPanel panel)
+    public BallSwingApplication(final String title, final DsolPanel panel)
             throws RemoteException, IllegalArgumentException, DsolException
     {
-        super(panel, title, DSOLAnimationTab.createAutoPanTab(new Bounds2d(-100, 100, -100, 100), panel.getSimulator()));
+        super(panel, title, DsolAnimationTab.createAutoPanTab(new Bounds2d(-100, 100, -100, 100), panel.getSimulator()));
         getAnimationTab().getAnimationPanel().setRenderableScale(new RenderableScale(2.0, 0.5));
 
         ObjectKind<Ball> objectKind = new ObjectKind<Ball>("Ball")
@@ -81,7 +81,7 @@ public class BallSwingApplication extends DSOLAnimationApplication
         BallModel model = new BallModel(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
-        DSOLPanel panel = new DSOLPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
+        DsolPanel panel = new DsolPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
         panel.addTab("logger", new ConsoleLogger(Level.INFO));
         panel.addTab("console", new ConsoleOutput());
         new BallSwingApplication("BallSwingApplication", panel);

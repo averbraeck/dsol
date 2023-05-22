@@ -29,7 +29,7 @@ import nl.tudelft.simulation.dsol.simulators.RunState;
  * @param <S> the simulator type to use
  */
 public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DevsRealTimeAnimator<T>>
-        extends DEVSControlPanel<T, S> implements PropertyChangeListener
+        extends DevsControlPanel<T, S> implements PropertyChangeListener
 {
     /** */
     private static final long serialVersionUID = 20201227L;

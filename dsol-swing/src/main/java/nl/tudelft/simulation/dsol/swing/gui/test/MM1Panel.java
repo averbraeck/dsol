@@ -12,9 +12,9 @@ import nl.tudelft.simulation.dsol.swing.charts.boxwhisker.BoxAndWhiskerChart;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleLogger;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleOutput;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
-import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
 
 /**
@@ -27,16 +27,16 @@ import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1Panel extends DSOLPanel
+public class MM1Panel extends DsolPanel
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param controlPanel DEVSControlPanel.TimeDouble; the control panel
+     * @param controlPanel DevsControlPanel.TimeDouble; the control panel
      * @throws RemoteException when communications to a remote machine fails
      */
-    public MM1Panel(final DEVSControlPanel.TimeDouble controlPanel) throws RemoteException
+    public MM1Panel(final DevsControlPanel.TimeDouble controlPanel) throws RemoteException
     {
         super(controlPanel);
         addTabs();

@@ -8,8 +8,8 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DessSimulator;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 
 /**
  * <p>
@@ -21,13 +21,13 @@ import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DessSwingApplication extends DSOLApplication
+public class DessSwingApplication extends DsolApplication
 {
     /**
      * @param title String; the title
-     * @param panel DSOLPanel&lt;Double,Double,Double&gt;; the panel
+     * @param panel DsolPanel&lt;Double,Double,Double&gt;; the panel
      */
-    public DessSwingApplication(final String title, final DSOLPanel panel)
+    public DessSwingApplication(final String title, final DsolPanel panel)
     {
         super(panel, title);
         panel.enableSimulationControlButtons();

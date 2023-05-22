@@ -27,7 +27,7 @@ import nl.tudelft.simulation.dsol.simulators.RunState;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator type to use
  */
-public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsSimulatorInterface<T>>
+public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSimulatorInterface<T>>
         extends AbstractControlPanel<T, S>
 {
     /** */
@@ -46,7 +46,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsSi
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
-    public DEVSControlPanel(final DsolModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator)
+    public DevsControlPanel(final DsolModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator)
             throws RemoteException
     {
         super(model, simulator);
@@ -220,7 +220,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeDouble extends DEVSControlPanel<Double, DevsSimulatorInterface<Double>>
+    public static class TimeDouble extends DevsControlPanel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -254,7 +254,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeFloat extends DEVSControlPanel<Float, DevsSimulatorInterface<Float>>
+    public static class TimeFloat extends DevsControlPanel<Float, DevsSimulatorInterface<Float>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -288,7 +288,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeLong extends DEVSControlPanel<Long, DevsSimulatorInterface<Long>>
+    public static class TimeLong extends DevsControlPanel<Long, DevsSimulatorInterface<Long>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -322,7 +322,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeDoubleUnit extends DEVSControlPanel<Duration, DevsSimulatorInterface<Duration>>
+    public static class TimeDoubleUnit extends DevsControlPanel<Duration, DevsSimulatorInterface<Duration>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;
@@ -356,7 +356,7 @@ public class DEVSControlPanel<T extends Number & Comparable<T>, S extends DevsSi
      * </p>
      * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
      */
-    public static class TimeFloatUnit extends DEVSControlPanel<FloatDuration, DevsSimulatorInterface<FloatDuration>>
+    public static class TimeFloatUnit extends DevsControlPanel<FloatDuration, DevsSimulatorInterface<FloatDuration>>
     {
         /** */
         private static final long serialVersionUID = 20201227L;

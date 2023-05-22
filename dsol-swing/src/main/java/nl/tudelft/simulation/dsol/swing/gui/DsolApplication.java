@@ -37,7 +37,7 @@ import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
 
 /**
  * The DSOLSimulationApplication allows to execute and control a simulation model, add tabs, and provide insight into the state
- * of the simulation. It does not have animation -- the DSOLAnimationApplication adds the DSOLAnimationPAnel for that specific
+ * of the simulation. It does not have animation -- the DsolAnimationApplication adds the DsolAnimationPAnel for that specific
  * purpose.
  * <p>
  * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
@@ -47,13 +47,13 @@ import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DSOLApplication extends JFrame
+public class DsolApplication extends JFrame
 {
     /** */
     private static final long serialVersionUID = 20190118L;
 
     /** the content pane of this application. */
-    private final DSOLPanel panel;
+    private final DsolPanel panel;
 
     /** whether the application has been closed or not. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -70,7 +70,7 @@ public class DSOLApplication extends JFrame
      * @param panel JPanel; the simulation panel (or console or animation panel) to be used on the main page
      * @param title String; the window title
      */
-    public DSOLApplication(final DSOLPanel panel, final String title)
+    public DsolApplication(final DsolPanel panel, final String title)
     {
         setPreferredSize(new Dimension(1024, 768));
         this.panel = panel;
@@ -86,7 +86,7 @@ public class DSOLApplication extends JFrame
             @Override
             public void windowClosing(final WindowEvent windowEvent)
             {
-                DSOLApplication.this.closed = true;
+                DsolApplication.this.closed = true;
                 super.windowClosing(windowEvent);
             }
         });
@@ -109,7 +109,7 @@ public class DSOLApplication extends JFrame
                     File f = new File(propertiesFile);
                     f.getParentFile().mkdirs();
                     FileWriter writer = new FileWriter(f);
-                    DSOLApplication.this.frameProperties.store(writer, "DSOL user settings");
+                    DsolApplication.this.frameProperties.store(writer, "DSOL user settings");
                 }
                 catch (IOException exception)
                 {
@@ -331,9 +331,9 @@ public class DSOLApplication extends JFrame
 
     /**
      * Return the panel with the controls and the tabbed content pane.
-     * @return DSOLPanel; the panel with the controls and the tabbed content pane
+     * @return DsolPanel; the panel with the controls and the tabbed content pane
      */
-    public DSOLPanel getDSOLPanel()
+    public DsolPanel getDsolPanel()
     {
         return this.panel;
     }

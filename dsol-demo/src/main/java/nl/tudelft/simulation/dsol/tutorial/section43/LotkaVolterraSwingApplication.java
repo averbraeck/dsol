@@ -8,8 +8,8 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DessSimulator;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
 import nl.tudelft.simulation.dsol.swing.gui.control.GenericControlPanel;
 
@@ -24,13 +24,13 @@ import nl.tudelft.simulation.dsol.swing.gui.control.GenericControlPanel;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class LotkaVolterraSwingApplication extends DSOLApplication
+public class LotkaVolterraSwingApplication extends DsolApplication
 {
     /**
      * @param title String; the title
-     * @param panel DSOLPanel; the panel
+     * @param panel DsolPanel; the panel
      */
-    public LotkaVolterraSwingApplication(final String title, final DSOLPanel panel)
+    public LotkaVolterraSwingApplication(final String title, final DsolPanel panel)
     {
         super(panel, title);
         panel.enableSimulationControlButtons();
@@ -57,7 +57,7 @@ public class LotkaVolterraSwingApplication extends DSOLApplication
     }
 
     /** The panel. */
-    private static class LotkaVolterraPanel extends DSOLPanel
+    private static class LotkaVolterraPanel extends DsolPanel
     {
         /** */
         private static final long serialVersionUID = 1L;

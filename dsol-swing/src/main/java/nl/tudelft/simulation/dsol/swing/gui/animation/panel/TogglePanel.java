@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.swing.gui.animation.panel;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationTab;
+import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationTab;
 
 /**
  * TogglePanel.java.
@@ -22,9 +22,9 @@ public class TogglePanel extends JPanel
 
     /**
      * Create a TogglePanel to switch objects / layers in the animation on or off.
-     * @param animationTab DSOLAnimationTab; the tab with the methods to switch objects / layers on or off
+     * @param animationTab DsolAnimationTab; the tab with the methods to switch objects / layers on or off
      */
-    public TogglePanel(final DSOLAnimationTab animationTab)
+    public TogglePanel(final DsolAnimationTab animationTab)
     {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }

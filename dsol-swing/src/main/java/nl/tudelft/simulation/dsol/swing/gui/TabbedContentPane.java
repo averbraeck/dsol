@@ -5,7 +5,7 @@ import java.awt.Component;
 import javax.swing.JTabbedPane;
 
 /**
- * A tabbed pane for the DSOLPanel to structure console tabs, statistics tabs, animation tabs, etc.
+ * A tabbed pane for the DsolPanel to structure console tabs, statistics tabs, animation tabs, etc.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL

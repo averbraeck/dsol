@@ -10,9 +10,9 @@ import nl.tudelft.simulation.dsol.statistics.table.PersistentTableModel;
 import nl.tudelft.simulation.dsol.statistics.table.TallyTableModel;
 import nl.tudelft.simulation.dsol.swing.charts.boxwhisker.BoxAndWhiskerChart;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
-import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
 import nl.tudelft.simulation.language.DsolException;
 
@@ -26,18 +26,18 @@ import nl.tudelft.simulation.language.DsolException;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1Panel extends DSOLPanel
+public class MM1Panel extends DsolPanel
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param controlPanel DEVSControlPanel; the control panel
+     * @param controlPanel DevsControlPanel; the control panel
      * @param model MM1Model; the model
      * @throws DsolException on error
      * @throws RemoteException on error
      */
-    public MM1Panel(final DEVSControlPanel.TimeDouble controlPanel, final MM1Model model)
+    public MM1Panel(final DevsControlPanel.TimeDouble controlPanel, final MM1Model model)
             throws RemoteException, DsolException
     {
         super(controlPanel);

@@ -19,9 +19,9 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
-import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationApplication;
-import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationGisTab;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
+import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationApplication;
+import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationGisTab;
 import nl.tudelft.simulation.dsol.swing.gui.control.RealTimeControlPanel;
 import nl.tudelft.simulation.language.DsolException;
 
@@ -36,17 +36,17 @@ import nl.tudelft.simulation.language.DsolException;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class EsriXmlSwingApplication extends DSOLAnimationApplication
+public class EsriXmlSwingApplication extends DsolAnimationApplication
 {
     /**
      * @param title String; the title
-     * @param panel DSOLPanel; the panel
-     * @param animationTab DSOLAnimationGisTab; the (custom) animation tab
+     * @param panel DsolPanel; the panel
+     * @param animationTab DsolAnimationGisTab; the (custom) animation tab
      * @throws DsolException when simulator is not an animator
      * @throws IllegalArgumentException for illegal bounds
      * @throws RemoteException on network error
      */
-    public EsriXmlSwingApplication(final String title, final DSOLPanel panel, final DSOLAnimationGisTab animationTab)
+    public EsriXmlSwingApplication(final String title, final DsolPanel panel, final DsolAnimationGisTab animationTab)
             throws RemoteException, IllegalArgumentException, DsolException
     {
         super(panel, title, animationTab);
@@ -70,9 +70,9 @@ public class EsriXmlSwingApplication extends DSOLAnimationApplication
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
 
-        DSOLPanel panel = new DSOLPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
+        DsolPanel panel = new DsolPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
         Bounds2d mapBounds = new Bounds2d(4.355, 4.386, 51.995, 52.005);
-        DSOLAnimationGisTab animationTab = new DSOLAnimationGisTab(mapBounds, simulator);
+        DsolAnimationGisTab animationTab = new DsolAnimationGisTab(mapBounds, simulator);
         animationTab.getAnimationPanel().setRenderableScale(
                 new RenderableScale(Math.cos(Math.toRadians(mapBounds.midPoint().getY())), 1.0 / 111319.24));
         animationTab.addAllToggleGISButtonText("MAP LAYERS", model.getGisMap(), "hide or show this GIS layer");

@@ -11,9 +11,9 @@ import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
-import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
+import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 
 /**
  * SwingApplication.java.
@@ -25,7 +25,7 @@ import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class SwingApplication extends DSOLApplication
+public class SwingApplication extends DsolApplication
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class SwingApplication extends DSOLApplication
     /**
      * @param panel the panel with the controls and tabbed pane for content
      */
-    public SwingApplication(final DSOLPanel panel)
+    public SwingApplication(final DsolPanel panel)
     {
         super(panel, "Swing test appication");
         panel.enableSimulationControlButtons();
@@ -50,8 +50,8 @@ public class SwingApplication extends DSOLApplication
         MyModel model = new MyModel(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
-        DEVSControlPanel.TimeDouble controlPanel = new DEVSControlPanel.TimeDouble(model, simulator);
-        DSOLPanel panel = new DSOLPanel(controlPanel);
+        DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, simulator);
+        DsolPanel panel = new DsolPanel(controlPanel);
         panel.addConsoleLogger(Level.INFO);
         new SwingApplication(panel);
     }

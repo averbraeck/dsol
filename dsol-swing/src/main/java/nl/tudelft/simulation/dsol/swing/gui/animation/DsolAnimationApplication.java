@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import org.djutils.draw.bounds.Bounds2d;
 
-import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 import nl.tudelft.simulation.language.DsolException;
 
 /**
@@ -20,27 +20,27 @@ import nl.tudelft.simulation.language.DsolException;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DSOLAnimationApplication extends DSOLApplication
+public class DsolAnimationApplication extends DsolApplication
 {
     /** */
     private static final long serialVersionUID = 20190118L;
 
     /** the animation panel in a tab. */
-    private DSOLAnimationTab animationTab;
+    private DsolAnimationTab animationTab;
 
     /**
      * Create a DSOL application with animation. 
-     * @param panel DSOLPanel; this should be the tabbed panel of the simulation
+     * @param panel DsolPanel; this should be the tabbed panel of the simulation
      * @param title String; the title of the window
      * @param homeExtent Bounds2d; the home extent of the animation
      * @throws RemoteException on network error
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
-    public DSOLAnimationApplication(final DSOLPanel panel, final String title, final Bounds2d homeExtent)
+    public DsolAnimationApplication(final DsolPanel panel, final String title, final Bounds2d homeExtent)
             throws RemoteException, DsolException
     {
         super(panel, title);
-        this.animationTab = new DSOLAnimationTab(homeExtent, panel.getSimulator());
+        this.animationTab = new DsolAnimationTab(homeExtent, panel.getSimulator());
         panel.addTab(0, "animation", this.animationTab);
         panel.getTabbedPane().setSelectedIndex(0); // select the animation pane as default (can be overridden)
         setAppearance(getAppearance()); // update appearance of added objects
@@ -48,13 +48,13 @@ public class DSOLAnimationApplication extends DSOLApplication
 
     /**
      * Create a DSOL application with a custom animation tab. 
-     * @param panel DSOLPanel; this should be the tabbed panel of the simulation
+     * @param panel DsolPanel; this should be the tabbed panel of the simulation
      * @param title String; the title of the window
-     * @param animationTab DSOLAnimationTab; the animation tab to add, e.g. one containing GIS
+     * @param animationTab DsolAnimationTab; the animation tab to add, e.g. one containing GIS
      * @throws RemoteException on network error
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
-    public DSOLAnimationApplication(final DSOLPanel panel, final String title, final DSOLAnimationTab animationTab)
+    public DsolAnimationApplication(final DsolPanel panel, final String title, final DsolAnimationTab animationTab)
             throws RemoteException, DsolException
     {
         super(panel, title);
@@ -65,9 +65,9 @@ public class DSOLAnimationApplication extends DSOLApplication
     }
 
     /**
-     * @return DSOLAnimationTab; the animationTab
+     * @return DsolAnimationTab; the animationTab
      */
-    public DSOLAnimationTab getAnimationTab()
+    public DsolAnimationTab getAnimationTab()
     {
         return this.animationTab;
     }

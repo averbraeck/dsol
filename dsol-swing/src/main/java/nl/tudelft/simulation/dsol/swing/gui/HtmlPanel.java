@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.logger.Cat;
  * @author <a href="http://www.tbm.tudelft.nl/mzhang">Mingxin Zhang </a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck </a>
  */
-public class HTMLPanel extends JEditorPane
+public class HtmlPanel extends JEditorPane
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -34,7 +34,7 @@ public class HTMLPanel extends JEditorPane
     /**
      * Construct an HTML panel for the user interface.
      */
-    public HTMLPanel()
+    public HtmlPanel()
     {
         super();
         super.setEditable(false);
@@ -46,7 +46,7 @@ public class HTMLPanel extends JEditorPane
      * @param page URL; the URL of the page to display in the panel.
      * @throws IOException in case page cannot be loaded
      */
-    public HTMLPanel(final URL page) throws IOException
+    public HtmlPanel(final URL page) throws IOException
     {
         this();
         this.setPage(page);
@@ -76,15 +76,15 @@ public class HTMLPanel extends JEditorPane
         String url = "https://simulation.tudelft.nl/dsol/3.05.04/dsol-core/jacoco/index.html";
         if (args.length != 1)
         {
-            System.out.println("Usage: java nl.tudelft.simulation.dsol.gui.HTMLPanel [url]");
+            System.out.println("Usage: java nl.tudelft.simulation.dsol.gui.HtmlPanel [url]");
         }
         else
         {
             url = args[0];
         }
-        JFrame app = new JFrame("HTMLPanel, (c) 2003-2023 Delft University of Technology");
+        JFrame app = new JFrame("HtmlPanel, (c) 2003-2023 Delft University of Technology");
         app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        HTMLPanel htmlPanel = new HTMLPanel(new URL(url));
+        HtmlPanel htmlPanel = new HtmlPanel(new URL(url));
         app.setContentPane(new JScrollPane(htmlPanel));
         app.setExtendedState(Frame.MAXIMIZED_BOTH);
         app.setVisible(true);

@@ -11,8 +11,8 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
-import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
+import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 import nl.tudelft.simulation.language.DsolException;
 
 /**
@@ -26,13 +26,13 @@ import nl.tudelft.simulation.language.DsolException;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1SwingApplication extends DSOLApplication
+public class MM1SwingApplication extends DsolApplication
 {
     /** the model. */
     private MM1Model model;
 
     /**
-     * @param panel DSOLPanel; the panel
+     * @param panel DsolPanel; the panel
      * @param model MM1Model; the model
      * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
      */
@@ -68,7 +68,7 @@ public class MM1SwingApplication extends DSOLApplication
         MM1Model model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
-        DEVSControlPanel.TimeDouble controlPanel = new DEVSControlPanel.TimeDouble(model, simulator);
+        DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, simulator);
         new MM1SwingApplication(new MM1Panel(controlPanel, model), model, simulator);
     }
 

@@ -10,8 +10,8 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
-import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
+import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 
 /**
  * MM1SwingApplication is a test GUI application.
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1SwingApplication extends DSOLApplication
+public class MM1SwingApplication extends DsolApplication
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -48,7 +48,7 @@ public class MM1SwingApplication extends DSOLApplication
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
-        DEVSControlPanel.TimeDouble controlPanel = new DEVSControlPanel.TimeDouble(model, simulator);
+        DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, simulator);
         new MM1SwingApplication(new MM1Panel(controlPanel));
     }
 

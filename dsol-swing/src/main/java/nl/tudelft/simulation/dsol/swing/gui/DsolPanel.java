@@ -28,7 +28,7 @@ import nl.tudelft.simulation.dsol.swing.gui.control.AbstractControlPanel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="http://www.tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class DSOLPanel extends JPanel implements AppearanceControl
+public class DsolPanel extends JPanel implements AppearanceControl
 {
     /** */
     private static final long serialVersionUID = 20150617L;
@@ -51,7 +51,7 @@ public class DSOLPanel extends JPanel implements AppearanceControl
      *            control)
      * @throws RemoteException when communications to a remote machine fails
      */
-    public DSOLPanel(final AbstractControlPanel<?, ?> controlPanel) throws RemoteException
+    public DsolPanel(final AbstractControlPanel<?, ?> controlPanel) throws RemoteException
     {
         setPreferredSize(new Dimension(1024, 768));
         this.tabbedPane = new AppearanceControlTabbedContentPane(SwingConstants.BOTTOM);
@@ -66,7 +66,7 @@ public class DSOLPanel extends JPanel implements AppearanceControl
     }
 
     /**
-     * Add a tab to the DSOLPanel as the last tab.
+     * Add a tab to the DsolPanel as the last tab.
      * @param tabTitle String; the title of the tab
      * @param component Component; the swing component to add as this tab
      */
@@ -76,7 +76,7 @@ public class DSOLPanel extends JPanel implements AppearanceControl
     }
 
     /**
-     * Add a tab to the DSOLPanel at a given position.
+     * Add a tab to the DsolPanel at a given position.
      * @param position int; the position to insert the tab at (0 is first)
      * @param tabTitle String; the title of the tab
      * @param component Component; the swing component to add as this tab

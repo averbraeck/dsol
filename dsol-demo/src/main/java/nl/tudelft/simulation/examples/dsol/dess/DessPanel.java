@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.table.PersistentTableModel;
-import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
+import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
 import nl.tudelft.simulation.dsol.swing.gui.control.GenericControlPanel;
 import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DessPanel extends DSOLPanel
+public class DessPanel extends DsolPanel
 {
     /** */
     private static final long serialVersionUID = 1L;
