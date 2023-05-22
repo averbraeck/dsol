@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <L> The Locatable source type
  */
-public abstract class SimRenderable2D<L extends Locatable> extends Renderable2d<L>
+public abstract class SimRenderable2d<L extends Locatable> extends Renderable2d<L>
 {
     /** */
     private static final long serialVersionUID = 20220205L;
@@ -24,7 +24,7 @@ public abstract class SimRenderable2D<L extends Locatable> extends Renderable2d<
      * @param source T; the Locatable source type that provides the location and bounds
      * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator to provide the context via the replication
      */
-    public SimRenderable2D(final L source, final SimulatorInterface<?> simulator)
+    public SimRenderable2d(final L source, final SimulatorInterface<?> simulator)
     {
         super(source, simulator.getReplication());
     }
