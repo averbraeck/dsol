@@ -141,13 +141,13 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
         {
             // COUPLED MODEL
             CoupledModel<T> coupledModel = (CoupledModel<T>) this.model;
-            for (EIC<T, ?> o : coupledModel.externalInputCouplingSet)
+            for (ExternalInputCoupling<T, ?> o : coupledModel.externalInputCouplingSet)
             {
                 if (o.getFromPort() == this)
                 {
                     try
                     {
-                        ((EIC<T, TYPE>) o).getToPort().receive(value, time);
+                        ((ExternalInputCoupling<T, TYPE>) o).getToPort().receive(value, time);
                     }
                     catch (SimRuntimeException e)
                     {

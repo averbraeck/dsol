@@ -15,7 +15,7 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <P> the type of message the EIC accepts.
  */
-public class EIC<T extends Number & Comparable<T>, P>
+public class ExternalInputCoupling<T extends Number & Comparable<T>, P>
 {
     /** the output port of the sending component. */
     private InputPortInterface<T, P> fromPort;
@@ -29,7 +29,7 @@ public class EIC<T extends Number & Comparable<T>, P>
      * @param toPort InputPortInterface&lt;T,P&gt;; input port of the receiving component
      * @throws Exception in case of wiring to self
      */
-    public EIC(final InputPortInterface<T, P> fromPort, final InputPortInterface<T, P> toPort) throws Exception
+    public ExternalInputCoupling(final InputPortInterface<T, P> fromPort, final InputPortInterface<T, P> toPort) throws Exception
     {
         this.fromPort = fromPort;
         this.toPort = toPort;

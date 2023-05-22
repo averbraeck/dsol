@@ -15,7 +15,7 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <P> the type of message the EOC produces.
  */
-public class EOC<T extends Number & Comparable<T>, P>
+public class ExternalOutputCoupling<T extends Number & Comparable<T>, P>
 {
     /** the output port of the sending component. */
     private OutputPortInterface<T, P> fromPort;
@@ -29,7 +29,7 @@ public class EOC<T extends Number & Comparable<T>, P>
      * @param toPort OutputPortInterface&lt;T,P&gt;; input port of the receiving component
      * @throws Exception in case of wiring to self
      */
-    public EOC(final OutputPortInterface<T, P> fromPort, final OutputPortInterface<T, P> toPort) throws Exception
+    public ExternalOutputCoupling(final OutputPortInterface<T, P> fromPort, final OutputPortInterface<T, P> toPort) throws Exception
     {
         this.fromPort = fromPort;
         this.toPort = toPort;

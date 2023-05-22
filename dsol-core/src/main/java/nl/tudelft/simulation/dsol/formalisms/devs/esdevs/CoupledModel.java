@@ -35,15 +35,15 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /** the internal couplings (from internal models to internal models). */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected Set<IC<T, ?>> internalCouplingSet = new LinkedHashSet<IC<T, ?>>();
+    protected Set<InternalCoupling<T, ?>> internalCouplingSet = new LinkedHashSet<InternalCoupling<T, ?>>();
 
     /** the couplings from the internal models to the output of this coupled model. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected Set<EOC<T, ?>> externalOutputCouplingSet = new LinkedHashSet<EOC<T, ?>>();
+    protected Set<ExternalOutputCoupling<T, ?>> externalOutputCouplingSet = new LinkedHashSet<ExternalOutputCoupling<T, ?>>();
 
     /** the couplings from the outside world to the internal models of this coupled model. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected Set<EIC<T, ?>> externalInputCouplingSet = new LinkedHashSet<EIC<T, ?>>();
+    protected Set<ExternalInputCoupling<T, ?>> externalInputCouplingSet = new LinkedHashSet<ExternalInputCoupling<T, ?>>();
 
     /** the models within this coupled model. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -122,18 +122,18 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     @SuppressWarnings("unchecked")
     public <TYPE> void transfer(final OutputPortInterface<T, TYPE> x, final TYPE y) throws RemoteException, SimRuntimeException
     {
-        for (IC<T, ?> o : this.internalCouplingSet)
+        for (InternalCoupling<T, ?> o : this.internalCouplingSet)
         {
             if (o.getFromPort() == x)
             {
-                ((IC<T, TYPE>) o).getToPort().receive(y, this.simulator.getSimulatorTime());
+                ((InternalCoupling<T, TYPE>) o).getToPort().receive(y, this.simulator.getSimulatorTime());
             }
         }
-        for (EOC<T, ?> o : this.externalOutputCouplingSet)
+        for (ExternalOutputCoupling<T, ?> o : this.externalOutputCouplingSet)
         {
             if (o.getFromPort() == x)
             {
-                ((EOC<T, TYPE>) o).getToPort().send(y);
+                ((ExternalOutputCoupling<T, TYPE>) o).getToPort().send(y);
             }
         }
     }
@@ -154,7 +154,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     {
         try
         {
-            this.internalCouplingSet.add(new IC<T, TYPE>(fromPort, toPort));
+            this.internalCouplingSet.add(new InternalCoupling<T, TYPE>(fromPort, toPort));
         }
         catch (Exception e)
         {
@@ -173,7 +173,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     public <TYPE> void removeInternalCoupling(final OutputPortInterface<T, TYPE> fromPort,
             final InputPortInterface<T, TYPE> toPort)
     {
-        for (IC<T, ?> ic : this.internalCouplingSet)
+        for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort().getModel() == fromPort && ic.getToPort().getModel() == toPort)
             {
@@ -196,7 +196,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     {
         try
         {
-            this.externalInputCouplingSet.add(new EIC<T, TYPE>(fromPort, toPort));
+            this.externalInputCouplingSet.add(new ExternalInputCoupling<T, TYPE>(fromPort, toPort));
         }
         catch (Exception e)
         {
@@ -215,7 +215,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     public <TYPE> void removeExternalInputCoupling(final InputPortInterface<T, TYPE> fromPort,
             final InputPortInterface<T, TYPE> toPort)
     {
-        for (EIC<T, ?> eic : this.externalInputCouplingSet)
+        for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort() == fromPort && eic.getToPort() == toPort)
             {
@@ -237,7 +237,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     {
         try
         {
-            this.externalOutputCouplingSet.add(new EOC<T, TYPE>(fromPort, toPort));
+            this.externalOutputCouplingSet.add(new ExternalOutputCoupling<T, TYPE>(fromPort, toPort));
         }
         catch (Exception e)
         {
@@ -256,7 +256,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     public <TYPE> void removeExternalOutputCoupling(final OutputPortInterface<T, TYPE> fromPort,
             final OutputPortInterface<T, TYPE> toPort)
     {
-        for (EOC<T, ?> eoc : this.externalOutputCouplingSet)
+        for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort() == fromPort && eoc.getToPort() == toPort)
             {
@@ -296,7 +296,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
      */
     public void removeModelComponent(final AbstractDevsModel<T> model)
     {
-        for (EOC<T, ?> eoc : this.externalOutputCouplingSet)
+        for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort().getModel() == model || eoc.getToPort().getModel() == model)
             {
@@ -304,7 +304,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
             }
         }
 
-        for (EIC<T, ?> eic : this.externalInputCouplingSet)
+        for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort().getModel() == model || eic.getToPort().getModel() == model)
             {
@@ -312,7 +312,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
             }
         }
 
-        for (IC<T, ?> ic : this.internalCouplingSet)
+        for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort().getModel() == model || ic.getToPort().getModel() == model)
             {
@@ -335,7 +335,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         InputPortInterface<T, ?> inputPort = this.inputPortMap.get(name);
         super.removeInputPort(name); // throws exception in case nonexistent
 
-        for (EIC<T, ?> eic : this.externalInputCouplingSet)
+        for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort() == inputPort || eic.getToPort() == inputPort)
             {
@@ -343,7 +343,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
             }
         }
 
-        for (IC<T, ?> ic : this.internalCouplingSet)
+        for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getToPort() == inputPort)
             {
@@ -361,7 +361,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         OutputPortInterface<T, ?> outputPort = this.outputPortMap.get(name);
         super.removeOutputPort(name); // throws exception in case nonexistent
 
-        for (EOC<T, ?> eoc : this.externalOutputCouplingSet)
+        for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort() == outputPort || eoc.getToPort() == outputPort)
             {
@@ -369,7 +369,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
             }
         }
 
-        for (IC<T, ?> ic : this.internalCouplingSet)
+        for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort() == outputPort)
             {
@@ -385,7 +385,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * @return internalCouplingSet; the internal couplings (from internal models to internal models)
      */
-    public Set<IC<T, ?>> getInternalCouplingSet()
+    public Set<InternalCoupling<T, ?>> getInternalCouplingSet()
     {
         return this.internalCouplingSet;
     }
@@ -393,7 +393,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * @return externalOutputCouplingSet; the couplings from the internal models to the output of this coupled model
      */
-    public Set<EOC<T, ?>> getExternalOutputCouplingSet()
+    public Set<ExternalOutputCoupling<T, ?>> getExternalOutputCouplingSet()
     {
         return this.externalOutputCouplingSet;
     }
@@ -401,7 +401,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * @return externalInputCouplingSet; the couplings from the outside world to the internal models of this coupled model
      */
-    public Set<EIC<T, ?>> getExternalInputCouplingSet()
+    public Set<ExternalInputCoupling<T, ?>> getExternalInputCouplingSet()
     {
         return this.externalInputCouplingSet;
     }
@@ -427,7 +427,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         System.out.println(space + "================");
         System.out.println(space + "coupled model name: " + this.getClass().getName());
         System.out.println(space + "Externaloutputcouplings");
-        for (EOC<T, ?> eoc : this.externalOutputCouplingSet)
+        for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             System.out.print(space);
             System.out.print("between ");
@@ -437,7 +437,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
             System.out.println();
         }
         System.out.println(space + "Externalinputcouplings");
-        for (EIC<T, ?> eic : this.externalInputCouplingSet)
+        for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             System.out.print(space);
             System.out.print("between ");
@@ -447,7 +447,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
             System.out.println();
         }
         System.out.println(space + "Externaloutputcouplings");
-        for (IC<T, ?> ic : this.internalCouplingSet)
+        for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             System.out.print(space);
             System.out.print("between ");
