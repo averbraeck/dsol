@@ -15,7 +15,7 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs</a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class AGV extends IntResource<Double>
+public class Agv extends IntResource<Double>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class AGV extends IntResource<Double>
      * @param capacity long; the capacity
      * @param agvTime DistContinuous; AGV time delay
      */
-    public AGV(final DevsSimulatorInterface<Double> simulator, final String description, final long capacity,
+    public Agv(final DevsSimulatorInterface<Double> simulator, final String description, final long capacity,
             final DistContinuous agvTime)
     {
         super(simulator, description, capacity);

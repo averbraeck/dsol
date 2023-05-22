@@ -54,7 +54,7 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
     {
         StreamInterface stream = this.simulator.getModel().getStream("default");
 
-        CPU cpu = new CPU(this.simulator);
+        Cpu cpu = new Cpu(this.simulator);
         DistContinuous thinkDelay = new DistExponential(stream, 25);
         DistContinuous processDelay = new DistExponential(stream, 0.8);
 

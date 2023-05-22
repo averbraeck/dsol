@@ -80,8 +80,8 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
         }
         int numCont = 3000;
 
-        QC qc = new QC(this.simulator, "QC", this.numQC, new DistExponential(defaultStream, 60. / 30.));
-        AGV agv = new AGV(this.simulator, "AGV", this.numAGV, new DistTriangular(defaultStream, 7, 9, 14));
+        QuayCrane qc = new QuayCrane(this.simulator, "QC", this.numQC, new DistExponential(defaultStream, 60. / 30.));
+        Agv agv = new Agv(this.simulator, "AGV", this.numAGV, new DistTriangular(defaultStream, 7, 9, 14));
         this.ship = new Ship(numCont);
 
         this.ship.addListener(this, Ship.SHIP_FULL_EVENT);

@@ -15,7 +15,7 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs</a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class QC extends IntResource<Double>
+public class QuayCrane extends IntResource<Double>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class QC extends IntResource<Double>
      * @param capacity long; the capacity
      * @param qcTime DistContinuous; QC time delay
      */
-    public QC(final DevsSimulatorInterface<Double> simulator, final String description, final long capacity,
+    public QuayCrane(final DevsSimulatorInterface<Double> simulator, final String description, final long capacity,
             final DistContinuous qcTime)
     {
         super(simulator, description, capacity);

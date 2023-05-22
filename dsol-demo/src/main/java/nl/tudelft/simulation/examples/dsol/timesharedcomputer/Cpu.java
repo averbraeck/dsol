@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class CPU extends Station<Double> implements Locatable
+public class Cpu extends Station<Double> implements Locatable
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -64,7 +64,7 @@ public class CPU extends Station<Double> implements Locatable
      * constructs a new CPU.
      * @param simulator DevsSimulatorInterface&lt;Double&gt;; a devs simulator
      */
-    public CPU(final DevsSimulatorInterface<Double> simulator)
+    public Cpu(final DevsSimulatorInterface<Double> simulator)
     {
         super("CPU", simulator);
         this.fireTimedEvent(UTILIZATION_EVENT, 0.0, simulator.getSimulatorTime());

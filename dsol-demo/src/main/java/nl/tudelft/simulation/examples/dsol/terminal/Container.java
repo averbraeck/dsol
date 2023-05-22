@@ -26,10 +26,10 @@ public class Container implements IntResourceRequestorInterface<Double>
     private final int containerNumber;
 
     /** the QC resources. */
-    private final QC qc;
+    private final QuayCrane qc;
 
     /** the AGV resources. */
-    private final AGV agv;
+    private final Agv agv;
 
     /** the ship. */
     private final Ship ship;
@@ -44,7 +44,7 @@ public class Container implements IntResourceRequestorInterface<Double>
      * @param agv AGV; the AGV resources
      * @param ship Ship; the ship
      */
-    public Container(final DevsSimulatorInterface<Double> simulator, final int containerNumber, final QC qc, final AGV agv,
+    public Container(final DevsSimulatorInterface<Double> simulator, final int containerNumber, final QuayCrane qc, final Agv agv,
             final Ship ship)
     {
         this.simulator = simulator;
@@ -79,13 +79,13 @@ public class Container implements IntResourceRequestorInterface<Double>
     {
         try
         {
-            if (resource instanceof AGV)
+            if (resource instanceof Agv)
             {
                 this.phase++;
                 this.simulator.scheduleEventRel(this.agv.drawDelay(), this, "agvReady", null);
             }
 
-            if (resource instanceof QC)
+            if (resource instanceof QuayCrane)
             {
                 if (Terminal.DEBUG)
                 {
