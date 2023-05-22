@@ -1,3 +1,2 @@
 mkdocs >= 1.4.0
 pymdown-extensions
-pymdownx.arithmatex
