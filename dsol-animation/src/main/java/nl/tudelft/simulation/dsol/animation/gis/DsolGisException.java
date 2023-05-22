@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.animation.gis;
 
 /**
- * DSOLGisException for exceptions when reading or drawing GIS layers.
+ * DsolGisException for exceptions when reading or drawing GIS layers.
  * <p>
  * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -10,43 +10,43 @@ package nl.tudelft.simulation.dsol.animation.gis;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DSOLGisException extends Exception
+public class DsolGisException extends Exception
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructs a new blank DSOLGisException.
+     * Constructs a new blank DsolGisException.
      */
-    public DSOLGisException()
+    public DsolGisException()
     {
         super();
     }
 
     /**
-     * Constructs a new DSOLGisException.
+     * Constructs a new DsolGisException.
      * @param message String; the message to display
      * @param cause Throwable; the underlying exception
      */
-    public DSOLGisException(final String message, final Throwable cause)
+    public DsolGisException(final String message, final Throwable cause)
     {
         super(message, cause);
     }
 
     /**
-     * Constructs a new DSOLGisException.
+     * Constructs a new DsolGisException.
      * @param message String; the message to display
      */
-    public DSOLGisException(final String message)
+    public DsolGisException(final String message)
     {
         super(message);
     }
 
     /**
-     * Constructs a new DSOLGisException.
+     * Constructs a new DsolGisException.
      * @param cause Throwable; the underlying exception
      */
-    public DSOLGisException(final Throwable cause)
+    public DsolGisException(final Throwable cause)
     {
         super(cause);
     }

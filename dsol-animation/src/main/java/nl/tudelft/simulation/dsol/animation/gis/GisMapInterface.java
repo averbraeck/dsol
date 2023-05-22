@@ -68,10 +68,10 @@ public interface GisMapInterface extends Serializable
      * draws the map on a graphics object.
      * @param graphics Graphics2D; the graphics object
      * @return Graphics2D
-     * @throws DSOLGisException on drawing failure
+     * @throws DsolGisException on drawing failure
      * @throws RemoteException on network failure
      */
-    Graphics2D drawMap(Graphics2D graphics) throws DSOLGisException, RemoteException;
+    Graphics2D drawMap(Graphics2D graphics) throws DsolGisException, RemoteException;
 
     /**
      * Getter for property extent.

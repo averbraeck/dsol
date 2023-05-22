@@ -19,7 +19,7 @@ import org.djutils.immutablecollections.ImmutableList;
 import org.djutils.immutablecollections.ImmutableMap;
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.animation.gis.DSOLGisException;
+import nl.tudelft.simulation.dsol.animation.gis.DsolGisException;
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisObject;
@@ -177,7 +177,7 @@ public class GisMap implements GisMapInterface
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:methodlength")
-    public Graphics2D drawMap(final Graphics2D graphics) throws DSOLGisException
+    public Graphics2D drawMap(final Graphics2D graphics) throws DsolGisException
     {
         if (this.drawBackground)
         {
@@ -259,7 +259,7 @@ public class GisMap implements GisMapInterface
             catch (Exception exception)
             {
                 CategoryLogger.always().error(exception);
-                throw new DSOLGisException(exception.getMessage());
+                throw new DsolGisException(exception.getMessage());
             }
         }
         return graphics;
