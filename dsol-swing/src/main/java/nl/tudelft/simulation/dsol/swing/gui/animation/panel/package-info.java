@@ -1,6 +1,6 @@
 /**
  * Panels for the AnimationTab, such as SearchPanel, TogglePanel and ButtonPanel. The AnimationPanel is contained in its own
- * package nl.tudelft.simulation.dsol.swing.gui.animation.D2.
+ * package nl.tudelft.simulation.dsol.swing.gui.animation.d2.
  * <p>
  * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
