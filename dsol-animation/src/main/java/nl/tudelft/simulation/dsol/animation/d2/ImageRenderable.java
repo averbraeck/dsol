@@ -36,7 +36,7 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  * @since 1.5
  * @param <L> the Locatable class of the source that indicates the location of the Renderable on the screen
  */
-public abstract class ImageRenderable<L extends Locatable> extends Renderable2D<L>
+public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<L>
 {
     /** */
     private static final long serialVersionUID = 20200108L;

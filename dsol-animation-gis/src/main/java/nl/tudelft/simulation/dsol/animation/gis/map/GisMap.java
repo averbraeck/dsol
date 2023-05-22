@@ -27,7 +27,7 @@ import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
 import nl.tudelft.simulation.dsol.animation.gis.MapImageInterface;
 import nl.tudelft.simulation.dsol.animation.gis.MapUnits;
 import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
-import nl.tudelft.simulation.dsol.animation.gis.SerializableRectangle2D;
+import nl.tudelft.simulation.dsol.animation.gis.SerializableRectangle2d;
 
 /**
  * Provides the implementation of a Map.
@@ -401,7 +401,7 @@ public class GisMap implements GisMapInterface
 
     /** {@inheritDoc} */
     @Override
-    public void zoomRectangle(final SerializableRectangle2D rectangle)
+    public void zoomRectangle(final SerializableRectangle2d rectangle)
     {
 
         double maxX = (getUnitImageRatio() * this.getImage().getSize().getWidth()) + this.extent.getMinX();

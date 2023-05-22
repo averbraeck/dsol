@@ -27,7 +27,7 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @param <L> the Locatable class of the source that indicates the location of the Renderable on the screen
  */
-public interface Renderable2DInterface<L extends Locatable> extends Serializable
+public interface Renderable2dInterface<L extends Locatable> extends Serializable
 {
     /**
      * the overarching method that is called when painting, usually redirecting to paint(...) but possibly retrieving the

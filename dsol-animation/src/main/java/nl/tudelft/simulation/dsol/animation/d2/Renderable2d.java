@@ -38,7 +38,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @param <L> the Locatable class of the source that can return the location of the Renderable on the screen
  */
-public abstract class Renderable2D<L extends Locatable> implements Renderable2DInterface<L>
+public abstract class Renderable2d<L extends Locatable> implements Renderable2dInterface<L>
 {
     /** */
     private static final long serialVersionUID = 20200108L;
@@ -81,7 +81,7 @@ public abstract class Renderable2D<L extends Locatable> implements Renderable2DI
      * @param source T; the source
      * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
      */
-    public Renderable2D(final L source, final Contextualized contextProvider)
+    public Renderable2d(final L source, final Contextualized contextProvider)
     {
         this.source = source;
         this.bind2Context(contextProvider);

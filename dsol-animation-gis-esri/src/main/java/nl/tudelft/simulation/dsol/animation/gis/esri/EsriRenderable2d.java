@@ -16,7 +16,7 @@ import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
-import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
 import nl.tudelft.simulation.naming.context.Contextualized;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -31,7 +31,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class EsriRenderable2D implements GisRenderable2D
+public class EsriRenderable2d implements GisRenderable2d
 {
     /** */
     private static final long serialVersionUID = 20200108L;
@@ -65,7 +65,7 @@ public class EsriRenderable2D implements GisRenderable2D
      * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
      * @param map MapInterface; the parsed map to use
      */
-    public EsriRenderable2D(final Contextualized contextProvider, final GisMapInterface map)
+    public EsriRenderable2d(final Contextualized contextProvider, final GisMapInterface map)
     {
         this(contextProvider, map, new CoordinateTransform.NoTransform());
     }
@@ -76,7 +76,7 @@ public class EsriRenderable2D implements GisRenderable2D
      * @param map MapInterface; the parsed map to use
      * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
      */
-    public EsriRenderable2D(final Contextualized contextProvider, final GisMapInterface map,
+    public EsriRenderable2d(final Contextualized contextProvider, final GisMapInterface map,
             final CoordinateTransform coordinateTransform)
     {
         this(contextProvider, map, coordinateTransform, -Double.MAX_VALUE);
@@ -89,7 +89,7 @@ public class EsriRenderable2D implements GisRenderable2D
      * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates
      * @param z double; the z-value to use
      */
-    public EsriRenderable2D(final Contextualized contextProvider, final GisMapInterface map,
+    public EsriRenderable2d(final Contextualized contextProvider, final GisMapInterface map,
             final CoordinateTransform coordinateTransform, final double z)
     {
         try
@@ -150,7 +150,7 @@ public class EsriRenderable2D implements GisRenderable2D
 
     /** {@inheritDoc} */
     @Override
-    public EsriRenderable2D getSource()
+    public EsriRenderable2d getSource()
     {
         return this;
     }

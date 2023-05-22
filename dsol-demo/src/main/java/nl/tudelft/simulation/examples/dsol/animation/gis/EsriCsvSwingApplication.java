@@ -11,9 +11,9 @@ import org.djutils.io.URLResource;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
-import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.animation.gis.esri.EsriFileCsvParser;
-import nl.tudelft.simulation.dsol.animation.gis.esri.EsriRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.esri.EsriRenderable2d;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
@@ -86,7 +86,7 @@ public class EsriCsvSwingApplication extends DSOLAnimationApplication
         private static final long serialVersionUID = 1L;
 
         /** the GIS map. */
-        private GisRenderable2D gisMap;
+        private GisRenderable2d gisMap;
 
         /**
          * constructs a new EmptyModel.
@@ -105,7 +105,7 @@ public class EsriCsvSwingApplication extends DSOLAnimationApplication
             System.out.println("ESRI-map file: " + csvUrl.toString());
             try
             {
-                this.gisMap = new EsriRenderable2D(getSimulator().getReplication(),
+                this.gisMap = new EsriRenderable2d(getSimulator().getReplication(),
                         EsriFileCsvParser.parseMapFile(csvUrl, "TU Delft"));
             }
             catch (IOException e)
@@ -117,7 +117,7 @@ public class EsriCsvSwingApplication extends DSOLAnimationApplication
         /**
          * @return gisMap
          */
-        public GisRenderable2D getGisMap()
+        public GisRenderable2d getGisMap()
         {
             return this.gisMap;
         }

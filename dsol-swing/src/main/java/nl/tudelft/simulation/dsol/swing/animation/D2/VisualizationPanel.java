@@ -41,8 +41,8 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2DComparator;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2DInterface;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2dComparator;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2dInterface;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.D2.actions.IntrospectionAction;
@@ -147,8 +147,8 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /** the elements of this panel. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected SortedSet<Renderable2DInterface<? extends Locatable>> elements =
-            new TreeSet<Renderable2DInterface<? extends Locatable>>(new Renderable2DComparator());
+    protected SortedSet<Renderable2dInterface<? extends Locatable>> elements =
+            new TreeSet<Renderable2dInterface<? extends Locatable>>(new Renderable2dComparator());
 
     /** filter for types to be shown or not. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -174,7 +174,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /** List of drawable objects. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected List<Renderable2DInterface<? extends Locatable>> elementList = new ArrayList<>();
+    protected List<Renderable2dInterface<? extends Locatable>> elementList = new ArrayList<>();
 
     /** dirty flag for the list. */
     private boolean dirty = false;
@@ -271,7 +271,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         }
 
         // draw the animation elements
-        for (Renderable2DInterface<? extends Locatable> element : this.elementList)
+        for (Renderable2dInterface<? extends Locatable> element : this.elementList)
         {
             // destroy has been called?
             if (element.getSource() == null)
@@ -298,7 +298,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the renderable element to test
      * @return whether the element needs to be shown or not
      */
-    public boolean isShowElement(final Renderable2DInterface<? extends Locatable> element)
+    public boolean isShowElement(final Renderable2dInterface<? extends Locatable> element)
     {
         return element.getSource() == null ? false : isShowClass(element.getSource().getClass());
     }
@@ -358,9 +358,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         this.context.addListener(this, ContextInterface.OBJECT_REMOVED_EVENT);
         for (Object element : this.context.values())
         {
-            if (element instanceof Renderable2DInterface)
+            if (element instanceof Renderable2dInterface)
             {
-                objectAdded((Renderable2DInterface<? extends Locatable>) element);
+                objectAdded((Renderable2dInterface<? extends Locatable>) element);
             }
             else
             {
@@ -386,12 +386,12 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
         else if (event.getType().equals(ContextInterface.OBJECT_ADDED_EVENT))
         {
-            objectAdded((Renderable2DInterface<? extends Locatable>) ((Object[]) event.getContent())[2]);
+            objectAdded((Renderable2dInterface<? extends Locatable>) ((Object[]) event.getContent())[2]);
         }
 
         else if (event.getType().equals(ContextInterface.OBJECT_REMOVED_EVENT))
         {
-            objectRemoved((Renderable2DInterface<? extends Locatable>) ((Object[]) event.getContent())[2]);
+            objectRemoved((Renderable2dInterface<? extends Locatable>) ((Object[]) event.getContent())[2]);
         }
     }
 
@@ -680,7 +680,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      * Add a locatable object to the animation.
      * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the element to add to the animation
      */
-    public void objectAdded(final Renderable2DInterface<? extends Locatable> element)
+    public void objectAdded(final Renderable2dInterface<? extends Locatable> element)
     {
         synchronized (this.elementList)
         {
@@ -693,7 +693,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      * Remove a locatable object from the animation.
      * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the element to add to the animation
      */
-    public void objectRemoved(final Renderable2DInterface<? extends Locatable> element)
+    public void objectRemoved(final Renderable2dInterface<? extends Locatable> element)
     {
         synchronized (this.elementList)
         {
@@ -714,7 +714,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         double maxY = -Double.MAX_VALUE;
         try
         {
-            for (Renderable2DInterface<? extends Locatable> renderable : this.elementList)
+            for (Renderable2dInterface<? extends Locatable> renderable : this.elementList)
             {
                 if (renderable.getSource() == null)
                 {
@@ -855,7 +855,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         try
         {
             Point2d point = getRenderableScale().getWorldCoordinates(mousePoint, getExtent(), getSize());
-            for (Renderable2DInterface<?> renderable : getElements())
+            for (Renderable2dInterface<?> renderable : getElements())
             {
                 if (isShowElement(renderable) && renderable.contains(point, getExtent()))
                 {
@@ -964,7 +964,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     /**
      * @return the set of animation elements.
      */
-    public SortedSet<Renderable2DInterface<? extends Locatable>> getElements()
+    public SortedSet<Renderable2dInterface<? extends Locatable>> getElements()
     {
         return this.elements;
     }

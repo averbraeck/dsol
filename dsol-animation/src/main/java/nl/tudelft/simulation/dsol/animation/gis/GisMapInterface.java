@@ -242,7 +242,7 @@ public interface GisMapInterface extends Serializable
      * @param rectangle SerializableRectangle2D; a rectangle in the map (image units)
      * @throws RemoteException on network exception
      */
-    void zoomRectangle(SerializableRectangle2D rectangle) throws RemoteException;
+    void zoomRectangle(SerializableRectangle2d rectangle) throws RemoteException;
 
     /**
      * return whether background is drawn or not.

@@ -14,19 +14,19 @@ import java.util.Comparator;
  * @author <a href="http://www.peter-jacobs.com/index.htm">Peter Jacobs </a>
  * @since 1.5
  */
-public class Renderable2DComparator implements Comparator<Renderable2DInterface<?>>
+public class Renderable2dComparator implements Comparator<Renderable2dInterface<?>>
 {
     /**
      * constructs a new Renderable2DComparator.
      */
-    public Renderable2DComparator()
+    public Renderable2dComparator()
     {
         super();
     }
 
     /** {@inheritDoc} */
     @Override
-    public int compare(final Renderable2DInterface<?> r1, final Renderable2DInterface<?> r2)
+    public int compare(final Renderable2dInterface<?> r1, final Renderable2dInterface<?> r2)
     {
         try
         {

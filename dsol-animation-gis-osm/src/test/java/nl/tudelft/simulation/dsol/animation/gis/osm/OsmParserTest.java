@@ -12,7 +12,7 @@ import org.djutils.io.URLResource;
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
-import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
 import nl.tudelft.simulation.naming.context.JVMContext;
@@ -46,7 +46,7 @@ public class OsmParserTest implements Contextualized
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");
         assertEquals("tudelft", map.getName());
         
-        GisRenderable2D renderable = new OsmRenderable2D(this, map);
+        GisRenderable2d renderable = new OsmRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
         assertNotNull(renderable.getBounds());
@@ -68,7 +68,7 @@ public class OsmParserTest implements Contextualized
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");
         assertEquals("tudelft", map.getName());
         
-        GisRenderable2D renderable = new OsmRenderable2D(this, map);
+        GisRenderable2d renderable = new OsmRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
         assertNotNull(renderable.getBounds());

@@ -16,7 +16,7 @@ import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisObject;
 import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
-import nl.tudelft.simulation.dsol.animation.gis.SerializableRectangle2D;
+import nl.tudelft.simulation.dsol.animation.gis.SerializableRectangle2d;
 import nl.tudelft.simulation.dsol.animation.gis.io.Endianness;
 import nl.tudelft.simulation.dsol.animation.gis.io.ObjectEndianInputStream;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
@@ -237,7 +237,7 @@ public class ShapeFileReader implements DataSourceInterface
                 double minY = Math.min(min[1], max[1]);
                 double width = Math.max(min[0], max[0]) - minX;
                 double height = Math.max(min[1], max[1]) - minY;
-                SerializableRectangle2D bounds = new SerializableRectangle2D.Double(minX, minY, width, height);
+                SerializableRectangle2d bounds = new SerializableRectangle2d.Double(minX, minY, width, height);
                 if (Shape.overlaps(extent.toRectangle2D(), bounds))
                 {
                     results.add(

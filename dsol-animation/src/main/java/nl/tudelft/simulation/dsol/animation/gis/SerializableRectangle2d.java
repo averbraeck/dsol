@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * The SerializableRectangle2D class is a serializable version of the <code>java.awt.geom.Rectangle2D</code> class, yet in an
+ * The SerializableRectangle2d class is a serializable version of the <code>java.awt.geom.Rectangle2D</code> class, yet in an
  * immutable form.
  * <p>
  * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
@@ -17,24 +17,24 @@ import java.io.Serializable;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public abstract class SerializableRectangle2D extends Rectangle2D implements Serializable
+public abstract class SerializableRectangle2d extends Rectangle2D implements Serializable
 {
     /** */
     private static final long serialVersionUID = 20201015L;
 
     /**
-     * constructs a new SerializableRectangle2D.
+     * constructs a new SerializableRectangle2d.
      */
-    protected SerializableRectangle2D()
+    protected SerializableRectangle2d()
     {
         super();
     }
 
     /**
-     * The SerializableRectangle2D.Double class is a serializable version of the <code>java.awt.geom.Rectangle2D.Double</code>
+     * The SerializableRectangle2d.Double class is a serializable version of the <code>java.awt.geom.Rectangle2D.Double</code>
      * class.
      */
-    public static class Double extends SerializableRectangle2D implements Serializable
+    public static class Double extends SerializableRectangle2d implements Serializable
     {
         /** */
         private static final long serialVersionUID = 20201015L;
@@ -51,7 +51,7 @@ public abstract class SerializableRectangle2D extends Rectangle2D implements Ser
         }
 
         /**
-         * constructs a new SerializableRectangle2D.Double.
+         * constructs a new SerializableRectangle2d.Double.
          * @param x double; lower x
          * @param y double; lower y
          * @param w double; width
@@ -171,17 +171,17 @@ public abstract class SerializableRectangle2D extends Rectangle2D implements Ser
     }
 
     /**
-     * The SerializableRectangle2D.Float class is a serializable version of the <code>java.awt.geom.Rectangle2D.Double</code>
+     * The SerializableRectangle2d.Float class is a serializable version of the <code>java.awt.geom.Rectangle2D.Double</code>
      * class.
      */
-    public static class Float extends SerializableRectangle2D
+    public static class Float extends SerializableRectangle2d
     {
 
         /** the rectangle. */
         private Rectangle2D rectangle;
 
         /**
-         * constructs a new SerializableRectangle2D.Float.
+         * constructs a new SerializableRectangle2d.Float.
          */
         public Float()
         {
@@ -189,7 +189,7 @@ public abstract class SerializableRectangle2D extends Rectangle2D implements Ser
         }
 
         /**
-         * constructs a new SerializableRectangle2D.Float.
+         * constructs a new SerializableRectangle2d.Float.
          * @param x float; the lower x
          * @param y float; the lower y
          * @param w float; the width

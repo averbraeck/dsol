@@ -12,7 +12,7 @@ import org.djutils.io.URLResource;
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
-import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.animation.gis.MapUnits;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
@@ -48,7 +48,7 @@ public class EsriParserTest implements Contextualized
         assertEquals("tudelft", map.getName());
         assertEquals(MapUnits.DECIMAL_DEGREES, map.getUnits());
         
-        GisRenderable2D renderable = new EsriRenderable2D(this, map);
+        GisRenderable2d renderable = new EsriRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
         assertNotNull(renderable.getBounds());
@@ -70,7 +70,7 @@ public class EsriParserTest implements Contextualized
         GisMapInterface map = EsriFileCsvParser.parseMapFile(url, "tudelft");
         assertEquals("tudelft", map.getName());
         
-        GisRenderable2D renderable = new EsriRenderable2D(this, map);
+        GisRenderable2d renderable = new EsriRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
         assertNotNull(renderable.getBounds());

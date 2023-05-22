@@ -15,7 +15,7 @@ import org.djutils.draw.point.Point2d;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2DInterface;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2dInterface;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.esri.EsriFileXmlParser;
@@ -37,7 +37,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @since 1.5
  */
-public class GisRenderableNoCache2D implements Renderable2DInterface<GisRenderableNoCache2D>, Locatable
+public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderableNoCache2D>, Locatable
 {
     /** the map to display. */
     protected GisMapInterface map = null;

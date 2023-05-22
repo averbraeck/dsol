@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.dsol.animation;
 
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2D;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2d;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <L> The Locatable source type
  */
-public abstract class SimRenderable2D<L extends Locatable> extends Renderable2D<L>
+public abstract class SimRenderable2D<L extends Locatable> extends Renderable2d<L>
 {
     /** */
     private static final long serialVersionUID = 20220205L;

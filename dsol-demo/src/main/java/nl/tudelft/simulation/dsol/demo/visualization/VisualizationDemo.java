@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 import org.djutils.draw.bounds.Bounds2d;
 
 import nl.tudelft.simulation.dsol.animation.StaticLocation2d;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2D;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2d;
 import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationUpdaterThread;
 import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
@@ -124,7 +124,7 @@ public class VisualizationDemo implements Contextualized
     }
 
     /** DrawObject to draw an object on the screen. */
-    static class DrawObject extends Renderable2D<StaticLocation2d>
+    static class DrawObject extends Renderable2d<StaticLocation2d>
     {
         /** */
         private static final long serialVersionUID = 1L;

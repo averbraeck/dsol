@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.animation.D2;
+package nl.tudelft.simulation.dsol.animation.d2;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

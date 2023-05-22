@@ -18,7 +18,7 @@ import org.djutils.event.Event;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2DInterface;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2dInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel;
 import nl.tudelft.simulation.language.DSOLException;
@@ -121,7 +121,7 @@ public class AutoPanAnimationPanel extends AnimationPanel
         List<Object> targets = new ArrayList<>();
         Point2d point = getRenderableScale().getWorldCoordinates(mousePoint,
                 getExtent(), getSize());
-        for (Renderable2DInterface<?> renderable : getElements())
+        for (Renderable2dInterface<?> renderable : getElements())
         {
             if (isShowElement(renderable)
                     && renderable.contains(point, getExtent()))

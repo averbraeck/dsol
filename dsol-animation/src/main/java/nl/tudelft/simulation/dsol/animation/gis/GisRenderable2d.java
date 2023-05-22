@@ -8,7 +8,7 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point2d;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2DInterface;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2dInterface;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.naming.context.Contextualized;
 
@@ -22,7 +22,7 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public interface GisRenderable2D extends Renderable2DInterface<GisRenderable2D>, Locatable
+public interface GisRenderable2d extends Renderable2dInterface<GisRenderable2d>, Locatable
 {
     /** {@inheritDoc} */
     @Override
@@ -31,7 +31,7 @@ public interface GisRenderable2D extends Renderable2DInterface<GisRenderable2D>,
 
     /** {@inheritDoc} */
     @Override
-    default GisRenderable2D getSource()
+    default GisRenderable2d getSource()
     {
         return this;
     }

@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.animation.D2;
+package nl.tudelft.simulation.dsol.animation.d2;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -23,7 +23,7 @@ import org.djutils.draw.point.Point3d;
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2D;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2d;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
@@ -40,7 +40,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class Renderable2DTest
+public class Renderable2dTest
 {
     /**
      * Test the flags for a Rendeable2D.
@@ -52,7 +52,7 @@ public class Renderable2DTest
     {
         LocatableAngle locatable = new LocatableAngle();
         ContextProvider contextProvider = new ContextProvider();
-        Renderable2D<Locatable> renderable = new Renderable2D<Locatable>(locatable, contextProvider)
+        Renderable2d<Locatable> renderable = new Renderable2d<Locatable>(locatable, contextProvider)
         {
             /** */
             private static final long serialVersionUID = 1L;

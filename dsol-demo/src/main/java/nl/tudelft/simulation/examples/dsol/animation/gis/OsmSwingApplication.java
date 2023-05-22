@@ -11,9 +11,9 @@ import org.djutils.io.URLResource;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
-import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.animation.gis.osm.OsmFileCsvParser;
-import nl.tudelft.simulation.dsol.animation.gis.osm.OsmRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.osm.OsmRenderable2d;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
@@ -86,7 +86,7 @@ public class OsmSwingApplication extends DSOLAnimationApplication
         private static final long serialVersionUID = 1L;
 
         /** the GIS map. */
-        private OsmRenderable2D gisMap;
+        private OsmRenderable2d gisMap;
 
         /**
          * constructs a new EmptyModel.
@@ -107,7 +107,7 @@ public class OsmSwingApplication extends DSOLAnimationApplication
             System.out.println("GIS data file: " + osmUrl.toString());
             try
             {
-                this.gisMap = new OsmRenderable2D(getSimulator().getReplication(),
+                this.gisMap = new OsmRenderable2d(getSimulator().getReplication(),
                         OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "TU Delft"));
             }
             catch (IOException exception)
@@ -119,7 +119,7 @@ public class OsmSwingApplication extends DSOLAnimationApplication
         /**
          * @return gisMap
          */
-        public GisRenderable2D getOsmMap()
+        public GisRenderable2d getOsmMap()
         {
             return this.gisMap;
         }

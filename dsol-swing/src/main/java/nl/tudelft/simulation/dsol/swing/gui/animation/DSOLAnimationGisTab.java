@@ -15,7 +15,7 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
-import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
+import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationPanel;
 import nl.tudelft.simulation.dsol.swing.animation.D2.AutoPanAnimationPanel;
@@ -93,7 +93,7 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
      * @param gisMap GisRenderable2D; the GIS map for which the toggles have to be added
      * @param toolTipText String; the tool tip text to show when hovering over the button
      */
-    public void addAllToggleGISButtonText(final String header, final GisRenderable2D gisMap, final String toolTipText)
+    public void addAllToggleGISButtonText(final String header, final GisRenderable2d gisMap, final String toolTipText)
     {
         addToggleText(" ");
         addToggleText(header);
@@ -117,7 +117,7 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
      * @param gisMap GisRenderable2D; the map
      * @param toolTipText String; the tool tip text
      */
-    public void addToggleGISButtonText(final String layerName, final String displayName, final GisRenderable2D gisMap,
+    public void addToggleGISButtonText(final String layerName, final String displayName, final GisRenderable2d gisMap,
             final String toolTipText)
     {
         JToggleButton button;
