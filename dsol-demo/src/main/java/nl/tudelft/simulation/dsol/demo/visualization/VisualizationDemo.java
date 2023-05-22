@@ -17,8 +17,8 @@ import org.djutils.draw.bounds.Bounds2d;
 
 import nl.tudelft.simulation.dsol.animation.StaticLocation2d;
 import nl.tudelft.simulation.dsol.animation.d2.Renderable2d;
-import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationUpdaterThread;
-import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
+import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationUpdaterThread;
+import nl.tudelft.simulation.dsol.swing.animation.d2.VisualizationPanel;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;

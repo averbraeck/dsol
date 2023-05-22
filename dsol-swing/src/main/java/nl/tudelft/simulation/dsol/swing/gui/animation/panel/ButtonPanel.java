@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.swing.ButtonUtil;
-import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationPanel;
+import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
 
 /**
  * The ButtonPanel with the home button, grid button, and full extent button are synchronously coupled to the animation panel.

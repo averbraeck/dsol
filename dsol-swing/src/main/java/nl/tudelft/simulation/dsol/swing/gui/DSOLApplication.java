@@ -31,7 +31,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationPanel;
+import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.Appearance;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
 

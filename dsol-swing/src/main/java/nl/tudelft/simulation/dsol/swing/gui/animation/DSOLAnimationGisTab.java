@@ -17,8 +17,8 @@ import org.djutils.logger.CategoryLogger;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationPanel;
-import nl.tudelft.simulation.dsol.swing.animation.D2.AutoPanAnimationPanel;
+import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
+import nl.tudelft.simulation.dsol.swing.animation.d2.AutoPanAnimationPanel;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel;
 import nl.tudelft.simulation.language.DSOLException;
 
