@@ -37,8 +37,8 @@ public class TestSwing
      */
     public static void main(String[] args)
     {
-        System.setProperty("java.awt.graphicsenv", "nl.tudelft.simulation.dsol.web.animation.HTMLGraphicsEnvironment");
-        System.setProperty("awt.toolkit", "nl.tudelft.simulation.dsol.web.animation.HTMLToolkit");
+        System.setProperty("java.awt.graphicsenv", "nl.tudelft.simulation.dsol.web.animation.HtmlGraphicsEnvironment");
+        System.setProperty("awt.toolkit", "nl.tudelft.simulation.dsol.web.animation.HtmlToolkit");
         javax.swing.SwingUtilities.invokeLater(new Runnable()
         {
             @Override

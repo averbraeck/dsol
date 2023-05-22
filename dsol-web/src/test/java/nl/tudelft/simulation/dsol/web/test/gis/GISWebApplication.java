@@ -7,7 +7,7 @@ import org.djutils.draw.bounds.Bounds2d;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
-import nl.tudelft.simulation.dsol.web.DSOLWebServer;
+import nl.tudelft.simulation.dsol.web.DsolWebServer;
 
 /**
  * <p>
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.web.DSOLWebServer;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class GISWebApplication extends DSOLWebServer
+public class GISWebApplication extends DsolWebServer
 {
     /** the default extent. */
     private static Bounds2d extent;

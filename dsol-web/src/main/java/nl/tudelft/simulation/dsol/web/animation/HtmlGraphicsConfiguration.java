@@ -11,7 +11,7 @@ import org.djutils.logger.CategoryLogger;
 import nl.tudelft.simulation.dsol.logger.Cat;
 
 /**
- * The <code>HTMLGraphicsConfiguration</code> class describes the characteristics of the HTML canvas in the browser, as a
+ * The <code>HtmlGraphicsConfiguration</code> class describes the characteristics of the HTML canvas in the browser, as a
  * graphics destination to write to. Note that there can be several <code>GraphicsConfiguration</code> objects associated with a
  * single graphics device, representing different drawing modes or capabilities. <br>
  * <br>
@@ -20,10 +20,10 @@ import nl.tudelft.simulation.dsol.logger.Cat;
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class HTMLGraphicsConfiguration extends GraphicsConfiguration
+public class HtmlGraphicsConfiguration extends GraphicsConfiguration
 {
-    /** the {@link HTMLDevice} associated with this <code>HTMLGraphicsConfiguration</code>. */
-    HTMLDevice htmlDevice;
+    /** the {@link HtmlDevice} associated with this <code>HtmlGraphicsConfiguration</code>. */
+    HtmlDevice htmlDevice;
 
     /** the identity AffineTransform. */
     AffineTransform identityTransform = new AffineTransform();
@@ -34,27 +34,27 @@ public class HTMLGraphicsConfiguration extends GraphicsConfiguration
     /**
      * Create a graphics configuration for the HTML device.
      */
-    public HTMLGraphicsConfiguration()
+    public HtmlGraphicsConfiguration()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.<init>");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.<init>");
     }
 
     /** {@inheritDoc} */
     @Override
     public GraphicsDevice getDevice()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.getDevice()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getDevice()");
         return this.htmlDevice;
     }
 
     /**
-     * Set the {@link HTMLDevice} associated with this <code>HTMLGraphicsConfiguration</code>.
-     * @param htmlDevice HTMLDevice; a &lt;code&gt;GraphicsDevice&lt;/code&gt; object that is associated with this
-     *            <code>HTMLGraphicsConfiguration</code>.
+     * Set the {@link HtmlDevice} associated with this <code>HtmlGraphicsConfiguration</code>.
+     * @param htmlDevice HtmlDevice; a &lt;code&gt;GraphicsDevice&lt;/code&gt; object that is associated with this
+     *            <code>HtmlGraphicsConfiguration</code>.
      */
-    public void setDevice(final HTMLDevice htmlDevice)
+    public void setDevice(final HtmlDevice htmlDevice)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.setDevice()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.setDevice()");
         this.htmlDevice = htmlDevice;
     }
 
@@ -62,7 +62,7 @@ public class HTMLGraphicsConfiguration extends GraphicsConfiguration
     @Override
     public ColorModel getColorModel()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.getColorModel()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getColorModel()");
         return ColorModel.getRGBdefault();
     }
 
@@ -70,7 +70,7 @@ public class HTMLGraphicsConfiguration extends GraphicsConfiguration
     @Override
     public ColorModel getColorModel(int transparency)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.getColorModel()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getColorModel()");
         return ColorModel.getRGBdefault();
     }
 
@@ -78,7 +78,7 @@ public class HTMLGraphicsConfiguration extends GraphicsConfiguration
     @Override
     public AffineTransform getDefaultTransform()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.getDefaultTransform()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getDefaultTransform()");
         return this.identityTransform;
     }
 
@@ -86,7 +86,7 @@ public class HTMLGraphicsConfiguration extends GraphicsConfiguration
     @Override
     public AffineTransform getNormalizingTransform()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.getNormalizingTransform()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getNormalizingTransform()");
         return this.identityTransform;
     }
 
@@ -94,7 +94,7 @@ public class HTMLGraphicsConfiguration extends GraphicsConfiguration
     @Override
     public Rectangle getBounds()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HTMLGraphicsConfiguration.getBounds()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getBounds()");
         return this.bounds;
     }
 

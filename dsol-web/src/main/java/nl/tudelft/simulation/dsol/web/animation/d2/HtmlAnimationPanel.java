@@ -25,7 +25,7 @@ import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.web.animation.HTMLGraphics2D;
+import nl.tudelft.simulation.dsol.web.animation.HtmlGraphics2D;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
 
@@ -43,7 +43,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
-public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
+public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
 {
     /** */
     private static final long serialVersionUID = 20200108L;
@@ -101,7 +101,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
      * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator of which we want to know the events for animation
      * @throws RemoteException on network error for one of the listeners
      */
-    public HTMLAnimationPanel(final Bounds2d extent, final Dimension size, final SimulatorInterface<?> simulator)
+    public HtmlAnimationPanel(final Bounds2d extent, final Dimension size, final SimulatorInterface<?> simulator)
             throws RemoteException
     {
         super(extent, size);
@@ -112,7 +112,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
 
     /** {@inheritDoc} */
     @Override
-    public void paintComponent(final HTMLGraphics2D g2)
+    public void paintComponent(final HtmlGraphics2D g2)
     {
         // draw the grid.
         super.paintComponent(g2);

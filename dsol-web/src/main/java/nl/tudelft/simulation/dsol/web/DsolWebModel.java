@@ -30,8 +30,8 @@ import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.web.animation.d2.HTMLAnimationPanel;
-import nl.tudelft.simulation.dsol.web.animation.d2.HTMLGridPanel;
+import nl.tudelft.simulation.dsol.web.animation.d2.HtmlAnimationPanel;
+import nl.tudelft.simulation.dsol.web.animation.d2.HtmlGridPanel;
 import nl.tudelft.simulation.dsol.web.animation.d2.ToggleButtonInfo;
 import nl.tudelft.simulation.introspection.Property;
 import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
@@ -44,7 +44,7 @@ import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DSOLWebModel implements EventListener
+public class DsolWebModel implements EventListener
 {
     /** the title for the model window. */
     private final String title;
@@ -56,7 +56,7 @@ public class DSOLWebModel implements EventListener
     private boolean dirtyControls = false;
 
     /** the animation panel. */
-    private HTMLAnimationPanel animationPanel;
+    private HtmlAnimationPanel animationPanel;
 
     /** Timer update interval in msec. */
     private long lastWallTIme = -1;
@@ -69,7 +69,7 @@ public class DSOLWebModel implements EventListener
      * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator
      * @throws Exception in case jetty crashes
      */
-    public DSOLWebModel(final String title, final SimulatorInterface<?> simulator) throws Exception
+    public DsolWebModel(final String title, final SimulatorInterface<?> simulator) throws Exception
     {
         this.title = title;
         this.simulator = simulator;
@@ -80,7 +80,7 @@ public class DSOLWebModel implements EventListener
 
         if (this.simulator instanceof AnimatorInterface)
         {
-            this.animationPanel = new HTMLAnimationPanel(extent, new Dimension(800, 600), this.simulator);
+            this.animationPanel = new HtmlAnimationPanel(extent, new Dimension(800, 600), this.simulator);
             // get the already created elements in context(/animation/D2)
             this.animationPanel.notify(
                     new TimedEvent(Replication.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
@@ -106,7 +106,7 @@ public class DSOLWebModel implements EventListener
     /**
      * @return animationPanel
      */
-    public HTMLAnimationPanel getAnimationPanel()
+    public HtmlAnimationPanel getAnimationPanel()
     {
         return this.animationPanel;
     }
@@ -217,7 +217,7 @@ public class DSOLWebModel implements EventListener
             String message = request.getParameter("message");
             String[] parts = message.split("\\|");
             String command = parts[0];
-            HTMLAnimationPanel animationPanel = getAnimationPanel();
+            HtmlAnimationPanel animationPanel = getAnimationPanel();
 
             switch (command)
             {
@@ -292,25 +292,25 @@ public class DSOLWebModel implements EventListener
 
                 case "arrowDown":
                 {
-                    animationPanel.pan(HTMLGridPanel.DOWN, 0.1);
+                    animationPanel.pan(HtmlGridPanel.DOWN, 0.1);
                     break;
                 }
 
                 case "arrowUp":
                 {
-                    animationPanel.pan(HTMLGridPanel.UP, 0.1);
+                    animationPanel.pan(HtmlGridPanel.UP, 0.1);
                     break;
                 }
 
                 case "arrowLeft":
                 {
-                    animationPanel.pan(HTMLGridPanel.LEFT, 0.1);
+                    animationPanel.pan(HtmlGridPanel.LEFT, 0.1);
                     break;
                 }
 
                 case "arrowRight":
                 {
-                    animationPanel.pan(HTMLGridPanel.RIGHT, 0.1);
+                    animationPanel.pan(HtmlGridPanel.RIGHT, 0.1);
                     break;
                 }
 
@@ -589,10 +589,10 @@ public class DSOLWebModel implements EventListener
 
     /**
      * Return the toggle button info for the toggle panel.
-     * @param panel the HTMLAnimationPanel
+     * @param panel the HtmlAnimationPanel
      * @return the String that can be parsed by the select.html iframe
      */
-    private String getToggles(final HTMLAnimationPanel panel)
+    private String getToggles(final HtmlAnimationPanel panel)
     {
         String ret = "<toggles>\n";
         for (ToggleButtonInfo toggle : panel.getToggleButtons())

@@ -51,7 +51,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
- * DSOLWebServer.java. <br>
+ * DsolWebServer.java. <br>
  * <br>
  * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
@@ -63,8 +63,8 @@ public abstract class AbstractTestDemoServer
     /** the map of sessionIds to DsolModel that handles the animation and updates for the started model. */
     final Map<String, DsolModel<Duration, SimulatorInterface<Duration>>> sessionModelMap = new LinkedHashMap<>();
 
-    /** the map of sessionIds to DSOLWebModel that handles the animation and updates for the started model. */
-    final Map<String, DSOLWebModel> sessionWebModelMap = new LinkedHashMap<>();
+    /** the map of sessionIds to DsolWebModel that handles the animation and updates for the started model. */
+    final Map<String, DsolWebModel> sessionWebModelMap = new LinkedHashMap<>();
 
     /**
      * @throws Exception in case jetty crashes
@@ -183,7 +183,7 @@ public abstract class AbstractTestDemoServer
                         Replication<Duration> newReplication = new SingleReplication<Duration>("rep 1",
                                 Duration.ZERO, Duration.ZERO, Duration.instantiateSI(3600.0));
                         simulator.initialize(model, newReplication);
-                        DSOLWebModel webModel = new DSOLWebModel(model.toString(), simulator);
+                        DsolWebModel webModel = new DsolWebModel(model.toString(), simulator);
                         AbstractTestDemoServer.this.sessionWebModelMap.put(sessionId, webModel);
                     }
                     catch (Exception exception)
@@ -220,7 +220,7 @@ public abstract class AbstractTestDemoServer
 
         /**
          * Create the handler for Servlet requests.
-         * @param webServer DSOLWebServer; web server for callback of actions
+         * @param webServer DsolWebServer; web server for callback of actions
          */
         public XHRHandler(final AbstractTestDemoServer webServer)
         {

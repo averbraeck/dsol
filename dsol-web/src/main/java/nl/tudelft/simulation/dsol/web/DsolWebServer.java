@@ -37,21 +37,21 @@ import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.web.animation.d2.HTMLAnimationPanel;
-import nl.tudelft.simulation.dsol.web.animation.d2.HTMLGridPanel;
+import nl.tudelft.simulation.dsol.web.animation.d2.HtmlAnimationPanel;
+import nl.tudelft.simulation.dsol.web.animation.d2.HtmlGridPanel;
 import nl.tudelft.simulation.dsol.web.animation.d2.ToggleButtonInfo;
 import nl.tudelft.simulation.introspection.Property;
 import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
 
 /**
- * DSOLWebServer.java. <br>
+ * DsolWebServer.java. <br>
  * <br>
  * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public abstract class DSOLWebServer implements EventListener
+public abstract class DsolWebServer implements EventListener
 {
     /** the title for the model window. */
     private final String title;
@@ -63,7 +63,7 @@ public abstract class DSOLWebServer implements EventListener
     private boolean dirtyControls = false;
 
     /** the animation panel. */
-    private HTMLAnimationPanel animationPanel;
+    private HtmlAnimationPanel animationPanel;
 
     /**
      * @param title String; the title for the model window
@@ -71,7 +71,7 @@ public abstract class DSOLWebServer implements EventListener
      * @param extent Rectangle2D.Double; the extent to use for the graphics (min/max coordinates)
      * @throws Exception in case jetty crashes
      */
-    public DSOLWebServer(final String title, final SimulatorInterface<?> simulator, final Bounds2d extent) throws Exception
+    public DsolWebServer(final String title, final SimulatorInterface<?> simulator, final Bounds2d extent) throws Exception
     {
         this.title = title;
 
@@ -82,7 +82,7 @@ public abstract class DSOLWebServer implements EventListener
 
         if (this.simulator instanceof AnimatorInterface)
         {
-            this.animationPanel = new HTMLAnimationPanel(extent, new Dimension(800, 600), this.simulator);
+            this.animationPanel = new HtmlAnimationPanel(extent, new Dimension(800, 600), this.simulator);
 
             // get the already created elements in context(/animation/D2)
             this.animationPanel.notify(
@@ -111,7 +111,7 @@ public abstract class DSOLWebServer implements EventListener
             resourceHandler.setResourceBase(webRoot);
 
             HandlerList handlers = new HandlerList();
-            handlers.setHandlers(new Handler[] {resourceHandler, new XHRHandler(DSOLWebServer.this)});
+            handlers.setHandlers(new Handler[] {resourceHandler, new XHRHandler(DsolWebServer.this)});
             server.setHandler(handlers);
 
             try
@@ -145,7 +145,7 @@ public abstract class DSOLWebServer implements EventListener
     /**
      * @return animationPanel
      */
-    public HTMLAnimationPanel getAnimationPanel()
+    public HtmlAnimationPanel getAnimationPanel()
     {
         return this.animationPanel;
     }
@@ -241,7 +241,7 @@ public abstract class DSOLWebServer implements EventListener
     public static class XHRHandler extends AbstractHandler
     {
         /** web server for callback of actions. */
-        final DSOLWebServer webServer;
+        final DsolWebServer webServer;
 
         /** Timer update interval in msec. */
         private long lastWallTIme = -1;
@@ -251,9 +251,9 @@ public abstract class DSOLWebServer implements EventListener
 
         /**
          * Create the handler for Servlet requests.
-         * @param webServer DSOLWebServer; web server for callback of actions
+         * @param webServer DsolWebServer; web server for callback of actions
          */
-        public XHRHandler(final DSOLWebServer webServer)
+        public XHRHandler(final DsolWebServer webServer)
         {
             this.webServer = webServer;
         }
@@ -276,7 +276,7 @@ public abstract class DSOLWebServer implements EventListener
                 String message = request.getParameter("message");
                 String[] parts = message.split("\\|");
                 String command = parts[0];
-                HTMLAnimationPanel animationPanel = this.webServer.getAnimationPanel();
+                HtmlAnimationPanel animationPanel = this.webServer.getAnimationPanel();
 
                 switch (command)
                 {
@@ -351,25 +351,25 @@ public abstract class DSOLWebServer implements EventListener
 
                     case "arrowDown":
                     {
-                        animationPanel.pan(HTMLGridPanel.DOWN, 0.1);
+                        animationPanel.pan(HtmlGridPanel.DOWN, 0.1);
                         break;
                     }
 
                     case "arrowUp":
                     {
-                        animationPanel.pan(HTMLGridPanel.UP, 0.1);
+                        animationPanel.pan(HtmlGridPanel.UP, 0.1);
                         break;
                     }
 
                     case "arrowLeft":
                     {
-                        animationPanel.pan(HTMLGridPanel.LEFT, 0.1);
+                        animationPanel.pan(HtmlGridPanel.LEFT, 0.1);
                         break;
                     }
 
                     case "arrowRight":
                     {
-                        animationPanel.pan(HTMLGridPanel.RIGHT, 0.1);
+                        animationPanel.pan(HtmlGridPanel.RIGHT, 0.1);
                         break;
                     }
 
@@ -648,10 +648,10 @@ public abstract class DSOLWebServer implements EventListener
 
         /**
          * Return the toggle button info for the toggle panel.
-         * @param panel the HTMLAnimationPanel
+         * @param panel the HtmlAnimationPanel
          * @return the String that can be parsed by the select.html iframe
          */
-        private String getToggles(final HTMLAnimationPanel panel)
+        private String getToggles(final HtmlAnimationPanel panel)
         {
             String ret = "<toggles>\n";
             for (ToggleButtonInfo toggle : panel.getToggleButtons())
