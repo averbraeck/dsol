@@ -21,6 +21,8 @@ nav:
   - Getting started:
     - Installing Eclipse: 1-getting-started/eclipse.md
     - DSOL projects: 1-getting-started/dsol-project.md
+    - DES model example: 1-getting-started/example-event.md
+    - Flow model example: 1-getting-started/example-flow.md
     - DSOL technical docs: https://simulation.tudelft.nl/dsol/docs/latest/index.html
     - API dsol-core: https://simulation.tudelft.nl/dsol/docs/latest/dsol-core/apidocs/index.html
   - Simulation theory:
