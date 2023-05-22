@@ -16,7 +16,7 @@ import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
-import nl.tudelft.simulation.dsol.swing.charts.boxAndWhisker.BoxAndWhiskerChart;
+import nl.tudelft.simulation.dsol.swing.charts.boxwhisker.BoxAndWhiskerChart;
 import nl.tudelft.simulation.dsol.swing.charts.histogram.Histogram;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
 import nl.tudelft.simulation.jstats.distributions.DistConstant;

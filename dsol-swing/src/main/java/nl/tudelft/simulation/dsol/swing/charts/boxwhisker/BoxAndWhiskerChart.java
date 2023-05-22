@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.swing.charts.boxAndWhisker;
+package nl.tudelft.simulation.dsol.swing.charts.boxwhisker;
 
 import java.awt.Color;
 import java.awt.Container;
