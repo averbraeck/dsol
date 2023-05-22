@@ -31,7 +31,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extends LocalEventProducer
+public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extends LocalEventProducer
 {
     /** the default serial version UId. */
     private static final long serialVersionUID = 1L;
@@ -80,10 +80,10 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
      */
     static
     {
-        AbstractDEVSModel.atomicFields = ClassUtil.getAllFields(AtomicModel.class);
-        AbstractDEVSModel.coupledFields = ClassUtil.getAllFields(CoupledModel.class);
-        AbstractDEVSModel.entityFields = ClassUtil.getAllFields(AbstractEntity.class);
-        AbstractDEVSModel.abstractDEVSFields = ClassUtil.getAllFields(AbstractDEVSModel.class);
+        AbstractDevsModel.atomicFields = ClassUtil.getAllFields(AtomicModel.class);
+        AbstractDevsModel.coupledFields = ClassUtil.getAllFields(CoupledModel.class);
+        AbstractDevsModel.entityFields = ClassUtil.getAllFields(AbstractEntity.class);
+        AbstractDevsModel.abstractDEVSFields = ClassUtil.getAllFields(AbstractDevsModel.class);
     }
 
     /**
@@ -93,7 +93,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
      * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule the events on.
      * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of.
      */
-    public AbstractDEVSModel(final String modelName, final DevsSimulatorInterface<T> simulator,
+    public AbstractDevsModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
     {
         this.modelName = modelName;
@@ -104,11 +104,11 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
         this.fullName += this.modelName;
         this.simulator = simulator;
         this.parentModel = parentModel;
-        if (!AbstractDEVSModel.stateFieldMap.containsKey(this.getClass()))
+        if (!AbstractDevsModel.stateFieldMap.containsKey(this.getClass()))
         {
             this.createStateFieldSet();
         }
-        this.stateFieldSet = AbstractDEVSModel.stateFieldMap.get(this.getClass());
+        this.stateFieldSet = AbstractDevsModel.stateFieldMap.get(this.getClass());
     }
 
     /**
@@ -179,25 +179,25 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
 
         if (this instanceof AtomicModel)
         {
-            fieldSet.removeAll(AbstractDEVSModel.atomicFields);
+            fieldSet.removeAll(AbstractDevsModel.atomicFields);
         }
         else if (this instanceof CoupledModel)
         {
-            fieldSet.removeAll(AbstractDEVSModel.coupledFields);
+            fieldSet.removeAll(AbstractDevsModel.coupledFields);
         }
         else if (this instanceof AbstractEntity)
         {
-            fieldSet.removeAll(AbstractDEVSModel.entityFields);
+            fieldSet.removeAll(AbstractDevsModel.entityFields);
         }
         else
         {
-            fieldSet.removeAll(AbstractDEVSModel.abstractDEVSFields);
+            fieldSet.removeAll(AbstractDevsModel.abstractDEVSFields);
         }
 
         // we can now do something with the annotations, but that comes later
 
         // put the results in the map
-        AbstractDEVSModel.stateFieldMap.put(this.getClass(), fieldSet);
+        AbstractDevsModel.stateFieldMap.put(this.getClass(), fieldSet);
     }
 
     /**
@@ -216,7 +216,7 @@ public abstract class AbstractDEVSModel<T extends Number & Comparable<T>> extend
             {
                 field.setAccessible(true);
                 StateUpdate stateUpdate = new StateUpdate(this.getModelName(), field.getName(), field.get(this));
-                this.fireTimedEvent(AbstractDEVSModel.STATE_UPDATE, stateUpdate, getSimulator().getSimulatorTime());
+                this.fireTimedEvent(AbstractDevsModel.STATE_UPDATE, stateUpdate, getSimulator().getSimulatorTime());
             }
             catch (IllegalAccessException exception)
             {

@@ -33,6 +33,6 @@ public interface OutputPortInterface<T extends Number & Comparable<T>, TYPE>
     /**
      * @return the model to which the port belongs.
      */
-    AbstractDEVSModel<T> getModel();
+    AbstractDevsModel<T> getModel();
 
 }

@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.logger.Cat;
 public class OutputPort<T extends Number & Comparable<T>, TYPE> implements OutputPortInterface<T, TYPE>
 {
     /** The model to which the port links. */
-    private AbstractDEVSModel<T> model;
+    private AbstractDevsModel<T> model;
 
     /**
      * Constructor for the output port where the model is a coupled model.
@@ -69,7 +69,7 @@ public class OutputPort<T extends Number & Comparable<T>, TYPE> implements Outpu
      * {@inheritDoc}
      */
     @Override
-    public AbstractDEVSModel<T> getModel()
+    public AbstractDevsModel<T> getModel()
     {
         return this.model;
     }

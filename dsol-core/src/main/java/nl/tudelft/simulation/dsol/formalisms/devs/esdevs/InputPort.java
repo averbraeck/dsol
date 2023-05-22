@@ -27,7 +27,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
 public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputPortInterface<T, TYPE>
 {
     /** The model to which the port links. */
-    private AbstractDEVSModel<T> model;
+    private AbstractDevsModel<T> model;
 
     /** Is the model atomic or not? */
     private boolean atomic;
@@ -163,7 +163,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
      * {@inheritDoc}
      */
     @Override
-    public AbstractDEVSModel<T> getModel()
+    public AbstractDevsModel<T> getModel()
     {
         return this.model;
     }

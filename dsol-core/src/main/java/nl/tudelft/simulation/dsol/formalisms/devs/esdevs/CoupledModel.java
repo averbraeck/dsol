@@ -28,7 +28,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class CoupledModel<T extends Number & Comparable<T>> extends AbstractDEVSPortModel<T>
+public abstract class CoupledModel<T extends Number & Comparable<T>> extends AbstractDevsPortModel<T>
 {
     /** the default serialVersionUId. */
     private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /** the models within this coupled model. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected Set<AbstractDEVSModel<T>> modelComponents = new LinkedHashSet<>();
+    protected Set<AbstractDevsModel<T>> modelComponents = new LinkedHashSet<>();
 
     // ///////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS AND INITIALIZATION
@@ -99,7 +99,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         boolean returnBoolean = true;
         returnBoolean &= super.addListener(eli, et);
 
-        for (AbstractDEVSModel<T> devsmodel : this.modelComponents)
+        for (AbstractDevsModel<T> devsmodel : this.modelComponents)
         {
             returnBoolean &= devsmodel.addListener(eli, et);
         }
@@ -273,11 +273,11 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
      * Add a model component to this coupled model.
      * @param model AbstractDEVSModel&lt;T&gt;; the component to add.
      */
-    public void addModelComponent(final AbstractDEVSModel<T> model)
+    public void addModelComponent(final AbstractDevsModel<T> model)
     {
         this.modelComponents.add(model);
 
-        List<Reference<EventListener>> elis = getListenerReferences(AbstractDEVSModel.STATE_UPDATE);
+        List<Reference<EventListener>> elis = getListenerReferences(AbstractDevsModel.STATE_UPDATE);
 
         if (elis == null)
         {
@@ -286,7 +286,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
         for (Reference<EventListener> eli : elis)
         {
-            model.addListener(eli.get(), AbstractDEVSModel.STATE_UPDATE);
+            model.addListener(eli.get(), AbstractDevsModel.STATE_UPDATE);
         }
     }
 
@@ -294,7 +294,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
      * Remove a model component from a coupled model, including all its couplings (internal, external in, and external out).
      * @param model AbstractDEVSModel&lt;T&gt;; the component to remove.
      */
-    public void removeModelComponent(final AbstractDEVSModel<T> model)
+    public void removeModelComponent(final AbstractDevsModel<T> model)
     {
         for (EOC<T, ?> eoc : this.externalOutputCouplingSet)
         {
@@ -409,7 +409,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * @return modelComponents; the models within the coupled model
      */
-    public Set<AbstractDEVSModel<T>> getModelComponents()
+    public Set<AbstractDevsModel<T>> getModelComponents()
     {
         return this.modelComponents;
     }
@@ -457,7 +457,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
             System.out.println();
         }
 
-        for (AbstractDEVSModel<T> dm : this.modelComponents)
+        for (AbstractDevsModel<T> dm : this.modelComponents)
         {
             dm.printModel(space + "    ");
         }

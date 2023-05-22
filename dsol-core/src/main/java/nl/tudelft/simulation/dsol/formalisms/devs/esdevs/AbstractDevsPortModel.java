@@ -21,7 +21,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @since 1.5
  */
-public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> extends AbstractDEVSModel<T>
+public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> extends AbstractDevsModel<T>
 {
     /** the default serial version UId. */
     private static final long serialVersionUID = 1L;
@@ -41,7 +41,7 @@ public abstract class AbstractDEVSPortModel<T extends Number & Comparable<T>> ex
      * @param simulator DEVSSimulatorInterface&lt;T&gt;; the simulator to schedule the events on.
      * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of.
      */
-    public AbstractDEVSPortModel(final String modelName, final DevsSimulatorInterface<T> simulator,
+    public AbstractDevsPortModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
     {
         super(modelName, simulator, parentModel);

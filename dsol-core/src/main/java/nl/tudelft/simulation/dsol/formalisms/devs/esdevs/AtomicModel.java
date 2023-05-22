@@ -22,7 +22,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a><br>
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  */
-public abstract class AtomicModel<T extends Number & Comparable<T>> extends AbstractDEVSPortModel<T>
+public abstract class AtomicModel<T extends Number & Comparable<T>> extends AbstractDevsPortModel<T>
 {
     /** the default serialVersionUId. */
     private static final long serialVersionUID = 1L;
