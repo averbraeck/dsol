@@ -43,7 +43,7 @@ Usually EventTypes are declared as `public static final`, so they are immutable 
 
 ## Example implementation: EventProducer
 
-Usually, a class extends the `org.djutils.event.LocalEventProducer` when it needs to be able to produce events. Often an object created in the DSOLModel, or the DSOModel itself, needs to produce events. For that purpose, the `AbstractDSOLModel` already extends `EventProducer`. An event producing class notifies its subscribers of the event with the `fireEvent` method. Suppose we have a model called `PlantModel` that fires events (repeatedly) if the pressure in a reactor exceeds a threshold. An example of the code is shown below:
+Usually, a class extends the `org.djutils.event.LocalEventProducer` when it needs to be able to produce events. Often an object created in the DsolModel, or the DSOModel itself, needs to produce events. For that purpose, the `AbstractDsolModel` already extends `EventProducer`. An event producing class notifies its subscribers of the event with the `fireEvent` method. Suppose we have a model called `PlantModel` that fires events (repeatedly) if the pressure in a reactor exceeds a threshold. An example of the code is shown below:
 
 ```java
 public class PlantModel extends LocalEventProducer

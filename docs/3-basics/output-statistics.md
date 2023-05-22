@@ -17,10 +17,10 @@ The classes have the following relations:
 
 The diagram above shows that all statistics objects are both an `EventProducer` and an `EventListener`. The observations are given to the ststistics objects using events, and the statistics produce events that the status has changed after receiving events. This enables loose coupling between the model, statistics objects, and user interfaces showing the current state of the statistics objects. Using the publish-subscribe mechanism (see [Advanced Topics](../../advanced/pub-sub) for the inner working of the pub-sub mechanism), statistics objects are kept up-to-date with the latest observations.
 
-Suppose that a `DSOLModel` wants to keep a `Tally` object updated about the waiting time of an entity. The `AbstractDSOLModel` is already an `EventProducer`. This means that it can already fire events to listeners. When the model is instantiated, it can either make the statistics classes itself, or allow external code (e.g., the `public static void main` method) to make the stastistics class for the model. Suppose the model makes the `Tally` object itself in the constructor, the following code shows how to arrange the subscription:
+Suppose that a `DsolModel` wants to keep a `Tally` object updated about the waiting time of an entity. The `AbstractDsolModel` is already an `EventProducer`. This means that it can already fire events to listeners. When the model is instantiated, it can either make the statistics classes itself, or allow external code (e.g., the `public static void main` method) to make the stastistics class for the model. Suppose the model makes the `Tally` object itself in the constructor, the following code shows how to arrange the subscription:
 
 ```java
-public class QueueModel extends AbstractDSOLModel.TimeDoubleUnit<SimulatorInterface.TimeDoubleUnit>
+public class QueueModel extends AbstractDsolModel.TimeDoubleUnit<SimulatorInterface.TimeDoubleUnit>
 {
     public static final EventType WAITING_TIME_EVENT = new EventType("WAITING_TIME");
 

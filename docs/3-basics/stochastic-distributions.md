@@ -4,7 +4,7 @@
 
 DSOL has a number of built-in continuous and discrete distribution functions. Continuous distribution functions, such as the Exponential, Uniform and Normal distribution, return real numbers. Discrete distributions, such as the Geometric and the Poisson distribution, return integer numbers. Each distribution uses a random stream (see [Random Numbers](../random-numbers)) to provide a pseudo-random draw from the distribution function. 
 
-In most cases, distribution functions for the model are created in the `constructModel()` method of the `DSOLModel`. An example is:
+In most cases, distribution functions for the model are created in the `constructModel()` method of the `DsolModel`. An example is:
 
 ```java
 StreamInterface defaultStream = this.simulator.getReplication().getStream("default");

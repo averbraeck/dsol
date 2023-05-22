@@ -67,7 +67,7 @@ In the Maven pom-file of the simulation project, add the following dependency fo
     <dependency>
       <groupId>dsol</groupId>
       <artifactId>dsol-core</artifactId>
-      <version>4.1.0</version>
+      <version>4.2.0</version>
     </dependency>
   </dependencies>
 ```

@@ -18,9 +18,9 @@ DSOL offers various implementations of Random Number Generators, each of which i
 |  `MersenneTwister` | 10^6000 | This is a Java version of the C-program for MT19937: Integer version. genrand() generates one pseudorandom unsigned integer (32 bit) which is uniformly distributed among 0 to 2^32-1 for each call. sgenrand(seed) set initial values to the working area of 624 words. (seed is any 32-bit integer except for 0). Orignally Coded by Takuji Nishimura, considering the suggestions by Topher Cooper and Marc Rieffel in July-August 1997. More information can be found at [https://en.wikipedia.org/wiki/Mersenne_Twister](https://en.wikipedia.org/wiki/Mersenne_Twister) and [http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/ARTICLES/mt.pdf](http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/ARTICLES/mt.pdf). |
 
 
-## Access to RNGs from the DSOLModel
+## Access to RNGs from the DsolModel
 
-The streams to be used are defined in the model itself. The `DSOLModel` interface has several methods defined that can help with retrieving and making of new RNGs. Because the user has to choose the Random Number Generator (RNG) type(s) and seed(s), only one default RNG is defined. The `AbstractDSOLModel` class creates a default MersenneTwister RNG with the name "default". Modelers who don't want to bother with the setting of a specific RNG can use this RNG, which has a different seed for each replication.
+The streams to be used are defined in the model itself. The `DsolModel` interface has several methods defined that can help with retrieving and making of new RNGs. Because the user has to choose the Random Number Generator (RNG) type(s) and seed(s), only one default RNG is defined. The `AbstractDsolModel` class creates a default MersenneTwister RNG with the name "default". Modelers who don't want to bother with the setting of a specific RNG can use this RNG, which has a different seed for each replication.
 
 In the model, the RNG can be used as follows; in this case for creating an Exponential interarrival distribution with a lambda-value of 10.0 in the model's `constructModel()` method:
 

@@ -4,7 +4,7 @@
 
 In line with the Framework of Modeling &amp; Simulation (Zeigler et al., 2000, p.26) as depicted in the Figure below, a Simulation consists of the following elements:
 * A **Model** that contains the logic to execute the required state changes over time. In DSOL, the Model is represented by the `Model` interface and `AbstractModel` reference implementation.
-* A **Simulator** that can execute the model and advance time. In DSOL, the Simulator has many implementation for different simulation formalisms, such as the `DEVSSimulator` for discrete-event models, the `DESSSimulator` for continuous models, the `DEVSRealTimeAnimaor` for real-time models, and the `DEVDESSSimulator` for mixed DEV&amp;DESS models. 
+* A **Simulator** that can execute the model and advance time. In DSOL, the Simulator has many implementation for different simulation formalisms, such as the `DevsSimulator` for discrete-event models, the `DessSimulator` for continuous models, the `DevsRealTimeAnimaor` for real-time models, and the `DevDessSimulator` for mixed DEV&amp;DESS models. 
 * An **Experimental Frame** that describes the conditions under which the system is observed or esperimented with. The Experimental Frame is implemented in DSOL using the `Experiment`, `RunControl` and `Replication` classes. 
 
 ![](../images/3-basics/zeigler2000-basic-entities.png?resize=500,350)
@@ -15,7 +15,7 @@ Typically, the above three elements are created for any simulation to run:
 ```java
 public MM1Application() throws SimRuntimeException, RemoteException, NamingException
 {
-    DEVSSimulator<Double> simulator = new DEVSSimulator<>("mm1");
+    DevsSimulator<Double> simulator = new DevsSimulator<>("mm1");
     MM1Model model = new MM1Model(simulator);
     ReplicationInterface<Double> replication = 
         new SingleReplication<>("rep1", 0.0, 0.0, 100.0);
@@ -52,10 +52,10 @@ The above steps are illustrated by the following sequence diagram:
 
 ## The DSOL model
 
-The `DSOLModel` interface forces the following methods to be in place:
+The `DsolModel` interface forces the following methods to be in place:
 
 ```java
-public interface DSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>>
+public interface DsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>>
 {
     /**
      * construct a model on a simulator.
@@ -95,8 +95,8 @@ public interface DSOLModel<T extends Number & Comparable<T>, S extends Simulator
 }
 ```
 
-* The `constructModel()` method that is called whenever a `Replication` is initialized. In essence, the `constructModel()` method does exactly what the name suggests: it builds a new, blank version of the model. When multiple replications are carried out with a model, we have to be able to ensure that the model is blank when initialized (at least when the replication mode is equal to `ReplicationMode.TERMINATING`; see below under replication modes for more explanation). When expensive calculations have to be made to construct the model, these can of course be cached. The constructore of the model class can take care of the one-off initializations that will speed up the model construction.
-* The `getSimulator()` method that can tell on which simulator the model runs. In the code, simulation time can be requested by `getSimulator().getSimulatorTime()` to retrieve the time. Depending on the simulator, events can be scheduled on the event list, or other time-state related activities can be carried out. The `AbstractDSOLModel` class makes a reference implementation of the `getSimulator()` method, so when extending the model from `AbstractDSOLModel`, this method is already implemented.
+* The `constructModel()` method that is called whenever a `Replication` is initialized. In essence, the `constructModel()` method does exactly what the name suggests: it builds a new, blank version of the model. When multiple replications are carried out with a model, we have to be able to ensure that the model is blank when initialized (at least when the replication mode is equal to `ReplicationMode.TERMINATING`; see below under replication modes for more explanation). When expensive calculations have to be made to construct the model, these can of course be cached. The constructors of the model class can take care of the one-off initializations that will speed up the model construction.
+* The `getSimulator()` method that can tell on which simulator the model runs. In the code, simulation time can be requested by `getSimulator().getSimulatorTime()` to retrieve the time. Depending on the simulator, events can be scheduled on the event list, or other time-state related activities can be carried out. The `AbstractDsolModel` class makes a reference implementation of the `getSimulator()` method, so when extending the model from `AbstractDsolModel`, this method is already implemented.
 * The `getInputParameterMap()` method that is able to retrieve the input parameters for which the model runs. Typically, the `Treatment` for the `Experiment` specifies which input parameters are used for the execution of each of the replications in the experiment. Input parameters are those things that the modeler wants to be able to set to carry out `what-if` experiments with the model.
 * The `getOutputStatistics()` method that is able to report the output statistics that the model can calculate. This can be important for setting up a flexible user interface, where output statistics are shown to the user, or for exporting the output statistics at the end of a run to a file or database. 
 * The `setStreamInformation(...)` and `getStreamInformation()` methods are used for providing the simulation with the correct random number generators (RNGs) and the appropriate seeds for the simulation to run.
@@ -149,7 +149,7 @@ StreamInterface stream = getSimulator().getReplication().getStream("default");
 
 The `Treatment` object specifies the run control conditions: at what time does the model start, how long should it run, is there a warm-up period or not, and if yes, how long is it? The units in which these times are specified are given by the simulation time unit that the model and the simulator use.
 
-In addition, the `Treatment` specifies the input parameters for the model. As there is one treatment per experiment, the model parameters for all replications in one experiment are the same (with the exception of the seeds of the randon number generators). In the default implementation of the `AbstractDSOLModel`, the InputParameterMap is stored in the Model and can be retrieved with a default method in the Treatment to set the values of the parameters for that particular Experiment. 
+In addition, the `Treatment` specifies the input parameters for the model. As there is one treatment per experiment, the model parameters for all replications in one experiment are the same (with the exception of the seeds of the random number generators). In the default implementation of the `AbstractDsolModel`, the InputParameterMap is stored in the Model and can be retrieved with a default method in the Treatment to set the values of the parameters for that particular Experiment. 
 
 
 ### Experiment
@@ -175,7 +175,7 @@ It is clear from the diagram that:
 * A `Treatment` has a `ReplicationMode` 
 
 !!! Info
-    The `DSOLModel` knows what input parameters it has.<br>
+    The `DsolModel` knows what input parameters it has.<br>
     
 !!! Info
     The `Treatment` or `Experiment` can set the values for the input parameters <br>

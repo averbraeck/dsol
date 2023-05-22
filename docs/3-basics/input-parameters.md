@@ -2,9 +2,9 @@
 
 ## InputParameterMap
 
-Each DSOLModel contains an `InputParameterMap`. The idea of the `InputParameterMap` is to provide an easy way to specify known input parameters of the model. The `InputParameterMap` specifies the typed parameters using a tree structure. Each entry of the Map has a key and a value; the key is a String, and the value is an InputParameter, which can -- again -- be an `InputParameterMap`. Easy-to-use input parameters have been defined, such as the `InputParameterDouble` and the `InputParameterString`. Also more complex input parameters exist, such as the `InputParameterUnit`, the `InputParameterDoubleScalar`, and the `InputParameterDistContinuous`.
+Each DsolModel contains an `InputParameterMap`. The idea of the `InputParameterMap` is to provide an easy way to specify known input parameters of the model. The `InputParameterMap` specifies the typed parameters using a tree structure. Each entry of the Map has a key and a value; the key is a String, and the value is an InputParameter, which can -- again -- be an `InputParameterMap`. Easy-to-use input parameters have been defined, such as the `InputParameterDouble` and the `InputParameterString`. Also more complex input parameters exist, such as the `InputParameterUnit`, the `InputParameterDoubleScalar`, and the `InputParameterDistContinuous`.
 
-The InputParameters that a model needs to run are specified in the DSOLModel; usually in the contructor of the model class. The `AbstractDSOLModel` defines the following field:
+The InputParameters that a model needs to run are specified in the DsolModel; usually in the contructor of the model class. The `AbstractDsolModel` defines the following field:
 
 ```java
 protected InputParameterMap inputParameterMap = 
@@ -143,7 +143,7 @@ this.inputParameterMap.add(paramSelect);
 
 ## Retrieving sub-parameters with dot notation
 
-Suppose we have an `InputParameterMap` for the DSOLModel that contains a sub-map called "other". In the 'other' map, there is a length of type Length called "length". We want to know the si-value of the entered length. The code below goes down the tree step by step...
+Suppose we have an `InputParameterMap` for the DsolModel that contains a sub-map called "other". In the 'other' map, there is a length of type Length called "length". We want to know the si-value of the entered length. The code below goes down the tree step by step...
 
 ```java
 InputParameterMap subMap =(InputParameterMap) this.inputParameterMap.get("other");
