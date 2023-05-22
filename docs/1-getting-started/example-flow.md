@@ -1,4 +1,4 @@
-# Example Queueing model using flow blocks
+# Example DSOL Queueing model using flow blocks
 
 ## Introduction
 An M/M/1 queueing system is a system with one server (that's what the 1 stands for in M/M/1), and parts or clients arriving at the server with an exponentially distributed inter-arrival time (the first M denotes that) and an exponentially distributed service time (the second M denotes that). 
