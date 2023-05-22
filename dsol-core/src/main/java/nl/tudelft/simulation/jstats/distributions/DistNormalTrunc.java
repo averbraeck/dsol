@@ -109,7 +109,7 @@ public class DistNormalTrunc extends DistContinuous
             // rounding error?
             if (Math.abs(d - this.max) < 1.0E-6 * Math.abs(this.max))
             {
-                return this.min;
+                return this.max;
             }
             throw new IllegalStateException(toString() + ": drawn value outside of interval [min, max]: value " + d
                     + " not in [" + this.min + ", " + this.max + "]");
