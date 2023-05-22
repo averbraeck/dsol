@@ -1,0 +1,20 @@
+<html>
+<body>
+<H2>Single-server queueing system.</H2>
+<p>
+Consider a single-server queueing system for which the interarrival times are independent and identically distributed.
+A customer who arrives and finds the server idle enters service immediately. The service time of the server is again an
+independent and identically distributed random variable. A customer who enters and finds the server busy joins the end
+of a single queue. Upon completing service for a customer, the server chooses a customer from the queue in a first-in first-out
+(FIFO) manner. 
+</p>
+<p>
+The MM1 examples illustrated in this package start with a simulator in "empty-and-idle" state. At t=0 we begin with waiting
+for the first arrival which will occur after the first arrival time. We simulate the system until a fixed number of customers (n)
+have completed their delays in queue. To measure the performance of this system, we will look at estimates of 3 quantities. 
+First we will estimate the expected average delay in queue of the n customers completing their service during the simulation. 
+This time delay is represented as d(n). <br> From a system based viewpoint we are going to look at the average number of
+entities in the queue q(n) and to the average utilization of the server u(n). 
+</p>
+</body>
+</html>
