@@ -5,18 +5,21 @@ An M/M/1 queueing system is a system with one server (that's what the 1 stands f
 For an M/M/1 system to be stable, the average service time, denoted as $\lambda$ should be less than the average inter-arrival time, denoted as $\mu$. The ratio between $\lambda$ and $\mu$ is called $\rho = \lambda / \mu$, and it is also known as the average utilization of the queueing system. 
 
 For a typical queueing system, we are interested in simulating different arrival rates with different service times, and studying the following main output variables:
+
 - queue length (development over time, average, standard deviation, min, max)
 - time in queue (development over time, average, standard deviation, min, max)
 - time in system (development over time, average, standard deviation, min, max)
 - utilization of the server (development over time, average)
 
-If we build a simulation model for this, we need four types of components:
-1. An **entity** that flows through the model
-2. an **arrival generator** that makes entities arrive with an interarrival time drawn from the correct distribution
-3. a **server with an attached queue** that can serve entities, and makes them wait in case the server is busy
-4. **output statistics objects** to gather the required 
-5. **random distributions** to draw the inter-arrival time and service time from
-6. A **program** that can be started.
+If we build a simulation model for this, we the following types of components:
+
+1. **An entity** that flows through the model
+2. **An arrival generator** that makes entities arrive with an interarrival time drawn from the correct distribution
+3. **A server** that can serve entities for a given time
+4. **A queue** in which waiting entities can be stored
+5. **Output statistics objects** to gather the required 
+6. **Random distributions** to draw the inter-arrival time and service time from
+7. **A program** that can be started and that creates the simulator, model, and makes it work.
 
 
 ## implementation using event scheduling
@@ -95,12 +98,18 @@ The code to generate an entity would be:
 ```
 
 A few explanations:
-- The `Model` class has a queue called `queue` (see #2), a server capacity called `capacity` (default 1), and a number of entities being processed by the server at this moment called `busy` (0 or 1 in the default situation).
+
+- The `Model` class has a queue called `queue` (see #4), a server capacity called `capacity` (default 1), and a number of entities being processed by the server at this moment called `busy` (0 or 1 in the default situation).
 - The method `simulator.getSimulatorTime()` that is used a few times returns the current time of the simulator.
-- Note that the time stays constant as long as the executed event (method) is busy. If the execution of a method takes 5 minutes on the wall clock (real time), the simulation clock is standing still for that entire duration. On the other hand, if the next event is 1000 years later than the last event, the simulator clock will instantaneously jump 1000 years ahead to execute the next event.
-- There is a statistic called `persistentQueueLength` (see #4) that keeps the statistics for the queue length. Every time an entity enters the queue or leaves the queue, the statistic is updated.
+- There is a statistic called `persistentQueueLength` (see #5) that keeps the statistics for the queue length. Every time an entity enters the queue or leaves the queue, the statistic is updated.
 - The last line re-schedules the `generate()` method. It indicates that we should schedule after a relative duration (`scheduleEventRel`) and not at an absolute point in time. The interarrival time is drawn from a distribution object (see #6) called `interarrivalTime`. The last three arguments indicate the object instance on which the method will eventually be scheduled (`this`), the name of the method (`generate`) and the arguments to pass to the method (`null`), so no arguments.
 
+!!! Note
+    The time stays constant as long as the executed event (method) is busy. If the execution of a method takes 5 minutes on the wall clock (real time), the simulation clock is standing still for that entire duration. On the other hand, if the next event is 1000 years later than the last event, the simulator clock will instantaneously jump 1000 years ahead to execute the next event.
 
-### 2. A server with an attached queue
-When the server is free, it is offered a generated entity at some time. To indicate that the server is busy, we 
+!!! Note
+    The execution of the methods is single-threaded. No parallel execution occurs, and the `Simulator` carries out one event at a time, so we do not have to be afraid that another entity is being generated while we did not yet increase the `busy` flag of the server. The next event will only be carried out when the current event, including method calls to other methods, has been completed. 
+
+
+### 3. A server with an attached queue
+When the server is free, it is offered a generated entity at some time. To indicate that the server is busy, we set the 
