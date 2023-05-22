@@ -15,7 +15,7 @@ import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
-import nl.tudelft.simulation.naming.context.JVMContext;
+import nl.tudelft.simulation.naming.context.JvmContext;
 
 /**
  * OsmParserTest tests the PBF and OSM gis readers.
@@ -40,7 +40,7 @@ public class OsmParserTest implements Contextualized
     @Test
     public void testOsmPbfParser() throws IOException, NamingException
     {
-        this.context = new JVMContext(null, "rootPbf");
+        this.context = new JvmContext(null, "rootPbf");
         URL csvUrl = URLResource.getResource("/resources/osm/tudelft.csv");
         URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.pbf");
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");
@@ -62,7 +62,7 @@ public class OsmParserTest implements Contextualized
     @Test
     public void testOsmGzipParser() throws IOException, NamingException
     {
-        this.context = new JVMContext(null, "rootCsv");
+        this.context = new JvmContext(null, "rootCsv");
         URL csvUrl = URLResource.getResource("/resources/osm/tudelft.csv");
         URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.gz");
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");

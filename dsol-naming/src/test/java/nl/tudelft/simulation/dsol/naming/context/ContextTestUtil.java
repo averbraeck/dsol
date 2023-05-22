@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 import java.lang.reflect.Field;
 
 import nl.tudelft.simulation.naming.context.FileContextFactory;
-import nl.tudelft.simulation.naming.context.JVMContextFactory;
+import nl.tudelft.simulation.naming.context.JvmContextFactory;
 import nl.tudelft.simulation.naming.context.RemoteContextFactory;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 
@@ -62,7 +62,7 @@ public final class ContextTestUtil
             contextEventProducerImpl.setAccessible(false);
             
             // clean the static fields in the context factories
-            Field jvmContext = JVMContextFactory.class.getDeclaredField("context");
+            Field jvmContext = JvmContextFactory.class.getDeclaredField("context");
             jvmContext.setAccessible(true);
             jvmContext.set(null, null);
             jvmContext.setAccessible(false);

@@ -16,7 +16,7 @@ import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2d;
 import nl.tudelft.simulation.dsol.animation.gis.MapUnits;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
-import nl.tudelft.simulation.naming.context.JVMContext;
+import nl.tudelft.simulation.naming.context.JvmContext;
 
 /**
  * EsriParserTest tests the parser for the Esri shape files. 
@@ -41,7 +41,7 @@ public class EsriParserTest implements Contextualized
     @Test
     public void testXmlParser() throws IOException, NamingException
     {
-        this.context = new JVMContext(null, "rootXml");
+        this.context = new JvmContext(null, "rootXml");
         URL url = URLResource.getResource("/resources/esri/tudelft.xml");
         assertNotNull(url);
         GisMapInterface map = EsriFileXmlParser.parseMapFile(url);
@@ -64,7 +64,7 @@ public class EsriParserTest implements Contextualized
     @Test
     public void testCsvParser() throws IOException, NamingException
     {
-        this.context = new JVMContext(null, "rootCsv");
+        this.context = new JvmContext(null, "rootCsv");
         URL url = URLResource.getResource("/resources/esri/tudelft.csv");
         assertNotNull(url);
         GisMapInterface map = EsriFileCsvParser.parseMapFile(url, "tudelft");

@@ -3,7 +3,7 @@ package nl.tudelft.simulation.naming.context;
 import java.util.Hashtable;
 
 /**
- * A factory for JVMContext instances, automatically invoked by JNDI when the correct jndi.properties file has been used.
+ * A factory for JvmContext instances, automatically invoked by JNDI when the correct jndi.properties file has been used.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -14,10 +14,10 @@ import java.util.Hashtable;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class JVMContextFactory implements ContextFactory
+public class JvmContextFactory implements ContextFactory
 {
-    /** context refers to the static JVMContext. */
-    private static JVMContext context = null;
+    /** context refers to the static JvmContext. */
+    private static JvmContext context = null;
 
     /** {@inheritDoc} */
     @Override
@@ -25,7 +25,7 @@ public class JVMContextFactory implements ContextFactory
     {
         if (context == null)
         {
-            JVMContextFactory.context = new JVMContext(atomicName);
+            JvmContextFactory.context = new JvmContext(atomicName);
         }
         return context;
     }

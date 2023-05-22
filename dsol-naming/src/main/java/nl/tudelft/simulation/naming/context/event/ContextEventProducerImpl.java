@@ -23,7 +23,7 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
 /**
  * ContextEventProducerImpl carries out the implementation for the EventContext classes. The class registers as a listener on
  * the root of the InitialEventContext or the RemoteEventContext. Whenever sub-contexts are added (these will typically not be
- * of type EventContext, but rather of type JVMContext, FileContext, RemoteContext, or other), this class also registers as a
+ * of type EventContext, but rather of type JvmContext, FileContext, RemoteContext, or other), this class also registers as a
  * listener on these sub-contexts. Thereby, it remains aware of all changes happening in the sub-contexts of which it may be
  * notified.<br>
  * <br>

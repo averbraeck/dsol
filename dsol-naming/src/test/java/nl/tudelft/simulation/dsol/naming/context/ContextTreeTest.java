@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.FileContext;
-import nl.tudelft.simulation.naming.context.JVMContext;
+import nl.tudelft.simulation.naming.context.JvmContext;
 import nl.tudelft.simulation.naming.context.RemoteContext;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -49,10 +49,10 @@ public class ContextTreeTest
     @Test
     public void testContextTree() throws NamingException, RemoteException, IOException, AlreadyBoundException
     {
-        // test JVMContext
-        ContextInterface jvmContext = new JVMContext(null, "root");
+        // test JvmContext
+        ContextInterface jvmContext = new JvmContext(null, "root");
         testContextTree(jvmContext);
-        jvmContext = new JVMContext(null, "root");
+        jvmContext = new JvmContext(null, "root");
         testContextUtil(jvmContext);
 
         // test FileContext directly
@@ -68,7 +68,7 @@ public class ContextTreeTest
         testContextUtil(fileContext);
 
         // test RemoteContext directly
-        RemoteContext remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JVMContext(null, "root"),
+        RemoteContext remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JvmContext(null, "root"),
                 "remoteEventProducerKey");
         testContextTree(remoteContext);
         try
@@ -80,7 +80,7 @@ public class ContextTreeTest
             // TODO: research why RmiRegistry.closeRegistry(remoteContext.getRegistry()) gives an error
             System.err.println(e.getMessage());
         }
-        remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JVMContext(null, "root"),
+        remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JvmContext(null, "root"),
                 "remoteEventProducerKey");
         testContextUtil(remoteContext);
         try
@@ -95,7 +95,7 @@ public class ContextTreeTest
 
         // test InitialEventContext
         Properties properties = new Properties();
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JVMContextFactory");
+        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
         InitialEventContext eventContext = InitialEventContext.instantiate(properties, "root");
         testContextTree(eventContext);
         eventContext.close();
@@ -120,7 +120,7 @@ public class ContextTreeTest
         // test RemoteContext
         properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.RemoteContextFactory");
         properties.put("java.naming.provider.url", "http://localhost:1099/remoteContext");
-        properties.put("wrapped.naming.factory.initial", "nl.tudelft.simulation.naming.context.JVMContextFactory");
+        properties.put("wrapped.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
         InitialEventContext remoteEventContext = InitialEventContext.instantiate(properties, "root");
         testContextTree(remoteEventContext);
         ContextTestUtil.destroyInitialEventContext(eventContext);

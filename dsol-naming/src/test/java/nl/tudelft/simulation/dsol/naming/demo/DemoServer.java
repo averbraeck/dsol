@@ -14,7 +14,7 @@ import org.djutils.event.EventProducer;
 import org.djutils.rmi.RmiObject;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
-import nl.tudelft.simulation.naming.context.JVMContext;
+import nl.tudelft.simulation.naming.context.JvmContext;
 import nl.tudelft.simulation.naming.context.event.RemoteEventContext;
 import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
 
@@ -50,7 +50,7 @@ public class DemoServer extends RmiObject implements EventProducer
         this.eventListenerMap = new EventListenerMap();
         URL url = new URL("http://127.0.0.1:1099/remoteContext");
         RemoteEventContextInterface remoteContext =
-                new RemoteEventContext(url, new JVMContext("root"), "remoteContext.producer");
+                new RemoteEventContext(url, new JvmContext("root"), "remoteContext.producer");
 
         remoteContext.bind("key1", "string1");
         remoteContext.bind("key2", "string2");

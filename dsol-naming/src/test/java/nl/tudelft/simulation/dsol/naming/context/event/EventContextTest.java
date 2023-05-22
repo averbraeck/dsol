@@ -51,7 +51,7 @@ public class EventContextTest
         {
             Hashtable<String, String> environment = new Hashtable<>();
             environment.put(InitialEventContext.INITIAL_CONTEXT_FACTORY,
-                    "nl.tudelft.simulation.naming.context.JVMContextFactory");
+                    "nl.tudelft.simulation.naming.context.JvmContextFactory");
             ctx = InitialEventContext.instantiate(environment, "root");
 
             // get the embedded contextEventProducer
@@ -175,7 +175,7 @@ public class EventContextTest
         {
             Hashtable<String, String> environment = new Hashtable<>();
             environment.put(InitialEventContext.INITIAL_CONTEXT_FACTORY,
-                    "nl.tudelft.simulation.naming.context.JVMContextFactory");
+                    "nl.tudelft.simulation.naming.context.JvmContextFactory");
             context = InitialEventContext.instantiate(environment, "root");
 
             // make the start of a tree

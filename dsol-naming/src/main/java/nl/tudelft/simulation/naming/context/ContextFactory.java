@@ -20,7 +20,7 @@ public interface ContextFactory
 {
     /**
      * Creates an Initial Context for beginning name resolution. Special requirements of this context are supplied using
-     * <code>environment</code>. Different implementations exist, such as the JVMContext, the FileContext and the RemoteContext.
+     * <code>environment</code>. Different implementations exist, such as the JvmContext, the FileContext and the RemoteContext.
      * A remote context registers itself in the RMI registry using a provided key from the environment. The remote event
      * producer for the remote context uses that same key, extended with the string "_producer".
      * @param environment The possibly null environment specifying information to be used in the creation of the initial context

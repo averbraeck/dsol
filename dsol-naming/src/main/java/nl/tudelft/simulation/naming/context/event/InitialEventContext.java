@@ -184,7 +184,7 @@ public final class InitialEventContext implements EventContext
         String[] keys = new String[] {INITIAL_CONTEXT_FACTORY, PROVIDER_URL, WRAPPED_CONTEXT_FACTORY};
 
         // (1) defaults
-        result.put(INITIAL_CONTEXT_FACTORY, "nl.tudelft.simulation.naming.context.JVMContextFactory");
+        result.put(INITIAL_CONTEXT_FACTORY, "nl.tudelft.simulation.naming.context.JvmContextFactory");
 
         // (2) system properties
         Map<String, String> sysEnv = System.getenv();

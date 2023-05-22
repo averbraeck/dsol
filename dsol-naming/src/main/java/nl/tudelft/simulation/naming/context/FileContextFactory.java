@@ -23,7 +23,7 @@ import org.djutils.logger.CategoryLogger;
  */
 public class FileContextFactory implements ContextFactory
 {
-    /** context refers to the static JVMContext. */
+    /** context refers to the static JvmContext. */
     private static FileContext context = null;
 
     /** {@inheritDoc} */

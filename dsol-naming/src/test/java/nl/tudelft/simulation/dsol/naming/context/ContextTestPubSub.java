@@ -25,7 +25,7 @@ import org.junit.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.FileContext;
-import nl.tudelft.simulation.naming.context.JVMContext;
+import nl.tudelft.simulation.naming.context.JvmContext;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 
 /**
@@ -51,8 +51,8 @@ public class ContextTestPubSub
     @Test
     public void testContextPubSub() throws NamingException, RemoteException, IOException, AlreadyBoundException
     {
-        // test JVMContext
-        ContextInterface jvmContext = new JVMContext(null, "root");
+        // test JvmContext
+        ContextInterface jvmContext = new JvmContext(null, "root");
         assertNull(jvmContext.getParent());
         assertEquals("root", jvmContext.getAtomicName());
         assertEquals(jvmContext, jvmContext.getRootContext());
@@ -68,7 +68,7 @@ public class ContextTestPubSub
 
         // test InitialEventContext
         Properties properties = new Properties();
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JVMContextFactory");
+        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
         InitialEventContext eventContext = InitialEventContext.instantiate(properties, "root");
         assertNull(eventContext.getParent());
         assertEquals("root", eventContext.getAtomicName());

@@ -20,7 +20,7 @@ import org.djutils.logger.CategoryLogger;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
 
 /**
- * The JVMContext is an in-memory, thread-safe context implementation of the ContextInterface.
+ * The JvmContext is an in-memory, thread-safe context implementation of the ContextInterface.
  * <p>
  * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -30,7 +30,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class JVMContext extends LocalEventProducer implements ContextInterface
+public class JvmContext extends LocalEventProducer implements ContextInterface
 {
     /** */
     private static final long serialVersionUID = 20200101L;
@@ -48,20 +48,20 @@ public class JVMContext extends LocalEventProducer implements ContextInterface
     protected Map<String, Object> elements = Collections.synchronizedMap(new TreeMap<String, Object>());
 
     /**
-     * constructs a new root JVMContext.
+     * constructs a new root JvmContext.
      * @param atomicName String; the name under which the root context will be registered
      */
-    public JVMContext(final String atomicName)
+    public JvmContext(final String atomicName)
     {
         this(null, atomicName);
     }
 
     /**
-     * Constructs a new JVMContext.
+     * Constructs a new JvmContext.
      * @param parent Context; the parent context
      * @param atomicName String; the name under which the context will be registered
      */
-    public JVMContext(final ContextInterface parent, final String atomicName)
+    public JvmContext(final ContextInterface parent, final String atomicName)
     {
         Throw.whenNull(atomicName, "name under which a context is registered cannot be null");
         Throw.when(atomicName.contains(ContextInterface.SEPARATOR), IllegalArgumentException.class,
@@ -337,7 +337,7 @@ public class JVMContext extends LocalEventProducer implements ContextInterface
             int index = reference.indexOf(ContextInterface.SEPARATOR);
             if (index == -1)
             {
-                ContextInterface newContext = new JVMContext(subContext, reference);
+                ContextInterface newContext = new JvmContext(subContext, reference);
                 subContext.bind(reference, newContext);
                 subContext = newContext;
                 break;
@@ -346,7 +346,7 @@ public class JVMContext extends LocalEventProducer implements ContextInterface
             reference = reference.substring(index + ContextInterface.SEPARATOR.length());
             if (!subContext.hasKey(sub))
             {
-                ContextInterface newContext = new JVMContext(subContext, sub);
+                ContextInterface newContext = new JvmContext(subContext, sub);
                 subContext.bind(sub, newContext);
                 subContext = newContext;
             }
@@ -496,7 +496,7 @@ public class JVMContext extends LocalEventProducer implements ContextInterface
         {
             parentName = "unreachable";
         }
-        return "JVMContext[parent=" + parentName + ", atomicName=" + this.atomicName + "]";
+        return "JvmContext[parent=" + parentName + ", atomicName=" + this.atomicName + "]";
     }
 
     /** {@inheritDoc} */
@@ -505,7 +505,7 @@ public class JVMContext extends LocalEventProducer implements ContextInterface
     {
         if (!verbose)
         {
-            return "JVMContext[" + getAtomicName() + "]";
+            return "JvmContext[" + getAtomicName() + "]";
         }
         return ContextUtil.toText(this);
     }

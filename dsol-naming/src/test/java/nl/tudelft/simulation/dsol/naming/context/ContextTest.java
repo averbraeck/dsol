@@ -32,7 +32,7 @@ import org.junit.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.FileContext;
-import nl.tudelft.simulation.naming.context.JVMContext;
+import nl.tudelft.simulation.naming.context.JvmContext;
 import nl.tudelft.simulation.naming.context.RemoteContext;
 import nl.tudelft.simulation.naming.context.RemoteContextInterface;
 import nl.tudelft.simulation.naming.context.event.ContextScope;
@@ -64,8 +64,8 @@ public class ContextTest
         // test the ContextName object
         testContextName();
 
-        // test JVMContext
-        ContextInterface jvmContext = new JVMContext(null, "root");
+        // test JvmContext
+        ContextInterface jvmContext = new JvmContext(null, "root");
         assertNull(jvmContext.getParent());
         assertEquals("root", jvmContext.getAtomicName());
         assertEquals(jvmContext, jvmContext.getRootContext());
@@ -79,7 +79,7 @@ public class ContextTest
         testContext(fileContext, fileContext, true);
 
         // test RemoteContext directly
-        ContextInterface embeddedContext = new JVMContext(null, "root");
+        ContextInterface embeddedContext = new JvmContext(null, "root");
         RemoteContext remoteContext =
                 new RemoteContext("127.0.0.1", 1099, "remoteContextKey", embeddedContext, "remoteEventProducerKey");
         testContext(remoteContext, embeddedContext, true);
@@ -94,7 +94,7 @@ public class ContextTest
 
         // test InitialEventContext
         Properties properties = new Properties();
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JVMContextFactory");
+        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
         InitialEventContext eventContext = InitialEventContext.instantiate(properties, "root");
         assertNull(eventContext.getParent());
         assertEquals("root", eventContext.getAtomicName());
@@ -128,7 +128,7 @@ public class ContextTest
         // test RemoteEventContext
         properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.RemoteContextFactory");
         properties.put("java.naming.provider.url", "http://localhost:1099/remoteContext");
-        properties.put("wrapped.naming.factory.initial", "nl.tudelft.simulation.naming.context.JVMContextFactory");
+        properties.put("wrapped.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
         InitialEventContext remoteEventContext = InitialEventContext.instantiate(properties, "root");
         testContext(remoteEventContext, remoteEventContext.getRootContext(), false);
         ContextTestUtil.destroyInitialEventContext(remoteEventContext);
@@ -452,31 +452,31 @@ public class ContextTest
      */
     public void testContextName()
     {
-        ContextInterface c1 = new JVMContext(null, "c1");
-        ContextInterface c2 = new JVMContext(null, "c2");
+        ContextInterface c1 = new JvmContext(null, "c1");
+        ContextInterface c2 = new JvmContext(null, "c2");
         String name1 = "name1";
         String name2 = "name2";
-        JVMContext.ContextName cn1 = new JVMContext.ContextName(c1, name1);
-        JVMContext.ContextName cn2 = new JVMContext.ContextName(c2, name2);
+        JvmContext.ContextName cn1 = new JvmContext.ContextName(c1, name1);
+        JvmContext.ContextName cn2 = new JvmContext.ContextName(c2, name2);
 
         assertEquals(cn1, cn1);
-        assertEquals(cn1, new JVMContext.ContextName(c1, name1));
+        assertEquals(cn1, new JvmContext.ContextName(c1, name1));
         assertNotEquals(cn1, cn2);
         assertNotEquals(cn1, null);
         assertNotEquals(cn1, new Object());
-        assertNotEquals(cn1, new JVMContext.ContextName(null, name1));
-        assertNotEquals(cn1, new JVMContext.ContextName(c1, null));
-        assertNotEquals(new JVMContext.ContextName(null, name1), cn1);
-        assertNotEquals(new JVMContext.ContextName(c1, null), cn1);
-        assertNotEquals(new JVMContext.ContextName(null, name1), new JVMContext.ContextName(null, name2));
-        assertEquals(new JVMContext.ContextName(null, name1), new JVMContext.ContextName(null, name1));
-        assertNotEquals(new JVMContext.ContextName(c1, null), new JVMContext.ContextName(c2, null));
-        assertEquals(new JVMContext.ContextName(c1, null), new JVMContext.ContextName(c1, null));
+        assertNotEquals(cn1, new JvmContext.ContextName(null, name1));
+        assertNotEquals(cn1, new JvmContext.ContextName(c1, null));
+        assertNotEquals(new JvmContext.ContextName(null, name1), cn1);
+        assertNotEquals(new JvmContext.ContextName(c1, null), cn1);
+        assertNotEquals(new JvmContext.ContextName(null, name1), new JvmContext.ContextName(null, name2));
+        assertEquals(new JvmContext.ContextName(null, name1), new JvmContext.ContextName(null, name1));
+        assertNotEquals(new JvmContext.ContextName(c1, null), new JvmContext.ContextName(c2, null));
+        assertEquals(new JvmContext.ContextName(c1, null), new JvmContext.ContextName(c1, null));
 
         assertEquals(cn1.hashCode(), cn1.hashCode());
         assertNotEquals(cn1.hashCode(), cn2.hashCode());
-        assertNotEquals(cn1.hashCode(), new JVMContext.ContextName(c1, null).hashCode());
-        assertNotEquals(cn1.hashCode(), new JVMContext.ContextName(null, name1).hashCode());
+        assertNotEquals(cn1.hashCode(), new JvmContext.ContextName(c1, null).hashCode());
+        assertNotEquals(cn1.hashCode(), new JvmContext.ContextName(null, name1).hashCode());
 
         assertTrue(cn1.toString().contains("name=name1"));
         assertTrue(cn1.toString().contains("atomicName=c1"));
