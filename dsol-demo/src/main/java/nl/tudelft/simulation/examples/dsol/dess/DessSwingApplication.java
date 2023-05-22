@@ -21,13 +21,13 @@ import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DESSSwingApplication extends DSOLApplication
+public class DessSwingApplication extends DSOLApplication
 {
     /**
      * @param title String; the title
      * @param panel DSOLPanel&lt;Double,Double,Double&gt;; the panel
      */
-    public DESSSwingApplication(final String title, final DSOLPanel panel)
+    public DessSwingApplication(final String title, final DSOLPanel panel)
     {
         super(panel, title);
         panel.enableSimulationControlButtons();
@@ -45,10 +45,10 @@ public class DESSSwingApplication extends DSOLApplication
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
         DessSimulator<Double> simulator = new DessSimulator<Double>("DESSSwingApplication", 0.1);
-        DESSModel model = new DESSModel(simulator);
+        DessModel model = new DessModel(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 100.0);
         simulator.initialize(model, replication);
-        new DESSSwingApplication("DESS model", new DESSPanel(model, simulator));
+        new DessSwingApplication("DESS model", new DessPanel(model, simulator));
     }
 
 }

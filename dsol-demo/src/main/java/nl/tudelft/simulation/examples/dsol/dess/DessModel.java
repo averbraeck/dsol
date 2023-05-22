@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DESSModel extends AbstractDsolModel<Double, DessSimulatorInterface<Double>>
+public class DessModel extends AbstractDsolModel<Double, DessSimulatorInterface<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class DESSModel extends AbstractDsolModel<Double, DessSimulatorInterface<
      * constructs a new DESSModel.
      * @param simulator DessSimulatorInterface&lt;Double&gt;; the continuous simulator
      */
-    public DESSModel(final DessSimulatorInterface<Double> simulator)
+    public DessModel(final DessSimulatorInterface<Double> simulator)
     {
         super(simulator);
     }

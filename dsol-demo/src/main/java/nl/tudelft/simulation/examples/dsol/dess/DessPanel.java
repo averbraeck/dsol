@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DESSPanel extends DSOLPanel
+public class DessPanel extends DSOLPanel
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class DESSPanel extends DSOLPanel
      * @param simulator DessSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on error
      */
-    public DESSPanel(final DESSModel model, final DessSimulatorInterface<Double> simulator) throws RemoteException
+    public DessPanel(final DessModel model, final DessSimulatorInterface<Double> simulator) throws RemoteException
     {
         super(new GenericControlPanel<>(model, simulator));
 
