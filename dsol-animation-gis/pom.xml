@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.tudelft.simulation</groupId>
     <artifactId>dsol</artifactId>
-    <version>4.2.0-SNAPSHOT</version>
+    <version>4.2.0</version>
   </parent>
 
   <artifactId>dsol-animation-gis</artifactId>
