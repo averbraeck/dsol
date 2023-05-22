@@ -8,7 +8,8 @@ theme:
   navigation_depth: 1
     
 markdown_extensions:
-  - mathjax
+  - pymdownx.arithmatex:
+      generic: true
   - admonition
 
 extra_css: 
