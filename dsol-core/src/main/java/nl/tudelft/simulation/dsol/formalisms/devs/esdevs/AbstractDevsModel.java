@@ -16,8 +16,8 @@ import org.djutils.reflection.ClassUtil;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * AbstractDEVSModel class. The basic model or component from which the AtomicModel, the CoupledModel, and the AbstractEntity
- * are derived. The DEVSModel provides basic functionality for reporting its state changes through the publish/subscribe
+ * AbstractDevsModel class. The basic model or component from which the AtomicModel, the CoupledModel, and the AbstractEntity
+ * are derived. The DevsModel provides basic functionality for reporting its state changes through the publish/subscribe
  * mechanism.
  * <p>
  * Copyright (c) 2009-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
@@ -75,7 +75,7 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
     private static Set<Field> abstractDEVSFields = new LinkedHashSet<Field>();
 
     /**
-     * Static constructor. Takes care of filling the static constants the first time an extension of the AbstractDEVSModel is
+     * Static constructor. Takes care of filling the static constants the first time an extension of the AbstractDevsModel is
      * created.
      */
     static

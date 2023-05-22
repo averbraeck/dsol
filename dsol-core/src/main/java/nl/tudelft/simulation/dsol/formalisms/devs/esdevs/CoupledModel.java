@@ -271,7 +271,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * Add a model component to this coupled model.
-     * @param model AbstractDEVSModel&lt;T&gt;; the component to add.
+     * @param model AbstractDevsModel&lt;T&gt;; the component to add.
      */
     public void addModelComponent(final AbstractDevsModel<T> model)
     {
@@ -292,7 +292,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * Remove a model component from a coupled model, including all its couplings (internal, external in, and external out).
-     * @param model AbstractDEVSModel&lt;T&gt;; the component to remove.
+     * @param model AbstractDevsModel&lt;T&gt;; the component to remove.
      */
     public void removeModelComponent(final AbstractDevsModel<T> model)
     {
