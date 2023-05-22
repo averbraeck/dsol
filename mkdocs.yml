@@ -1,7 +1,7 @@
 site_name: DSOL MANUAL
 site_url: https://simulation.tudelft.nl/dsol/manual/
 site_favicon: images/favicon.png
-copyright: (c) 2002-2022 Delft University of Technology
+copyright: (c) 2002-2023 Delft University of Technology
 
 theme:
   name: readthedocs
