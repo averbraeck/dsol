@@ -1,3 +1,3 @@
-# Example Queuing model using flow blocks
+# Example Queueing model using flow blocks
 
 ## Introduction
