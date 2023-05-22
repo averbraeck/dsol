@@ -37,9 +37,9 @@ import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.dsol.web.animation.D2.HTMLAnimationPanel;
-import nl.tudelft.simulation.dsol.web.animation.D2.HTMLGridPanel;
-import nl.tudelft.simulation.dsol.web.animation.D2.ToggleButtonInfo;
+import nl.tudelft.simulation.dsol.web.animation.d2.HTMLAnimationPanel;
+import nl.tudelft.simulation.dsol.web.animation.d2.HTMLGridPanel;
+import nl.tudelft.simulation.dsol.web.animation.d2.ToggleButtonInfo;
 import nl.tudelft.simulation.introspection.Property;
 import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
 

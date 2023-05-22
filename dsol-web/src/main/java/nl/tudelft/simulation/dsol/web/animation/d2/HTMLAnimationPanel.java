@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.web.animation.D2;
+package nl.tudelft.simulation.dsol.web.animation.d2;
 
 import java.awt.Color;
 import java.awt.Dimension;

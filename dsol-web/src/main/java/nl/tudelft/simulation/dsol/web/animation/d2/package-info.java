@@ -8,4 +8,4 @@
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-package nl.tudelft.simulation.dsol.web.animation.D2;
+package nl.tudelft.simulation.dsol.web.animation.d2;
