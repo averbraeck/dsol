@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
@@ -50,7 +50,7 @@ public class SimPersistentTest extends LocalEventProducer
     public void testSimPersistent() throws NamingException, RemoteException
     {
         DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
-        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
+        DsolModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 

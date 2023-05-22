@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 
@@ -33,9 +33,9 @@ public class InputParametersTab extends JPanel
     
     /**
      * Create an InputParametersTab for the given simulation model.
-     * @param model DSOLModel; the model.
+     * @param model DsolModel; the model.
      */
-    public InputParametersTab(final DSOLModel<?, ?> model)
+    public InputParametersTab(final DsolModel<?, ?> model)
     {
         this.inputParameterMap = model.getInputParameterMap();
         JEditorPane textPane = new JEditorPane("text/html", "");

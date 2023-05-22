@@ -8,7 +8,7 @@ import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DessSimulator;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
 
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class PredatorPreyModel extends AbstractDSOLModel<Double, DessSimulator<Double>>
+public class PredatorPreyModel extends AbstractDsolModel<Double, DessSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

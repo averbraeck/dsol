@@ -12,7 +12,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.Executable;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.LambdaSimEvent;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
 
 /**
@@ -65,7 +65,7 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"hiding", "checkstyle:hiddenfield"})
-    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
+    public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
             throws SimRuntimeException
     {
         // this check HAS to be done BEFORE clearing the event list

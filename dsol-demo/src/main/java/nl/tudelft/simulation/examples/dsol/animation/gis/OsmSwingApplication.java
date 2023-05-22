@@ -16,7 +16,7 @@ import nl.tudelft.simulation.dsol.animation.gis.osm.OsmFileCsvParser;
 import nl.tudelft.simulation.dsol.animation.gis.osm.OsmRenderable2d;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
@@ -80,7 +80,7 @@ public class OsmSwingApplication extends DSOLAnimationApplication
     }
 
     /** The empty model -- this demo is just to show a map on the screen. */
-    static class EmptyModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+    static class EmptyModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
         /** The default serial version UID for serializable classes. */
         private static final long serialVersionUID = 1L;

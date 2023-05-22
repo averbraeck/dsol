@@ -5,7 +5,7 @@ import java.net.URL;
 import org.djutils.io.URLResource;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 
 /**
@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  */
-public class GISModel extends AbstractDSOLModel<Double, DevsRealTimeAnimator.TimeDouble>
+public class GISModel extends AbstractDsolModel<Double, DevsRealTimeAnimator.TimeDouble>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

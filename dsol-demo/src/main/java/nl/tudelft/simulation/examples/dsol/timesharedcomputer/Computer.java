@@ -6,8 +6,8 @@ import org.djutils.event.Event;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -28,7 +28,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Computer extends AbstractDSOLModel<Double, DevsSimulator<Double>>
+public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -96,10 +96,10 @@ public class Computer extends AbstractDSOLModel<Double, DevsSimulator<Double>>
         /**
          * constructs a new ExitCounter.
          * @param description String; the description of the counter
-         * @param model DSOLModel&lt;Double, SimulatorInterface&lt;Double&gt;&gt;; the model to register the OutputStatistics
+         * @param model DsolModel&lt;Double, SimulatorInterface&lt;Double&gt;&gt;; the model to register the OutputStatistics
          * @throws RemoteException on network failure
          */
-        public ExitCounter(final String description, final DSOLModel<Double, DevsSimulator<Double>> model)
+        public ExitCounter(final String description, final DsolModel<Double, DevsSimulator<Double>> model)
                 throws RemoteException
         {
             super(description, model);

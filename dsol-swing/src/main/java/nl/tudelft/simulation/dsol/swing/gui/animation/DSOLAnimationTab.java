@@ -90,7 +90,7 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
     private Map<Class<? extends Locatable>, JToggleButton> toggleButtons = new LinkedHashMap<>();
 
     /**
-     * Construct a tab with an AnimationPanel for the animation of a DSOLModel.
+     * Construct a tab with an AnimationPanel for the animation of a DsolModel.
      * @param homeExtent Bounds2d; initial extent of the animation
      * @param simulator SimulatorInterface; the simulator
      * @throws RemoteException on network error in case of a distributed simulation
@@ -103,7 +103,7 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
     }
 
     /**
-     * Construct a tab with an AnimationPanel for the animation of a DSOLModel.
+     * Construct a tab with an AnimationPanel for the animation of a DsolModel.
      * @param simulator SimulatorInterface; the simulator
      * @param animationPanel AnimationPanel; the animation panel to use, e.g. the AutoPanAnimationPanel
      * @throws RemoteException on network error in case of a distributed simulation
@@ -126,7 +126,7 @@ public class DSOLAnimationTab extends JPanel implements ActionListener, EventLis
     }
 
     /**
-     * Construct a tab with an AutoPanAnimationPanel and a linked SearchPanel for the animation of a DSOLModel.
+     * Construct a tab with an AutoPanAnimationPanel and a linked SearchPanel for the animation of a DsolModel.
      * @param homeExtent Bounds2d; initial extent of the animation
      * @param simulator SimulatorInterface; the simulator
      * @return DSOLAnimationTab; a tab with an AutoPanAnimationPanel and a linked SearchPanel

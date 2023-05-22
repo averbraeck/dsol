@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
- * The model interface defines the model object. Since version 2.1.0 of DSOL, the DSOLModel now knows its simulator and can
+ * The model interface defines the model object. Since version 2.1.0 of DSOL, the DsolModel now knows its simulator and can
  * return it to anyone interested. Through the Simulator, the Replication can be requested and through that the Experiment and
  * the Treatment under which the simulation is running.
  * <p>
@@ -28,7 +28,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator to use
  */
-public interface DSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends Serializable
+public interface DsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends Serializable
 {
     /**
      * construct a model on a simulator.

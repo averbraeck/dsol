@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
@@ -32,7 +32,7 @@ public class MM1Application
     protected MM1Application() throws SimRuntimeException, RemoteException, NamingException
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("MM1SwingApplication.Simulator");
-        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
+        DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
         simulator.start();

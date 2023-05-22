@@ -19,8 +19,8 @@ import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.Sleep;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
@@ -50,7 +50,7 @@ public class ExperimentTest
     public void testDoubleExperiment()
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
-        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, new LinkedHashMap<>());
+        DsolModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, new LinkedHashMap<>());
         Experiment<Double, DevsSimulatorInterface<Double>> expd =
                 new Experiment<>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
 
@@ -117,8 +117,8 @@ public class ExperimentTest
     {
         // generic experiment
         DevsSimulator<Double> simd = new DevsSimulator<>("simulator");
-        DSOLModel<Double, DevsSimulatorInterface<Double>> modd =
-                new AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>(simd)
+        DsolModel<Double, DevsSimulatorInterface<Double>> modd =
+                new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simd)
                 {
                     /** */
                     private static final long serialVersionUID = 1L;
@@ -136,7 +136,7 @@ public class ExperimentTest
 
         // float experiment
         DevsSimulator<Float> simf = new DevsSimulator<Float>("simulator");
-        DSOLModel<Float, DevsSimulatorInterface<Float>> modf = new AbstractDSOLModel<Float, DevsSimulatorInterface<Float>>(simf)
+        DsolModel<Float, DevsSimulatorInterface<Float>> modf = new AbstractDsolModel<Float, DevsSimulatorInterface<Float>>(simf)
         {
 
             /** */
@@ -156,7 +156,7 @@ public class ExperimentTest
 
         // long experiment
         DevsSimulator<Long> siml = new DevsSimulator<Long>("simulator");
-        DSOLModel<Long, DevsSimulatorInterface<Long>> modl = new AbstractDSOLModel<Long, DevsSimulatorInterface<Long>>(siml)
+        DsolModel<Long, DevsSimulatorInterface<Long>> modl = new AbstractDsolModel<Long, DevsSimulatorInterface<Long>>(siml)
         {
 
             /** */
@@ -176,8 +176,8 @@ public class ExperimentTest
 
         // double unit experiment
         DevsSimulator<Duration> simdu = new DevsSimulator<Duration>("simulator");
-        DSOLModel<Duration, DevsSimulatorInterface<Duration>> moddu =
-                new AbstractDSOLModel<Duration, DevsSimulatorInterface<Duration>>(simdu)
+        DsolModel<Duration, DevsSimulatorInterface<Duration>> moddu =
+                new AbstractDsolModel<Duration, DevsSimulatorInterface<Duration>>(simdu)
                 {
 
                     /** */
@@ -197,8 +197,8 @@ public class ExperimentTest
 
         // float unit experiment
         DevsSimulator<FloatDuration> simfu = new DevsSimulator<FloatDuration>("simulator");
-        DSOLModel<FloatDuration, DevsSimulatorInterface<FloatDuration>> modfu =
-                new AbstractDSOLModel<FloatDuration, DevsSimulatorInterface<FloatDuration>>(simfu)
+        DsolModel<FloatDuration, DevsSimulatorInterface<FloatDuration>> modfu =
+                new AbstractDsolModel<FloatDuration, DevsSimulatorInterface<FloatDuration>>(simfu)
                 {
 
                     /** */
@@ -226,7 +226,7 @@ public class ExperimentTest
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
-        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
+        DsolModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
         Experiment<Double, DevsSimulatorInterface<Double>> expd =
                 new Experiment<Double, DevsSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 1.0, 12.0, 10);
 
@@ -276,7 +276,7 @@ public class ExperimentTest
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
-        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
+        DsolModel<Double, DevsSimulatorInterface<Double>> model = new CountModel(simulator, dataCollector);
         StreamSeedInformation streamInformation = new StreamSeedInformation();
         streamInformation.addStream("default", new MersenneTwister(10L));
         streamInformation.addStream("iatStream", new MersenneTwister(20L));
@@ -317,7 +317,7 @@ public class ExperimentTest
     public void testSummaryStatistics() throws RemoteException
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
-        DSOLModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
+        DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
         Experiment<Double, DevsSimulatorInterface<Double>> expd =
                 new Experiment<Double, DevsSimulatorInterface<Double>>("Exp 1", simulator, model, 10.0, 10.0, 20.0, 10);
 
@@ -337,7 +337,7 @@ public class ExperimentTest
     /**
      * Model class.
      */
-    public static class CountModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+    public static class CountModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -382,7 +382,7 @@ public class ExperimentTest
     /**
      * Quick and dirty MM1 queuing system Model class.
      */
-    public static class MM1Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+    public static class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;

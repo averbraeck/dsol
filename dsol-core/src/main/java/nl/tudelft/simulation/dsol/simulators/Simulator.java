@@ -18,7 +18,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 
 /**
  * The Simulator class is an abstract implementation of the SimulatorInterface.
@@ -64,7 +64,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** The model that is currently active; is null before initialize() has been called. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DSOLModel<T, ? extends SimulatorInterface<T>> model = null;
+    protected DsolModel<T, ? extends SimulatorInterface<T>> model = null;
 
     /** a worker. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -106,7 +106,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** {@inheritDoc} */
     @Override
-    public void initialize(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
+    public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
             throws SimRuntimeException
     {
         Throw.whenNull(model, "Simulator.initialize: model cannot be null");
@@ -476,7 +476,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /** {@inheritDoc} */
     @Override
-    public DSOLModel<T, ? extends SimulatorInterface<T>> getModel()
+    public DsolModel<T, ? extends SimulatorInterface<T>> getModel()
     {
         return this.model;
     }

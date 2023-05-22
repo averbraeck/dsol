@@ -9,7 +9,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.Sleep;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 
 /**
  * SimulatorTest tests the simulator.addScheduledMethodOnInitialize method.
@@ -52,7 +52,7 @@ public class SimulatorTest
     }
 
     /** */
-    static class TestModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
+    static class TestModel extends AbstractDsolModel<Double, DevsSimulator<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;

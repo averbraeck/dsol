@@ -11,7 +11,7 @@ import org.pmw.tinylog.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 
 /**
  * The SimulatorInterface defines the behavior of the simulators in the DSOL framework. The simulator is defined as the
@@ -97,10 +97,10 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
 
     /**
      * Returns the currently executed model, or null when the initialize method has not yet been called.
-     * @return DSOLModel&lt;T, ? extends SimulatorInterface&gt;; the currently executed model, or null when the model has not
+     * @return DsolModel&lt;T, ? extends SimulatorInterface&gt;; the currently executed model, or null when the model has not
      *         yet been initialized
      */
-    DSOLModel<T, ? extends SimulatorInterface<T>> getModel();
+    DsolModel<T, ? extends SimulatorInterface<T>> getModel();
 
     /**
      * Add a method call that has to be performed at the end if initialize, and before the model starts. This can, for instance,
@@ -136,12 +136,12 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * only be done after the simulator has been started. Note that the listeners of all statistics objects are removed when the
      * simulator is initialized with the replication. Connecting the statistics objects to the simulation should be done between
      * the initialize(...) method and starting the simulator, or could even be delayed till the WARMUP_EVENT has been fired.
-     * @param model DSOLModel&lt;T, S&gt;; the model to initialize
+     * @param model DsolModel&lt;T, S&gt;; the model to initialize
      * @param replication Replication&lt;T, ? extends SimulatorInterface&lt;T&gt;&gt;; the replication to use for running the
      *            model
      * @throws SimRuntimeException when the simulator is running
      */
-    void initialize(DSOLModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication)
+    void initialize(DsolModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication)
             throws SimRuntimeException;
 
     /**

@@ -9,7 +9,7 @@ import org.pmw.tinylog.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
@@ -57,7 +57,7 @@ public class SwingApplication extends DSOLApplication
     }
 
     /** */
-    static class MyModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
+    static class MyModel extends AbstractDsolModel<Double, DevsSimulator<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;

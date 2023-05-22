@@ -13,7 +13,7 @@ import net.jodah.concurrentunit.Waiter;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
@@ -208,7 +208,7 @@ public class DEVSRealTimeClockDoubleTest implements EventListener
     /**
      * THE MODEL.
      */
-    public static class ModelDouble extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+    public static class ModelDouble extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
         private static final long serialVersionUID = 1L;

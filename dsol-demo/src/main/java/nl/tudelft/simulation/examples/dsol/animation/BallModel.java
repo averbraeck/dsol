@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  */
-public class BallModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

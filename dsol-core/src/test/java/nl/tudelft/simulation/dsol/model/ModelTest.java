@@ -31,15 +31,15 @@ public class ModelTest
 {
 
     /**
-     * Test the AbstractDSOLModel class.
+     * Test the AbstractDsolModel class.
      * @throws InputParameterException on error with input parameter
      */
     @Test
-    public void testDSOLModel() throws InputParameterException
+    public void testDsolModel() throws InputParameterException
     {
         DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
-        DSOLModel<Double, SimulatorInterface<Double>> model =
-                new AbstractDSOLModel<Double, SimulatorInterface<Double>>(simulator)
+        DsolModel<Double, SimulatorInterface<Double>> model =
+                new AbstractDsolModel<Double, SimulatorInterface<Double>>(simulator)
                 {
                     /** */
                     private static final long serialVersionUID = 1L;

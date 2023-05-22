@@ -8,7 +8,7 @@ import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -30,7 +30,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class WebMM1Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
+public class WebMM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

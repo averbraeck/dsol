@@ -17,7 +17,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedTimestampWeightedTally;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -54,9 +54,9 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     /**
      * constructs a new SimPersistent.
      * @param description String; refers to the description of this SimPersistent
-     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      */
-    public SimPersistent(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model)
+    public SimPersistent(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
         super(description);
         Throw.whenNull(model, "model cannot be null");
@@ -82,12 +82,12 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /**
      * constructs a new SimPersistent.
-     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      * @param description String; the description
      * @param target EventProducer; the target on which to collect statistics
      * @param eventType EventType; the eventType for which statistics are sampled
      */
-    public SimPersistent(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model,
+    public SimPersistent(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)
     {
         this(description, model);

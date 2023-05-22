@@ -7,7 +7,7 @@ import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * License of use: <a href="http://www.gnu.org/copyleft/gpl.html">General Public License (GPL) </a>, no warranty <br>
  * @author <a href="http://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class Terminal extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>> implements EventListener
+public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>> implements EventListener
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

@@ -18,7 +18,7 @@ import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.stats.summarizers.Tally;
 
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -63,7 +63,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
     private final S simulator;
 
     /** The model that has to be executed. */
-    private final DSOLModel<T, ? extends S> model;
+    private final DsolModel<T, ? extends S> model;
 
     /** The current replication. */
     private int currentReplicationNumber = -1;
@@ -98,7 +98,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
      * Construct a new Experiment.
      * @param id String; the id of the experiment
      * @param simulator S; the simulator
-     * @param model DSOLModel&lt;T, S&gt;; the model to experiment with
+     * @param model DsolModel&lt;T, S&gt;; the model to experiment with
      * @param startTime T; the start time of the simulation.
      * @param warmupPeriod R; the warmup period, included in the runlength (!)
      * @param runLength R; the total length of the run, including the warm-up period.
@@ -107,7 +107,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
      * @throws IllegalArgumentException when warmup period is negative, or run length is zero or negative, or when the warmup
      *             time is longer than or equal to the runlength, or the number of replications is zero or negative
      */
-    public Experiment(final String id, final S simulator, final DSOLModel<T, ? extends S> model, final T startTime,
+    public Experiment(final String id, final S simulator, final DsolModel<T, ? extends S> model, final T startTime,
             final T warmupPeriod, final T runLength, final int numberOfReplications)
     {
         this(simulator, model, new ExperimentRunControl<T>(id, startTime, warmupPeriod, runLength, numberOfReplications));
@@ -116,11 +116,11 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
     /**
      * Construct a new Experiment, using a RunControl to store the run control information.
      * @param simulator S; the simulator
-     * @param model DSOLModel&lt;T, S&gt;; the model to experiment with
+     * @param model DsolModel&lt;T, S&gt;; the model to experiment with
      * @param runControl ExperimentRunControl; the run control information
      * @throws NullPointerException when id, startTime, warmupPeriod or runLength is null
      */
-    public Experiment(final S simulator, final DSOLModel<T, ? extends S> model, final ExperimentRunControl<T> runControl)
+    public Experiment(final S simulator, final DsolModel<T, ? extends S> model, final ExperimentRunControl<T> runControl)
     {
         Throw.whenNull(simulator, "simulator cannot be null");
         Throw.whenNull(model, "model cannot be null");
@@ -148,9 +148,9 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the model.
-     * @return DSOLModel; the model
+     * @return DsolModel; the model
      */
-    public DSOLModel<T, ? extends S> getModel()
+    public DsolModel<T, ? extends S> getModel()
     {
         return this.model;
     }

@@ -4,7 +4,7 @@ import java.rmi.MarshalledObject;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs"> Peter Jacobs </a>
  * @since 1.5
  */
-public class Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+public class Model extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

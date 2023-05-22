@@ -32,7 +32,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterBoolean;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDistContinuousSelection;
@@ -60,8 +60,8 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  */
 public abstract class AbstractTestDemoServer
 {
-    /** the map of sessionIds to DSOLModel that handles the animation and updates for the started model. */
-    final Map<String, DSOLModel<Duration, SimulatorInterface<Duration>>> sessionModelMap = new LinkedHashMap<>();
+    /** the map of sessionIds to DsolModel that handles the animation and updates for the started model. */
+    final Map<String, DsolModel<Duration, SimulatorInterface<Duration>>> sessionModelMap = new LinkedHashMap<>();
 
     /** the map of sessionIds to DSOLWebModel that handles the animation and updates for the started model. */
     final Map<String, DSOLWebModel> sessionWebModelMap = new LinkedHashMap<>();
@@ -159,7 +159,7 @@ public abstract class AbstractTestDemoServer
                     System.out.println("parameters: " + modelId);
                     DevsRealTimeAnimator<Duration> simulator = new DevsRealTimeAnimator.TimeDoubleUnit(modelId);
                     simulator.setAnimation(false);
-                    DSOLModel<Duration, SimulatorInterface<Duration>> model = instantiateModel(modelId);
+                    DsolModel<Duration, SimulatorInterface<Duration>> model = instantiateModel(modelId);
                     if (model != null)
                         AbstractTestDemoServer.this.sessionModelMap.put(sessionId, model);
                     else
@@ -175,7 +175,7 @@ public abstract class AbstractTestDemoServer
                         && !AbstractTestDemoServer.this.sessionWebModelMap.containsKey(sessionId))
                 {
                     System.out.println("startModel: " + modelId);
-                    DSOLModel<Duration, SimulatorInterface<Duration>> model =
+                    DsolModel<Duration, SimulatorInterface<Duration>> model =
                             AbstractTestDemoServer.this.sessionModelMap.get(sessionId);
                     SimulatorInterface<Duration> simulator = model.getSimulator();
                     try
@@ -203,7 +203,7 @@ public abstract class AbstractTestDemoServer
      * @param modelId the String that contains the model name to be instantiated
      * @return a newly created DSOL model
      */
-    protected abstract DSOLModel<Duration, SimulatorInterface<Duration>> instantiateModel(String modelId);
+    protected abstract DsolModel<Duration, SimulatorInterface<Duration>> instantiateModel(String modelId);
 
     /**
      * Answer handles the events from the web-based user interface for a demo. <br>
@@ -241,7 +241,7 @@ public abstract class AbstractTestDemoServer
                 }
                 else if (this.webServer.sessionModelMap.containsKey(sessionId))
                 {
-                    DSOLModel<Duration, SimulatorInterface<Duration>> model =
+                    DsolModel<Duration, SimulatorInterface<Duration>> model =
                             this.webServer.sessionModelMap.get(sessionId);
                     String answer = "<message>ok</message>";
 
@@ -296,7 +296,7 @@ public abstract class AbstractTestDemoServer
          * @param model the model with parameters
          * @return an XML string with the parameters
          */
-        private String makeParameterMap(final DSOLModel model)
+        private String makeParameterMap(final DsolModel model)
         {
             StringBuffer answer = new StringBuffer();
             answer.append("<parameters>\n");
@@ -480,7 +480,7 @@ public abstract class AbstractTestDemoServer
          * @param message the key-value pairs of the set parameters
          * @return the errors if they are detected. If none, errors is set to "OK"
          */
-        private String setParameters(final DSOLModel model, final String message)
+        private String setParameters(final DsolModel model, final String message)
         {
             String errors = "OK";
             InputParameterMap inputParameters = model.getInputParameterMap();

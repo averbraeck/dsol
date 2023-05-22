@@ -8,7 +8,7 @@ import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.flow.Station;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 
@@ -35,10 +35,10 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
     /**
      * constructs a new Utilization.
      * @param description String; the description of this utilization
-     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      * @param target Station&lt;T&gt;; the target
      */
-    public Utilization(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model,
+    public Utilization(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final Station<T> target)
     {
         super(description, model);

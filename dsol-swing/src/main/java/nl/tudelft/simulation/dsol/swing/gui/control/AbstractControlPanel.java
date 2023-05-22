@@ -21,7 +21,7 @@ import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.RunState;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControlButton;
@@ -51,7 +51,7 @@ public abstract class AbstractControlPanel<
     private S simulator;
 
     /** The model, needed for its properties. */
-    private final DSOLModel<T, ? extends SimulatorInterface<T>> model;
+    private final DsolModel<T, ? extends SimulatorInterface<T>> model;
 
     /** The clock. */
     private ClockPanel<T> clockPanel;
@@ -82,14 +82,14 @@ public abstract class AbstractControlPanel<
      * are used by any simulator (continuous, discrete, real-time) and for any type of simulation time (floating point, integer,
      * or unit based). Specific classes extend this abstract control panel to define the additional features that are
      * necessary for those simulators.
-     * @param model DSOLModel&lt;T, ? extends SimulationInterface&lt;T&gt;&gt;; the model for the control panel, to
+     * @param model DsolModel&lt;T, ? extends SimulationInterface&lt;T&gt;&gt;; the model for the control panel, to
      *            allow a reset of the model
      * @param simulator S; the simulator. Specified separately, because the model can have been specified with a superclass of
      *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DEVSAnimator,
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
-    public AbstractControlPanel(final DSOLModel<T, ? extends SimulatorInterface<T>> model, final S simulator)
+    public AbstractControlPanel(final DsolModel<T, ? extends SimulatorInterface<T>> model, final S simulator)
             throws RemoteException
     {
         Throw.whenNull(model, "model cannot be null");
@@ -366,7 +366,7 @@ public abstract class AbstractControlPanel<
     /**
      * @return model
      */
-    public DSOLModel<T, ? extends SimulatorInterface<T>> getModel()
+    public DsolModel<T, ? extends SimulatorInterface<T>> getModel()
     {
         return this.model;
     }

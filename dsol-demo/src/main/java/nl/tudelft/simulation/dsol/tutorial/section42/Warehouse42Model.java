@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterLong;
@@ -21,7 +21,7 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class Warehouse42Model extends AbstractDSOLModel<Double, DevsSimulator<Double>>
+public class Warehouse42Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

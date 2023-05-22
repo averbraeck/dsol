@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.dsol.tutorial.section25;
 
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 
 /**
@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class CustomerOrderModel extends AbstractDSOLModel<Double, DevsSimulator<Double>>
+public class CustomerOrderModel extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;

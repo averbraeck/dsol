@@ -5,7 +5,7 @@ import org.djutils.event.EventListener;
 import org.djutils.event.reference.ReferenceType;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 
 /**
  * The TestModel.
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>,
  *         <a href="mailto:a.verbraeck@tudelft.nl">Alexander Verbraeck </a>
  */
-public class TestModel extends AbstractDSOLModel<Double, SimulatorInterface<Double>> implements EventListener
+public class TestModel extends AbstractDsolModel<Double, SimulatorInterface<Double>> implements EventListener
 {
     /** */
     private static final long serialVersionUID = 1L;

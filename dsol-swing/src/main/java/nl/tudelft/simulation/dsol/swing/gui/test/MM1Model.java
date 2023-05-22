@@ -6,7 +6,7 @@ import java.util.List;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -26,7 +26,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class MM1Model extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
     /** */
     private static final long serialVersionUID = 1L;

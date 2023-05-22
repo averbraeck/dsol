@@ -15,7 +15,7 @@ import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
- * AbstractDSOLModel, an abstract helper class to easily construct a DSOLModel. The model automatically acts as an
+ * AbstractDsolModel, an abstract helper class to easily construct a DsolModel. The model automatically acts as an
  * EventProducer, so events can be sent to statistics gathering classes. <br>
  * <br>
  * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
@@ -25,8 +25,8 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
  * @param <S> the simulator type to use
  */
-public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
-        implements DSOLModel<T, S>
+public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
+        implements DsolModel<T, S>
 {
     /** */
     private static final long serialVersionUID = 20181117L;
@@ -52,7 +52,7 @@ public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S exte
      * @param simulator S; the simulator to use for this model
      * @throws NullPointerException when simulator is null
      */
-    public AbstractDSOLModel(final S simulator)
+    public AbstractDsolModel(final S simulator)
     {
         this(simulator, new StreamInformation(new MersenneTwister(10L)));
     }
@@ -64,7 +64,7 @@ public abstract class AbstractDSOLModel<T extends Number & Comparable<T>, S exte
      * @param streamInformation StreamInformation; the streams that have been prepared in a StreamInformation class
      * @throws NullPointerException when simulator or streamInformation is null
      */
-    public AbstractDSOLModel(final S simulator, final StreamInformation streamInformation)
+    public AbstractDsolModel(final S simulator, final StreamInformation streamInformation)
     {
         Throw.whenNull(simulator, "simulator cannot be null");
         this.simulator = simulator;

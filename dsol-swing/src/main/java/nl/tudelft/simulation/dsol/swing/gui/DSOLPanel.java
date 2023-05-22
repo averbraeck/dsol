@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 
 import org.pmw.tinylog.Level;
 
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
 import nl.tudelft.simulation.dsol.swing.gui.control.AbstractControlPanel;
@@ -140,7 +140,7 @@ public class DSOLPanel extends JPanel implements AppearanceControl
     /**
      * @return the Model
      */
-    public DSOLModel<?, ?> getModel()
+    public DsolModel<?, ?> getModel()
     {
         return this.controlPanel.getModel();
     }

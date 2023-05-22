@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.statistics;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.model.AbstractDSOLModel;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
@@ -12,7 +12,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DummyModel extends AbstractDSOLModel<Double, DevsSimulatorInterface<Double>>
+public class DummyModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
     /** */
     private static final long serialVersionUID = 1L;

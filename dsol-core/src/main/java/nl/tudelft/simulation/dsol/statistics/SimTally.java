@@ -16,7 +16,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedTally;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -52,9 +52,9 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
     /**
      * constructs a new SimTally.
      * @param description String; refers to the description of this Tally.
-     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      */
-    public SimTally(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model)
+    public SimTally(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
         super(description);
         Throw.whenNull(model, "model cannot be null");
@@ -80,11 +80,11 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
     /**
      * constructs a new SimTally based on an eventType for which statistics are sampled.
      * @param description String; the description of this tally.
-     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      * @param target EventProducer; the target on which to subscribe
      * @param eventType EventType; the eventType for which statistics are sampled
      */
-    public SimTally(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model,
+    public SimTally(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)
     {
         this(description, model);

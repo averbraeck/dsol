@@ -15,7 +15,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.summarizers.event.EventBasedCounter;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.model.DSOLModel;
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
@@ -54,9 +54,9 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     /**
      * Construct a new SimCounter, and register the counter in the OutputStatistics of the model.
      * @param description String; refers to the description of this counter
-     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      */
-    public SimCounter(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model)
+    public SimCounter(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
         super(description);
         Throw.whenNull(model, "model cannot be null");
@@ -82,11 +82,11 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     /**
      * constructs a new SimCounter.
      * @param description String; the description
-     * @param model DSOLModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
      * @param target EventProducer; the target on which to count
      * @param eventType EventType; the EventType for which counting takes place
      */
-    public SimCounter(final String description, final DSOLModel<T, ? extends SimulatorInterface<T>> model,
+    public SimCounter(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)
     {
         this(description, model);

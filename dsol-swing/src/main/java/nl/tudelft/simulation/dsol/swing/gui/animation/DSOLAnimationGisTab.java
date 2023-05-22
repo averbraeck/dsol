@@ -45,7 +45,7 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
     private Map<String, JToggleButton> toggleGISButtons = new LinkedHashMap<>();
 
     /**
-     * Construct a tab with an AnimationPane for the animation of a DSOLModel, including GIS layers.
+     * Construct a tab with an AnimationPane for the animation of a DsolModel, including GIS layers.
      * @param homeExtent Bounds2d; initial extent of the animation
      * @param simulator SimulatorInterface; the simulator
      * @throws RemoteException when notification of the animation panel fails
@@ -58,7 +58,7 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
     }
 
     /**
-     * Construct a tab with an AnimationPane for the animation of a DSOLModel, including GIS layers.
+     * Construct a tab with an AnimationPane for the animation of a DsolModel, including GIS layers.
      * @param simulator SimulatorInterface; the simulator
      * @param animationPanel AnimationPanel; the animation panel to use, e.g. the AutoPanAnimationPanel
      * @throws RemoteException when notification of the animation panel fails
@@ -71,7 +71,7 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
     }
 
     /**
-     * Construct a tab with an AutoPanAnimationPanel and a linked SearchPanel for the animation of a DSOLModel, including GIS
+     * Construct a tab with an AutoPanAnimationPanel and a linked SearchPanel for the animation of a DsolModel, including GIS
      * layers.
      * @param homeExtent Bounds2d; initial extent of the animation
      * @param simulator SimulatorInterface; the simulator
