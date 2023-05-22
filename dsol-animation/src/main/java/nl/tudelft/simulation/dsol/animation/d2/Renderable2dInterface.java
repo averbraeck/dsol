@@ -15,8 +15,8 @@ import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.naming.context.Contextualized;
 
 /**
- * The Renderable2D interface defines the basic interface for 2d animation. This is a hard-to-use interface. It is implemented
- * by the easy-to-use Renderable2D class.
+ * The Renderable2d interface defines the basic interface for 2d animation. This is a hard-to-use interface. It is implemented
+ * by the easy-to-use Renderable2d class.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL

@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.animation.d2;
 import java.util.Comparator;
 
 /**
- * A comparator for two Renderable2D objects. 
+ * A comparator for two Renderable2d objects. 
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -17,7 +17,7 @@ import java.util.Comparator;
 public class Renderable2dComparator implements Comparator<Renderable2dInterface<?>>
 {
     /**
-     * constructs a new Renderable2DComparator.
+     * constructs a new Renderable2dComparator.
      */
     public Renderable2dComparator()
     {

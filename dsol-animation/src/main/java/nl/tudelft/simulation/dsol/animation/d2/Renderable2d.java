@@ -21,7 +21,7 @@ import nl.tudelft.simulation.naming.context.Contextualized;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
 
 /**
- * The Renderable2D provides an easy accessible renderable object that can be drawn on an absolute or relative position, scaled,
+ * The Renderable2d provides an easy accessible renderable object that can be drawn on an absolute or relative position, scaled,
  * flipped, and rotated. For scaling, several options exist:<br>
  * - scale: whether to scale the drawing at all; e.g. for a legend, absolute coordinates might be used (scale = false);<br>
  * - scaleY: whether to scale differently in X and Y direction, e.g. for a map at higher latitudes (scaleY = true);<br>
@@ -77,7 +77,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     private int id;
 
     /**
-     * Constructs a new Renderable2D.
+     * Constructs a new Renderable2d.
      * @param source T; the source
      * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
      */
@@ -383,7 +383,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     @Override
     public String toString()
     {
-        return "Renderable2D [source=" + this.source + "]";
+        return "Renderable2d [source=" + this.source + "]";
     }
 
     /**

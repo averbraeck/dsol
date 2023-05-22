@@ -61,7 +61,7 @@ public class OsmRenderable2d implements GisRenderable2d
     protected Bounds3d bounds = null;
 
     /**
-     * constructs a new GisRenderable2D.
+     * constructs a new GisRenderable2d.
      * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
      * @param map MapInterface; the map to use.
      */
@@ -71,7 +71,7 @@ public class OsmRenderable2d implements GisRenderable2d
     }
 
     /**
-     * constructs a new GisRenderable2D.
+     * constructs a new GisRenderable2d.
      * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
      * @param map MapInterface; the map to use.
      * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
@@ -83,7 +83,7 @@ public class OsmRenderable2d implements GisRenderable2d
     }
 
     /**
-     * constructs a new GisRenderable2D based on an existing Map.
+     * constructs a new GisRenderable2d based on an existing Map.
      * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
      * @param map MapInterface; the map to use.
      * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.

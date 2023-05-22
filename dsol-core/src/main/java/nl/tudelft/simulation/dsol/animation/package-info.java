@@ -1,5 +1,5 @@
 /**
- * The SimRenderable2D, which binds the animation objects to the context in simulator.getReplication().
+ * The SimRenderable2d, which binds the animation objects to the context in simulator.getReplication().
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL

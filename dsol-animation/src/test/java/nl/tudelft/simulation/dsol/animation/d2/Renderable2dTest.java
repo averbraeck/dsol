@@ -31,7 +31,7 @@ import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
 
 /**
- * Unit tests for the Renderable2D class.
+ * Unit tests for the Renderable2d class.
  * <p>
  * Copyright (c) 2020-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -65,7 +65,7 @@ public class Renderable2dTest
         };
         assertEquals(locatable, renderable.getSource());
         assertTrue(renderable.getId() > 0); // 0 means not incremented
-        assertTrue(renderable.toString().contains("Renderable2D"));
+        assertTrue(renderable.toString().contains("Renderable2d"));
 
         BufferedImage img = new BufferedImage(200, 100, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = img.createGraphics();

@@ -295,7 +295,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Test whether the element needs to be shown on the screen or not.
-     * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the renderable element to test
+     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the renderable element to test
      * @return whether the element needs to be shown or not
      */
     public boolean isShowElement(final Renderable2dInterface<? extends Locatable> element)
@@ -678,7 +678,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Add a locatable object to the animation.
-     * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the element to add to the animation
+     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the element to add to the animation
      */
     public void objectAdded(final Renderable2dInterface<? extends Locatable> element)
     {
@@ -691,7 +691,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Remove a locatable object from the animation.
-     * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the element to add to the animation
+     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the element to add to the animation
      */
     public void objectRemoved(final Renderable2dInterface<? extends Locatable> element)
     {
@@ -891,7 +891,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     }
 
     /**
-     * Returns the clicked Renderable2D with the highest z-value.
+     * Returns the clicked Renderable2d with the highest z-value.
      * @param targets List&lt;Locatable&gt;; which are selected by the mouse.
      * @return the selected Object (e.g. the one with the highest zValue).
      */

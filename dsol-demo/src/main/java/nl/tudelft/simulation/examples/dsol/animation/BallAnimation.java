@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import nl.tudelft.simulation.dsol.animation.SimRenderable2D;
+import nl.tudelft.simulation.dsol.animation.SimRenderable2d;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  * @since 1.4
  */
-public class BallAnimation extends SimRenderable2D<Ball>
+public class BallAnimation extends SimRenderable2d<Ball>
 {
     /** */
     private static final long serialVersionUID = 1L;

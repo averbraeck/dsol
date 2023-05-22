@@ -148,7 +148,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
 
     /**
      * Test whether the element needs to be shown on the screen or not.
-     * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the renderable element to test
+     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the renderable element to test
      * @return whether the element needs to be shown or not
      */
     public boolean isShowElement(final Renderable2dInterface<? extends Locatable> element)
@@ -253,7 +253,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
 
     /**
      * Add a locatable object to the animation.
-     * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the element to add to the animation
+     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the element to add to the animation
      */
     public void objectAdded(final Renderable2dInterface<? extends Locatable> element)
     {
@@ -266,7 +266,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
 
     /**
      * Remove a locatable object from the animation.
-     * @param element Renderable2DInterface&lt;? extends Locatable&gt;; the element to add to the animation
+     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the element to add to the animation
      */
     public void objectRemoved(final Renderable2dInterface<? extends Locatable> element)
     {
@@ -456,7 +456,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
     /**
      * Add buttons for toggling all GIS layers on or off.
      * @param header String; the name of the group of layers
-     * @param gisMap GisRenderable2D; the GIS map for which the toggles have to be added
+     * @param gisMap GisRenderable2d; the GIS map for which the toggles have to be added
      * @param toolTipText String; the tool tip text to show when hovering over the button
      */
     public void addAllToggleGISButtonText(final String header, final GisRenderable2d gisMap, final String toolTipText)
@@ -480,7 +480,7 @@ public class HTMLAnimationPanel extends HTMLGridPanel implements EventListener
      * Add a button to toggle a GIS Layer on or off.
      * @param layerName String; the name of the layer
      * @param displayName String; the name to display next to the tick box
-     * @param gisMap GisRenderable2D; the map
+     * @param gisMap GisRenderable2d; the map
      * @param toolTipText String; the tool tip text
      */
     public void addToggleGISButtonText(final String layerName, final String displayName, final GisRenderable2d gisMap,
