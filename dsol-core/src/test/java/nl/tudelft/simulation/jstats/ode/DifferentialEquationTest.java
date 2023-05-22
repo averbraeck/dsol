@@ -18,7 +18,7 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @since 1.5
  */
-public class ODETest
+public class DifferentialEquationTest
 {
     /**
      * tests the differential equation solvers on y' = x.y^(1/3); see F. Scheid, Numerical Analysis, 2nd Edition, p.204 (Schaum
