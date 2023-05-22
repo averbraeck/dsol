@@ -21,7 +21,7 @@ import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.d2.Renderable2dInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * Animation panel that adds autopan functionality. Code based on OpenTrafficSim project component with the same purpose.
@@ -60,10 +60,10 @@ public class AutoPanAnimationPanel extends AnimationPanel
      * @param homeExtent Bounds2d; home extent
      * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; simulator
      * @throws RemoteException on remote animation error
-     * @throws DSOLException when simulator does not implement AnimatorInterface
+     * @throws DsolException when simulator does not implement AnimatorInterface
      */
     public AutoPanAnimationPanel(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         super(homeExtent, simulator);
         MouseListener[] listeners = getMouseListeners();

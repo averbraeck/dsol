@@ -6,7 +6,7 @@ import org.djutils.draw.bounds.Bounds2d;
 
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * Wrap a DSOL simulation model, or any (descendant of a) JPanel in a JFrame (wrap it in a window). The window will be
@@ -34,10 +34,10 @@ public class DSOLAnimationApplication extends DSOLApplication
      * @param title String; the title of the window
      * @param homeExtent Bounds2d; the home extent of the animation
      * @throws RemoteException on network error
-     * @throws DSOLException when simulator does not implement the AnimatorInterface
+     * @throws DsolException when simulator does not implement the AnimatorInterface
      */
     public DSOLAnimationApplication(final DSOLPanel panel, final String title, final Bounds2d homeExtent)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         super(panel, title);
         this.animationTab = new DSOLAnimationTab(homeExtent, panel.getSimulator());
@@ -52,10 +52,10 @@ public class DSOLAnimationApplication extends DSOLApplication
      * @param title String; the title of the window
      * @param animationTab DSOLAnimationTab; the animation tab to add, e.g. one containing GIS
      * @throws RemoteException on network error
-     * @throws DSOLException when simulator does not implement the AnimatorInterface
+     * @throws DsolException when simulator does not implement the AnimatorInterface
      */
     public DSOLAnimationApplication(final DSOLPanel panel, final String title, final DSOLAnimationTab animationTab)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         super(panel, title);
         this.animationTab = animationTab;

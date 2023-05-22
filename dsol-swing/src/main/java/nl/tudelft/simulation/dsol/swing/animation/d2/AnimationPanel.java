@@ -9,7 +9,7 @@ import org.djutils.exceptions.Throw;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
 
@@ -42,13 +42,13 @@ public class AnimationPanel extends VisualizationPanel
      * @param homeExtent Bounds2d; the home (initial) extent of the panel
      * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator of which we want to know the events for animation
      * @throws RemoteException on network error for one of the listeners
-     * @throws DSOLException when the simulator is not implementing the AnimatorInterface
+     * @throws DsolException when the simulator is not implementing the AnimatorInterface
      */
     public AnimationPanel(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         super(homeExtent, simulator);
-        Throw.when(!(simulator instanceof AnimatorInterface), DSOLException.class,
+        Throw.when(!(simulator instanceof AnimatorInterface), DsolException.class,
                 "Simulator must implement the AnimatorInterface");
         this.simulator = simulator;
         simulator.addListener(this, Replication.START_REPLICATION_EVENT);

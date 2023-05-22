@@ -13,7 +13,7 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * M/M/1 queuing model with animation and graphs.
@@ -59,9 +59,9 @@ public class MM1SwingApplication extends DSOLApplication
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error
-     * @throws DSOLException on error
+     * @throws DsolException on error
      */
-    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DSOLException
+    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DsolException
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("MM1SwingApplication");

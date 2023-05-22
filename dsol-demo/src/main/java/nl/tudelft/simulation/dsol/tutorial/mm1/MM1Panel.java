@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
 import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * <p>
@@ -34,11 +34,11 @@ public class MM1Panel extends DSOLPanel
     /**
      * @param controlPanel DEVSControlPanel; the control panel
      * @param model MM1Model; the model
-     * @throws DSOLException on error
+     * @throws DsolException on error
      * @throws RemoteException on error
      */
     public MM1Panel(final DEVSControlPanel.TimeDouble controlPanel, final MM1Model model)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         super(controlPanel);
         addTabs(model);

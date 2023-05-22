@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.simtime;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
 
-import nl.tudelft.simulation.language.DSOLRuntimeException;
+import nl.tudelft.simulation.language.DsolRuntimeException;
 
 /**
  * SimTime contains a number of static methods to deal with adding and substracting simulation times.
@@ -60,7 +60,7 @@ public final class SimTime
         if (hash == hashFloatDuration)
             return (T) ((FloatDuration) a).plus((FloatDuration) b);
 
-        throw new DSOLRuntimeException("SimTime.plus called for unknown time class: " + a.getClass().getSimpleName());
+        throw new DsolRuntimeException("SimTime.plus called for unknown time class: " + a.getClass().getSimpleName());
     }
 
     /**
@@ -85,7 +85,7 @@ public final class SimTime
         if (hash == hashFloatDuration)
             return (T) ((FloatDuration) a).minus((FloatDuration) b);
 
-        throw new DSOLRuntimeException("SimTime.minus called for unknown time class: " + a.getClass().getSimpleName());
+        throw new DsolRuntimeException("SimTime.minus called for unknown time class: " + a.getClass().getSimpleName());
     }
 
     /**
@@ -109,7 +109,7 @@ public final class SimTime
         if (hash == hashFloatDuration)
             return (T) new FloatDuration((FloatDuration) a);
 
-        throw new DSOLRuntimeException("SimTime.copy called for unknown time class: " + a.getClass().getSimpleName());
+        throw new DsolRuntimeException("SimTime.copy called for unknown time class: " + a.getClass().getSimpleName());
     }
 
     /**
@@ -133,6 +133,6 @@ public final class SimTime
         if (hash == hashFloatDuration)
             return (T) FloatDuration.ZERO;
 
-        throw new DSOLRuntimeException("SimTime.copy called for unknown time class: " + a.getClass().getSimpleName());
+        throw new DsolRuntimeException("SimTime.copy called for unknown time class: " + a.getClass().getSimpleName());
     }
 }

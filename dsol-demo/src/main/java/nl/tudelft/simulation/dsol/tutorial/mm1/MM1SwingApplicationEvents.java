@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DSOLApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DEVSControlPanel;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * M/M/1 Swing application that shows the events that are fired by the Simulator in the Console.
@@ -67,9 +67,9 @@ public class MM1SwingApplicationEvents extends DSOLApplication
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error
-     * @throws DSOLException on error
+     * @throws DsolException on error
      */
-    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DSOLException
+    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DsolException
     {
         CategoryLogger.setAllLogLevel(Level.TRACE);
         DevsSimulator<Double> devsSimulator = new DevsSimulator<Double>("MM1SwingApplicationEvents");

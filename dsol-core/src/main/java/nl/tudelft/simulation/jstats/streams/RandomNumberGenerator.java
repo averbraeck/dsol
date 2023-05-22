@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.jstats.streams;
 
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 import nl.tudelft.simulation.language.reflection.StateSaver;
 
 /**
@@ -144,7 +144,7 @@ public abstract class RandomNumberGenerator implements StreamInterface
         {
             return StateSaver.saveState(this);
         }
-        catch (DSOLException exception)
+        catch (DsolException exception)
         {
             throw new StreamException(exception);
         }
@@ -158,7 +158,7 @@ public abstract class RandomNumberGenerator implements StreamInterface
         {
             StateSaver.restoreState(this, state);
         }
-        catch (DSOLException exception)
+        catch (DsolException exception)
         {
             throw new StreamException(exception);
         }

@@ -16,7 +16,7 @@ import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationApplication;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationTab;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel.ObjectKind;
 import nl.tudelft.simulation.dsol.swing.gui.control.RealTimeControlPanel;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * <p>
@@ -36,12 +36,12 @@ public class BallSwingApplication extends DSOLAnimationApplication
     /**
      * @param title String; the title
      * @param panel DSOLPanel; the panel
-     * @throws DSOLException when simulator is not an animator
+     * @throws DsolException when simulator is not an animator
      * @throws IllegalArgumentException for illegal bounds
      * @throws RemoteException on network error
      */
     public BallSwingApplication(final String title, final DSOLPanel panel)
-            throws RemoteException, IllegalArgumentException, DSOLException
+            throws RemoteException, IllegalArgumentException, DsolException
     {
         super(panel, title, DSOLAnimationTab.createAutoPanTab(new Bounds2d(-100, 100, -100, 100), panel.getSimulator()));
         getAnimationTab().getAnimationPanel().setRenderableScale(new RenderableScale(2.0, 0.5));

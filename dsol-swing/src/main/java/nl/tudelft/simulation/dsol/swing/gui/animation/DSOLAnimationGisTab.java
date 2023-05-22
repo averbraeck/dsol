@@ -20,7 +20,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
 import nl.tudelft.simulation.dsol.swing.animation.d2.AutoPanAnimationPanel;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * Animation panel with GIS layers and various controls.
@@ -49,10 +49,10 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
      * @param homeExtent Bounds2d; initial extent of the animation
      * @param simulator SimulatorInterface; the simulator
      * @throws RemoteException when notification of the animation panel fails
-     * @throws DSOLException when simulator does not implement the AnimatorInterface
+     * @throws DsolException when simulator does not implement the AnimatorInterface
      */
     public DSOLAnimationGisTab(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         super(homeExtent, simulator);
     }
@@ -62,10 +62,10 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
      * @param simulator SimulatorInterface; the simulator
      * @param animationPanel AnimationPanel; the animation panel to use, e.g. the AutoPanAnimationPanel
      * @throws RemoteException when notification of the animation panel fails
-     * @throws DSOLException when simulator does not implement the AnimatorInterface
+     * @throws DsolException when simulator does not implement the AnimatorInterface
      */
     public DSOLAnimationGisTab(final SimulatorInterface<?> simulator, final AnimationPanel animationPanel)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         super(simulator, animationPanel);
     }
@@ -77,10 +77,10 @@ public class DSOLAnimationGisTab extends DSOLAnimationTab
      * @param simulator SimulatorInterface; the simulator
      * @return DSOLAnimationTab; a tab with an AutoPanAnimationPanel and a linked SearchPanel
      * @throws RemoteException when notification of the animation panel fails
-     * @throws DSOLException when simulator does not implement the AnimatorInterface
+     * @throws DsolException when simulator does not implement the AnimatorInterface
      */
     public static DSOLAnimationTab createAutoPanTab(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DSOLException
+            throws RemoteException, DsolException
     {
         DSOLAnimationTab tab = new DSOLAnimationTab(simulator, new AutoPanAnimationPanel(homeExtent, simulator));
         tab.setSearchPanel(new SearchPanel());

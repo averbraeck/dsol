@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.swing.gui.DSOLPanel;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationApplication;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DSOLAnimationGisTab;
 import nl.tudelft.simulation.dsol.swing.gui.control.RealTimeControlPanel;
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * GIS demo to show a map using ESRI shape files.
@@ -42,12 +42,12 @@ public class EsriCsvSwingApplication extends DSOLAnimationApplication
      * @param title String; the title
      * @param panel DSOLPanel; the panel
      * @param animationTab DSOLAnimationGisTab; the (custom) animation tab
-     * @throws DSOLException when simulator is not an animator
+     * @throws DsolException when simulator is not an animator
      * @throws IllegalArgumentException for illegal bounds
      * @throws RemoteException on network error
      */
     public EsriCsvSwingApplication(final String title, final DSOLPanel panel, final DSOLAnimationGisTab animationTab)
-            throws RemoteException, IllegalArgumentException, DSOLException
+            throws RemoteException, IllegalArgumentException, DsolException
     {
         super(panel, title, animationTab);
         panel.enableSimulationControlButtons();
@@ -61,9 +61,9 @@ public class EsriCsvSwingApplication extends DSOLAnimationApplication
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error
-     * @throws DSOLException when simulator is not an animator
+     * @throws DsolException when simulator is not an animator
      */
-    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DSOLException
+    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DsolException
     {
         DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("EsriSwingApplication", 0.001);
         EmptyModel model = new EmptyModel(simulator);

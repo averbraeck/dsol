@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
-import nl.tudelft.simulation.language.DSOLRuntimeException;
+import nl.tudelft.simulation.language.DsolRuntimeException;
 
 /**
  * NumericalIntegratorType is an enum with the currently implemented integrators.
@@ -95,7 +95,7 @@ public enum NumericalIntegratorType
         catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException e)
         {
-            throw new DSOLRuntimeException(e);
+            throw new DsolRuntimeException(e);
         }
     }
 }

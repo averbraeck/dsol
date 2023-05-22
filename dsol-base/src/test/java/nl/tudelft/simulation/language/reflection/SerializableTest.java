@@ -16,7 +16,7 @@ import org.djutils.exceptions.Try;
 import org.djutils.exceptions.Try.Execution;
 import org.junit.Test;
 
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * SerializableTest.java.
@@ -112,10 +112,10 @@ public class SerializableTest
     
     /**
      * Test the StateSaver class.
-     * @throws DSOLException on error
+     * @throws DsolException on error
      */
     @Test
-    public void testStateSaver() throws DSOLException
+    public void testStateSaver() throws DsolException
     {
         TestClass tc1 = new TestClass(31);
         byte[] state = StateSaver.saveState(tc1);

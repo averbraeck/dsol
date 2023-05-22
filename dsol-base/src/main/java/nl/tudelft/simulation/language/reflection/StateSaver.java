@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.djutils.reflection.ClassUtil;
 
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 
 /**
  * StateSaver can serialize a full state of a single object, including the fields of its superclass, to an object. Later, this
@@ -43,9 +43,9 @@ public final class StateSaver
      * copy, using the writeObject() method of serialization.
      * @param object Object; the object to save the state from
      * @return the state packed into a memory object
-     * @throws DSOLException on serialization error
+     * @throws DsolException on serialization error
      */
-    public static byte[] saveState(final Object object) throws DSOLException
+    public static byte[] saveState(final Object object) throws DsolException
     {
         byte[] state = null;
         try
@@ -59,7 +59,7 @@ public final class StateSaver
         }
         catch (IOException exception)
         {
-            throw new DSOLException(exception);
+            throw new DsolException(exception);
         }
         return state;
     }
@@ -70,9 +70,9 @@ public final class StateSaver
      * readObject() method of deserialization to fill the target object.
      * @param target Object; the target object to write the deserialized information into
      * @param state Object; the earlier saved state to write
-     * @throws DSOLException on deserialization error
+     * @throws DsolException on deserialization error
      */
-    public static void restoreState(final Object target, final byte[] state) throws DSOLException
+    public static void restoreState(final Object target, final byte[] state) throws DsolException
     {
         try
         {
@@ -95,7 +95,7 @@ public final class StateSaver
         catch (IOException | ClassNotFoundException | IllegalArgumentException | IllegalAccessException
                 | SecurityException exception)
         {
-            throw new DSOLException(exception);
+            throw new DsolException(exception);
         }
     }
 

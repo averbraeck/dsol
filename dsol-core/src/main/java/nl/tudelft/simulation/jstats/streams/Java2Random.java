@@ -2,7 +2,7 @@ package nl.tudelft.simulation.jstats.streams;
 
 import java.util.Random;
 
-import nl.tudelft.simulation.language.DSOLException;
+import nl.tudelft.simulation.language.DsolException;
 import nl.tudelft.simulation.language.reflection.StateSaver;
 
 /**
@@ -94,7 +94,7 @@ public class Java2Random extends Random implements StreamInterface
         {
             return StateSaver.saveState(this);
         }
-        catch (DSOLException exception)
+        catch (DsolException exception)
         {
             throw new StreamException(exception);
         }
@@ -108,7 +108,7 @@ public class Java2Random extends Random implements StreamInterface
         {
             StateSaver.restoreState(this, state);
         }
-        catch (DSOLException exception)
+        catch (DsolException exception)
         {
             throw new StreamException(exception);
         }
