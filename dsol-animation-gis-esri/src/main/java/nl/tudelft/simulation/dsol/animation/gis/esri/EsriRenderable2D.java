@@ -14,7 +14,7 @@ import org.djutils.draw.point.OrientedPoint3d;
 import org.djutils.draw.point.Point2d;
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
+import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;

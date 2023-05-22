@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.animation.D2;
+package nl.tudelft.simulation.dsol.animation.d2;
 
 import org.djutils.draw.Oriented;
 import org.djutils.draw.Transform2d;

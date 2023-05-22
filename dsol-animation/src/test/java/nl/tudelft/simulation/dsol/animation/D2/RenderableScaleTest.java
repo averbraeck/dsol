@@ -11,6 +11,8 @@ import org.djutils.draw.point.Point2d;
 import org.djutils.exceptions.Try;
 import org.junit.Test;
 
+import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
+
 /**
  * RenderableScaleTest to test the RenderableScale class.
  * <p>

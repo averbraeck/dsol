@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import org.djutils.draw.bounds.Bounds2d;
 import org.pmw.tinylog.Level;
 
-import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
+import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;

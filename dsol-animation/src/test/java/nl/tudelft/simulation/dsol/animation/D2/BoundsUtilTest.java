@@ -16,6 +16,7 @@ import org.djutils.draw.point.Point3d;
 import org.junit.Test;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
+import nl.tudelft.simulation.dsol.animation.d2.BoundsUtil;
 
 /**
  * Unit tests for the BoundsUtil class.

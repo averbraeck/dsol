@@ -10,7 +10,7 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.io.URLResource;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.animation.D2.RenderableScale;
+import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.animation.gis.GisRenderable2D;
 import nl.tudelft.simulation.dsol.animation.gis.esri.EsriFileCsvParser;
 import nl.tudelft.simulation.dsol.animation.gis.esri.EsriRenderable2D;

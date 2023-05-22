@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.dsol.animation;
 
-import nl.tudelft.simulation.dsol.animation.D2.Renderable2D;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2D;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**

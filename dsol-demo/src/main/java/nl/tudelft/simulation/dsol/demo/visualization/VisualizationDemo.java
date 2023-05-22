@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 import org.djutils.draw.bounds.Bounds2d;
 
 import nl.tudelft.simulation.dsol.animation.StaticLocation2d;
-import nl.tudelft.simulation.dsol.animation.D2.Renderable2D;
+import nl.tudelft.simulation.dsol.animation.d2.Renderable2D;
 import nl.tudelft.simulation.dsol.swing.animation.D2.AnimationUpdaterThread;
 import nl.tudelft.simulation.dsol.swing.animation.D2.VisualizationPanel;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
