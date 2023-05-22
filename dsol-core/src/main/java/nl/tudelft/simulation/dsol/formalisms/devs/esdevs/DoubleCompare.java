@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
 /**
  * DoubleCompare class. Compares two doubles except for the last two bits of the mantissa.

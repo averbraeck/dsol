@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions;
 
 /**
  * State variable that has been requested cannot be found.

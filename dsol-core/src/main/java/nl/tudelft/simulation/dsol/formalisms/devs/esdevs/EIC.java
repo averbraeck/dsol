@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
 /**
  * EIC class. EIC stands for External Input Coupling, which is a coupling between the outside of a coupled model and a component

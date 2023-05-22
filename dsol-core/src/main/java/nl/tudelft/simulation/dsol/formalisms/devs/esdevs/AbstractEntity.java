@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 

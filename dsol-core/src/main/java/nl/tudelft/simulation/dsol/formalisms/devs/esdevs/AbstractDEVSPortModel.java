@@ -1,10 +1,10 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortNotFoundException;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortAlreadyDefinedException;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortNotFoundException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**

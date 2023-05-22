@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
 import java.rmi.RemoteException;
 import java.util.LinkedHashSet;
@@ -10,7 +10,7 @@ import org.djutils.event.EventType;
 import org.djutils.event.reference.Reference;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortNotFoundException;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortNotFoundException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**

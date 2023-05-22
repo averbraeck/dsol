@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
 /**
  * IC class. IC stands for Internal Coupling, which is a coupling between two components within a coupled model. The definition

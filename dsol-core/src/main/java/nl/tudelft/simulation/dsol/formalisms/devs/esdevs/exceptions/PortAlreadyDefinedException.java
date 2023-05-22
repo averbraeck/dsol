@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions;
+package nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions;
 
 /**
  * PortAlreadyDefinedException class. An input or output port with the given name has already been defined for the model.

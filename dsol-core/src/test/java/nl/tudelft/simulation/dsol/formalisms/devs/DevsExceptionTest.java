@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortAlreadyDefinedException;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.PortNotFoundException;
-import nl.tudelft.simulation.dsol.formalisms.devs.ESDEVS.exceptions.StateVariableNotFoundException;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortAlreadyDefinedException;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortNotFoundException;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.StateVariableNotFoundException;
 
 /**
  * PortAlreadyDefinedExceptionTest.java.
