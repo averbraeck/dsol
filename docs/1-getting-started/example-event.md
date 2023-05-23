@@ -74,22 +74,21 @@ The code to generate an entity would be:
 ```java
     protected void generate() throws SimRuntimeException
     {
-        Entity entity = new Entity(this.entityCounter++, 
-            this.simulator.getSimulatorTime());
+        double time = this.simulator.getSimulatorTime();
+        Entity entity = new Entity(this.entityCounter++, time);
         synchronized (this.queue)
         {
             if (this.capacity - this.busy >= 1)
             {
                 // process
+                this.tallyTimeInQueue.register(0.0); // no waiting
                 startProcess(entity);
             }
             else
             {
                 // queue
-                this.persistentQueueLength.register(getSimulator().getSimulatorTime(),
-                    this.queue.size());
-                this.queue.add(new QueueEntry<Entity>(entity, 
-                    this.simulator.getSimulatorTime()));
+                this.queue.add(new QueueEntry<Entity>(entity, time));
+                this.persistentQueueLength.register(time, this.queue.size());
             }
         }
         this.simulator.scheduleEventRel(this.interarrivalTime.draw(), 
@@ -100,8 +99,9 @@ The code to generate an entity would be:
 A few explanations:
 
 - The `Model` class has a queue called `queue` (see #4), a server capacity called `capacity` (default 1), and a number of entities being processed by the server at this moment called `busy` (0 or 1 in the default situation).
-- The method `simulator.getSimulatorTime()` that is used a few times returns the current time of the simulator.
+- The method `simulator.getSimulatorTime()` returns the current time of the simulator.
 - There is a statistic called `persistentQueueLength` (see #5) that keeps the statistics for the queue length. Every time an entity enters the queue or leaves the queue, the statistic is updated.
+- There is a statistic called `tallyTimeInQueue` (see #5) that keeps the statistics for the time the entities spent in the queue. Every time an entity leaves the queue, the statistic is updated. When there is **no** waiting time in the queue, we have to explicitly register this as a zero waiting time. 
 - The last line re-schedules the `generate()` method. It indicates that we should schedule after a relative duration (`scheduleEventRel`) and not at an absolute point in time. The interarrival time is drawn from a distribution object (see #6) called `interarrivalTime`. The last three arguments indicate the object instance on which the method will eventually be scheduled (`this`), the name of the method (`generate`) and the arguments to pass to the method (`null`), so no arguments.
 
 !!! Note
@@ -114,47 +114,129 @@ A few explanations:
 ### 3. A server that can serve the entities for a given time
 When the server is free, it is offered a generated entity at some time through the `startProcess(entity)` method. To indicate that the server is busy, we increase the value of the variable `busy` by 1 (this is already a preparation for the so-called M/M/c system where multiple entities can be served at the same time). 
 
+#### startProcess()
 The `startProcess(entity)` method of the server calculates some statistics, and releases the entity after the service time by calling the `endProcess(entity)` method. The `startProcess(..)` method looks as follows:
 
 ```java
     protected void startProcess(final Entity entity) throws SimRuntimeException
     {
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        double time = getSimulator().getSimulatorTime();
         this.busy++;
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(time, this.busy);
         this.simulator.scheduleEventRel(this.processingTime.draw(), 
             this, "endProcess", new Object[] {entity});
-        this.tallyTimeInQueue.register(this.simulator.getSimulatorTime() 
-            - entity.getCreateTime());
     }
 ```
 
-The first three statements of the method body are for updating the utilization statistics. First, the current utilization value is ended at the current time; then the number of entities in process is increased, then the new utilization factor is registered in the statistic. 
+The first three statements of the method body are for updating the utilization statistics. First, the number of entities being processed is increased, then the new utilization is registered in the statistic. 
 
 The fourth statement is scheduling the end of the process; it draws a delay from the `processingTime` distribution, and schedules a call to the method named `this.endProcess` after the delay. The methods expects one argument: the `entity`. In a sense, it is calling the method `this.endProcess(entity)` after the delay. 
 
-The last statement registers a value for the time-in-queue statistic, by subtracting the creation time of the entity from the current simulation time. This is the time that the entity has spent in the queue. When the entity accesses the server right after being created, the time-in-queue was zero.
-
+#### endProcess()
 The `endProcess(entity)` method has to do three things: (1) increasing the capacity of the server, (2) seeing if there are entities waiting in the queue and if yes, removing the first entity from the queue and processing it on the server, and (3) calculating statistics on the service duration. The method looks as folows:
 
 ```java
     protected void endProcess(final Entity entity) throws SimRuntimeException
     {
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        double time = getSimulator().getSimulatorTime();
         this.busy--;
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(time, this.busy);
         if (!this.queue.isEmpty())
         {
-            this.persistentQueueLength.register(getSimulator().getSimulatorTime(), 
-                this.queue.size());
-            startProcess(this.queue.remove(0).getEntity());
+            QueueEntry<Entity> queueEntry = this.queue.remove(0); 
+            this.persistentQueueLength.register(time, this.queue.size());
+            this.tallyTimeInQueue.register(time - queueEntry.getQueueInTime());
+            startProcess(queueEntry.getEntity());
         }
-        this.tallyTimeInSystem.register(this.simulator.getSimulatorTime() 
-            - entity.getCreateTime());
+        this.tallyTimeInSystem.register(time - entity.getCreateTime());
     }
 ```
 
-The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity. Statement 4 checks whether there are elements in the queue. If yes, the statistic for the queue length is updated, and the first entity of the queue is removed and offered to the `startProcess` method. The last stetement tallies the time-in-system of the entity. Since no statement suing the entity comes afterward, the entity is removed from the model.
+The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity by one. Statement 4 checks whether there are elements in the queue. If yes, we remove the first entry from the queue. the statistic for the queue length and the time-in-queue are updated, ather which the removed entity is offered to the `startProcess` method. The last stetement tallies the time-in-system of the entity. Since no statement using the entity comes afterward, the entity is removed from the model.
+
+The `tallyTimeInQueue` statistic registers the value for the time-in-queue statistic, by subtracting the time the entity entered the queue (`queueEntry.getQueueInTime()` from the current simulation time. This is the time that the entity has spent in the queue. 
 
 
 ### 4. A queue in which waiting entities can be stored
+In this model, the queue is represented by a java `List`. In theory, it would be sufficient to store the entity in the list with `this.queue.add(entity)`, and remove the first entity from the queue with `Entity entity = this.queue.remove(0)`. When the model gets more complicated, however, and multiple servers with queues are part of the model, the queue should store the time when the entity entered the queue together with the entity itself. This is exactly what we have done in this model:
+
+```java
+    protected class QueueEntry<E>
+    {
+        private final double queueInTime;
+        private final E entity;
+
+        public QueueEntry(final E entity, final double queueInTime)
+        {
+            this.entity = entity;
+            this.queueInTime = queueInTime;
+        }
+
+        public double getQueueInTime()
+        {
+            return this.queueInTime;
+        }
+
+        public E getEntity()
+        {
+            return this.entity;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "QueueEntry [queueInTime=" + this.queueInTime 
+                + ", entity=" + this.entity + "]";
+        }
+    }
+```
+
+The `QueueEntry` stores the entity AND the time when it entered the queue. Thereby, it is easy to determine the duration that the entity spent in the queue when it leaes the queue. The queue is defined as follows in the model:
+
+```java
+    private List<QueueEntry<Entity>> queue = new ArrayList<QueueEntry<Entity>>();
+```
+
+
+### 5. Output statistics to store the results
+The model defines four output statistics:
+
+```java
+    SimTally<Double> tallyTimeInQueue;
+    SimTally<Double> tallyTimeInSystem;
+    SimPersistent<Double> persistentUtilization;
+    SimPersistent<Double> persistentQueueLength;
+```
+
+Two of the statistics are tallies, and two of the statistics are persistent, or time weighted, statistics. 
+
+A tally is a statistic for which you register values, and it calculates mean, standard deviation, min, max, and higher order moments by simply using the observations as such. The mean is calculated by:
+
+$$
+  mean = \sum{i=1}^N{\frac{v_i}{N}}
+$$
+
+where $v_i$ are the registered values, and $N$ is the number of registered values. If we register the values 2 and 4, the average is 3.
+
+A persistent statistic is a time-weiged statistic that takes into account how long a certain value persisted. If we offer the value 2 for 10 time units, and the value 4 for 2 time units, the average is (10 * 2 + 2 * 4) / 12 = 2.33. Instead of dividing by the number of observations, we divide over the total time. The mean is calculated by:
+
+$$
+  mean = \int{0}^T{\frac{t_i * v_i}{T}} where T = \sum{i=1}^T{t_i}
+$$
+
+In this case, $v_i$ are the registered values, and $t_i$ are the durations for which value $v_i$ was registered.
+
+Therefore, a tally only needs a value to be registered:
+
+```java
+  this.tallyTimeInQueue.register(time - queueEntry.getQueueInTime());
+```
+
+whereas a persistent statistic needs a timestamp AND a new value to be registered:
+
+```java
+  this.persistentQueueLength.register(time, this.queue.size());
+```
+
+
+### 6. Random distributions to draw the inter-arrival time and service time from
