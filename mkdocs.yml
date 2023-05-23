@@ -4,7 +4,7 @@ site_favicon: images/favicon.png
 copyright: (c) 2002-2023 Delft University of Technology
 
 theme:
-  name: material
+  name: readthedocs
   navigation_depth: 1
     
 markdown_extensions:
