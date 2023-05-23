@@ -11,7 +11,8 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - admonition
-  - markdown.extensions.toc:
+  - toc:
+      premalink: True
       baselevel: 1
       
 extra_css: 
