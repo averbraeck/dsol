@@ -37,33 +37,33 @@ Suppose we have a class called `Entity` that we want to generate. The `Entity` h
 The simple implementation for such an entity would be:
 
 ```java
-    protected class Entity
+  protected class Entity
+  {
+    private final double createTime;
+    private final int id;
+
+    public Entity(final int id, final double createTime)
     {
-        private final double createTime;
-        private final int id;
-
-        public Entity(final int id, final double createTime)
-        {
-            this.id = id;
-            this.createTime = createTime;
-        }
-
-        public double getCreateTime() 
-        {
-            return this.createTime;
-        }
-
-        public int getId()
-        {
-            return this.id;
-        }
-
-        @Override
-        public String toString()
-        {
-            return "Entity [createTime=" + this.createTime + ", id=" + this.id + "]";
-        }
+      this.id = id;
+      this.createTime = createTime;
     }
+
+    public double getCreateTime() 
+    {
+      return this.createTime;
+    }
+
+    public int getId()
+    {
+      return this.id;
+    }
+
+    @Override
+    public String toString()
+    {
+      return "Entity [createTime=" + this.createTime + ", id=" + this.id + "]";
+    }
+  }
 ```
 
 
@@ -75,28 +75,28 @@ After the just created entity has been handled, the `generate()` method calls it
 The code to generate an entity would be:
 
 ```java
-    protected void generate() throws SimRuntimeException
+  protected void generate() throws SimRuntimeException
+  {
+    double time = this.simulator.getSimulatorTime();
+    Entity entity = new Entity(this.entityCounter++, time);
+    synchronized (this.queue)
     {
-        double time = this.simulator.getSimulatorTime();
-        Entity entity = new Entity(this.entityCounter++, time);
-        synchronized (this.queue)
-        {
-            if (this.capacity - this.busy >= 1)
-            {
-                // process
-                this.tallyTimeInQueue.register(0.0); // no waiting
-                startProcess(entity);
-            }
-            else
-            {
-                // queue
-                this.queue.add(new QueueEntry<Entity>(entity, time));
-                this.persistentQueueLength.register(time, this.queue.size());
-            }
-        }
-        this.simulator.scheduleEventRel(this.interarrivalTime.draw(), 
-            this, "generate", null);
+      if (this.capacity - this.busy >= 1)
+      {
+        // process
+        this.tallyTimeInQueue.register(0.0); // no waiting
+        startProcess(entity);
+      }
+      else
+      {
+        // queue
+        this.queue.add(new QueueEntry<Entity>(entity, time));
+        this.persistentQueueLength.register(time, this.queue.size());
+      }
     }
+    this.simulator.scheduleEventRel(this.interarrivalTime.draw(), 
+        this, "generate", null);
+  }
 ```
 
 A few explanations:
@@ -121,14 +121,14 @@ When the server is free, it is offered a generated entity at some time through t
 The `startProcess(entity)` method of the server calculates some statistics, and releases the entity after the service time by calling the `endProcess(entity)` method. The `startProcess(..)` method looks as follows:
 
 ```java
-    protected void startProcess(final Entity entity) throws SimRuntimeException
-    {
-        double time = getSimulator().getSimulatorTime();
-        this.busy++;
-        this.persistentUtilization.register(time, this.busy);
-        this.simulator.scheduleEventRel(this.processingTime.draw(), 
-            this, "endProcess", new Object[] {entity});
-    }
+  protected void startProcess(final Entity entity) throws SimRuntimeException
+  {
+    double time = getSimulator().getSimulatorTime();
+    this.busy++;
+    this.persistentUtilization.register(time, this.busy);
+    this.simulator.scheduleEventRel(this.processingTime.draw(), 
+        this, "endProcess", new Object[] {entity});
+  }
 ```
 
 The first three statements of the method body are for updating the utilization statistics. First, the number of entities being processed is increased, then the new utilization is registered in the statistic. 
@@ -139,20 +139,20 @@ The fourth statement is scheduling the end of the process; it draws a delay from
 The `endProcess(entity)` method has to do three things: (1) increasing the capacity of the server, (2) seeing if there are entities waiting in the queue and if yes, removing the first entity from the queue and processing it on the server, and (3) calculating statistics on the service duration. The method looks as folows:
 
 ```java
-    protected void endProcess(final Entity entity) throws SimRuntimeException
+  protected void endProcess(final Entity entity) throws SimRuntimeException
+  {
+    double time = getSimulator().getSimulatorTime();
+    this.busy--;
+    this.persistentUtilization.register(time, this.busy);
+    if (!this.queue.isEmpty())
     {
-        double time = getSimulator().getSimulatorTime();
-        this.busy--;
-        this.persistentUtilization.register(time, this.busy);
-        if (!this.queue.isEmpty())
-        {
-            QueueEntry<Entity> queueEntry = this.queue.remove(0); 
-            this.persistentQueueLength.register(time, this.queue.size());
-            this.tallyTimeInQueue.register(time - queueEntry.getQueueInTime());
-            startProcess(queueEntry.getEntity());
-        }
-        this.tallyTimeInSystem.register(time - entity.getCreateTime());
+        QueueEntry<Entity> queueEntry = this.queue.remove(0); 
+        this.persistentQueueLength.register(time, this.queue.size());
+        this.tallyTimeInQueue.register(time - queueEntry.getQueueInTime());
+        startProcess(queueEntry.getEntity());
     }
+    this.tallyTimeInSystem.register(time - entity.getCreateTime());
+  }
 ```
 
 The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity by one. Statement 4 checks whether there are elements in the queue. If yes, we remove the first entry from the queue. The statistic for the queue length and the time-in-queue are updated, ather which the removed entity is offered to the `startProcess` method. The last stetement tallies the time-in-system of the entity. Since no statement using the entity comes afterward, the entity is removed from the model after processing.
@@ -164,40 +164,40 @@ The `tallyTimeInQueue` statistic registers the value for the time-in-queue stati
 In this model, the queue is represented by a java `List`. In theory, it would be sufficient to store the entity in the list with `this.queue.add(entity)`, and remove the first entity from the queue with `Entity entity = this.queue.remove(0)`. When the model gets more complicated, however, and multiple servers with queues are part of the model, the queue should store the time when the entity entered the queue together with the entity itself. This is exactly what we have done in this model:
 
 ```java
-    protected class QueueEntry<E>
+  protected class QueueEntry<E>
+  {
+    private final double queueInTime;
+    private final E entity;
+
+    public QueueEntry(final E entity, final double queueInTime)
     {
-        private final double queueInTime;
-        private final E entity;
-
-        public QueueEntry(final E entity, final double queueInTime)
-        {
-            this.entity = entity;
-            this.queueInTime = queueInTime;
-        }
-
-        public double getQueueInTime()
-        {
-            return this.queueInTime;
-        }
-
-        public E getEntity()
-        {
-            return this.entity;
-        }
-
-        @Override
-        public String toString()
-        {
-            return "QueueEntry [queueInTime=" + this.queueInTime 
-                + ", entity=" + this.entity + "]";
-        }
+        this.entity = entity;
+        this.queueInTime = queueInTime;
     }
+
+    public double getQueueInTime()
+    {
+        return this.queueInTime;
+    }
+
+    public E getEntity()
+    {
+        return this.entity;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "QueueEntry [queueInTime=" + this.queueInTime 
+            + ", entity=" + this.entity + "]";
+    }
+  }
 ```
 
 The `QueueEntry` stores the entity AND the time when it entered the queue. Thereby, it is easy to determine the duration that the entity spent in the queue when it leaes the queue. The queue is defined as follows in the model:
 
 ```java
-    private List<QueueEntry<Entity>> queue = new ArrayList<QueueEntry<Entity>>();
+  private List<QueueEntry<Entity>> queue = new ArrayList<QueueEntry<Entity>>();
 ```
 
 
@@ -205,10 +205,10 @@ The `QueueEntry` stores the entity AND the time when it entered the queue. There
 The model defines four output statistics:
 
 ```java
-    SimTally<Double> tallyTimeInQueue;
-    SimTally<Double> tallyTimeInSystem;
-    SimPersistent<Double> persistentUtilization;
-    SimPersistent<Double> persistentQueueLength;
+  SimTally<Double> tallyTimeInQueue;
+  SimTally<Double> tallyTimeInSystem;
+  SimPersistent<Double> persistentUtilization;
+  SimPersistent<Double> persistentQueueLength;
 ```
 
 Two of the statistics are tallies, and two of the statistics are persistent, or time weighted, statistics. 
@@ -310,8 +310,8 @@ where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own R
 A model can define multiple stochastic distributions, by specifying the type of distribution, the parameters for the distribution, and the RNG to be used for drawing the random numbers. DSOL offers both continuous distributions such as Exponential, Triangular, Normal, Uniform, Weibull, Gamma, Beta, Lognormal, and discrete distributions such as Poisson, Discrete Uniform, Bernoulli, and Geometric. A distribution is a class that is instantiated, e.g., as follows for the inter-arrival distribution and the service time distribution:
 
 ```java
-    private DistContinuous interarrivalTime = new DistExponential(stream, 1.0);
-    private DistContinuous processingTime = new DistExponential(stream, 0.9);
+  private DistContinuous interarrivalTime = new DistExponential(stream, 1.0);
+  private DistContinuous processingTime = new DistExponential(stream, 0.9);
 ```
 
 Drawing a value from such a distribution is done by, e.g., `this.interarrivalTime.draw()`. 
@@ -326,8 +326,8 @@ The `SingleRreplication` example for the RNG is not using seed management, and h
 This stream can now be used in the stochastic distributions for the inter-arrival time and the service time:
 
 ```java
-    this.interarrivalTime = new DistExponential(defaultStream, 1.0);
-    this.processingTime = new DistExponential(defaultStream, 0.9);
+  this.interarrivalTime = new DistExponential(defaultStream, 1.0);
+  this.processingTime = new DistExponential(defaultStream, 0.9);
 ```
 
 The streams will automatically be reset with a new seed before a new replication starts. 
@@ -371,6 +371,162 @@ The call to `parameters.get("generator.intervalTime")` retrieves the parameter _
 
 
 ### 9. A program that can be started to create the model
+As shown above, the `Simulator`, `Model`, and `Experiment` can be created in a constructor:
+
+```java
+  protected MM1Application()
+  {
+    this.simulator = new DevsSimulator<Double>("MM1.Simulator");
+    this.model = new MM1Model(this.simulator);
+    this.experiment = new Experiment<>("mm1", this.simulator, 
+        this.model, 0.0, 0.0, 1000.0, 10);
+    this.experiment.start();
+  }
+
+  public static void main(final String[] args)
+  {
+    new MM1Application();
+  }
+```
+
+When we want to print the results of the replication and of the entire experiment, this is not straightforward, since we have no clue when a replication or the experiment has finished. For the replication, there are _two ways_ in which we can print the results at the end of the replication. 
+
+#### Printing results at the end of a replication option #1: simulation event
+We can print the results of the output statistics at the end of a replication by scheduling a method on the event list, just before the simulation has ended. E.g., by including the following code in the `constructModel()` method:
+
+```java
+  public void constructModel()
+  {
+    ...
+    this.simulator.scheduleEventAbs(this.simulator.getReplication().getRunLength(), 
+        this. "reportStats()", null);
+  }
+  
+  protected void reportStats()
+  {
+    System.out.println("average queue length   = " 
+        + this.persistentQueueLength.getWeightedSampleMean());
+    System.out.println("average time in queue  = " 
+        + this.tallyTimeInQueue.getSampleMean());
+    System.out.println("average time in system = " 
+        + this.tallyTimeInSystem.getSampleMean());
+    System.out.println("average utilization    = " 
+        + this.persistentUtilization.getWeightedSampleMean());
+  }
+```
+
+The replication takes care that **first** all regular events at the time when the replication ends are executed before ending the simulation. If, however, the time is even the slightest bit later, e.g., because of a calculation, the `reportStats()` method might not be scheduled. Since we directly use the value of `getReplication().getRunLength()` here, there is no danger of the method not being executed.
+
+#### Printing results at the end of a replication option #2: pub/sub event
+The second way to print the results at the end of the run is to subscribe to an event of the `Simulator` that indicates the end of the replication, called `Replication.END_REPLICATION_EVENT`. The subscription is done as follows (e.g., in the setup of the simulator, model and experiment):
+
+```java
+  class MM1Application implements EventListener
+  {
+    protected MM1Application()
+    {
+      this.simulator = new DevsSimulator<Double>("MM1.Simulator");
+      this.model = new MM1Model(this.simulator);
+      this.experiment = new Experiment<>("mm1", this.simulator, 
+          this.model, 0.0, 0.0, 1000.0, 10);
+      this.experiment.addListener(this, Replication.END_REPLICATION_EVENT);
+      this.experiment.start();
+    }
+```
+
+When the end of the replication is reached, the `notify(event)` method is called. We can then print the results if the event is indeed the `END_REPLICATION_EVENT`:
+
+```java
+  @Override
+  public void notify(final Event event) throws RemoteException
+  {
+    if (event.getType().equals(Replication.END_REPLICATION_EVENT))
+    {
+      reportStats();
+    }
+  }
+```
+
+#### printing results at the end of an experiment
+Printing the results at the end of an entire experiment can only be done with the publish/subscribe method shown above, but then for the `Experiment.END_EXPERIMENT_EVENT` event. The code would look, e.g., as follows (also inclduing the `Replication.END_REPLICATION_EVENT`:
+
+```java
+  class MM1Application implements EventListener
+  {
+    protected MM1Application()
+    {
+      this.simulator = new DevsSimulator<Double>("MM1.Simulator");
+      this.model = new MM1Model(this.simulator);
+      this.experiment = new Experiment<>("mm1", this.simulator, 
+          this.model, 0.0, 0.0, 1000.0, 10);
+      this.experiment.addListener(this, Experiment.END_EXPERIMENT_EVENT);
+      this.experiment.addListener(this, Replication.END_REPLICATION_EVENT);
+      this.experiment.start();
+    }
+    
+    @Override
+    public void notify(final Event event) throws RemoteException
+    {
+      if (event.getType().equals(Replication.END_REPLICATION_EVENT))
+      {
+        reportStats();
+      }
+      if (event.getType().equals(Experiment.END_EXPERIMENT_EVENT))
+      {
+        reportFinalStats();
+      }
+    }
+    
+    protected reportFinalStats()
+    {
+      System.out.println("Final statistics:");
+      SortedMap<String, SortedMap<String, Tally>> stats 
+          = this.experiment.getSummaryStatistics();
+      for (String statMapKey : stats.keySet())
+      {
+        System.out.println("\nSummary statistic for: " + statMapKey);
+        System.out.println(Tally.reportHeader());
+        SortedMap<String, Tally> statMap = stats.get(statMapKey);
+        for (String statKey : statMap.keySet())
+        {
+          Tally stat = statMap.get(statKey);
+          System.out.println(stat.reportLine());
+        }
+        System.out.println(Tally.reportFooter());
+      }
+    }
+```
+
+The `reportFinalStats()` method makes use of the fact that the _summary statistics_ over the 10 replications are _all_ Tally statistics (all statistics values are the normal average over 10 runs). The Tally has a nice property that it can report the results in nice lines with a header and a footer.
+
+It will report, e.g. the following (small excerpt of the summary statistics):
+
+```text
+Summary statistic for: Time in Queue
+--------------------------------------------------------------------------------------------------
+| Tally name                        |      n |       mean |     st.dev |    minimum |    maximum |
+--------------------------------------------------------------------------------------------------
+| Max                               |     10 |      5.607 |      1.595 |      3.477 |      9.591 |
+| Min                               |     10 |      0.000 |      0.000 |      0.000 |      0.000 |
+| N                                 |     10 |   1007.300 |     26.702 |    956.000 |   1047.000 |
+| PopulationExcessKurtosis          |     10 |      8.286 |      5.518 |      2.627 |     22.921 |
+| PopulationKurtosis                |     10 |     11.286 |      5.518 |      5.627 |     25.921 |
+| PopulationMean                    |     10 |      0.507 |      0.074 |      0.382 |      0.684 |
+| PopulationSkewness                |     10 |      2.560 |      0.652 |      1.808 |      4.142 |
+| PopulationStDev                   |     10 |      0.874 |      0.135 |      0.622 |      1.113 |
+| PopulationVariance                |     10 |      0.783 |      0.238 |      0.387 |      1.238 |
+| SampleExcessKurtosis              |     10 |      8.333 |      5.547 |      2.645 |     23.045 |
+| SampleKurtosis                    |     10 |     11.274 |      5.512 |      5.621 |     25.894 |
+| SampleMean                        |     10 |      0.507 |      0.074 |      0.382 |      0.684 |
+| SampleSkewness                    |     10 |      2.564 |      0.653 |      1.811 |      4.148 |
+| SampleStDev                       |     10 |      0.875 |      0.135 |      0.622 |      1.113 |
+| SampleVariance                    |     10 |      0.783 |      0.238 |      0.387 |      1.239 |
+| Sum                               |     10 |    511.195 |     79.132 |    386.626 |    705.454 |
+--------------------------------------------------------------------------------------------------
+```
+
+Tables like this will also be printed for the queue length, server utilization, and time in system.
+
 
 
 ### 10. A GUI to display statistics and graphs to the user
