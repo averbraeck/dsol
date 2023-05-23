@@ -65,7 +65,7 @@ The simple implementation for such an entity would be:
 
 
 ### 2. An arrival generator that makes entities
-For the generation of the entities, we create a method called `generate()`, that we call when constructing the model. The `generate` method creates one entity and either offers it to the `process(Entity)` method when the server is idle, or adds it to the rear of the queue when the server is busy. 
+For the generation of the entities, we create a method called `generate()`, that we call when constructing the model. The `generate` method creates one entity and either offers it to the `startProcess(Entity)` method when the server is idle, or adds it to the rear of the queue when the server is busy. 
 
 After the just created entity has been handled, the `generate()` method calls itself after a time equal to a random value drawn from the Exponential inter-arrival time distribution. In a sense, the method re-schedules itself indefinitely, each time with an inter-arrival time from a given exponential distribution with $\lambda$ as the parameter.
 
@@ -111,5 +111,50 @@ A few explanations:
     The execution of the methods is single-threaded. No parallel execution occurs, and the `Simulator` carries out one event at a time, so we do not have to be afraid that another entity is being generated while we did not yet increase the `busy` flag of the server. The next event will only be carried out when the current event, including method calls to other methods, has been completed. 
 
 
-### 3. A server with an attached queue
-When the server is free, it is offered a generated entity at some time. To indicate that the server is busy, we set the 
+### 3. A server that can serve the entities for a given time
+When the server is free, it is offered a generated entity at some time through the `startProcess(entity)` method. To indicate that the server is busy, we increase the value of the variable `busy` by 1 (this is already a preparation for the so-called M/M/c system where multiple entities can be served at the same time). 
+
+The `startProcess(entity)` method of the server calculates some statistics, and releases the entity after the service time by calling the `endProcess(entity)` method. The `startProcess(..)` method looks as follows:
+
+```java
+    protected void startProcess(final Entity entity) throws SimRuntimeException
+    {
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        this.busy++;
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        this.simulator.scheduleEventRel(this.processingTime.draw(), 
+            this, "endProcess", new Object[] {entity});
+        this.tallyTimeInQueue.register(this.simulator.getSimulatorTime() 
+            - entity.getCreateTime());
+    }
+```
+
+The first three statements of the method body are for updating the utilization statistics. First, the current utilization value is ended at the current time; then the number of entities in process is increased, then the new utilization factor is registered in the statistic. 
+
+The fourth statement is scheduling the end of the process; it draws a delay from the `processingTime` distribution, and schedules a call to the method named `this.endProcess` after the delay. The methods expects one argument: the `entity`. In a sense, it is calling the method `this.endProcess(entity)` after the delay. 
+
+The last statement registers a value for the time-in-queue statistic, by subtracting the creation time of the entity from the current simulation time. This is the time that the entity has spent in the queue. When the entity accesses the server right after being created, the time-in-queue was zero.
+
+The `endProcess(entity)` method has to do three things: (1) increasing the capacity of the server, (2) seeing if there are entities waiting in the queue and if yes, removing the first entity from the queue and processing it on the server, and (3) calculating statistics on the service duration. The method looks as folows:
+
+```java
+    protected void endProcess(final Entity entity) throws SimRuntimeException
+    {
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        this.busy--;
+        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        if (!this.queue.isEmpty())
+        {
+            this.persistentQueueLength.register(getSimulator().getSimulatorTime(), 
+                this.queue.size());
+            startProcess(this.queue.remove(0).getEntity());
+        }
+        this.tallyTimeInSystem.register(this.simulator.getSimulatorTime() 
+            - entity.getCreateTime());
+    }
+```
+
+The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity. Statement 4 checks whether there are elements in the queue. If yes, the statistic for the queue length is updated, and the first entity of the queue is removed and offered to the `startProcess` method. The last stetement tallies the time-in-system of the entity. Since no statement suing the entity comes afterward, the entity is removed from the model.
+
+
+### 4. A queue in which waiting entities can be stored
