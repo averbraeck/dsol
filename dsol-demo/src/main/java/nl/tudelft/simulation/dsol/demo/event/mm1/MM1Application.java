@@ -1,10 +1,5 @@
 package nl.tudelft.simulation.dsol.demo.event.mm1;
 
-import java.rmi.RemoteException;
-
-import javax.naming.NamingException;
-
-import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DsolModel;
@@ -25,26 +20,21 @@ public class MM1Application
 {
     /**
      * M/M/1 queueing application.
-     * @throws SimRuntimeException on simulation error
-     * @throws RemoteException on remote error
-     * @throws NamingException on naming/animation error
      */
-    protected MM1Application() throws SimRuntimeException, RemoteException, NamingException
+    protected MM1Application()
     {
-        DevsSimulator<Double> simulator = new DevsSimulator<Double>("MM1SwingApplication.Simulator");
+        DevsSimulatorInterface<Double> simulator = new DevsSimulator<>("MM1.Simulator");
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
-        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
+        Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
         simulator.initialize(model, replication);
         simulator.start();
     }
 
     /**
+     * Start the simulation experiment with the model.
      * @param args String[]; the arguments (not used, should be empty)
-     * @throws SimRuntimeException on simulation error
-     * @throws RemoteException on remote error
-     * @throws NamingException on naming/animation error
      */
-    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
+    public static void main(final String[] args)
     {
         new MM1Application();
     }

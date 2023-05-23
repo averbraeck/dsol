@@ -11,15 +11,18 @@ For a typical queueing system, we are interested in simulating different arrival
 - time in system (development over time, average, standard deviation, min, max)
 - utilization of the server (development over time, average)
 
-If we build a simulation model for this, we the following types of components:
+If we build a simulation model for this, we need the following types of components:
 
 1. **An entity** that flows through the model
-2. **An arrival generator** that makes entities arrive with an interarrival time drawn from the correct distribution
+2. **An arrival generator** that creates entities with an interarrival time drawn from the correct distribution
 3. **A server** that can serve entities for a given time
 4. **A queue** in which waiting entities can be stored
-5. **Output statistics objects** to gather the required 
-6. **Random distributions** to draw the inter-arrival time and service time from
-7. **A program** that can be started and that creates the simulator, model, and makes it work.
+5. **Output statistics objects** to gather the required statistics
+6. **Experiment management** including the replication settings and seed management
+7. **Random distributions** to draw the inter-arrival time and service times
+8. **Input parameters** for the model to set the experimental conditions
+9. **A program** that can be started and that creates the simulator, model, and makes it work.
+10. **A GUI** to display statistics and graphs to the user
 
 
 ## implementation using event scheduling
@@ -152,7 +155,7 @@ The `endProcess(entity)` method has to do three things: (1) increasing the capac
     }
 ```
 
-The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity by one. Statement 4 checks whether there are elements in the queue. If yes, we remove the first entry from the queue. the statistic for the queue length and the time-in-queue are updated, ather which the removed entity is offered to the `startProcess` method. The last stetement tallies the time-in-system of the entity. Since no statement using the entity comes afterward, the entity is removed from the model.
+The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity by one. Statement 4 checks whether there are elements in the queue. If yes, we remove the first entry from the queue. The statistic for the queue length and the time-in-queue are updated, ather which the removed entity is offered to the `startProcess` method. The last stetement tallies the time-in-system of the entity. Since no statement using the entity comes afterward, the entity is removed from the model after processing.
 
 The `tallyTimeInQueue` statistic registers the value for the time-in-queue statistic, by subtracting the time the entity entered the queue (`queueEntry.getQueueInTime()` from the current simulation time. This is the time that the entity has spent in the queue. 
 
@@ -218,7 +221,7 @@ $$
 
 where $v_i$ are the registered values, and $N$ is the number of registered values. If we register the values 2 and 4, the average is 3.
 
-A persistent statistic is a time-weiged statistic that takes into account how long a certain value persisted. If we offer the value 2 for 10 time units, and the value 4 for 2 time units, the average is (10 * 2 + 2 * 4) / 12 = 2.33. Instead of dividing by the number of observations, we divide over the total time. The mean is calculated by:
+A persistent statistic is a time-weighted statistic that takes into account how long a certain value persisted. If we offer the value 2 for 10 time units, and the value 4 for 2 time units, the average is (10 * 2 + 2 * 4) / 12 = 2.33. Instead of dividing by the number of observations, we divide over the total time. The mean is calculated by:
 
 $$
   \text{mean} = \int_0^T{\frac{t_i * v_i}{T}}\text{ where }T = \sum_{i=1}^T{t_i}
@@ -238,5 +241,97 @@ whereas a persistent statistic needs a timestamp AND a new value to be registere
   this.persistentQueueLength.register(time, this.queue.size());
 ```
 
+### 6. Experiment management
+A simulation model is executed as part of a properly designed experiment. The experiment sets the input parameters, measures the output statistics, and establishes a relationshp between the input paprameters and the calculated indicators. Often, the model is ran multiple times (so-called _replications_ of the simulation run), to avoid any dependency on the particularities of a specific run. When the model is stable, and the indicators easily converge towards the same value, a handful of replications, typically 5 or 10, is sufficient. When the model has rare events that can happen at particular times, such as weather events, failures, or disturbances, many more replications are needed to assess the true value of the output statistics, since the outcome of two replications can differ significantly. In such a case, the 95% confidence interval of the output statistics needs to be calculated and replications have to be repeated until the confidence interval is considered to be small enough for the purpose of the experiment. In this case, we start with observing one replication, but want to extend to multiple replications later.
 
-### 6. Random distributions to draw the inter-arrival time and service time from
+Two other values that need to be set for the experiment are the length of each run, and the so-called warmup period -- the start period of the model that it needs to cover the transient period. When a model needs time to get realistically 'filled' and therefor show realistic behavior, we remove the first part of the run (that shows irrealistic behavior, e.g., because the model is too 'empty') from the statistics. In other words, the warmup period is the duration after which the statistics are all reset to their initial values. For this queueing model, we set the run time to 1000 time units, and the warmup period to 0, since an empty system is quite realistic, and the system is so simple, it does not need any time to get realistically filled.
+
+In the code, setting up the `Simulator`, `Model` and `Replication` is pretty straightforward:
+
+```java
+  protected MM1Application()
+  {
+    DevsSimulatorInterface<Double> simulator = new DevsSimulator<>("MM1.Simulator");
+    DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
+    Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+    simulator.initialize(model, replication);
+    simulator.start();
+  }
+
+  public static void main(final String[] args)
+  {
+    new MM1Application();
+  }
+```
+
+Explanation:
+
+- We first create a `DevsSimulator`. The time type for the Simulator is `Double` (it could also be, e.g., `Float`, `Integer`, or `Duration`). The Simulator has a name to identify it: "MM1.Simulator". `DevsSimulator` stands for a Discrete Event Simulator -- a simulator that maintains an event list with future events, and that allows for delayed method invocation. Several other types of simulators exist within DSOL.
+- The `MM1Model` is created and uses the time type `Double` and the `DevsSimulatorInterface<Double>` as its simulator. These generics are important as they help to strongly type the methods that are part of the model and the simulator.
+- The `Replication` is instantiated next as a `SingleReplication` (so this is not an experiment with multiple replications) with name "rep1", starting time 0.0, warmup period 0.0, and run length 1000 time units. 
+- The simulator initializes the model with data from the replicaton (timing, seeds, random streams, input variables). 
+- The simulator is asked to start the model execution.
+
+!!! Note
+    When the simulator receives the `initialize` method call, it first _constructs_ the model by calling the `model.constructModel()` method. In other words, the model carries out all the initial code that is necessary to start executing. Sometimes this is only a few statements of code. In other cases, the entire model is instantiated from a database. The reason for carrrying out the initialization is (a) that thereby the values of input variables can be used to create the structure of the model, and (b) the model is initialized for every replication to its initial state, and there are no 'leftovers' from previous replications.
+    
+When we would want to carry out 10 replications, the construction of the simulator, model, and experiment would look as follows:
+
+```java
+  protected MM1Application()
+  {
+    this.simulator = new DevsSimulator<Double>("MM1.Simulator");
+    this.model = new MM1Model(this.simulator);
+    this.experiment = new Experiment<>("mm1", this.simulator, 
+        this.model, 0.0, 0.0, 1000.0, 10);
+    this.experiment.start();
+  }
+```
+
+In this case, the creation of the simulator and the model is the same, but now we create an `Experiment` that has the same arguments as the `SingleReplication` class above, but with one extra argument: the number of replications (10). When starting the experiment, it will create the replications one-by-one, initialize the model with the replication, and start the replication. Summary statistics are gathered that can be used after all 10 replications have been completed.
+
+
+### 7. Random distributions to draw the inter-arrival time and service times
+DSOL has a solid system for random number generation (RNG), stochastic distributions, and seed management. 
+
+#### Random number generator
+DSOL allows for multiple, independent, random streams to be used in the model, allowing for the usage of so-called _Common Random Numbers_ experiments. The most used random number generator is the _Mersenne Twister_, the de facto standard for RNG in discrete-event simulation. Other RNGs are offered as well, and it is easy to add a special RNG if needed. Random streams are typically offered through DSOL's experiment management, but can also be created by hand:
+
+```java
+  private StreamInterface stream = new MersenneTwister(12);
+```
+
+where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own RNG is that the seed is not changed between replications, in case the model is ran multiple times to get a confidence interval for the output statistics such as the average time-in-queue or the average utilization of the server. Experiment management (see section 7) takes care of defining random streams that _are_ (reproducibly) changed between replications.
+
+!!! Note
+    Proper experimentation with simulation models is all about reproducibility. So, we want some values to be random, but it should be reproducibly random. This means that if we run the model again, with the same seed settings, we should get exactly the same results. Only when these conditions are fulfilled, we can use the simulation to run a proper scientific experiment. Seed management for the RNGs is key in ensuring randomness _and_ reprodicibility.
+    
+#### Stochastic distributions
+A model can define multiple stochastic distributions, by specifying the type of distribution, the parameters for the distribution, and the RNG to be used for drawing the random numbers. DSOL offers both continuous such as Exponential, Triangular, Normal, Uniform, Weibull, Gamma, Beta, Lognormal, and discrete distributions such as Poisson, Discrete Uniform, Bernoulli, and Geometric. A distribution is a class that is instantiated, e.g., as follows for the inter-arrival distribution and the service time distribution:
+
+```java
+    private DistContinuous interarrivalTime = new DistExponential(stream, 1.0);
+    private DistContinuous processingTime = new DistTriangular(stream, 0.8, 0.9, 1.1);
+```
+
+Drawing a value from such a distribution is done by, e.g., `this.interarrivalTime.draw()`. 
+
+#### Seed management
+The `SingleRreplication` example for the RNG is not using seed management, and has the same value for the seed for all replications. That is clearly not what we would want for an experiment with multiple replications. For this use case, the `Experiment` class in DSOL takes care of proper seed management, updating the seed value for each new replication in a reproducible way. You can create as many properly managed random streams in the experiment as needed, but there is always one default stream available in the `Experiment` that you can use. You can access it by:
+
+```java
+  StreamInterface defaultStream = getDefaultStream();
+```
+
+This stream can now be used in the stochastic distributions for the inter-arrival time and the service time:
+
+```java
+    this.interarrivalTime = new DistExponential(defaultStream, 1.0);
+    this.processingTime = new DistTriangular(defaultStream, 0.8, 0.9, 1.1);
+```
+
+The streams will be reset with a new seed before a new replication starts. 
+
+
+### 8. Input parameters for the model to set the experimental conditions
+

@@ -7,10 +7,10 @@ import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
-import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
+import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.distributions.DistTriangular;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -41,12 +41,10 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     private StreamInterface stream = new MersenneTwister(12L);
 
     /** inter-arrival time. */
-    private DistContinuousSimulationTime<Double> interarrivalTime =
-            new DistContinuousSimulationTime.TimeDouble(new DistExponential(this.stream, 1.0));
+    private DistContinuous interarrivalTime = new DistExponential(this.stream, 1.0);
 
     /** processing time. */
-    private DistContinuousSimulationTime<Double> processingTime =
-            new DistContinuousSimulationTime.TimeDouble(new DistTriangular(this.stream, 0.8, 0.9, 1.1));
+    private DistContinuous processingTime = new DistTriangular(this.stream, 0.8, 0.9, 1.1);
 
     /** queue of waiting entities. */
     private List<QueueEntry<Entity>> queue = new ArrayList<QueueEntry<Entity>>();
@@ -146,7 +144,7 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
         this.persistentUtilization.register(time, this.busy);
         if (!this.queue.isEmpty())
         {
-            QueueEntry<Entity> queueEntry = this.queue.remove(0); 
+            QueueEntry<Entity> queueEntry = this.queue.remove(0);
             this.persistentQueueLength.register(time, this.queue.size());
             this.tallyTimeInQueue.register(time - queueEntry.getQueueInTime());
             startProcess(queueEntry.getEntity());
