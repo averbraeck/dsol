@@ -213,7 +213,7 @@ Two of the statistics are tallies, and two of the statistics are persistent, or 
 A tally is a statistic for which you register values, and it calculates mean, standard deviation, min, max, and higher order moments by simply using the observations as such. The mean is calculated by:
 
 $$
-  mean = \sum{i=1}^N{\frac{v_i}{N}}
+  \text{mean} = \sum_{i=1}^N{\frac{v_i}{N}}
 $$
 
 where $v_i$ are the registered values, and $N$ is the number of registered values. If we register the values 2 and 4, the average is 3.
@@ -221,7 +221,7 @@ where $v_i$ are the registered values, and $N$ is the number of registered value
 A persistent statistic is a time-weiged statistic that takes into account how long a certain value persisted. If we offer the value 2 for 10 time units, and the value 4 for 2 time units, the average is (10 * 2 + 2 * 4) / 12 = 2.33. Instead of dividing by the number of observations, we divide over the total time. The mean is calculated by:
 
 $$
-  mean = \int{0}^T{\frac{t_i * v_i}{T}} where T = \sum{i=1}^T{t_i}
+  \text{mean} = \int_0^T{\frac{t_i * v_i}{T}}\text{ where }T = \sum_{i=1}^T{t_i}
 $$
 
 In this case, $v_i$ are the registered values, and $t_i$ are the durations for which value $v_i$ was registered.
