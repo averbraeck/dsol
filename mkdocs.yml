@@ -12,8 +12,9 @@ markdown_extensions:
       generic: true
   - admonition
   - toc:
-      premalink: True
+      permalink: true
       baselevel: 1
+      toc_depth: 3
       
 extra_css: 
   - css/custom.css
