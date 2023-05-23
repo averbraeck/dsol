@@ -83,7 +83,9 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     public void constructModel() throws SimRuntimeException
     {
         this.persistentUtilization = new SimPersistent<Double>("utilization", this);
+        this.persistentUtilization.register(0.0, 0.0);
         this.persistentQueueLength = new SimPersistent<Double>("queue length", this);
+        this.persistentQueueLength.register(0.0, 0.0);
         this.tallyTimeInQueue = new SimTally<Double>("time in queue", this);
         this.tallyTimeInSystem = new SimTally<Double>("time in system", this);
 
@@ -96,7 +98,8 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
      */
     protected void generate() throws SimRuntimeException
     {
-        Entity entity = new Entity(this.entityCounter++, this.simulator.getSimulatorTime());
+        double time = this.simulator.getSimulatorTime();
+        Entity entity = new Entity(this.entityCounter++, time);
         System.out.println("Generated: " + entity);
         CategoryLogger.always().info("Generated: " + entity);
         synchronized (this.queue)
@@ -104,13 +107,14 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
             if (this.capacity - this.busy >= 1)
             {
                 // process
+                this.tallyTimeInQueue.register(0.0); // no waiting
                 startProcess(entity);
             }
             else
             {
                 // queue
-                this.persistentQueueLength.register(getSimulator().getSimulatorTime(), this.queue.size());
-                this.queue.add(new QueueEntry<Entity>(entity, this.simulator.getSimulatorTime()));
+                this.queue.add(new QueueEntry<Entity>(entity, time));
+                this.persistentQueueLength.register(time, this.queue.size());
                 System.out.println("In Queue: " + entity);
             }
         }
@@ -124,11 +128,10 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     protected void startProcess(final Entity entity) throws SimRuntimeException
     {
         System.out.println("Start Process: " + entity);
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        double time = getSimulator().getSimulatorTime();
         this.busy++;
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(time, this.busy);
         this.simulator.scheduleEventRel(this.processingTime.draw(), this, "endProcess", new Object[] {entity});
-        this.tallyTimeInQueue.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
     }
 
     /**
@@ -138,15 +141,17 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     protected void endProcess(final Entity entity) throws SimRuntimeException
     {
         System.out.println("End Process: " + entity);
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        double time = getSimulator().getSimulatorTime();
         this.busy--;
-        this.persistentUtilization.register(getSimulator().getSimulatorTime(), this.busy);
+        this.persistentUtilization.register(time, this.busy);
         if (!this.queue.isEmpty())
         {
-            this.persistentQueueLength.register(getSimulator().getSimulatorTime(), this.queue.size());
-            startProcess(this.queue.remove(0).getEntity());
+            QueueEntry<Entity> queueEntry = this.queue.remove(0); 
+            this.persistentQueueLength.register(time, this.queue.size());
+            this.tallyTimeInQueue.register(time - queueEntry.getQueueInTime());
+            startProcess(queueEntry.getEntity());
         }
-        this.tallyTimeInSystem.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
+        this.tallyTimeInSystem.register(time - entity.getCreateTime());
     }
 
     /******************************************************************************************************/
