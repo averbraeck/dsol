@@ -1,5 +1,7 @@
 # Example DSOL Queueing model using discrete events
 
+This is the first example of building a complete model for an M/M/1 queueing system using event scheduling. The next opic shows the same model using the flow library of DSOL.
+
 ## Introduction
 An M/M/1 queueing system is a system with one server (that's what the 1 stands for in M/M/1), and parts or clients arriving at the server with an exponentially distributed inter-arrival time (the first M denotes that) and an exponentially distributed service time (the second M denotes that). 
 For an M/M/1 system to be stable, the average service time, denoted as $\lambda$ should be less than the average inter-arrival time, denoted as $\mu$. The ratio between $\lambda$ and $\mu$ is called $\rho = \lambda / \mu$, and it is also known as the average utilization of the queueing system. 
@@ -25,7 +27,7 @@ If we build a simulation model for this, we need the following types of componen
 10. **A GUI** to display statistics and graphs to the user
 
 
-## implementation using event scheduling
+## Implementation using event scheduling
 Event scheduling is also called 'delayed method invocation'. This means that we can call any method in the model, delayed by a specified duration on an artificial timeline, maintained by the simulation clock. The simulator will take care that all these method calls (also known as **'events'**, are carried out in the right sequence and with the correct simulator time being available. Nothing happens between events, so the simulator jumps from event to event, updating the simulator clock at every event. When multiple events happen at the same time, they can be prioritized; if they have the same priority, they will be handled in a first-come-first-serve manner.
 
 Let's now conceptually discuss each of the three components above:
@@ -242,7 +244,7 @@ whereas a persistent statistic needs a timestamp AND a new value to be registere
 ```
 
 ### 6. Experiment management
-A simulation model is executed as part of a properly designed experiment. The experiment sets the input parameters, measures the output statistics, and establishes a relationshp between the input paprameters and the calculated indicators. Often, the model is ran multiple times (so-called _replications_ of the simulation run), to avoid any dependency on the particularities of a specific run. When the model is stable, and the indicators easily converge towards the same value, a handful of replications, typically 5 or 10, is sufficient. When the model has rare events that can happen at particular times, such as weather events, failures, or disturbances, many more replications are needed to assess the true value of the output statistics, since the outcome of two replications can differ significantly. In such a case, the 95% confidence interval of the output statistics needs to be calculated and replications have to be repeated until the confidence interval is considered to be small enough for the purpose of the experiment. In this case, we start with observing one replication, but want to extend to multiple replications later.
+A simulation model is executed as part of a properly designed experiment. The experiment sets the input parameters, measures the output statistics, and establishes a relationshp between the input paprameters and the calculated indicators. Often, the model is ran multiple times (so-called *replications* of the simulation run), to avoid any dependency on the particularities of a specific run. When the model is stable, and the indicators easily converge towards the same value, a handful of replications, typically 5 or 10, is sufficient. When the model has rare events that can happen at particular times, such as weather events, failures, or disturbances, many more replications are needed to assess the true value of the output statistics, since the outcome of two replications can differ significantly. In such a case, the 95% confidence interval of the output statistics needs to be calculated and replications have to be repeated until the confidence interval is considered to be small enough for the purpose of the experiment. In this case, we start with observing one replication, but want to extend to multiple replications later.
 
 Two other values that need to be set for the experiment are the length of each run, and the so-called warmup period -- the start period of the model that it needs to cover the transient period. When a model needs time to get realistically 'filled' and therefor show realistic behavior, we remove the first part of the run (that shows irrealistic behavior, e.g., because the model is too 'empty') from the statistics. In other words, the warmup period is the duration after which the statistics are all reset to their initial values. For this queueing model, we set the run time to 1000 time units, and the warmup period to 0, since an empty system is quite realistic, and the system is so simple, it does not need any time to get realistically filled.
 
@@ -273,7 +275,7 @@ Explanation:
 - The simulator is asked to start the model execution.
 
 !!! Note
-    When the simulator receives the `initialize` method call, it first _constructs_ the model by calling the `model.constructModel()` method. In other words, the model carries out all the initial code that is necessary to start executing. Sometimes this is only a few statements of code. In other cases, the entire model is instantiated from a database. The reason for carrrying out the initialization is (a) that thereby the values of input variables can be used to create the structure of the model, and (b) the model is initialized for every replication to its initial state, and there are no 'leftovers' from previous replications.
+    When the simulator receives the `initialize` method call, it first *constructs* the model by calling the `model.constructModel()` method. In other words, the model carries out all the initial code that is necessary to start executing. Sometimes this is only a few statements of code. In other cases, the entire model is instantiated from a database. The reason for carrrying out the initialization is (a) that thereby the values of input variables can be used to create the structure of the model, and (b) the model is initialized for every replication to its initial state, and there are no 'leftovers' from previous replications.
     
 When we would want to carry out 10 replications, the construction of the simulator, model, and experiment would look as follows:
 
@@ -295,16 +297,16 @@ In this case, the creation of the simulator and the model is the same, but now w
 DSOL has a solid system for random number generation (RNG), stochastic distributions, and seed management. 
 
 #### Random number generator
-DSOL allows for multiple, independent, random streams to be used in the model, allowing for the usage of so-called _Common Random Numbers_ experiments. The most used random number generator is the _Mersenne Twister_, the de facto standard for RNG in discrete-event simulation. Other RNGs are offered as well, and it is easy to add a special RNG if needed. Random streams are typically offered through DSOL's experiment management, but can also be created by hand:
+DSOL allows for multiple, independent, random streams to be used in the model, allowing for the usage of so-called *Common Random Numbers* experiments. The most used random number generator is the *Mersenne Twister*, the de facto standard for RNG in discrete-event simulation. Other RNGs are offered as well, and it is easy to add a special RNG if needed. Random streams are typically offered through DSOL's experiment management, but can also be created by hand:
 
 ```java
   private StreamInterface stream = new MersenneTwister(12);
 ```
 
-where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own RNG is that the seed is not changed between replications, in case the model is ran multiple times to get a confidence interval for the output statistics such as the average time-in-queue or the average utilization of the server. Experiment management (see section 7) takes care of defining random streams that _are_ (reproducibly) changed between replications.
+where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own RNG is that the seed is not changed between replications, in case the model is ran multiple times to get a confidence interval for the output statistics such as the average time-in-queue or the average utilization of the server. Experiment management (see section 7) takes care of defining random streams that *are* (reproducibly) changed between replications.
 
 !!! Note
-    Proper experimentation with simulation models is all about reproducibility. So, we want some values to be random, but it should be reproducibly random. This means that if we run the model again, with the same seed settings, we should get exactly the same results. Only when these conditions are fulfilled, we can use the simulation to run a proper scientific experiment. Seed management for the RNGs is key in ensuring randomness _and_ reprodicibility.
+    Proper experimentation with simulation models is all about reproducibility. So, we want some values to be random, but it should be reproducibly random. This means that if we run the model again, with the same seed settings, we should get exactly the same results. Only when these conditions are fulfilled, we can use the simulation to run a proper scientific experiment. Seed management for the RNGs is key in ensuring randomness *and* reprodicibility.
     
 #### Stochastic distributions
 A model can define multiple stochastic distributions, by specifying the type of distribution, the parameters for the distribution, and the RNG to be used for drawing the random numbers. DSOL offers both continuous distributions such as Exponential, Triangular, Normal, Uniform, Weibull, Gamma, Beta, Lognormal, and discrete distributions such as Poisson, Discrete Uniform, Bernoulli, and Geometric. A distribution is a class that is instantiated, e.g., as follows for the inter-arrival distribution and the service time distribution:
@@ -364,7 +366,7 @@ To retrieve a set input value, the model can use, e.g., the following code:
       (Double) this.inputParameterMap.get("serviceTime").getValue());
 ```
 
-The call to `parameters.get("generator.intervalTime")` retrieves the parameter _object_ that has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we use the `getValue()` method to retrieve the value set by the user, and cast it to a Double.
+The call to `parameters.get("generator.intervalTime")` retrieves the parameter *object* that has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we use the `getValue()` method to retrieve the value set by the user, and cast it to a Double.
 
 !!! Note
     When submaps are used, the 'dot'-notation gives access to the parameters. Suppose there are several parameters for the server that are stored in a submap with the key `server`, then the paramters such as the server capacity can be retrieved by `(Integer) this.inputParameterMap.get("server.capacity").getValue()`. This enables the maintainance of a diverse set of input parameters in a comprehensible way.
@@ -389,7 +391,7 @@ As shown above, the `Simulator`, `Model`, and `Experiment` can be created in a c
   }
 ```
 
-When we want to print the results of the replication and of the entire experiment, this is not straightforward, since we have no clue when a replication or the experiment has finished. For the replication, there are _two ways_ in which we can print the results at the end of the replication. 
+When we want to print the results of the replication and of the entire experiment, this is not straightforward, since we have no clue when a replication or the experiment has finished. For the replication, there are *two ways* in which we can print the results at the end of the replication. 
 
 #### Printing results at the end of a replication option #1: simulation event
 We can print the results of the output statistics at the end of a replication by scheduling a method on the event list, just before the simulation has ended. E.g., by including the following code in the `constructModel()` method:
@@ -497,7 +499,7 @@ Printing the results at the end of an entire experiment can only be done with th
     }
 ```
 
-The `reportFinalStats()` method makes use of the fact that the _summary statistics_ over the 10 replications are _all_ Tally statistics (all statistics values are the normal average over 10 runs). The Tally has a nice property that it can report the results in nice lines with a header and a footer.
+The `reportFinalStats()` method makes use of the fact that the *summary statistics* over the 10 replications are *all* Tally statistics (all statistics values are the normal average over 10 runs). The Tally has a nice property that it can report the results in nice lines with a header and a footer.
 
 It will report, e.g. the following (small excerpt of the summary statistics):
 
@@ -525,10 +527,191 @@ Summary statistic for: Time in Queue
 --------------------------------------------------------------------------------------------------
 ```
 
-Tables like this will also be printed for the queue length, server utilization, and time in system.
+Tables like this will also be printed for the queue length, server utilization, and time in system. A summary table like this might take some time to comprehend. We have, for instance, the maximum of the mean (0.684), and the mean of the maximum (5.607). The maximum of the mean has the folowing interpretation: the time in queue had different mean values in each of the 10 runs. The highest mean value in the 10 runs had 0.684 as the mean (and the lowest had 0.382; over 10 runs the mean of the mean values was 0.507). The mean of the maximum, however, tells something very different: what was the average *largest time in queue* over the 10 runs? As we can see, there was a run with 3.477 as the longest time in queue (lowest over the 10 replications), adn there was a run with 9.591 as the longest time in queue (highest over the 10 replications). On *average* however, the maximum time in queue over the 10 replications was 5.607. 
+
+!!! Warning
+    The above example clearly shows that even for a simple model like a M/M/1 queueing model, the values between replications vary significantly. If you would carry out only one replication, you could have gotten the result 0.382 as the average time in queue, or if you would have done another single run, you could have gotten 0.684... Only after a number of replications, e.g., 10, you get a good sense of the *actual* value of the average waitin time in the queue.
 
 
 
 ### 10. A GUI to display statistics and graphs to the user
+The dsol-swing project offers plenty of possibilities to show statistics and graphs to the user. This takes a bit more effort, since the results need to be placed on the screen, with possibly tabs and headers. An example is shown below:
+
+![](../images/1-getting-started/des-gui-screenshot.png "des-gui-screenshot")
+
+In order to get such a screen, only a few things in the application need to be adapted. The model itself remains *unchanged*. In the main program, we indicate that it inherits from `DsolApplication`, and in the program, we create a panel that will show the above results:
+
+```java
+public class MM1SwingApplication extends DsolApplication
+{
+  public MM1SwingApplication(final MM1Panel panel)
+  {
+    super(panel, "MM1 Queueing model");
+  }
+
+    public static void main(final String[] args)
+  {
+    DevsSimulator<Double> simulator = new DevsSimulator<>("MM1.Simulator");
+    DsolModel<Double, DevsSimulatorInterface<Double>> model 
+        = new MM1Model(simulator);
+    Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+    simulator.initialize(model, replication);
+    DevsControlPanel.TimeDouble controlPanel 
+        = new DevsControlPanel.TimeDouble(model, simulator);
+    new MM1SwingApplication(new MM1Panel(controlPanel));
+  }
+```
+
+In this case we run a single replication, since we want to study the results. We make a `ControlPanel` with buttons to start and stop the simulation, and to keep track of the simulator's time, and we create our own `MM1Panel` with the statistics. The complete code for the `MM1Panel` class is given below:
+
+```java
+public class MM1Panel extends DsolPanel
+{
+  public MM1Panel(final DevsControlPanel.TimeDouble controlPanel) throws RemoteException
+  {
+    super(controlPanel);
+    addTabs();
+    enableSimulationControlButtons();
+  }
+
+  protected void addTabs()
+  {
+    TablePanel charts = new TablePanel(4, 4);
+    getTabbedPane().addTab("statistics", charts);
+    getTabbedPane().setSelectedIndex(0);
+    MM1Model model = (MM1Model) getModel();
+
+    try
+    {
+      // time in queue
+
+      XYChart dNVal = new XYChart(getSimulator(), 
+          "time in queue (dN)").setLabelXAxis("time (s)").setLabelYAxis("dN");
+      dNVal.add("dN value", model.tallyTimeInQueue, 
+          StatisticsEvents.OBSERVATION_ADDED_EVENT);
+      charts.setCell(dNVal.getSwingPanel(), 0, 0);
+
+      XYChart dN = new XYChart(getSimulator(), 
+          "avg time in queue").setLabelXAxis("time (s)").setLabelYAxis("avg dN");
+      dN.add("dN mean", model.tallyTimeInQueue, 
+          StatisticsEvents.SAMPLE_MEAN_EVENT);
+      charts.setCell(dN.getSwingPanel(), 1, 0);
+
+      BoxAndWhiskerChart bwdN = new BoxAndWhiskerChart(getSimulator(), "dN boxplot");
+      bwdN.add(model.tallyTimeInQueue);
+      charts.setCell(bwdN.getSwingPanel(), 2, 0);
+
+      StatisticsTable dNTable = 
+          new StatisticsTable(new TallyTableModel(model.tallyTimeInQueue));
+      charts.setCell(dNTable.getSwingPanel(), 3, 0);
+
+      // queue length
+
+      XYChart qNVal = new XYChart(getSimulator(), 
+          "queue length (qN)").setLabelXAxis("time (s)").setLabelYAxis("qN");
+      qNVal.add("qN value", model.persistentQueueLength, 
+          SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
+      charts.setCell(qNVal.getSwingPanel(), 0, 1);
+
+      XYChart qN = new XYChart(getSimulator(), 
+          "avg queue length").setLabelXAxis("time (s)").setLabelYAxis("avg qN");
+      qN.add("qN mean", model.persistentQueueLength, 
+          StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT);
+      charts.setCell(qN.getSwingPanel(), 1, 1);
+
+      BoxAndWhiskerChart bwqN = new BoxAndWhiskerChart(getSimulator(), "qN boxplot");
+      bwqN.add(model.persistentQueueLength);
+      charts.setCell(bwqN.getSwingPanel(), 2, 1);
+
+      StatisticsTable qNTable = 
+          new StatisticsTable(new PersistentTableModel(model.persistentQueueLength));
+      charts.setCell(qNTable.getSwingPanel(), 3, 1);
+
+      // utilization
+
+      XYChart utilization = new XYChart(getSimulator(), 
+          "utilization").setLabelXAxis("time (s)").setLabelYAxis("uN");
+      utilization.add("utilization", model.persistentUtilization, 
+          SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
+      charts.setCell(utilization.getSwingPanel(), 0, 2);
+
+      XYChart meanUtilization = new XYChart(getSimulator(), 
+          "avg utilization (uN)").setLabelXAxis("time (s)").setLabelYAxis("avg uN");
+      meanUtilization.add("mean utilization", model.persistentUtilization,
+          StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT);
+      charts.setCell(meanUtilization.getSwingPanel(), 1, 2);
+
+      BoxAndWhiskerChart bwuN = 
+          new BoxAndWhiskerChart(getSimulator(), "uN boxplot");
+      bwuN.add(model.persistentUtilization);
+      charts.setCell(bwuN.getSwingPanel(), 2, 2);
+
+      StatisticsTable uNTable = 
+          new StatisticsTable(new PersistentTableModel(model.persistentUtilization));
+      charts.setCell(uNTable.getSwingPanel(), 3, 2);
+
+      // time in system
+
+      XYChart tNVal = new XYChart(getSimulator(), 
+          "time in system (tN)").setLabelXAxis("time (s)").setLabelYAxis("tN");
+      tNVal.add("tN value", model.tallyTimeInSystem, 
+          StatisticsEvents.OBSERVATION_ADDED_EVENT);
+      charts.setCell(tNVal.getSwingPanel(), 0, 3);
+
+      XYChart tN = new XYChart(getSimulator(), 
+          "avg time in system").setLabelXAxis("time (s)").setLabelYAxis("avg tN");
+      tN.add("tN mean", model.tallyTimeInSystem, 
+          StatisticsEvents.SAMPLE_MEAN_EVENT);
+      charts.setCell(tN.getSwingPanel(), 1, 3);
+
+      BoxAndWhiskerChart bwtN = 
+          new BoxAndWhiskerChart(getSimulator(), "tN boxplot");
+      bwtN.add(model.tallyTimeInSystem);
+      charts.setCell(bwtN.getSwingPanel(), 2, 3);
+
+      StatisticsTable tNTable = 
+          new StatisticsTable(new TallyTableModel(model.tallyTimeInSystem));
+      charts.setCell(tNTable.getSwingPanel(), 3, 3);
+    }
+    catch (RemoteException exception)
+    {
+      model.getSimulator().getLogger().always().error(exception);
+    }
+
+    ConsoleLogger logConsole = new ConsoleLogger(Level.INFO);
+    getTabbedPane().addTab("logger", logConsole);
+    getTabbedPane().addTab("console", new ConsoleOutput());
+  }
+}
+```
+
+This creates the 16 cells in the 'statistics' tab that were shown in the screen shot above. First, a `TablePanel` is created with 4 x 4 cells. Then, one-by-one the right type of charts are made for the statistics, linked to the statistics that are already present in the model, and put in the correct cell i the 4 x 4 grid.
+
+The graphs subscribe to the `OBSERVATION_ADDED_EVENT`, `SAMPLE_MEAN_EVENT`, or similar event from the Tally and Persistent statistics, and are automatically updated with new values when the statistic updates. No specific action from the model is needed to update any graphics. In other words, the model is completely *agnostic* of the existence of a graphics screen that displays the results.
+
+!!! Note
+    This loose coupling using the publish/subscribe mechanism ensures that the model does not need to be concerned with any display of variables, graphs, or statistics in a user interface. There could be one window displaying the statistics, or zero, or ten. Not a single line of code has to be changed in the model to enable or disable the display of statistics in a GUI. The same approach is used to display animation for the models, as we will see later.
+
+
+## Summary
+This extended example for modeling an M/M/1 queueing system showed the following properties of a DSOL model using the event scheduling mechanism:
+
+- The amin components of a DSOL model are the Simulator, Model, Replication and Experiment.
+- DSOL supports multiple versions of time, such as a double value or a duration quantity.
+- DSOL supports random number generation, use of stochastic distributions, and seed management for replications.
+- Setting ans using of input variables for an experiment is supported.
+- Creating and calculating different types of output statistics for a replication is supported.
+- Summary statistics for an experiment with multiple replication are automatically created.
+- Output statistics can be conveniently shown on the screen or in a GUI.
+- The publish/subscribe mechanism ensures decoupling of the model and the GUI.
+
+
+## Code
+The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1](https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1). 
+
+- `MM1Application` executes a single replication and presents the output statistics textually on the screen.
+- `MM1ExperimentApplication` carries out 10 replications amd displays replication statistics and summary statistics on the screen.
+- `MM1SwingApplication` executes a single replication and displays the results in a graphical user interface.
+
 
 
