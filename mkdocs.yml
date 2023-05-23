@@ -11,7 +11,9 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - admonition
-
+  - markdown.extensions.toc:
+      baselevel: 1
+      
 extra_css: 
   - css/custom.css
   
