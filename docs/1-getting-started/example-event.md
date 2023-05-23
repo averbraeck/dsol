@@ -1,12 +1,12 @@
-# Example DSOL Queueing model using discrete events
+# Example DSOL Queuing model using discrete events
 
-This is the first example of building a complete model for an M/M/1 queueing system using event scheduling. The next opic shows the same model using the flow library of DSOL.
+This is the first example of building a complete model for an M/M/1 queuing system using event scheduling. The next topic shows the same model using the flow library of DSOL.
 
 ## Introduction
-An M/M/1 queueing system is a system with one server (that's what the 1 stands for in M/M/1), and parts or clients arriving at the server with an exponentially distributed inter-arrival time (the first M denotes that) and an exponentially distributed service time (the second M denotes that). 
-For an M/M/1 system to be stable, the average service time, denoted as $\lambda$ should be less than the average inter-arrival time, denoted as $\mu$. The ratio between $\lambda$ and $\mu$ is called $\rho = \lambda / \mu$, and it is also known as the average utilization of the queueing system. 
+An M/M/1 queuing system is a system with one server (that's what the 1 stands for in M/M/1), and parts or clients arriving at the server with an exponentially distributed inter-arrival time (the first M denotes that) and an exponentially distributed service time (the second M denotes that). 
+For an M/M/1 system to be stable, the average service time, denoted as $\lambda$ should be less than the average inter-arrival time, denoted as $\mu$. The ratio between $\lambda$ and $\mu$ is called $\rho = \lambda / \mu$, and it is also known as the average utilization of the queuing system. 
 
-For a typical queueing system, we are interested in simulating different arrival rates with different service times, and studying the following main output variables:
+For a typical queuing system, we are interested in simulating different arrival rates with different service times, and studying the following main output variables:
 
 - queue length (development over time, average, standard deviation, min, max)
 - time in queue (development over time, average, standard deviation, min, max)
@@ -138,7 +138,7 @@ The first three statements of the method body are for updating the utilization s
 The fourth statement is scheduling the end of the process; it draws a delay from the `processingTime` distribution, and schedules a call to the method named `this.endProcess` after the delay. The methods expects one argument: the `entity`. In a sense, it is calling the method `this.endProcess(entity)` after the delay. 
 
 #### endProcess()
-The `endProcess(entity)` method has to do three things: (1) increasing the capacity of the server, (2) seeing if there are entities waiting in the queue and if yes, removing the first entity from the queue and processing it on the server, and (3) calculating statistics on the service duration. The method looks as folows:
+The `endProcess(entity)` method has to do three things: (1) increasing the capacity of the server, (2) seeing if there are entities waiting in the queue and if yes, removing the first entity from the queue and processing it on the server, and (3) calculating statistics on the service duration. The method looks as follows:
 
 ```java
   protected void endProcess(final Entity entity) throws SimRuntimeException
@@ -157,7 +157,7 @@ The `endProcess(entity)` method has to do three things: (1) increasing the capac
   }
 ```
 
-The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity by one. Statement 4 checks whether there are elements in the queue. If yes, we remove the first entry from the queue. The statistic for the queue length and the time-in-queue are updated, ather which the removed entity is offered to the `startProcess` method. The last stetement tallies the time-in-system of the entity. Since no statement using the entity comes afterward, the entity is removed from the model after processing.
+The first three statements are analogous to those in the `process()` method, but instead of decreasing the used capacity, it increases the used capacity by one. Statement 4 checks whether there are elements in the queue. If yes, we remove the first entry from the queue. The statistic for the queue length and the time-in-queue are updated, after which the removed entity is offered to the `startProcess` method. The last statement tallies the time-in-system of the entity. Since no statement using the entity comes afterward, the entity is removed from the model after processing.
 
 The `tallyTimeInQueue` statistic registers the value for the time-in-queue statistic, by subtracting the time the entity entered the queue (`queueEntry.getQueueInTime()` from the current simulation time. This is the time that the entity has spent in the queue. 
 
@@ -196,7 +196,7 @@ In this model, the queue is represented by a java `List`. In theory, it would be
   }
 ```
 
-The `QueueEntry` stores the entity AND the time when it entered the queue. Thereby, it is easy to determine the duration that the entity spent in the queue when it leaes the queue. The queue is defined as follows in the model:
+The `QueueEntry` stores the entity AND the time when it entered the queue. Thereby, it is easy to determine the duration that the entity spent in the queue when it leaves the queue. The queue is defined as follows in the model:
 
 ```java
   private List<QueueEntry<Entity>> queue = new ArrayList<QueueEntry<Entity>>();
@@ -244,9 +244,9 @@ whereas a persistent statistic needs a timestamp AND a new value to be registere
 ```
 
 ### 6. Experiment management
-A simulation model is executed as part of a properly designed experiment. The experiment sets the input parameters, measures the output statistics, and establishes a relationshp between the input paprameters and the calculated indicators. Often, the model is ran multiple times (so-called *replications* of the simulation run), to avoid any dependency on the particularities of a specific run. When the model is stable, and the indicators easily converge towards the same value, a handful of replications, typically 5 or 10, is sufficient. When the model has rare events that can happen at particular times, such as weather events, failures, or disturbances, many more replications are needed to assess the true value of the output statistics, since the outcome of two replications can differ significantly. In such a case, the 95% confidence interval of the output statistics needs to be calculated and replications have to be repeated until the confidence interval is considered to be small enough for the purpose of the experiment. In this case, we start with observing one replication, but want to extend to multiple replications later.
+A simulation model is executed as part of a properly designed experiment. The experiment sets the input parameters, measures the output statistics, and establishes a relationship between the input parameters and the calculated indicators. Often, the model is ran multiple times (so-called *replications* of the simulation run), to avoid any dependency on the particularities of a specific run. When the model is stable, and the indicators easily converge towards the same value, a handful of replications, typically 5 or 10, is sufficient. When the model has rare events that can happen at particular times, such as weather events, failures, or disturbances, many more replications are needed to assess the true value of the output statistics, since the outcome of two replications can differ significantly. In such a case, the 95% confidence interval of the output statistics needs to be calculated and replications have to be repeated until the confidence interval is considered to be small enough for the purpose of the experiment. In this case, we start with observing one replication, but want to extend to multiple replications later.
 
-Two other values that need to be set for the experiment are the length of each run, and the so-called warmup period -- the start period of the model that it needs to cover the transient period. When a model needs time to get realistically 'filled' and therefor show realistic behavior, we remove the first part of the run (that shows irrealistic behavior, e.g., because the model is too 'empty') from the statistics. In other words, the warmup period is the duration after which the statistics are all reset to their initial values. For this queueing model, we set the run time to 1000 time units, and the warmup period to 0, since an empty system is quite realistic, and the system is so simple, it does not need any time to get realistically filled.
+Two other values that need to be set for the experiment are the length of each run, and the so-called warmup period -- the start period of the model that it needs to cover the transient period. When a model needs time to get realistically 'filled' and therefor show realistic behavior, we remove the first part of the run (that shows unrealistic behavior, e.g., because the model is too 'empty') from the statistics. In other words, the warmup period is the duration after which the statistics are all reset to their initial values. For this queuing model, we set the run time to 1000 time units, and the warmup period to 0, since an empty system is quite realistic, and the system is so simple, it does not need any time to get realistically filled.
 
 In the code, setting up the `Simulator`, `Model` and `Replication` is pretty straightforward:
 
@@ -271,11 +271,11 @@ Explanation:
 - We first create a `DevsSimulator`. The time type for the Simulator is `Double` (it could also be, e.g., `Float`, `Integer`, or `Duration`). The Simulator has a name to identify it: "MM1.Simulator". `DevsSimulator` stands for a Discrete Event Simulator -- a simulator that maintains an event list with future events, and that allows for delayed method invocation. Several other types of simulators exist within DSOL.
 - The `MM1Model` is created and uses the time type `Double` and the `DevsSimulatorInterface<Double>` as its simulator. These generics are important as they help to strongly type the methods that are part of the model and the simulator.
 - The `Replication` is instantiated next as a `SingleReplication` (so this is not an experiment with multiple replications) with name "rep1", starting time 0.0, warmup period 0.0, and run length 1000 time units. 
-- The simulator initializes the model with data from the replicaton (timing, seeds, random streams, input variables). 
+- The simulator initializes the model with data from the replication (timing, seeds, random streams, input variables). 
 - The simulator is asked to start the model execution.
 
 !!! Note
-    When the simulator receives the `initialize` method call, it first *constructs* the model by calling the `model.constructModel()` method. In other words, the model carries out all the initial code that is necessary to start executing. Sometimes this is only a few statements of code. In other cases, the entire model is instantiated from a database. The reason for carrrying out the initialization is (a) that thereby the values of input variables can be used to create the structure of the model, and (b) the model is initialized for every replication to its initial state, and there are no 'leftovers' from previous replications.
+    When the simulator receives the `initialize` method call, it first *constructs* the model by calling the `model.constructModel()` method. In other words, the model carries out all the initial code that is necessary to start executing. Sometimes this is only a few statements of code. In other cases, the entire model is instantiated from a database. The reason for carrying out the initialization is (a) that thereby the values of input variables can be used to create the structure of the model, and (b) the model is initialized for every replication to its initial state, and there are no 'leftovers' from previous replications.
     
 When we would want to carry out 10 replications, the construction of the simulator, model, and experiment would look as follows:
 
@@ -303,11 +303,11 @@ DSOL allows for multiple, independent, random streams to be used in the model, a
   private StreamInterface stream = new MersenneTwister(12);
 ```
 
-where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own RNG is that the seed is not changed between replications, in case the model is ran multiple times to get a confidence interval for the output statistics such as the average time-in-queue or the average utilization of the server. Experiment management (see section 7) takes care of defining random streams that *are* (reproducibly) changed between replications.
+where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own RNG is that the seed is not changed between replications, in case the model is ran multiple times to get a confidence interval for the output statistics such as the average time-in-queue or the average utilization of the server. Experiment management (see section 6) takes care of defining random streams that *are* (reproducibly) changed between replications.
 
 !!! Note
-    Proper experimentation with simulation models is all about reproducibility. So, we want some values to be random, but it should be reproducibly random. This means that if we run the model again, with the same seed settings, we should get exactly the same results. Only when these conditions are fulfilled, we can use the simulation to run a proper scientific experiment. Seed management for the RNGs is key in ensuring randomness *and* reprodicibility.
-    
+    Proper experimentation with simulation models is all about reproducibility. So, we want some values to be random, but it should be reproducibly random. This means that if we run the model again, with the same seed settings, we should get exactly the same results. Only when these conditions are fulfilled, we can use the simulation to run a proper scientific experiment. Seed management for the RNGs is key in ensuring randomness *and* reproducibility.
+
 #### Stochastic distributions
 A model can define multiple stochastic distributions, by specifying the type of distribution, the parameters for the distribution, and the RNG to be used for drawing the random numbers. DSOL offers both continuous distributions such as Exponential, Triangular, Normal, Uniform, Weibull, Gamma, Beta, Lognormal, and discrete distributions such as Poisson, Discrete Uniform, Bernoulli, and Geometric. A distribution is a class that is instantiated, e.g., as follows for the inter-arrival distribution and the service time distribution:
 
@@ -355,7 +355,7 @@ The arguments of the methods are as follows:
 2. short name to display the value, e.g., in a table
 3. longer description to explain the input value in, e.g., a GUI. This string may contain HTML markup.
 4. default value.
-5. sequence number in this map as a floating point value, makig it easy to insert a value without renumbering. If another value would have to be added between the intervalTime and serviceime, it could get 1.5 as its sequence, which would place it between the frst two values for the user interface or display.
+5. sequence number in this map as a floating point value, making it easy to insert a value without renumbering. If another value would have to be added between the intervalTime and serviceTime, it could get 1.5 as its sequence, which would place it between the first two values for the user interface or display.
 
 To retrieve a set input value, the model can use, e.g., the following code:
 
@@ -369,7 +369,7 @@ To retrieve a set input value, the model can use, e.g., the following code:
 The call to `parameters.get("generator.intervalTime")` retrieves the parameter *object* that has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we use the `getValue()` method to retrieve the value set by the user, and cast it to a Double.
 
 !!! Note
-    When submaps are used, the 'dot'-notation gives access to the parameters. Suppose there are several parameters for the server that are stored in a submap with the key `server`, then the paramters such as the server capacity can be retrieved by `(Integer) this.inputParameterMap.get("server.capacity").getValue()`. This enables the maintainance of a diverse set of input parameters in a comprehensible way.
+    When submaps are used, the 'dot'-notation gives access to the parameters. Suppose there are several parameters for the server that are stored in a submap with the key `server`, then the parameters such as the server capacity can be retrieved by `(Integer) this.inputParameterMap.get("server.capacity").getValue()`. This enables the maintenance of a diverse set of input parameters in a comprehensible way.
 
 
 ### 9. A program that can be started to create the model
@@ -450,7 +450,7 @@ When the end of the replication is reached, the `notify(event)` method is called
 ```
 
 #### printing results at the end of an experiment
-Printing the results at the end of an entire experiment can only be done with the publish/subscribe method shown above, but then for the `Experiment.END_EXPERIMENT_EVENT` event. The code would look, e.g., as follows (also inclduing the `Replication.END_REPLICATION_EVENT`:
+Printing the results at the end of an entire experiment can only be done with the publish/subscribe method shown above, but then for the `Experiment.END_EXPERIMENT_EVENT` event. The code would look, e.g., as follows (also including the `Replication.END_REPLICATION_EVENT`:
 
 ```java
   class MM1Application implements EventListener
@@ -527,10 +527,10 @@ Summary statistic for: Time in Queue
 --------------------------------------------------------------------------------------------------
 ```
 
-Tables like this will also be printed for the queue length, server utilization, and time in system. A summary table like this might take some time to comprehend. We have, for instance, the maximum of the mean (0.684), and the mean of the maximum (5.607). The maximum of the mean has the folowing interpretation: the time in queue had different mean values in each of the 10 runs. The highest mean value in the 10 runs had 0.684 as the mean (and the lowest had 0.382; over 10 runs the mean of the mean values was 0.507). The mean of the maximum, however, tells something very different: what was the average *largest time in queue* over the 10 runs? As we can see, there was a run with 3.477 as the longest time in queue (lowest over the 10 replications), adn there was a run with 9.591 as the longest time in queue (highest over the 10 replications). On *average* however, the maximum time in queue over the 10 replications was 5.607. 
+Tables like this will also be printed for the queue length, server utilization, and time in system. A summary table like this might take some time to comprehend. We have, for instance, the maximum of the mean (0.684), and the mean of the maximum (5.607). The maximum of the mean has the following interpretation: the time in queue had different mean values in each of the 10 runs. The highest mean value in the 10 runs had 0.684 as the mean (and the lowest had 0.382; over 10 runs the mean of the mean values was 0.507). The mean of the maximum, however, tells something very different: what was the average *largest time in queue* over the 10 runs? As we can see, there was a run with 3.477 as the longest time in queue (lowest over the 10 replications), and there was a run with 9.591 as the longest time in queue (highest over the 10 replications). On *average* however, the maximum time in queue over the 10 replications was 5.607. 
 
 !!! Warning
-    The above example clearly shows that even for a simple model like a M/M/1 queueing model, the values between replications vary significantly. If you would carry out only one replication, you could have gotten the result 0.382 as the average time in queue, or if you would have done another single run, you could have gotten 0.684... Only after a number of replications, e.g., 10, you get a good sense of the *actual* value of the average waitin time in the queue.
+    The above example clearly shows that even for a simple model like a M/M/1 queuing model, the values between replications vary significantly. If you would carry out only one replication, you could have gotten the result 0.382 as the average time in queue, or if you would have done another single run, you could have gotten 0.684... Only after a number of replications, e.g., 10, you get a good sense of the *actual* value of the average waiting time in the queue.
 
 
 
@@ -546,7 +546,7 @@ public class MM1SwingApplication extends DsolApplication
 {
   public MM1SwingApplication(final MM1Panel panel)
   {
-    super(panel, "MM1 Queueing model");
+    super(panel, "MM1 queuing model");
   }
 
     public static void main(final String[] args)
@@ -694,9 +694,9 @@ The graphs subscribe to the `OBSERVATION_ADDED_EVENT`, `SAMPLE_MEAN_EVENT`, or s
 
 
 ## Summary
-This extended example for modeling an M/M/1 queueing system showed the following properties of a DSOL model using the event scheduling mechanism:
+This extended example for modeling an M/M/1 queuing system showed the following properties of a DSOL model using the event scheduling mechanism:
 
-- The amin components of a DSOL model are the Simulator, Model, Replication and Experiment.
+- The main components of a DSOL model are the Simulator, Model, Replication and Experiment.
 - DSOL supports multiple versions of time, such as a double value or a duration quantity.
 - DSOL supports random number generation, use of stochastic distributions, and seed management for replications.
 - Setting ans using of input variables for an experiment is supported.
@@ -710,7 +710,7 @@ This extended example for modeling an M/M/1 queueing system showed the following
 The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1](https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1). 
 
 - `MM1Application` executes a single replication and presents the output statistics textually on the screen.
-- `MM1ExperimentApplication` carries out 10 replications amd displays replication statistics and summary statistics on the screen.
+- `MM1ExperimentApplication` carries out 10 replications and displays replication statistics and summary statistics on the screen.
 - `MM1SwingApplication` executes a single replication and displays the results in a graphical user interface.
 
 
