@@ -307,11 +307,11 @@ where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own R
     Proper experimentation with simulation models is all about reproducibility. So, we want some values to be random, but it should be reproducibly random. This means that if we run the model again, with the same seed settings, we should get exactly the same results. Only when these conditions are fulfilled, we can use the simulation to run a proper scientific experiment. Seed management for the RNGs is key in ensuring randomness _and_ reprodicibility.
     
 #### Stochastic distributions
-A model can define multiple stochastic distributions, by specifying the type of distribution, the parameters for the distribution, and the RNG to be used for drawing the random numbers. DSOL offers both continuous such as Exponential, Triangular, Normal, Uniform, Weibull, Gamma, Beta, Lognormal, and discrete distributions such as Poisson, Discrete Uniform, Bernoulli, and Geometric. A distribution is a class that is instantiated, e.g., as follows for the inter-arrival distribution and the service time distribution:
+A model can define multiple stochastic distributions, by specifying the type of distribution, the parameters for the distribution, and the RNG to be used for drawing the random numbers. DSOL offers both continuous distributions such as Exponential, Triangular, Normal, Uniform, Weibull, Gamma, Beta, Lognormal, and discrete distributions such as Poisson, Discrete Uniform, Bernoulli, and Geometric. A distribution is a class that is instantiated, e.g., as follows for the inter-arrival distribution and the service time distribution:
 
 ```java
     private DistContinuous interarrivalTime = new DistExponential(stream, 1.0);
-    private DistContinuous processingTime = new DistTriangular(stream, 0.8, 0.9, 1.1);
+    private DistContinuous processingTime = new DistExponential(stream, 0.9);
 ```
 
 Drawing a value from such a distribution is done by, e.g., `this.interarrivalTime.draw()`. 
@@ -327,11 +327,52 @@ This stream can now be used in the stochastic distributions for the inter-arriva
 
 ```java
     this.interarrivalTime = new DistExponential(defaultStream, 1.0);
-    this.processingTime = new DistTriangular(defaultStream, 0.8, 0.9, 1.1);
+    this.processingTime = new DistExponential(defaultStream, 0.9);
 ```
 
-The streams will be reset with a new seed before a new replication starts. 
+The streams will automatically be reset with a new seed before a new replication starts. 
 
 
 ### 8. Input parameters for the model to set the experimental conditions
+In most cases, an experiment with a simulation model has input values that can be changed, to establish the relationship between the input values on the output statistics. DSOL provides a wide range of input values that can be set and accessed in the model. The input parameters are stored in a hierarchical map, that enables parameters that belong together to be grouped. Many types of parameters exist, such as strings, floating point variables, integers, units, scalar quantities with a unit, values from a list, continuous distributions, discrete distributions, and submaps. 
+
+In the case of the M/M/1 model, we would want to set the parameter values for the exponential distributions for the inter-arrival times and for the service times. We also could set the capacity for the server. In code, this would look as follows:
+
+```java
+  this.inputParameterMap.add.add(new InputParameterDouble("intervalTime", 
+      "Average interval time", "Average interval time", 1.0, 1.0));
+  this.inputParameterMap.add(new InputParameterDouble("serviceTime", 
+      "Average service time", "Average service time", 0.8, 2.0));
+  this.inputParameterMap.add(new InputParameterDouble("capacity", 
+      "Server capacity", "Server capacity", 1.0, 3.0));
+```
+
+The arguments of the methods are as follows:
+
+1. key, by which the value can be easily retrieved.
+2. short name to display the value, e.g., in a table
+3. longer description to explain the input value in, e.g., a GUI. This string may contain HTML markup.
+4. default value.
+5. sequence number in this map as a floating point value, makig it easy to insert a value without renumbering. If another value would have to be added between the intervalTime and serviceime, it could get 1.5 as its sequence, which would place it between the frst two values for the user interface or display.
+
+To retrieve a set input value, the model can use, e.g., the following code:
+
+```java
+  this.interarrivalTime = new DistExponential(defaultStream, 
+      (Double) this.inputParameterMap.get("intervalTime").getValue());
+  this.processingTime = new DistExponential(defaultStream, 
+      (Double) this.inputParameterMap.get("serviceTime").getValue());
+```
+
+The call to `parameters.get("generator.intervalTime")` retrieves the parameter _object_ that has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we use the `getValue()` method to retrieve the value set by the user, and cast it to a Double.
+
+!!! Note
+    When submaps are used, the 'dot'-notation gives access to the parameters. Suppose there are several parameters for the server that are stored in a submap with the key `server`, then the paramters such as the server capacity can be retrieved by `(Integer) this.inputParameterMap.get("server.capacity").getValue()`. This enables the maintainance of a diverse set of input parameters in a comprehensible way.
+
+
+### 9. A program that can be started to create the model
+
+
+### 10. A GUI to display statistics and graphs to the user
+
 
