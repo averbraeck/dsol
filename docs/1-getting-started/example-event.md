@@ -13,7 +13,7 @@ For a typical queuing system, we are interested in simulating different arrival 
 - time in system (development over time, average, standard deviation, min, max)
 - utilization of the server (development over time, average)
 
-If we build a simulation model for this, we need the following types of components:
+If we build a simulation model using event scheduling for this, we need the following types of components:
 
 1. **An entity** that flows through the model
 2. **An arrival generator** that creates entities with an interarrival time drawn from the correct distribution
@@ -226,10 +226,10 @@ where $v_i$ are the registered values, and $N$ is the number of registered value
 A persistent statistic is a time-weighted statistic that takes into account how long a certain value persisted. If we offer the value 2 for 10 time units, and the value 4 for 2 time units, the average is (10 * 2 + 2 * 4) / 12 = 2.33. Instead of dividing by the number of observations, we divide over the total time. The mean is calculated by:
 
 $$
-  \text{mean} = \int_0^T{\frac{t_i * v_i}{T}}\text{ where }T = \sum_{i=1}^T{t_i}
+  \text{mean} = \int_0^T{\frac{t_i * v_i}{T}}\text{ where }T = \sum_{i=1}^N{t_i}
 $$
 
-In this case, $v_i$ are the registered values, and $t_i$ are the durations for which value $v_i$ was registered.
+In this case, $N$ is the number of registered values, $v_i$ are the registered values, and $t_i$ are the durations for which value $v_i$ was registered.
 
 Therefore, a tally only needs a value to be registered:
 
@@ -370,6 +370,8 @@ The call to `parameters.get("generator.intervalTime")` retrieves the parameter *
 
 !!! Note
     When submaps are used, the 'dot'-notation gives access to the parameters. Suppose there are several parameters for the server that are stored in a submap with the key `server`, then the parameters such as the server capacity can be retrieved by `(Integer) this.inputParameterMap.get("server.capacity").getValue()`. This enables the maintenance of a diverse set of input parameters in a comprehensible way.
+
+The `ReadInputParameters` class offers a method to read input parameters from a properties file, or from the command line arguments. Furthermore, the dsol-swing project offers a dialog to read the input parameters from the screen using only one line of code.
 
 
 ### 9. A program that can be started to create the model
@@ -699,7 +701,7 @@ This extended example for modeling an M/M/1 queuing system showed the following 
 - The main components of a DSOL model are the Simulator, Model, Replication and Experiment.
 - DSOL supports multiple versions of time, such as a double value or a duration quantity.
 - DSOL supports random number generation, use of stochastic distributions, and seed management for replications.
-- Setting ans using of input variables for an experiment is supported.
+- Setting and using of input variables for an experiment is supported.
 - Creating and calculating different types of output statistics for a replication is supported.
 - Summary statistics for an experiment with multiple replication are automatically created.
 - Output statistics can be conveniently shown on the screen or in a GUI.
