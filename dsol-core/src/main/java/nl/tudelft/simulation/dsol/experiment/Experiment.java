@@ -39,7 +39,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author Alexander Verbraeck relative types are the same.
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  * @param <S> the simulator to use
  */
 public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
