@@ -7,7 +7,7 @@ import org.djutils.event.reference.ReferenceType;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.formalisms.flow.Station;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -36,16 +36,16 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
      * constructs a new Utilization.
      * @param description String; the description of this utilization
      * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
-     * @param target Station&lt;T&gt;; the target
+     * @param target FlowObject&lt;T&gt;; the target
      */
     public Utilization(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
-            final Station<T> target)
+            final FlowObject<T> target)
     {
         super(description, model);
         try
         {
-            target.addListener(this, Station.RECEIVE_EVENT, ReferenceType.STRONG);
-            target.addListener(this, Station.RELEASE_EVENT, ReferenceType.STRONG);
+            target.addListener(this, FlowObject.RECEIVE_EVENT, ReferenceType.STRONG);
+            target.addListener(this, FlowObject.RELEASE_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
             getSimulator().addListener(this, Replication.END_REPLICATION_EVENT, ReferenceType.STRONG);
             // object is already bound, because SimPersistend (super) bound the statistic to the Context
