@@ -7,8 +7,10 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.djutils.base.Identifiable;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
+import org.djutils.exceptions.Throw;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -25,26 +27,33 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
- * @param <T> the simulation time type to use.
- * @since 1.5
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @param <T> the simulation time type
  */
-public class Resource<T extends Number & Comparable<T>> extends LocalEventProducer
+public class Resource<T extends Number & Comparable<T>> extends LocalEventProducer implements Identifiable
 {
     /** */
     private static final long serialVersionUID = 20140805L;
 
-    /** the counter counting the requests. package visibility, so Request can access it. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    static long counter = 0;
+    /** the id of the resource. */
+    private String resourceId;
+    
+    /** the counter to give a unique sequence number to the requests. */
+    private static long counter = 0;
 
-    /** UTILIZATION_EVENT is fired on activity. */
+    /** UTILIZATION_EVENT is fired on activity that decreases or increases the utilization. */
     public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT",
             "Utilization changed", new ObjectDescriptor("newUtilization", "new utilization", Double.class)));
 
-    /** RESOURCE_REQUESTED_QUEUE_LENGTH fired on changes in queue length. */
-    public static final EventType RESOURCE_REQUESTED_QUEUE_LENGTH =
-            new EventType(new MetaData("RESOURCE_REQUESTED_QUEUE_LENGTH", "Queue length changed",
+    /** QUEUE_LENGTH_EVENT fired on changes in queue length. */
+    public static final EventType QUEUE_LENGTH_EVENT =
+            new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length changed",
                     new ObjectDescriptor("newQueueLength", "new queue length", Integer.class)));
+
+    /** QUEUE_TIME_EVENT is fired wwhen a request is granted and provides the waiting time (which can be 0). */
+    public static final EventType QUEUE_WAITING_TIME_EVENT =
+            new EventType(new MetaData("QUEUE_WAITING_TIME_EVENT", "Queue waiting time",
+                    new ObjectDescriptor("queue waiting time", "queue waiting time", Number.class)));
 
     /** the minimum priority. */
     public static final int MIN_REQUEST_PRIORITY = 0;
@@ -59,44 +68,51 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
     private double capacity;
 
     /** claimedCapacity defines the currently claimed capacity. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected double claimedCapacity = 0.0;
+    private double claimedCapacity = 0.0;
 
     /** request defines the list of requestors for this resource. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected SortedSet<Request<T>> requests =
-            Collections.synchronizedSortedSet(new TreeSet<Request<T>>(new RequestComparator()));
+    protected final SortedSet<Request<T>> requests;
 
     /** simulator defines the simulator on which is scheduled. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected DevsSimulatorInterface<T> simulator;
 
-    /** the description of the resource. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected String description = "resource";
-
     /**
-     * Method Resource.
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param description String; the description of this resource
-     * @param capacity double; of the resource
+     * Create a new Resource with a capacity and a specific request comparator, e.g., LIFO or sorted on an attribute.
+     * @param resourceId String; the id of this resource
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator
+     * @param capacity double; the capacity of the resource
+     * @param requestComparator Comparator&lt;Request&lt;T&gt;&gt;; the comparator to use
      */
-    public Resource(final DevsSimulatorInterface<T> simulator, final String description, final double capacity)
+    public Resource(final String resourceId, final DevsSimulatorInterface<T> simulator, final double capacity,
+            final Comparator<Request<T>> requestComparator)
     {
-        super();
-        this.description = description;
+        Throw.whenNull(resourceId, "resourceId cannot be null");
+        Throw.whenNull(simulator, "simulator cannot be null");
+        Throw.whenNull(requestComparator, "requestComparator cannot be null");
+        this.resourceId = resourceId;
         this.simulator = simulator;
         this.capacity = capacity;
+        this.requests = Collections.synchronizedSortedSet(new TreeSet<Request<T>>(requestComparator));;
     }
 
     /**
-     * Method Resource.
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param capacity double; of the resource
+     * Create a new Resource with a capacity and a default FIFO request comparator.
+     * @param resourceId String; the id of this resource
+     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator
+     * @param capacity double; the capacity of the resource
      */
-    public Resource(final DevsSimulatorInterface<T> simulator, final double capacity)
+    public Resource(final String resourceId, final DevsSimulatorInterface<T> simulator, final double capacity)
     {
-        this(simulator, "resource", capacity);
+        this(resourceId, simulator, capacity, new RequestComparator<T>());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String getId()
+    {
+        return this.resourceId;
     }
 
     /**
@@ -204,7 +220,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
             {
                 this.requests.add(new Request<T>(requestor, amount, priority));
             }
-            this.fireTimedEvent(Resource.RESOURCE_REQUESTED_QUEUE_LENGTH, this.requests.size(),
+            this.fireTimedEvent(Resource.QUEUE_LENGTH_EVENT, this.requests.size(),
                     this.simulator.getSimulatorTime());
         }
     }
@@ -237,7 +253,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
                     {
                         i.remove();
                     }
-                    this.fireTimedEvent(Resource.RESOURCE_REQUESTED_QUEUE_LENGTH, this.requests.size(),
+                    this.fireTimedEvent(Resource.QUEUE_LENGTH_EVENT, this.requests.size(),
                             this.simulator.getSimulatorTime());
                 }
                 else
@@ -252,13 +268,14 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
     @Override
     public String toString()
     {
-        return this.description;
+        return this.resourceId;
     }
 
     /**
      * the RequestComparator. This comparator first checks on priority, then on ID.
+     * @param <T> the simulation time type to use.
      */
-    protected class RequestComparator implements Comparator<Request<T>>
+    public static class RequestComparator<T extends Number & Comparable<T>> implements Comparator<Request<T>>
     {
         /** {@inheritDoc} */
         @Override
