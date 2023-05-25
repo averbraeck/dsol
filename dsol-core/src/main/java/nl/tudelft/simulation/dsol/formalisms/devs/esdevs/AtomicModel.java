@@ -20,7 +20,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * </p>
  * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
  * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a><br>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  */
 public abstract class AtomicModel<T extends Number & Comparable<T>> extends AbstractDevsPortModel<T>
 {

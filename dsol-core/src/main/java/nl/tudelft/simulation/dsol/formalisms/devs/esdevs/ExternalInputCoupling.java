@@ -12,7 +12,7 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
  * </p>
  * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
  * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a><br>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  * @param <P> the type of message the EIC accepts.
  */
 public class ExternalInputCoupling<T extends Number & Comparable<T>, P>

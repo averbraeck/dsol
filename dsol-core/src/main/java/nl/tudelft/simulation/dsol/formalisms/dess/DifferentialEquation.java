@@ -24,7 +24,7 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  * @since 1.5
  */
 public abstract class DifferentialEquation<T extends Number & Comparable<T>>

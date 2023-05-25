@@ -25,7 +25,7 @@ import nl.tudelft.simulation.dsol.simulators.RunState;
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  * @param <S> the simulator type to use
  */
 public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends DevsRealTimeAnimator<T>>

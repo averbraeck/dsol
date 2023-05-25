@@ -22,7 +22,7 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  * @param <S> the simulator type to use
  */
 public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer

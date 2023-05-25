@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControlLabel;
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  */
 public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPanel implements AppearanceControl
 {

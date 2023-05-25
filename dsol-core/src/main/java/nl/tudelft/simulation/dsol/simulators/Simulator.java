@@ -30,7 +30,7 @@ import nl.tudelft.simulation.dsol.model.DsolModel;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a> relative types are the same.
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  */
 public abstract class Simulator<T extends Number & Comparable<T>> extends LocalEventProducer
         implements SimulatorInterface<T>, Runnable

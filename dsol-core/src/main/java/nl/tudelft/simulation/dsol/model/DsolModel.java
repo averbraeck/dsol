@@ -25,7 +25,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  * @param <S> the simulator to use
  */
 public interface DsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends Serializable

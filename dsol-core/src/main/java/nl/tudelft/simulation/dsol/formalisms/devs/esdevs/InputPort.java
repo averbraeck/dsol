@@ -21,7 +21,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * </p>
  * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
  * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a><br>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+ * @param <T> the time type
  * @param <TYPE> The type of messages the input port accepts.
  */
 public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputPortInterface<T, TYPE>
