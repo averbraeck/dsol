@@ -1,12 +1,10 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The Release station releases a given quantity of a claimed resource.
+ * The Release flow object releases a given quantity of a claimed resource.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -15,10 +13,10 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
- * @since 1.5
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @param <T> the time type
  */
-public class Release<T extends Number & Comparable<T>> extends Station<T>
+public class Release<T extends Number & Comparable<T>> extends FlowObject<T>
 {
     /** */
     private static final long serialVersionUID = 20151028L;
@@ -30,25 +28,24 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
     private double amount = 1.0;
 
     /**
-     * Construct a Release station to release seized resource units.
-     * @param id Serializable; the id of the Station
+     * Construct a Release flow object to release seized resource units.
+     * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param resource Resource&lt;T&gt;; which is released
      */
-    public Release(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
+    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
     {
         this(id, simulator, resource, 1.0);
     }
 
     /**
      * Constructor for Release.
-     * @param id Serializable; the id of the Station
+     * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param resource Resource&lt;T&gt;; which is released
      * @param amount double; of resource which is released
      */
-    public Release(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
-            final double amount)
+    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource, final double amount)
     {
         super(id, simulator);
         this.resource = resource;
@@ -57,13 +54,13 @@ public class Release<T extends Number & Comparable<T>> extends Station<T>
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void receiveObject(final Object object)
+    public synchronized void receiveEntity(final Entity<T> entity)
     {
-        super.receiveObject(object);
+        super.receiveEntity(entity);
         try
         {
             this.resource.releaseCapacity(this.amount);
-            this.releaseObject(object);
+            this.releaseObject(entity);
         }
         catch (Exception exception)
         {
