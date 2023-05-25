@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +14,13 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The Seize station requests a resource and keeps the entity within the station's queue until the resource is actually claimed.
+ * The Seize flow block requests a resource and keeps the entity within the flow block's queue until the resource is actually
+ * claimed. Note that the Seize block has a queue in which the Entity is waiting, while the Resource has a queue in which the
+ * request is waiting. This sounds like we store the same information twice. This is, however, not the case. (1) Multiple Seize
+ * blocks can share the same Resource, each holding their own entities that make the request, where the total set of requests is
+ * stored at the Resource. (2) A Seize could potentially request access to two resources, where the entity is held at the Seize
+ * block until both are available. Each Resource keeps and grants its own requests. Since there nam be an n:m relationship
+ * between Seize blocks and Resources, each have their own queue, with its own sorting mechanism (ideally the same).
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -24,10 +29,10 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
- * @since 1.5
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @param <T> the time type
  */
-public class Seize<T extends Number & Comparable<T>> extends Station<T> implements ResourceRequestorInterface<T>
+public class Seize<T extends Number & Comparable<T>> extends FlowObject<T> implements ResourceRequestorInterface<T>
 {
     /** */
     private static final long serialVersionUID = 20140911L;
@@ -50,24 +55,24 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
     private Resource<T> resource;
 
     /**
-     * Constructor for Seize station.
-     * @param id Serializable; the id of the Station
+     * Constructor for Seize flow object.
+     * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
      * @param resource Resource&lt;T&gt;; which is claimed
      */
-    public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
+    public Seize(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
     {
         this(id, simulator, resource, 1.0);
     }
 
     /**
-     * Constructor for Seize station.
-     * @param id Serializable; the id of the Station
+     * Constructor for Seize flow object.
+     * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
      * @param resource Resource&lt;T&gt;; which is claimed
      * @param requestedCapacity double; is the amount which is claimed by the seize
      */
-    public Seize(final Serializable id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
+    public Seize(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
             final double requestedCapacity)
     {
         super(id, simulator);
@@ -81,14 +86,14 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
 
     /**
      * Receive an object that requests an amount of units from a resource.
-     * @param object Object; the object
+     * @param entity Entity&lt;T&gt;; the object
      * @param pRequestedCapacity double; the requested capacity
      */
-    public synchronized void receiveObject(final Object object, final double pRequestedCapacity)
+    public synchronized void receiveObject(final Entity<T> entity, final double pRequestedCapacity)
 
     {
-        super.receiveObject(object);
-        Request<T> request = new Request<T>(object, pRequestedCapacity, this.simulator.getSimulatorTime());
+        super.receiveEntity(entity);
+        Request<T> request = new Request<T>(entity, pRequestedCapacity, this.simulator.getSimulatorTime());
         synchronized (this.queue)
         {
             this.queue.add(request);
@@ -106,9 +111,9 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
 
     /** {@inheritDoc} */
     @Override
-    public void receiveObject(final Object object)
+    public void receiveEntity(final Entity<T> entity)
     {
-        this.receiveObject(object, this.requestedCapacity);
+        this.receiveObject(entity, this.requestedCapacity);
     }
 
     /**
@@ -143,7 +148,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
                     this.queue.remove(request);
                 }
                 this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), this.simulator.getSimulatorTime());
-                T delay = SimTime.minus(this.simulator.getSimulatorTime(), request.getCreationTime());
+                T delay = SimTime.minus(this.simulator.getSimulatorTime(), request.getQueueEntryTime());
                 this.fireTimedEvent(Seize.DELAY_TIME, delay.doubleValue(), this.simulator.getSimulatorTime());
                 this.releaseObject(request.getEntity());
                 return;
@@ -153,7 +158,7 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
 
     /**
      * The Request Class defines the requests for resource.
-     * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
+     * @param <T> the time type
      */
     public static class Request<T extends Number & Comparable<T>>
     {
@@ -161,27 +166,27 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
         private final double amount;
 
         /** entity is the object requesting the amount. */
-        private final Object entity;
+        private final Entity<T> entity;
 
-        /** creationTime refers to the moment the request was created. */
-        private final T creationTime;
+        /** the time when the request was created. */
+        private final T queueEntryTime;
 
         /**
          * Method Request.
-         * @param entity Object; the requesting entity
+         * @param entity Entity&lt;T&gt;; the requesting entity
          * @param amount double; is the requested amount
-         * @param creationTime T; the time the request was created
+         * @param queueEntryTime T; the time the request was created
          */
-        public Request(final Object entity, final double amount, final T creationTime)
+        public Request(final Entity<T> entity, final double amount, final T queueEntryTime)
         {
             this.entity = entity;
             this.amount = amount;
-            this.creationTime = creationTime;
+            this.queueEntryTime = queueEntryTime;
         }
 
         /**
-         * Returns the amount.
-         * @return double
+         * Return the requested amount.
+         * @return double; the requested amount
          */
         public double getAmount()
         {
@@ -189,21 +194,21 @@ public class Seize<T extends Number & Comparable<T>> extends Station<T> implemen
         }
 
         /**
-         * Returns the entity.
-         * @return Object
+         * Return the entity.
+         * @return Entity&lt;T&gt;; the entity
          */
-        public Object getEntity()
+        public Entity<T> getEntity()
         {
             return this.entity;
         }
 
         /**
-         * Returns the creationTime.
-         * @return double
+         * Returns the time when the request was made.
+         * @return T; the time when the request was made
          */
-        public T getCreationTime()
+        public T getQueueEntryTime()
         {
-            return this.creationTime;
+            return this.queueEntryTime;
         }
     }
 
