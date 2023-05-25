@@ -1,5 +1,5 @@
 /**
- * Flow-based simulation classes, such as the Station, Generator, Seize, Delay, Release, and Departure.
+ * Flow-based simulation classes, such as the FlowObject, Generator, Seize, Delay, Release, and Departure.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
