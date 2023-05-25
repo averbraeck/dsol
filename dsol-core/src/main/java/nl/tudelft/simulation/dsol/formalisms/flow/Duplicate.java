@@ -1,12 +1,9 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import java.io.Serializable;
-import java.rmi.MarshalledObject;
-
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The Duplicate station makes copies of incoming objects and sends them to their destination.
+ * The Duplicate flow block makes a number of copies of incoming entities and sends them to a destination.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -15,41 +12,40 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
- * @since 1.5
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @param <T> the time type
  */
-public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
+public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T>
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /** DuplicateDestination which is the duplicate definition. */
-    private Station<T> duplicateDestination;
+    private FlowObject<T> duplicateDestination;
 
     /** numberCopies refers to the number of duplicates. */
     private int numberCopies;
 
     /**
-     * Creates a new Duplicate that makes 1 copy.
-     * @param id Serializable; the id of the Station
+     * Create a new Duplicate flow block that makes 1 copy.
+     * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param duplicateDestination Station&lt;T&gt;; the duplicate destination
+     * @param duplicateDestination FlowObject&lt;T&gt;; the duplicate destination
      */
-    public Duplicate(final Serializable id, final DevsSimulatorInterface<T> simulator,
-            final Station<T> duplicateDestination)
+    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T> duplicateDestination)
     {
         this(id, simulator, duplicateDestination, 1);
     }
 
     /**
-     * Create a new Duplicate that makes numberCopies copies.
-     * @param id Serializable; the id of the Station
+     * Create a new Duplicate flock block that makes numberCopies copies.
+     * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param duplicateDestination Station&lt;T&gt;; which is the duplicate definition
+     * @param duplicateDestination FlowObject&lt;T&gt;; which is the duplicate definition
      * @param numberCopies int; the number of copies
      */
-    public Duplicate(final Serializable id, final DevsSimulatorInterface<T> simulator,
-            final Station<T> duplicateDestination, final int numberCopies)
+    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T> duplicateDestination,
+            final int numberCopies)
     {
         super(id, simulator);
         this.duplicateDestination = duplicateDestination;
@@ -58,30 +54,15 @@ public class Duplicate<T extends Number & Comparable<T>> extends Station<T>
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void receiveObject(final Object object)
+    public synchronized void receiveEntity(final Entity<T> entity)
     {
-        super.receiveObject(object);
-        try
+        super.receiveEntity(entity);
+        this.releaseObject(entity);
+        for (int i = 0; i < this.numberCopies; i++)
         {
-            this.releaseObject(object);
-            if (object instanceof Serializable)
-            {
-                for (int i = 0; i < this.numberCopies; i++)
-                {
-                    Object clone = new MarshalledObject<Object>(object).get();
-                    this.fireTimedEvent(Station.RELEASE_EVENT, 1, getSimulator().getSimulatorTime());
-                    this.duplicateDestination.receiveObject(clone);
-                }
-            }
-            else
-            {
-                throw new Exception(
-                        "cannot duplicate object: " + object.getClass() + " does not implement java.io.Serializable");
-            }
-        }
-        catch (Exception exception)
-        {
-            this.simulator.getLogger().always().warn(exception, "receiveMethod");
+            Entity<T> clone = entity.clone();
+            this.fireTimedEvent(FlowObject.RELEASE_EVENT, clone, getSimulator().getSimulatorTime());
+            this.duplicateDestination.receiveEntity(clone);
         }
     }
 
