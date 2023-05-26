@@ -18,7 +18,7 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
- * FlowTest tests the flow objects, such as Station, Seize, Delay, Release.
+ * FlowTest tests the flow objects, such as FlowObject, Seize, Delay, Release.
  * <p>
  * Copyright (c) 2021-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -52,8 +52,8 @@ public class FlowTest
         Destroy<Double> departure = new Destroy<Double>("departure", simulator);
         delay.setDestination(departure);
         assertEquals(departure, delay.getDestination());
-        String object = "abc";
-        delay.receiveObject(object);
+        Entity<Double> object = new Entity<Double>("abc", 0.0);
+        delay.receiveEntity(object);
         assertEquals(nrEvents + 1, simulator.getEventList().size());
         simulator.runUpTo(5.0);
         wait(simulator, 500);
