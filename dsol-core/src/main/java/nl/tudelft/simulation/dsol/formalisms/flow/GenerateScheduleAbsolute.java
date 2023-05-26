@@ -1,23 +1,20 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
-import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.jstats.distributions.DistDiscrete;
 
 /**
- * The ScheduledGenerate is an extension to the Generate station which accepts a schedule of inter-arrival times. Instead of
- * generating with a continuous interarrival distribution we submit a map consisting of keys (execution times). Each key
- * indicates the <i>starting time </i> of a new interval, while the value in the map is the continuous distribution function to
- * use to draw the interarrival times. If no values have to be generated in a certain interval, use a large inter-arrival time
- * value in the distribution function, or use DistConstant(stream, 1E20) to indicate that the next drawing will take place
- * <i>after </i> the end of the interval.
+ * The GenerateScheduleAbsolute is an extension to the Generate flow object which accepts a schedule of absolute inter-arrival
+ * times. Instead of generating with a continuous interarrival distribution we submit a map consisting of keys (execution
+ * times). Each key indicates the <i>starting time </i> of a new interval, while the value in the map is the continuous
+ * distribution function to use to draw the interarrival times. If no values have to be generated in a certain interval, use a
+ * large inter-arrival time value in the distribution function, or use DistConstant(stream, 1E20) to indicate that the next
+ * drawing will take place <i>after </i> the end of the interval.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -26,75 +23,64 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
- * @param <T> the extended type itself to be able to implement a comparator on the simulation time.
- * @since 1.5
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @param <T> the time type
  */
-public class ScheduledGenerate<T extends Number & Comparable<T>> extends Generate<T>
+public abstract class GenerateScheduleAbsolute<T extends Number & Comparable<T>> extends Generate<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;
 
-    /**
-     * schedule is a time sorted map of distributions.
-     */
-    private SortedMap<T, DistContinuousSimulationTime<T>> schedule =
+    /** absoluteSchedule is a time sorted map of inter-arrival distributions. */
+    private SortedMap<T, DistContinuousSimulationTime<T>> absoluteSchedule =
             Collections.synchronizedSortedMap(new TreeMap<T, DistContinuousSimulationTime<T>>());
 
     /**
-     * constructs a new Schedule.
-     * @param id Serializable; the id of the Station
+     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Generate
+     * flow object when a destination has been indicated with the setDestination method.
+     * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
-     * @param myClass Class&lt;?&gt;; is the class of which entities are created
-     * @param constructorArguments Object[]; are the parameters for the constructor of myClass. of arguments.
-     *            <code>constructorArgument[n]=Integer.valueOf(12)</code> may have constructorArgumentClasses[n]=int.class;
-     * @throws SimRuntimeException on constructor invocation.
+     * @param absoluteSchedule SortedMap&lt;T, DistContinuousSimulationTime&lt;T&gt;&gt;; time sorted map of inter-arrival
+     *            distributions
+     * @param batchSize DistDiscrete; the distribution of the number of objects generated at each generation event
      */
-    public ScheduledGenerate(final Serializable id, final DevsSimulatorInterface<T> simulator, final Class<?> myClass,
-            final Object[] constructorArguments) throws SimRuntimeException
+    public GenerateScheduleAbsolute(final String id, final DevsSimulatorInterface<T> simulator,
+            final SortedMap<T, DistContinuousSimulationTime<T>> absoluteSchedule, final DistDiscrete batchSize)
     {
-        super(id, simulator, myClass, constructorArguments);
+        super(id, simulator, batchSize);
+        setSchedule(absoluteSchedule);
     }
 
     /**
-     * returns the schedule.
+     * Return the remaining schedule.
      * @return SortedMap the schedule
      */
-    public SortedMap<T, DistContinuousSimulationTime<T>> getSchedule()
+    public SortedMap<T, DistContinuousSimulationTime<T>> getRemainingSchedule()
     {
-        return this.schedule;
+        return this.absoluteSchedule;
     }
 
     /**
-     * sets the schedule.
+     * Set a new schedule.
      * @param map SortedMap&lt;T, DistContinuousSimulationTime&lt;R&gt;&gt;; is the new map
      */
     public synchronized void setSchedule(final SortedMap<T, DistContinuousSimulationTime<T>> map)
     {
-        this.schedule = map;
+        this.absoluteSchedule.clear();
+        this.absoluteSchedule.putAll(map);
         this.changeIntervalTime();
     }
 
     /**
-     * changes the intervalTime of the schedule.
+     * Change the intervalTime of the schedule.
      */
     public synchronized void changeIntervalTime()
     {
-        try
+        if (!this.absoluteSchedule.isEmpty())
         {
-            if (!this.schedule.isEmpty())
-            {
-                this.simulator.cancelEvent(super.nextEvent);
-                this.interval = this.schedule.values().iterator().next();
-                this.schedule.remove(this.schedule.firstKey());
-                this.simulator.scheduleEvent(new SimEvent<T>(this.schedule.firstKey(), this,"changeIntervalTime", null));
-                this.generate(this.constructorArguments);
-                this.simulator.getLogger().filter(Cat.DSOL).trace("changeIntervalTime: set the intervalTime to {}",
-                        this.interval);
-            }
-        }
-        catch (Exception exception)
-        {
-            this.simulator.getLogger().always().warn(exception, "changeIntervalTime");
+            setInterval(this.absoluteSchedule.values().iterator().next()); // schedules next generation
+            this.absoluteSchedule.remove(this.absoluteSchedule.firstKey());
+            this.simulator.scheduleEventAbs(this.absoluteSchedule.firstKey(), this, "changeIntervalTime", null);
         }
     }
 
