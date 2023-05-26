@@ -150,7 +150,7 @@ public class Seize<T extends Number & Comparable<T>> extends FlowObject<T> imple
                 this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), this.simulator.getSimulatorTime());
                 T delay = SimTime.minus(this.simulator.getSimulatorTime(), request.getQueueEntryTime());
                 this.fireTimedEvent(Seize.DELAY_TIME, delay.doubleValue(), this.simulator.getSimulatorTime());
-                this.releaseObject(request.getEntity());
+                this.releaseEntity(request.getEntity());
                 return;
             }
         }

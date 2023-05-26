@@ -40,11 +40,11 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
 
     /** RECEIVE_EVENT is fired whenever an entity enters the flow object. */
     public static final EventType RECEIVE_EVENT = new EventType(new MetaData("RECEIVE_EVENT", "Entity received",
-            new ObjectDescriptor("receivedObject", "received object", Entity.class)));
+            new ObjectDescriptor("receivedObject", "received object", Integer.class))); // XXX Entity?
 
     /** RELEASE_EVENT is fired whenever an entity leaves the flow object. */
     public static final EventType RELEASE_EVENT = new EventType(new MetaData("RELEASE_EVENT", "Entity released",
-            new ObjectDescriptor("releasedObject", "released object", Entity.class)));
+            new ObjectDescriptor("releasedObject", "released object", Integer.class))); // XXX Entity?
 
     /**
      * Construct a new FlowObject.
@@ -65,7 +65,7 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
      */
     public void receiveEntity(final Entity<T> entity)
     {
-        this.fireTimedEvent(RECEIVE_EVENT, entity, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(RECEIVE_EVENT, 1, this.simulator.getSimulatorTime());  // XXX: entity instead of 1?
     }
 
     /**
@@ -83,9 +83,9 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
      * null, the entity will be discarded.
      * @param entity Entity; the entity to release
      */
-    protected synchronized void releaseObject(final Entity<T> entity)
+    protected synchronized void releaseEntity(final Entity<T> entity)
     {
-        this.fireTimedEvent(RELEASE_EVENT, entity, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(RELEASE_EVENT, 1, this.simulator.getSimulatorTime()); // XXX: entity instead of 1?
         if (this.destination != null)
         {
             this.destination.receiveEntity(entity);

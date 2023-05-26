@@ -60,7 +60,7 @@ public class Release<T extends Number & Comparable<T>> extends FlowObject<T>
         try
         {
             this.resource.releaseCapacity(this.amount);
-            this.releaseObject(entity);
+            this.releaseEntity(entity);
         }
         catch (Exception exception)
         {

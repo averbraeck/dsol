@@ -57,7 +57,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T>
     public synchronized void receiveEntity(final Entity<T> entity)
     {
         super.receiveEntity(entity);
-        this.releaseObject(entity);
+        this.releaseEntity(entity);
         for (int i = 0; i < this.numberCopies; i++)
         {
             Entity<T> clone = entity.clone();

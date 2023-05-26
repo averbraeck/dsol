@@ -59,7 +59,7 @@ public class Release extends nl.tudelft.simulation.dsol.formalisms.flow.Release<
             Customer customer = (Customer) object;
             double serviceTime = this.simulator.getSimulatorTime() - customer.getEntranceTime();
             this.fireTimedEvent(Release.SERVICE_TIME_EVENT, serviceTime, this.simulator.getSimulatorTime());
-            super.releaseObject(object);
+            super.releaseEntity(object);
         }
     }
 }
