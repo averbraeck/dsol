@@ -3,18 +3,17 @@ package nl.tudelft.simulation.dsol.demo.flow.mm1;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
+import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
 import nl.tudelft.simulation.dsol.formalisms.flow.Generate;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
-import nl.tudelft.simulation.dsol.formalisms.flow.Station;
 import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
-import nl.tudelft.simulation.jstats.distributions.DistConstant;
-import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
@@ -61,22 +60,29 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
         StreamInterface defaultStream = getDefaultStream();
 
         // The Generator
-        Generate<Double> generator = new Generate<Double>("Generator", this.simulator, Object.class, null);
-        generator.setInterval(new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, 1.0)));
-        generator.setStartTime(new DistContinuousSimulationTime.TimeDouble(new DistConstant(defaultStream, 0.0)));
-        generator.setBatchSize(new DistDiscreteConstant(defaultStream, 1));
+        Generate<Double> generator = new Generate<Double>("generate", this.simulator,
+                new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, 1.0)), 1)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected Entity<Double> generateEntity()
+            {
+                return new Entity<Double>("entity", getSimulator().getSimulatorTime());
+            }
+        };
 
         // The queue, the resource and the release
-        Resource<Double> resource = new Resource<>(this.simulator, 1.0);
+        Resource<Double> resource = new Resource<>("resource", this.simulator, 1.0);
 
         // created a resource
-        Station<Double> queue = new Seize<Double>("Seize", this.simulator, resource);
-        Station<Double> release = new Release<Double>("Release", this.simulator, resource, 1.0);
+        FlowObject<Double> queue = new Seize<Double>("Seize", this.simulator, resource);
+        FlowObject<Double> release = new Release<Double>("Release", this.simulator, resource, 1.0);
 
         // The server
         DistContinuousSimulationTime<Double> serviceTime =
                 new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, 0.5));
-        Station<Double> server = new Delay<Double>("Delay", this.simulator, serviceTime);
+        FlowObject<Double> server = new Delay<Double>("Delay", this.simulator, serviceTime);
 
         // The flow
         generator.setDestination(queue);
