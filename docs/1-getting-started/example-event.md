@@ -349,29 +349,65 @@ In the case of the M/M/1 model, we would want to set the parameter values for th
       "Server capacity", "Server capacity", 1.0, 3.0));
 ```
 
+Suppose we would also like to set the batch size of arrivals, as well as the start time of the generation process. Since we have a number of parameters for the generator and a number of parameters or the server, we could separate these in two sub-maps. 
+
+```java
+  InputParameterMap generatorMap = new InputParameterMap("generator", 
+      "Generator", "Generator", 1.0);
+  generatorMap.add(new InputParameterDouble("intervalTime", 
+      "Average interval time", "Average interval time", 1.0, 1.0));
+  generatorMap.add(new InputParameterDouble("startTime", 
+      "Generator start time", "Generator start time", 0.0, 2.0));
+  generatorMap.add(new InputParameterInteger("batchSize", 
+      "Batch size", "batch size", 1, 3.0));
+  this.inputParameterMap.add(generatorMap);
+  InputParameterMap resourceMap = new InputParameterMap("resource", 
+      "Resource", "Resource", 2.0);
+  resourceMap.add(new InputParameterInteger("capacity", 
+      "Resource capacity", "Resource capacity", 1, 1.0));
+  resourceMap.add(new InputParameterDouble("serviceTime", 
+      "Average service time", "Average service time", 0.9, 2.0));
+  this.inputParameterMap.add(resourceMap);
+```
+
 The arguments of the methods are as follows:
 
 1. key, by which the value can be easily retrieved.
 2. short name to display the value, e.g., in a table
 3. longer description to explain the input value in, e.g., a GUI. This string may contain HTML markup.
 4. default value.
-5. sequence number in this map as a floating point value, making it easy to insert a value without renumbering. If another value would have to be added between the intervalTime and serviceTime, it could get 1.5 as its sequence, which would place it between the first two values for the user interface or display.
+5. sequence number in this map as a floating point value, making it easy to insert a value without renumbering. If another value would have to be added between the intervalTime and serviceTime, it could get 1.5 as its sequence, which would place it between the first two values for the user interface or display. The sequence number is always the last number in the constructor call of an `InputParameter`.
 
-To retrieve a set input value, the model can use, e.g., the following code:
+To retrieve a set input value and either set it to a field, or use it to define a distibution, the model can use, e.g., the following code:
 
 ```java
-  this.interarrivalTime = new DistExponential(defaultStream, 
-      (Double) this.inputParameterMap.get("intervalTime").getValue());
-  this.processingTime = new DistExponential(defaultStream, 
-      (Double) this.inputParameterMap.get("serviceTime").getValue());
+  this.capacity = (Integer) getInputParameter("resource.capacity");
+  this.batchSize = (Integer) getInputParameter("generator.batchSize");
+  double startTime = (Double) getInputParameter("generator.startTime");
+  double iat = (Double) getInputParameter("generator.intervalTime");
+  this.interarrivalTime = new DistExponential(getDefaultStream(), iat);
+  double st = (Double) getInputParameter("resource.serviceTime");
+  this.processingTime = new DistExponential(getDefaultStream(), st);
+  getSimulator().scheduleEventRel(startTime, this, "generate", null);
 ```
 
-The call to `parameters.get("generator.intervalTime")` retrieves the parameter *object* that has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we use the `getValue()` method to retrieve the value set by the user, and cast it to a Double.
+The call to `getInputParameter(key)` returns the set *value* for the input parameter that has to be cast to the right type. It is also possible to retrieve the parameter *object* with a call to `this.inputParameterMap.get(key)`. This parameter *object* has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we could use the `getValue()` method to retrieve the value set by the user, and cast it to a Double. Typically, however, we just use the `getInputParameter(key)` method since it is the most straightforward, and we don't need the other methods of the `InputParameter` object.
 
 !!! Note
     When submaps are used, the 'dot'-notation gives access to the parameters. Suppose there are several parameters for the server that are stored in a submap with the key `server`, then the parameters such as the server capacity can be retrieved by `(Integer) this.inputParameterMap.get("server.capacity").getValue()`. This enables the maintenance of a diverse set of input parameters in a comprehensible way.
 
-The `ReadInputParameters` class offers a method to read input parameters from a properties file, or from the command line arguments. Furthermore, the dsol-swing project offers a dialog to read the input parameters from the screen using only one line of code.
+The `ReadInputParameters` class offers a method to read input parameters from a properties file, or from the command line arguments. Furthermore, the dsol-swing project offers a dialog to read the input parameters from the screen using only one line of code. As an example, when we put the line:
+
+```java
+  new TabbedParameterDialog(model.getInputParameterMap());
+```
+
+in the `main` method of an interactive Swing appplication (see item #10 below), the following dialog pops up before starting the model:
+
+![](../images/1-getting-started/des-gui-parameters.png "des-gui-parameters")
+
+The screen has a tab for each submap, and shows the default values provided in the `InputParameter` objects. The items are provided in the order that was given by the last parameter of the `InputParameter` objects.
+
 
 
 ### 9. A program that can be started to create the model
