@@ -180,9 +180,8 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
 
     /**
      * Generate a new entity.
-     * @param constructorArgs Object[]; are the parameters used in the constructor.
      */
-    protected synchronized void generate(final Object[] constructorArgs)
+    protected synchronized void generate()
     {
         if (this.numberCreationEvents > this.maxNumberCreationEvents)
         {
@@ -193,7 +192,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
         {
             Entity<T> entity = generateEntity();
             this.fireTimedEvent(Generate.CREATE_EVENT, 1, this.simulator.getSimulatorTime());
-            this.releaseObject(entity);
+            this.releaseEntity(entity);
             this.numberGeneratedEntities++;
             if (this.numberGeneratedEntities > this.maxNumberGeneratedEntities)
             {
