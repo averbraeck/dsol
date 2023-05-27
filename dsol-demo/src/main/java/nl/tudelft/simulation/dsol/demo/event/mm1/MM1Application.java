@@ -3,8 +3,10 @@ package nl.tudelft.simulation.dsol.demo.event.mm1;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DsolModel;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
 
 /**
  * MM1Application.java.
@@ -20,12 +22,14 @@ public class MM1Application
 {
     /**
      * M/M/1 queueing application.
+     * @throws InputParameterException on parameter error
      */
-    protected MM1Application()
+    protected MM1Application() throws InputParameterException
     {
         DevsSimulatorInterface<Double> simulator = new DevsSimulator<>("MM1.Simulator");
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+        new TabbedParameterDialog(model.getInputParameterMap());
         simulator.initialize(model, replication);
         simulator.start();
     }
@@ -33,8 +37,9 @@ public class MM1Application
     /**
      * Start the simulation experiment with the model.
      * @param args String[]; the arguments (not used, should be empty)
+     * @throws InputParameterException on parameter error
      */
-    public static void main(final String[] args)
+    public static void main(final String[] args) throws InputParameterException
     {
         new MM1Application();
     }

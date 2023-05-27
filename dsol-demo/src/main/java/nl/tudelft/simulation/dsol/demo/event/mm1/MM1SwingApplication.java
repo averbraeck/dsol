@@ -8,10 +8,12 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.DsolModel;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
 
 /**
  * MM1SwingApplication is a test GUI application.
@@ -41,12 +43,15 @@ public class MM1SwingApplication extends DsolApplication
      * @throws SimRuntimeException on simulation error
      * @throws RemoteException on remote error
      * @throws NamingException on naming/animation error
+     * @throws InputParameterException on parameter error
      */
-    public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
+    public static void main(final String[] args)
+            throws SimRuntimeException, RemoteException, NamingException, InputParameterException
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("MM1SwingApplication.Simulator");
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
+        new TabbedParameterDialog(model.getInputParameterMap());
         simulator.initialize(model, replication);
         DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, simulator);
         new MM1SwingApplication(new MM1Panel(controlPanel));

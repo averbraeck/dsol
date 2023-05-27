@@ -7,14 +7,15 @@ import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
-import nl.tudelft.simulation.jstats.distributions.DistTriangular;
-import nl.tudelft.simulation.jstats.streams.MersenneTwister;
-import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
  * Simple M/M/1 queuing model, which can be changed into a X/X/c model by changing the parameters.
@@ -37,14 +38,14 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     /** busy units. */
     private int busy = 0;
 
-    /** the stream. */
-    private StreamInterface stream = new MersenneTwister(12L);
+    /** batch size. */
+    private int batchSize = 1;
 
     /** inter-arrival time. */
-    private DistContinuous interarrivalTime = new DistExponential(this.stream, 1.0);
+    private DistContinuous interarrivalTime;
 
     /** processing time. */
-    private DistContinuous processingTime = new DistTriangular(this.stream, 0.8, 0.9, 1.1);
+    private DistContinuous processingTime;
 
     /** queue of waiting entities. */
     private List<QueueEntry<Entity>> queue = new ArrayList<QueueEntry<Entity>>();
@@ -53,27 +54,33 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     private int entityCounter = 0;
 
     /** statistics for the utilization. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
     SimPersistent<Double> persistentUtilization;
 
     /** statistics for the queue length. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
     SimPersistent<Double> persistentQueueLength;
 
     /** statistics for the time in queue. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
     SimTally<Double> tallyTimeInQueue;
 
     /** statistics for the time in system. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
     SimTally<Double> tallyTimeInSystem;
 
     /**
-     * @param simulator DevsSimulator&lt;Double&gt;;
+     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
+     * @throws InputParameterException on parameter error
      */
-    public MM1Model(final DevsSimulatorInterface<Double> simulator)
+    public MM1Model(final DevsSimulatorInterface<Double> simulator) throws InputParameterException
     {
         super(simulator);
+        InputParameterMap generatorMap = new InputParameterMap("generator", "Generator", "Generator", 1.0);
+        generatorMap.add(new InputParameterDouble("intervalTime", "Average interval time", "Average interval time", 1.0, 1.0));
+        generatorMap.add(new InputParameterDouble("startTime", "Generator start time", "Generator start time", 0.0, 2.0));
+        generatorMap.add(new InputParameterInteger("batchSize", "Batch size", "batch size", 1, 3.0));
+        this.inputParameterMap.add(generatorMap);
+        InputParameterMap resourceMap = new InputParameterMap("resource", "Resource", "Resource", 2.0);
+        resourceMap.add(new InputParameterInteger("capacity", "Resource capacity", "Resource capacity", 1, 1.0));
+        resourceMap.add(new InputParameterDouble("serviceTime", "Average service time", "Average service time", 0.9, 2.0));
+        this.inputParameterMap.add(resourceMap);
     }
 
     /** {@inheritDoc} */
@@ -87,7 +94,21 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
         this.tallyTimeInQueue = new SimTally<Double>("time in queue", this);
         this.tallyTimeInSystem = new SimTally<Double>("time in system", this);
 
-        generate();
+        try
+        {
+            this.capacity = (Integer) getInputParameter("resource.capacity");
+            this.batchSize = (Integer) getInputParameter("generator.batchSize");
+            double startTime = (Double) getInputParameter("generator.startTime");
+            double iat = (Double) getInputParameter("generator.intervalTime");
+            this.interarrivalTime = new DistExponential(getDefaultStream(), iat);
+            double st = (Double) getInputParameter("resource.serviceTime");
+            this.processingTime = new DistExponential(getDefaultStream(), st);
+            getSimulator().scheduleEventRel(startTime, this, "generate", null);
+        }
+        catch (InputParameterException e)
+        {
+            throw new SimRuntimeException(e);
+        }
     }
 
     /**
@@ -97,23 +118,26 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     protected void generate() throws SimRuntimeException
     {
         double time = this.simulator.getSimulatorTime();
-        Entity entity = new Entity(this.entityCounter++, time);
-        System.out.println("Generated: " + entity);
-        CategoryLogger.always().info("Generated: " + entity);
-        synchronized (this.queue)
+        for (int i = 0; i < this.batchSize; i++)
         {
-            if (this.capacity - this.busy >= 1)
+            Entity entity = new Entity(this.entityCounter++, time);
+            System.out.println("Generated: " + entity);
+            CategoryLogger.always().info("Generated: " + entity);
+            synchronized (this.queue)
             {
-                // process
-                this.tallyTimeInQueue.register(0.0); // no waiting
-                startProcess(entity);
-            }
-            else
-            {
-                // queue
-                this.queue.add(new QueueEntry<Entity>(entity, time));
-                this.persistentQueueLength.register(time, this.queue.size());
-                System.out.println("In Queue: " + entity);
+                if (this.capacity - this.busy >= 1)
+                {
+                    // process
+                    this.tallyTimeInQueue.register(0.0); // no waiting
+                    startProcess(entity);
+                }
+                else
+                {
+                    // queue
+                    this.queue.add(new QueueEntry<Entity>(entity, time));
+                    this.persistentQueueLength.register(time, this.queue.size());
+                    System.out.println("In Queue: " + entity);
+                }
             }
         }
         this.simulator.scheduleEventRel(this.interarrivalTime.draw(), this, "generate", null);
