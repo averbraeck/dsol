@@ -11,6 +11,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
 
 /**
  * <p>
@@ -41,6 +42,7 @@ public class MM1Application
         this.simulator = new DevsSimulator<Double>("MM1Application");
         this.model = new MM1Model(this.simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
+        new TabbedParameterDialog(this.model.getInputParameterMap());
         this.simulator.initialize(this.model, replication);
         this.simulator.scheduleEventAbs(1000.0, this, "terminate", null);
         this.simulator.start();

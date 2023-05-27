@@ -6,7 +6,7 @@ import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
 import nl.tudelft.simulation.dsol.formalisms.flow.Generate;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
-import nl.tudelft.simulation.dsol.formalisms.flow.Station;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
 import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
@@ -72,13 +72,13 @@ public class WebMM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>
         Resource<Double> resource = new Resource<>(getSimulator(), 1.0);
 
         // created a resource
-        Station<Double> queue = new Seize<Double>("Seize", getSimulator(), resource);
-        Station<Double> release = new Release<Double>("Release", getSimulator(), resource, 1.0);
+        FlowObject<Double> queue = new Seize<Double>("Seize", getSimulator(), resource);
+        FlowObject<Double> release = new Release<Double>("Release", getSimulator(), resource, 1.0);
 
         // The server
         DistContinuousSimulationTime<Double> serviceTime =
                 new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, 0.5));
-        Station<Double> server = new Delay<Double>("Delay", getSimulator(), serviceTime);
+        FlowObject<Double> server = new Delay<Double>("Delay", getSimulator(), serviceTime);
 
         // The flow
         generator.setDestination(queue);

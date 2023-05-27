@@ -17,6 +17,7 @@ import nl.tudelft.simulation.dsol.experiment.Experiment;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
+import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
 
 /**
  * <p>
@@ -52,6 +53,7 @@ public class MM1ExperimentApplication implements EventListener
     {
         this.simulator = new DevsSimulator<Double>("MM1ExperimentApplication");
         this.model = new MM1Model(this.simulator);
+        new TabbedParameterDialog(this.model.getInputParameterMap());
         this.experiment = new Experiment<>("mm1", this.simulator, this.model, 0.0, 0.0, 1000.0, 10);
         this.experiment.addListener(this, Experiment.END_EXPERIMENT_EVENT);
         this.experiment.addListener(this, Replication.END_REPLICATION_EVENT);

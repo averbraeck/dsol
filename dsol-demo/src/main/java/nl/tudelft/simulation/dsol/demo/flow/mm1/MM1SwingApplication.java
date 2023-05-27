@@ -13,6 +13,7 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
 import nl.tudelft.simulation.language.DsolException;
 
 /**
@@ -67,6 +68,7 @@ public class MM1SwingApplication extends DsolApplication
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("MM1SwingApplication");
         MM1Model model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);
+        new TabbedParameterDialog(model.getInputParameterMap());
         simulator.initialize(model, replication);
         DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, simulator);
         new MM1SwingApplication(new MM1Panel(controlPanel, model), model, simulator);
