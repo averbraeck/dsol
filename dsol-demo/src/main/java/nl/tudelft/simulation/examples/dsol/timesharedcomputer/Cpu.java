@@ -85,7 +85,7 @@ public class Cpu extends FlowObject<Double> implements Locatable
     public void receiveEntity(final Entity<Double> entity)
     {
         this.queue.add(entity);
-        this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), this.simulator.getSimulatorTime());
+        this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
         if (this.status == IDLE)
         {
             try
@@ -104,7 +104,7 @@ public class Cpu extends FlowObject<Double> implements Locatable
     protected synchronized void releaseEntity(final Entity<Double> entity)
     {
         this.status = IDLE;
-        this.fireTimedEvent(UTILIZATION_EVENT, 0.0, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(UTILIZATION_EVENT, 0.0, getSimulator().getSimulatorTime());
         ((Job) entity).getOwner().receiveEntity(entity);
         try
         {
@@ -125,27 +125,27 @@ public class Cpu extends FlowObject<Double> implements Locatable
         if (this.queue.size() > 0)
         {
             this.status = BUSY;
-            this.fireTimedEvent(UTILIZATION_EVENT, 1.0, this.simulator.getSimulatorTime());
+            this.fireTimedEvent(UTILIZATION_EVENT, 1.0, getSimulator().getSimulatorTime());
             Job job = (Job) this.queue.remove(0);
-            this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), this.simulator.getSimulatorTime());
+            this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
             if (job.getServiceTime() > QUANTUM)
             {
                 job.setServiceTime(job.getServiceTime() - QUANTUM);
                 Object[] args = {job};
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, "receiveObject", args);
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + QUANTUM + SWAP, this, "next", null);
+                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + QUANTUM + SWAP, this, "receiveObject", args);
+                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + QUANTUM + SWAP, this, "next", null);
             }
             else
             {
                 Object[] args = {job};
-                this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + job.getServiceTime() + SWAP, this, "releaseObject",
+                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + job.getServiceTime() + SWAP, this, "releaseObject",
                         args);
             }
         }
         else
         {
             this.status = IDLE;
-            this.fireTimedEvent(UTILIZATION_EVENT, 0.0, this.simulator.getSimulatorTime());
+            this.fireTimedEvent(UTILIZATION_EVENT, 0.0, getSimulator().getSimulatorTime());
         }
     }
 

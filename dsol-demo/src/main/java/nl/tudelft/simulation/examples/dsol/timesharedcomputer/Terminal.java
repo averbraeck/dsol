@@ -43,13 +43,13 @@ public class Terminal extends FlowObject<Double>
      * @param thinkDelay DistContinuous; the delay
      * @param jobSize DistContinuous; in time
      */
-    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowObject cpu, final DistContinuous thinkDelay,
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowObject<Double> cpu, final DistContinuous thinkDelay,
             final DistContinuous jobSize)
     {
         super("Terminal", simulator);
         this.thinkDelay = thinkDelay;
         this.jobSize = jobSize;
-        this.setDestination(cpu);
+        setDestination(cpu);
         this.releaseEntity(null);
     }
 
@@ -57,12 +57,12 @@ public class Terminal extends FlowObject<Double>
     @Override
     public void receiveEntity(final Entity<Double> entity)
     {
-        this.fireTimedEvent(SERVICE_TIME, this.simulator.getSimulatorTime() - ((Job) entity).getCreationTime(),
-                this.simulator.getSimulatorTime());
+        this.fireTimedEvent(SERVICE_TIME, getSimulator().getSimulatorTime() - ((Job) entity).getCreationTime(),
+                getSimulator().getSimulatorTime());
         try
         {
             Object[] args = {entity};
-            this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + this.thinkDelay.draw(), this, "releaseObject",
+            getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + this.thinkDelay.draw(), this, "releaseObject",
                     args);
         }
         catch (SimRuntimeException exception)
@@ -76,8 +76,8 @@ public class Terminal extends FlowObject<Double>
     public synchronized void releaseEntity(final Entity<Double> entity)
     {
         String id = "job:" + this.jobCounter++;
-        Job job = new Job(id, this.jobSize, this, this.simulator.getSimulatorTime());
-        this.fireTimedEvent(FlowObject.RELEASE_EVENT, 1, this.simulator.getSimulatorTime());
-        super.destination.receiveEntity(job);
+        Job job = new Job(id, this.jobSize, this, getSimulator().getSimulatorTime());
+        this.fireTimedEvent(FlowObject.RELEASE_EVENT, 1, getSimulator().getSimulatorTime());
+        getDestination().receiveEntity(job);
     }
 }
