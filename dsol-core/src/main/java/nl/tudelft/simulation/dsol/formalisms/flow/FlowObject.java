@@ -27,24 +27,25 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
     /** */
     private static final long serialVersionUID = 20140805L;
 
-    /** simulator is the simulator on which behavior is scheduled. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DevsSimulatorInterface<T> simulator;
+    /** the simulator on which behavior is scheduled. */
+    private DevsSimulatorInterface<T> simulator;
 
-    /** destination refers to the next flow object in the process-model chain. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected FlowObject<T> destination;
+    /** the next flow object in the process-model chain. */
+    private FlowObject<T> destination;
+
+    /** the number of entities in the flow object. */
+    private int numberEntities = 0;
 
     /** the id of the FlowObject. */
     private final String id;
 
     /** RECEIVE_EVENT is fired whenever an entity enters the flow object. */
     public static final EventType RECEIVE_EVENT = new EventType(new MetaData("RECEIVE_EVENT", "Entity received",
-            new ObjectDescriptor("receivedObject", "received object", Integer.class))); // XXX Entity?
+            new ObjectDescriptor("receivedEntity", "number of entities in flow object", Integer.class)));
 
     /** RELEASE_EVENT is fired whenever an entity leaves the flow object. */
     public static final EventType RELEASE_EVENT = new EventType(new MetaData("RELEASE_EVENT", "Entity released",
-            new ObjectDescriptor("releasedObject", "released object", Integer.class))); // XXX Entity?
+            new ObjectDescriptor("releasedEntity", "number of entities in flow object", Integer.class)));
 
     /**
      * Construct a new FlowObject.
@@ -65,7 +66,8 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
      */
     public void receiveEntity(final Entity<T> entity)
     {
-        this.fireTimedEvent(RECEIVE_EVENT, 1, this.simulator.getSimulatorTime());  // XXX: entity instead of 1?
+        this.numberEntities++;
+        this.fireTimedEvent(RECEIVE_EVENT, this.numberEntities, this.simulator.getSimulatorTime());
     }
 
     /**
@@ -79,13 +81,14 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
     }
 
     /**
-     * Release an entity, making it flow to the next flow object (the destination) when destination is not null. When destination is
-     * null, the entity will be discarded.
+     * Release an entity, making it flow to the next flow object (the destination) when destination is not null. When
+     * destination is null, the entity will be discarded.
      * @param entity Entity; the entity to release
      */
     protected synchronized void releaseEntity(final Entity<T> entity)
     {
-        this.fireTimedEvent(RELEASE_EVENT, 1, this.simulator.getSimulatorTime()); // XXX: entity instead of 1?
+        this.numberEntities--;
+        this.fireTimedEvent(RELEASE_EVENT, this.numberEntities, this.simulator.getSimulatorTime());
         if (this.destination != null)
         {
             this.destination.receiveEntity(entity);
