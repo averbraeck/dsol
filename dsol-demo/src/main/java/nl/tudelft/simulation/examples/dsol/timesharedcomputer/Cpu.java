@@ -12,7 +12,8 @@ import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.formalisms.flow.Station;
+import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
@@ -26,7 +27,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Cpu extends Station<Double> implements Locatable
+public class Cpu extends FlowObject<Double> implements Locatable
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -81,9 +82,9 @@ public class Cpu extends Station<Double> implements Locatable
 
     /** {@inheritDoc} */
     @Override
-    public void receiveObject(final Object object)
+    public void receiveEntity(final Entity<Double> entity)
     {
-        this.queue.add(object);
+        this.queue.add(entity);
         this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), this.simulator.getSimulatorTime());
         if (this.status == IDLE)
         {
@@ -100,11 +101,11 @@ public class Cpu extends Station<Double> implements Locatable
 
     /** {@inheritDoc} */
     @Override
-    protected synchronized void releaseObject(final Object object)
+    protected synchronized void releaseEntity(final Entity<Double> entity)
     {
         this.status = IDLE;
         this.fireTimedEvent(UTILIZATION_EVENT, 0.0, this.simulator.getSimulatorTime());
-        ((Job) object).getOwner().receiveObject(object);
+        ((Job) entity).getOwner().receiveEntity(entity);
         try
         {
             this.next();

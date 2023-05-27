@@ -3,8 +3,8 @@ package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 import org.djutils.event.EventType;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.formalisms.flow.Station;
-import nl.tudelft.simulation.dsol.formalisms.flow.Station;
+import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
@@ -19,7 +19,7 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Terminal extends Station<Double>
+public class Terminal extends FlowObject<Double>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -33,6 +33,9 @@ public class Terminal extends Station<Double>
     /** the jobSize. */
     private DistContinuous jobSize = null;
 
+    /** the job counter for the job number. */
+    private int jobCounter = 0;
+
     /**
      * constructs a new Terminal.
      * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
@@ -40,25 +43,25 @@ public class Terminal extends Station<Double>
      * @param thinkDelay DistContinuous; the delay
      * @param jobSize DistContinuous; in time
      */
-    public Terminal(final DevsSimulatorInterface<Double> simulator, final Station cpu,
-            final DistContinuous thinkDelay, final DistContinuous jobSize)
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowObject cpu, final DistContinuous thinkDelay,
+            final DistContinuous jobSize)
     {
         super("Terminal", simulator);
         this.thinkDelay = thinkDelay;
         this.jobSize = jobSize;
         this.setDestination(cpu);
-        this.releaseObject(null);
+        this.releaseEntity(null);
     }
 
     /** {@inheritDoc} */
     @Override
-    public void receiveObject(final Object object)
+    public void receiveEntity(final Entity<Double> entity)
     {
-        this.fireTimedEvent(SERVICE_TIME, this.simulator.getSimulatorTime() - ((Job) object).getCreationTime(),
+        this.fireTimedEvent(SERVICE_TIME, this.simulator.getSimulatorTime() - ((Job) entity).getCreationTime(),
                 this.simulator.getSimulatorTime());
         try
         {
-            Object[] args = {object};
+            Object[] args = {entity};
             this.simulator.scheduleEventAbs(this.simulator.getSimulatorTime() + this.thinkDelay.draw(), this, "releaseObject",
                     args);
         }
@@ -70,10 +73,11 @@ public class Terminal extends Station<Double>
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void releaseObject(final Object object)
+    public synchronized void releaseEntity(final Entity<Double> entity)
     {
-        Job job = new Job(this.jobSize, this, this.simulator.getSimulatorTime());
-        this.fireTimedEvent(Station.RELEASE_EVENT, 1, this.simulator.getSimulatorTime());
-        super.destination.receiveObject(job);
+        String id = "job:" + this.jobCounter++;
+        Job job = new Job(id, this.jobSize, this, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(FlowObject.RELEASE_EVENT, 1, this.simulator.getSimulatorTime());
+        super.destination.receiveEntity(job);
     }
 }
