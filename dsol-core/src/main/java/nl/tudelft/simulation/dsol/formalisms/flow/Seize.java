@@ -93,19 +93,19 @@ public class Seize<T extends Number & Comparable<T>> extends FlowObject<T> imple
 
     {
         super.receiveEntity(entity);
-        Request<T> request = new Request<T>(entity, pRequestedCapacity, this.simulator.getSimulatorTime());
+        Request<T> request = new Request<T>(entity, pRequestedCapacity, getSimulator().getSimulatorTime());
         synchronized (this.queue)
         {
             this.queue.add(request);
         }
         try
         {
-            this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), this.simulator.getSimulatorTime());
+            this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
             this.resource.requestCapacity(pRequestedCapacity, this);
         }
         catch (Exception exception)
         {
-            this.simulator.getLogger().always().warn(exception, "receiveObject");
+            getSimulator().getLogger().always().warn(exception, "receiveObject");
         }
     }
 
@@ -147,9 +147,9 @@ public class Seize<T extends Number & Comparable<T>> extends FlowObject<T> imple
                 {
                     this.queue.remove(request);
                 }
-                this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), this.simulator.getSimulatorTime());
-                T delay = SimTime.minus(this.simulator.getSimulatorTime(), request.getQueueEntryTime());
-                this.fireTimedEvent(Seize.DELAY_TIME, delay.doubleValue(), this.simulator.getSimulatorTime());
+                this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
+                T delay = SimTime.minus(getSimulator().getSimulatorTime(), request.getQueueEntryTime());
+                this.fireTimedEvent(Seize.DELAY_TIME, delay.doubleValue(), getSimulator().getSimulatorTime());
                 this.releaseEntity(request.getEntity());
                 return;
             }

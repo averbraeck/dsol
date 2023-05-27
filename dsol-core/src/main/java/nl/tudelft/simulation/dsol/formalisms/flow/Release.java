@@ -64,7 +64,7 @@ public class Release<T extends Number & Comparable<T>> extends FlowObject<T>
         }
         catch (Exception exception)
         {
-            this.simulator.getLogger().always().warn(exception, "receiveObject");
+            getSimulator().getLogger().always().warn(exception, "receiveEntity");
         }
     }
 

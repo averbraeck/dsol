@@ -80,7 +80,7 @@ public abstract class GenerateScheduleAbsolute<T extends Number & Comparable<T>>
         {
             setInterval(this.absoluteSchedule.values().iterator().next()); // schedules next generation
             this.absoluteSchedule.remove(this.absoluteSchedule.firstKey());
-            this.simulator.scheduleEventAbs(this.absoluteSchedule.firstKey(), this, "changeIntervalTime", null);
+            getSimulator().scheduleEventAbs(this.absoluteSchedule.firstKey(), this, "changeIntervalTime", null);
         }
     }
 

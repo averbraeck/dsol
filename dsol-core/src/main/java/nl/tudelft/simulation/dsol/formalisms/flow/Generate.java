@@ -191,7 +191,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
         for (int i = 0; i < this.batchSize.draw(); i++)
         {
             Entity<T> entity = generateEntity();
-            this.fireTimedEvent(Generate.CREATE_EVENT, 1, this.simulator.getSimulatorTime());
+            this.fireTimedEvent(Generate.CREATE_EVENT, 1, getSimulator().getSimulatorTime());
             this.releaseEntity(entity);
             this.numberGeneratedEntities++;
             if (this.numberGeneratedEntities > this.maxNumberGeneratedEntities)
@@ -205,7 +205,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
         {
             return;
         }
-        this.simulator.scheduleEvent(this.nextEvent);
+        getSimulator().scheduleEvent(this.nextEvent);
     }
 
     /**
@@ -257,7 +257,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
             {
                 return;
             }
-            this.simulator.scheduleEvent(this.nextEvent);
+            getSimulator().scheduleEvent(this.nextEvent);
         }
     }
 

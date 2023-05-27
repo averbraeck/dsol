@@ -48,11 +48,11 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
         super.receiveEntity(entity);
         try
         {
-            this.simulator.scheduleEventRel(this.delayDistribution.draw(), this, "releaseEntity", new Object[] {entity});
+            getSimulator().scheduleEventRel(this.delayDistribution.draw(), this, "releaseEntity", new Object[] {entity});
         }
         catch (Exception exception)
         {
-            this.simulator.getLogger().always().warn(exception, "receiveObject");
+            getSimulator().getLogger().always().warn(exception, "receiveEntity");
         }
     }
 
