@@ -15,7 +15,7 @@ import nl.tudelft.simulation.jstats.distributions.DistDiscrete;
 import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
 
 /**
- * The Generate flow object generates entities with a certain inter-arrival time. The class is abstract because the modeller has
+ * The Create flow object generates entities with a certain inter-arrival time. The class is abstract because the modeller has
  * to provide the generateEntity method that generates an entity with the correct id and attributes.
  * <p>
  * Copyright (c) 2002-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
@@ -28,7 +28,7 @@ import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public abstract class Generate<T extends Number & Comparable<T>> extends FlowObject<T>
+public abstract class Create<T extends Number & Comparable<T>> extends FlowObject<T>
 {
     /** */
     public static final long serialVersionUID = 20140805L;
@@ -65,7 +65,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
     private SimEventInterface<T> nextEvent = null;
 
     /**
-     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Generate
+     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Create
      * flow object when a destination has been indicated with the setDestination method.
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
@@ -73,7 +73,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
      * @param startTime DistContinuousSimulationTime&lt;T&gt;; the inter-arrival time distribution
      * @param batchSize DistDiscrete; the distribution of the number of objects generated at each generation event
      */
-    public Generate(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
+    public Create(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
             final DistContinuousSimulationTime<T> startTime, final DistDiscrete batchSize)
     {
         super(id, simulator);
@@ -87,7 +87,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
     }
 
     /**
-     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Generate
+     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Create
      * flow object when a destination has been indicated with the setDestination method.
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
@@ -95,14 +95,14 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
      * @param startTime DistContinuousSimulationTime&lt;T&gt;; the inter-arrival time distribution
      * @param batchSize int; the number of objects generated at each generation event
      */
-    public Generate(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
+    public Create(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
             final DistContinuousSimulationTime<T> startTime, final int batchSize)
     {
         this(id, simulator, interval, startTime, new DistDiscreteConstant(simulator.getModel().getDefaultStream(), batchSize));
     }
 
     /**
-     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Generate
+     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Create
      * flow object when a destination has been indicated with the setDestination method. This constructor has a maximum number
      * of entities generated, which results in stopping the generator when the maximum number of entities has been reached.
      * @param id String; the id of the FlowObject
@@ -110,7 +110,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
      * @param interval DistContinuousSimulationTime&lt;T&gt;; the start time distribution for the generator
      * @param startTime DistContinuousSimulationTime&lt;T&gt;; the inter-arrival time distribution
      */
-    public Generate(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
+    public Create(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
             final DistContinuousSimulationTime<T> startTime)
     {
         this(id, simulator, interval, startTime, 1);
@@ -118,14 +118,14 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
 
     /**
      * Construct a new generator for objects in a simulation, but without the interval (to be set later, e.g., by the generator
-     * classes with a schedule). Constructed objects are sent to the 'destination' of the Generate flow object when a
+     * classes with a schedule). Constructed objects are sent to the 'destination' of the Create flow object when a
      * destination has been indicated with the setDestination method. This constructor has a maximum number of entities
      * generated, which results in stopping the generator when the maximum number of entities has been reached.
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
      * @param batchSize DistDiscrete; the number of objects generated at each generation event
      */
-    protected Generate(final String id, final DevsSimulatorInterface<T> simulator, final DistDiscrete batchSize)
+    protected Create(final String id, final DevsSimulatorInterface<T> simulator, final DistDiscrete batchSize)
     {
         super(id, simulator);
         Throw.whenNull(batchSize, "batchSize cannot be null");
@@ -136,20 +136,20 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
 
     /**
      * Construct a new generator for objects in a simulation, but without the interval (to be set later, e.g., by the generator
-     * classes with a schedule). Constructed objects are sent to the 'destination' of the Generate flow object when a
+     * classes with a schedule). Constructed objects are sent to the 'destination' of the Create flow object when a
      * destination has been indicated with the setDestination method. This constructor has a maximum number of entities
      * generated, which results in stopping the generator when the maximum number of entities has been reached.
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
      * @param batchSize int; the number of objects generated at each generation event
      */
-    protected Generate(final String id, final DevsSimulatorInterface<T> simulator, final int batchSize)
+    protected Create(final String id, final DevsSimulatorInterface<T> simulator, final int batchSize)
     {
         this(id, simulator, new DistDiscreteConstant(simulator.getModel().getDefaultStream(), batchSize));
     }
 
     /**
-     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Generate
+     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Create
      * flow object when a destination has been indicated with the setDestination method. This constructor has a maximum number
      * of entities generated, which results in stopping the generator when the maximum number of entities has been reached.
      * @param id String; the id of the FlowObject
@@ -157,7 +157,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
      * @param interval DistContinuousSimulationTime&lt;T&gt;; the start time distribution for the generator
      * @param batchSize int; the number of objects generated at each generation event
      */
-    public Generate(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
+    public Create(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval,
             final int batchSize)
     {
         this(id, simulator, batchSize);
@@ -166,14 +166,14 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
     }
 
     /**
-     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Generate
+     * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Create
      * flow object when a destination has been indicated with the setDestination method. This constructor has a maximum number
      * of entities generated, which results in stopping the generator when the maximum number of entities has been reached.
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
      * @param interval DistContinuousSimulationTime&lt;T&gt;; the start time distribution for the generator
      */
-    public Generate(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval)
+    public Create(final String id, final DevsSimulatorInterface<T> simulator, final DistContinuousSimulationTime<T> interval)
     {
         this(id, simulator, interval, 1);
     }
@@ -191,7 +191,7 @@ public abstract class Generate<T extends Number & Comparable<T>> extends FlowObj
         for (int i = 0; i < this.batchSize.draw(); i++)
         {
             Entity<T> entity = generateEntity();
-            this.fireTimedEvent(Generate.CREATE_EVENT, 1, getSimulator().getSimulatorTime());
+            this.fireTimedEvent(Create.CREATE_EVENT, 1, getSimulator().getSimulatorTime());
             this.releaseEntity(entity);
             this.numberGeneratedEntities++;
             if (this.numberGeneratedEntities > this.maxNumberGeneratedEntities)

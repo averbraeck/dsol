@@ -2,10 +2,10 @@ package nl.tudelft.simulation.dsol.demo.flow.mm1;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.Resource;
+import nl.tudelft.simulation.dsol.formalisms.flow.Create;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
 import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
-import nl.tudelft.simulation.dsol.formalisms.flow.Generate;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
 import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
@@ -91,7 +91,7 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             double avgServiceTime = (Double) getInputParameter("resource.serviceTime");
 
             // The Generator
-            Generate<Double> generator = new Generate<Double>("generate", this.simulator,
+            Create<Double> generator = new Create<Double>("generate", this.simulator,
                     new DistContinuousSimulationTime.TimeDouble(avgStartTime == 0.0
                             ? new DistConstant(defaultStream, avgStartTime) : new DistExponential(defaultStream, avgStartTime)),
                     new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, avgInterArrivalTime)),
