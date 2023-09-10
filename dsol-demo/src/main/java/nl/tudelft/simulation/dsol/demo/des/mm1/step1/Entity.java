@@ -1,0 +1,56 @@
+package nl.tudelft.simulation.dsol.demo.des.mm1.step1;
+
+/**
+ * Entity class for M/M/1 Discrete Event Simulation (DES) model example. See
+ * <a href= "https://simulation.tudelft.nl/dsol/manual/1-getting-started/example-event/">DES Model Example</a> for more
+ * information.
+ * <p>
+ * Copyright (c) 2023-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
+ * project is distributed under a three-clause BSD-style license, which can be found at
+ * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
+ * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ */
+class Entity
+{
+    /** time of creation for statistics. */
+    private final double createTime;
+
+    /** id number. */
+    private final int id;
+
+    /**
+     * @param id int; entity id number
+     * @param createTime double; time of creation for statistics
+     */
+    public Entity(final int id, final double createTime)
+    {
+        this.id = id;
+        this.createTime = createTime;
+    }
+
+    /**
+     * @return time of creation for statistics
+     */
+    public double getCreateTime()
+    {
+        return this.createTime;
+    }
+
+    /**
+     * @return entity id number
+     */
+    public int getId()
+    {
+        return this.id;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "Entity [createTime=" + this.createTime + ", id=" + this.id + "]";
+    }
+}
