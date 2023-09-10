@@ -1,9 +1,9 @@
 package nl.tudelft.simulation.dsol.formalisms.devs;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortAlreadyDefinedException;
 import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortNotFoundException;

@@ -1,8 +1,8 @@
 package nl.tudelft.simulation.jstats.distributions.unit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -95,7 +95,7 @@ import org.djunits.value.vdouble.scalar.Torque;
 import org.djunits.value.vdouble.scalar.Volume;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djutils.reflection.ClassUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
@@ -199,8 +199,8 @@ public class DistributionUnitTest
                 AbstractDoubleScalar<?, ?> s = unitDistribution.draw();
                 assertNotNull(s);
                 assertTrue(s.getClass().isAssignableFrom(scalarClass));
-                assertTrue(unitDistribution.toString(), s.getSI() >= min.getSI());
-                assertTrue(unitDistribution.toString(), s.getSI() <= max.getSI());
+                assertTrue(s.getSI() >= min.getSI(), unitDistribution.toString());
+                assertTrue(s.getSI() <= max.getSI(), unitDistribution.toString());
             }
             AbstractDoubleScalar<?, ?> p50 = (AbstractDoubleScalar<?, ?>) scalarConstructor.newInstance(7.5, unit);
             Method densityMethod = ClassUtil.resolveMethod(unitDistribution, "probDensity", new Object[] {p50});

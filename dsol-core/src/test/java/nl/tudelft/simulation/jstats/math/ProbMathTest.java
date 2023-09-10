@@ -1,10 +1,10 @@
 package nl.tudelft.simulation.jstats.math;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.djutils.exceptions.Try;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The tests for the ProbMath class.
@@ -128,10 +128,10 @@ public class ProbMathTest
                 0.999593048};
         for (int i = 0; i < testWikipedia.length / 2; i++)
         {
-            assertEquals("erf for value " + testWikipedia[2 * i], testWikipedia[2 * i + 1], ProbMath.erf(testWikipedia[2 * i]),
-                    0.0001);
-            assertEquals("erfInv(" + testWikipedia[2 * i + 1] + ") for value " + testWikipedia[2 * i], testWikipedia[2 * i],
-                    ProbMath.erfInv(testWikipedia[2 * i + 1]), 0.0001);
+            assertEquals(testWikipedia[2 * i + 1], ProbMath.erf(testWikipedia[2 * i]), 0.0001,
+                    "erf for value " + testWikipedia[2 * i]);
+            assertEquals(testWikipedia[2 * i], ProbMath.erfInv(testWikipedia[2 * i + 1]),
+                    0.0001, "erfInv(" + testWikipedia[2 * i + 1] + ") for value " + testWikipedia[2 * i]);
         }
     }
 

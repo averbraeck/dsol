@@ -7,7 +7,7 @@ import javax.naming.NamingException;
 
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import net.jodah.concurrentunit.Waiter;
 import nl.tudelft.simulation.dsol.SimRuntimeException;

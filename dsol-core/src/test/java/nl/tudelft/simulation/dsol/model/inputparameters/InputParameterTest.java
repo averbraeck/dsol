@@ -1,9 +1,9 @@
 package nl.tudelft.simulation.dsol.model.inputparameters;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 import java.util.SortedMap;
@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vfloat.scalar.FloatLength;
 import org.djutils.exceptions.Try;
 import org.djutils.reflection.ClassUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * InputParameterTest.java. <br>

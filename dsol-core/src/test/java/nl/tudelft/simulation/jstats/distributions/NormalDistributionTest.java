@@ -1,11 +1,11 @@
 package nl.tudelft.simulation.jstats.distributions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.djutils.exceptions.Try;
 import org.djutils.stats.summarizers.Tally;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.math.ProbMath;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -66,16 +66,16 @@ public class NormalDistributionTest
             double d = dist.draw();
             if (!Double.isNaN(expectedMin))
             {
-                assertTrue(name + " min: " + d + ">=" + expectedMin, d >= expectedMin);
+                assertTrue(d >= expectedMin, name + " min: " + d + ">=" + expectedMin);
             }
             if (!Double.isNaN(expectedMax))
             {
-                assertTrue(name + " max: " + d + "<=" + expectedMax, d <= expectedMax);
+                assertTrue(d <= expectedMax, name + " max: " + d + "<=" + expectedMax);
             }
             tally.register(d);
         }
-        assertEquals(name + " mean", expectedMean, tally.getPopulationMean(), precision);
-        assertEquals(name + " stdev", Math.sqrt(expectedVariance), tally.getPopulationStDev(), precision);
+        assertEquals(expectedMean, tally.getPopulationMean(), precision, name + " mean");
+        assertEquals(Math.sqrt(expectedVariance), tally.getPopulationStDev(), precision, name + " stdev");
     }
 
     /**
@@ -251,13 +251,13 @@ public class NormalDistributionTest
             double xi = (x - mu) / sigma;
             if (x < a || x > b)
             {
-                assertEquals("pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")", 0.0,
-                        dist.getProbabilityDensity(x), 0.0001);
+                assertEquals(0.0, dist.getProbabilityDensity(x),
+                        0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
             }
             else
             {
-                assertEquals("pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")",
-                        phi(xi) / (sigma * z), dist.getProbabilityDensity(x), 0.0001);
+                assertEquals(phi(xi) / (sigma * z),
+                        dist.getProbabilityDensity(x), 0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
             }
         }
         double expectedMean = mu + sigma * (phi(alpha) - phi(beta)) / z;
@@ -294,8 +294,8 @@ public class NormalDistributionTest
         dist = new DistNormalTrunc(this.stream, 2, 0.2, -10, 10);
         for (double x = -8; x <= 8; x += 0.1)
         {
-            assertEquals("x=" + x, normpdf(2, 0.2, x), dist.getProbabilityDensity(x), 0.0001);
-            assertEquals("x=" + x, normcdf(2, 0.2, x), dist.getCumulativeProbability(x), 0.0001);
+            assertEquals(normpdf(2, 0.2, x), dist.getProbabilityDensity(x), 0.0001, "x=" + x);
+            assertEquals(normcdf(2, 0.2, x), dist.getCumulativeProbability(x), 0.0001, "x=" + x);
         }
     }
 
@@ -340,17 +340,17 @@ public class NormalDistributionTest
                             double xi = (x - mu) / sigma;
                             if (x < a || x > b)
                             {
-                                assertEquals("pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")", 0.0,
-                                        dist.getProbabilityDensity(x), 0.0001);
-                                assertEquals("CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")",
-                                        x < a ? 0 : 1, dist.getCumulativeProbability(x), 0.0001);
+                                assertEquals(0.0, dist.getProbabilityDensity(x),
+                                        0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                                assertEquals(x < a ? 0 : 1,
+                                        dist.getCumulativeProbability(x), 0.0001, "CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
                             }
                             else
                             {
-                                assertEquals("pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")",
-                                        phi(xi) / (sigma * z), dist.getProbabilityDensity(x), 0.0001);
-                                assertEquals("CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")",
-                                        (PHI(xi) - PHI(alpha)) / z, dist.getCumulativeProbability(x), 0.0001);
+                                assertEquals(phi(xi) / (sigma * z),
+                                        dist.getProbabilityDensity(x), 0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                                assertEquals((PHI(xi) - PHI(alpha)) / z,
+                                        dist.getCumulativeProbability(x), 0.0001, "CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
                             }
                         }
                     }

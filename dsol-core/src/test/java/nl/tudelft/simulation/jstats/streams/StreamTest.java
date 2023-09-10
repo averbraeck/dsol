@@ -1,10 +1,10 @@
 package nl.tudelft.simulation.jstats.streams;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The test script for the random generator classes.
@@ -35,8 +35,8 @@ public class StreamTest
             for (int i = 0; i < nr; i++)
             {
                 double value = stream.nextDouble();
-                Assert.assertTrue(value >= 0.0);
-                Assert.assertTrue(value <= 1.0);
+                assertTrue(value >= 0.0);
+                assertTrue(value <= 1.0);
                 sum += value;
                 min = Math.min(min, value);
                 max = Math.max(max, value);
@@ -63,8 +63,8 @@ public class StreamTest
             for (int i = 0; i < nr; i++)
             {
                 float value = stream.nextFloat();
-                Assert.assertTrue(value >= 0.0f);
-                Assert.assertTrue(value <= 1.0f);
+                assertTrue(value >= 0.0f);
+                assertTrue(value <= 1.0f);
                 sum += value;
                 min = Math.min(min, value);
                 max = Math.max(max, value);

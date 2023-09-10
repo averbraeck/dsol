@@ -1,10 +1,10 @@
 package nl.tudelft.simulation.jstats.distributions.empirical;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.djutils.exceptions.Try;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.distributions.DistEmpiricalDiscreteDouble;
 import nl.tudelft.simulation.jstats.distributions.DistEmpiricalDiscreteLong;
@@ -40,7 +40,7 @@ public class DistEmpiricalTest
         for (int i = 0; i < 100_000; i++)
         {
             double d = dist.draw();
-            assertTrue("value = " + d, d == 1.0 || d == 2.0 || d == 3.0 || d == 4.0);
+            assertTrue(d == 1.0 || d == 2.0 || d == 3.0 || d == 4.0, "value = " + d);
             bins[(int) (d - 1.0)]++;
         }
         double[] density = {0.1, 0.4, 0.3, 0.2};
@@ -87,15 +87,15 @@ public class DistEmpiricalTest
         for (double x = -1.0; x < 5.0; x += 0.1)
         {
             if (x >= 0.0 && x < 1.0)
-                assertEquals("value = " + x, 0.1, dist.getProbabilityDensity(x), 1E-6);
+                assertEquals(0.1, dist.getProbabilityDensity(x), 1E-6, "value = " + x);
             else if (x >= 1.0 && x < 2.0)
-                assertEquals("value = " + x, 0.4, dist.getProbabilityDensity(x), 1E-6);
+                assertEquals(0.4, dist.getProbabilityDensity(x), 1E-6, "value = " + x);
             else if (x >= 2.0 && x < 3.0)
-                assertEquals("value = " + x, 0.3, dist.getProbabilityDensity(x), 1E-6);
+                assertEquals(0.3, dist.getProbabilityDensity(x), 1E-6, "value = " + x);
             else if (x >= 3.0 && x <= 4.0)
-                assertEquals("value = " + x, 0.2, dist.getProbabilityDensity(x), 1E-6);
+                assertEquals(0.2, dist.getProbabilityDensity(x), 1E-6, "value = " + x);
             else
-                assertEquals("value = " + x, 0.0, dist.getProbabilityDensity(x), 1E-6);
+                assertEquals(0.0, dist.getProbabilityDensity(x), 1E-6, "value = " + x);
         }
         assertEquals(0.0, dist.getProbabilityDensity(-0.1), 1E-6);
         assertEquals(0.0, dist.getProbabilityDensity(6.1), 1E-6);
@@ -116,7 +116,7 @@ public class DistEmpiricalTest
         for (int i = 0; i < 100_000; i++)
         {
             long v = dist.draw();
-            assertTrue("value = " + v, v == 1L || v == 2L || v == 3L || v == 4L);
+            assertTrue(v == 1L || v == 2L || v == 3L || v == 4L, "value = " + v);
             bins[(int) (v - 1)]++;
         }
         double[] density = {0.1, 0.4, 0.3, 0.2};

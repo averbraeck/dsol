@@ -1,9 +1,9 @@
 package nl.tudelft.simulation.dsol.simulators;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.Sleep;
@@ -47,7 +47,7 @@ public class SimulatorTest
             {
                 Sleep.sleep(10);
             }
-            assertEquals("The value after running should be 103 -- adding 1, 2, and 10 x 10", 103, model.getValue());
+            assertEquals(103, model.getValue(), "The value after running should be 103 -- adding 1, 2, and 10 x 10");
         }
     }
 

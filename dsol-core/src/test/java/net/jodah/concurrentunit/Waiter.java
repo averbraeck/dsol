@@ -4,6 +4,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
+
 import net.jodah.concurrentunit.internal.ReentrantCircuit;
 
 /**
@@ -69,7 +72,7 @@ public class Waiter
     {
         try
         {
-            org.junit.Assert.assertEquals(expected, actual, delta);
+            org.junit.jupiter.api.Assertions.assertEquals(expected, actual, delta);
         }
         catch (AssertionError ae)
         {
@@ -136,11 +139,11 @@ public class Waiter
      * @param <T> the type of the actual
      * @throws AssertionError when the assertion fails
      */
-    public <T> void assertThat(final T actual, final org.hamcrest.Matcher<? super T> matcher)
+    public <T> void assertThat(final T actual, final Matcher<? super T> matcher)
     {
         try
         {
-            org.hamcrest.MatcherAssert.assertThat(actual, matcher);
+            MatcherAssert.assertThat(actual, matcher);
         }
         catch (AssertionError e)
         {

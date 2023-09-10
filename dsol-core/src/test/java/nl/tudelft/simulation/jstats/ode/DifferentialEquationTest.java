@@ -1,8 +1,8 @@
 package nl.tudelft.simulation.jstats.ode;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 
@@ -32,15 +32,15 @@ public class DifferentialEquationTest
             ODE ode = new ODE(0.01, integrationMethod);
             String m = "Method " + integrationMethod.toString() + ", x = ";
             double[] result = ode.y(1);
-            assertEquals(m + "1", 1.0, result[0], 0.1);
+            assertEquals(1.0, result[0], 0.1, m + "1");
             result = ode.y(2);
-            assertEquals(m + "2", 2.82843, result[0], 0.5);
+            assertEquals(2.82843, result[0], 0.5, m + "2");
             result = ode.y(3);
-            assertEquals(m + "3", 7.02113, result[0], 0.5);
+            assertEquals(7.02113, result[0], 0.5, m + "3");
             result = ode.y(4);
-            assertEquals(m + "4", 14.69694, result[0], 0.5);
+            assertEquals(14.69694, result[0], 0.5, m + "4");
             result = ode.y(5);
-            assertEquals(m + "5", 27.0, result[0], 0.5);
+            assertEquals(27.0, result[0], 0.5, m + "5");
         }
     }
 
@@ -70,7 +70,7 @@ public class DifferentialEquationTest
             {
                 double[] result = ode.y(x);
                 double expected = Math.exp(-x);
-                assertEquals(m + x, expected, result[0], 0.1 * expected);
+                assertEquals(expected, result[0], 0.1 * expected, m + x);
             }
         }
     }

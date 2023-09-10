@@ -1,10 +1,10 @@
 package nl.tudelft.simulation.dsol.simtime;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * SimTimeTest tests the SimTime classes.

@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.serialize;
 import java.io.IOException;
 import java.rmi.MarshalledObject;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.eventlists.RedBlackTree;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;

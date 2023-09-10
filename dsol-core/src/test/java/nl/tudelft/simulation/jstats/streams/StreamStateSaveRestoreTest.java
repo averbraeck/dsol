@@ -1,8 +1,7 @@
 package nl.tudelft.simulation.jstats.streams;
 
-import static org.junit.Assert.fail;
-
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * <br>
@@ -41,15 +40,15 @@ public class StreamStateSaveRestoreTest
             {
                 StreamInterface rng = streams[j];
                 String r = draw(rng, 10);
-                Assert.assertEquals("r.len != 30 for j=" + j, r.length(), 30);
+                assertEquals(r.length(), 30, "r.len != 30 for j=" + j);
                 byte[] state = rng.saveState();
                 String s = draw(rng, 10);
-                Assert.assertEquals("s.len != 30 for j=" + j, s.length(), 30);
+                assertEquals(s.length(), 30, "s.len != 30 for j=" + j);
                 draw(rng, 20);
                 rng.restoreState(state);
                 String t = draw(rng, 10);
-                Assert.assertEquals("t.len != 30 for j=" + j, t.length(), 30);
-                Assert.assertEquals("j=" + j, s, t);
+                assertEquals(t.length(), 30, "t.len != 30 for j=" + j);
+                assertEquals(s, t, "j=" + j);
             }
             catch (StreamException se)
             {

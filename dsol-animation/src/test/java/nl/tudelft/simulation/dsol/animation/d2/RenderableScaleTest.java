@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.dsol.animation.d2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point2d;
 import org.djutils.exceptions.Try;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 

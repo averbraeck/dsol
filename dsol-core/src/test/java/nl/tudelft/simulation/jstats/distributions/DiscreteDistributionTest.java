@@ -1,11 +1,11 @@
 package nl.tudelft.simulation.jstats.distributions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.djutils.exceptions.Try;
 import org.djutils.stats.summarizers.Tally;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.math.ProbMath;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -69,16 +69,16 @@ public class DiscreteDistributionTest
             double d = 1.0 * dist.draw();
             if (!Double.isNaN(expectedMin))
             {
-                assertTrue(name + " min", d >= expectedMin);
+                assertTrue(d >= expectedMin, name + " min");
             }
             if (!Double.isNaN(expectedMax))
             {
-                assertTrue(name + " max", d <= expectedMax);
+                assertTrue(d <= expectedMax, name + " max");
             }
             tally.register(d);
         }
-        assertEquals(name + " mean", expectedMean, tally.getPopulationMean(), precision);
-        assertEquals(name + " stdev", Math.sqrt(expectedVariance), tally.getPopulationStDev(), precision);
+        assertEquals(expectedMean, tally.getPopulationMean(), precision, name + " mean");
+        assertEquals(Math.sqrt(expectedVariance), tally.getPopulationStDev(), precision, name + " stdev");
     }
 
     /**

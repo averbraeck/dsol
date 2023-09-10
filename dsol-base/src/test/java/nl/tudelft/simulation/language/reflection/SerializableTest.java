@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.language.reflection;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 
 import org.djutils.exceptions.Try;
 import org.djutils.exceptions.Try.Execution;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.language.DsolException;
 

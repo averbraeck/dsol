@@ -1,10 +1,10 @@
 package nl.tudelft.simulation.language.concurrent;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.djutils.exceptions.Try;
 import org.djutils.exceptions.Try.Execution;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * MonitorTest.java.

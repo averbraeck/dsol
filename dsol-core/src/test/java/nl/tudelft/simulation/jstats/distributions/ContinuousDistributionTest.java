@@ -1,11 +1,11 @@
 package nl.tudelft.simulation.jstats.distributions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.djutils.exceptions.Try;
 import org.djutils.stats.summarizers.Tally;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
@@ -75,16 +75,16 @@ public class ContinuousDistributionTest
             double d = dist.draw();
             if (!Double.isNaN(expectedMin))
             {
-                assertTrue(name + " min", d >= expectedMin);
+                assertTrue(d >= expectedMin, name + " min");
             }
             if (!Double.isNaN(expectedMax))
             {
-                assertTrue(name + " max", d <= expectedMax);
+                assertTrue(d <= expectedMax, name + " max");
             }
             tally.register(d);
         }
-        assertEquals(name + " mean", expectedMean, tally.getPopulationMean(), precision);
-        assertEquals(name + " stdev", Math.sqrt(expectedVariance), tally.getPopulationStDev(), precision);
+        assertEquals(expectedMean, tally.getPopulationMean(), precision, name + " mean");
+        assertEquals(Math.sqrt(expectedVariance), tally.getPopulationStDev(), precision, name + " stdev");
     }
 
     /**
@@ -680,9 +680,9 @@ public class ContinuousDistributionTest
                 dist = new DistWeibull(this.stream, a, b);
                 for (double x = 0.02; x <= 10; x += 0.02)
                 {
-                    assertEquals("a=" + a + ", b=" + b + ", x=" + x,
-                            a * Math.pow(b, -a) * Math.pow(x, a - 1) * Math.exp(-Math.pow(x / b, a)),
-                            dist.getProbabilityDensity(x), 0.0001);
+                    assertEquals(a * Math.pow(b, -a) * Math.pow(x, a - 1) * Math.exp(-Math.pow(x / b, a)),
+                            dist.getProbabilityDensity(x),
+                            0.0001, "a=" + a + ", b=" + b + ", x=" + x);
                 }
             }
         }
