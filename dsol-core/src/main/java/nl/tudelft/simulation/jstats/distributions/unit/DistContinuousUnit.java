@@ -1,7 +1,7 @@
 package nl.tudelft.simulation.jstats.distributions.unit;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 import nl.tudelft.simulation.jstats.distributions.Dist;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
@@ -16,7 +16,7 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  * @param <U> the unit type for the values of the distribution
  * @param <S> the type of scalar to draw
  */
-public abstract class DistContinuousUnit<U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> extends Dist
+public abstract class DistContinuousUnit<U extends Unit<U>, S extends DoubleScalar<U, S>> extends Dist
 {
     /** */
     private static final long serialVersionUID = 1L;

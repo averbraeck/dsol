@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
-import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point2d;
 import org.djutils.event.Event;
@@ -495,18 +495,18 @@ public abstract class DsolWebServer implements EventListener
                                     seconds % 60, fractionalSeconds);
                             answer = timeText;
                         }
-                        else if (simTime instanceof AbstractDoubleScalar)
+                        else if (simTime instanceof DoubleScalar)
                         {
-                            double now = Math.round(((AbstractDoubleScalar<?, ?>) simTime).si * 1000) / 1000d;
+                            double now = Math.round(((DoubleScalar<?, ?>) simTime).si * 1000) / 1000d;
                             int seconds = (int) Math.floor(now);
                             int fractionalSeconds = (int) Math.floor(1000 * (now - seconds));
                             String timeText = String.format("  %02d:%02d:%02d.%03d  ", seconds / 3600, seconds / 60 % 60,
                                     seconds % 60, fractionalSeconds);
                             answer = timeText;
                         }
-                        else if (simTime instanceof AbstractFloatScalar)
+                        else if (simTime instanceof FloatScalar)
                         {
-                            double now = Math.round(((AbstractFloatScalar<?, ?>) simTime).si * 1000) / 1000d;
+                            double now = Math.round(((FloatScalar<?, ?>) simTime).si * 1000) / 1000d;
                             int seconds = (int) Math.floor(now);
                             int fractionalSeconds = (int) Math.floor(1000 * (now - seconds));
                             String timeText = String.format("  %02d:%02d:%02d.%03d  ", seconds / 3600, seconds / 60 % 60,
@@ -528,10 +528,10 @@ public abstract class DsolWebServer implements EventListener
                             simTime = (double) simTimeObject;
                         else if (simTimeObject instanceof Float)
                             simTime = (float) simTimeObject;
-                        else if (simTimeObject instanceof AbstractDoubleScalar)
-                            simTime = ((AbstractDoubleScalar<?, ?>) simTimeObject).si;
-                        else if (simTimeObject instanceof AbstractFloatScalar)
-                            simTime = ((AbstractFloatScalar<?, ?>) simTimeObject).si;
+                        else if (simTimeObject instanceof DoubleScalar)
+                            simTime = ((DoubleScalar<?, ?>) simTimeObject).si;
+                        else if (simTimeObject instanceof FloatScalar)
+                            simTime = ((FloatScalar<?, ?>) simTimeObject).si;
                         else if (simTimeObject instanceof Calendar)
                             simTime = ((Calendar) simTimeObject).getTimeInMillis();
                         double speed = getSimulationSpeed(simTime);

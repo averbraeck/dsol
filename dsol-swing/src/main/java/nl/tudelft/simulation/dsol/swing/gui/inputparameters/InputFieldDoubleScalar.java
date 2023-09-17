@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDoubleScalar;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
  * @param <U> the unit type
  * @param <T> the scalar type
  */
-public class InputFieldDoubleScalar<U extends Unit<U>, T extends AbstractDoubleScalar<U, T>> extends AbstractInputField
+public class InputFieldDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U, T>> extends AbstractInputField
 {
     /** field for the double value. */
     @SuppressWarnings("checkstyle:visibilitymodifier")

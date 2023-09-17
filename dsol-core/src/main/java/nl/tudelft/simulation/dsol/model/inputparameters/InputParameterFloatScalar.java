@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 import org.djutils.exceptions.Throw;
 import org.djutils.reflection.ClassUtil;
 
@@ -19,7 +19,7 @@ import org.djutils.reflection.ClassUtil;
  * @param <U> the unit type
  * @param <T> the scalar type
  */
-public class InputParameterFloatScalar<U extends Unit<U>, T extends AbstractFloatScalar<U, T>>
+public class InputParameterFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T>>
         extends AbstractInputParameterTypedMap<T>
 {
     /** */

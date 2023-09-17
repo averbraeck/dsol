@@ -93,7 +93,7 @@ import org.djunits.value.vdouble.scalar.Temperature;
 import org.djunits.value.vdouble.scalar.Time;
 import org.djunits.value.vdouble.scalar.Torque;
 import org.djunits.value.vdouble.scalar.Volume;
-import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 import org.djutils.reflection.ClassUtil;
 import org.junit.jupiter.api.Test;
 
@@ -187,8 +187,8 @@ public class DistributionUnitTest
             Class<?> distClass = ut.getDistClass();
             Unit<?> unit = ut.getUnit();
             Constructor<?> scalarConstructor = scalarClass.getConstructor(double.class, unit.getClass());
-            AbstractDoubleScalar<?, ?> min = (AbstractDoubleScalar<?, ?>) scalarConstructor.newInstance(5.0, unit);
-            AbstractDoubleScalar<?, ?> max = (AbstractDoubleScalar<?, ?>) scalarConstructor.newInstance(10.0, unit);
+            DoubleScalar<?, ?> min = (DoubleScalar<?, ?>) scalarConstructor.newInstance(5.0, unit);
+            DoubleScalar<?, ?> max = (DoubleScalar<?, ?>) scalarConstructor.newInstance(10.0, unit);
             Constructor<?> distConstructor = distClass.getConstructor(DistContinuous.class, unit.getClass());
             DistContinuousUnit<?, ?> unitDistribution = (DistContinuousUnit<?, ?>) distConstructor.newInstance(dist, unit);
             assertEquals(stream, unitDistribution.getStream());
@@ -196,13 +196,13 @@ public class DistributionUnitTest
             assertEquals(dist, unitDistribution.getWrappedDistribution());
             for (int i = 0; i < 100; i++)
             {
-                AbstractDoubleScalar<?, ?> s = unitDistribution.draw();
+                DoubleScalar<?, ?> s = unitDistribution.draw();
                 assertNotNull(s);
                 assertTrue(s.getClass().isAssignableFrom(scalarClass));
                 assertTrue(s.getSI() >= min.getSI(), unitDistribution.toString());
                 assertTrue(s.getSI() <= max.getSI(), unitDistribution.toString());
             }
-            AbstractDoubleScalar<?, ?> p50 = (AbstractDoubleScalar<?, ?>) scalarConstructor.newInstance(7.5, unit);
+            DoubleScalar<?, ?> p50 = (DoubleScalar<?, ?>) scalarConstructor.newInstance(7.5, unit);
             Method densityMethod = ClassUtil.resolveMethod(unitDistribution, "probDensity", new Object[] {p50});
             assertEquals(0.2, (double) densityMethod.invoke(unitDistribution, p50), 0.0001);
 
@@ -219,7 +219,7 @@ public class DistributionUnitTest
     private static class UnitType
     {
         /** scalar class. */
-        private Class<? extends AbstractDoubleScalar<?, ?>> scalarClass;
+        private Class<? extends DoubleScalar<?, ?>> scalarClass;
 
         /** unit distribution class. */
         private Class<? extends DistContinuousUnit<?, ?>> distClass;
@@ -232,7 +232,7 @@ public class DistributionUnitTest
          * @param distClass unit distribution class
          * @param unit unit to use
          */
-        UnitType(final Class<? extends AbstractDoubleScalar<?, ?>> scalarClass,
+        UnitType(final Class<? extends DoubleScalar<?, ?>> scalarClass,
                 final Class<? extends DistContinuousUnit<?, ?>> distClass, final Unit<?> unit)
         {
             this.scalarClass = scalarClass;
@@ -243,7 +243,7 @@ public class DistributionUnitTest
         /**
          * @return scalarClass
          */
-        public Class<? extends AbstractDoubleScalar<?, ?>> getScalarClass()
+        public Class<? extends DoubleScalar<?, ?>> getScalarClass()
         {
             return this.scalarClass;
         }

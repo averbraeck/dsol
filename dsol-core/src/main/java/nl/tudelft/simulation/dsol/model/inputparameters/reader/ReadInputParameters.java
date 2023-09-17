@@ -47,7 +47,7 @@ import org.djunits.value.vdouble.scalar.Temperature;
 import org.djunits.value.vdouble.scalar.Time;
 import org.djunits.value.vdouble.scalar.Torque;
 import org.djunits.value.vdouble.scalar.Volume;
-import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits.value.vfloat.scalar.FloatAbsoluteTemperature;
 import org.djunits.value.vfloat.scalar.FloatAbsorbedDose;
 import org.djunits.value.vfloat.scalar.FloatAcceleration;
@@ -90,7 +90,7 @@ import org.djunits.value.vfloat.scalar.FloatTemperature;
 import org.djunits.value.vfloat.scalar.FloatTime;
 import org.djunits.value.vfloat.scalar.FloatTorque;
 import org.djunits.value.vfloat.scalar.FloatVolume;
-import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 import org.djutils.io.URLResource;
 
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
@@ -135,19 +135,12 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * Read InputParameters from a Properties file or from an array of Strings. For the properties file, the format is one parameter
  * per line. Keys for the sub-parameters are indicated with a dot notation. The general format is key=value. The value for an
- * integer value called 'nrServers' in the root category:
- * 
- * <pre>
+ * integer value called 'nrServers' in the root category: <pre>
  * nrServers = 2
- * </pre>
- * 
- * The key for a Duration parameter called 'serviceTime' in the category 'server':<br>
- * 
+ * </pre> The key for a Duration parameter called 'serviceTime' in the category 'server':<br>
  * <pre>
  * server.serviceTime = 5.0min
- * </pre>
- * 
- * <br>
+ * </pre> <br>
  * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
  * source code and binary code of this software is proprietary information of Delft University of Technology.
@@ -368,7 +361,7 @@ public final class ReadInputParameters
     private static void parseDoubleScalar(final InputParameterDoubleScalar<?, ?> param, final String value)
             throws InputParameterException
     {
-        AbstractDoubleScalar<?, ?> scalar;
+        DoubleScalar<?, ?> scalar;
         if (param.getDefaultTypedValue() instanceof Dimensionless)
             scalar = Dimensionless.valueOf(value);
         else if (param.getDefaultTypedValue() instanceof Acceleration)
@@ -454,7 +447,7 @@ public final class ReadInputParameters
         else if (param.getDefaultTypedValue() instanceof RadioActivity)
             scalar = RadioActivity.valueOf(value);
         else
-            throw new InputParameterException("Cannot instantiate AbstractDoubleScalar of param " + param.toString());
+            throw new InputParameterException("Cannot instantiate DoubleScalar of param " + param.toString());
 
         param.getDoubleParameter().setDoubleValue(scalar.getInUnit());
         param.getUnitParameter().setObjectValue(scalar.getDisplayUnit());
@@ -471,7 +464,7 @@ public final class ReadInputParameters
     private static void parseFloatScalar(final InputParameterFloatScalar<?, ?> param, final String value)
             throws InputParameterException
     {
-        AbstractFloatScalar<?, ?> scalar;
+        FloatScalar<?, ?> scalar;
         if (param.getDefaultTypedValue() instanceof FloatDimensionless)
             scalar = FloatDimensionless.valueOf(value);
         else if (param.getDefaultTypedValue() instanceof FloatAcceleration)
@@ -557,7 +550,7 @@ public final class ReadInputParameters
         else if (param.getDefaultTypedValue() instanceof FloatRadioActivity)
             scalar = FloatRadioActivity.valueOf(value);
         else
-            throw new InputParameterException("Cannot instantiate AbstractFloatScalar of param " + param.toString());
+            throw new InputParameterException("Cannot instantiate FloatScalar of param " + param.toString());
 
         param.getFloatParameter().setFloatValue(scalar.getInUnit());
         param.getUnitParameter().setObjectValue(scalar.getDisplayUnit());

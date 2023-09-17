@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 import org.djutils.exceptions.Throw;
 import org.djutils.reflection.ClassUtil;
 
@@ -19,7 +19,7 @@ import org.djutils.reflection.ClassUtil;
  * @param <U> the unit type
  * @param <T> the scalar type
  */
-public class InputParameterDoubleScalar<U extends Unit<U>, T extends AbstractDoubleScalar<U, T>>
+public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U, T>>
         extends AbstractInputParameterTypedMap<T>
 {
     /** */

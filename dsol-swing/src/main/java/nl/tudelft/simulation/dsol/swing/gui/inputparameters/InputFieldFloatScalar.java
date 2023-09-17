@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.djunits.unit.Unit;
-import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloatScalar;
@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloatScala
  * @param <U> the unit type
  * @param <T> the scalar type
  */
-public class InputFieldFloatScalar<U extends Unit<U>, T extends AbstractFloatScalar<U, T>> extends AbstractInputField
+public class InputFieldFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T>> extends AbstractInputField
 {
     /** field for the float value. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
