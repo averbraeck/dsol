@@ -11,7 +11,7 @@ import java.util.TreeSet;
  * InputParameterMap provides functions to add and remove sub-parameters, to retrieve sub-parameters based on their key, and to
  * return a sorted set of InputParameters based on their displayValue. <br>
  * <br>
- * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2003- 2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
  * source code and binary code of this software is proprietary information of Delft University of Technology.
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -203,7 +203,7 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
      * InputParameterComparator provides the comparator based on the displayPriority of the entries. In case they are the same,
      * the entries are ordered by the String value of the key. <br>
      * <br>
-     * Copyright (c) 2003-2023 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2003- 2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>.
      * The source code and binary code of this software is proprietary information of Delft University of Technology.
      * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
