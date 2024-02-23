@@ -34,7 +34,7 @@ import nl.tudelft.simulation.dsol.swing.introspection.sortable.SortingTableHeade
  * A configuration mechanism is implemented to load the editors and renders to be used by this JTable. See @see
  * #setConfig(nl.tudelft.simulation.introspection.mapping.CellPresentationConfiguration) for details.
  * <p>
- * Copyright (c) 2002- 2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
