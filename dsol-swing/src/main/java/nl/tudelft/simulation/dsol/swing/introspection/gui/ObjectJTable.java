@@ -1,11 +1,14 @@
 package nl.tudelft.simulation.dsol.swing.introspection.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -118,7 +121,7 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
      * initializes the objectJTable.
      * @param model IntrospectingTableModelInterface; the model
      */
-    private void init(IntrospectingTableModelInterface model)
+    private void init(final IntrospectingTableModelInterface model)
     {
         this.introspectionTableModel = model;
         initConfig();
@@ -140,7 +143,7 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
      * @see javax.swing.JTable#getDefaultRenderer(java.lang.Class)
      */
     @Override
-    public TableCellRenderer getDefaultRenderer(Class<?> columnClass)
+    public TableCellRenderer getDefaultRenderer(final Class<?> columnClass)
     {
         if (columnClass.isArray())
             return super.getDefaultRenderer(Object[].class);
@@ -152,6 +155,10 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
             return super.getDefaultRenderer(Map.class);
         if (ImmutableMap.class.isAssignableFrom(columnClass))
             return super.getDefaultRenderer(ImmutableMap.class);
+        if (ExpandButton.class.isAssignableFrom(columnClass))
+            return super.getDefaultRenderer(ExpandButton.class);
+        if (JComponent.class.isAssignableFrom(columnClass))
+            return super.getDefaultRenderer(JComponent.class);
         return super.getDefaultRenderer(columnClass);
     }
 

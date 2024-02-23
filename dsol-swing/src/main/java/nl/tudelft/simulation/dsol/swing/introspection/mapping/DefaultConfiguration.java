@@ -1,6 +1,7 @@
 package nl.tudelft.simulation.dsol.swing.introspection.mapping;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -35,7 +36,8 @@ public class DefaultConfiguration implements CellPresentationConfiguration
     static
     {
         defaultConfig = new DefaultConfiguration();
-        defaultConfig.addRenderer(JComponent.class, SwingCellRenderer.class);
+        defaultConfig.addRenderer(ExpandButton.class, SwingCellRenderer.class);
+        defaultConfig.addRenderer(JComponent.class, MyDefaultRenderer.class);
         defaultConfig.addRenderer(Object.class, MyDefaultRenderer.class);
         defaultConfig.addRenderer(Object[].class, ArrayRenderer.class);
         defaultConfig.addRenderer(Collection.class, CollectionRenderer.class);
@@ -44,7 +46,8 @@ public class DefaultConfiguration implements CellPresentationConfiguration
         defaultConfig.addRenderer(ImmutableMap.class, ImmutableMapRenderer.class);
         defaultConfig.addRenderer(Color.class, MyColorRenderer.class);
         defaultConfig.addEditor(Color.class, MyColorEditor.class);
-        defaultConfig.addEditor(JComponent.class, SwingCellEditor.class);
+        defaultConfig.addEditor(ExpandButton.class, SwingCellEditor.class);
+        defaultConfig.addEditor(JComponent.class, MyDefaultEditor.class);
         defaultConfig.addEditor(Object.class, MyDefaultEditor.class);
         defaultConfig.addEditor(ExpandButton.class, ExpandButtonEditor.class);
     }
