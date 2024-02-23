@@ -1,14 +1,12 @@
 package nl.tudelft.simulation.dsol.swing.introspection.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
 import java.util.Collection;
 import java.util.Map;
 
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
