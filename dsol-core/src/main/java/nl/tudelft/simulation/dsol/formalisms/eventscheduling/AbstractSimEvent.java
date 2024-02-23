@@ -63,7 +63,6 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
                     + SimEvent.MAX_PRIORITY + "]");
         }
         this.priority = priority;
-
         this.id = AbstractSimEvent.constructorCounter.incrementAndGet();
     }
 
