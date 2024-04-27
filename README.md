@@ -26,4 +26,5 @@ The four words of the "Distributed Simulation Object Library" have been chosen p
   for traffic modeling ([OpenTrafficSim](https://github.com/averbraeck/opentrafficsim2)), 
   disease spread ([MedLabs](https://github.com/averbraeck/medlabs)) or supply chains (forthcoming). 
   
-
+Note that as a result of the used libraries, the minimum Java version has been updated from java 11 to **Java 17**
+as of dsol version 4.2.2.
