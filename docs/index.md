@@ -39,7 +39,8 @@ DSOL, as of version 4.0 can be downloaded from github, and ready-to-use jars can
 
 Furthermore, Java itself, a development environment, and resources on which DSOL is dependent are necessary:
 
-* Java, as of version 11. DSOL 4 and higher can not be used with prior versions of the Java programming language. For developing models with DSOL, we recommend to use a Java Development Kit (JDK), rather than a JRE. For running models, a JRE is sufficient. Java can be downloaded from Oracle or as an open source build: [https://jdk.java.net/archive/](https://jdk.java.net/archive/) for Java-11.
+* Java, as of version 11. DSOL 4 and higher can not be used with prior versions of the Java programming language. For developing models with DSOL, we recommend to use a Java Development Kit (JDK), rather than a JRE. For running models, a JRE is sufficient. Java can be downloaded from Oracle or as an open source build: [https://jdk.java.net/archive/](https://jdk.java.net/archive/) for Java-11. 
+Note that as a result of the used libraries, the minimum Java version has been updated from java 11 to Java 17 as of dsol version 4.2.2.
 
 * We highly recommend using an integrated development environment for the construction of simulation models. This tutorial refers to the Eclipse development environment (version 2022-06 or higher) which can be downloaded from [https://www.eclipse.org](https://www.eclipse.org).
 
