@@ -1,5 +1,6 @@
 package nl.tudelft.simulation.dsol.animation.gis.osm;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -64,8 +65,8 @@ public class OsmFileReader implements DataSourceInterface
     @Override
     public void populateShapes() throws IOException
     {
-        InputStream fis = this.osmURL.openStream();
         String filename = this.osmURL.toString().toLowerCase();
+        File inputFile = new File(this.osmURL.getPath());
 
         OsmLayerSink sinkImplementation = new OsmLayerSink(this.featuresToRead, this.coordinateTransform);
         CompressionMethod compression = CompressionMethod.None;
@@ -89,18 +90,18 @@ public class OsmFileReader implements DataSourceInterface
         {
             try
             {
-                reader = new OsmosisReader(fis);
+                reader = new OsmosisReader(inputFile);
                 System.out.println("osm pbf map to read: " + filename);
             }
             catch (Exception exception)
             {
                 sinkImplementation.close();
-                fis.close();
                 throw new IOException("Error during reading of OSM file " + filename, exception);
             }
         }
         else
         {
+            InputStream fis = this.osmURL.openStream();
             reader = new XmlStreamReader(fis, false, compression);
             System.out.println("osm xml map to read: " + filename);
         }
