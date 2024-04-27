@@ -3,7 +3,7 @@
 
   <groupId>nl.tudelft.simulation</groupId>
   <artifactId>dsol</artifactId>
-  <version>4.2.1</version>
+  <version>4.2.2</version>
 
   <packaging>pom</packaging>
 
