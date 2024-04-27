@@ -12,11 +12,11 @@ By default, Eclipse starts with a built-in Java version. If you go to the folder
 -vm
 plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.2.v20210201-0955/jre/bin
 ```
-So, in this case the Java version that is used is Java version 15, built into Eclipse. This is sufficient to run. You can also install a stable, Long-Term Support (LTS) version of Java yourself -- see the following section what to do in case you want to install a version of Java yourself. If you have installed your own Java version, e.g. in C:\app\jdk11 for Windows, change the above 'vm' setting to:
+So, in this case the Java version that is used is Java version 15, built into Eclipse. This is sufficient to run. You can also install a stable, Long-Term Support (LTS) version of Java yourself -- see the following section what to do in case you want to install a version of Java yourself. If you have installed your own Java version, e.g. in C:\app\jdk17 for Windows, change the above 'vm' setting to:
 
 ```
 -vm
-C:/app/jdk11/bin
+C:/app/jdk17/bin
 ```
 
 Of course it is possible to use another development environment such as Netbeans ([https://netbeans.org/downloads/](https://netbeans.org/downloads/)) instead of Eclipse, and a build manager such as Gradle ([https://gradle.org/](https://gradle.org/)) instead of Maven. This manual, however, uses Eclipse and Maven as reference examples.
@@ -24,13 +24,13 @@ Of course it is possible to use another development environment such as Netbeans
 
 ## Installing Java (optional -- you can use the Eclipse version)
 
-For **Windows**, install OpenJDK version 11 (the current LTS = Long Term Support version). Download the zip for Java 11 at [https://jdk.java.net/archive/](https://jdk.java.net/archive/) for your operating system. You can install a later version of Java, but the current version of DSOL has been developed and tested with Java version 11. The best way to install Java is to unpack the Java zip in a folder without spaces in the folder name, e.g., C:\app\jdk11. Make sure to add Java to the current 'Path' (on Windows-10 go to Windows Settings - System - About and click 'Advanced Systems Settings' on the right. Click 'Environment Variables' in the 'Systems Properties' screen. Edit the 'Path' entry and add `C:\app\jdk11\bin` as an entry (adapt for your chosen location). You can move the entry to before 'C:\Windows\system32' to override a Java client in Windows. Add or modify an entry `JAVA_HOME` and set the value to `C:\app\jdk11` (adapt for your chosen location). You can test whether Java works by opening a Command prompt (CMD) and typing `java -version`. If Java responds with with version 11, the installation has succeeded.
+For **Windows**, install OpenJDK version 17 (a current LTS = Long Term Support version). Download the zip for Java 17 at [https://jdk.java.net/archive/](https://jdk.java.net/archive/) for your operating system. You can install a later version of Java, but the current version of DSOL has been developed and tested with Java version 17. The best way to install Java is to unpack the Java zip in a folder without spaces in the folder name, e.g., C:\app\jdk17. Make sure to add Java to the current 'Path' (on Windows-10 or Windows-11 go to Windows Settings - System - About and click 'Advanced Systems Settings' on the right. Click 'Environment Variables' in the 'Systems Properties' screen. Edit the 'Path' entry and add `C:\app\jdk17\bin` as an entry (adapt for your chosen location). You can move the entry to before 'C:\Windows\system32' to override a Java client in Windows. Add or modify an entry `JAVA_HOME` and set the value to `C:\app\jdk17` (adapt for your chosen location). You can test whether Java works by opening a Command prompt (CMD) and typing `java -version`. If Java responds with with version 17, the installation has succeeded.
 
-For **MacOS**, install OpenJDK version 11, e.g., using the following instruction: [https://techoral.com/blog/java/install-openjdk-11-on-mac.html](https://techoral.com/blog/java/install-openjdk-11-on-mac.html).
+For **MacOS**, install OpenJDK version 17, e.g., using the following instruction: [https://stackoverflow.com/questions/69875335/macos-how-to-install-java-17](https://stackoverflow.com/questions/69875335/macos-how-to-install-java-17) or [https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html) or [https://www.codejava.net/java-core/install-openjdk-17-on-macos](https://www.codejava.net/java-core/install-openjdk-17-on-macos).
 
-For **Debian / Ubuntu** versions of Linux, use the command `sudo apt install openjdk-11-jdk` to install OpenJDK version 11. For
+For **Debian / Ubuntu** versions of Linux, use the command `sudo apt install openjdk-17-jdk` to install OpenJDK version 17. For
 
-**CentOS / RedHat** versions of Linux, use the command `sudo yum install java-11-openjdk-devel` or `sudo dnf install java-11-openjdk-devel` to install OpenJDK version 11. If you want to know which java installations are available on CentOS / RedHat, type: `yum search jdk` or `dnf search jdk`, and choose the one you want to install.
+**CentOS / RedHat** versions of Linux, use the command `sudo yum install java-17-openjdk-devel` or `sudo dnf install java-17-openjdk-devel` to install OpenJDK version 17. If you want to know which java installations are available on CentOS / RedHat, type: `yum search jdk` or `dnf search jdk`, and choose the one you want to install.
 
 
 ## Creating a new project in Eclipse
@@ -63,16 +63,16 @@ After pressing "Finish", the project and its default structure will be created. 
 * **src/test/java** where the test code (if any) is placed; test code such as unit tests take care of guarding the integrity of the code in src/main/java;
 * **src/test/resources** where the resources for the test code are placed; test code and resources are not copied into executable jar files.
 
-In this case, the JRE System Library indicates that version 5 of Java is used for compilation (the J2SE-1.5 in green in the above picture). This is the wrong version of Java, as DSOL is dependent on Java version 11 or higher. Therefore, we have to tell Eclipse (or Maven) that we want to use compliance with Java version 11. This can be done in two ways.
+In this case, the JRE System Library indicates that version 5 of Java is used for compilation (the J2SE-1.5 in green in the above picture). This is the wrong version of Java, as DSOL is dependent on Java version 17 or higher. Therefore, we have to tell Eclipse (or Maven) that we want to use compliance with Java version 17. This can be done in two ways.
 
 
 ### Including the Java version in the POM-file
 
-The first (and preferred) way how to do this is to double click on the `pom.xml` file in the Package Explorer in Eclipse. The Overview screen of the pom-file opens. Open 'properties' and click 'Create...'. Add a property with the name `jdk.version` and value: `11`:
+The first (and preferred) way how to do this is to double click on the `pom.xml` file in the Package Explorer in Eclipse. The Overview screen of the pom-file opens. Open 'properties' and click 'Create...'. Add a property with the name `jdk.version` and value: `17`:
 
 ![](../images/1-getting-started/pom-jdk-version.png)
 
-Similarly, add a property `maven.compiler.source` with value `11`, and a property `maven.compiler.target` with value `11`. The properties should now look as follows:
+Similarly, add a property `maven.compiler.source` with value `17`, and a property `maven.compiler.target` with value `17`. The properties should now look as follows:
 
 ![](../images/1-getting-started/pom-jdk-properties.png)
 
@@ -92,14 +92,14 @@ Instead of editing the properties in the Overview screen, they can be typed dire
   <description>DSOL Tutorial Examples</description>
   
   <properties>
-    <jdk.version>11</jdk.version>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <jdk.version>17</jdk.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 </project>
 ```
 
-Save the pom.xml file. Right-click on the project name in the Package Explorer at the left of the screen, select 'Maven', Update Project, and click 'Ok'. The version should be updated to JavaSE-11.
+Save the pom.xml file. Right-click on the project name in the Package Explorer at the left of the screen, select 'Maven', Update Project, and click 'Ok'. The version should be updated to JavaSE-17.
 
 
 ### Change the Java build path in Eclipse
@@ -112,10 +112,10 @@ Click 'Edit', and select the Workspace default JRE:
 
 ![](../images/1-getting-started/maven_system_library_8.png)
 
-Click 'Finish' to save the changes. Note that when Maven does an update, it is possible that the default Java version is changed back to version 1.5 instead of 11 (or higher). Therefore, the first method where the changes were made in the pom.xml file, is preferred.
+Click 'Finish' to save the changes. Note that when Maven does an update, it is possible that the default Java version is changed back to version 1.5 instead of 17 (or higher). Therefore, the first method where the changes were made in the pom.xml file, is preferred.
 
 
-#### Result: Java 11 used
+#### Result: Java 17 used
 
 In either case, the JRE System Library should now be correct:
 

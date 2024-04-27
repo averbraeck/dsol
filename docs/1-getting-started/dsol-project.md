@@ -67,7 +67,7 @@ In the Maven pom-file of the simulation project, add the following dependency fo
     <dependency>
       <groupId>dsol</groupId>
       <artifactId>dsol-core</artifactId>
-      <version>4.2.0</version>
+      <version>4.2.2</version>
     </dependency>
   </dependencies>
 ```
@@ -79,13 +79,13 @@ And for a swing-based interactive simulation, make the following dependency:
     <dependency>
       <groupId>dsol</groupId>
       <artifactId>dsol-swing</artifactId>
-      <version>4.2.0</version>
+      <version>4.2.2</version>
     </dependency>
   </dependencies>
 ```
 
 
-Suppose that we have a project that is dependent on `dsol-core` version `4.2.0`. In that case, the entire `pom.xml` file looks as follows:
+Suppose that we have a project that is dependent on `dsol-core` version `4.2.2`. In that case, the entire `pom.xml` file looks as follows:
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -99,7 +99,7 @@ Suppose that we have a project that is dependent on `dsol-core` version `4.2.0`.
   <description>DSOL Tutorial Examples</description>
   
   <properties>
-    <jdk.version>11</jdk.version>
+    <jdk.version>17</jdk.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
@@ -108,7 +108,7 @@ Suppose that we have a project that is dependent on `dsol-core` version `4.2.0`.
     <dependency>
       <groupId>dsol</groupId>
       <artifactId>dsol-core</artifactId>
-      <version>4.2.0</version>
+      <version>4.2.2</version>
     </dependency>
   </dependencies>
 
