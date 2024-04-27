@@ -55,8 +55,8 @@
     <commons-compress.version>1.26.1</commons-compress.version>
 
     <maven.compiler.version>3.13.0</maven.compiler.version>
-    <maven.site.version>3.12.1</maven.site.version>
-    <maven.install.version>3.0.1</maven.install.version>
+    <maven.site.version>4.0.0-M13</maven.site.version>
+    <maven.install.version>3.1.1</maven.install.version>
     <maven.source.version>3.3.1</maven.source.version>
     <maven.javadoc.version>3.6.3</maven.javadoc.version>
     <maven.resources.version>3.3.1</maven.resources.version>
