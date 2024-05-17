@@ -1,4 +1,0 @@
-mkdocs >= 1.4.0
-pymdown-extensions
-mkdocs-toc-md
-mkdocs-material
