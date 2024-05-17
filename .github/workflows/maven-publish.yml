@@ -35,6 +35,9 @@ jobs:
         gpg_private_key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
         passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
+    - name: Build with Maven and check if site building works
+      run: mvn clean site --file pom.xml
+
     - name: Build with Maven and test if signing works
       run: mvn clean package -P release --file pom.xml
       env:
