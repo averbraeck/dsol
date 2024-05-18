@@ -22,11 +22,11 @@
       <item name="dsol-naming" href="../dsol-naming/index.html" />
       <item name="dsol-introspection" href="../dsol-introspection/index.html" />
       <item name="dsol-core" href="../dsol-core/index.html" />
-      <item name="dsol-swing" href="../dsol-swing/index.html" />
       <item name="dsol-animation" href="../dsol-animation/index.html" />
       <item name="dsol-animation-gis" href="../dsol-animation-gis/index.html" />
       <item name="dsol-animation-gis-esri" href="../dsol-animation-gis-esri/index.html" />
       <item name="dsol-animation-gis-osm" href="../dsol-animation-gis-osm/index.html" />
+      <item name="dsol-swing" href="../dsol-swing/index.html" />
       <item name="dsol-web" href="../dsol-web/index.html" />
       <item name="dsol-demo" href="../dsol-demo/index.html" />
     </menu>
@@ -48,6 +48,15 @@
       <item name="SpotBugs" href="spotbugs.html" />
       <item name="CPD" href="cpd.html" />
       <item name="PMD" href="pmd.html" />
+    </menu>
+
+    <menu name="PROJECT INFO">
+      <item name="About" href="index.html" />
+      <item name="Project Summary" href="summary.html" />
+      <item name="Project Team" href="team.html" />
+      <item name="Project License" href="../license.html" />
+      <item name="Versions + Changes" href="../changes-report.html" />
+      <item name="DSOL Manual" href="../manual/" target="_blank" />
     </menu>
 
   </body>

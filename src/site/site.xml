@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <site xmlns="http://maven.apache.org/SITE/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd"
   name="${project.artifactId} ${project.version}">
@@ -43,18 +42,17 @@
       <item name="Maven use" href="maven.html" />
     </menu>
 
-    <menu name="PROJECT INFO" inherit="bottom">
+    <menu name="PROJECT INFO">
       <item name="About" href="index.html" />
       <item name="Project Summary" href="summary.html" />
       <item name="Project Team" href="team.html" />
-      <item name="Project License" href="../license.htmllicense.html" />
-      <item name="Versions + Changes" href="../changes-report.html" />
+      <item name="Project License" href="license.html" />
+      <item name="Versions + Changes" href="changes-report.html" />
       <item name="DSOL Manual" href="manual/" target="_blank" />
     </menu>
 
     <menu name="RELATED" inherit="bottom">
       <item name="Simulation@TU Delft" href="https://simulation.tudelft.nl" target="_blank" />
-      <item name="DSOL Manual" href="manual/" target="_blank" />
       <item name="DJUNITS project" href="https://djunits.org" target="_blank" />
       <item name="DJUTILS project" href="https://djutils.org" target="_blank" />
       <item name="Sim0MQ project" href="https://sim0mq.org" target="_blank" />
