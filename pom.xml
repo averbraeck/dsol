@@ -393,7 +393,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven.javadoc.version}</version>
         <configuration>
-          <links>
+          <offlineLinks>
             <offlineLink><url>https://www.jfree.org/jcommon/api/</url></offlineLink>
             <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
             <offlineLink><url>https://x-stream.github.io/javadoc/</url></offlineLink>
@@ -404,7 +404,7 @@
             <offlineLink><url>https://djutils.org/docs/latest/djutils-data/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-stats/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-draw/apidocs/</url></offlineLink>
-          </links>
+          </offlineLinks>
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
