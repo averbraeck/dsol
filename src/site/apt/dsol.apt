@@ -1,13 +1,15 @@
-DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
+DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE
 
-  Peter H.M. Jacobs 
-  Niels A. Lang 
-  Alexander Verbraeck 
+----
+Peter H.M. Jacobs 
+Niels A. Lang 
+Alexander Verbraeck 
 
-  Delft University of Technology 
-  Faculty of Technology, Policy and Management 
-  Systems Engineering Group
-  Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
+Delft University of Technology 
+Faculty of Technology, Policy and Management 
+Systems Engineering Group
+Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
+----
 
 
 * INTRODUCTION
@@ -46,7 +48,7 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   When several stakeholders are in this way concurrently interacting with the simulation, distributed simulation can
   become distributed gaming.
 
-  A final argument for a distributed simulation architecture is rooted in the need to <i>specify</i> simulations of
+  A final argument for a distributed simulation architecture is rooted in the need to <specify> simulations of
   complex business systems. Gathering data from systems and databases, and carrying out measurements for the
   specification by hand is a costly procedure. However, most data needed for simulation studies is available in some
   automated form, such as in datawarehouses, in ERP databases, or in legacy systems. Since these systems probably contain
@@ -55,8 +57,7 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   systems, perhaps even during the run of the simulation. In this way generators, statistical objects and even some of
   the transactional events could be automatically instantiated and initialized from underlying data sources.
 
-  [ images/iddd-architecture.png ]
-  Figure 1: Architecture
+[images/iddd-architecture.png] Figure 1: Architecture
 
 
 * Architecture
@@ -65,7 +66,7 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   As indicated, current implementations of discrete event simulation software are not sufficiently capable to support
   this distributed cooperation. The next section will present some background on existing object-oriented simulation
   packages. Section 3 will point out the approach that we have taken to develop a new distributed simulation and
-  representation architecture called <i>DSOL</i>, which stands for <i>Distributed Simulation Object Library</i>. In this
+  representation architecture called <DSOL>, which stands for <Distributed Simulation Object Library>. In this
   section screenshots of a distributed supplychain example are included. The final section presents the conclusions and
   gives some pointers for further research.
 
@@ -162,20 +163,19 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   The advantages of a DES implementation are its single threaded approach, its increased flexibility (Buss 2001),
   and the lack of requirements on objects involved in the simulation.
   
-  [ images/iddd-simulation.png ]
-  Figure 2: Simulation architecture
+[images/iddd-simulation.png] Figure 2: Simulation architecture
   
 
 ** ARCHITECTURE OF A FULLY DISTRIBUTED SIMULATION ENVIRONMENT
 
   The architecture presented in this paper and illustrated in Figure 1 focuses on two remote network services. The first
-  service is a DES-based remote simulation service which is described in subsection <i>DISCRETE EVENT SIMULATION
-  IMPLEMENTED AS A REMOTE NETWORK SERVICE</i> The second service is a system representation service described in subsection
-  <i>SYSTEM REPRESENTATION IMPLEMENTED AS A REMOTE NETWORK SERVICE</i>
+  service is a DES-based remote simulation service which is described in subsection <DISCRETE EVENT SIMULATION
+  IMPLEMENTED AS A REMOTE NETWORK SERVICE> The second service is a system representation service described in subsection
+  <SYSTEM REPRESENTATION IMPLEMENTED AS A REMOTE NETWORK SERVICE>
 
   Before focusing on the internal structures of these services, a notion must be made on the increased complexity of
-  autonomous components in runtime. The basic question regarding this complexity is <i>"How are distributed clients,
-  components, data sources, simulation services, etc. able to find each other in order to interact?"</i>.
+  autonomous components in runtime. The basic question regarding this complexity is <"How are distributed clients,
+  components, data sources, simulation services, etc. able to find each other in order to interact?">.
 
   The implementation presented in this paper made a first step in solving this issue by defining a asynchronous
   topic-subscription and lookup mechanism. The first step occurs when objects involved in the architecture present their
@@ -210,8 +210,8 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   The introductory notes on simulation use for complex systems engineering has already revealed minimal requirements for
   system representation. These can be summarized as follows:
 
-  The representation of a (modelled) system should be made available for <i>multiple stakeholders</i>, that <i>interact
-  concurrently</i> with that system from a variety of possibly <i>remote</i> locations.
+  The representation of a (modelled) system should be made available for <multiple stakeholders>, that <interact
+  concurrently> with that system from a variety of possibly <remote> locations.
 
   However, some additional observations specific for system representation can be made.
 
@@ -219,10 +219,10 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   aspects of the system. This is especially true when large-scale, complex systems are considered. This implies a need to
   'browse' the system (Spence 2001).
 
-  Secondly, a user may interact with a model in several modes. We characterize the interaction as <i>passive</i>, if the
+  Secondly, a user may interact with a model in several modes. We characterize the interaction as <passive>, if the
   user does not interact with the model during a run. In this mode the user is still able to dynamically define his area
   of interest (e.g. to 'browse' the system representation). However, these actions will not change the outcomes of the
-  simulation run. The interaction is characterized as <i>active</i>, if the user is able to interact with the model
+  simulation run. The interaction is characterized as <active>, if the user is able to interact with the model
   during a run. The user's actions will then influence the actual outcomes of the simulation run. The distinction between
   passive and active model interaction has consequences for the relation between representation and simulation. With
   passive interaction, the representation data only needs to be generated once by a simulation run. After that, many
@@ -233,10 +233,9 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   representation presented to the user. This link becomes even more tight, when multiple users are interacting with the
   model concurrently. Ideally, the representation subsystem should be able to support both modes of interaction.
 
-  [ images/iddd-visualization.png ]
-  Figure 4:System representation
+[images/iddd-visualization.png] Figure 4:System representation
 
-  Thirdly, system representation as such does not <i>require</i> to be based on a simulation only. Instead, by separating
+  Thirdly, system representation as such does not <require> to be based on a simulation only. Instead, by separating
   the system representation from the simulation components, various combinations between real systems (e.g. information
   system) and simulated systems become possible. The representation presented to the user may be generated in each of
   them.
@@ -259,15 +258,15 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   Figure 1 already introduced the relationship between model,simulation and representation components. Several of these
   components have a role in the system representation process:
 
-  * <i>Model components</i> represent the state of the system. They are sources of state change updates (events),
+  * <Model components> represent the state of the system. They are sources of state change updates (events),
     which encompasses the basic data needed to update their system representation. The information system shown in Figure
     1 is one potential source for state update events.
     
-  * <i>Representation components</i> enable clients to retrieve various <i>event handlers</i>, thus implementing
+  * <Representation components> enable clients to retrieve various <event handlers>, thus implementing
     the representation service. Event handlers can transform incoming state change updates into (visual) representations
     and may provide interaction with an underlying model component.
     
-  * <i>Clients</i> contain <i>representation contexts</i> used by event handlers to provide representations to the
+  * <Clients> contain <representation contexts> used by event handlers to provide representations to the
     user. For visual representation such a context is a graphical region where the event handler can paint. The clients
     are able to find the other components using the lookup mechanism described previously.
     
@@ -311,7 +310,9 @@ DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
   dynamic processes. This controlling part may also be enabled to interact with the original model component that created
   it. In this way active user-system interaction can be implemented.
 
+
 * OBTAINING THE SOFTWARE
+
   The latest version of the software including its code, can be downloaded from the web at
   {{https://github.com/averbraeck/dsol">https://github.com/averbraeck/dsol}}
   
