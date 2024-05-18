@@ -409,7 +409,6 @@
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
-          <stylesheetfile>${basedir}/config/javadoc/stylesheet.css</stylesheetfile>
           <detectJavaApiLink>false</detectJavaApiLink>
           <detectOfflineLinks>true</detectOfflineLinks>
           <detectLinks>false</detectLinks>
