@@ -1,10 +1,10 @@
                    -----------------------
                    DSOL
                    -----------------------
-                   September, 2018
+                   May, 2024
                    -----------------------
     
-DSOL - Distributed Simulation Object Library
+* DSOL - Distributed Simulation Object Library
                
     What is DSOL?
     
@@ -19,20 +19,20 @@ DSOL - Distributed Simulation Object Library
       in a simulation study are a model, and a simulator, governed for experimentation by and experimental frame. 
     
     * All these elements surface in the DSOL simulation framework: the ModelInterface, implemented by the user, 
-      the SimulatorInterface with several implementations such as the DEVSSimulator and the DESSSimulator, and
+      the SimulatorInterface with several implementations such as the DevsSimulator and the DessSimulator, and
       the class ExperimentalFrame for setting the experiment.
            
     []
 
 
-Implemented formalisms
+* Implemented formalisms
     
     At the moment, the following formalisms have been implemented in DSOL: event scheduling, process interaction, 
     differential equations, flow modeling, classical DEVS, Port-based DEVS, hierarchical DEVS, and agent modeling. 
     Extensions created by others (but currently still outside the core) contain for instance Petri Nets.
 
 
-DSOL license
+* DSOL license
 
     DSOL has an open source BSD 3-clause license.
 

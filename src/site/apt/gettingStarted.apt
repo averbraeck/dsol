@@ -1,11 +1,11 @@
-Downloading and starting DSOL
+* Downloading and starting DSOL
 
-	DSOL is an open source suite and as such published on the open TU Delft SVN. 
-	A download can be obtained from {{https://simulation.tudelft.nl/dsol/3.0/}}.
+	DSOL is an open source suite and as such published on Github. 
+	A download can be obtained from {{https://github.com/averbraeck/dsol}}.
 	
 
 
-Run the tutorial examples
+* Run the tutorial examples
 
 	In the tutorial section, a number of examples can be run out of the box. 
 	Play around with the different windows, see the animation, and experience what DSOL 
@@ -14,14 +14,14 @@ Run the tutorial examples
 
 
 
-Develop a model
+* Develop a model
 
 	After running the web-based tutorial examples, the next task is to see how to develop models. 
 	The maven instructions indicate how to include DSOL in your project. 
 
 
 
-OK, what's next
+* OK, what's next
 
 	Now it is time to read the tutorial and understand the concepts, design guidelines and 
 	language constructs. Have fun and don't forget that DSOL is based on the idea of an 

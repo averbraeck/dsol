@@ -1,4 +1,4 @@
-SNE Comparisons
+* SNE Comparisons
 
 	Simulation News Europe (SNE) features a series on comparisons of simulation software. 
 	Based on simple, easily comprehensible models special features of modelling and experimentation 
@@ -16,7 +16,7 @@ SNE Comparisons
 
 
 
-Supply chain games
+* Supply chain games
 
 	Welcome to the portal of the Global Supply Chain Game (http://www.gscg.org). 
 	The Global Supply Chain Game (GSCG) library is a flexible environment based on the Java programming language 
@@ -31,11 +31,11 @@ Supply chain games
 	and the way the graphical user interface works. These graphical user interfaces are used by a player to 
 	control a supply chain actor, e.g. a retailer or a manufacturer.
 	
-	For more information you can contact: {{{mailto:s.p.a.vanhouten@tudelft.nl}Stijn-Pieter van Houten}}.
+	For more information you can contact: {{{mailto:a.verbraeck@tudelft.nl}Alexander Verbraeck}}..
 
 
 
-Termsim
+* Termsim
 
 	TermSim (short for Terminal Simulation) is a simulation library for supporting the analysis of 
 	container terminal performance. The library is under development to support a PhD research on simulation 
@@ -55,7 +55,7 @@ Termsim
 	
 	
 	
-Traffic Control Strategies: a simulation testbed
+* Traffic Control Strategies: a simulation testbed
 
 	A Simulation Test Bed is being developed to support the testing of traffic control strategies. 
 	It offers generic simulation components which are based on DSOL simulation environment to provide a flexible 
@@ -76,7 +76,7 @@ Traffic Control Strategies: a simulation testbed
 
 
 
-Can I present my DSOL project on this site?
+* Can I present my DSOL project on this site?
 
 	Yes, we would very much like to present other DSOL projects on this site. Please send a short description with 
 	contact information to {{mailto:a.verbraeck@tudelft.nl}} and your project will be added.
