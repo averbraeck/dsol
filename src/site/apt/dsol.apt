@@ -1,15 +1,12 @@
 DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE
 
-----
-Peter H.M. Jacobs 
-Niels A. Lang 
-Alexander Verbraeck 
+Peter H.M. Jacobs, Niels A. Lang, Alexander Verbraeck 
 
-Delft University of Technology 
-Faculty of Technology, Policy and Management 
-Systems Engineering Group
+Delft University of Technology \ 
+Faculty of Technology, Policy and Management \ 
+Systems Engineering Group \
 Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
-----
+
 
 
 * INTRODUCTION
@@ -58,9 +55,6 @@ Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
   the transactional events could be automatically instantiated and initialized from underlying data sources.
 
 [images/iddd-architecture.png] Figure 1: Architecture
-
-
-* Architecture
 
   This section has clearly stated the need for a distributed architecture on which discrete event simulations are built.
   As indicated, current implementations of discrete event simulation software are not sufficiently capable to support
@@ -233,7 +227,7 @@ Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
   representation presented to the user. This link becomes even more tight, when multiple users are interacting with the
   model concurrently. Ideally, the representation subsystem should be able to support both modes of interaction.
 
-[images/iddd-visualization.png] Figure 4:System representation
+[images/iddd-visualization.png] Figure 3: A-synchronous Distributed System Representation
 
   Thirdly, system representation as such does not <require> to be based on a simulation only. Instead, by separating
   the system representation from the simulation components, various combinations between real systems (e.g. information
@@ -275,7 +269,7 @@ Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
   The arrows in Figure 1 also show some interactions that take place between the various groups of components. This
   interactions are described in more detail in Figure
   
-  The left side of Figure 1 illustrates the representation update process. Model components broadcast events to
+  The left side of Figure 3 illustrates the representation update process. Model components broadcast events to
   interested clients, that place received events in a local visualization event-list. Conceptually, the state update
   event-list does not need to reside client-side. Several clients could share one server-side event list. It may be noted
   that this event list contains state update events, in contrast with the simulation event list, that contains events
@@ -288,7 +282,7 @@ Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
   The process described thus far provides a mechanism to process a state-update event on the correct representation
   time. However, since these events basically only contain the state-change information itself, additional components are
   needed to transform this information in an actual, dynamic representation. This is illustrated on the right side of
-  Figure 5, by the interaction between the client-side visualization manager and the representation components in the
+  Figure 3, by the interaction between the client-side visualization manager and the representation components in the
   network. Initially, the client has no event handlers available. When an event needs to be processed for which no event
   handler is yet available, the client tries to retrieve this event handler from the representation components, based on:
 
@@ -303,9 +297,9 @@ Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
   As a result, an event handler component is returned, that is able to process the incoming state-update event.
 
   The event handler may consist of a controlling part and a representation part. The representation part shown in
-  Figure 5 is a graphical representation of an airplane, that will be added to the client's visual representation
+  Figure 3 is a graphical representation of an airplane, that will be added to the client's visual representation
   context. The controlling part of the event handler can be an intelligent component: the movement of the airplane
-  representations shown in Figure 5 could be extrapolated by the event handler until the time the next 'move' event
+  representations shown in Figure 3 could be extrapolated by the event handler until the time the next 'move' event
   arrives for that airplane. This mechanism reduces the amount of events that needs to be communicated to represent
   dynamic processes. This controlling part may also be enabled to interact with the original model component that created
   it. In this way active user-system interaction can be implemented.
@@ -317,3 +311,9 @@ Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
   {{https://github.com/averbraeck/dsol">https://github.com/averbraeck/dsol}}
   
   License information, tutorials and examples can be downloaded and reactions are welcome.
+
+
+=======================================================================
+
+  Paper published in: Proceedings of the 2002 Winter Simulation Conference. 
+  E. Yücesan, C.-H. Chen, J. L. Snowdon, and J. M. Charnes, (Eds.). IEEE, pp. 793-800.
