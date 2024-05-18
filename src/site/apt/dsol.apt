@@ -1,4 +1,4 @@
-* DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
+DSOL; A DISTRIBUTED JAVA BASED DISCRETE EVENT SIMULATION ARCHITECTURE</H1>
 
   Peter H.M. Jacobs 
   Niels A. Lang 
@@ -10,7 +10,7 @@
   Jaffalaan 5, 2628 BX, Delft, THE NETHERLANDS
 
 
-** INTRODUCTION
+* INTRODUCTION
 
   Discrete event simulation is used for dynamically modeling complex systems in order to analyze and understand
   these systems, and in order to (re)design and engineer these systems (Shannon 1975, Banks 1998). Statistical
@@ -59,7 +59,7 @@
   Figure 1: Architecture
 
 
-** Architecture
+* Architecture
 
   This section has clearly stated the need for a distributed architecture on which discrete event simulations are built.
   As indicated, current implementations of discrete event simulation software are not sufficiently capable to support
@@ -70,7 +70,7 @@
   gives some pointers for further research.
 
 
-** EXISTING SIMULATION ENVIRONMENTS
+* EXISTING SIMULATION ENVIRONMENTS
 
   This section gives an overview of current discrete event environments. Focusing on the distributed goal of simulation
   environments, three different levels of distribution can be distinguished in these environments. These are:
@@ -108,7 +108,7 @@
   easiness of model construction but conflict with a distributed deployment.
   
   
-*** CURRENT JAVA-BASED SIMULATION LANGUAGES BASED ON A PROCESS ORIENTED WORLDVIEW.
+** CURRENT JAVA-BASED SIMULATION LANGUAGES BASED ON A PROCESS ORIENTED WORLDVIEW.
 
   The main goal of environments like JavaSim, Silk, DESMO-J, etc. is to create (re)usable object-oriented simulation
   models and components while maintaining a natural process-oriented modeling capability. Since entities in the model are
@@ -142,7 +142,7 @@
     []
     
 
-*** CURRENT JAVA-BASED SIMULATION LANGUAGES BASED ON AN EVENT BASED WORLDVIEW.
+** CURRENT JAVA-BASED SIMULATION LANGUAGES BASED ON AN EVENT BASED WORLDVIEW.
 
   Another worldview adopted by some discrete event languages is DES and its accompanying Future Event List on which
   object interaction is scheduled. Two of the core notions most Object-Oriented implementations of this worldview share
@@ -187,7 +187,7 @@
   services can be found in (Sing 2000).
   
   
-*** DISCRETE EVENT SIMULATION IMPLEMENTED AS A REMOTE NETWORK SERVICE
+** DISCRETE EVENT SIMULATION IMPLEMENTED AS A REMOTE NETWORK SERVICE
 
   The simulation environment provided in this paper has fully adopted DES as its underlying worldview. Distribution formed
   once again the basis for not using current implementations but to design a new architecture.
@@ -205,7 +205,7 @@
   are available to facilitate overloaded methods with primitive and wrapped arguments.
   
   
-*** SYSTEM REPRESENTATION IMPLEMENTED AS A REMOTE NETWORK SERVICE
+** SYSTEM REPRESENTATION IMPLEMENTED AS A REMOTE NETWORK SERVICE
 
   The introductory notes on simulation use for complex systems engineering has already revealed minimal requirements for
   system representation. These can be summarized as follows:
@@ -311,7 +311,7 @@
   dynamic processes. This controlling part may also be enabled to interact with the original model component that created
   it. In this way active user-system interaction can be implemented.
 
-** OBTAINING THE SOFTWARE
+* OBTAINING THE SOFTWARE
   The latest version of the software including its code, can be downloaded from the web at
   {{https://github.com/averbraeck/dsol">https://github.com/averbraeck/dsol}}
   
