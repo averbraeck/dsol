@@ -394,23 +394,23 @@
         <version>${maven.javadoc.version}</version>
         <configuration>
           <links>
-            <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
-            <link>https://www.jfree.org/jcommon/api/</link>
-            <link>https://www.jfree.org/jfreechart/api/javadoc/</link>
-            <link>https://x-stream.github.io/javadoc/</link>
-            <link>https://tinylog.org/v1/javadoc/</link>
-            <link>https://djunits.org/docs/latest/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-cli/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-data/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-stats/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-draw/apidocs/</link>
+            <offlineLink><url>https://www.jfree.org/jcommon/api/</url></offlineLink>
+            <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
+            <offlineLink><url>https://x-stream.github.io/javadoc/</url></offlineLink>
+            <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
+            <offlineLink><url>https://djunits.org/docs/latest/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-cli/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-data/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-stats/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-draw/apidocs/</url></offlineLink>
           </links>
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
-          <detectJavaApiLink>false</detectJavaApiLink>
+          <detectJavaApiLink>true</detectJavaApiLink>
           <detectOfflineLinks>true</detectOfflineLinks>
-          <detectLinks>false</detectLinks>
+          <detectLinks>true</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
         <executions>
@@ -637,24 +637,24 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven.javadoc.version}</version>
         <configuration>
-          <links>
-            <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
-            <link>https://www.jfree.org/jcommon/api/</link>
-            <link>https://www.jfree.org/jfreechart/api/javadoc/</link>
-            <link>https://x-stream.github.io/javadoc/</link>
-            <link>https://tinylog.org/v1/javadoc/</link>
-            <link>https://djunits.org/docs/latest/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-cli/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-data/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-stats/apidocs/</link>
-            <link>https://djutils.org/docs/latest/djutils-draw/apidocs/</link>
-          </links>
+          <offlineLinks>
+            <offlineLink><url>https://www.jfree.org/jcommon/api/</url></offlineLink>
+            <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
+            <offlineLink><url>https://x-stream.github.io/javadoc/</url></offlineLink>
+            <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
+            <offlineLink><url>https://djunits.org/docs/latest/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-cli/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-data/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-stats/apidocs/</url></offlineLink>
+            <offlineLink><url>https://djutils.org/docs/latest/djutils-draw/apidocs/</url></offlineLink>
+          </offlineLinks>
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
-          <detectJavaApiLink>false</detectJavaApiLink>
+          <detectJavaApiLink>true</detectJavaApiLink>
           <detectOfflineLinks>true</detectOfflineLinks>
-          <detectLinks>false</detectLinks>
+          <detectLinks>true</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
         <reportSets>
