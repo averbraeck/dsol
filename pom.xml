@@ -394,7 +394,6 @@
         <version>${maven.javadoc.version}</version>
         <configuration>
           <offlineLinks>
-            <offlineLink><url>https://www.jfree.org/jcommon/api/</url></offlineLink>
             <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
             <offlineLink><url>https://x-stream.github.io/javadoc/</url></offlineLink>
             <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
@@ -404,13 +403,23 @@
             <offlineLink><url>https://djutils.org/docs/latest/djutils-data/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-stats/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-draw/apidocs/</url></offlineLink>
+            <offlineLink><url>https://junit.org/junit5/docs/current/api/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.jfree/jcommon/latest/index.html</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.eclipse.jetty/jetty-server/latest/org.eclipse.jetty.server/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/jakarta.annotation/jakarta.annotation-api/latest/jakarta.annotation/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-core/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-pbf/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-set/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-osm-binary/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-xml/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/de.siegmar/fastcsv/latest/de.siegmar.fastcsv/</url></offlineLink>
           </offlineLinks>
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
           <detectJavaApiLink>true</detectJavaApiLink>
           <detectOfflineLinks>true</detectOfflineLinks>
-          <detectLinks>true</detectLinks>
+          <detectLinks>false</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
         <executions>
@@ -638,7 +647,6 @@
         <version>${maven.javadoc.version}</version>
         <configuration>
           <offlineLinks>
-            <offlineLink><url>https://www.jfree.org/jcommon/api/</url></offlineLink>
             <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
             <offlineLink><url>https://x-stream.github.io/javadoc/</url></offlineLink>
             <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
@@ -648,13 +656,23 @@
             <offlineLink><url>https://djutils.org/docs/latest/djutils-data/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-stats/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-draw/apidocs/</url></offlineLink>
+            <offlineLink><url>https://junit.org/junit5/docs/current/api/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.jfree/jcommon/latest/index.html</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.eclipse.jetty/jetty-server/latest/org.eclipse.jetty.server/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/jakarta.annotation/jakarta.annotation-api/latest/jakarta.annotation/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-core/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-pbf/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-set/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-osm-binary/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-xml/latest/</url></offlineLink>
+            <offlineLink><url>https://javadoc.io/doc/de.siegmar/fastcsv/latest/de.siegmar.fastcsv/</url></offlineLink>
           </offlineLinks>
           <minmemory>256m</minmemory>
           <maxmemory>1g</maxmemory>
           <show>package</show>
           <detectJavaApiLink>true</detectJavaApiLink>
           <detectOfflineLinks>true</detectOfflineLinks>
-          <detectLinks>true</detectLinks>
+          <detectLinks>false</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
         <reportSets>
