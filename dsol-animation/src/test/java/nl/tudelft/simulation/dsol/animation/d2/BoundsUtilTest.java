@@ -9,14 +9,13 @@ import java.rmi.RemoteException;
 import org.djutils.draw.Transform3d;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.bounds.Bounds3d;
-import org.djutils.draw.point.OrientedPoint2d;
+import org.djutils.draw.point.DirectedPoint2d;
 import org.djutils.draw.point.OrientedPoint3d;
 import org.djutils.draw.point.Point2d;
 import org.djutils.draw.point.Point3d;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.animation.d2.BoundsUtil;
 
 /**
  * Unit tests for the BoundsUtil class.
@@ -182,14 +181,14 @@ public class BoundsUtilTest
     }
 
     /**
-     * Test the projectBounds and bounds transformation for an OrientedPoint2d.
+     * Test the projectBounds and bounds transformation for an DirectedPoint2d.
      * @throws RemoteException on network error
      */
     @Test
-    public void testProjectBoundsOrientedPoint2d() throws RemoteException
+    public void testProjectBoundsDirectedPoint2d() throws RemoteException
     {
         Bounds2d box00 = new Bounds2d(new Point2d[] {new Point2d(-2, -2), new Point2d(2, 2)});
-        OrientedPoint2d location = new OrientedPoint2d(4, 4);
+        DirectedPoint2d location = new DirectedPoint2d(4, 4, 0);
         // the box is around (4,4), so its real coordinates are (2,2, 6,6).
         testRect(BoundsUtil.projectBounds(location, box00), 2, 2, 6, 6);
 
@@ -205,9 +204,9 @@ public class BoundsUtilTest
             }
 
             @Override
-            public OrientedPoint2d getLocation() throws RemoteException
+            public DirectedPoint2d getLocation() throws RemoteException
             {
-                return new OrientedPoint2d(this.x, this.y, this.dirZ);
+                return new DirectedPoint2d(this.x, this.y, this.dirZ);
             }
 
             @Override

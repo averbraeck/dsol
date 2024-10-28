@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.animation;
 import java.awt.geom.Point2D;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.draw.point.OrientedPoint2d;
+import org.djutils.draw.point.DirectedPoint2d;
 
 /**
  * A StaticLocation in 2 dimensions.
@@ -16,7 +16,7 @@ import org.djutils.draw.point.OrientedPoint2d;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class StaticLocation2d extends OrientedPoint2d implements Locatable
+public class StaticLocation2d extends DirectedPoint2d implements Locatable
 {
     /** The default serial version UID for serializable classes. */
     private static final long serialVersionUID = 1L;
@@ -54,14 +54,14 @@ public class StaticLocation2d extends OrientedPoint2d implements Locatable
      * @param location OrientedPoint3d; the location
      * @param bounds Bounds; the bounds
      */
-    public StaticLocation2d(final OrientedPoint2d location, final Bounds2d bounds)
+    public StaticLocation2d(final DirectedPoint2d location, final Bounds2d bounds)
     {
         super(location.getX(), location.getY(), location.getDirZ());
         this.bounds = bounds;
     }
 
     @Override
-    public OrientedPoint2d getLocation()
+    public DirectedPoint2d getLocation()
     {
         return this;
     }

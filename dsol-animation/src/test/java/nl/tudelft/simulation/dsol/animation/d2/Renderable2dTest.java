@@ -23,8 +23,6 @@ import org.djutils.draw.point.Point3d;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
-import nl.tudelft.simulation.dsol.animation.d2.Renderable2d;
-import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
@@ -133,7 +131,7 @@ public class Renderable2dTest
         }
 
         @Override
-        public Bounds<?, ?, ?> getBounds() throws RemoteException
+        public Bounds<?, ?> getBounds() throws RemoteException
         {
             return new Bounds3d(4, 4, 4);
         }
@@ -162,7 +160,7 @@ public class Renderable2dTest
             }
 
             @Override
-            public Bounds<?, ?, ?> getBounds() throws RemoteException
+            public Bounds<?, ?> getBounds() throws RemoteException
             {
                 return new Bounds3d(4, 4, 4);
             }

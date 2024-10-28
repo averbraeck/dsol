@@ -58,5 +58,5 @@ public interface Locatable
      * @return Bounds&lt;?, ?, ?, ?&gt;; the bounds of the object around getLocation() as center of the box.
      * @throws RemoteException on network failure
      */
-    Bounds<?, ?, ?> getBounds() throws RemoteException;
+    Bounds<?, ?> getBounds() throws RemoteException;
 }

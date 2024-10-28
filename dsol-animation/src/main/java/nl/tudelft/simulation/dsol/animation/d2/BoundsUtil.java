@@ -6,7 +6,7 @@ import org.djutils.draw.Transform3d;
 import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.bounds.Bounds3d;
-import org.djutils.draw.point.OrientedPoint2d;
+import org.djutils.draw.point.DirectedPoint2d;
 import org.djutils.draw.point.OrientedPoint3d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
@@ -40,10 +40,10 @@ public final class BoundsUtil
      * center point coordinates, and possibly rotated by the orientation of the center point.
      * @param center Point; the point relative to which the bounds need to be calculated
      * @param bounds Bounds; the bounds for which the intersection needs to be calculated. The Bounds3d are <b>relative to the
-     *            center</b> that is provided
+     *     center</b> that is provided
      * @return Bounds2d the projected rectangle of the intersection, or null if there is no intersection
      */
-    public static Bounds2d projectBounds(final Point<?> center, final Bounds<?, ?, ?> bounds)
+    public static Bounds2d projectBounds(final Point<?> center, final Bounds<?, ?> bounds)
     {
         if (center == null)
         {
@@ -87,11 +87,11 @@ public final class BoundsUtil
     /**
      * Rotates and translates a bound relative to an oriented point. Often this point will be the given center point for the
      * animation.
-     * @param center OrientedPoint2d; the point relative to which the bounds need to be transformed
+     * @param center DirectedPoint2d; the point relative to which the bounds need to be transformed
      * @param bounds Bound2ds; the bounds that need to be rotated and translated
      * @return the bounds after rotation and translation
      */
-    public static Bounds2d transform(final OrientedPoint2d center, final Bounds2d bounds)
+    public static Bounds2d transform(final DirectedPoint2d center, final Bounds2d bounds)
     {
         if (center == null)
         {
@@ -111,7 +111,7 @@ public final class BoundsUtil
      * @param center OrientedPoint3d; the 'center' of the bounds.
      * @param bounds Bounds3d; the bounds relative to 0,0,0
      * @param point Point3d; the point that might be in or out of the bounds after they have been rotated and translated
-     *            relative to the center.
+     *     relative to the center.
      * @return whether or not the point is in the bounds
      */
     public static boolean contains(final OrientedPoint3d center, final Bounds3d bounds, final Point3d point)
@@ -134,13 +134,13 @@ public final class BoundsUtil
      * the location). Usually the center is in the bounds, but that is not necessary. The center is in many occasions the
      * Location of an animated object, and the bounds indicate the outer values of its animation without translation and
      * rotation (as if center is 0,0) and has no direction (rotation 0.0).
-     * @param center OrientedPoint2d; the 'center' of the bounds.
+     * @param center DirectedPoint2d; the 'center' of the bounds.
      * @param bounds Bounds2d; the bounds relative to 0,0
      * @param point Point2d; the point that might be in or out of the bounds after they have been rotated and translated
-     *            relative to the center.
+     *     relative to the center.
      * @return whether or not the point is in the bounds
      */
-    public static boolean contains(final OrientedPoint2d center, final Bounds2d bounds, final Point2d point)
+    public static boolean contains(final DirectedPoint2d center, final Bounds2d bounds, final Point2d point)
     {
         if (center == null)
         {

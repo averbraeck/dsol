@@ -47,7 +47,7 @@
     <jcommon.version>1.0.24</jcommon.version>
     <jfreechart.version>1.5.5</jfreechart.version>
     <djunits.version>5.1.4</djunits.version>
-    <djutils.version>2.2.2</djutils.version>
+    <djutils.version>2.2.3</djutils.version>
     <jetty.version>11.0.23</jetty.version>
     <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
     <osm.version>0.49.2</osm.version>
