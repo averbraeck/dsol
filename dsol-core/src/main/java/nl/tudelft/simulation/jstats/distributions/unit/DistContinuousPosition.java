@@ -37,7 +37,6 @@ public class DistContinuousPosition extends DistContinuousUnit<PositionUnit, Pos
         super(wrappedDistribution, PositionUnit.DEFAULT);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Position draw()
     {

@@ -35,7 +35,6 @@ public class DistConstant extends DistContinuous
         this.constant = constant;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -43,7 +42,6 @@ public class DistConstant extends DistContinuous
         return this.constant;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -63,7 +61,6 @@ public class DistConstant extends DistContinuous
         return this.constant;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -37,7 +37,6 @@ public class DistContinuousTorque extends DistContinuousUnit<TorqueUnit, Torque>
         super(wrappedDistribution, TorqueUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Torque draw()
     {

@@ -289,7 +289,6 @@ public final class InitialEventContext implements EventContext
         return (Hashtable<?, ?>) this.properties.clone();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void close() throws NamingException, RemoteException
     {
@@ -302,7 +301,6 @@ public final class InitialEventContext implements EventContext
         this.gotDefault = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getAtomicName() throws RemoteException
     {
@@ -311,7 +309,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getParent() throws RemoteException
     {
@@ -321,7 +318,6 @@ public final class InitialEventContext implements EventContext
 
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getRootContext() throws RemoteException
     {
@@ -330,7 +326,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getAbsolutePath() throws RemoteException
     {
@@ -339,7 +334,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(final String name) throws NamingException, RemoteException
     {
@@ -348,7 +342,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getObject(final String key) throws NamingException, RemoteException
     {
@@ -357,7 +350,6 @@ public final class InitialEventContext implements EventContext
         throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean exists(final String name) throws NamingException, RemoteException
     {
@@ -366,7 +358,6 @@ public final class InitialEventContext implements EventContext
         throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasKey(final String key) throws NamingException, RemoteException
     {
@@ -375,7 +366,6 @@ public final class InitialEventContext implements EventContext
         throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasObject(final Object object) throws RemoteException
     {
@@ -384,7 +374,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() throws RemoteException
     {
@@ -393,7 +382,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bind(final String name, final Object object) throws NamingException, RemoteException
     {
@@ -403,7 +391,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bindObject(final String key, final Object object) throws NamingException, RemoteException
     {
@@ -413,7 +400,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bindObject(final Object object) throws NamingException, RemoteException
     {
@@ -423,7 +409,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void unbind(final String name) throws NamingException, RemoteException
     {
@@ -433,7 +418,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void unbindObject(final String key) throws NamingException, RemoteException
     {
@@ -443,7 +427,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rebind(final String name, final Object object) throws NamingException, RemoteException
     {
@@ -453,7 +436,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rebindObject(final String key, final Object object) throws NamingException, RemoteException
     {
@@ -463,7 +445,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rename(final String oldName, final String newName) throws NamingException, RemoteException
     {
@@ -473,7 +454,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface createSubcontext(final String name) throws NamingException, RemoteException
     {
@@ -483,7 +463,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void destroySubcontext(final String name) throws NamingException, RemoteException
     {
@@ -493,7 +472,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void checkCircular(final Object newObject) throws NamingException, RemoteException
     {
@@ -503,7 +481,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Set<String> keySet() throws RemoteException
     {
@@ -512,7 +489,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Collection<Object> values() throws RemoteException
     {
@@ -521,7 +497,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Map<String, Object> bindings() throws RemoteException
     {
@@ -530,7 +505,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fireObjectChangedEventValue(final Object object)
             throws NameNotFoundException, NullPointerException, NamingException, RemoteException
@@ -541,7 +515,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fireObjectChangedEventKey(final String key)
             throws NameNotFoundException, NullPointerException, NamingException, RemoteException
@@ -552,7 +525,6 @@ public final class InitialEventContext implements EventContext
             throw new NoInitialContextException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -561,7 +533,6 @@ public final class InitialEventContext implements EventContext
         return "InitialEventContext[null]";
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString(final boolean verbose) throws RemoteException
     {
@@ -576,7 +547,6 @@ public final class InitialEventContext implements EventContext
     /* **************************************** EVENTPRODUCER IMPLEMENTATION ******************************************* */
     /* ***************************************************************************************************************** */
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType) throws RemoteException
     {
@@ -585,7 +555,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType,
             final ReferenceType referenceType) throws RemoteException
@@ -595,7 +564,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position)
             throws RemoteException
@@ -605,7 +573,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position,
             final ReferenceType referenceType) throws RemoteException
@@ -615,7 +582,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean removeListener(final EventListener listener, final EventType eventType) throws RemoteException
     {
@@ -636,7 +602,6 @@ public final class InitialEventContext implements EventContext
     /* *************************************** EVENTCONTEXTINTERFACE LISTENERS ***************************************** */
     /* ***************************************************************************************************************** */
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
             throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
@@ -647,7 +612,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
             final ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
@@ -658,7 +622,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
             final int position) throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException,
@@ -669,7 +632,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
             final int position, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
@@ -680,7 +642,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean removeListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
             throws RemoteException, InvalidNameException, NullPointerException
@@ -690,7 +651,6 @@ public final class InitialEventContext implements EventContext
         throw new RuntimeException(new NoInitialContextException());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int removeAllListeners()
     {

@@ -47,7 +47,6 @@ public class DistGeometric extends DistDiscrete
         this.lnp = Math.log(1.0 - this.p);
     }
 
-    /** {@inheritDoc} */
     @Override
     public long draw()
     {
@@ -55,7 +54,6 @@ public class DistGeometric extends DistDiscrete
         return (long) (Math.floor(Math.log(u) / this.lnp));
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {
@@ -75,7 +73,6 @@ public class DistGeometric extends DistDiscrete
         return this.p;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

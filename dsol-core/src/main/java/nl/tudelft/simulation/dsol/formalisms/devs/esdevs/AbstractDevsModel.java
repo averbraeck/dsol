@@ -151,7 +151,6 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
         return this.fullName;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

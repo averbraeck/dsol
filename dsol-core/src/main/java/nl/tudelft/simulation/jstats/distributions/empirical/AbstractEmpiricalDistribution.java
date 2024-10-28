@@ -69,28 +69,24 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public int size()
     {
         return this.cumulativeProbabilityMap.size();
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<Double> getCumulativeProbabilities()
     {
         return new ArrayList<Double>(this.cumulativeProbabilityMap.keySet());
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<Number> getValues()
     {
         return new ArrayList<Number>(this.cumulativeProbabilityMap.values());
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistributionEntry getFloorEntry(final double cumulativeProbability)
     {
@@ -102,7 +98,6 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return new DistributionEntry(floorEntry.getValue(), floorEntry.getKey());
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistributionEntry getCeilingEntry(final double cumulativeProbability)
     {
@@ -114,7 +109,6 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return new DistributionEntry(ceilingEntry.getValue(), ceilingEntry.getKey());
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistributionEntry getPrevEntry(final double cumulativeProbability)
     {
@@ -133,7 +127,6 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistributionEntry getNextEntry(final double cumulativeProbability)
     {
@@ -152,7 +145,6 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistributionEntry getFloorEntryForValue(final Number value)
     {
@@ -173,7 +165,6 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return floorEntry == null ? null : new DistributionEntry(floorEntry.getValue(), floorEntry.getKey());
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistributionEntry getCeilingEntryForValue(final Number value)
     {
@@ -188,21 +179,18 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Number getLowestValue()
     {
         return this.cumulativeProbabilityMap.ceilingEntry(-1.0).getValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Number getHighestValue()
     {
         return this.cumulativeProbabilityMap.floorEntry(2.0).getValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode()
     {
@@ -212,7 +200,6 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:needbraces")
     public boolean equals(final Object obj)
@@ -229,7 +216,6 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

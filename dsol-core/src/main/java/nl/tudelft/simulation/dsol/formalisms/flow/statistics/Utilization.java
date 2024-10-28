@@ -56,7 +56,6 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event)
     {

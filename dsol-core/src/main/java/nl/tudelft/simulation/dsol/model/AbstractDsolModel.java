@@ -71,7 +71,6 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
         setStreamInformation(streamInformation);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setStreamInformation(final StreamInformation streamInformation)
     {
@@ -79,21 +78,18 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
         this.streamInformation = streamInformation;
     }
 
-    /** {@inheritDoc} */
     @Override
     public StreamInformation getStreamInformation()
     {
         return this.streamInformation;
     }
 
-    /** {@inheritDoc} */
     @Override
     public S getSimulator()
     {
         return this.simulator;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterMap getInputParameterMap()
     {
@@ -122,7 +118,6 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
         return this.inputParameterMap.get(key).getCalculatedValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<SimulationStatistic<T>> getOutputStatistics()
     {

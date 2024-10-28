@@ -37,7 +37,6 @@ public class DistContinuousMass extends DistContinuousUnit<MassUnit, Mass>
         super(wrappedDistribution, MassUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Mass draw()
     {

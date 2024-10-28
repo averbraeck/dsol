@@ -134,21 +134,18 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         this.instances.put(nextKey, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getRowCount()
     {
         return this.instances.size();
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getColumnCount()
     {
         return CollectionTableModel.COLUMNS.length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
@@ -167,14 +164,12 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getColumnName(final int columnIndex)
     {
         return CollectionTableModel.COLUMNS[columnIndex];
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isCellEditable(final int rowIndex, final int columnIndex)
     {
@@ -185,7 +180,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex)
     {
@@ -212,7 +206,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         this.fireTableDataChanged();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getColumnClass(final int columnIndex)
     {
@@ -244,7 +237,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         return new CollectionProperty(this.keys.get(index), this.parentProperty.getName());
     }
 
-    /** {@inheritDoc} */
     @Override
     public void createRow()
     {
@@ -270,7 +262,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void createRows(final int amount)
     {
@@ -280,7 +271,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void deleteRow(final int index)
     {
@@ -291,7 +281,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         update();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void deleteRows(final int[] indices)
     {
@@ -302,14 +291,12 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Introspector getIntrospector()
     {
         return this.introspector;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
@@ -348,7 +335,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         return this.manager;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isRowEditable()
     {
@@ -378,28 +364,24 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
             this.name = name;
         }
 
-        /** {@inheritDoc} */
         @Override
         public Object getInstance()
         {
             return CollectionTableModel.this.instances.values();
         }
 
-        /** {@inheritDoc} */
         @Override
         public String getName()
         {
             return this.name + "[" + CollectionTableModel.this.keys.indexOf(this.key) + "]";
         }
 
-        /** {@inheritDoc} */
         @Override
         public Class<?> getType()
         {
             return CollectionTableModel.this.instances.get(this.key).getClass();
         }
 
-        /** {@inheritDoc} */
         @Override
         public Object getValue()
         {
@@ -413,14 +395,12 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
             }
         }
 
-        /** {@inheritDoc} */
         @Override
         public boolean isEditable()
         {
             return true;
         }
 
-        /** {@inheritDoc} */
         @Override
         protected void setRegularValue(final Object value)
         {
@@ -428,7 +408,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
                     + "A program is not supposed to arrive here.");
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {
@@ -436,7 +415,6 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -49,7 +49,6 @@ public abstract class RandomNumberGenerator implements StreamInterface
         this.originalSeed = seed;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void reset()
     {
@@ -63,14 +62,12 @@ public abstract class RandomNumberGenerator implements StreamInterface
      */
     protected abstract long next(int bits);
 
-    /** {@inheritDoc} */
     @Override
     public boolean nextBoolean()
     {
         return next(1) != 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double nextDouble()
     {
@@ -78,7 +75,6 @@ public abstract class RandomNumberGenerator implements StreamInterface
         return l / (double) (1L << 53);
     }
 
-    /** {@inheritDoc} */
     @Override
     public float nextFloat()
     {
@@ -86,14 +82,12 @@ public abstract class RandomNumberGenerator implements StreamInterface
         return i / ((float) (1 << 24));
     }
 
-    /** {@inheritDoc} */
     @Override
     public int nextInt()
     {
         return (int) this.next(32);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized int nextInt(final int i, final int j)
     {
@@ -104,39 +98,33 @@ public abstract class RandomNumberGenerator implements StreamInterface
         return i + (int) Math.floor((j - i + 1) * this.nextDouble());
     }
 
-    /** {@inheritDoc} */
     @Override
     public long nextLong()
     {
         return ((next(32)) << 32) + next(32);
     }
 
-    /** {@inheritDoc} */
     @Override
     public abstract void setSeed(long seed);
 
-    /** {@inheritDoc} */
     @Override
     public long getSeed()
     {
         return this.seed;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long getOriginalSeed()
     {
         return this.originalSeed;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
         return this.getClass().toString() + "[" + this.seed + "]";
     }
 
-    /** {@inheritDoc} */
     @Override
     public byte[] saveState() throws StreamException
     {
@@ -150,7 +138,6 @@ public abstract class RandomNumberGenerator implements StreamInterface
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void restoreState(final byte[] state) throws StreamException
     {

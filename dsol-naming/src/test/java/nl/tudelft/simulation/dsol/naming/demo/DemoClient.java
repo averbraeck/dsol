@@ -72,7 +72,6 @@ public class DemoClient extends RmiObject implements EventListener
         System.exit(0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

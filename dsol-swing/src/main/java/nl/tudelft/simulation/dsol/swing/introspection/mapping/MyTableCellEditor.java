@@ -25,7 +25,6 @@ import javax.swing.table.TableCellEditor;
  */
 public class MyTableCellEditor implements TableCellEditor
 {
-    /** {@inheritDoc} */
     @Override
     public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected,
             final int row, final int column)
@@ -35,49 +34,42 @@ public class MyTableCellEditor implements TableCellEditor
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getCellEditorValue()
     {
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isCellEditable(final EventObject anEvent)
     {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean shouldSelectCell(final EventObject anEvent)
     {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean stopCellEditing()
     {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void cancelCellEditing()
     {
         // We cannot edit; this method will never be invoked.
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addCellEditorListener(final CellEditorListener l)
     {
         // Strange, we do not edit
     }
 
-    /** {@inheritDoc} */
     @Override
     public void removeCellEditorListener(final CellEditorListener l)
     {

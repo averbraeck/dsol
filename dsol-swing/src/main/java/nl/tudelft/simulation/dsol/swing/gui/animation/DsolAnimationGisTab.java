@@ -213,7 +213,6 @@ public class DsolAnimationGisTab extends DsolAnimationTab
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {

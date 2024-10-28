@@ -98,7 +98,6 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void initialize()
     {
@@ -117,7 +116,6 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
     public void notify(final Event event)
@@ -154,7 +152,6 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public double register(final double value)
     {
@@ -170,7 +167,6 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         return value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimulatorInterface<T> getSimulator()
     {

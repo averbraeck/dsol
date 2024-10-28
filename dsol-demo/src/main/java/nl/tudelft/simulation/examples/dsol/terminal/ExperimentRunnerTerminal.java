@@ -113,7 +113,6 @@ public class ExperimentRunnerTerminal implements EventListener
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void notify(final Event event) throws RemoteException
     {

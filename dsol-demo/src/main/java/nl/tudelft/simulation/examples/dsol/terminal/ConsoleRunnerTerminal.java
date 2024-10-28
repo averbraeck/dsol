@@ -75,7 +75,6 @@ public final class ConsoleRunnerTerminal implements EventListener
         System.exit(0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void notify(final Event event) throws RemoteException
     {

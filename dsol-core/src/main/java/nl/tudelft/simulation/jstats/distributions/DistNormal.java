@@ -65,7 +65,6 @@ public class DistNormal extends DistContinuous
         this.mu = mu;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -118,7 +117,6 @@ public class DistNormal extends DistContinuous
         return v1 * norm;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -141,7 +139,6 @@ public class DistNormal extends DistContinuous
         return this.sigma;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setStream(final StreamInterface stream)
     {
@@ -149,7 +146,6 @@ public class DistNormal extends DistContinuous
         this.haveNextNextGaussian = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

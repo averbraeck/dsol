@@ -37,7 +37,6 @@ public class DistContinuousFlowVolume extends DistContinuousUnit<FlowVolumeUnit,
         super(wrappedDistribution, FlowVolumeUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public FlowVolume draw()
     {

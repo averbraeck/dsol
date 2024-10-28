@@ -77,7 +77,6 @@ public interface AnimatorInterface
             this.animator = animator;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void run()
         {

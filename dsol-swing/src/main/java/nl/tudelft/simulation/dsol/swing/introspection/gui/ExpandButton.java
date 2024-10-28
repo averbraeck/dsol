@@ -190,7 +190,6 @@ public class ExpandButton extends JButton
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

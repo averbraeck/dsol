@@ -37,7 +37,6 @@ public class DistContinuousIlluminance extends DistContinuousUnit<IlluminanceUni
         super(wrappedDistribution, IlluminanceUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Illuminance draw()
     {

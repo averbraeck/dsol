@@ -30,7 +30,6 @@ public class SwingCellEditor extends AbstractCellEditor implements TableCellEdit
     /** the value to edit. */
     private JComponent component = new JPanel();
 
-    /** {@inheritDoc} */
     @Override
     public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected,
             final int row, final int column)
@@ -39,7 +38,6 @@ public class SwingCellEditor extends AbstractCellEditor implements TableCellEdit
         return (JComponent) value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getCellEditorValue()
     {

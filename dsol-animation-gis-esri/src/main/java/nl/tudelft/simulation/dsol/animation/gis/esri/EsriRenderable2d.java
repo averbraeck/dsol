@@ -124,7 +124,6 @@ public class EsriRenderable2d implements GisRenderable2d
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paintComponent(final Graphics2D graphics, final Bounds2d extent, final Dimension screen,
             final RenderableScale renderableScale, final ImageObserver observer)
@@ -148,21 +147,18 @@ public class EsriRenderable2d implements GisRenderable2d
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public EsriRenderable2d getSource()
     {
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds3d getBounds()
     {
         return this.bounds;
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation()
     {
@@ -213,14 +209,12 @@ public class EsriRenderable2d implements GisRenderable2d
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
     {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long getId()
     {

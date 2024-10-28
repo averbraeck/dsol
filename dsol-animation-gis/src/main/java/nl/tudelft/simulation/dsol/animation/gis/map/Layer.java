@@ -35,63 +35,54 @@ public class Layer implements LayerInterface
     /** the feature map, implemented by a LinkedHashMap to guarantee a reproducible order. */
     private List<FeatureInterface> features = new ArrayList<>();
 
-    /** {@inheritDoc} */
     @Override
     public List<FeatureInterface> getFeatures()
     {
         return this.features;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setFeatures(final List<FeatureInterface> features)
     {
         this.features = features;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addFeature(final FeatureInterface feature)
     {
         this.features.add(feature);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getName()
     {
         return this.name;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setName(final String name)
     {
         this.name = name;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isDisplay()
     {
         return this.display;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDisplay(final boolean status)
     {
         this.display = status;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isTransform()
     {
         return this.transform;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setTransform(final boolean transform)
     {

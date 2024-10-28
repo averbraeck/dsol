@@ -72,7 +72,6 @@ public class Container implements IntResourceRequestorInterface<Double>
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void receiveRequestedResource(final long requestedCapacity,
             final IntResource<Double> resource) throws RemoteException

@@ -37,7 +37,6 @@ public class DistContinuousRadioActivity extends DistContinuousUnit<RadioActivit
         super(wrappedDistribution, RadioActivityUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public RadioActivity draw()
     {

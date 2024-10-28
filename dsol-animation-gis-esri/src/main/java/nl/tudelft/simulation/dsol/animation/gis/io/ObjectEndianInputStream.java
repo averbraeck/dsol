@@ -40,7 +40,6 @@ public class ObjectEndianInputStream implements DataInput
         this.dataInputStream = new DataInputStream(inputStream);
     }
 
-    /** {@inheritDoc} */
     @Override
     public short readShort() throws IOException
     {
@@ -52,7 +51,6 @@ public class ObjectEndianInputStream implements DataInput
         return (short) ((this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff));
     }
 
-    /** {@inheritDoc} */
     @Override
     public int readUnsignedShort() throws IOException
     {
@@ -64,7 +62,6 @@ public class ObjectEndianInputStream implements DataInput
         return ((this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff));
     }
 
-    /** {@inheritDoc} */
     @Override
     public char readChar() throws IOException
     {
@@ -76,7 +73,6 @@ public class ObjectEndianInputStream implements DataInput
         return (char) ((this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff));
     }
 
-    /** {@inheritDoc} */
     @Override
     public int readInt() throws IOException
     {
@@ -88,7 +84,6 @@ public class ObjectEndianInputStream implements DataInput
         return (this.buffer[3]) << 24 | (this.buffer[2] & 0xff) << 16 | (this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff);
     }
 
-    /** {@inheritDoc} */
     @Override
     public long readLong() throws IOException
     {
@@ -102,7 +97,6 @@ public class ObjectEndianInputStream implements DataInput
                 | (long) (this.buffer[2] & 0xff) << 16 | (long) (this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff);
     }
 
-    /** {@inheritDoc} */
     @Override
     public float readFloat() throws IOException
     {
@@ -113,7 +107,6 @@ public class ObjectEndianInputStream implements DataInput
         return Float.intBitsToFloat(readInt());
     }
 
-    /** {@inheritDoc} */
     @Override
     public double readDouble() throws IOException
     {
@@ -148,56 +141,48 @@ public class ObjectEndianInputStream implements DataInput
         return this.inputStream.read(b, off, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void readFully(final byte[] b) throws IOException
     {
         this.dataInputStream.readFully(b, 0, b.length);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void readFully(final byte[] b, final int off, final int len) throws IOException
     {
         this.dataInputStream.readFully(b, off, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int skipBytes(final int n) throws IOException
     {
         return this.dataInputStream.skipBytes(n);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean readBoolean() throws IOException
     {
         return this.dataInputStream.readBoolean();
     }
 
-    /** {@inheritDoc} */
     @Override
     public byte readByte() throws IOException
     {
         return this.dataInputStream.readByte();
     }
 
-    /** {@inheritDoc} */
     @Override
     public int readUnsignedByte() throws IOException
     {
         return this.dataInputStream.readUnsignedByte();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String readUTF() throws IOException
     {
         return this.dataInputStream.readUTF();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String readLine()
     {

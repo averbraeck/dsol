@@ -103,7 +103,6 @@ public class MersenneTwister extends RandomNumberGenerator
         this.mag01[1] = MATRIX_A;
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized long next(final int bits)
     {
@@ -141,7 +140,6 @@ public class MersenneTwister extends RandomNumberGenerator
         return y << 32 + this.next(bits - 32);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void setSeed(final long seed)
     {

@@ -37,7 +37,6 @@ public class DistContinuousPressure extends DistContinuousUnit<PressureUnit, Pre
         super(wrappedDistribution, PressureUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Pressure draw()
     {

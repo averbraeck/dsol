@@ -60,7 +60,6 @@ public class MM1ExperimentApplication implements EventListener
         this.experiment.start();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

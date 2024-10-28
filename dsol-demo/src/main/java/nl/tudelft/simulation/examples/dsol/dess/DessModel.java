@@ -33,7 +33,6 @@ public class DessModel extends AbstractDsolModel<Double, DessSimulatorInterface<
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel()
     {

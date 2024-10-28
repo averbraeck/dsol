@@ -55,21 +55,18 @@ public class FieldProperty extends AbstractProperty implements Property
         this(owner, descriptor, true);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getName()
     {
         return this.descriptor.getName();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getType()
     {
         return this.descriptor.getType();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setRegularValue(final Object value)
     {
@@ -91,7 +88,6 @@ public class FieldProperty extends AbstractProperty implements Property
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getValue()
     {
@@ -105,14 +101,12 @@ public class FieldProperty extends AbstractProperty implements Property
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getInstance()
     {
         return this.owner;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEditable()
     {

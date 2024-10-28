@@ -64,14 +64,12 @@ public class StaticLocation3d extends OrientedPoint3d implements Locatable
         this.bounds = bounds;
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation()
     {
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds3d getBounds()
     {

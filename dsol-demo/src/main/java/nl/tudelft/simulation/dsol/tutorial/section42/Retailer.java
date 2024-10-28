@@ -89,7 +89,6 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
         this.reviewInventory();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void receiveProduct(final long amount)
     {
@@ -124,7 +123,6 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void order(final BuyerInterface buyer, final long amount)
     {

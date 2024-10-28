@@ -214,7 +214,6 @@ public abstract class Create<T extends Number & Comparable<T>> extends FlowObjec
      */
     protected abstract Entity<T> generateEntity();
 
-    /** {@inheritDoc} */
     @Override
     public void receiveEntity(final Entity<T> entity)
     {

@@ -116,7 +116,6 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
         return this.chart;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Container getSwingPanel()
     {
@@ -145,7 +144,6 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
         ((BoxAndWhiskerPlot) this.chart.getPlot()).setConfidenceInterval(confidenceInterval);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

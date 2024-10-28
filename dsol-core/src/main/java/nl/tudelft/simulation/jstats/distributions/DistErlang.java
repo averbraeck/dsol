@@ -66,7 +66,6 @@ public class DistErlang extends DistContinuous
         this.distGamma = this.k <= DistErlang.GAMMATHRESHOLD ? null : new DistGamma(stream, this.k, this.scale);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -85,7 +84,6 @@ public class DistErlang extends DistContinuous
         return this.distGamma.draw();
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -113,7 +111,6 @@ public class DistErlang extends DistContinuous
         return this.scale;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setStream(final StreamInterface stream)
     {
@@ -124,7 +121,6 @@ public class DistErlang extends DistContinuous
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

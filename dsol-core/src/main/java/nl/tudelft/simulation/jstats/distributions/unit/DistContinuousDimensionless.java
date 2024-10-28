@@ -37,7 +37,6 @@ public class DistContinuousDimensionless extends DistContinuousUnit<Dimensionles
         super(wrappedDistribution, DimensionlessUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Dimensionless draw()
     {

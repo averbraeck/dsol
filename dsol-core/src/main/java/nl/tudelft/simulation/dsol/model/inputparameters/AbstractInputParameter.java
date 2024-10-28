@@ -70,21 +70,18 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
         this.displayPriority = displayPriority;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getKey()
     {
         return this.key;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getExtendedKey()
     {
         return (getParent() == null) ? getKey() : getParent().getExtendedKey() + "." + getKey();
     }
 
-    /** {@inheritDoc} */
     @Override
     public VT getValue()
     {
@@ -110,14 +107,12 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
         this.value = newValue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public VT getDefaultValue()
     {
         return this.defaultValue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDefaultValue(final VT newValue) throws InputParameterException
     {
@@ -125,35 +120,30 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
         this.defaultValue = newValue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setReadOnly(final boolean readOnly)
     {
         this.readOnly = readOnly;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getDisplayPriority()
     {
         return this.displayPriority;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getShortName()
     {
         return this.shortName;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getDescription()
     {
         return this.description;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isReadOnly()
     {
@@ -169,21 +159,18 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
         this.parent = newParent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public AbstractInputParameterMap<?> getParent()
     {
         return this.parent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
         return getKey() + "[" + getShortName() + "] = " + getValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public AbstractInputParameter<?, ?> clone()
     {

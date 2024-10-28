@@ -52,7 +52,6 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         this.panel = panel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mouseClicked(final MouseEvent e)
     {
@@ -68,7 +67,6 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mousePressed(final MouseEvent e)
     {
@@ -81,7 +79,6 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mouseReleased(final MouseEvent e)
     {
@@ -100,21 +97,18 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mouseEntered(final MouseEvent e)
     {
         // Nothing to be done.
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mouseExited(final MouseEvent e)
     {
         // Nothing to be done
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mouseWheelMoved(final MouseWheelEvent e)
     {
@@ -130,7 +124,6 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mouseDragged(final MouseEvent e)
     {
@@ -141,7 +134,6 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         this.panel.repaint();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void mouseMoved(final MouseEvent mouseEvent)
     {
@@ -172,7 +164,6 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         this.timeBetweenAnimationMouseMoveEventsMs = timeBetweenAnimationMouseMoveEventsMs;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void keyPressed(final KeyEvent e)
     {
@@ -200,14 +191,12 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void keyReleased(final KeyEvent e)
     {
         // nothing to be done
     }
 
-    /** {@inheritDoc} */
     @Override
     public void keyTyped(final KeyEvent e)
     {

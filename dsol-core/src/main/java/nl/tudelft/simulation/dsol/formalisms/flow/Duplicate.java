@@ -52,7 +52,6 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T>
         this.numberCopies = numberCopies;
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void receiveEntity(final Entity<T> entity)
     {

@@ -130,7 +130,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         this.model = model;
     }
 
-    /** {@inheritDoc} */
     @Override
     public RunControl<T> getRunControl()
     {
@@ -217,7 +216,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         return new ExperimentReplication<T, S>(this.runControl, this, this.currentReplicationNumber);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {
@@ -353,7 +351,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         return this.currentReplicationNumber;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getContext()
     {
@@ -436,7 +433,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
         return this.running;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -462,7 +458,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
             this.experiment = experiment;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void run()
         {

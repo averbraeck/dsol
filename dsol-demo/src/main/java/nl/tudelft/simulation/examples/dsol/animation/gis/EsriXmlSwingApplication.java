@@ -97,7 +97,6 @@ public class EsriXmlSwingApplication extends DsolAnimationApplication
             super(simulator);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void constructModel() throws SimRuntimeException
         {

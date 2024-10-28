@@ -89,7 +89,6 @@ public class UpdateTimer extends TimerTask
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {

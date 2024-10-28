@@ -54,7 +54,6 @@ public class MyColorEditor extends AbstractCellEditor implements TableCellEditor
             this.chooser = chooser;
         }
 
-        /** {@inheritDoc} */
         @Override
         public synchronized void actionPerformed(final ActionEvent event)
         {
@@ -70,7 +69,6 @@ public class MyColorEditor extends AbstractCellEditor implements TableCellEditor
      */
     protected class CancelListener implements ActionListener
     {
-        /** {@inheritDoc} */
         @Override
         public void actionPerformed(final ActionEvent e)
         {
@@ -78,14 +76,12 @@ public class MyColorEditor extends AbstractCellEditor implements TableCellEditor
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getCellEditorValue()
     {
         return this.color;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected,
             final int row, final int column)

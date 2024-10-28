@@ -37,7 +37,6 @@ public class DistContinuousElectricalPotential extends DistContinuousUnit<Electr
         super(wrappedDistribution, ElectricalPotentialUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ElectricalPotential draw()
     {

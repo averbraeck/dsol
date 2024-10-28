@@ -55,7 +55,6 @@ public class Customer implements BuyerInterface
         this.createOrder();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void receiveProduct(final long amount)
     {

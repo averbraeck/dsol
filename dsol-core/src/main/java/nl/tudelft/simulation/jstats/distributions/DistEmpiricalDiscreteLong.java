@@ -44,7 +44,6 @@ public class DistEmpiricalDiscreteLong extends DistDiscrete
         this.empiricalDistribution = empiricalDistribution;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long draw()
     {
@@ -52,7 +51,6 @@ public class DistEmpiricalDiscreteLong extends DistDiscrete
         return this.empiricalDistribution.getCeilingEntry(u).getValue().longValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {

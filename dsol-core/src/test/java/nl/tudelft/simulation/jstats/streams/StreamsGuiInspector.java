@@ -41,7 +41,6 @@ public class StreamsGuiInspector extends JPanel
         this.stream = stream;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void paintComponent(final Graphics g)
     {

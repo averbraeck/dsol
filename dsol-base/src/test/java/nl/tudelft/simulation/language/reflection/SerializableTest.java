@@ -194,7 +194,6 @@ public class SerializableTest
             this.value = value;
         }
 
-        /** {@inheritDoc} */
         @Override
         public int hashCode()
         {
@@ -205,7 +204,6 @@ public class SerializableTest
             return result;
         }
 
-        /** {@inheritDoc} */
         @Override
         @SuppressWarnings("checkstyle:needbraces")
         public boolean equals(final Object obj)

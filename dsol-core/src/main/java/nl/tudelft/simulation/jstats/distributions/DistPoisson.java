@@ -43,7 +43,6 @@ public class DistPoisson extends DistDiscrete
         this.expl = Math.exp(-this.lambda);
     }
 
-    /** {@inheritDoc} */
     @Override
     public long draw()
     {
@@ -59,7 +58,6 @@ public class DistPoisson extends DistDiscrete
         return x;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {
@@ -78,7 +76,6 @@ public class DistPoisson extends DistDiscrete
         return this.lambda;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

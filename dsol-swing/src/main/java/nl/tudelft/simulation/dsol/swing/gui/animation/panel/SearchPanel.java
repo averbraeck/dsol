@@ -90,21 +90,18 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
             /** */
             private static final long serialVersionUID = 20180207L;
 
-            /** {@inheritDoc} */
             @Override
             public boolean isForeground()
             {
                 return false;
             }
 
-            /** {@inheritDoc} */
             @Override
             public boolean isBackground()
             {
                 return false;
             }
 
-            /** {@inheritDoc} */
             @Override
             public String toString()
             {
@@ -158,7 +155,6 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
         actionPerformed(null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent e)
     {
@@ -167,35 +163,30 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
                         this.idTextField.getText(), this.trackObject.isSelected()}));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void focusGained(final FocusEvent e)
     {
         actionPerformed(null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void focusLost(final FocusEvent e)
     {
         // Do nothing
     }
 
-    /** {@inheritDoc} */
     @Override
     public void insertUpdate(final DocumentEvent e)
     {
         actionPerformed(null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void removeUpdate(final DocumentEvent e)
     {
         actionPerformed(null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void changedUpdate(final DocumentEvent e)
     {
@@ -261,7 +252,6 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
         /** */
         private static final long serialVersionUID = 20210213L;
 
-        /** {@inheritDoc} */
         @Override
         public void fireEvent(final Event event)
         {
@@ -278,28 +268,24 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
         return this.searchPanelEventProducer;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType)
     {
         return this.searchPanelEventProducer.addListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType, final ReferenceType referenceType)
     {
         return this.searchPanelEventProducer.addListener(listener, eventType, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType, final int position)
     {
         return this.searchPanelEventProducer.addListener(listener, eventType, position);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType, final int position,
             final ReferenceType referenceType)
@@ -307,7 +293,6 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
         return this.searchPanelEventProducer.addListener(listener, eventType, position, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean removeListener(final EventListener listener, final EventType eventType)
 
@@ -315,14 +300,12 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
         return this.searchPanelEventProducer.removeListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int removeAllListeners()
     {
         return this.searchPanelEventProducer.removeAllListeners();
     }
 
-    /** {@inheritDoc} */
     @Override
     public EventListenerMap getEventListenerMap() throws RemoteException
     {

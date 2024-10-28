@@ -41,7 +41,6 @@ public class TallyTableModel extends StatisticsTableModel
         notify(null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

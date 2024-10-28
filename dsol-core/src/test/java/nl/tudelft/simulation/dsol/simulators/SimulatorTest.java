@@ -83,7 +83,6 @@ public class SimulatorTest
 
         }
 
-        /** {@inheritDoc} */
         @Override
         public void constructModel() throws SimRuntimeException
         {

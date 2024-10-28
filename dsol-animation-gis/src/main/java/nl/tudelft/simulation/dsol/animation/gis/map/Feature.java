@@ -54,21 +54,18 @@ public class Feature implements FeatureInterface
     /** whether the shapes have been read or not. */
     private boolean initialized = false;
 
-    /** {@inheritDoc} */
     @Override
     public final String getKey()
     {
         return this.key;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void setKey(final String key)
     {
         this.key = key;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final String getValue()
     {
@@ -82,42 +79,36 @@ public class Feature implements FeatureInterface
 //        return this.dataSource;
 //    }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isInitialized()
     {
         return this.initialized;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setInitialized(final boolean initialized)
     {
         this.initialized = initialized;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getNumShapes()
     {
         return this.shapes.size();
     }
 
-    /** {@inheritDoc} */
     @Override
     public GisObject getShape(final int index) throws IndexOutOfBoundsException
     {
         return this.shapes.get(index);
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<GisObject> getShapes()
     {
         return this.shapes;
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<GisObject> getShapes(final Bounds2d rectangle)
     {
@@ -154,35 +145,30 @@ public class Feature implements FeatureInterface
 //        this.dataSource = dataSource;
 //    }
 
-    /** {@inheritDoc} */
     @Override
     public final void setValue(final String value)
     {
         this.value = value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Color getFillColor()
     {
         return this.fillColor;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setFillColor(final Color fillColor)
     {
         this.fillColor = fillColor;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Color getOutlineColor()
     {
         return this.outlineColor;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setOutlineColor(final Color outlineColor)
     {

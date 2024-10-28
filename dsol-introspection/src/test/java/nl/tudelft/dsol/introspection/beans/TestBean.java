@@ -155,7 +155,6 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
         this.subBean = subBean;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

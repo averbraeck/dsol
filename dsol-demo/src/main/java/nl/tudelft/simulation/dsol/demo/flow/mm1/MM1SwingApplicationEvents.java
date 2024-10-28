@@ -116,7 +116,6 @@ public class MM1SwingApplicationEvents extends DsolApplication
             devsSimulator.addListener(this, SimulatorInterface.TIME_CHANGED_EVENT);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void notify(final Event event) throws RemoteException
         {

@@ -42,14 +42,12 @@ public abstract class Ball implements Locatable
         this.name = "" + Ball.number;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds3d getBounds() throws RemoteException
     {
         return new Bounds3d(2.0 * Ball.RADIUS, 2.0 * Ball.RADIUS, 2.0 * Ball.RADIUS);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

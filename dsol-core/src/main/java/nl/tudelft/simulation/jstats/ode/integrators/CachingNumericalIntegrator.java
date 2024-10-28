@@ -58,7 +58,6 @@ public abstract class CachingNumericalIntegrator extends NumericalIntegrator
         this.startingSubSteps = startingSubSteps;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setStepSize(final double stepSize)
     {
@@ -66,7 +65,6 @@ public abstract class CachingNumericalIntegrator extends NumericalIntegrator
         this.lastCachePlace = -1;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] next(final double x, final double[] y)
     {

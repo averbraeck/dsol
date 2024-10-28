@@ -59,7 +59,6 @@ public class OsmLayerSink implements Sink
         this.coordinateTransform = coordinateTransform;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void process(final EntityContainer entityContainer)
     {
@@ -134,14 +133,12 @@ public class OsmLayerSink implements Sink
 
     }
 
-    /** {@inheritDoc} */
     @Override
     public void initialize(final Map<String, Object> metaData)
     {
         // nothing to do right now.
     }
 
-    /** {@inheritDoc} */
     @Override
     public void complete()
     {
@@ -182,7 +179,6 @@ public class OsmLayerSink implements Sink
         way.feature.getShapes().add(new GisObject(path, att));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void close()
     {

@@ -86,14 +86,12 @@ public class DefaultConfiguration implements CellPresentationConfiguration
         this.editors.add(new Class[] {cellType, editingClass});
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?>[][] getRenderers()
     {
         return this.renderers.toArray(new Class[0][0]);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?>[][] getEditors()
     {

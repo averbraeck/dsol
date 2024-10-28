@@ -37,7 +37,6 @@ public class DistContinuousForce extends DistContinuousUnit<ForceUnit, Force>
         super(wrappedDistribution, ForceUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Force draw()
     {

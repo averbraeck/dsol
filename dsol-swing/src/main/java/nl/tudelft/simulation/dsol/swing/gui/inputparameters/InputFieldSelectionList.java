@@ -58,7 +58,6 @@ public class InputFieldSelectionList<T> extends AbstractInputField
         panel.add(explanation);
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterSelectionList<T> getParameter()

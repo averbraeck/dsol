@@ -80,21 +80,18 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getAtomicName() throws RemoteException
     {
         return this.atomicName;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getParent() throws RemoteException
     {
         return this.parent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getRootContext() throws RemoteException
     {
@@ -106,14 +103,12 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getAbsolutePath() throws RemoteException
     {
         return this.absolutePath;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getObject(final String key) throws NamingException, RemoteException
     {
@@ -128,7 +123,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         return this.elements.get(key);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(final String name) throws NamingException, RemoteException
     {
@@ -141,7 +135,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean exists(final String name) throws NamingException, RemoteException
     {
@@ -153,7 +146,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         return contextName.getContext().hasKey(contextName.getName());
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasKey(final String key) throws NamingException, RemoteException
     {
@@ -168,21 +160,18 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
      * @param object Object; the object to look up; mey be null
      * @return boolean; whether an object with the given key has been registered once or more in the current context
      */
-    /** {@inheritDoc} */
     @Override
     public boolean hasObject(final Object object) throws RemoteException
     {
         return this.elements.containsValue(object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() throws RemoteException
     {
         return this.elements.isEmpty();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bindObject(final String key, final Object object) throws NamingException, RemoteException
     {
@@ -198,7 +187,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         fireEvent(ContextInterface.OBJECT_ADDED_EVENT, new Object[] {getAbsolutePath(), key, object});
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bindObject(final Object object) throws NamingException, RemoteException
     {
@@ -206,7 +194,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         bindObject(makeObjectKey(object), object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bind(final String name, final Object object) throws NamingException, RemoteException
     {
@@ -214,7 +201,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         contextName.getContext().bindObject(contextName.getName(), object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void unbindObject(final String key) throws NamingException, RemoteException
     {
@@ -228,7 +214,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void unbind(final String name) throws NamingException, RemoteException
     {
@@ -236,7 +221,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         contextName.getContext().unbindObject(contextName.getName());
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rebindObject(final String key, final Object object) throws NamingException, RemoteException
     {
@@ -253,7 +237,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         fireEvent(ContextInterface.OBJECT_ADDED_EVENT, new Object[] {getAbsolutePath(), key, object});
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rebind(final String name, final Object object) throws NamingException, RemoteException
     {
@@ -261,7 +244,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         contextName.getContext().rebindObject(contextName.getName(), object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rename(final String oldName, final String newName) throws NamingException, RemoteException
     {
@@ -277,14 +259,12 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         contextNameNew.getContext().bindObject(contextNameNew.getName(), object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface createSubcontext(final String name) throws NamingException, RemoteException
     {
         return lookupAndBuild(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void destroySubcontext(final String name) throws NamingException, RemoteException
     {
@@ -396,28 +376,24 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Set<String> keySet() throws RemoteException
     {
         return this.elements.keySet();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Collection<Object> values() throws RemoteException
     {
         return this.elements.values();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Map<String, Object> bindings() throws RemoteException
     {
         return this.elements;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fireObjectChangedEventValue(final Object object)
             throws NameNotFoundException, NullPointerException, NamingException, RemoteException
@@ -426,7 +402,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         fireObjectChangedEventKey(makeObjectKey(object));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fireObjectChangedEventKey(final String key)
             throws NameNotFoundException, NullPointerException, NamingException, RemoteException
@@ -458,7 +433,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         return object.toString().replace(ContextInterface.SEPARATOR, ContextInterface.REPLACE_SEPARATOR);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void checkCircular(final Object newObject) throws NamingException, RemoteException
     {
@@ -474,7 +448,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void close() throws NamingException, RemoteException
     {
@@ -483,7 +456,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         this.parent = null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -499,7 +471,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         return "JvmContext[parent=" + parentName + ", atomicName=" + this.atomicName + "]";
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString(final boolean verbose) throws RemoteException
     {
@@ -610,7 +581,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
             return this.name;
         }
 
-        /** {@inheritDoc} */
         @Override
         public int hashCode()
         {
@@ -621,7 +591,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
             return result;
         }
 
-        /** {@inheritDoc} */
         @Override
         public boolean equals(final Object obj)
         {
@@ -649,7 +618,6 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
             return true;
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

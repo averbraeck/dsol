@@ -37,7 +37,6 @@ public class DistContinuousSpeed extends DistContinuousUnit<SpeedUnit, Speed>
         super(wrappedDistribution, SpeedUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Speed draw()
     {

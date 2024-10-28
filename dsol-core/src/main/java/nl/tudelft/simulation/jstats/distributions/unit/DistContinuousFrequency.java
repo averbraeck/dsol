@@ -37,7 +37,6 @@ public class DistContinuousFrequency extends DistContinuousUnit<FrequencyUnit, F
         super(wrappedDistribution, FrequencyUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Frequency draw()
     {

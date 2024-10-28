@@ -52,7 +52,6 @@ public class ButtonPanel extends JPanel implements ActionListener
         add(ButtonUtil.makeButton(this, "gridButton", "/resources/Grid.png", "Grid", "Toggle grid on/off", true));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {

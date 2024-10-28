@@ -40,7 +40,6 @@ public class SnippetFilter extends AbstractFilter
         this.snippet = snippet;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean filter(final Object entry)
     {
@@ -57,7 +56,6 @@ public class SnippetFilter extends AbstractFilter
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getCriterion()
     {

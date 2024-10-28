@@ -73,7 +73,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
             super(wrappedDistribution);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Double draw()
         {
@@ -95,7 +94,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
             super(wrappedDistribution);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Float draw()
         {
@@ -117,7 +115,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
             super(wrappedDistribution);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Long draw()
         {
@@ -144,7 +141,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
             this.unit = unit;
         }
 
-        /** {@inheritDoc} */
         @Override
         public Duration draw()
         {
@@ -171,7 +167,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
             this.unit = unit;
         }
 
-        /** {@inheritDoc} */
         @Override
         public FloatDuration draw()
         {

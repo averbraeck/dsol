@@ -71,7 +71,6 @@ public class DevsRealTimeClockDoubleTest implements EventListener
         this.devsSimulator.scheduleEventRel(1.0, this, "step1", new Object[] {checkTime + 1.0});
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {
@@ -221,7 +220,6 @@ public class DevsRealTimeClockDoubleTest implements EventListener
             super(simulator);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void constructModel() throws SimRuntimeException
         {

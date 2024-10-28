@@ -23,7 +23,6 @@ public class MyDefaultRenderer extends DefaultTableCellRenderer
     /** */
     private static final long serialVersionUID = 20140831L;
 
-    /** {@inheritDoc} */
     @Override
     public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected,
             final boolean hasFocus, final int row, final int column)

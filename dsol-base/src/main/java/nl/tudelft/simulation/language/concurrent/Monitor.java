@@ -198,7 +198,6 @@ public final class Monitor
             return this.owner;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void run()
         {

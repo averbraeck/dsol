@@ -32,7 +32,6 @@ public abstract class AbstractSuppressIntrospector implements Introspector
         this.parent = parent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Property[] getProperties(final Object arg0)
     {
@@ -48,7 +47,6 @@ public abstract class AbstractSuppressIntrospector implements Introspector
         return result.toArray(new Property[0]);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String[] getPropertyNames(final Object arg0)
     {
@@ -61,7 +59,6 @@ public abstract class AbstractSuppressIntrospector implements Introspector
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Property getProperty(final Object arg0, final String arg1)
     {

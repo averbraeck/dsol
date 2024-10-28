@@ -105,14 +105,12 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
         this.tallies.add(tally);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getPlotType()
     {
         return PLOT_TYPE;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event)
     {
@@ -262,7 +260,6 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void draw(final Graphics2D g2, final Rectangle2D rectangle, final Point2D point, final PlotState plotState,
             final PlotRenderingInfo plotRenderingInfo)

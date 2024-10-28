@@ -43,14 +43,12 @@ public class DistUniform extends DistContinuous
         this.max = max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
         return this.min + (this.max - this.min) * this.stream.nextDouble();
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -79,7 +77,6 @@ public class DistUniform extends DistContinuous
         return this.max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

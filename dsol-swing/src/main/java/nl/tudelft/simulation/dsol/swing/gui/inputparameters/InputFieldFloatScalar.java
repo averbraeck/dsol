@@ -72,7 +72,6 @@ public class InputFieldFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T
         panel.add(explanation);
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterFloatScalar<U, T> getParameter()

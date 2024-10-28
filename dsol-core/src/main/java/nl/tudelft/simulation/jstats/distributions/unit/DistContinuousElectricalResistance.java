@@ -37,7 +37,6 @@ public class DistContinuousElectricalResistance extends DistContinuousUnit<Elect
         super(wrappedDistribution, ElectricalResistanceUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ElectricalResistance draw()
     {

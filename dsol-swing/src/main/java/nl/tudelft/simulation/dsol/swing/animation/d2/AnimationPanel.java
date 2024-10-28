@@ -54,7 +54,6 @@ public class AnimationPanel extends VisualizationPanel
         simulator.addListener(this, Replication.START_REPLICATION_EVENT);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

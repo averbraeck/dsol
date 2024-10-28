@@ -24,12 +24,10 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  */
 public interface GisRenderable2d extends Renderable2dInterface<GisRenderable2d>, Locatable
 {
-    /** {@inheritDoc} */
     @Override
     void paintComponent(Graphics2D graphics, Bounds2d extent, Dimension screen, RenderableScale renderableScale,
             ImageObserver observer);
 
-    /** {@inheritDoc} */
     @Override
     default GisRenderable2d getSource()
     {
@@ -47,14 +45,12 @@ public interface GisRenderable2d extends Renderable2dInterface<GisRenderable2d>,
     @Override
     void destroy(Contextualized contextProvider);
 
-    /** {@inheritDoc} */
     @Override
     default boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
     {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     default long getId()
     {

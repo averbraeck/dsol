@@ -37,7 +37,6 @@ public class DistContinuousDensity extends DistContinuousUnit<DensityUnit, Densi
         super(wrappedDistribution, DensityUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Density draw()
     {

@@ -24,7 +24,6 @@ public class Renderable2dComparator implements Comparator<Renderable2dInterface<
         super();
     }
 
-    /** {@inheritDoc} */
     @Override
     public int compare(final Renderable2dInterface<?> r1, final Renderable2dInterface<?> r2)
     {

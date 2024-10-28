@@ -25,7 +25,6 @@ public class InputFieldFloat extends InputFieldString
         super(panel, parameter);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterFloat getParameter()
     {

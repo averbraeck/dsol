@@ -361,7 +361,6 @@ public class ExperimentTest
             this.dataCollector = dataCollector;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void constructModel() throws SimRuntimeException
         {
@@ -426,7 +425,6 @@ public class ExperimentTest
             this.procDist = new DistExponential(getStream("procStream"), 0.8);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void constructModel() throws SimRuntimeException
         {

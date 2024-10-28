@@ -124,21 +124,18 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
         this.valueMap.put(nextKey, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getRowCount()
     {
         return this.keyMap.size();
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getColumnCount()
     {
         return MapTableModel.COLUMNS.length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
@@ -161,14 +158,12 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getColumnName(final int columnIndex)
     {
         return MapTableModel.COLUMNS[columnIndex];
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isCellEditable(final int rowIndex, final int columnIndex)
     {
@@ -180,7 +175,6 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setValueAt(final Object keyValue, final int rowIndex, final int columnIndex)
     {
@@ -190,7 +184,6 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
         throw new IllegalArgumentException("cannot set values in a Map...");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getColumnClass(final int columnIndex)
     {
@@ -222,14 +215,12 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
         return new MapProperty(this.rowKeys.get(index), this.parentProperty.getName());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Introspector getIntrospector()
     {
         return this.introspector;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
@@ -295,28 +286,24 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
             this.name = name;
         }
 
-        /** {@inheritDoc} */
         @Override
         public Object getInstance()
         {
             return MapTableModel.this.valueMap.values();
         }
 
-        /** {@inheritDoc} */
         @Override
         public String getName()
         {
             return this.name + "[" + MapTableModel.this.rowKeys.indexOf(this.key) + "]";
         }
 
-        /** {@inheritDoc} */
         @Override
         public Class<?> getType()
         {
             return MapTableModel.this.valueMap.get(this.key).getClass();
         }
 
-        /** {@inheritDoc} */
         @Override
         public Object getValue()
         {
@@ -330,14 +317,12 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
             }
         }
 
-        /** {@inheritDoc} */
         @Override
         public boolean isEditable()
         {
             return false;
         }
 
-        /** {@inheritDoc} */
         @Override
         protected void setRegularValue(final Object value)
         {
@@ -345,7 +330,6 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
                     + "A program is not supposed to arrive here.");
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {
@@ -353,7 +337,6 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

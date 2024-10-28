@@ -33,7 +33,6 @@ public class TestModel extends AbstractDsolModel<Double, SimulatorInterface<Doub
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel()
     {
@@ -51,7 +50,6 @@ public class TestModel extends AbstractDsolModel<Double, SimulatorInterface<Doub
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event)
     {

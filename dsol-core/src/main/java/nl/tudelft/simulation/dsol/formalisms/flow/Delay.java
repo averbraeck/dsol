@@ -41,7 +41,6 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
         this.delayDistribution = delayDistribution;
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void receiveEntity(final Entity<T> entity)
     {

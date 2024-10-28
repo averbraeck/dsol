@@ -60,14 +60,12 @@ public class StaticLocation2d extends OrientedPoint2d implements Locatable
         this.bounds = bounds;
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint2d getLocation()
     {
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds2d getBounds()
     {

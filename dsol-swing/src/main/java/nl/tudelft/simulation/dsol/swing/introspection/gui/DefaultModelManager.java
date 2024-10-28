@@ -45,42 +45,36 @@ public class DefaultModelManager implements ModelManager
         this.defaultMapObjectTableModel = mapModelClass;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getDefaultCollectionObjectTableModel()
     {
         return this.defaultCollectionObjectTableModel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getDefaultObjectTableModel()
     {
         return this.defaultObjectTableModel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getDefaultMapObjectTableModel()
     {
         return this.defaultMapObjectTableModel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDefaultCollectionObjectTableModel(final Class<?> defaultCollectionObjectTableModel)
     {
         this.defaultCollectionObjectTableModel = defaultCollectionObjectTableModel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDefaultObjectTableModel(final Class<?> defaultObjectTableModel)
     {
         this.defaultObjectTableModel = defaultObjectTableModel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDefaultMapObjectTableModel(final Class<?> defaultMapTableModel)
     {

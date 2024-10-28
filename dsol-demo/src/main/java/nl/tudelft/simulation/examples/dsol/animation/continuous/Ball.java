@@ -59,7 +59,6 @@ public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation() throws RemoteException
     {

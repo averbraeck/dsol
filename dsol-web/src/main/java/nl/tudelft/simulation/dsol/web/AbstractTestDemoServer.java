@@ -121,7 +121,6 @@ public abstract class AbstractTestDemoServer
     class MyResourceHandler extends ResourceHandler
     {
 
-        /** {@inheritDoc} */
         @Override
         public Resource getResource(final String path)
         {
@@ -137,7 +136,6 @@ public abstract class AbstractTestDemoServer
             }
         }
 
-        /** {@inheritDoc} */
         @Override
         public void handle(final String target, final Request baseRequest, final HttpServletRequest request,
                 final HttpServletResponse response) throws IOException, ServletException
@@ -227,7 +225,6 @@ public abstract class AbstractTestDemoServer
             this.webServer = webServer;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void handle(final String target, final Request baseRequest, final HttpServletRequest request,
                 final HttpServletResponse response) throws IOException, ServletException

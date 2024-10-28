@@ -27,28 +27,24 @@ public class MapImage implements MapImageInterface
     /** canvas image size; default is HD screen size. */
     private Dimension size = new Dimension(1920, 1080);
 
-    /** {@inheritDoc} */
     @Override
     public Color getBackgroundColor()
     {
         return this.backgroundColor;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setBackgroundColor(final Color backgroundColor)
     {
         this.backgroundColor = backgroundColor;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Dimension getSize()
     {
         return this.size;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setSize(final Dimension size)
     {

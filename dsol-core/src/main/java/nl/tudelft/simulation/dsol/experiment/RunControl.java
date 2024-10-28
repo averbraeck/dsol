@@ -67,63 +67,54 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
         this.warmupTime = SimTime.plus(startTime, warmupPeriod);
     }
 
-    /** {@inheritDoc} */
     @Override
     public RunControl<T> getRunControl()
     {
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getId()
     {
         return this.id;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDescription(final String description)
     {
         this.description = description;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getDescription()
     {
         return this.description;
     }
 
-    /** {@inheritDoc} */
     @Override
     public T getStartTime()
     {
         return this.startTime;
     }
 
-    /** {@inheritDoc} */
     @Override
     public T getEndTime()
     {
         return this.endTime;
     }
 
-    /** {@inheritDoc} */
     @Override
     public T getWarmupTime()
     {
         return this.warmupTime;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode()
     {
         return Objects.hash(this.endTime, this.id, this.startTime, this.warmupTime);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj)
     {
@@ -138,7 +129,6 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
                 && Objects.equals(this.startTime, other.startTime) && Objects.equals(this.warmupTime, other.warmupTime);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

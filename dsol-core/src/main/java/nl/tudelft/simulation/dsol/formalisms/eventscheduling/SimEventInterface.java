@@ -54,7 +54,6 @@ public interface SimEventInterface<T extends Number & Comparable<T>> extends Ser
      */
     long getId();
 
-    /** {@inheritDoc} */
     @Override
     default int compareTo(final SimEventInterface<T> simEvent)
     {

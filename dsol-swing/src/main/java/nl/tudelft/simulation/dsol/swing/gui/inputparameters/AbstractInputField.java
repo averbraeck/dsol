@@ -30,14 +30,12 @@ public abstract class AbstractInputField implements InputField
         this.key = parameter.getKey();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getKey()
     {
         return this.key;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameter<?, ?> getParameter()
     {

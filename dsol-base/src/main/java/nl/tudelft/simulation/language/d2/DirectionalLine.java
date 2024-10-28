@@ -122,7 +122,6 @@ public class DirectionalLine extends Line2D.Double
         this.calcNormal();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setLine(final double x1, final double y1, final double x2, final double y2)
     {
@@ -169,7 +168,6 @@ public class DirectionalLine extends Line2D.Double
                 || ((this.x1 == line.x2 && this.x2 == line.x1 && this.y1 == line.y2 && this.y2 == line.y1));
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

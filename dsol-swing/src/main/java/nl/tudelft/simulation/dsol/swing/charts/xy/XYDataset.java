@@ -41,7 +41,6 @@ public class XYDataset extends AbstractSeriesDataset implements org.jfree.data.x
         this.fireDatasetChanged();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void datasetChanged(final DatasetChangeEvent arg0)
     {
@@ -64,35 +63,30 @@ public class XYDataset extends AbstractSeriesDataset implements org.jfree.data.x
         this.fireDatasetChanged();
     }
 
-    /** {@inheritDoc} */
     @Override
     public DomainOrder getDomainOrder()
     {
         return DomainOrder.ASCENDING;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getItemCount(final int serie)
     {
         return this.series[serie].getItemCount();
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getXValue(final int serie, final int item)
     {
         return this.series[serie].getXValue(item);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getYValue(final int serie, final int item)
     {
         return this.series[serie].getYValue(item);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getSeriesCount()
     {
@@ -108,14 +102,12 @@ public class XYDataset extends AbstractSeriesDataset implements org.jfree.data.x
         return this.series[serie].getSeriesName();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Number getX(final int serie, final int item)
     {
         return Double.valueOf(this.series[serie].getXValue(item));
     }
 
-    /** {@inheritDoc} */
     @Override
     public Number getY(final int serie, final int item)
     {
@@ -134,7 +126,6 @@ public class XYDataset extends AbstractSeriesDataset implements org.jfree.data.x
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Comparable<?> getSeriesKey(final int seriesNumber)
     {

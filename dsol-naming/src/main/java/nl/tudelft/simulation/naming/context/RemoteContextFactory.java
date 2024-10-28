@@ -33,7 +33,6 @@ public class RemoteContextFactory implements ContextFactory
     /** context refers to the static RemoteContextClient. */
     private static RemoteContext context = null;
 
-    /** {@inheritDoc} */
     @Override
     public synchronized ContextInterface getInitialContext(final Hashtable<?, ?> environment, final String atomicName)
     {

@@ -50,7 +50,6 @@ public class BallAnimation extends SimRenderable2d<Ball>
         setScaleY(nr % 2 == 1);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paint(final Graphics2D graphics, final ImageObserver observer)
     {

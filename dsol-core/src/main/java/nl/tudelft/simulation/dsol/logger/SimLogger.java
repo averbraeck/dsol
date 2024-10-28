@@ -256,42 +256,36 @@ public class SimLogger
 
         /* ****************************************** TRACE ******************************************/
 
-        /** {@inheritDoc} */
         @Override
         public void trace(final Object object)
         {
             LogEntryForwarder.forward(1, Level.TRACE, this.simTimeFormatter.format(object.toString()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void trace(final String message)
         {
             LogEntryForwarder.forward(1, Level.TRACE, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void trace(final String message, final Object... arguments)
         {
             LogEntryForwarder.forward(1, Level.TRACE, this.simTimeFormatter.format(message), arguments);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void trace(final Throwable exception)
         {
             LogEntryForwarder.forward(1, Level.TRACE, exception, this.simTimeFormatter.format(exception.getMessage()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void trace(final Throwable exception, final String message)
         {
             LogEntryForwarder.forward(1, Level.TRACE, exception, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void trace(final Throwable exception, final String message, final Object... arguments)
         {
@@ -300,42 +294,36 @@ public class SimLogger
 
         /* ****************************************** DEBUG ******************************************/
 
-        /** {@inheritDoc} */
         @Override
         public void debug(final Object object)
         {
             LogEntryForwarder.forward(1, Level.DEBUG, this.simTimeFormatter.format(object.toString()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void debug(final String message)
         {
             LogEntryForwarder.forward(1, Level.DEBUG, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void debug(final String message, final Object... arguments)
         {
             LogEntryForwarder.forward(1, Level.DEBUG, this.simTimeFormatter.format(message), arguments);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void debug(final Throwable exception)
         {
             LogEntryForwarder.forward(1, Level.DEBUG, exception, this.simTimeFormatter.format(exception.getMessage()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void debug(final Throwable exception, final String message)
         {
             LogEntryForwarder.forward(1, Level.DEBUG, exception, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void debug(final Throwable exception, final String message, final Object... arguments)
         {
@@ -344,42 +332,36 @@ public class SimLogger
 
         /* ****************************************** INFO ******************************************/
 
-        /** {@inheritDoc} */
         @Override
         public void info(final Object object)
         {
             LogEntryForwarder.forward(1, Level.INFO, this.simTimeFormatter.format(object.toString()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void info(final String message)
         {
             LogEntryForwarder.forward(1, Level.INFO, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void info(final String message, final Object... arguments)
         {
             LogEntryForwarder.forward(1, Level.INFO, this.simTimeFormatter.format(message), arguments);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void info(final Throwable exception)
         {
             LogEntryForwarder.forward(1, Level.INFO, exception, this.simTimeFormatter.format(exception.getMessage()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void info(final Throwable exception, final String message)
         {
             LogEntryForwarder.forward(1, Level.INFO, exception, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void info(final Throwable exception, final String message, final Object... arguments)
         {
@@ -388,42 +370,36 @@ public class SimLogger
 
         /* ****************************************** WARN ******************************************/
 
-        /** {@inheritDoc} */
         @Override
         public void warn(final Object object)
         {
             LogEntryForwarder.forward(1, Level.WARNING, this.simTimeFormatter.format(object.toString()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void warn(final String message)
         {
             LogEntryForwarder.forward(1, Level.WARNING, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void warn(final String message, final Object... arguments)
         {
             LogEntryForwarder.forward(1, Level.WARNING, this.simTimeFormatter.format(message), arguments);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void warn(final Throwable exception)
         {
             LogEntryForwarder.forward(1, Level.WARNING, exception, this.simTimeFormatter.format(exception.getMessage()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void warn(final Throwable exception, final String message)
         {
             LogEntryForwarder.forward(1, Level.WARNING, exception, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void warn(final Throwable exception, final String message, final Object... arguments)
         {
@@ -432,42 +408,36 @@ public class SimLogger
 
         /* ****************************************** ERROR ******************************************/
 
-        /** {@inheritDoc} */
         @Override
         public void error(final Object object)
         {
             LogEntryForwarder.forward(1, Level.ERROR, this.simTimeFormatter.format(object.toString()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void error(final String message)
         {
             LogEntryForwarder.forward(1, Level.ERROR, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void error(final String message, final Object... arguments)
         {
             LogEntryForwarder.forward(1, Level.ERROR, this.simTimeFormatter.format(message), arguments);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void error(final Throwable exception)
         {
             LogEntryForwarder.forward(1, Level.ERROR, exception, this.simTimeFormatter.format(exception.getMessage()));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void error(final Throwable exception, final String message)
         {
             LogEntryForwarder.forward(1, Level.ERROR, exception, this.simTimeFormatter.format(message));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void error(final Throwable exception, final String message, final Object... arguments)
         {

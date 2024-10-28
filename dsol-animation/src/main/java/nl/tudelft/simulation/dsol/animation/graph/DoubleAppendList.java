@@ -95,7 +95,6 @@ public class DoubleAppendList implements Iterable<Double>, Serializable
         return this.storage.get(i >> CHUNK_BITS)[i & CHUNK_MASK];
     }
 
-    /** {@inheritDoc} */
     @Override
     public Iterator<Double> iterator()
     {
@@ -123,14 +122,12 @@ public class DoubleAppendList implements Iterable<Double>, Serializable
             this.counter = 0;
         }
 
-        /** {@inheritDoc} */
         @Override
         public boolean hasNext()
         {
             return this.counter < this.list.size();
         }
 
-        /** {@inheritDoc} */
         @Override
         public Double next()
         {

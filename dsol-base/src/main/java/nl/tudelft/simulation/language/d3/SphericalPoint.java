@@ -88,7 +88,6 @@ public class SphericalPoint implements Serializable
         return new CartesianPoint(x, y, z);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode()
     {
@@ -104,7 +103,6 @@ public class SphericalPoint implements Serializable
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
     public boolean equals(final Object obj)
@@ -125,7 +123,6 @@ public class SphericalPoint implements Serializable
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

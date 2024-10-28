@@ -37,7 +37,6 @@ public class DistContinuousMagneticFlux extends DistContinuousUnit<MagneticFluxU
         super(wrappedDistribution, MagneticFluxUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public MagneticFlux draw()
     {

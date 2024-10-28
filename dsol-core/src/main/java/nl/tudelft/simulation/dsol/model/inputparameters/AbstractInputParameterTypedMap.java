@@ -51,7 +51,6 @@ public abstract class AbstractInputParameterTypedMap<T> extends AbstractInputPar
      */
     public abstract void setCalculatedValue() throws InputParameterException;
 
-    /** {@inheritDoc} */
     @Override
     public T getCalculatedValue() throws InputParameterException
     {
@@ -69,7 +68,6 @@ public abstract class AbstractInputParameterTypedMap<T> extends AbstractInputPar
         return this.defaultTypedValue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public AbstractInputParameterTypedMap<T> clone()
     {

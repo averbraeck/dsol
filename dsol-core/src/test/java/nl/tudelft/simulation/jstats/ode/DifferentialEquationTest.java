@@ -92,7 +92,6 @@ public class DifferentialEquationTest
             super.initialize(1.0, new double[] {1.0});
         }
 
-        /** {@inheritDoc} */
         @Override
         public double[] dy(final double x, final double[] y)
         {
@@ -117,7 +116,6 @@ public class DifferentialEquationTest
             super.initialize(0, new double[] {1.0, -1.0});
         }
 
-        /** {@inheritDoc} */
         @Override
         public double[] dy(final double x, final double[] y)
         {

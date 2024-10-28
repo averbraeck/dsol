@@ -62,84 +62,72 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
             this.rectangle = new Rectangle2D.Double(x, y, w, h);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Rectangle2D createIntersection(final Rectangle2D r)
         {
             return this.rectangle.createIntersection(r);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Rectangle2D createUnion(final Rectangle2D r)
         {
             return this.rectangle.createUnion(r);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Rectangle2D getBounds2D()
         {
             return this.rectangle.getBounds2D();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getHeight()
         {
             return this.rectangle.getHeight();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getWidth()
         {
             return this.rectangle.getWidth();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getX()
         {
             return this.rectangle.getX();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getY()
         {
             return this.rectangle.getY();
         }
 
-        /** {@inheritDoc} */
         @Override
         public boolean isEmpty()
         {
             return this.rectangle.isEmpty();
         }
 
-        /** {@inheritDoc} */
         @Override
         public int outcode(final double x, final double y)
         {
             return this.rectangle.outcode(x, y);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setRect(final double x, final double y, final double w, final double h)
         {
             this.rectangle.setRect(x, y, w, h);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setRect(final Rectangle2D r)
         {
             this.rectangle.setRect(r);
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {
@@ -200,63 +188,54 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
             this.rectangle = new Rectangle2D.Float(x, y, w, h);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Rectangle2D createIntersection(final Rectangle2D r)
         {
             return this.rectangle.createIntersection(r);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Rectangle2D createUnion(final Rectangle2D r)
         {
             return this.rectangle.createUnion(r);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Rectangle2D getBounds2D()
         {
             return this.rectangle.getBounds2D();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getHeight()
         {
             return this.rectangle.getHeight();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getWidth()
         {
             return this.rectangle.getWidth();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getX()
         {
             return this.rectangle.getX();
         }
 
-        /** {@inheritDoc} */
         @Override
         public double getY()
         {
             return this.rectangle.getY();
         }
 
-        /** {@inheritDoc} */
         @Override
         public boolean isEmpty()
         {
             return this.rectangle.isEmpty();
         }
 
-        /** {@inheritDoc} */
         @Override
         public int outcode(final double x, final double y)
         {
@@ -274,21 +253,18 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
             this.rectangle.setRect(x, y, w, h);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setRect(final double x, final double y, final double w, final double h)
         {
             this.rectangle.setRect(x, y, w, h);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setRect(final Rectangle2D r)
         {
             this.rectangle.setRect(r);
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

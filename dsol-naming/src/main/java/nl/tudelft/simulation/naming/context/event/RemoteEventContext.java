@@ -78,7 +78,6 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
         this.contextEventProducerImpl = new ContextEventProducerImpl(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope) throws RemoteException, NameNotFoundException, InvalidNameException,
@@ -87,7 +86,6 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
@@ -96,7 +94,6 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope, final int position) throws RemoteException, NameNotFoundException,
@@ -105,7 +102,6 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope, final int position, final ReferenceType referenceType) throws RemoteException,
@@ -114,7 +110,6 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean removeListener(final EventListener listener, final String absolutePath,
             final ContextScope contextScope) throws RemoteException, InvalidNameException, NullPointerException

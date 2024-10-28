@@ -118,7 +118,6 @@ public class InputFieldDistDiscrete extends AbstractInputField implements ItemLi
         panel.add(explanation);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void itemStateChanged(final ItemEvent event)
     {
@@ -126,7 +125,6 @@ public class InputFieldDistDiscrete extends AbstractInputField implements ItemLi
         cardLayout.show(this.distPanel, (String) event.getItem());
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterDistDiscreteSelection getParameter()
     {

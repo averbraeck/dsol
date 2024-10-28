@@ -124,7 +124,6 @@ public class OsmRenderable2d implements GisRenderable2d
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paintComponent(final Graphics2D graphics, final Bounds2d extent, final Dimension screen,
             final RenderableScale renderableScale, final ImageObserver observer)
@@ -150,21 +149,18 @@ public class OsmRenderable2d implements GisRenderable2d
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public OsmRenderable2d getSource()
     {
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds3d getBounds()
     {
         return this.bounds;
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation()
     {
@@ -198,7 +194,6 @@ public class OsmRenderable2d implements GisRenderable2d
         this.bounds = new Bounds3d(this.cachedExtent.getDeltaX(), this.cachedExtent.getDeltaY(), 0.0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void destroy(final Contextualized contextProvider)
     {
@@ -213,14 +208,12 @@ public class OsmRenderable2d implements GisRenderable2d
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
     {
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long getId()
     {

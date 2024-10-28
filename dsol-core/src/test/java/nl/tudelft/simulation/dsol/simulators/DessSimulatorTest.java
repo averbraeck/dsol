@@ -47,7 +47,6 @@ public class DessSimulatorTest implements EventListener
 //        this.waiter.await(1000);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

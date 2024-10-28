@@ -52,7 +52,6 @@ public class Release<T extends Number & Comparable<T>> extends FlowObject<T>
         this.amount = amount;
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void receiveEntity(final Entity<T> entity)
     {

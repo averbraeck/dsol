@@ -312,7 +312,6 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
         textBox.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
@@ -382,7 +381,6 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
         return this.simulator;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

@@ -41,7 +41,6 @@ public class CounterTableModel extends StatisticsTableModel
         notify(null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

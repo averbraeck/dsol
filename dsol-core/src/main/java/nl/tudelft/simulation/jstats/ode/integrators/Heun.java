@@ -29,7 +29,6 @@ public class Heun extends NumericalIntegrator
         super(stepSize, equation);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] next(final double x, final double[] y)
     {

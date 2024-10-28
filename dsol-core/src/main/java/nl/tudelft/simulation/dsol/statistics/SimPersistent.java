@@ -101,7 +101,6 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void initialize()
     {
@@ -120,7 +119,6 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public double register(final Number timestamp, final double value)
@@ -136,7 +134,6 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         return super.register(timestamp, value);
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public void notify(final Event event)
@@ -178,7 +175,6 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimulatorInterface<T> getSimulator()
     {

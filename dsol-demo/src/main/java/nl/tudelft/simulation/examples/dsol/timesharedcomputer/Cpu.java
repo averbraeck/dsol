@@ -80,7 +80,6 @@ public class Cpu extends FlowObject<Double> implements Locatable
         return this.queue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void receiveEntity(final Entity<Double> entity)
     {
@@ -99,7 +98,6 @@ public class Cpu extends FlowObject<Double> implements Locatable
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     protected synchronized void releaseEntity(final Entity<Double> entity)
     {
@@ -149,14 +147,12 @@ public class Cpu extends FlowObject<Double> implements Locatable
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation()
     {
         return this.location;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds3d getBounds()
     {

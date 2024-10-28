@@ -104,7 +104,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         this.logger = new SimLogger(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
             throws SimRuntimeException
@@ -149,7 +148,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addScheduledMethodOnInitialize(final Object target, final String method, final Object[] args)
             throws SimRuntimeException
@@ -201,7 +199,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void start() throws SimRuntimeException
     {
@@ -210,7 +207,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         startImpl();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void runUpTo(final T stopTime) throws SimRuntimeException
     {
@@ -219,7 +215,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         startImpl();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void runUpToAndIncluding(final T stopTime) throws SimRuntimeException
     {
@@ -236,7 +231,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
      */
     protected abstract void stepImpl();
 
-    /** {@inheritDoc} */
     @Override
     public void step() throws SimRuntimeException
     {
@@ -290,7 +284,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void stop() throws SimRuntimeException
     {
@@ -309,7 +302,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         fireTimedEvent(Replication.WARMUP_EVENT, null, getSimulatorTime());
     }
 
-    /** {@inheritDoc} */
     @Override
     public void cleanUp()
     {
@@ -327,7 +319,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         this.replicationState = ReplicationState.NOT_INITIALIZED;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void endReplication() throws SimRuntimeException
     {
@@ -363,14 +354,12 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public final ErrorStrategy getErrorStrategy()
     {
         return this.errorStrategy;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void setErrorStrategy(final ErrorStrategy errorStrategy)
     {
@@ -378,7 +367,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         this.errorLogLevel = errorStrategy.getDefaultLogLevel();
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void setErrorStrategy(final ErrorStrategy newErrorStrategy, final Level newErrorLogLevel)
     {
@@ -386,14 +374,12 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         this.errorLogLevel = newErrorLogLevel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final Level getErrorLogLevel()
     {
         return this.errorLogLevel;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void setErrorLogLevel(final Level errorLogLevel)
     {
@@ -460,42 +446,36 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     @Override
     public abstract void run();
 
-    /** {@inheritDoc} */
     @Override
     public T getSimulatorTime()
     {
         return this.simulatorTime == null ? null : this.simulatorTime;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Replication<T> getReplication()
     {
         return this.replication;
     }
 
-    /** {@inheritDoc} */
     @Override
     public DsolModel<T, ? extends SimulatorInterface<T>> getModel()
     {
         return this.model;
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimLogger getLogger()
     {
         return this.logger;
     }
 
-    /** {@inheritDoc} */
     @Override
     public RunState getRunState()
     {
         return this.runState;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ReplicationState getReplicationState()
     {
@@ -601,7 +581,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             return this.getState().equals(Thread.State.WAITING);
         }
 
-        /** {@inheritDoc} */
         @Override
         public synchronized void run()
         {

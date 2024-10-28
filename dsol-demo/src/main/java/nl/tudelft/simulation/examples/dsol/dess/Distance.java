@@ -34,7 +34,6 @@ public class Distance extends DifferentialEquation<Double>
         this.initialize(10, new double[] {0});
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] dy(final double x, final double[] y)
     {

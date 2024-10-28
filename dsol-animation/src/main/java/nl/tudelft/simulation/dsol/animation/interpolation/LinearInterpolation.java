@@ -52,7 +52,6 @@ public class LinearInterpolation implements InterpolationInterface
         this.destination = destination; // immutable
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation(final double time)
     {

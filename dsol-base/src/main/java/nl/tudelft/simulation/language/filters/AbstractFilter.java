@@ -29,21 +29,18 @@ public abstract class AbstractFilter implements FilterInterface
         super();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isInverted()
     {
         return this.inverted;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setInverted(final boolean inverted)
     {
         this.inverted = inverted;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean accept(final Object entry)
     {
@@ -62,25 +59,21 @@ public abstract class AbstractFilter implements FilterInterface
      */
     protected abstract boolean filter(Object entry);
 
-    /** {@inheritDoc} */
     @Override
     public abstract String getCriterion();
 
-    /** {@inheritDoc} */
     @Override
     public FilterInterface and(final FilterInterface filter)
     {
         return new CompositeFilter(this, filter, CompositeFilter.Operator.AND);
     }
 
-    /** {@inheritDoc} */
     @Override
     public FilterInterface or(final FilterInterface filter)
     {
         return new CompositeFilter(this, filter, CompositeFilter.Operator.OR);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

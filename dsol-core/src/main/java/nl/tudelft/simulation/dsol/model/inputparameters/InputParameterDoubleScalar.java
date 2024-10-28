@@ -256,7 +256,6 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
         this.maxIncluded = maxIncluded;
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterDoubleScalar<U, T> clone()

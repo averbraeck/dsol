@@ -108,7 +108,6 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
         this(resourceId, simulator, capacity, new RequestComparator<T>());
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getId()
     {
@@ -264,7 +263,6 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -277,7 +275,6 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
      */
     public static class RequestComparator<T extends Number & Comparable<T>> implements Comparator<Request<T>>
     {
-        /** {@inheritDoc} */
         @Override
         public int compare(final Request<T> arg0, final Request<T> arg1)
         {
@@ -370,7 +367,6 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
             return this.id;
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

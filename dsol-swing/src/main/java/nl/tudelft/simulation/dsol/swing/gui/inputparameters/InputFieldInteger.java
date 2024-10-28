@@ -25,7 +25,6 @@ public class InputFieldInteger extends InputFieldString
         super(panel, parameter);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterInteger getParameter()
     {

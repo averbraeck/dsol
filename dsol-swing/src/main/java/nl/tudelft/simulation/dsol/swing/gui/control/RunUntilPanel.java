@@ -92,7 +92,6 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
         add(this.runUntilButton);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
@@ -206,14 +205,12 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
         return this.timeFont;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isForeground()
     {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -244,14 +241,12 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
             super(simulator, "0.0", "^([0-9]+([.][0-9]*)?|[.][0-9]+)$");
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSimulationTime(final Double simulationTime)
         {
             return String.format("%s", simulationTime);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected Double parseSimulationTime(final String simulationTimeString)
         {
@@ -291,14 +286,12 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
             super(simulator, "0.0", "^([0-9]+([.][0-9]*)?|[.][0-9]+)$");
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSimulationTime(final Float simulationTime)
         {
             return String.format("%s", simulationTime);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected Float parseSimulationTime(final String simulationTimeString)
         {
@@ -338,14 +331,12 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
             super(simulator, "0", "[0-9]+");
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSimulationTime(final Long simulationTime)
         {
             return String.format("%s", simulationTime);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected Long parseSimulationTime(final String simulationTimeString)
         {
@@ -388,14 +379,12 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
                             + "|ns|nsec|ps|psec|fs|fsec|as|asec|zs|zsec|ys|ysec|day|h|hr|hour|min|wk|week)");
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSimulationTime(final Duration simulationTime)
         {
             return String.format("%s", simulationTime.toString());
         }
 
-        /** {@inheritDoc} */
         @Override
         protected Duration parseSimulationTime(final String simulationTimeString)
         {
@@ -438,14 +427,12 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
                             + "|ns|nsec|ps|psec|fs|fsec|as|asec|zs|zsec|ys|ysec|day|h|hr|hour|min|wk|week)");
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSimulationTime(final FloatDuration simulationTime)
         {
             return String.format("%s", simulationTime.toString());
         }
 
-        /** {@inheritDoc} */
         @Override
         protected FloatDuration parseSimulationTime(final String simulationTimeString)
         {

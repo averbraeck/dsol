@@ -120,7 +120,6 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
     }
 
     
-    /** {@inheritDoc} */
     @Override
     public boolean isBackground()
     {
@@ -167,21 +166,18 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
             this.style = textPane.addStyle("colorStyle", null);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Set<LogEntryValue> getRequiredLogEntryValues()
         {
             return EnumSet.of(LogEntryValue.RENDERED_LOG_ENTRY); // Only the final rendered log entry is required
         }
 
-        /** {@inheritDoc} */
         @Override
         public void init(final Configuration configuration) throws Exception
         {
             // nothing to do
         }
 
-        /** {@inheritDoc} */
         @Override
         public synchronized void write(final LogEntry logEntry) throws Exception
         {
@@ -255,14 +251,12 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
             SwingUtilities.invokeLater(runnable);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void flush() throws Exception
         {
             // nothing to do
         }
 
-        /** {@inheritDoc} */
         @Override
         public void close() throws Exception
         {

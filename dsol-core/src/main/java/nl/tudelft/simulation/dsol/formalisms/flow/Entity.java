@@ -144,14 +144,12 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
         return this.creationTime;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getId()
     {
         return this.id;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

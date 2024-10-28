@@ -49,7 +49,6 @@ public class DistGamma extends DistContinuous
         this.scale = scale;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -131,7 +130,6 @@ public class DistGamma extends DistContinuous
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -159,7 +157,6 @@ public class DistGamma extends DistContinuous
         return this.scale;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

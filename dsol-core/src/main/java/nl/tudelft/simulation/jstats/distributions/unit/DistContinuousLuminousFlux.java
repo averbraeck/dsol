@@ -37,7 +37,6 @@ public class DistContinuousLuminousFlux extends DistContinuousUnit<LuminousFluxU
         super(wrappedDistribution, LuminousFluxUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public LuminousFlux draw()
     {

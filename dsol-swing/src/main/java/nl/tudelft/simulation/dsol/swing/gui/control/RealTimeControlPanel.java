@@ -64,7 +64,6 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         getSimulator().addListener(this, DevsRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
@@ -94,7 +93,6 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         super.actionPerformed(actionEvent); // includes fixButtons()
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void fixButtons()
     {
@@ -110,7 +108,6 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         super.fixButtons(); // handles the start/stop button
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void invalidateButtons()
     {
@@ -125,14 +122,12 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         super.invalidateButtons(); // handles the start/stop button
     }
 
-    /** {@inheritDoc} */
     @Override
     public void propertyChange(final PropertyChangeEvent evt)
     {
         // TODO: when external change on speed -- update the slider panel
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

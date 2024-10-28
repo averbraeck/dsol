@@ -42,21 +42,18 @@ public class BeanProperty extends AbstractProperty implements Property
         this.descriptor = descriptor;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getName()
     {
         return this.descriptor.getName();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getType()
     {
         return this.descriptor.getPropertyType();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void setRegularValue(final Object values)
     {
@@ -86,7 +83,6 @@ public class BeanProperty extends AbstractProperty implements Property
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getValue()
     {
@@ -106,14 +102,12 @@ public class BeanProperty extends AbstractProperty implements Property
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getInstance()
     {
         return this.bean;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEditable()
     {

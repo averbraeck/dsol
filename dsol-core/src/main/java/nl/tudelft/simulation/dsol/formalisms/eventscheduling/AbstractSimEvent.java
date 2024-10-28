@@ -66,25 +66,21 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
         this.id = AbstractSimEvent.constructorCounter.incrementAndGet();
     }
 
-    /** {@inheritDoc} */
     @Override
     public abstract void execute() throws SimRuntimeException;
 
-    /** {@inheritDoc} */
     @Override
     public T getAbsoluteExecutionTime()
     {
         return this.absoluteExecutionTime;
     }
 
-    /** {@inheritDoc} */
     @Override
     public short getPriority()
     {
         return this.priority;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long getId()
     {

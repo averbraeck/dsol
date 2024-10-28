@@ -100,7 +100,6 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void initialize()
     {
@@ -119,7 +118,6 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public long register(final long value)
     {
@@ -135,7 +133,6 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event)
     {
@@ -162,7 +159,6 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimulatorInterface<T> getSimulator()
     {

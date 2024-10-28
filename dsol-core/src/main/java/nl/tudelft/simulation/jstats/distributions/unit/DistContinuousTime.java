@@ -37,7 +37,6 @@ public class DistContinuousTime extends DistContinuousUnit<TimeUnit, Time>
         super(wrappedDistribution, TimeUnit.DEFAULT);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Time draw()
     {

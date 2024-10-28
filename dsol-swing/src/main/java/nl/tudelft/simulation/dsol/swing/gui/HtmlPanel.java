@@ -52,7 +52,6 @@ public class HtmlPanel extends JEditorPane
         this.setPage(page);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setPage(final URL page) throws IOException
     {

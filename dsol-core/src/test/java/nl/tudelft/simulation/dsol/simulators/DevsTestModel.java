@@ -28,7 +28,6 @@ public class DevsTestModel extends TestModel
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel()
     {

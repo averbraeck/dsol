@@ -37,7 +37,6 @@ public class DistContinuousAbsorbedDose extends DistContinuousUnit<AbsorbedDoseU
         super(wrappedDistribution, AbsorbedDoseUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public AbsorbedDose draw()
     {

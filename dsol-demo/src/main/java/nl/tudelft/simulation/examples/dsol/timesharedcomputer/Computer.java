@@ -48,7 +48,6 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {
@@ -105,7 +104,6 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
             super(description, model);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void notify(final Event event)
         {

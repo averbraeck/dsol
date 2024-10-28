@@ -241,14 +241,12 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             this.flags &= (~TRANSLATE_FLAG);
     }
 
-    /** {@inheritDoc} */
     @Override
     public L getSource()
     {
         return this.source;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paintComponent(final Graphics2D graphics, final Bounds2d extent, final Dimension screenSize,
             final RenderableScale renderableScale, final ImageObserver observer)
@@ -336,7 +334,6 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
     {
@@ -356,7 +353,6 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void destroy(final Contextualized contextProvider)
     {
@@ -372,14 +368,12 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public long getId()
     {
         return this.id;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

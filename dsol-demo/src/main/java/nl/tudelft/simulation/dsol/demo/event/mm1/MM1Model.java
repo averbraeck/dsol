@@ -83,7 +83,6 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
         this.inputParameterMap.add(resourceMap);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {
@@ -212,7 +211,6 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
             return this.id;
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {
@@ -261,7 +259,6 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<D
             return this.entity;
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

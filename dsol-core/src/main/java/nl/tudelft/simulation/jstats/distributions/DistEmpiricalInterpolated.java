@@ -37,7 +37,6 @@ public class DistEmpiricalInterpolated extends DistContinuous
         this.empiricalDistribution = empiricalDistribution;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -51,7 +50,6 @@ public class DistEmpiricalInterpolated extends DistContinuous
         return v0 + (v1 - v0) * (u - c0) / (c1 - c0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {

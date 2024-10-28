@@ -37,7 +37,6 @@ public class DistContinuousAbsoluteTemperature extends DistContinuousUnit<Absolu
         super(wrappedDistribution, AbsoluteTemperatureUnit.DEFAULT);
     }
 
-    /** {@inheritDoc} */
     @Override
     public AbsoluteTemperature draw()
     {

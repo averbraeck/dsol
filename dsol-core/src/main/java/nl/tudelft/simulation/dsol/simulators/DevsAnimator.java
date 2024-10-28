@@ -36,14 +36,12 @@ public class DevsAnimator<T extends Number & Comparable<T>> extends DevsSimulato
     /** AnimationDelay refers to the delay in milliseconds between timeSteps. */
     private long animationDelay = AnimatorInterface.DEFAULT_ANIMATION_DELAY;
 
-    /** {@inheritDoc} */
     @Override
     public long getAnimationDelay()
     {
         return this.animationDelay;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setAnimationDelay(final long animationDelay)
     {
@@ -51,14 +49,12 @@ public class DevsAnimator<T extends Number & Comparable<T>> extends DevsSimulato
         this.fireEvent(ANIMATION_DELAY_CHANGED_EVENT, animationDelay);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void updateAnimation()
     {
         this.fireTimedEvent(AnimatorInterface.UPDATE_ANIMATION_EVENT, null, this.simulatorTime);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {

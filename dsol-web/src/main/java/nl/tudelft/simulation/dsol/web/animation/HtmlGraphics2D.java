@@ -424,7 +424,6 @@ public class HtmlGraphics2D extends Graphics2D
         this.commands.append("</transformText>\n");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void draw(Shape shape)
     {
@@ -498,7 +497,6 @@ public class HtmlGraphics2D extends Graphics2D
 
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean drawImage(Image img, AffineTransform xform, ImageObserver obs)
     {
@@ -506,28 +504,24 @@ public class HtmlGraphics2D extends Graphics2D
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawImage(BufferedImage img, BufferedImageOp op, int x, int y)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawRenderedImage(RenderedImage img, AffineTransform xform)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawRenderedImage()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawRenderableImage(RenderableImage img, AffineTransform xform)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawRenderableImage()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawString(String str, int x, int y)
     {
@@ -535,7 +529,6 @@ public class HtmlGraphics2D extends Graphics2D
         addTransformText("drawString", x, y, str);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawString(String str, float x, float y)
     {
@@ -543,28 +536,24 @@ public class HtmlGraphics2D extends Graphics2D
         addTransformText("drawString", x, y, str);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawString(AttributedCharacterIterator iterator, int x, int y)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawString()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawString(AttributedCharacterIterator iterator, float x, float y)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawString()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawGlyphVector(GlyphVector g, float x, float y)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawGlyphVector()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fill(Shape shape)
     {
@@ -572,7 +561,6 @@ public class HtmlGraphics2D extends Graphics2D
         drawFillShape(shape, true);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hit(Rectangle rect, Shape s, boolean onStroke)
     {
@@ -580,7 +568,6 @@ public class HtmlGraphics2D extends Graphics2D
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public GraphicsConfiguration getDeviceConfiguration()
     {
@@ -588,14 +575,12 @@ public class HtmlGraphics2D extends Graphics2D
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setComposite(Composite comp)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setComposite()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setPaint(Paint paint)
     {
@@ -603,7 +588,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setPaint()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setStroke(Stroke s)
     {
@@ -611,7 +595,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setStroke()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setRenderingHint(Key hintKey, Object hintValue)
     {
@@ -619,7 +602,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setRenderingHint()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getRenderingHint(Key hintKey)
     {
@@ -627,7 +609,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.renderingHints.get(hintKey);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setRenderingHints(Map<?, ?> hints)
     {
@@ -636,7 +617,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setRenderingHints()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addRenderingHints(Map<?, ?> hints)
     {
@@ -644,7 +624,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.addRenderingHints()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public RenderingHints getRenderingHints()
     {
@@ -652,7 +631,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.renderingHints;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void translate(int x, int y)
     {
@@ -660,7 +638,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.translate()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void translate(double tx, double ty)
     {
@@ -668,7 +645,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.translate()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rotate(double theta)
     {
@@ -676,7 +652,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.rotate()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rotate(double theta, double x, double y)
     {
@@ -684,7 +659,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.rotate()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void scale(double sx, double sy)
     {
@@ -692,7 +666,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.scale()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void shear(double shx, double shy)
     {
@@ -700,14 +673,12 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.shear()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void transform(AffineTransform Tx)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.transform()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setTransform(AffineTransform Tx)
     {
@@ -715,7 +686,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setTransform()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public AffineTransform getTransform()
     {
@@ -723,7 +693,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.affineTransform;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Paint getPaint()
     {
@@ -731,7 +700,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.paint;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Composite getComposite()
     {
@@ -739,7 +707,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.composite;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setBackground(Color color)
     {
@@ -747,7 +714,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setBackground()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Color getBackground()
     {
@@ -755,7 +721,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.background;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Stroke getStroke()
     {
@@ -763,14 +728,12 @@ public class HtmlGraphics2D extends Graphics2D
         return this.stroke;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void clip(Shape s)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.clip()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public FontRenderContext getFontRenderContext()
     {
@@ -778,7 +741,6 @@ public class HtmlGraphics2D extends Graphics2D
         return new FontRenderContext(this.affineTransform, true, true);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Graphics create()
     {
@@ -786,7 +748,6 @@ public class HtmlGraphics2D extends Graphics2D
         return new HtmlGraphics2D(); // TODO: clone
     }
 
-    /** {@inheritDoc} */
     @Override
     public Color getColor()
     {
@@ -794,7 +755,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.color;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setColor(Color c)
     {
@@ -803,21 +763,18 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setColor()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setPaintMode()
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setPaintMode()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setXORMode(Color c1)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setXORMode()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Font getFont()
     {
@@ -825,7 +782,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.font;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setFont(Font font)
     {
@@ -834,7 +790,6 @@ public class HtmlGraphics2D extends Graphics2D
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setFont()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public FontMetrics getFontMetrics(Font f)
     {
@@ -842,7 +797,6 @@ public class HtmlGraphics2D extends Graphics2D
         return this.fontMetrics;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Rectangle getClipBounds()
     {
@@ -850,21 +804,18 @@ public class HtmlGraphics2D extends Graphics2D
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void clipRect(int x, int y, int width, int height)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.clipRect()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setClip(int x, int y, int width, int height)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setClip()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Shape getClip()
     {
@@ -872,21 +823,18 @@ public class HtmlGraphics2D extends Graphics2D
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setClip(Shape clip)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setClip()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void copyArea(int x, int y, int width, int height, int dx, int dy)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.copyArea()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawLine(int x1, int y1, int x2, int y2)
     {
@@ -894,7 +842,6 @@ public class HtmlGraphics2D extends Graphics2D
         addTransformDraw("drawLine", x1, y1, x2, y2);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fillRect(int x, int y, int width, int height)
     {
@@ -902,7 +849,6 @@ public class HtmlGraphics2D extends Graphics2D
         addTransformFill("fillRect", x, y, width, height);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void clearRect(int x, int y, int width, int height)
     {
@@ -910,21 +856,18 @@ public class HtmlGraphics2D extends Graphics2D
         addTransformDraw("clearRect", x, y, width, height);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawRoundRect()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillRoundRect()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawOval(int x, int y, int width, int height)
     {
@@ -932,7 +875,6 @@ public class HtmlGraphics2D extends Graphics2D
         addTransformDraw("drawOval", x, y, width, height);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fillOval(int x, int y, int width, int height)
     {
@@ -940,42 +882,36 @@ public class HtmlGraphics2D extends Graphics2D
         addTransformFill("fillOval", x, y, width, height);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawArc()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fillArc(int x, int y, int width, int height, int startAngle, int arcAngle)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillArc()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawPolyline(int[] xPoints, int[] yPoints, int nPoints)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillPolyline()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawPolygon()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillPolygon()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean drawImage(Image img, int x, int y, ImageObserver observer)
     {
@@ -983,7 +919,6 @@ public class HtmlGraphics2D extends Graphics2D
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean drawImage(Image img, int x, int y, int width, int height, ImageObserver observer)
     {
@@ -991,7 +926,6 @@ public class HtmlGraphics2D extends Graphics2D
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean drawImage(Image img, int x, int y, Color bgcolor, ImageObserver observer)
     {
@@ -999,7 +933,6 @@ public class HtmlGraphics2D extends Graphics2D
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean drawImage(Image img, int x, int y, int width, int height, Color bgcolor, ImageObserver observer)
     {
@@ -1007,7 +940,6 @@ public class HtmlGraphics2D extends Graphics2D
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2,
             ImageObserver observer)
@@ -1016,7 +948,6 @@ public class HtmlGraphics2D extends Graphics2D
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean drawImage(Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, Color bgcolor,
             ImageObserver observer)
@@ -1025,7 +956,6 @@ public class HtmlGraphics2D extends Graphics2D
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void dispose()
     {

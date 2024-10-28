@@ -76,7 +76,6 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {

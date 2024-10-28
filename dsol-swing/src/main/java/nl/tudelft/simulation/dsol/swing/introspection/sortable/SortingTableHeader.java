@@ -51,7 +51,6 @@ public class SortingTableHeader extends JTableHeader
     {
         this.addMouseListener(new MouseAdapter()
         {
-            /** {@inheritDoc} */
             @Override
             public void mouseClicked(final MouseEvent e)
             {
@@ -131,7 +130,6 @@ public class SortingTableHeader extends JTableHeader
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setColumnModel(final TableColumnModel columnModel)
     {
@@ -164,7 +162,6 @@ public class SortingTableHeader extends JTableHeader
         return SortingHeaderCell.SORT_NONE;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setTable(final JTable table)
     {

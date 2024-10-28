@@ -62,7 +62,6 @@ public class HistogramDomainAxis extends NumberAxis
         this.labels = this.createLabels(domain, numberOfBins);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double valueToJava2D(final double value, final Rectangle2D dataArea, final RectangleEdge edge)
     {
@@ -70,7 +69,6 @@ public class HistogramDomainAxis extends NumberAxis
         return dataArea.getX() + ratio * (dataArea.getWidth());
     }
 
-    /** {@inheritDoc} */
     @Override
     public double java2DToValue(final double value, final Rectangle2D dataArea, final RectangleEdge edge)
     {
@@ -78,7 +76,6 @@ public class HistogramDomainAxis extends NumberAxis
         return this.getLowerBound() + ratio * (this.getUpperBound() - this.getLowerBound());
     }
 
-    /** {@inheritDoc} */
     @Override
     public AxisSpace reserveSpace(final Graphics2D g2, final Plot dataPlot, final Rectangle2D dataArea,
             final RectangleEdge edge, final AxisSpace axisSpace)
@@ -127,7 +124,6 @@ public class HistogramDomainAxis extends NumberAxis
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public AxisState draw(final Graphics2D g2, final double cursor, final Rectangle2D plotArea, final Rectangle2D dataArea,
             final RectangleEdge edge, final PlotRenderingInfo arg5)

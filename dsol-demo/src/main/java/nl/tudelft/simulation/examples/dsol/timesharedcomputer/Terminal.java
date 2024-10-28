@@ -53,7 +53,6 @@ public class Terminal extends FlowObject<Double>
         this.releaseEntity(null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void receiveEntity(final Entity<Double> entity)
     {
@@ -71,7 +70,6 @@ public class Terminal extends FlowObject<Double>
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void releaseEntity(final Entity<Double> entity)
     {

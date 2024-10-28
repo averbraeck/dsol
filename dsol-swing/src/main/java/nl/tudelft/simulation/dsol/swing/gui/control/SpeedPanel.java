@@ -90,7 +90,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         /** */
         private static final long serialVersionUID = 20140000L;
 
-        /** {@inheritDoc} */
         @Override
         public void run()
         {
@@ -99,7 +98,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
             getSpeedLabel().repaint();
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {
@@ -163,14 +161,12 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
      */
     protected abstract String formatSpeed(T simulationTime);
 
-    /** {@inheritDoc} */
     @Override
     public boolean isForeground()
     {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -202,7 +198,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
             setPrevSimTime(0.0);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSpeed(final Double simulationTime)
         {
@@ -241,7 +236,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
             setPrevSimTime(0.0f);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSpeed(final Float simulationTime)
         {
@@ -280,7 +274,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
             setPrevSimTime(0L);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSpeed(final Long simulationTime)
         {
@@ -319,7 +312,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
             setPrevSimTime(Duration.ZERO);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSpeed(final Duration simulationTime)
         {
@@ -358,7 +350,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
             setPrevSimTime(FloatDuration.ZERO);
         }
 
-        /** {@inheritDoc} */
         @Override
         protected String formatSpeed(final FloatDuration simulationTime)
         {

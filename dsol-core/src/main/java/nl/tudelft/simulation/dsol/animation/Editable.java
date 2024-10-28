@@ -131,14 +131,12 @@ public abstract class Editable extends LocalEventProducer implements Locatable
         this.vertices = vertices;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds3d getBounds()
     {
         return this.bounds;
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation()
     {

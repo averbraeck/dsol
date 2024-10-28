@@ -136,7 +136,6 @@ public class HistogramSeries extends AbstractDataset implements EventListener
         return this.bins[bin].getYValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void notify(final Event event)
     {

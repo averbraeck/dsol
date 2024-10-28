@@ -37,7 +37,6 @@ public class DistContinuousElectricalCharge extends DistContinuousUnit<Electrica
         super(wrappedDistribution, ElectricalChargeUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ElectricalCharge draw()
     {

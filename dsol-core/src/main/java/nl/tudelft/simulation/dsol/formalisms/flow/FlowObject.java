@@ -113,14 +113,12 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
         return this.simulator;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getId()
     {
         return this.id;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

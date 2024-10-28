@@ -43,7 +43,6 @@ public class InputParameterDistDiscrete extends AbstractInputParameter<DistDiscr
         this.stream = stream;
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistDiscrete getCalculatedValue() throws InputParameterException
     {
@@ -82,7 +81,6 @@ public class InputParameterDistDiscrete extends AbstractInputParameter<DistDiscr
         setValue(dist);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterDistDiscrete clone()
     {

@@ -64,7 +64,6 @@ public class InputParameterLong extends AbstractInputParameter<Long, Long>
         this.format = format;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Long getCalculatedValue()
     {
@@ -136,7 +135,6 @@ public class InputParameterLong extends AbstractInputParameter<Long, Long>
         this.maximumValue = maximumValue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterLong clone()
     {

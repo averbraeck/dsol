@@ -41,7 +41,6 @@ public class Positioner extends DifferentialEquation<Double>
         super.initialize(this.simulator.getSimulatorTime(), new double[] {0.0, value});
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] dy(final double x, final double[] y)
     {

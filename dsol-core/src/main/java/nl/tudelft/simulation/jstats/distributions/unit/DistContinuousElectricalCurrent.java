@@ -37,7 +37,6 @@ public class DistContinuousElectricalCurrent extends DistContinuousUnit<Electric
         super(wrappedDistribution, ElectricalCurrentUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ElectricalCurrent draw()
     {

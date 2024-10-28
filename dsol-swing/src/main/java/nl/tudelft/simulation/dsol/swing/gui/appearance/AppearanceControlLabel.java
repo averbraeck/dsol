@@ -34,21 +34,18 @@ public class AppearanceControlLabel extends JLabel implements AppearanceControl
         super(text);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isForeground()
     {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isBackground()
     {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

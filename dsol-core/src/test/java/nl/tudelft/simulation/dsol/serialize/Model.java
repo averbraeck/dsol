@@ -33,7 +33,6 @@ public class Model extends AbstractDsolModel<Double, DevsSimulatorInterface<Doub
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {

@@ -31,7 +31,6 @@ public class Order
         this.amount = amount;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

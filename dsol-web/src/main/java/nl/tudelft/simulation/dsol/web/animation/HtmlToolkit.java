@@ -45,7 +45,6 @@ public abstract class HtmlToolkit extends Toolkit
     {
     }
 
-    /** {@inheritDoc} */
     @Override
     public Dimension getScreenSize() throws HeadlessException
     {
@@ -53,7 +52,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getScreenResolution() throws HeadlessException
     {
@@ -61,7 +59,6 @@ public abstract class HtmlToolkit extends Toolkit
         return 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ColorModel getColorModel() throws HeadlessException
     {
@@ -69,7 +66,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String[] getFontList()
     {
@@ -77,7 +73,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public FontMetrics getFontMetrics(Font font)
     {
@@ -85,14 +80,12 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void sync()
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.sync()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Image getImage(String filename)
     {
@@ -100,7 +93,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Image getImage(URL url)
     {
@@ -108,7 +100,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Image createImage(String filename)
     {
@@ -116,7 +107,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Image createImage(URL url)
     {
@@ -124,7 +114,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean prepareImage(Image image, int width, int height, ImageObserver observer)
     {
@@ -132,7 +121,6 @@ public abstract class HtmlToolkit extends Toolkit
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int checkImage(Image image, int width, int height, ImageObserver observer)
     {
@@ -140,7 +128,6 @@ public abstract class HtmlToolkit extends Toolkit
         return 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Image createImage(ImageProducer producer)
     {
@@ -148,7 +135,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Image createImage(byte[] imagedata, int imageoffset, int imagelength)
     {
@@ -156,7 +142,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public PrintJob getPrintJob(Frame frame, String jobtitle, Properties props)
     {
@@ -164,14 +149,12 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void beep()
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.beep()");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Clipboard getSystemClipboard() throws HeadlessException
     {
@@ -179,7 +162,6 @@ public abstract class HtmlToolkit extends Toolkit
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected EventQueue getSystemEventQueueImpl()
     {
@@ -188,7 +170,6 @@ public abstract class HtmlToolkit extends Toolkit
         return this.eventQueue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isModalityTypeSupported(ModalityType modalityType)
     {
@@ -196,7 +177,6 @@ public abstract class HtmlToolkit extends Toolkit
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isModalExclusionTypeSupported(ModalExclusionType modalExclusionType)
     {
@@ -204,7 +184,6 @@ public abstract class HtmlToolkit extends Toolkit
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Map<TextAttribute, ?> mapInputMethodHighlight(InputMethodHighlight highlight) throws HeadlessException
     {

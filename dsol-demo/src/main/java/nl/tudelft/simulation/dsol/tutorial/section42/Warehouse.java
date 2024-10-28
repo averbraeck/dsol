@@ -38,7 +38,6 @@ public class Warehouse implements SellerInterface
         this.leadTime = new DistUniform(stream, 0.5, 1.0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void order(final BuyerInterface buyer, final long amount)
     {

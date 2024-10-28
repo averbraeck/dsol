@@ -48,7 +48,6 @@ public class DevsSimulatorTest implements EventListener
 //        this.waiter.await(5000);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

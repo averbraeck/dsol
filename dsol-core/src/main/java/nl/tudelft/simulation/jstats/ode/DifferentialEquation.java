@@ -49,7 +49,6 @@ public abstract class DifferentialEquation extends LocalEventProducer implements
         this.integrator = integratorType.getInstance(stepSize, this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void initialize(final double x0, final double[] y0)
     {
@@ -57,7 +56,6 @@ public abstract class DifferentialEquation extends LocalEventProducer implements
         this.lastY = y0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] y(final double x)
     {

@@ -78,7 +78,6 @@ public abstract class AbstractProperty implements Property
      */
     protected abstract void setRegularValue(final Object value);
 
-    /** {@inheritDoc} */
     @Override
     public ComposedTypeEnum getComposedType()
     {
@@ -105,7 +104,6 @@ public abstract class AbstractProperty implements Property
         return ComposedTypeEnum.NONE;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getComponentType()
     {
@@ -139,7 +137,6 @@ public abstract class AbstractProperty implements Property
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

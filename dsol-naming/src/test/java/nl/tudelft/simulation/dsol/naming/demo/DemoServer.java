@@ -202,7 +202,6 @@ public class DemoServer extends RmiObject implements EventProducer
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public EventListenerMap getEventListenerMap() throws RemoteException
     {

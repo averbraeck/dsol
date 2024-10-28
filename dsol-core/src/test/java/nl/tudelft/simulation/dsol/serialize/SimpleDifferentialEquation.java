@@ -37,7 +37,6 @@ public class SimpleDifferentialEquation extends DifferentialEquation
         super(simulator, timeStep, numericalIntegrator, numberOfVariables);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] dy(final double arg0, final double[] arg1)
     {

@@ -28,7 +28,6 @@ public class CustomerOrderModel extends AbstractDsolModel<Double, DevsSimulator<
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel()
     {

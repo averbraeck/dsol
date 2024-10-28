@@ -57,7 +57,6 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
                 "Execute all events scheduled for the current time", true));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
@@ -101,7 +100,6 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
         super.actionPerformed(actionEvent); // includes fixButtons()
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void fixButtons()
     {
@@ -121,7 +119,6 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
         super.fixButtons(); // handles the start/stop button
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void invalidateButtons()
     {

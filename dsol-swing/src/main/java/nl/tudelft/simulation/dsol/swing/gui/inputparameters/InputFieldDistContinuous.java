@@ -118,7 +118,6 @@ public class InputFieldDistContinuous extends AbstractInputField implements Item
         panel.add(explanation);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void itemStateChanged(final ItemEvent event)
     {
@@ -126,7 +125,6 @@ public class InputFieldDistContinuous extends AbstractInputField implements Item
         cardLayout.show(this.distPanel, (String) event.getItem());
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterDistContinuousSelection getParameter()
     {

@@ -41,7 +41,6 @@ public final class CustomerOrderApp implements EventListener
         simulator.start();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

@@ -245,7 +245,6 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -257,7 +256,6 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
      */
     protected class RequestComparator implements Comparator<Request<T>>
     {
-        /** {@inheritDoc} */
         @Override
         public int compare(final Request<T> arg0, final Request<T> arg1)
         {
@@ -349,7 +347,6 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
             return this.id;
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

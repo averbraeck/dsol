@@ -65,7 +65,6 @@ public class VisualizationDemo implements Contextualized
         updater.start();
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getContext()
     {
@@ -96,7 +95,6 @@ public class VisualizationDemo implements Contextualized
             this.contextProvider = contextProvider;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void run()
         {
@@ -139,7 +137,6 @@ public class VisualizationDemo implements Contextualized
             super(new StaticLocation2d(x, y, 0.0, new Bounds2d(10.0, 10.0)), contextProvider);
         }
 
-        /** {@inheritDoc} */
         @Override
         public void paint(final Graphics2D graphics, final ImageObserver observer)
         {

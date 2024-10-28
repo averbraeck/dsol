@@ -68,7 +68,6 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
         setContext();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getId()
     {
@@ -131,7 +130,6 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
         return this.replicationNr;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -195,7 +195,6 @@ public class RunSpeedSliderPanel extends JPanel
         return stepToFactor(this.slider.getValue());
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

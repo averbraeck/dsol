@@ -147,7 +147,6 @@ public class ReentrantCircuit
         this.sync.open();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -64,21 +64,18 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         this.introspector = introspector;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getRowCount()
     {
         return this.properties.length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getColumnCount()
     {
         return columns.length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
@@ -106,14 +103,12 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getColumnName(final int columnIndex)
     {
         return columns[columnIndex];
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isCellEditable(final int rowIndex, final int columnIndex)
     {
@@ -128,7 +123,6 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex)
     {
@@ -147,7 +141,6 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getColumnClass(final int columnIndex)
     {
@@ -158,7 +151,6 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         return Object.class;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
@@ -194,7 +186,6 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         return -1;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Property getProperty(final String propertyName)
     {
@@ -206,7 +197,6 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         return this.properties[index];
     }
 
-    /** {@inheritDoc} */
     @Override
     public Introspector getIntrospector()
     {
@@ -232,7 +222,6 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         return this.manager;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

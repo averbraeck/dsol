@@ -80,7 +80,6 @@ public class DiscreteBall extends Ball
         this.simulator.scheduleEventAbs(this.stopTime, this, "next", null);
     }
 
-    /** {@inheritDoc} */
     @Override
     public OrientedPoint3d getLocation() throws RemoteException
     {

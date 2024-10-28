@@ -62,14 +62,12 @@ public class XmlStreamReader implements RunnableSource
         this.compressionMethod = compressionMethod;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setSink(final Sink sink)
     {
         this.sink = sink;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {

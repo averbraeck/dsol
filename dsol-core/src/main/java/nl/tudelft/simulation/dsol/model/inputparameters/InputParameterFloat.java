@@ -75,7 +75,6 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
         this.maxIncluded = maxIncluded;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Float getCalculatedValue()
     {
@@ -180,7 +179,6 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
         this.maxIncluded = maxIncluded;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterFloat clone()
     {

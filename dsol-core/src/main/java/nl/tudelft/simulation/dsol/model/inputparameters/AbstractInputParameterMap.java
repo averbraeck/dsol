@@ -110,7 +110,6 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
         return ((AbstractInputParameterMap<?>) parent).get(key.substring(key.indexOf('.') + 1));
     }
 
-    /** {@inheritDoc} */
     @Override
     public AbstractInputParameterMap<?> clone()
     {
@@ -210,7 +209,6 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
      */
     class InputParameterComparator implements Comparator<InputParameter<?, ?>>
     {
-        /** {@inheritDoc} */
         @Override
         public int compare(final InputParameter<?, ?> o1, final InputParameter<?, ?> o2)
         {

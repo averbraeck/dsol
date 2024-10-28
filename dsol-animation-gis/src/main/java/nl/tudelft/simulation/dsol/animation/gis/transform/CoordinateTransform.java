@@ -34,14 +34,12 @@ public interface CoordinateTransform
     class NoTransform implements CoordinateTransform
     {
 
-        /** {@inheritDoc} */
         @Override
         public float[] floatTransform(final double x, final double y)
         {
             return new float[] {(float) x, (float) y};
         }
 
-        /** {@inheritDoc} */
         @Override
         public double[] doubleTransform(final double x, final double y)
         {

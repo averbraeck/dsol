@@ -55,7 +55,6 @@ public class InputParameterUnit<U extends Unit<U>> extends InputParameterSelecti
         return options;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterUnit<U> clone()
     {

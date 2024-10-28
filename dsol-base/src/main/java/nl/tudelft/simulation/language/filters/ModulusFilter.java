@@ -32,7 +32,6 @@ public class ModulusFilter extends AbstractFilter
         this.modulus = modulus;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected synchronized boolean filter(final Object entry)
     {
@@ -44,7 +43,6 @@ public class ModulusFilter extends AbstractFilter
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getCriterion()
     {

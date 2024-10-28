@@ -26,7 +26,6 @@ public class FileContextFactory implements ContextFactory
     /** context refers to the static JvmContext. */
     private static FileContext context = null;
 
-    /** {@inheritDoc} */
     @Override
     public synchronized ContextInterface getInitialContext(final Hashtable<?, ?> environment, final String atomicName)
     {

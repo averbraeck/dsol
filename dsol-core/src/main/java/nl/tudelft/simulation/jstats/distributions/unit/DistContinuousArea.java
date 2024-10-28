@@ -37,7 +37,6 @@ public class DistContinuousArea extends DistContinuousUnit<AreaUnit, Area>
         super(wrappedDistribution, AreaUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Area draw()
     {

@@ -37,7 +37,6 @@ public class DistContinuousFlowMass extends DistContinuousUnit<FlowMassUnit, Flo
         super(wrappedDistribution, FlowMassUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public FlowMass draw()
     {

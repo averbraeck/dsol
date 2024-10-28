@@ -24,14 +24,12 @@ public class ZeroFilter extends AbstractFilter
         super();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean filter(final Object entry)
     {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getCriterion()
     {

@@ -75,7 +75,6 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
         this.format = format;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Double getCalculatedValue()
     {
@@ -179,7 +178,6 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
         this.maxIncluded = maxIncluded;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterDouble clone()
     {

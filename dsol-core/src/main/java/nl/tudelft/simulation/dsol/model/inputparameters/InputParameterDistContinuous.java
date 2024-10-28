@@ -42,7 +42,6 @@ public class InputParameterDistContinuous extends AbstractInputParameter<DistCon
         this.stream = stream;
     }
 
-    /** {@inheritDoc} */
     @Override
     public DistContinuous getCalculatedValue() throws InputParameterException
     {
@@ -81,7 +80,6 @@ public class InputParameterDistContinuous extends AbstractInputParameter<DistCon
         setValue(dist);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterDistContinuous clone()
     {

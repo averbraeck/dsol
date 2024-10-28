@@ -53,7 +53,6 @@ public class FieldIntrospector implements Introspector
         this.useDeepIntrospection = useDeepIntrospection;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Property[] getProperties(final Object introspectedObject)
     {
@@ -105,7 +104,6 @@ public class FieldIntrospector implements Introspector
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Property getProperty(final Object introspectedObject, final String property)
     {
@@ -132,7 +130,6 @@ public class FieldIntrospector implements Introspector
         throw new IllegalArgumentException("Property '" + property + "' not found for " + introspected);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String[] getPropertyNames(final Object introspectedObject)
     {

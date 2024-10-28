@@ -68,7 +68,6 @@ public class InputParameterSelectionList<T> extends AbstractInputParameter<T, T>
         this(key, shortName, description, Arrays.asList(options), defaultValue, displayPriority);
     }
 
-    /** {@inheritDoc} */
     @Override
     public T getCalculatedValue()
     {
@@ -128,7 +127,6 @@ public class InputParameterSelectionList<T> extends AbstractInputParameter<T, T>
         setValue(this.options.get(index));
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterSelectionList<T> clone()

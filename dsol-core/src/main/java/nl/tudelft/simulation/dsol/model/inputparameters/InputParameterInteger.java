@@ -64,7 +64,6 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
         this.format = format;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Integer getCalculatedValue()
     {
@@ -136,7 +135,6 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
         this.maximumValue = maximumValue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterInteger clone()
     {

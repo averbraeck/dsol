@@ -140,14 +140,12 @@ public class ShapeFileReader implements DataSourceInterface
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<FeatureInterface> getFeatures()
     {
         return this.featuresToRead;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void populateShapes() throws IOException
     {
@@ -815,7 +813,6 @@ public class ShapeFileReader implements DataSourceInterface
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isDynamic()
     {
@@ -831,7 +828,6 @@ public class ShapeFileReader implements DataSourceInterface
         return this.dbfReader.getColumnNames();
     }
 
-    /** {@inheritDoc} */
     @Override
     public URL getURL()
     {

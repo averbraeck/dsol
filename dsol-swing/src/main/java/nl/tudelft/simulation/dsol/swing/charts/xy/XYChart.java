@@ -300,7 +300,6 @@ public class XYChart implements Swingable, Serializable
         return this.chart;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Container getSwingPanel()
     {
@@ -328,7 +327,6 @@ public class XYChart implements Swingable, Serializable
         this.dataset.setFilter(filter);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

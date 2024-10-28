@@ -37,7 +37,6 @@ public class DistContinuousCatalyticActivity extends DistContinuousUnit<Catalyti
         super(wrappedDistribution, CatalyticActivityUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public CatalyticActivity draw()
     {

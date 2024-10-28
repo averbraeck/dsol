@@ -32,7 +32,6 @@ import nl.tudelft.simulation.introspection.Property;
  */
 public class BeanIntrospector implements Introspector
 {
-    /** {@inheritDoc} */
     @Override
     public Property[] getProperties(final Object introspectedObject)
     {
@@ -59,7 +58,6 @@ public class BeanIntrospector implements Introspector
         return props.toArray(new Property[props.size()]);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Property getProperty(final Object introspectedObject, final String property)
     {
@@ -87,7 +85,6 @@ public class BeanIntrospector implements Introspector
         throw new IllegalArgumentException("Property '" + property + "' not found for " + introspected);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String[] getPropertyNames(final Object introspectedObject)
     {

@@ -89,7 +89,6 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Replica
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

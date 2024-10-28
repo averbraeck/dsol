@@ -25,7 +25,6 @@ public class InputFieldDouble extends InputFieldString
         super(panel, parameter);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterDouble getParameter()
     {

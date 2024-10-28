@@ -73,7 +73,6 @@ public class XYSeries extends AbstractDataset implements EventListener
         this.fireDatasetChanged();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void notify(final Event event)
     {

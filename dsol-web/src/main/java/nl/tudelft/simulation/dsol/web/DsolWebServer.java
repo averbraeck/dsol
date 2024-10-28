@@ -216,7 +216,6 @@ public abstract class DsolWebServer implements EventListener
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

@@ -127,21 +127,18 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
         this.instances.put(nextKey, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getRowCount()
     {
         return this.instances.size();
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getColumnCount()
     {
         return ImmutableCollectionTableModel.COLUMNS.length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
@@ -160,14 +157,12 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getColumnName(final int columnIndex)
     {
         return ImmutableCollectionTableModel.COLUMNS[columnIndex];
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isCellEditable(final int rowIndex, final int columnIndex)
     {
@@ -179,7 +174,6 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex)
     {
@@ -188,7 +182,6 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
         throw new IllegalArgumentException("cannot set values in an ImmutableCollection...");
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getColumnClass(final int columnIndex)
     {
@@ -220,14 +213,12 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
         return new ImmutableCollectionProperty(this.keys.get(index), this.parentProperty.getName());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Introspector getIntrospector()
     {
         return this.introspector;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
@@ -289,28 +280,24 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
             this.name = name;
         }
 
-        /** {@inheritDoc} */
         @Override
         public Object getInstance()
         {
             return ImmutableCollectionTableModel.this.instances.values();
         }
 
-        /** {@inheritDoc} */
         @Override
         public String getName()
         {
             return this.name + "[" + ImmutableCollectionTableModel.this.keys.indexOf(this.key) + "]";
         }
 
-        /** {@inheritDoc} */
         @Override
         public Class<?> getType()
         {
             return ImmutableCollectionTableModel.this.instances.get(this.key).getClass();
         }
 
-        /** {@inheritDoc} */
         @Override
         public Object getValue()
         {
@@ -324,14 +311,12 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
             }
         }
 
-        /** {@inheritDoc} */
         @Override
         public boolean isEditable()
         {
             return false;
         }
 
-        /** {@inheritDoc} */
         @Override
         protected void setRegularValue(final Object value)
         {
@@ -339,7 +324,6 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
                     + "A program is not supposed to arrive here.");
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {
@@ -347,7 +331,6 @@ public class ImmutableCollectionTableModel extends AbstractTableModel implements
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

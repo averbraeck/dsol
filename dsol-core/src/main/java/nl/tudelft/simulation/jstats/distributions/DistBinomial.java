@@ -47,7 +47,6 @@ public class DistBinomial extends DistDiscrete
         this.p = p;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long draw()
     {
@@ -62,7 +61,6 @@ public class DistBinomial extends DistDiscrete
         return x;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {
@@ -92,7 +90,6 @@ public class DistBinomial extends DistDiscrete
         return this.p;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

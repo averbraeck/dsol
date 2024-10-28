@@ -35,7 +35,6 @@ public class InputFieldBoolean extends AbstractInputField
         panel.add(explanation);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterBoolean getParameter()
     {

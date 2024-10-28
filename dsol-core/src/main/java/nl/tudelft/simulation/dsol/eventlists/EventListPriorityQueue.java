@@ -34,63 +34,54 @@ public class EventListPriorityQueue<T extends Number & Comparable<T>> implements
         this.eventList = new PriorityQueue<>();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized SimEventInterface<T> removeFirst()
     {
         return this.eventList.poll();
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> first()
     {
         return this.eventList.peek();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void add(final SimEventInterface<T> event)
     {
         this.eventList.add(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean contains(final SimEventInterface<T> event)
     {
         return this.eventList.contains(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void clear()
     {
         this.eventList.clear();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty()
     {
         return this.eventList.isEmpty();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Iterator<SimEventInterface<T>> iterator()
     {
         return this.eventList.iterator();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean remove(final SimEventInterface<T> event)
     {
         return this.eventList.remove(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int size()
     {

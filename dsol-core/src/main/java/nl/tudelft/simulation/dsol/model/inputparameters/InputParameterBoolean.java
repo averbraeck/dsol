@@ -29,7 +29,6 @@ public class InputParameterBoolean extends AbstractInputParameter<Boolean, Boole
         super(key, shortName, description, defaultValue, displayPriority);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Boolean getCalculatedValue()
     {
@@ -46,7 +45,6 @@ public class InputParameterBoolean extends AbstractInputParameter<Boolean, Boole
         super.setValue(newValue);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterBoolean clone()
     {

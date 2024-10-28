@@ -256,7 +256,6 @@ public class InputParameterFloatScalar<U extends Unit<U>, T extends FloatScalar<
         this.maxIncluded = maxIncluded;
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterFloatScalar<U, T> clone()

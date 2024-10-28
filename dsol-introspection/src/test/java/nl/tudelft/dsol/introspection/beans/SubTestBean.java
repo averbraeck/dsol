@@ -140,7 +140,6 @@ public class SubTestBean implements Serializable
         this.font = font;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

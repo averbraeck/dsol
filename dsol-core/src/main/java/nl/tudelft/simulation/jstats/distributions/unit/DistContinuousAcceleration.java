@@ -37,7 +37,6 @@ public class DistContinuousAcceleration extends DistContinuousUnit<AccelerationU
         super(wrappedDistribution, AccelerationUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Acceleration draw()
     {

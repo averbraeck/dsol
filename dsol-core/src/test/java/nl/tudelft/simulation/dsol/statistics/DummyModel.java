@@ -25,7 +25,6 @@ public class DummyModel extends AbstractDsolModel<Double, DevsSimulatorInterface
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {

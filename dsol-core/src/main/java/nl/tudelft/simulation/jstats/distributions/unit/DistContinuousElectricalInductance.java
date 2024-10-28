@@ -37,7 +37,6 @@ public class DistContinuousElectricalInductance extends DistContinuousUnit<Elect
         super(wrappedDistribution, ElectricalInductanceUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ElectricalInductance draw()
     {

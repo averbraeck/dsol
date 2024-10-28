@@ -32,7 +32,6 @@ public class MaxPointFilter extends AbstractFilter
         this.maxPoints = maxPoints;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected synchronized boolean filter(final Object entry)
     {
@@ -44,7 +43,6 @@ public class MaxPointFilter extends AbstractFilter
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getCriterion()
     {

@@ -52,7 +52,6 @@ public class QueueEntry<E>
         return this.entity;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

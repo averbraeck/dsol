@@ -33,7 +33,6 @@ public class ExpandButtonEditor extends AbstractCellEditor implements TableCellE
     /** the value. */
     private JComponent component;
 
-    /** {@inheritDoc} */
     @Override
     public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected,
             final int row, final int column)
@@ -50,7 +49,6 @@ public class ExpandButtonEditor extends AbstractCellEditor implements TableCellE
         return (Component) value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getCellEditorValue()
     {

@@ -43,14 +43,12 @@ public class DistWeibull extends DistContinuous
         this.beta = beta;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
         return this.beta * Math.pow(-Math.log(this.stream.nextDouble()), 1.0d / this.alpha);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -80,7 +78,6 @@ public class DistWeibull extends DistContinuous
         return this.beta;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -34,7 +34,6 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {

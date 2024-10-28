@@ -78,7 +78,6 @@ public class EsriParserTest implements Contextualized
         this.context.destroySubcontext("animation");
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getContext()
     {

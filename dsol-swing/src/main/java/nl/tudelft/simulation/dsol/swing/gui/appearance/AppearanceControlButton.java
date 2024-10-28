@@ -26,14 +26,12 @@ public class AppearanceControlButton extends JButton implements AppearanceContro
         super(loadIcon);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isFont()
     {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

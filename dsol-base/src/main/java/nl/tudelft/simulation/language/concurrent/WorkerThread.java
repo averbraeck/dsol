@@ -65,7 +65,6 @@ public class WorkerThread extends Thread
         return this.running.get();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void run()
     {

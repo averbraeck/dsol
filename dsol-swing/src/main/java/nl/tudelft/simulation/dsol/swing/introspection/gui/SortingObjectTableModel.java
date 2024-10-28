@@ -32,7 +32,6 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
         super(source);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Introspector getIntrospector()
     {
@@ -43,7 +42,6 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
         return ((IntrospectingTableModelInterface) this.source).getIntrospector();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Property getProperty(final String propertyName)
     {
@@ -54,7 +52,6 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
         return ((IntrospectingTableModelInterface) this.source).getProperty(propertyName);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
@@ -65,7 +62,6 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
         return ((IntrospectingTableModelInterface) this.source).getTypeAt(this.expandedIndex[rowIndex].intValue(), columnIndex);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ModelManager getModelManager()
     {
@@ -76,7 +72,6 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
         return ((IntrospectingTableModelInterface) this.source).getModelManager();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

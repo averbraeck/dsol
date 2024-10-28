@@ -74,7 +74,6 @@ public abstract class InputParameterMapDistDiscrete extends InputParameterMap
         this.stream = stream;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterMapDistDiscrete clone()
     {

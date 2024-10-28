@@ -33,7 +33,6 @@ public class DistDiscreteConstant extends DistDiscrete
         this.constant = constant;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long draw()
     {
@@ -41,7 +40,6 @@ public class DistDiscreteConstant extends DistDiscrete
         return this.constant;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {
@@ -61,7 +59,6 @@ public class DistDiscreteConstant extends DistDiscrete
         return this.constant;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

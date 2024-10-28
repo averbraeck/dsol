@@ -108,7 +108,6 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
         init(dm);
     }
 
-    /** {@inheritDoc} */
     @Override
     public CellPresentationConfiguration getCellPresentationConfiguration()
     {
@@ -165,7 +164,6 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
      */
     protected class ParentListener implements HierarchyListener
     {
-        /** {@inheritDoc} */
         @Override
         public void hierarchyChanged(final HierarchyEvent e)
         {
@@ -221,7 +219,6 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
         this.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     }
 
-    /** {@inheritDoc} */
     @Override
     public IntrospectingTableModelInterface getIntrospectingTableModel()
     {

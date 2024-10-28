@@ -32,14 +32,12 @@ public class InputParameterMap extends AbstractInputParameterMap<SortedMap<Strin
         setReadOnly(true);
     }
 
-    /** {@inheritDoc} */
     @Override
     public SortedMap<String, InputParameter<?, ?>> getCalculatedValue()
     {
         return getValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterMap clone()
     {

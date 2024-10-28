@@ -39,7 +39,6 @@ public class DistEmpiricalDiscreteDouble extends DistContinuous
         this.empiricalDistribution = empiricalDistribution;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -47,7 +46,6 @@ public class DistEmpiricalDiscreteDouble extends DistContinuous
         return this.empiricalDistribution.getCeilingEntry(u).getValue().doubleValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {

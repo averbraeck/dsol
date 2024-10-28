@@ -147,7 +147,6 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
                 new Bounds3d(size.getDeltaX(), size.getDeltaY(), 0.0)), contextProvider, images);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paint(final Graphics2D graphics, final ImageObserver observer)
     {

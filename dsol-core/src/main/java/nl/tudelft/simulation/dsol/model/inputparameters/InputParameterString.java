@@ -32,7 +32,6 @@ public class InputParameterString extends AbstractInputParameter<String, String>
         Throw.whenNull(defaultValue, "defaultValue cannot be null");
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getCalculatedValue()
     {
@@ -49,7 +48,6 @@ public class InputParameterString extends AbstractInputParameter<String, String>
         super.setValue(newValue);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterString clone()
     {

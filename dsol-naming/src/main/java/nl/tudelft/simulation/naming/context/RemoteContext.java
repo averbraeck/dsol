@@ -97,175 +97,150 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         this.remoteEventProducer = new RemoteChangeEventProducer(host, port, eventProducerBindingKey);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getAtomicName() throws RemoteException
     {
         return this.embeddedContext.getAtomicName();
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getParent() throws RemoteException
     {
         return this.embeddedContext.getParent();
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getRootContext() throws RemoteException
     {
         return this.embeddedContext.getRootContext();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getAbsolutePath() throws RemoteException
     {
         return this.embeddedContext.getAbsolutePath();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(final String name) throws NamingException, RemoteException
     {
         return this.embeddedContext.get(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getObject(final String key) throws NamingException, RemoteException
     {
         return this.embeddedContext.getObject(key);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean exists(final String name) throws NamingException, RemoteException
     {
         return this.embeddedContext.exists(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasKey(final String key) throws NamingException, RemoteException
     {
         return this.embeddedContext.hasKey(key);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasObject(final Object object) throws RemoteException
     {
         return this.embeddedContext.hasObject(object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() throws RemoteException
     {
         return this.embeddedContext.isEmpty();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bind(final String name, final Object object) throws NamingException, RemoteException
     {
         this.embeddedContext.bind(name, object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bindObject(final String key, final Object object) throws NamingException, RemoteException
     {
         this.embeddedContext.bindObject(key, object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bindObject(final Object object) throws NamingException, RemoteException
     {
         this.embeddedContext.bindObject(object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void unbind(final String name) throws NamingException, RemoteException
     {
         this.embeddedContext.unbind(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void unbindObject(final String key) throws NamingException, RemoteException
     {
         this.embeddedContext.unbindObject(key);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rebind(final String name, final Object object) throws NamingException, RemoteException
     {
         this.embeddedContext.rebind(name, object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rebindObject(final String key, final Object object) throws NamingException, RemoteException
     {
         this.embeddedContext.rebindObject(key, object);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rename(final String oldName, final String newName) throws NamingException, RemoteException
     {
         this.embeddedContext.rename(oldName, newName);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface createSubcontext(final String name) throws NamingException, RemoteException
     {
         return this.embeddedContext.createSubcontext(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void destroySubcontext(final String name) throws NamingException, RemoteException
     {
         this.embeddedContext.destroySubcontext(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Set<String> keySet() throws RemoteException
     {
         return new LinkedHashSet<String>(this.embeddedContext.keySet());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Collection<Object> values() throws RemoteException
     {
         return new LinkedHashSet<Object>(this.embeddedContext.values());
     }
 
-    /** {@inheritDoc} */
     @Override
     public Map<String, Object> bindings() throws RemoteException
     {
         return this.embeddedContext.bindings();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void checkCircular(final Object newObject) throws NamingException, RemoteException
     {
         this.embeddedContext.checkCircular(newObject);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void close() throws NamingException, RemoteException
     {
@@ -273,7 +248,6 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         this.embeddedContext.close();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fireObjectChangedEventValue(final Object object)
             throws NameNotFoundException, NullPointerException, NamingException, RemoteException
@@ -282,7 +256,6 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         fireObjectChangedEventKey(makeObjectKey(object));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void fireObjectChangedEventKey(final String key)
             throws NameNotFoundException, NullPointerException, NamingException, RemoteException
@@ -315,7 +288,6 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         return object.toString().replace(ContextInterface.SEPARATOR, ContextInterface.REPLACE_SEPARATOR);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -324,7 +296,6 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         return "RemoteContext[null]";
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString(final boolean verbose) throws RemoteException
     {
@@ -339,14 +310,12 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     /* **************************************** EVENTPRODUCER IMPLEMENTATION ******************************************* */
     /* ***************************************************************************************************************** */
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType) throws RemoteException
     {
         return this.embeddedContext.addListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType,
             final ReferenceType referenceType) throws RemoteException
@@ -354,14 +323,12 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         return this.embeddedContext.addListener(listener, eventType, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position) throws RemoteException
     {
         return this.embeddedContext.addListener(listener, eventType, position);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position,
             final ReferenceType referenceType) throws RemoteException
@@ -369,28 +336,24 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         return this.embeddedContext.addListener(listener, eventType, position, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized int removeAllListeners() throws RemoteException
     {
         return this.remoteEventProducer.removeAllListeners();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized int removeAllListeners(final Class<?> ofClass) throws RemoteException
     {
         return this.remoteEventProducer.removeAllListeners(ofClass);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized boolean removeListener(final EventListener listener, final EventType eventType) throws RemoteException
     {
         return this.embeddedContext.removeListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<Reference<EventListener>> getListenerReferences(final EventType eventType)  throws RemoteException
     {

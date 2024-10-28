@@ -72,7 +72,6 @@ public class InputFieldDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U,
         panel.add(explanation);
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterDoubleScalar<U, T> getParameter()

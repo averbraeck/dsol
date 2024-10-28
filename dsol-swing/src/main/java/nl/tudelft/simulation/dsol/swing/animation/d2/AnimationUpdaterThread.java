@@ -55,7 +55,6 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
         this.eventProducer = eventProducer;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {
@@ -118,7 +117,6 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
         this.updateFrequency = updateFrequency;
     }
 
-    /** {@inheritDoc} */
     @Override
     public EventListenerMap getEventListenerMap() throws RemoteException
     {

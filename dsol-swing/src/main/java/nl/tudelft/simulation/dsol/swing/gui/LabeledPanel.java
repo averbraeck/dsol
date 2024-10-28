@@ -28,7 +28,6 @@ public class LabeledPanel extends JPanel
         setBorder(new TitledBorder(null, caption, TitledBorder.LEADING, TitledBorder.TOP, null, null));
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -72,7 +72,6 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
         this.args = args;
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void execute() throws SimRuntimeException
     {
@@ -172,7 +171,6 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
         return argsList.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

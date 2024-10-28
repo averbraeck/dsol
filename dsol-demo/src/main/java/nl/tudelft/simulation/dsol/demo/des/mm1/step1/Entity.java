@@ -47,7 +47,6 @@ class Entity
         return this.id;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

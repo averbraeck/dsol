@@ -163,7 +163,6 @@ public class DsolPanel extends JPanel implements AppearanceControl
         this.controlPanel.setControlButtonsState(false);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -195,7 +194,6 @@ public class DsolPanel extends JPanel implements AppearanceControl
             super(tabPlacement);
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

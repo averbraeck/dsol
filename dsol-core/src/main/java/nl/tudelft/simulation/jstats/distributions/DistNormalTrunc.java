@@ -82,7 +82,6 @@ public class DistNormalTrunc extends DistContinuous
         this.probDensFactor = 1.0 / this.cumulProbDiff;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -183,7 +182,6 @@ public class DistNormalTrunc extends DistContinuous
         return getInverseCumulativeProbabilityNotTruncated(this.cumulProbMin + cumulativeProbability * this.cumulProbDiff);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -227,7 +225,6 @@ public class DistNormalTrunc extends DistContinuous
         return this.max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

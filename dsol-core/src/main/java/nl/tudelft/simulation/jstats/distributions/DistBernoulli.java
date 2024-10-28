@@ -56,7 +56,6 @@ public class DistBernoulli extends DistDiscrete
         return 0L;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {
@@ -80,7 +79,6 @@ public class DistBernoulli extends DistDiscrete
         return this.p;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

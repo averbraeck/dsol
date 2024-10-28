@@ -137,7 +137,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -164,7 +163,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     false, "%f", 1.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -191,7 +189,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     Integer.MAX_VALUE, "%f", 1.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -218,7 +215,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     Double.MAX_VALUE, false, false, "%f", 1.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -247,7 +243,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -277,7 +272,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     false, "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -305,7 +299,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     0.0, Double.MAX_VALUE, true, false, "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -331,7 +324,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
             add(new InputParameterDouble("beta", "beta", "beta value", 1.0, 0.0, Double.MAX_VALUE, false, false, "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -361,7 +353,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
             add(new InputParameterDouble("beta", "beta", "beta value", 1.0, 0.0, Double.MAX_VALUE, false, false, "%f", 3.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -394,7 +385,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     -Double.MAX_VALUE, Double.MAX_VALUE, false, false, "%f", 3.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -430,7 +420,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
                     -Double.MAX_VALUE, Double.MAX_VALUE, false, false, "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -457,7 +446,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
             add(new InputParameterDouble("beta", "beta", "beta value", 1.0, 0.0, Double.MAX_VALUE, false, false, "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {

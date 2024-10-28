@@ -74,7 +74,6 @@ public class CompositeFilter extends AbstractFilter
         this.operator = operator;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean filter(final Object entry)
     {
@@ -98,7 +97,6 @@ public class CompositeFilter extends AbstractFilter
         return "OR";
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getCriterion()
     {

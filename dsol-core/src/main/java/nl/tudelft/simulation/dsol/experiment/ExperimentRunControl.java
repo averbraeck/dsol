@@ -51,7 +51,6 @@ public class ExperimentRunControl<T extends Number & Comparable<T>> extends RunC
         return this.numberOfReplications;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode()
     {
@@ -61,7 +60,6 @@ public class ExperimentRunControl<T extends Number & Comparable<T>> extends RunC
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:needbraces")
     public boolean equals(final Object obj)
@@ -76,7 +74,6 @@ public class ExperimentRunControl<T extends Number & Comparable<T>> extends RunC
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

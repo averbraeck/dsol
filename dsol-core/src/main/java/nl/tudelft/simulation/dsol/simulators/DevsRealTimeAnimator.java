@@ -82,7 +82,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         super(id);
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "checkstyle:methodlength"})
     public void run()
@@ -465,7 +464,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
             this.msecWallClockToSimTimeUnit = msecWallClockToSimTimeUnit;
         }
 
-        /** {@inheritDoc} */
         @Override
         public Double simulatorTimeForWallClockMillis(final double wallMilliseconds)
         {
@@ -520,7 +518,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
             super(id);
         }
 
-        /** {@inheritDoc} */
         @Override
         public Duration simulatorTimeForWallClockMillis(final double wallMilliseconds)
         {
@@ -544,7 +541,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
             super(id);
         }
 
-        /** {@inheritDoc} */
         @Override
         public FloatDuration simulatorTimeForWallClockMillis(final double wallMilliseconds)
         {

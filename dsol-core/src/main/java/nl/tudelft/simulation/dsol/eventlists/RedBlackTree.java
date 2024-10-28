@@ -37,7 +37,6 @@ public class RedBlackTree<T extends Number & Comparable<T>> implements EventList
         this.eventList = new TreeSet<>();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized SimEventInterface<T> removeFirst()
     {
@@ -49,7 +48,6 @@ public class RedBlackTree<T extends Number & Comparable<T>> implements EventList
         return first;
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> first()
     {
@@ -63,49 +61,42 @@ public class RedBlackTree<T extends Number & Comparable<T>> implements EventList
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void add(final SimEventInterface<T> event)
     {
         this.eventList.add(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean contains(final SimEventInterface<T> event)
     {
         return this.eventList.contains(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void clear()
     {
         this.eventList.clear();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty()
     {
         return this.eventList.isEmpty();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Iterator<SimEventInterface<T>> iterator()
     {
         return this.eventList.iterator();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean remove(final SimEventInterface<T> event)
     {
         return this.eventList.remove(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int size()
     {

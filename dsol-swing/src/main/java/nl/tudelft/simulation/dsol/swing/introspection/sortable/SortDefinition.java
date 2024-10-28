@@ -33,28 +33,24 @@ public class SortDefinition implements Sortable.Definition
         this.ascending = ascending;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getFieldID()
     {
         return this.fieldID;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isAcendingSort()
     {
         return this.ascending;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setAscending(final boolean ascending)
     {
         this.ascending = ascending;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

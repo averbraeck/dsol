@@ -74,7 +74,6 @@ public class SingleImageRenderable<L extends Locatable> extends ImageRenderable<
         super(staticLocation, size, contextProvider, new URL[] {image});
     }
 
-    /** {@inheritDoc} */
     @Override
     public int selectImage()
     {

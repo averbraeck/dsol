@@ -71,7 +71,6 @@ public class ConsoleOutput extends JPanel
             this.standardOut = standardOut;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void write(final int b) throws IOException
         {
@@ -101,7 +100,6 @@ public class ConsoleOutput extends JPanel
             this.standardErr = standardErr;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void write(final int b) throws IOException
         {

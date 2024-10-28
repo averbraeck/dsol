@@ -44,14 +44,12 @@ public class DistDiscreteUniform extends DistDiscrete
         this.max = max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public long draw()
     {
         return this.stream.nextInt((int) this.min, (int) this.max);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {
@@ -78,7 +76,6 @@ public class DistDiscreteUniform extends DistDiscrete
         return this.max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

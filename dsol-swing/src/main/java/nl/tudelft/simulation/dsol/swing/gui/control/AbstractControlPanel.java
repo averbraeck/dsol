@@ -173,7 +173,6 @@ public abstract class AbstractControlPanel<
             this.panel = panel;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void run()
         {
@@ -201,7 +200,6 @@ public abstract class AbstractControlPanel<
             setCloseHandlerRegistered(true);
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {
@@ -209,7 +207,6 @@ public abstract class AbstractControlPanel<
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent actionEvent)
     {
@@ -493,14 +490,12 @@ public abstract class AbstractControlPanel<
         this.closeHandlerRegistered = closeHandlerRegistered;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void windowOpened(final WindowEvent e)
     {
         // No action
     }
 
-    /** {@inheritDoc} */
     @Override
     public void windowClosing(final WindowEvent e)
     {
@@ -520,42 +515,36 @@ public abstract class AbstractControlPanel<
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void windowClosed(final WindowEvent e)
     {
         cleanup();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void windowIconified(final WindowEvent e)
     {
         // No action
     }
 
-    /** {@inheritDoc} */
     @Override
     public void windowDeiconified(final WindowEvent e)
     {
         // No action
     }
 
-    /** {@inheritDoc} */
     @Override
     public void windowActivated(final WindowEvent e)
     {
         // No action
     }
 
-    /** {@inheritDoc} */
     @Override
     public void windowDeactivated(final WindowEvent e)
     {
         // No action
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {
@@ -569,7 +558,6 @@ public abstract class AbstractControlPanel<
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

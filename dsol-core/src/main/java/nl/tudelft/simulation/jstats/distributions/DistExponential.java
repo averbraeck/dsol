@@ -45,14 +45,12 @@ public class DistExponential extends DistContinuous
         this.mean = mean;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
         return -this.mean * Math.log(this.stream.nextDouble());
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -71,7 +69,6 @@ public class DistExponential extends DistContinuous
         return this.mean;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

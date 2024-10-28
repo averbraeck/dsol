@@ -106,7 +106,6 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
         simulator.addListener(this, SimulatorInterface.TIME_CHANGED_EVENT, ReferenceType.STRONG);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void notify(final Event event) throws RemoteException
     {
@@ -127,7 +126,6 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void initialize(final double x, final double[] y)
     {

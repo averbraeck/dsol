@@ -51,7 +51,6 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public T getCalculatedValue()
     {
@@ -134,7 +133,6 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
         setValue(this.options.get(key));
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterSelectionMap<K, T> clone()

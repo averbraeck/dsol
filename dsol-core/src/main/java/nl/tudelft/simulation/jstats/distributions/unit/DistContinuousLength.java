@@ -37,7 +37,6 @@ public class DistContinuousLength extends DistContinuousUnit<LengthUnit, Length>
         super(wrappedDistribution, LengthUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Length draw()
     {

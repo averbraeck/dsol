@@ -60,7 +60,6 @@ public class DistLogNormalTrunc extends DistLogNormal
         this.lognormalProbMax = super.getCumulativeProbability(this.max);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -68,7 +67,6 @@ public class DistLogNormalTrunc extends DistLogNormal
                 this.lognormalProbMin + (this.lognormalProbMax - this.lognormalProbMin) * this.stream.nextDouble());
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getCumulativeProbability(final double x)
     {
@@ -83,7 +81,6 @@ public class DistLogNormalTrunc extends DistLogNormal
         return (super.getCumulativeProbability(x) - this.lognormalProbMin) / (this.lognormalProbMax - this.lognormalProbMin);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -94,7 +91,6 @@ public class DistLogNormalTrunc extends DistLogNormal
         return super.getProbabilityDensity(x) / (this.lognormalProbMax - this.lognormalProbMin);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getInverseCumulativeProbability(final double cumulativeProbability)
     {
@@ -118,7 +114,6 @@ public class DistLogNormalTrunc extends DistLogNormal
         return this.max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

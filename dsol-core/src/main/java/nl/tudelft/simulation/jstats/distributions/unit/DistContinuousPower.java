@@ -37,7 +37,6 @@ public class DistContinuousPower extends DistContinuousUnit<PowerUnit, Power>
         super(wrappedDistribution, PowerUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Power draw()
     {

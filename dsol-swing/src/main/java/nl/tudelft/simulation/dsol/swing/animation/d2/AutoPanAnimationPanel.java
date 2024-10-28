@@ -73,7 +73,6 @@ public class AutoPanAnimationPanel extends AnimationPanel
         }
         this.addMouseListener(new MouseAdapter()
         {
-            /** {@inheritDoc} */
             @Override
             public void mouseClicked(final MouseEvent e)
             {
@@ -102,7 +101,6 @@ public class AutoPanAnimationPanel extends AnimationPanel
         }
         this.addMouseWheelListener(new InputListener(this)
         {
-            /** {@inheritDoc} */
             @Override
             public void mouseWheelMoved(final MouseWheelEvent e)
             {
@@ -160,7 +158,6 @@ public class AutoPanAnimationPanel extends AnimationPanel
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paintComponent(final Graphics g)
     {
@@ -191,7 +188,6 @@ public class AutoPanAnimationPanel extends AnimationPanel
         super.paintComponent(g);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {
@@ -205,7 +201,6 @@ public class AutoPanAnimationPanel extends AnimationPanel
         super.notify(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

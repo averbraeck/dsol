@@ -86,7 +86,6 @@ public class GisMap implements GisMapInterface
         super();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addLayer(final LayerInterface layer)
     {
@@ -96,7 +95,6 @@ public class GisMap implements GisMapInterface
         this.same = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setLayers(final List<LayerInterface> layers)
     {
@@ -110,7 +108,6 @@ public class GisMap implements GisMapInterface
         this.same = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setLayer(final int index, final LayerInterface layer)
     {
@@ -127,7 +124,6 @@ public class GisMap implements GisMapInterface
         this.same = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void hideLayer(final LayerInterface layer)
     {
@@ -135,7 +131,6 @@ public class GisMap implements GisMapInterface
         this.same = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void hideLayer(final String layerName) throws RemoteException
     {
@@ -146,7 +141,6 @@ public class GisMap implements GisMapInterface
         this.same = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void showLayer(final LayerInterface layer)
     {
@@ -154,7 +148,6 @@ public class GisMap implements GisMapInterface
         this.same = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void showLayer(final String layerName) throws RemoteException
     {
@@ -165,7 +158,6 @@ public class GisMap implements GisMapInterface
         this.same = false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isSame() throws RemoteException
     {
@@ -174,7 +166,6 @@ public class GisMap implements GisMapInterface
         return ret;
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:methodlength")
     public Graphics2D drawMap(final Graphics2D graphics) throws DsolGisException
@@ -265,49 +256,42 @@ public class GisMap implements GisMapInterface
         return graphics;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Bounds2d getExtent()
     {
         return this.extent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public MapImageInterface getImage()
     {
         return this.image;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ImmutableList<LayerInterface> getAllLayers()
     {
         return new ImmutableArrayList<>(this.allLayers);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ImmutableList<LayerInterface> getVisibleLayers()
     {
         return new ImmutableArrayList<>(this.visibleLayers);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ImmutableMap<String, LayerInterface> getLayerMap() throws RemoteException
     {
         return new ImmutableHashMap<>(this.layerMap);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getName()
     {
         return this.name;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getScale()
     {
@@ -325,42 +309,36 @@ public class GisMap implements GisMapInterface
                 this.extent.getDeltaY() / this.image.getSize().getHeight());
     }
 
-    /** {@inheritDoc} */
     @Override
     public MapUnits getUnits()
     {
         return this.units;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setExtent(final Bounds2d extent)
     {
         this.extent = extent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setImage(final MapImageInterface image)
     {
         this.image = image;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setName(final String name)
     {
         this.name = name;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setUnits(final MapUnits units)
     {
         this.units = units;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void zoom(final double zoomFactor)
     {
@@ -379,7 +357,6 @@ public class GisMap implements GisMapInterface
                 new Bounds2d(centerX - 0.5 * width, centerX + 0.5 * width, centerY - 0.5 * height, centerY + 0.5 * height);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void zoomPoint(final Point2D pixelPosition, final double zoomFactor)
     {
@@ -399,7 +376,6 @@ public class GisMap implements GisMapInterface
                 new Bounds2d(centerX - 0.5 * width, centerX + 0.5 * width, centerY - 0.5 * height, centerY + 0.5 * height);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void zoomRectangle(final SerializableRectangle2d rectangle)
     {
@@ -421,14 +397,12 @@ public class GisMap implements GisMapInterface
         this.extent = new Bounds2d(minX, maxX, minY, maxY);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isDrawBackground()
     {
         return this.drawBackground;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDrawBackground(final boolean drawBackground)
     {

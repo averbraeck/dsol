@@ -27,14 +27,12 @@ public class DefaultSimTimeFormatter implements SimTimeFormatter
         this.simulator = simulator;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setSimulator(final SimulatorInterface<?> simulator)
     {
         this.simulator = simulator;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String format(final String message)
     {

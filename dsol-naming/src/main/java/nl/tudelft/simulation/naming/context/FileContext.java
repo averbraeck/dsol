@@ -75,7 +75,6 @@ public class FileContext extends JvmContext
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void bind(final String name, final Object value) throws NamingException, RemoteException
     {
@@ -83,7 +82,6 @@ public class FileContext extends JvmContext
         save();
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface createSubcontext(final String name) throws NamingException, RemoteException
     {
@@ -92,7 +90,6 @@ public class FileContext extends JvmContext
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void destroySubcontext(final String name) throws NamingException, RemoteException
     {
@@ -100,7 +97,6 @@ public class FileContext extends JvmContext
         save();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void rebind(final String name, final Object value) throws NamingException, RemoteException
     {
@@ -108,7 +104,6 @@ public class FileContext extends JvmContext
         save();
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void rename(final String nameOld, final String nameNew) throws NamingException, RemoteException
     {
@@ -116,7 +111,6 @@ public class FileContext extends JvmContext
         save();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void unbind(final String name) throws NamingException, RemoteException
     {

@@ -58,7 +58,6 @@ public class Warehouse42Model extends AbstractDsolModel<Double, DevsSimulator<Do
         this.inputParameterMap.add(policyMap);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {

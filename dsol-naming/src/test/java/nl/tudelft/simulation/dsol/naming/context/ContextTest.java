@@ -499,7 +499,6 @@ public class ContextTest
             this.field = field;
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

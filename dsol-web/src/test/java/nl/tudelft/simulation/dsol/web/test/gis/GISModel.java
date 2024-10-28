@@ -31,7 +31,6 @@ public class GISModel extends AbstractDsolModel<Double, DevsRealTimeAnimator.Tim
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {

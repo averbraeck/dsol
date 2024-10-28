@@ -43,7 +43,6 @@ public class StationaryPolicy implements OrderingPolicy
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public long computeAmountToOrder(final long inventory)
     {

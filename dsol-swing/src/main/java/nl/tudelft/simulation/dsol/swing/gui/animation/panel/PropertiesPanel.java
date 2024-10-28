@@ -39,7 +39,6 @@ public class PropertiesPanel extends JPanel implements EventListener
         // nothing yet
     }
     
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

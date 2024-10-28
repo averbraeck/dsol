@@ -61,7 +61,6 @@ public class SortingTableModel implements TableModel, Sortable
      */
     protected class ProxyListener implements TableModelListener
     {
-        /** {@inheritDoc} */
         @Override
         public void tableChanged(final TableModelEvent e)
         {
@@ -217,14 +216,12 @@ public class SortingTableModel implements TableModel, Sortable
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Definition[] getDefinitions()
     {
         return this.definitions.toArray(new Definition[0]);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDefinitions(final Definition[] definitions)
     {
@@ -232,14 +229,12 @@ public class SortingTableModel implements TableModel, Sortable
         this.definitions.addAll(Arrays.asList(definitions));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void sort()
     {
         buildIndex();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addTableModelListener(final TableModelListener l)
     {
@@ -248,35 +243,30 @@ public class SortingTableModel implements TableModel, Sortable
         this.source.addTableModelListener(proxy);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getColumnClass(final int columnIndex)
     {
         return this.source.getColumnClass(columnIndex);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getColumnCount()
     {
         return this.source.getColumnCount();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getColumnName(final int columnIndex)
     {
         return this.source.getColumnName(columnIndex);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getRowCount()
     {
         return this.source.getRowCount();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
@@ -293,14 +283,12 @@ public class SortingTableModel implements TableModel, Sortable
         return this.source.getValueAt(this.expandedIndex[rowIndex].intValue(), columnIndex);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isCellEditable(final int rowIndex, final int columnIndex)
     {
         return this.source.isCellEditable(this.expandedIndex[rowIndex].intValue(), columnIndex);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void removeTableModelListener(final TableModelListener l)
     {
@@ -309,7 +297,6 @@ public class SortingTableModel implements TableModel, Sortable
         this.proxyListeners.remove(proxy);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex)
     {
@@ -327,7 +314,6 @@ public class SortingTableModel implements TableModel, Sortable
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

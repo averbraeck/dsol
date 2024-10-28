@@ -28,7 +28,6 @@ public class Speed extends DifferentialEquation<Double>
         super(simulator, 1);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] dy(final double x, final double[] y)
     {

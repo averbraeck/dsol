@@ -84,7 +84,6 @@ public class DX120Generator extends RandomNumberGenerator
         this.k23 = 2 * K / 3 - 1; // (k23 = 79)
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized long next(final int bits)
     {
@@ -113,7 +112,6 @@ public class DX120Generator extends RandomNumberGenerator
         return (this.buffer[this.index]) >>> (63 - bits);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void setSeed(final long seed)
     {

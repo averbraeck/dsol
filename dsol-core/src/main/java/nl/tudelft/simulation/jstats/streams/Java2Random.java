@@ -50,28 +50,24 @@ public class Java2Random extends Random implements StreamInterface
         this.originalSeed = seed;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void reset()
     {
         this.setSeed(this.seed);
     }
 
-    /** {@inheritDoc} */
     @Override
     public long getOriginalSeed()
     {
         return this.originalSeed;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int nextInt(final int i, final int j)
     {
         return i + (int) Math.floor((j - i + 1) * this.nextDouble());
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void setSeed(final long seed)
     {
@@ -79,14 +75,12 @@ public class Java2Random extends Random implements StreamInterface
         super.setSeed(seed);
     }
 
-    /** {@inheritDoc} */
     @Override
     public long getSeed()
     {
         return this.seed;
     }
 
-    /** {@inheritDoc} */
     @Override
     public byte[] saveState() throws StreamException
     {
@@ -100,7 +94,6 @@ public class Java2Random extends Random implements StreamInterface
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void restoreState(final byte[] state) throws StreamException
     {

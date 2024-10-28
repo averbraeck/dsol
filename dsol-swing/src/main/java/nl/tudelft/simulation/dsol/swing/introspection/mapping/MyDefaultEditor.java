@@ -28,7 +28,6 @@ public class MyDefaultEditor implements TableCellEditor
     /** the delegate. */
     private TableCellEditor delegate = new DefaultCellEditor(new JTextField());
 
-    /** {@inheritDoc} */
     @Override
     public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected,
             final int row, final int column)
@@ -41,49 +40,42 @@ public class MyDefaultEditor implements TableCellEditor
         return this.delegate.getTableCellEditorComponent(table, value, isSelected, row, column);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void cancelCellEditing()
     {
         this.delegate.cancelCellEditing();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getCellEditorValue()
     {
         return this.delegate.getCellEditorValue();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isCellEditable(final EventObject anEvent)
     {
         return this.delegate.isCellEditable(anEvent);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean shouldSelectCell(final EventObject anEvent)
     {
         return this.delegate.shouldSelectCell(anEvent);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean stopCellEditing()
     {
         return this.delegate.stopCellEditing();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addCellEditorListener(final CellEditorListener l)
     {
         this.delegate.addCellEditorListener(l);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void removeCellEditorListener(final CellEditorListener l)
     {

@@ -125,7 +125,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
                     false, false, "%f", 1.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -155,7 +154,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
                     "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -182,7 +180,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
             add(new InputParameterLong("c", "c", "constant value to return", 0L, Long.MIN_VALUE, Long.MAX_VALUE, "%f", 1.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -209,7 +206,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
                     "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -236,7 +232,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
                     false, false, "%f", 1.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -266,7 +261,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
                     "%f", 2.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {
@@ -294,7 +288,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
                     false, "%f", 1.0));
         }
 
-        /** {@inheritDoc} */
         @Override
         public void setDist() throws InputParameterException
         {

@@ -46,7 +46,6 @@ public class RegexFormatter extends DefaultFormatter
         throw new ParseException("Pattern did not match", 0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

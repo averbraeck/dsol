@@ -58,7 +58,6 @@ public class TestSwing
             setMinimumSize(new Dimension(100, 100));
         }
 
-        /** {@inheritDoc} */
         @Override
         protected void paintComponent(Graphics g)
         {

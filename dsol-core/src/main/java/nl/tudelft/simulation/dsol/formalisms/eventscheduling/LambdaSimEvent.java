@@ -52,7 +52,6 @@ public class LambdaSimEvent<T extends Number & Comparable<T>> extends AbstractSi
         this.executable = executable;
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void execute() throws SimRuntimeException
     {
@@ -66,7 +65,6 @@ public class LambdaSimEvent<T extends Number & Comparable<T>> extends AbstractSi
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -62,7 +62,6 @@ public class MaxDiffFilter extends AbstractFilter
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getCriterion()
     {

@@ -17,7 +17,6 @@ public class SimpleStreamUpdater implements StreamUpdater
     /** */
     private static final long serialVersionUID = 20210405L;
 
-    /** {@inheritDoc} */
     @Override
     public void updateSeed(final String streamId, final StreamInterface stream, final int replicationNumber)
     {

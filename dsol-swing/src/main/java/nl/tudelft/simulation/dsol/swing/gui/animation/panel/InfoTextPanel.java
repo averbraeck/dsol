@@ -125,7 +125,6 @@ public class InfoTextPanel extends JPanel
         @SuppressWarnings("checkstyle:visibilitymodifier")
         protected boolean closing = false;
 
-        /** {@inheritDoc} */
         @Override
         public void run()
         {
@@ -140,7 +139,6 @@ public class InfoTextPanel extends JPanel
                     {
                         window.addWindowListener(new WindowAdapter()
                         {
-                            /** {@inheritDoc} */
                             @Override
                             public void windowClosing(final WindowEvent e)
                             {
@@ -167,7 +165,6 @@ public class InfoTextPanel extends JPanel
             }
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

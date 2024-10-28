@@ -53,7 +53,6 @@ public class DistBeta extends DistContinuous
         this.dist2 = new DistGamma(stream, this.alpha2, 1.0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -63,7 +62,6 @@ public class DistBeta extends DistContinuous
         return y1 / (y1 + y2);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -92,7 +90,6 @@ public class DistBeta extends DistContinuous
         return this.alpha2;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setStream(final StreamInterface stream)
     {
@@ -101,7 +98,6 @@ public class DistBeta extends DistContinuous
         this.dist2.setStream(stream);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -471,7 +471,6 @@ public class EventContextTest
             return this.receivedEvent;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void notify(final Event event) throws RemoteException
         {
@@ -516,7 +515,6 @@ public class EventContextTest
             this.field = field;
         }
 
-        /** {@inheritDoc} */
         @Override
         public String toString()
         {

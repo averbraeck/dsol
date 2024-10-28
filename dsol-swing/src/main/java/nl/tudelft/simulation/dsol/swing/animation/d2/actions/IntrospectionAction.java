@@ -37,7 +37,6 @@ public class IntrospectionAction extends AbstractAction
         this.target = target;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent e)
     {

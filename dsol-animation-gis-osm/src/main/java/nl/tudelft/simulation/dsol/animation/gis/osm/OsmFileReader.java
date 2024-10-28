@@ -54,14 +54,12 @@ public class OsmFileReader implements DataSourceInterface
         this.featuresToRead = featuresToRead;
     }
     
-    /** {@inheritDoc} */
     @Override
     public List<FeatureInterface> getFeatures()
     {
         return this.featuresToRead;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void populateShapes() throws IOException
     {
@@ -126,14 +124,12 @@ public class OsmFileReader implements DataSourceInterface
         System.out.println("OSM layer has been read");
     }
 
-    /** {@inheritDoc} */
     @Override
     public URL getURL()
     {
         return this.osmURL;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isDynamic()
     {

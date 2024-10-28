@@ -52,7 +52,6 @@ public class Population extends DifferentialEquation<Double>
         this.d = 0.2;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] dy(final double time, final double[] y)
     {

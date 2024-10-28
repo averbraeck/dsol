@@ -112,7 +112,6 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
         this.parent.addListener(this, ContextInterface.OBJECT_CHANGED_EVENT, ReferenceType.WEAK);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event) throws RemoteException
     {

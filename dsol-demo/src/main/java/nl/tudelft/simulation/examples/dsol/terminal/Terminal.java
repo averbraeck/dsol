@@ -62,7 +62,6 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
 
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {
@@ -100,7 +99,6 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
         return this.ship;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void notify(final Event event)
     {

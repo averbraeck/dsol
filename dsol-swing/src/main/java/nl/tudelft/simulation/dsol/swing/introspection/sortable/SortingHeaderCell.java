@@ -108,7 +108,6 @@ public class SortingHeaderCell extends DefaultTableCellRenderer
         return this.sortMode == SORT_ASCENDING;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paintComponent(final Graphics g)
     {
@@ -126,7 +125,6 @@ public class SortingHeaderCell extends DefaultTableCellRenderer
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void setValue(final Object value)
     {
@@ -134,7 +132,6 @@ public class SortingHeaderCell extends DefaultTableCellRenderer
         this.setBorder(BorderFactory.createRaisedBevelBorder());
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

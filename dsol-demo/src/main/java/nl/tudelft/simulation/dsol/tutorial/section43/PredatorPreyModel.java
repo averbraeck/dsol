@@ -40,7 +40,6 @@ public class PredatorPreyModel extends AbstractDsolModel<Double, DessSimulator<D
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {
@@ -109,7 +108,6 @@ public class PredatorPreyModel extends AbstractDsolModel<Double, DessSimulator<D
             this.skip = skip;
         }
 
-        /** {@inheritDoc} */
         @Override
         public void notify(final Event event) throws RemoteException
         {

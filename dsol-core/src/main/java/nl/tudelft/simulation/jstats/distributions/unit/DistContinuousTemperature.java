@@ -37,7 +37,6 @@ public class DistContinuousTemperature extends DistContinuousUnit<TemperatureUni
         super(wrappedDistribution, TemperatureUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Temperature draw()
     {

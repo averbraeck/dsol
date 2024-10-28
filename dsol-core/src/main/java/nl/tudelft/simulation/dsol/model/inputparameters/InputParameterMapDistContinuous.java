@@ -74,7 +74,6 @@ public abstract class InputParameterMapDistContinuous extends InputParameterMap
         this.stream = stream;
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterMapDistContinuous clone()
     {

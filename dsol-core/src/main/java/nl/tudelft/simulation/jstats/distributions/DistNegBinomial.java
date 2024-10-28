@@ -52,7 +52,6 @@ public class DistNegBinomial extends DistDiscrete
         this.lnp = Math.log(1.0 - this.p);
     }
 
-    /** {@inheritDoc} */
     @Override
     public long draw()
     {
@@ -65,7 +64,6 @@ public class DistNegBinomial extends DistDiscrete
         return x;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double probability(final long observation)
     {
@@ -95,7 +93,6 @@ public class DistNegBinomial extends DistDiscrete
         return this.p;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

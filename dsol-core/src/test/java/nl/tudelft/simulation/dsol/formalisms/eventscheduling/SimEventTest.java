@@ -52,7 +52,6 @@ public class SimEventTest
     /** thread to create 100000 events each. */
     class ThreadRunner extends Thread
     {
-        /** {@inheritDoc} */
         @Override
         public void run()
         {

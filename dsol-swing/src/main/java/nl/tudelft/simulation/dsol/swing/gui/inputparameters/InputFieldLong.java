@@ -25,7 +25,6 @@ public class InputFieldLong extends InputFieldString
         super(panel, parameter);
     }
 
-    /** {@inheritDoc} */
     @Override
     public InputParameterLong getParameter()
     {

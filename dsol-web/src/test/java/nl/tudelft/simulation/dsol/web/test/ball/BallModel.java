@@ -29,7 +29,6 @@ public class BallModel extends AbstractDsolModel<Double, DevsRealTimeAnimator.Ti
         super(simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void constructModel() throws SimRuntimeException
     {

@@ -137,7 +137,6 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void clear()
     {
@@ -148,7 +147,6 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized SimEventInterface<T> removeFirst()
     {

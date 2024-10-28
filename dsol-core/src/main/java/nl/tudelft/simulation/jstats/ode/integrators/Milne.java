@@ -43,7 +43,6 @@ public class Milne extends CachingNumericalIntegrator
         super(stepSize, equation, 4, primerIntegrationMethod, startingSubSteps);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double[] next(final double x)
     {

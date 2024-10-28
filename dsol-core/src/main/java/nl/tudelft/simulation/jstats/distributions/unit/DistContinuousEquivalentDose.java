@@ -37,7 +37,6 @@ public class DistContinuousEquivalentDose extends DistContinuousUnit<EquivalentD
         super(wrappedDistribution, EquivalentDoseUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public EquivalentDose draw()
     {

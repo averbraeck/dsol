@@ -37,7 +37,6 @@ public class DistContinuousSolidAngle extends DistContinuousUnit<SolidAngleUnit,
         super(wrappedDistribution, SolidAngleUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public SolidAngle draw()
     {

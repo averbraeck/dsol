@@ -37,7 +37,6 @@ public class DistContinuousDirection extends DistContinuousUnit<DirectionUnit, D
         super(wrappedDistribution, DirectionUnit.DEFAULT);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Direction draw()
     {

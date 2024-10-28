@@ -40,14 +40,12 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
         setTimeStep(initialTimeStep);
     }
 
-    /** {@inheritDoc} */
     @Override
     public T getTimeStep()
     {
         return this.timeStep;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setTimeStep(final T timeStep) throws SimRuntimeException
     {
@@ -64,7 +62,6 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void stepImpl()
     {
@@ -77,7 +74,6 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
         this.fireUnverifiedTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, this.simulatorTime);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {

@@ -52,7 +52,6 @@ public class DistributionEntry implements Serializable
         return this.value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode()
     {
@@ -65,7 +64,6 @@ public class DistributionEntry implements Serializable
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:needbraces")
     public boolean equals(final Object obj)
@@ -89,7 +87,6 @@ public class DistributionEntry implements Serializable
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

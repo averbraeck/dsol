@@ -50,7 +50,6 @@ public class DistTriangular extends DistContinuous
         this.max = max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -62,7 +61,6 @@ public class DistTriangular extends DistContinuous
         return this.max - Math.sqrt((this.max - this.min) * (this.max - this.mode) * (1.0d - u));
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -104,7 +102,6 @@ public class DistTriangular extends DistContinuous
         return this.max;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

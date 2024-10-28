@@ -43,7 +43,6 @@ public class DistLogNormal extends DistNormal
         this.c2pisigma2 = Math.sqrt(Math.PI * this.c2sigma2);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double draw()
     {
@@ -51,7 +50,6 @@ public class DistLogNormal extends DistNormal
         return Math.exp(y);
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getProbabilityDensity(final double x)
     {
@@ -63,7 +61,6 @@ public class DistLogNormal extends DistNormal
         return 0.0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getCumulativeProbability(final double x)
     {
@@ -74,14 +71,12 @@ public class DistLogNormal extends DistNormal
         return super.getCumulativeProbability(Math.log(x));
     }
 
-    /** {@inheritDoc} */
     @Override
     public double getInverseCumulativeProbability(final double cumulativeProbability)
     {
         return Math.exp(super.getInverseCumulativeProbability(cumulativeProbability));
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

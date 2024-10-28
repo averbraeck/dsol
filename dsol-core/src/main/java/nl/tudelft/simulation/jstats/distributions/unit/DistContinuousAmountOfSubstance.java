@@ -37,7 +37,6 @@ public class DistContinuousAmountOfSubstance extends DistContinuousUnit<AmountOf
         super(wrappedDistribution, AmountOfSubstanceUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public AmountOfSubstance draw()
     {

@@ -39,14 +39,12 @@ public class DevDessAnimator<T extends Number & Comparable<T>> extends DevDessSi
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected long animationDelay = 100L;
 
-    /** {@inheritDoc} */
     @Override
     public long getAnimationDelay()
     {
         return this.animationDelay;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setAnimationDelay(final long animationDelay)
     {
@@ -54,14 +52,12 @@ public class DevDessAnimator<T extends Number & Comparable<T>> extends DevDessSi
         this.fireEvent(ANIMATION_DELAY_CHANGED_EVENT, animationDelay);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void updateAnimation()
     {
         this.fireTimedEvent(AnimatorInterface.UPDATE_ANIMATION_EVENT, null, this.simulatorTime);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {

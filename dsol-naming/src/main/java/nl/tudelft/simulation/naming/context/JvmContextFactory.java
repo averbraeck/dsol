@@ -19,7 +19,6 @@ public class JvmContextFactory implements ContextFactory
     /** context refers to the static JvmContext. */
     private static JvmContext context = null;
 
-    /** {@inheritDoc} */
     @Override
     public synchronized ContextInterface getInitialContext(final Hashtable<?, ?> environment, final String atomicName)
     {

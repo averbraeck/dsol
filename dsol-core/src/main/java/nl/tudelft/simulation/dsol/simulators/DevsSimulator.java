@@ -48,21 +48,18 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         super(id);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean cancelEvent(final SimEventInterface<T> event)
     {
         return this.eventList.remove(event);
     }
 
-    /** {@inheritDoc} */
     @Override
     public EventListInterface<T> getEventList()
     {
         return this.eventList;
     }
 
-    /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"hiding", "checkstyle:hiddenfield"})
     public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
@@ -81,7 +78,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEvent(final SimEventInterface<T> event) throws SimRuntimeException
     {
@@ -97,7 +93,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final short priority, final Object target,
             final String method, final Object[] args) throws SimRuntimeException
@@ -109,7 +104,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final Object target, final String method,
             final Object[] args) throws SimRuntimeException
@@ -117,7 +111,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         return scheduleEventRel(relativeDelay, SimEventInterface.NORMAL_PRIORITY, target, method, args);
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final short priority, final Object target,
             final String method, final Object[] args) throws SimRuntimeException
@@ -128,7 +121,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final Object target, final String method,
             final Object[] args) throws SimRuntimeException
@@ -136,7 +128,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         return scheduleEventAbs(absoluteTime, SimEventInterface.NORMAL_PRIORITY, target, method, args);
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventNow(final short priority, final Object target, final String method,
             final Object[] args) throws SimRuntimeException
@@ -148,7 +139,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventNow(final Object target, final String method, final Object[] args)
             throws SimRuntimeException
@@ -156,7 +146,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         return scheduleEventNow(SimEventInterface.NORMAL_PRIORITY, target, method, args);
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final short priority, final Executable executable)
             throws SimRuntimeException
@@ -168,14 +157,12 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventRel(final T relativeDelay, final Executable executable) throws SimRuntimeException
     {
         return scheduleEventRel(relativeDelay, SimEventInterface.NORMAL_PRIORITY, executable);
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final short priority, final Executable executable)
             throws SimRuntimeException
@@ -186,14 +173,12 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final Executable executable) throws SimRuntimeException
     {
         return scheduleEventAbs(absoluteTime, SimEventInterface.NORMAL_PRIORITY, executable);
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventNow(final short priority, final Executable executable) throws SimRuntimeException
     {
@@ -204,14 +189,12 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SimEventInterface<T> scheduleEventNow(final Executable executable) throws SimRuntimeException
     {
         return scheduleEventNow(SimEventInterface.NORMAL_PRIORITY, executable);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void setEventList(final EventListInterface<T> eventList)
     {
@@ -219,7 +202,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         this.fireEvent(EVENTLIST_CHANGED_EVENT);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void stepImpl()
     {
@@ -235,7 +217,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {
@@ -272,7 +253,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void endReplication()
     {
@@ -280,7 +260,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         this.eventList.clear();
     }
 
-    /** {@inheritDoc} */
     @Override
     @Deprecated
     public boolean isPauseOnError()
@@ -288,7 +267,6 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
         return getErrorStrategy().equals(ErrorStrategy.WARN_AND_PAUSE);
     }
 
-    /** {@inheritDoc} */
     @Override
     @Deprecated
     public void setPauseOnError(final boolean pauseOnError)

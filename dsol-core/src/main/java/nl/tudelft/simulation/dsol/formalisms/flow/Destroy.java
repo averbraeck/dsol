@@ -38,7 +38,6 @@ public class Destroy<T extends Number & Comparable<T>> extends FlowObject<T>
         super(id, simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public synchronized void receiveEntity(final Entity<T> entity)
     {

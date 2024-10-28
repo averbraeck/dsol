@@ -42,14 +42,12 @@ public class DevDessSimulator<T extends Number & Comparable<T>> extends DevsSimu
         setTimeStep(initialTimeStep);
     }
 
-    /** {@inheritDoc} */
     @Override
     public T getTimeStep()
     {
         return this.timeStep;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setTimeStep(final T timeStep) throws SimRuntimeException
     {
@@ -64,7 +62,6 @@ public class DevDessSimulator<T extends Number & Comparable<T>> extends DevsSimu
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void run()
     {

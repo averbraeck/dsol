@@ -220,7 +220,6 @@ public class TabbedParameterDialog extends JDialog implements ActionListener
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void actionPerformed(final ActionEvent e)
     {

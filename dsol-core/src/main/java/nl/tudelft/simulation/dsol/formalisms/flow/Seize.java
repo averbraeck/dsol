@@ -109,7 +109,6 @@ public class Seize<T extends Number & Comparable<T>> extends FlowObject<T> imple
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void receiveEntity(final Entity<T> entity)
     {
@@ -134,7 +133,6 @@ public class Seize<T extends Number & Comparable<T>> extends FlowObject<T> imple
         return this.queue;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void receiveRequestedResource(final double pRequestedCapacity, final Resource<T> pResource)
 

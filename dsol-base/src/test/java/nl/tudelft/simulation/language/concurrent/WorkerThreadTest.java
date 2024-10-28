@@ -109,7 +109,6 @@ public class WorkerThreadTest
     /** The worker job. */
     class Job implements Runnable
     {
-        /** {@inheritDoc} */
         @Override
         public void run()
         {
@@ -121,7 +120,6 @@ public class WorkerThreadTest
     /** The worker job that throws an exception. */
     class ExceptionJob implements Runnable
     {
-        /** {@inheritDoc} */
         @Override
         public void run()
         {

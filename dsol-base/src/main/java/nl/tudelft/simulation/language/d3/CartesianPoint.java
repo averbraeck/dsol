@@ -80,7 +80,6 @@ public class CartesianPoint extends Point3d
         return new SphericalPoint(rho, theta, phi);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

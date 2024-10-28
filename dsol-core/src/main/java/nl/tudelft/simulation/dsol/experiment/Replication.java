@@ -69,7 +69,6 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
         this.runControl = runControl;
     }
 
-    /** {@inheritDoc} */
     @Override
     public RunControl<T> getRunControl()
     {
@@ -85,7 +84,6 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
         this.context = context;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ContextInterface getContext()
     {

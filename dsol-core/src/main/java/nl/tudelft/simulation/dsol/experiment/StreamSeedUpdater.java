@@ -38,7 +38,6 @@ public class StreamSeedUpdater implements StreamUpdater
         this.fallbackStreamUpdater = new SimpleStreamUpdater();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void updateSeed(final String streamId, final StreamInterface stream, final int replicationNumber)
     {

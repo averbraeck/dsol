@@ -47,7 +47,6 @@ public class BallAnimation extends SimRenderable2d<Locatable>
         super(source, simulator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paint(final Graphics2D graphics, final ImageObserver observer)
     {

@@ -167,7 +167,6 @@ public class Renderable2dTest
                 return new Bounds3d(4, 4, 4);
             }
 
-            /** {@inheritDoc} */
             @Override
             public double getZ() throws RemoteException
             {
@@ -193,7 +192,6 @@ public class Renderable2dTest
             this.context = ContextUtil.lookupOrCreateSubContext(rootContext, "testRenderable");
         }
 
-        /** {@inheritDoc} */
         @Override
         public ContextInterface getContext()
         {

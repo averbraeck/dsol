@@ -60,7 +60,6 @@ public class InputFieldSelectionMap<K, T> extends AbstractInputField
         panel.add(explanation);
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public InputParameterSelectionMap<K, T> getParameter()

@@ -42,7 +42,6 @@ public class Phase implements Serializable
         this.name = new String(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {

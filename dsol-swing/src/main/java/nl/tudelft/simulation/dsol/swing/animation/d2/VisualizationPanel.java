@@ -241,7 +241,6 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         subscribeToContext();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void paintComponent(final Graphics g)
     {
@@ -370,7 +369,6 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         this.repaint();
     }
 
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public void notify(final Event event) throws RemoteException
@@ -984,7 +982,6 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         /** */
         private static final long serialVersionUID = 20210213L;
 
-        /** {@inheritDoc} */
         @Override
         public void fireEvent(final Event event)
         {
@@ -1001,28 +998,24 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         return this.animationEventProducer;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType)
     {
         return this.animationEventProducer.addListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType, final ReferenceType referenceType)
     {
         return this.animationEventProducer.addListener(listener, eventType, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType, final int position)
     {
         return this.animationEventProducer.addListener(listener, eventType, position);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean addListener(final EventListener listener, final EventType eventType, final int position,
             final ReferenceType referenceType)
@@ -1030,21 +1023,18 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         return this.animationEventProducer.addListener(listener, eventType, position, referenceType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean removeListener(final EventListener listener, final EventType eventType)
     {
         return this.animationEventProducer.removeListener(listener, eventType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int removeAllListeners()
     {
         return this.animationEventProducer.removeAllListeners();
     }
 
-    /** {@inheritDoc} */
     @Override
     public EventListenerMap getEventListenerMap() throws RemoteException
     {

@@ -37,7 +37,6 @@ public class DistContinuousDuration extends DistContinuousUnit<DurationUnit, Dur
         super(wrappedDistribution, DurationUnit.SI);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Duration draw()
     {
