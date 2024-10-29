@@ -212,11 +212,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         setPreferredSize(new Dimension(1024, 768));
         this.animationEventProducer = new AnimationEventProducer();
         this.showGrid = true;
-        InputListener listener = new InputListener(this);
-        this.addMouseListener(listener);
-        this.addMouseMotionListener(listener);
-        this.addMouseWheelListener(listener);
-        this.addKeyListener(listener);
+        addListeners();
         this.renderableScale = new RenderableScale();
         this.homeExtent = homeExtent;
         this.setBackground(Color.WHITE);
@@ -239,6 +235,19 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         this(homeExtent, producer);
         this.context = context.createSubcontext("animation/2D");
         subscribeToContext();
+    }
+
+    /**
+     * Method to add listeners in the constructor. Can be overridden in a subclass in case another type of input listener is
+     * needed to handle mouse and keyboard events.
+     */
+    public void addListeners()
+    {
+        InputListener listener = new InputListener(this);
+        this.addMouseListener(listener);
+        this.addMouseMotionListener(listener);
+        this.addMouseWheelListener(listener);
+        this.addKeyListener(listener);
     }
 
     @Override
@@ -783,7 +792,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     /**
      * Toggle a class to be displayed in the animation to its reverse value.
      * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which a visible animation has to be turned off or
-     *            vice versa.
+     *     vice versa.
      */
     public void toggleClass(final Class<? extends Locatable> locatableClass)
     {
