@@ -17,6 +17,7 @@ import org.openstreetmap.osmosis.core.domain.v0_6.WayNode;
 import org.openstreetmap.osmosis.core.task.v0_6.Sink;
 
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
+import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
 import nl.tudelft.simulation.dsol.animation.gis.GisObject;
 import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
@@ -158,7 +159,7 @@ public class OsmLayerSink implements Sink
         boolean start = false;
         for (int i = 0; i < way.wayNodesLat.length; i++)
         {
-            float[] coordinate;
+            FloatXY coordinate;
             if (way.wayNodesId[i] != 0)
             {
                 MiniNode node = this.nodes.get(way.wayNodesId[i]);
@@ -170,10 +171,10 @@ public class OsmLayerSink implements Sink
             }
             if (!start)
             {
-                path.moveTo(coordinate[0], coordinate[1]);
+                path.moveTo(coordinate.x(), coordinate.y());
                 start = true;
             }
-            path.lineTo(coordinate[0], coordinate[1]);
+            path.lineTo(coordinate.x(), coordinate.y());
         }
         String[] att = new String[0];
         way.feature.getShapes().add(new GisObject(path, att));

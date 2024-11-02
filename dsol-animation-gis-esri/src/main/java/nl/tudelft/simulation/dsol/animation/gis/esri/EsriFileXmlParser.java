@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import nl.tudelft.simulation.dsol.animation.gis.DoubleXY;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
 import nl.tudelft.simulation.dsol.animation.gis.MapImageInterface;
@@ -153,12 +154,12 @@ public final class EsriFileXmlParser
             double maxX = nodeDouble(node, "maxX");
             double maxY = nodeDouble(node, "maxY");
 
-            double[] p = coordinateTransform.doubleTransform(minX, minY);
-            double[] q = coordinateTransform.doubleTransform(maxX, maxY);
-            minX = Math.min(p[0], q[0]);
-            minY = Math.min(p[1], q[1]);
-            maxX = Math.max(p[0], q[0]);
-            maxY = Math.max(p[1], q[1]);
+            DoubleXY p = coordinateTransform.doubleTransform(minX, minY);
+            DoubleXY q = coordinateTransform.doubleTransform(maxX, maxY);
+            minX = Math.min(p.x(), q.x());
+            minY = Math.min(p.y(), q.y());
+            maxX = Math.max(p.x(), q.x());
+            maxY = Math.max(p.y(), q.y());
             return new Bounds2d(minX, maxX, minY, maxY);
         }
         catch (Exception exception)

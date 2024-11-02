@@ -12,7 +12,9 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.animation.gis.DataSourceInterface;
+import nl.tudelft.simulation.dsol.animation.gis.DoubleXY;
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
+import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisObject;
 import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
@@ -229,12 +231,12 @@ public class ShapeFileReader implements DataSourceInterface
             int type = shapeInput.readInt();
             if (type != 0 && type != 1 && type != 11 && type != 21)
             {
-                double[] min = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
-                double[] max = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
-                double minX = Math.min(min[0], max[0]);
-                double minY = Math.min(min[1], max[1]);
-                double width = Math.max(min[0], max[0]) - minX;
-                double height = Math.max(min[1], max[1]) - minY;
+                DoubleXY min = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
+                DoubleXY max = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
+                double minX = Math.min(min.x(), max.x());
+                double minY = Math.min(min.y(), max.y());
+                double width = Math.max(min.x(), max.x()) - minX;
+                double height = Math.max(min.y(), max.y()) - minY;
                 SerializableRectangle2d bounds = new SerializableRectangle2d.Double(minX, minY, width, height);
                 if (Shape.overlaps(extent.toRectangle2D(), bounds))
                 {
@@ -364,7 +366,6 @@ public class ShapeFileReader implements DataSourceInterface
      * <p>
      * A point consists of a pair of double-precision coordinates in the order X,Y.
      * </p>
-     * 
      * <pre>
      *   All byte orders are Little Endian.
      *   Integer ShapeType  // byte  0; Value 1 for Point
@@ -374,7 +375,6 @@ public class ShapeFileReader implements DataSourceInterface
      *     Double Y         // byte 12; Y coordinate (8 bytes)
      *   }
      * </pre>
-     * 
      * @param input ObjectEndianInputStream; the inputStream
      * @return Point2D.Double; the point
      * @throws IOException on file IO or database connection failure
@@ -383,8 +383,8 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.POINT;
         input.setEndianness(Endianness.LITTLE_ENDIAN);
-        double[] point = this.coordinateTransform.doubleTransform(input.readDouble(), input.readDouble());
-        return new Point2D.Double(point[0], point[1]);
+        DoubleXY point = this.coordinateTransform.doubleTransform(input.readDouble(), input.readDouble());
+        return new Point2D.Double(point.x(), point.y());
     }
 
     /**
@@ -395,7 +395,6 @@ public class ShapeFileReader implements DataSourceInterface
      * specification does not forbid consecutive points with identical coordinates, shapefile readers must handle such cases. On
      * the other hand, the degenerate, zero length parts that might result are not allowed.
      * </p>
-     * 
      * <pre>
      *   All byte orders are Little Endian.
      *   Integer ShapeType         // byte  0; Value 8 for PolyLine
@@ -415,7 +414,6 @@ public class ShapeFileReader implements DataSourceInterface
      *     Double Y                // Y coordinate (8 bytes)
      *   }
      * </pre>
-     * 
      * @param input ObjectEndianInputStream; the inputStream
      * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
      * @return the shape as a SerializablePath
@@ -444,12 +442,12 @@ public class ShapeFileReader implements DataSourceInterface
         SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
         for (int i = 0; i < numParts; i++)
         {
-            float[] mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf[0], mf[1]);
+            FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+            result.moveTo(mf.x(), mf.y());
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                float[] lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf[0], lf[1]);
+                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                result.lineTo(lf.x(), lf.y());
             }
         }
         return result;
@@ -484,12 +482,12 @@ public class ShapeFileReader implements DataSourceInterface
         SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
         for (int i = 0; i < numParts; i++)
         {
-            float[] mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf[0], mf[1]);
+            FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+            result.moveTo(mf.x(), mf.y());
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                float[] lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf[0], lf[1]);
+                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                result.lineTo(lf.x(), lf.y());
             }
         }
 
@@ -569,13 +567,13 @@ public class ShapeFileReader implements DataSourceInterface
         SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
         for (int i = 0; i < numParts; i++)
         {
-            float[] mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf[0], mf[1]);
+            FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+            result.moveTo(mf.x(), mf.y());
             byteCounter += 16;
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                float[] lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf[0], lf[1]);
+                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                result.lineTo(lf.x(), lf.y());
                 byteCounter += 16;
             }
         }
@@ -615,13 +613,13 @@ public class ShapeFileReader implements DataSourceInterface
         SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
         for (int i = 0; i < numParts; i++)
         {
-            float[] mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf[0], mf[1]);
+            FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+            result.moveTo(mf.x(), mf.y());
             byteCounter += 16;
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                float[] lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf[0], lf[1]);
+                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                result.lineTo(lf.x(), lf.y());
                 byteCounter += 16;
             }
         }
@@ -705,13 +703,13 @@ public class ShapeFileReader implements DataSourceInterface
         SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
         for (int i = 0; i < numParts; i++)
         {
-            float[] mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf[0], mf[1]);
+            FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+            result.moveTo(mf.x(), mf.y());
             byteCounter += 16;
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                float[] lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf[0], lf[1]);
+                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                result.lineTo(lf.x(), lf.y());
                 byteCounter += 16;
             }
         }
@@ -751,13 +749,13 @@ public class ShapeFileReader implements DataSourceInterface
         SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
         for (int i = 0; i < numParts; i++)
         {
-            float[] mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf[0], mf[1]);
+            FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+            result.moveTo(mf.x(), mf.y());
             byteCounter += 16;
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                float[] lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf[0], lf[1]);
+                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                result.lineTo(lf.x(), lf.y());
                 byteCounter += 16;
             }
         }

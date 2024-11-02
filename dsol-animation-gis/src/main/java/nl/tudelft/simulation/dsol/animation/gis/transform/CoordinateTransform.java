@@ -1,5 +1,8 @@
 package nl.tudelft.simulation.dsol.animation.gis.transform;
 
+import nl.tudelft.simulation.dsol.animation.gis.DoubleXY;
+import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
+
 /**
  * Transforms an (x, y) coordinate to a new (x', y') coordinate.
  * <p>
@@ -13,20 +16,31 @@ package nl.tudelft.simulation.dsol.animation.gis.transform;
 public interface CoordinateTransform
 {
     /**
-     * transform the (x, y) coordinate to a new (x', y') coordinate represented as a float[2].
+     * transform the (x, y) coordinate to a new (x', y') coordinate represented as a FloatXY record.
      * @param x double; the original x-coordinate, e.g. lon in dd (double degrees)
      * @param y double; the original y-coordinate, e.g. lat in dd (double degrees)
      * @return the new (x', y') coordinate represented as a float[2]
      */
-    float[] floatTransform(double x, double y);
+    FloatXY floatTransform(float x, float y);
 
     /**
-     * transform the (x, y) coordinate to a new (x', y') coordinate represented as a double[2].
+     * transform the (x, y) coordinate to a new (x', y') coordinate represented as a FloatXY record.
+     * @param x double; the original x-coordinate, e.g. lon in dd (double degrees)
+     * @param y double; the original y-coordinate, e.g. lat in dd (double degrees)
+     * @return the new (x', y') coordinate represented as a float[2]
+     */
+    default FloatXY floatTransform(final double x, final double y)
+    {
+        return floatTransform((float) x, (float) y);
+    }
+
+    /**
+     * transform the (x, y) coordinate to a new (x', y') coordinate represented as a DoubleXY record.
      * @param x double; the original x-coordinate, e.g. lon in dd (double degrees)
      * @param y double; the original y-coordinate, e.g. lat in dd (double degrees)
      * @return the new (x', y') coordinate represented as a double[2]
      */
-    double[] doubleTransform(double x, double y);
+    DoubleXY doubleTransform(double x, double y);
 
     /**
      * The identical transformation (x,y) =&gt; (x,y).
@@ -35,15 +49,15 @@ public interface CoordinateTransform
     {
 
         @Override
-        public float[] floatTransform(final double x, final double y)
+        public FloatXY floatTransform(final float x, final float y)
         {
-            return new float[] {(float) x, (float) y};
+            return new FloatXY(x, y);
         }
 
         @Override
-        public double[] doubleTransform(final double x, final double y)
+        public DoubleXY doubleTransform(final double x, final double y)
         {
-            return new double[] {x, y};
+            return new DoubleXY(x, y);
         }
 
     }
