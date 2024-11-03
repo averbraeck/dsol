@@ -20,7 +20,7 @@ import nl.tudelft.simulation.dsol.animation.gis.io.ObjectEndianInputStream;
  * The dsol-animation-gis project is based on the gisbeans project that has been part of DSOL since 2002, originally by Peter
  * Jacobs and Paul Jacobs.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class DbfReader implements Serializable
 {

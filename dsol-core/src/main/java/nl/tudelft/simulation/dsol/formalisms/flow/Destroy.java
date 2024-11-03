@@ -16,7 +16,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author Peter Jacobs
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type itself to be able to implement a comparator on the simulation time.
  */
 public class Destroy<T extends Number & Comparable<T>> extends FlowObject<T>

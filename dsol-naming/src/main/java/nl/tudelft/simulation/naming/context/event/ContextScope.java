@@ -11,7 +11,7 @@ package nl.tudelft.simulation.naming.context.event;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public enum ContextScope
 {

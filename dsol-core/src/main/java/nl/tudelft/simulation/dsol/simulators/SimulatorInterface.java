@@ -62,7 +62,7 @@ import nl.tudelft.simulation.dsol.model.DsolModel;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a> relative types are the same.
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a> relative types are the same.
  * @param <T> the extended simulation time type to be able to implement a comparator on the simulation time.
  */
 @SuppressWarnings("checkstyle:linelength")

@@ -23,7 +23,7 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class DevsRealTimeClockDoubleTest implements EventListener
 {

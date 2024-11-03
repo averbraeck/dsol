@@ -22,7 +22,7 @@ import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class InfoTextPanel extends JPanel
 {

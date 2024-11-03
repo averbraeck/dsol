@@ -29,7 +29,7 @@ import nl.tudelft.simulation.dsol.model.DsolModel;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a> relative types are the same.
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a> relative types are the same.
  * @param <T> the time type
  */
 public abstract class Simulator<T extends Number & Comparable<T>> extends LocalEventProducer

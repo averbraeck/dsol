@@ -17,7 +17,7 @@ import nl.tudelft.simulation.language.d3.CartesianPoint;
  * <p>
  * See for project information <a href="https://simulation.tudelft.nl/" target="_blank"> www.simulation.tudelft.nl</a>.
  * <p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
 {

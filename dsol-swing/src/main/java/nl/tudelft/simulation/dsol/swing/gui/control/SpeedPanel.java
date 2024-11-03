@@ -25,7 +25,7 @@ import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControlLabel;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
 public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPanel implements AppearanceControl
@@ -181,7 +181,7 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeDouble extends SpeedPanel<Double>
     {
@@ -219,7 +219,7 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeFloat extends SpeedPanel<Float>
     {
@@ -257,7 +257,7 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeLong extends SpeedPanel<Long>
     {
@@ -295,7 +295,7 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeDoubleUnit extends SpeedPanel<Duration>
     {
@@ -333,7 +333,7 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeFloatUnit extends SpeedPanel<FloatDuration>
     {

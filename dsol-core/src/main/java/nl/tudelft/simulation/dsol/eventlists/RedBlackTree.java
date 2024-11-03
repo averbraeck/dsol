@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraec</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraec</a>
  * @param <T> The time type, e.g., Double, Long, Duration
  * @since 1.5
  */

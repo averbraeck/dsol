@@ -14,7 +14,7 @@ import java.util.List;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public interface EmpiricalDistributionInterface extends Serializable
 {

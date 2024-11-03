@@ -36,7 +36,7 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class RemoteContext extends RmiObject implements RemoteContextInterface, EventProducer
 {
@@ -380,7 +380,7 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
      * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck" target="_blank">Alexander Verbraeck</a>
      */
     protected class RemoteChangeEventProducer extends RmiEventProducer
     {

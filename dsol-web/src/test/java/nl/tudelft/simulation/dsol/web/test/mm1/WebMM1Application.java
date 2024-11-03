@@ -33,7 +33,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  * profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or
  * tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the
  * possibility of such damage.
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class WebMM1Application
 {

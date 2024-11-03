@@ -17,7 +17,7 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the relative time type.
  */
 public abstract class DistContinuousSimulationTime<T extends Number & Comparable<T>> extends Dist

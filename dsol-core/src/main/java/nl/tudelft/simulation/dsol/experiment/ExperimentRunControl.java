@@ -10,7 +10,7 @@ import org.djutils.exceptions.Throw;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the simulation time type to be able to implement a comparator on the simulation time.
  */
 public class ExperimentRunControl<T extends Number & Comparable<T>> extends RunControl<T>

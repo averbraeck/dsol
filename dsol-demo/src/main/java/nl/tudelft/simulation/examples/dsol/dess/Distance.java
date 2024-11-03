@@ -11,7 +11,7 @@ import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
  * <p>
  * See for project information <a href="https://simulation.tudelft.nl/" target="_blank"> www.simulation.tudelft.nl</a>.
  * <p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class Distance extends DifferentialEquation<Double>
 {

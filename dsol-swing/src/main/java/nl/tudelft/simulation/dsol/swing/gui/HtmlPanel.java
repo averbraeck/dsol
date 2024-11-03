@@ -24,7 +24,7 @@ import nl.tudelft.simulation.dsol.logger.Cat;
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/mzhang">Mingxin Zhang </a>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck </a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck </a>
  */
 public class HtmlPanel extends JEditorPane
 {

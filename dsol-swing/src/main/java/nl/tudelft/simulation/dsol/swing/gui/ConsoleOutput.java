@@ -18,7 +18,7 @@ import javax.swing.ScrollPaneConstants;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank"> Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
  */
 public class ConsoleOutput extends JPanel
 {

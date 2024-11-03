@@ -31,7 +31,7 @@ import nl.tudelft.simulation.dsol.swing.gui.util.RegexFormatter;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
 public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JPanel
@@ -225,7 +225,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeDouble extends RunUntilPanel<Double>
     {
@@ -270,7 +270,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeFloat extends RunUntilPanel<Float>
     {
@@ -315,7 +315,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeLong extends RunUntilPanel<Long>
     {
@@ -360,7 +360,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeDoubleUnit extends RunUntilPanel<Duration>
     {
@@ -408,7 +408,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeFloatUnit extends RunUntilPanel<FloatDuration>
     {

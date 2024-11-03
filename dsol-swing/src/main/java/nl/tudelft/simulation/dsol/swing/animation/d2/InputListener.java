@@ -27,7 +27,7 @@ import nl.tudelft.simulation.dsol.swing.introspection.gui.IntrospectionDialog;
  * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class InputListener implements MouseListener, MouseWheelListener, MouseMotionListener, KeyListener
 {

@@ -17,7 +17,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  * @param <S> the simulator type to use
  */
@@ -51,7 +51,7 @@ public class GenericControlPanel<
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeDouble extends GenericControlPanel<Double, SimulatorInterface<Double>>
     {
@@ -85,7 +85,7 @@ public class GenericControlPanel<
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeFloat extends GenericControlPanel<Float, SimulatorInterface<Float>>
     {
@@ -119,7 +119,7 @@ public class GenericControlPanel<
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeLong extends GenericControlPanel<Long, SimulatorInterface<Long>>
     {
@@ -153,7 +153,7 @@ public class GenericControlPanel<
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeDoubleUnit
             extends GenericControlPanel<Duration, SimulatorInterface<Duration>>
@@ -188,7 +188,7 @@ public class GenericControlPanel<
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     public static class TimeFloatUnit
             extends GenericControlPanel<FloatDuration, SimulatorInterface<FloatDuration>>

@@ -30,7 +30,7 @@ import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class OsmLayerSink implements Sink
 {
@@ -189,7 +189,7 @@ public class OsmLayerSink implements Sink
     /**
      * Store only the id, lat and lon of a Node to reduce the memory footprint of the Node storage during parsing. <br>
      * <br>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     protected static class MiniNode
     {
@@ -219,7 +219,7 @@ public class OsmLayerSink implements Sink
     /**
      * Store the minimum set of features of a Way to reduce the memory footprint of the Way storage during parsing. <br>
      * <br>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     protected static class MiniWay
     {
