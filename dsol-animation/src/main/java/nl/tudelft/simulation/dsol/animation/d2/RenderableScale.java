@@ -15,9 +15,9 @@ import org.djutils.exceptions.Throw;
  * Copyright (c) 2020-2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
- * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
+ * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class RenderableScale
 {
@@ -143,6 +143,21 @@ public class RenderableScale
         double x = (worldCoordinates.getX() - extent.getMinX()) * (1.0 / getXScale(extent, screen));
         double y = screen.getHeight() - (worldCoordinates.getY() - extent.getMinY()) * (1.0 / getYScale(extent, screen));
         return new Point2D.Double(x, y);
+    }
+
+    /**
+     * returns the frame xy-coordinates of a point in world coordinates. If parameters are invalid (i.e. screen.size &lt;= 0) a
+     * null value is returned. If parameter combinations (i.e !extent.contains(point)) are invalid a null value is returned.
+     * @param worldCoordinates Point&lt;?, ?&gt;; the world coordinates
+     * @param extent Bounds2d; the extent of this animation
+     * @param screen Dimension; the screen dimentsions
+     * @return Point2D (x,y) on screen. Can be null.
+     */
+    public Point2d getScreenCoordinatesAsPoint2d(final Point<?> worldCoordinates, final Bounds2d extent, final Dimension screen)
+    {
+        double x = (worldCoordinates.getX() - extent.getMinX()) * (1.0 / getXScale(extent, screen));
+        double y = screen.getHeight() - (worldCoordinates.getY() - extent.getMinY()) * (1.0 / getYScale(extent, screen));
+        return new Point2d(x, y);
     }
 
     /**

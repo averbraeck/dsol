@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.naming.NamingException;
 
+import org.djutils.draw.Transform2d;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
@@ -30,10 +31,9 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * The default values are: translate = true; scale = true; flip = false; rotate = true; scaleY = false; scaleObject = false.
  * <p>
  * Copyright (c) 2002-2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
- * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
+ * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
- * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
- * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
+ * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @param <L> the Locatable class of the source that can return the location of the Renderable on the screen
@@ -98,8 +98,8 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         try
         {
             this.id = animationObjectCounter.incrementAndGet();
-            ContextUtil.lookupOrCreateSubContext(contextProvider.getContext(), "animation/2D")
-                    .bind(Integer.toString(this.id), this);
+            ContextUtil.lookupOrCreateSubContext(contextProvider.getContext(), "animation/2D").bind(Integer.toString(this.id),
+                    this);
         }
         catch (NamingException | RemoteException exception)
         {
@@ -185,7 +185,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     /**
      * Set whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
      * @param scaleY boolean; whether to scale the renderable in the X/Y-direction with the value of
-     *            RenderableScale.objectScaleFactor or not
+     *     RenderableScale.objectScaleFactor or not
      */
     @SuppressWarnings("checkstyle:needbraces")
     public void setScaleObject(final boolean scaleY)
@@ -199,7 +199,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     /**
      * Return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
      * @return boolean; whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor
-     *         or not
+     * or not
      */
     public boolean isScaleObject()
     {
@@ -351,6 +351,52 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             CategoryLogger.always().warn(exception, "contains");
             return false;
         }
+    }
+
+    @Override
+    public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+            final RenderableScale scale, final double margin, final boolean relativeMargin)
+    {
+        try
+        {
+            System.out.println("\nobject = " + getSource().toString());
+            Point2d pointWorldCoordinates = scale.getWorldCoordinates(pointScreenCoordinates, extent, screenSize);
+            System.out.println("pointWorldCoordinates = " + pointWorldCoordinates);
+            System.out.println("pointScreenCoordinates = " + pointScreenCoordinates);
+            Point2d screenLocation = scale.getScreenCoordinatesAsPoint2d(getSource().getLocation(), extent, screenSize);
+            System.out.println("screenLocation = " + screenLocation);
+            Transform2d transformation = new Transform2d();
+            transformation.reflectY();
+            transformation.scale(scale.getXScale(extent, screenSize), scale.getYScale(extent, screenSize));
+            transformation.rotation(getSource().getDirZ());
+            transformation.translate(screenLocation.neg());
+            Point2d pointRelativeTo00 =
+                    transformation.transform(new Point2d(pointScreenCoordinates.getX(), pointScreenCoordinates.getY()));
+            System.out.println("pointRelativeTo00 = " + pointRelativeTo00);
+            return contains(pointRelativeTo00, scale, margin, relativeMargin);
+        }
+        catch (RemoteException exception)
+        {
+            CategoryLogger.always().warn(exception, "contains");
+            return false;
+        }
+    }
+
+    /**
+     * Reference implementation of the contains method that uses the bounding box to determine whether the shape contains the
+     * point (e.g., a mouse click) or not.<br>
+     * <br>
+     * @param pointRelativeTo00 Point2d; the point relative to the drawing world.
+     * @param scale RenderableScale; the current zoom factor of the screen
+     * @param margin double; the margin to apply 'around' the object
+     * @param relativeMargin boolean; whether the margin should be scaled with the zoom factor (true) or not (false)
+     * @return whether the point is in the shape or in a margin around the shape
+     */
+    public boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double margin,
+            final boolean relativeMargin)
+    {
+        // TODO: BoundsUtil.
+        return true;
     }
 
     @Override

@@ -74,12 +74,11 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
  * middle of the screen.
  * <p>
  * Copyright (c) 2002-2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
- * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
+ * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
- * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
- * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
+ * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @author Niels Lang
  * @author <a href="http://www.peter-jacobs.com">Peter Jacobs </a>
  */
@@ -864,7 +863,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             Point2d point = getRenderableScale().getWorldCoordinates(mousePoint, getExtent(), getSize());
             for (Renderable2dInterface<?> renderable : getElements())
             {
-                if (isShowElement(renderable) && renderable.contains(point, getExtent()))
+                // if (isShowElement(renderable) && renderable.contains(point, getExtent()))
+                if (isShowElement(renderable)
+                        && renderable.contains(mousePoint, this.extent, getSize(), getRenderableScale(), 1.0, false))
                 {
                     targets.add(renderable.getSource());
                 }
@@ -982,9 +983,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      * Copyright (c) 2021-2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
      * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
      * DSOL project is distributed under a three-clause BSD-style license, which can be found at
-     * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
+     * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
      * </p>
-     * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     class AnimationEventProducer extends LocalEventProducer
     {
