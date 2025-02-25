@@ -16,7 +16,7 @@ import java.util.Map;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="mailto:phmjacobs@hotmail.com">Peter H.M. Jacobs</a>
- * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public final class Monitor
 {

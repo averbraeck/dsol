@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
- * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a><br>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a><br>
  * @param <T> the time type
  * @since 1.5
  */
@@ -236,7 +236,7 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
      * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
      * </p>
      * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
-     * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a><br>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a><br>
      */
     public static class StateUpdate implements Serializable
     {

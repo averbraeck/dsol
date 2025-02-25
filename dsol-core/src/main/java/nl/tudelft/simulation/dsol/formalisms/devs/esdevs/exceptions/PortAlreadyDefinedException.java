@@ -9,7 +9,7 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
- * @author <a href="http://tudelft.nl/averbraeck">Alexander Verbraeck</a><br>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a><br>
  */
 public class PortAlreadyDefinedException extends Exception
 {
