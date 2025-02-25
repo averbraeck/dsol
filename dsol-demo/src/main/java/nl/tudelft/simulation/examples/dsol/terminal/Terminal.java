@@ -21,7 +21,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * (c) copyright 2018 <a href="https://simulation.tudelft.nl">Delft University of Technology </a>, the Netherlands. <br>
  * See for project information <a href="https://simulation.tudelft.nl">www.simulation.tudelft.nl </a> <br>
  * License of use: <a href="http://www.gnu.org/copyleft/gpl.html">General Public License (GPL) </a>, no warranty <br>
- * @author <a href="http://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>> implements EventListener
 {
