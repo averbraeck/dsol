@@ -20,7 +20,7 @@ import nl.tudelft.simulation.dsol.swing.introspection.gui.IntrospectionDialog;
  * The InputListener for the AnimationPanel. Some of the actions are delegated to the AnimationPanel or to other panels through
  * firing an event.
  * <p>
- * Copyright (c) 2002-2024 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * Copyright (c) 2002-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
