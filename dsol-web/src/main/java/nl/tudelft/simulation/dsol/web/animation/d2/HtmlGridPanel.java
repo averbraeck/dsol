@@ -45,9 +45,6 @@ public class HtmlGridPanel implements ImageObserver
     /** the ZOOM factor. */
     public static final double ZOOMFACTOR = 1.2;
 
-    /** gridColor. */
-    protected static final Color GRIDCOLOR = Color.BLACK;
-
     /** the extent of this panel. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Bounds2d extent = null;
@@ -67,6 +64,9 @@ public class HtmlGridPanel implements ImageObserver
     /** the gridSize for the Y-direction in world Units. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected double gridSizeY = 100.0;
+
+    /** gridColor. */
+    private Color gridColor = Color.BLACK;
 
     /** the formatter to use. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -310,6 +310,24 @@ public class HtmlGridPanel implements ImageObserver
     }
 
     /**
+     * Return the current grid color for this VisualizationPanel.
+     * @return the current grid color
+     */
+    public Color getGridColor()
+    {
+        return this.gridColor;
+    }
+
+    /**
+     * Set a new grid color for this VisualizationPanel
+     * @param gridColor the new grid color
+     */
+    public void setGridColor(final Color gridColor)
+    {
+        this.gridColor = gridColor;
+    }
+
+    /**
      * zooms in/out.
      * @param factor double; The zoom factor
      */
@@ -345,7 +363,7 @@ public class HtmlGridPanel implements ImageObserver
     {
         // we prepare the graphics object for the grid
         g.setFont(g.getFont().deriveFont(11.0f));
-        g.setColor(GRIDCOLOR);
+        g.setColor(this.gridColor);
         double scaleX = this.renderableScale.getXScale(this.extent, this.getSize());
         double scaleY = this.renderableScale.getYScale(this.extent, this.getSize());
 
