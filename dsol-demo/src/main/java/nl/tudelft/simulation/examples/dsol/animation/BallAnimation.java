@@ -1,14 +1,19 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
+import org.djutils.draw.bounds.Bounds2d;
+
 import nl.tudelft.simulation.dsol.animation.SimRenderable2d;
+import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
@@ -39,16 +44,22 @@ public class BallAnimation extends SimRenderable2d<Ball>
      * @throws NamingException on registration error
      * @throws RemoteException on remote animation error
      */
-    public BallAnimation(final Ball source, final SimulatorInterface<Double> simulator)
-            throws RemoteException, NamingException
+    public BallAnimation(final Ball source, final SimulatorInterface<Double> simulator) throws RemoteException, NamingException
     {
         super(source, simulator);
         setScaleObject(true);
         setScaleY(true);
         // even numbered balls are vertically scaled; odd numbered balls not. Balls 6-10 are twice as small.
-//        int nr = Integer.parseInt(source.toString());
-//        setScaleObject(nr > 5);
-//        setScaleY(nr % 2 == 1);
+        // int nr = Integer.parseInt(source.toString());
+        // setScaleObject(nr > 5);
+        // setScaleY(nr % 2 == 1);
+    }
+
+    @Override
+    public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+            final RenderableScale scale, final double worldMargin, final double pixelMargin)
+    {
+        return super.contains(pointScreenCoordinates, extent, screenSize, scale, 0.0, 4.0);
     }
 
     @Override
