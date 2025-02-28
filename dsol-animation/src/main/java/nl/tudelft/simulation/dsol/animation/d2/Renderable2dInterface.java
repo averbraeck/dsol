@@ -68,11 +68,8 @@ public interface Renderable2dInterface<L extends Locatable> extends Serializable
      * @return whether the point is in the shape or in a margin around the shape
      * @throws IllegalStateException when the renderable does not overlap with the extent
      */
-    default boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
-            final RenderableScale scale, final double margin, final boolean relativeMargin)
-    {
-        return false; // XXX: for now -- to avoid errors in implementing classes.
-    }
+    boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+            final RenderableScale scale, final double margin, final boolean relativeMargin);
 
     /**
      * destroys this editable. How to do this must be implemented by the modeler.

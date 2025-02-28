@@ -11,7 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.naming.NamingException;
 
 import org.djutils.draw.Transform2d;
+import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
+import org.djutils.draw.point.DirectedPoint2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
 import org.djutils.logger.CategoryLogger;
@@ -359,12 +361,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     {
         try
         {
-            System.out.println("\nobject = " + getSource().toString());
-            Point2d pointWorldCoordinates = scale.getWorldCoordinates(pointScreenCoordinates, extent, screenSize);
-            System.out.println("pointWorldCoordinates = " + pointWorldCoordinates);
-            System.out.println("pointScreenCoordinates = " + pointScreenCoordinates);
             Point2d screenLocation = scale.getScreenCoordinatesAsPoint2d(getSource().getLocation(), extent, screenSize);
-            System.out.println("screenLocation = " + screenLocation);
             Transform2d transformation = new Transform2d();
             transformation.reflectY();
             transformation.scale(scale.getXScale(extent, screenSize), scale.getYScale(extent, screenSize));
@@ -372,7 +369,6 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             transformation.translate(screenLocation.neg());
             Point2d pointRelativeTo00 =
                     transformation.transform(new Point2d(pointScreenCoordinates.getX(), pointScreenCoordinates.getY()));
-            System.out.println("pointRelativeTo00 = " + pointRelativeTo00);
             return contains(pointRelativeTo00, scale, margin, relativeMargin);
         }
         catch (RemoteException exception)
@@ -381,6 +377,9 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             return false;
         }
     }
+
+    /** static storage of origin. */
+    private static final DirectedPoint2d POINT_ZERO = new DirectedPoint2d(0.0, 0.0, 0.0);
 
     /**
      * Reference implementation of the contains method that uses the bounding box to determine whether the shape contains the
@@ -395,8 +394,22 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     public boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double margin,
             final boolean relativeMargin)
     {
-        // TODO: BoundsUtil.
-        return true;
+        try
+        {
+            Bounds<?, ?> b = getSource().getBounds();
+            Bounds2d bounds;
+            if (isScaleY())
+                bounds = new Bounds2d(b.getMinX() / scale.getYScaleRatio(), b.getMaxX() / scale.getYScaleRatio(),
+                        b.getMinY() / scale.getYScaleRatio(), b.getMaxY() / scale.getYScaleRatio());
+            else
+                bounds = new Bounds2d(b.getMinX(), b.getMaxX(), b.getMinY(), b.getMaxY());
+            return BoundsUtil.contains(POINT_ZERO, bounds, pointRelativeTo00);
+        }
+        catch (RemoteException exception)
+        {
+            CategoryLogger.always().warn(exception, "contains");
+            return false;
+        }
     }
 
     @Override
