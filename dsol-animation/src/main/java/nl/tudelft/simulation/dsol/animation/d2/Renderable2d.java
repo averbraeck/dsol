@@ -13,7 +13,6 @@ import javax.naming.NamingException;
 import org.djutils.draw.Transform2d;
 import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.draw.point.DirectedPoint2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
 import org.djutils.logger.CategoryLogger;
@@ -350,60 +349,63 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         }
         catch (RemoteException exception)
         {
-            CategoryLogger.always().warn(exception, "contains");
+            CategoryLogger.always().warn(exception, "contains (world coordinates)");
             return false;
         }
     }
 
     @Override
     public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
-            final RenderableScale scale, final double margin, final boolean relativeMargin)
+            final RenderableScale scale, final double worldMargin, final double pixelMargin)
     {
         try
         {
             Point2d screenLocation = scale.getScreenCoordinatesAsPoint2d(getSource().getLocation(), extent, screenSize);
             Transform2d transformation = new Transform2d();
             transformation.reflectY();
-            transformation.scale(scale.getXScale(extent, screenSize), scale.getYScale(extent, screenSize));
+            double xScale = scale.getXScale(extent, screenSize);
+            double yScale = scale.getYScale(extent, screenSize);
+            transformation.scale(xScale, yScale);
             transformation.rotation(getSource().getDirZ());
             transformation.translate(screenLocation.neg());
             Point2d pointRelativeTo00 =
                     transformation.transform(new Point2d(pointScreenCoordinates.getX(), pointScreenCoordinates.getY()));
-            return contains(pointRelativeTo00, scale, margin, relativeMargin);
+            return contains(pointRelativeTo00, scale, worldMargin, pixelMargin, xScale, yScale);
         }
         catch (RemoteException exception)
         {
-            CategoryLogger.always().warn(exception, "contains");
+            CategoryLogger.always().warn(exception, "contains (screen coordinates)");
             return false;
         }
     }
 
-    /** static storage of origin. */
-    private static final DirectedPoint2d POINT_ZERO = new DirectedPoint2d(0.0, 0.0, 0.0);
-
     /**
      * Reference implementation of the contains method that uses the bounding box to determine whether the shape contains the
-     * point (e.g., a mouse click) or not.<br>
-     * <br>
+     * point (e.g., a mouse click) or not.
      * @param pointRelativeTo00 Point2d; the point relative to the drawing world.
      * @param scale RenderableScale; the current zoom factor of the screen
-     * @param margin double; the margin to apply 'around' the object
-     * @param relativeMargin boolean; whether the margin should be scaled with the zoom factor (true) or not (false)
+     * @param worldMargin double; the margin to apply 'around' the object, in screen coordinates at a zoom level of 1, which is
+     *     the same as world coordinates. This margin grows and shrinks in absolute sense with the zoom factor.
+     * @param pixelMargin double; the number of pixels around the drawn object for contains to be 'true'. This guarantees that a
+     *     mouse click can be pointed to a very small object.
+     * @param xScale double; the ratio between a world x-coordinate and a pixel
+     * @param yScale double; the ratio between a world y-coordinate and a pixel
      * @return whether the point is in the shape or in a margin around the shape
      */
-    public boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double margin,
-            final boolean relativeMargin)
+    public boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double worldMargin,
+            final double pixelMargin, final double xScale, final double yScale)
     {
         try
         {
             Bounds<?, ?> b = getSource().getBounds();
-            Bounds2d bounds;
-            if (isScaleY())
-                bounds = new Bounds2d(b.getMinX() / scale.getYScaleRatio(), b.getMaxX() / scale.getYScaleRatio(),
-                        b.getMinY() / scale.getYScaleRatio(), b.getMaxY() / scale.getYScaleRatio());
-            else
-                bounds = new Bounds2d(b.getMinX(), b.getMaxX(), b.getMinY(), b.getMaxY());
-            return BoundsUtil.contains(POINT_ZERO, bounds, pointRelativeTo00);
+            Bounds2d bounds =
+                    new Bounds2d(b.getMinX() * scale.getObjectScaleFactor(), b.getMaxX() * scale.getObjectScaleFactor(),
+                            b.getMinY() * scale.getObjectScaleFactor(), b.getMaxY() * scale.getObjectScaleFactor());
+            double xMarginWorld = Math.max(worldMargin * scale.getObjectScaleFactor(), pixelMargin * xScale);
+            double yMarginWorld = Math.max(worldMargin * scale.getObjectScaleFactor(), pixelMargin * yScale);
+            Bounds2d marginBounds = new Bounds2d(bounds.getMinX() - xMarginWorld, bounds.getMaxX() + xMarginWorld,
+                    bounds.getMinY() - yMarginWorld, bounds.getMaxY() + yMarginWorld);
+            return marginBounds.covers(pointRelativeTo00);
         }
         catch (RemoteException exception)
         {
