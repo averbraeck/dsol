@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.web.test.gis;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -214,6 +215,13 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
 
     @Override
     public boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+            final RenderableScale scale, final double worldMargin, final double pixelMargin)
     {
         return false;
     }
