@@ -878,7 +878,6 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         List<Locatable> targets = new ArrayList<Locatable>();
         try
         {
-            Point2d point = getRenderableScale().getWorldCoordinates(mousePoint, getExtent(), getSize());
             for (Renderable2dInterface<?> renderable : getElements())
             {
                 // if (isShowElement(renderable) && renderable.contains(point, getExtent()))
