@@ -43,10 +43,12 @@ public class BallAnimation extends SimRenderable2d<Ball>
             throws RemoteException, NamingException
     {
         super(source, simulator);
+        setScaleObject(true);
+        setScaleY(true);
         // even numbered balls are vertically scaled; odd numbered balls not. Balls 6-10 are twice as small.
-        int nr = Integer.parseInt(source.toString());
-        setScaleObject(nr > 5);
-        setScaleY(nr % 2 == 1);
+//        int nr = Integer.parseInt(source.toString());
+//        setScaleObject(nr > 5);
+//        setScaleY(nr % 2 == 1);
     }
 
     @Override
@@ -54,9 +56,12 @@ public class BallAnimation extends SimRenderable2d<Ball>
     {
         graphics.setColor(this.color);
         graphics.fillOval(-(int) Ball.RADIUS, -(int) Ball.RADIUS, (int) (Ball.RADIUS * 2.0), (int) (Ball.RADIUS * 2.0));
-        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD));
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD).deriveFont(6.0f));
         graphics.setColor(Color.GRAY);
-        graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -1.0), (float) (Ball.RADIUS * 1.0));
+        if (Integer.parseInt(getSource().toString()) > 9)
+            graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.8), (float) (Ball.RADIUS * 0.5));
+        else
+            graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.5), (float) (Ball.RADIUS * 0.5));
     }
 
     /**

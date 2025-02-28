@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import org.djutils.draw.bounds.Bounds2d;
 import org.pmw.tinylog.Level;
 
-import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
@@ -43,7 +42,7 @@ public class BallSwingApplication extends DsolAnimationApplication
             throws RemoteException, IllegalArgumentException, DsolException
     {
         super(panel, title, DsolAnimationTab.createAutoPanTab(new Bounds2d(-100, 100, -100, 100), panel.getSimulator()));
-        getAnimationTab().getAnimationPanel().setRenderableScale(new RenderableScale(2.0, 0.5));
+        // getAnimationTab().getAnimationPanel().setRenderableScale(new RenderableScale(2.0, 0.5));
 
         ObjectKind<Ball> objectKind = new ObjectKind<Ball>("Ball")
         {
