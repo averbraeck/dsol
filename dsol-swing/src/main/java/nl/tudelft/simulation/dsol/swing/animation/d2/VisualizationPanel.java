@@ -129,9 +129,21 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected NumberFormat formatter = NumberFormat.getInstance();
 
-    /** the last computed Dimension. */
+    /** the last computed Dimension, to see if objects need to be redrawn. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Dimension lastDimension = null;
+
+    /** the last stored screen dimensions for zoom-in, zoom-out. */
+    @SuppressWarnings("checkstyle:visibilitymodifier")
+    protected Dimension lastScreen = null;
+
+    /** the last stored x-scale for zoom-in, zoom-out. */
+    @SuppressWarnings("checkstyle:visibilitymodifier")
+    protected Double lastXScale = null;
+
+    /** the last stored y-scale for zoom-in, zoom-out. */
+    @SuppressWarnings("checkstyle:visibilitymodifier")
+    protected Double lastYScale = null;
 
     /** the last known world coordinate of the mouse. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
@@ -216,6 +228,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         this.homeExtent = homeExtent;
         this.setBackground(Color.WHITE);
         this.lastDimension = this.getSize();
+        this.lastScreen = this.getSize();
         setExtent(homeExtent);
         producer.addListener(this, AnimatorInterface.UPDATE_ANIMATION_EVENT);
     }
@@ -259,7 +272,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         if (!this.getSize().equals(this.lastDimension))
         {
             this.lastDimension = this.getSize();
-            setExtent(this.renderableScale.computeVisibleExtent(this.extent, this.getSize()));
+            setExtent(computeVisibleExtent(this.extent));
         }
         if (this.showGrid)
         {
@@ -416,6 +429,12 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      */
     public void setExtent(final Bounds2d extent)
     {
+        if (this.lastScreen != null && this.lastScreen.getWidth() != 0.0 && this.lastScreen.getHeight() != 0.0)
+        {
+            // this prevents zoom being undone when resizing the screen afterwards
+            this.lastXScale = this.getRenderableScale().getXScale(extent, this.lastScreen);
+            this.lastYScale = this.getRenderableScale().getYScale(extent, this.lastScreen);
+        }
         this.extent = extent;
         this.repaint();
     }
@@ -519,7 +538,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      */
     public synchronized void home()
     {
-        setExtent(this.renderableScale.computeVisibleExtent(this.homeExtent, this.getSize()));
+        setExtent(computeVisibleExtent(this.homeExtent));
     }
 
     /**
@@ -701,6 +720,51 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     }
 
     /**
+     * Computes the visible extent, while preserving zoom scale, otherwise dragging the split screen may pump up the zoom factor
+     * @param extent the extent to use
+     * @return a new extent or null if parameters are null or screen is invalid (width / height &lt;= 0)
+     */
+    public Bounds2d computeVisibleExtent(final Bounds2d extent)
+    {
+        Dimension screen = getSize();
+        if (this.lastScreen == null || this.lastScreen.getWidth() == 0.0 || this.lastScreen.getHeight() == 0.0)
+        {
+            this.lastScreen = new Dimension(screen);
+        }
+        double xScale = this.renderableScale.getXScale(extent, screen);
+        double yScale = this.renderableScale.getYScale(extent, screen);
+        Bounds2d result;
+        if (this.lastYScale != null && yScale == this.lastYScale)
+        {
+            result = new Bounds2d(extent.midPoint().getX() - 0.5 * screen.getWidth() * yScale,
+                    extent.midPoint().getX() + 0.5 * screen.getWidth() * yScale, extent.getMinY(), extent.getMaxY());
+            xScale = yScale;
+        }
+        else if (this.lastXScale != null && xScale == this.lastXScale)
+        {
+            result = new Bounds2d(extent.getMinX(), extent.getMaxX(),
+                    extent.midPoint().getY() - 0.5 * screen.getHeight() * xScale * this.renderableScale.getYScaleRatio(),
+                    extent.midPoint().getY() + 0.5 * screen.getHeight() * xScale * this.renderableScale.getYScaleRatio());
+            yScale = xScale;
+        }
+        else
+        {
+            double scale = this.lastXScale == null ? Math.min(xScale, yScale)
+                    : this.lastXScale * this.lastScreen.getWidth() / screen.getWidth();
+            result = new Bounds2d(extent.midPoint().getX() - 0.5 * screen.getWidth() * scale,
+                    extent.midPoint().getX() + 0.5 * screen.getWidth() * scale,
+                    extent.midPoint().getY() - 0.5 * screen.getHeight() * scale * this.renderableScale.getYScaleRatio(),
+                    extent.midPoint().getY() + 0.5 * screen.getHeight() * scale * this.renderableScale.getYScaleRatio());
+            yScale = scale;
+            xScale = scale;
+        }
+        this.lastXScale = xScale;
+        this.lastYScale = yScale;
+        this.lastScreen = screen;
+        return result;
+    }
+
+    /**
      * Add a locatable object to the animation.
      * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the element to add to the animation
      */
@@ -773,7 +837,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      */
     public synchronized void zoomAll()
     {
-        setExtent(getRenderableScale().computeVisibleExtent(fullExtent(), this.getSize()));
+        setExtent(computeVisibleExtent(fullExtent()));
     }
 
     /**
