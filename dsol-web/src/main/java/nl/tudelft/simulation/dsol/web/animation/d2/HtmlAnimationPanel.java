@@ -317,7 +317,7 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
      */
     public synchronized void zoomAll()
     {
-        this.extent = getRenderableScale().computeVisibleExtent(fullExtent(), this.getSize());
+        this.extent = computeVisibleExtent(fullExtent());
         this.repaint();
     }
 
