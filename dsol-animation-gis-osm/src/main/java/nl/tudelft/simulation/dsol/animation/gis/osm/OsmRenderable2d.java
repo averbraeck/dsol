@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.animation.gis.osm;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.rmi.RemoteException;
@@ -210,6 +211,13 @@ public class OsmRenderable2d implements GisRenderable2d
 
     @Override
     public boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+            final RenderableScale scale, final double margin, final boolean relativeMargin)
     {
         return false;
     }
