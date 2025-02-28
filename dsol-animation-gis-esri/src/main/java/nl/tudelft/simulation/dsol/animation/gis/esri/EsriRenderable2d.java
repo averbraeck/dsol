@@ -218,7 +218,7 @@ public class EsriRenderable2d implements GisRenderable2d
 
     @Override
     public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
-            final RenderableScale scale, final double margin, final boolean relativeMargin)
+            final RenderableScale scale, final double worldMargin, final double pixelMargin)
     {
         return false;
     }
