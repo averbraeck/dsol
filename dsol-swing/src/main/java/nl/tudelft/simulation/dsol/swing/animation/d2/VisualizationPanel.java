@@ -882,7 +882,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             {
                 // if (isShowElement(renderable) && renderable.contains(point, getExtent()))
                 if (isShowElement(renderable)
-                        && renderable.contains(mousePoint, this.extent, getSize(), getRenderableScale(), 1.0, false))
+                        && renderable.contains(mousePoint, this.extent, getSize(), getRenderableScale(), 0.0, 0.0))
                 {
                     targets.add(renderable.getSource());
                 }
