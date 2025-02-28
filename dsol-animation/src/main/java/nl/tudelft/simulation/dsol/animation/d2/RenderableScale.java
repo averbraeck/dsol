@@ -102,35 +102,6 @@ public class RenderableScale
     }
 
     /**
-     * computes the visible extent.
-     * @param extent Rectangle2D; the extent
-     * @param screen Dimension; the screen
-     * @return a new extent or null if parameters are null or screen is invalid (width / height &lt;= 0)
-     */
-    public Bounds2d computeVisibleExtent(final Bounds2d extent, final Dimension screen)
-    {
-        if (extent == null || screen == null || screen.getHeight() <= 0 || screen.getWidth() <= 0)
-        {
-            return null;
-        }
-        double xScale = extent.getDeltaX() / screen.getWidth();
-        double yScale = extent.getDeltaY() / (this.yScaleRatio * screen.getHeight());
-        Bounds2d result;
-        if (xScale < yScale)
-        {
-            result = new Bounds2d(extent.midPoint().getX() - 0.5 * screen.getWidth() * yScale,
-                    extent.midPoint().getX() + 0.5 * screen.getWidth() * yScale, extent.getMinY(), extent.getMaxY());
-        }
-        else
-        {
-            result = new Bounds2d(extent.getMinX(), extent.getMaxX(),
-                    extent.midPoint().getY() - 0.5 * screen.getHeight() * xScale * this.yScaleRatio,
-                    extent.midPoint().getY() + 0.5 * screen.getHeight() * xScale * this.yScaleRatio);
-        }
-        return result;
-    }
-
-    /**
      * returns the frame xy-coordinates of a point in world coordinates. If parameters are invalid (i.e. screen.size &lt;= 0) a
      * null value is returned. If parameter combinations (i.e !extent.contains(point)) are invalid a null value is returned.
      * @param worldCoordinates Point&lt;?, ?&gt;; the world coordinates
