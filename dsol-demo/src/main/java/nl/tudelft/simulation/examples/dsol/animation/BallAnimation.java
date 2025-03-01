@@ -49,10 +49,8 @@ public class BallAnimation extends SimRenderable2d<Ball>
         super(source, simulator);
         setScaleObject(true);
         setScaleY(true);
-        // even numbered balls are vertically scaled; odd numbered balls not. Balls 6-10 are twice as small.
-        // int nr = Integer.parseInt(source.toString());
-        // setScaleObject(nr > 5);
-        // setScaleY(nr % 2 == 1);
+        setRotate(true);
+        new BallTextAnimation(source, simulator);
     }
 
     @Override
@@ -66,13 +64,8 @@ public class BallAnimation extends SimRenderable2d<Ball>
     public void paint(final Graphics2D graphics, final ImageObserver observer)
     {
         graphics.setColor(this.color);
-        graphics.fillOval(-(int) Ball.RADIUS, -(int) Ball.RADIUS, (int) (Ball.RADIUS * 2.0), (int) (Ball.RADIUS * 2.0));
+        graphics.fillRect(-(int) Ball.RADIUS, -(int) Ball.RADIUS, (int) (Ball.RADIUS * 2.0), (int) (Ball.RADIUS * 2.0));
         graphics.setFont(graphics.getFont().deriveFont(Font.BOLD).deriveFont(6.0f));
-        graphics.setColor(Color.GRAY);
-        if (Integer.parseInt(getSource().toString()) > 9)
-            graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.8), (float) (Ball.RADIUS * 0.5));
-        else
-            graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.5), (float) (Ball.RADIUS * 0.5));
     }
 
     /**
@@ -89,5 +82,46 @@ public class BallAnimation extends SimRenderable2d<Ball>
     public void setColor(final Color color)
     {
         this.color = color;
+    }
+
+    /** Separately animating text without a ScaleY. */
+    public class BallTextAnimation extends SimRenderable2d<Ball>
+    {
+        /** */
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * constructs a new BallTextAnimation, possibly without a ScaleY.
+         * @param source Locatable; the source
+         * @param simulator SimulatorInterface&lt;Double&gt;; the simulator
+         * @throws NamingException on registration error
+         * @throws RemoteException on remote animation error
+         */
+        public BallTextAnimation(final Ball source, final SimulatorInterface<Double> simulator)
+                throws RemoteException, NamingException
+        {
+            super(source, simulator);
+            setScaleObject(true);
+            setScaleY(false);
+            setRotate(false);
+        }
+
+        @Override
+        public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+                final RenderableScale scale, final double worldMargin, final double pixelMargin)
+        {
+            return false;
+        }
+
+        @Override
+        public void paint(final Graphics2D graphics, final ImageObserver observer)
+        {
+            graphics.setColor(Color.GRAY);
+            if (Integer.parseInt(getSource().toString()) > 9)
+                graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.8), (float) (Ball.RADIUS * 0.5));
+            else
+                graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.5), (float) (Ball.RADIUS * 0.5));
+        }
+
     }
 }
