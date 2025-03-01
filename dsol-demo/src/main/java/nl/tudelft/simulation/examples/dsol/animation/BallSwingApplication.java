@@ -1,8 +1,10 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
+import java.awt.Color;
 import java.rmi.RemoteException;
 
 import org.djutils.draw.bounds.Bounds2d;
+import org.djutils.draw.point.DirectedPoint2d;
 import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
@@ -41,7 +43,7 @@ public class BallSwingApplication extends DsolAnimationApplication
     public BallSwingApplication(final String title, final DsolPanel panel)
             throws RemoteException, IllegalArgumentException, DsolException
     {
-        super(panel, title, DsolAnimationTab.createAutoPanTab(new Bounds2d(-100, 100, -100, 100), panel.getSimulator()));
+        super(panel, title, DsolAnimationTab.createAutoPanTab(new Bounds2d(-120, 120, -120, 120), panel.getSimulator()));
         // getAnimationTab().getAnimationPanel().setRenderableScale(new RenderableScale(2.0, 0.5));
 
         ObjectKind<Ball> objectKind = new ObjectKind<Ball>("Ball")
@@ -65,6 +67,15 @@ public class BallSwingApplication extends DsolAnimationApplication
 
         };
         getAnimationTab().getSearchPanel().addObjectKind(objectKind);
+
+        Wall wallL = new Wall("L", new Bounds2d(-104, -100, -104, 104), Color.BLUE);
+        Wall wallR = new Wall("R", new Bounds2d(208, 4), Color.BLUE, new DirectedPoint2d(102, 0, Math.PI / 2.0));
+        Wall wallB = new Wall("B", new Bounds2d(-104, 104, -104, -100), Color.BLUE);
+        Wall wallT = new Wall("T", new Bounds2d(4, 208), Color.BLUE, new DirectedPoint2d(0, 102, Math.PI / 2.0));
+        new WallAnimation(wallL, panel.getSimulator());
+        new WallAnimation(wallR, panel.getSimulator());
+        new WallAnimation(wallB, panel.getSimulator());
+        new WallAnimation(wallT, panel.getSimulator());
 
         panel.enableSimulationControlButtons();
     }
