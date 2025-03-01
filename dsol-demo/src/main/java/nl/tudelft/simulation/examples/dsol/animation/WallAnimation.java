@@ -30,7 +30,7 @@ public class WallAnimation extends SimRenderable2d<Wall>
     public WallAnimation(final Wall source, final SimulatorInterface<?> simulator)
     {
         super(source, simulator);
-        setTranslate(true);
+        setScaleY(true);
     }
 
     /** {@inheritDoc} */
