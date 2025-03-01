@@ -597,7 +597,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         double minY = mwc.getY() - (mwc.getY() - this.extent.getMinY()) * factor;
         double w = this.extent.getDeltaX() * factor;
         double h = this.extent.getDeltaY() * factor;
-        
+
         setExtent(new Bounds2d(minX, minX + w, minY, minY + h));
     }
 
@@ -758,29 +758,32 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         {
             this.lastScreen = new Dimension(screen);
         }
+        double ysr = this.renderableScale.getYScaleRatio();
         double xScale = this.renderableScale.getXScale(extent, screen);
-        double yScale = this.renderableScale.getYScale(extent, screen);
+        double yScale = this.renderableScale.getYScale(extent, screen) / ysr;
         Bounds2d result;
-        if (this.lastYScale != null && yScale == this.lastYScale)
+        if (this.lastYScale != null && extent.equals(this.extent) && screen.getHeight() == this.lastScreen.getHeight()
+                && screen.getWidth() != this.lastScreen.getWidth())
         {
             result = new Bounds2d(extent.midPoint().getX() - 0.5 * screen.getWidth() * yScale,
                     extent.midPoint().getX() + 0.5 * screen.getWidth() * yScale, extent.getMinY(), extent.getMaxY());
             xScale = yScale;
         }
-        else if (this.lastXScale != null && xScale == this.lastXScale)
+        else if (this.lastYScale != null && extent.equals(this.extent) && screen.getHeight() != this.lastScreen.getHeight()
+                && screen.getWidth() == this.lastScreen.getWidth())
         {
             result = new Bounds2d(extent.getMinX(), extent.getMaxX(),
-                    extent.midPoint().getY() - 0.5 * screen.getHeight() * xScale * this.renderableScale.getYScaleRatio(),
-                    extent.midPoint().getY() + 0.5 * screen.getHeight() * xScale * this.renderableScale.getYScaleRatio());
+                    extent.midPoint().getY() - 0.5 * screen.getHeight() * xScale * ysr,
+                    extent.midPoint().getY() + 0.5 * screen.getHeight() * xScale * ysr);
             yScale = xScale;
         }
         else
         {
-            double scale = Math.min(xScale, yScale);
+            double scale = Math.max(xScale, yScale);
             result = new Bounds2d(extent.midPoint().getX() - 0.5 * screen.getWidth() * scale,
                     extent.midPoint().getX() + 0.5 * screen.getWidth() * scale,
-                    extent.midPoint().getY() - 0.5 * screen.getHeight() * scale * this.renderableScale.getYScaleRatio(),
-                    extent.midPoint().getY() + 0.5 * screen.getHeight() * scale * this.renderableScale.getYScaleRatio());
+                    extent.midPoint().getY() - 0.5 * screen.getHeight() * scale * ysr,
+                    extent.midPoint().getY() + 0.5 * screen.getHeight() * scale * ysr);
             yScale = scale;
             xScale = scale;
         }
