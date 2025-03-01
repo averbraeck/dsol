@@ -597,8 +597,35 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         double minY = mwc.getY() - (mwc.getY() - this.extent.getMinY()) * factor;
         double w = this.extent.getDeltaX() * factor;
         double h = this.extent.getDeltaY() * factor;
-
+        
         setExtent(new Bounds2d(minX, minX + w, minY, minY + h));
+    }
+
+    /**
+     * zooms in/out for the y-axis only.
+     * @param factor double; The zoom factor
+     * @param mouseX int; x-position of the mouse around which we zoom
+     * @param mouseY int; y-position of the mouse around which we zoom
+     */
+    public synchronized void zoomY(final double factor, final int mouseX, final int mouseY)
+    {
+        Point2d mwc = this.renderableScale.getWorldCoordinates(new Point2D.Double(0, mouseY), this.extent, this.getSize());
+        double minX = mwc.getX() - (mwc.getX() - this.extent.getMinX()) * factor;
+        double minY = mwc.getY() - (mwc.getY() - this.extent.getMinY()) * factor;
+        double w = this.extent.getDeltaX();
+        double h = this.extent.getDeltaY() * factor;
+        this.renderableScale = new RenderableScale(this.renderableScale.getYScaleRatio() * factor,
+                this.renderableScale.getObjectScaleFactor());
+        setExtent(new Bounds2d(minX, minX + w, minY, minY + h));
+    }
+
+    /**
+     * reset the zooms factor for the y-axis. The center of the screen will be taken as the reference point for the reset.
+     */
+    public synchronized void resetZoomY()
+    {
+        this.renderableScale = new RenderableScale(1.0, this.renderableScale.getObjectScaleFactor());
+        setExtent(computeVisibleExtent(this.extent));
     }
 
     /**
@@ -749,7 +776,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         }
         else
         {
-            double scale = Math.max(xScale, yScale);
+            double scale = Math.min(xScale, yScale);
             result = new Bounds2d(extent.midPoint().getX() - 0.5 * screen.getWidth() * scale,
                     extent.midPoint().getX() + 0.5 * screen.getWidth() * scale,
                     extent.midPoint().getY() - 0.5 * screen.getHeight() * scale * this.renderableScale.getYScaleRatio(),

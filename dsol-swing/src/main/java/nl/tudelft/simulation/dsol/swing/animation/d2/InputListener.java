@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.animation.d2;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -10,10 +9,6 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
 
-import nl.tudelft.simulation.dsol.swing.animation.d2.actions.PanDownAction;
-import nl.tudelft.simulation.dsol.swing.animation.d2.actions.PanLeftAction;
-import nl.tudelft.simulation.dsol.swing.animation.d2.actions.PanRightAction;
-import nl.tudelft.simulation.dsol.swing.animation.d2.actions.PanUpAction;
 import nl.tudelft.simulation.dsol.swing.introspection.gui.IntrospectionDialog;
 
 /**
@@ -115,11 +110,17 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         int amount = e.getUnitsToScroll();
         if (amount > 0)
         {
-            this.panel.zoom(VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            if (e.isControlDown())
+                this.panel.zoomY(VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            else
+                this.panel.zoom(VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
         }
         else if (amount < 0)
         {
-            this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            if (e.isControlDown())
+                this.panel.zoomY(1.0 / VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            else
+                this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
         }
     }
 
@@ -169,22 +170,33 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         switch (e.getKeyCode())
         {
             case KeyEvent.VK_LEFT:
-                new PanLeftAction(this.panel).actionPerformed(new ActionEvent(this, 0, "LEFT"));
+                this.panel.pan(VisualizationPanel.RIGHT, 0.1);
                 break;
             case KeyEvent.VK_RIGHT:
-                new PanRightAction(this.panel).actionPerformed(new ActionEvent(this, 0, "RIGHT"));
+                this.panel.pan(VisualizationPanel.LEFT, 0.1);
                 break;
             case KeyEvent.VK_UP:
-                new PanUpAction(this.panel).actionPerformed(new ActionEvent(this, 0, "UP"));
+                this.panel.pan(VisualizationPanel.DOWN, 0.1);
                 break;
             case KeyEvent.VK_DOWN:
-                new PanDownAction(this.panel).actionPerformed(new ActionEvent(this, 0, "DOWN"));
+                this.panel.pan(VisualizationPanel.UP, 0.1);
                 break;
             case KeyEvent.VK_MINUS:
-                this.panel.zoom(VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
+                if (e.isControlDown()) 
+                    this.panel.zoomY(VisualizationPanel.ZOOMFACTOR, 0, this.panel.getHeight() / 2);
+                else
+                    this.panel.zoom(VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
                 break;
             case KeyEvent.VK_PLUS:
-                this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
+            case KeyEvent.VK_EQUALS:
+                if (e.isControlDown()) 
+                    this.panel.zoomY(1.0 / VisualizationPanel.ZOOMFACTOR, 0, this.panel.getHeight() / 2);
+                else
+                    this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
+                break;
+            case KeyEvent.VK_Z:
+                if (e.isControlDown() && e.isShiftDown())
+                    this.panel.resetZoomY();
                 break;
             default:
         }
