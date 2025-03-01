@@ -25,7 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
-import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
@@ -41,6 +40,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
+import nl.tudelft.simulation.dsol.animation.d2.BoundsUtil;
 import nl.tudelft.simulation.dsol.animation.d2.Renderable2dComparator;
 import nl.tudelft.simulation.dsol.animation.d2.Renderable2dInterface;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
@@ -225,10 +225,10 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         this.showGrid = true;
         addListeners();
         this.renderableScale = new RenderableScale();
-        this.homeExtent = homeExtent;
+        this.homeExtent = new Bounds2d(homeExtent);
         this.setBackground(Color.WHITE);
-        this.lastDimension = this.getSize();
-        this.lastScreen = this.getSize();
+        this.lastDimension = null;
+        this.lastScreen = null;
         setExtent(homeExtent);
         producer.addListener(this, AnimatorInterface.UPDATE_ANIMATION_EVENT);
     }
@@ -749,8 +749,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         }
         else
         {
-            double scale = this.lastXScale == null ? Math.min(xScale, yScale)
-                    : this.lastXScale * this.lastScreen.getWidth() / screen.getWidth();
+            double scale = Math.max(xScale, yScale);
             result = new Bounds2d(extent.midPoint().getX() - 0.5 * screen.getWidth() * scale,
                     extent.midPoint().getX() + 0.5 * screen.getWidth() * scale,
                     extent.midPoint().getY() - 0.5 * screen.getHeight() * scale * this.renderableScale.getYScaleRatio(),
@@ -811,11 +810,11 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
                 Point<?> l = renderable.getSource().getLocation();
                 if (l != null)
                 {
-                    Bounds<?, ?> b = renderable.getSource().getBounds();
-                    minX = Math.min(minX, l.getX() + b.getMinX());
-                    minY = Math.min(minY, l.getY() + b.getMinY());
-                    maxX = Math.max(maxX, l.getX() + b.getMaxX());
-                    maxY = Math.max(maxY, l.getY() + b.getMaxY());
+                    Bounds2d b = BoundsUtil.projectBounds(l, renderable.getSource().getBounds());
+                    minX = Math.min(minX, b.getMinX());
+                    minY = Math.min(minY, b.getMinY());
+                    maxX = Math.max(maxX, b.getMaxX());
+                    maxY = Math.max(maxY, b.getMaxY());
                 }
             }
         }
