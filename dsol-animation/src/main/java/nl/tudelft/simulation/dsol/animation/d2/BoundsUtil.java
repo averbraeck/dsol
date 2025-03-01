@@ -7,6 +7,7 @@ import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.bounds.Bounds3d;
 import org.djutils.draw.point.DirectedPoint2d;
+import org.djutils.draw.point.DirectedPoint3d;
 import org.djutils.draw.point.OrientedPoint3d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
@@ -48,14 +49,29 @@ public final class BoundsUtil
         {
             return new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
         }
-        if (center instanceof Oriented)
+        if (center instanceof Oriented<?> o)
         {
             Bounds2d b = new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
             Point2d c = new Point2d(center.getX(), center.getY());
-            Oriented<?> o = (Oriented<?>) center;
             Transform2d transformation = new Transform2d();
             transformation.translate(c);
             transformation.rotation(o.getDirZ());
+            return transformation.transform(b);
+        }
+        else if (center instanceof DirectedPoint2d dirCenter)
+        {
+            Bounds2d b = new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
+            Transform2d transformation = new Transform2d();
+            transformation.translate(dirCenter);
+            transformation.rotation(dirCenter.getDirZ());
+            return transformation.transform(b);
+        }
+        else if (center instanceof DirectedPoint3d dirCenter)
+        {
+            Bounds2d b = new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
+            Transform2d transformation = new Transform2d();
+            transformation.translate(dirCenter.getX(), dirCenter.getY());
+            transformation.rotation(dirCenter.getDirZ());
             return transformation.transform(b);
         }
         return new Bounds2d(bounds.getMinX() + center.getX(), bounds.getMaxX() + center.getX(),
