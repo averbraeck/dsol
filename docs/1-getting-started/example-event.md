@@ -601,6 +601,8 @@ To retrieve a set input value and either set it to a field, or use it to define 
 
 The call to `getInputParameter(key)` returns the set *value* for the input parameter that has to be cast to the right type. It is also possible to retrieve the parameter *object* with a call to `this.inputParameterMap.get(key)`. This parameter *object* has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we could use the `getValue()` method to retrieve the value set by the user, and cast it to a Double. Typically, however, we just use the `getInputParameter(key)` method since it is the most straightforward, and we don't need the other methods of the `InputParameter` object.
 
+The model `DesQueueingModel8` how the `InputParameterMap` can be defined and used.
+
 !!! Note
     When submaps are used, the 'dot'-notation gives access to the parameters. Suppose there are several parameters for the server that are stored in a submap with the key `server`, then the parameters such as the server capacity can be retrieved by `(Integer) this.inputParameterMap.get("server.capacity").getValue()`. This enables the maintenance of a diverse set of input parameters in a comprehensible way.
 
@@ -612,32 +614,15 @@ The `ReadInputParameters` class offers a method to read input parameters from a 
 
 in the `main` method of an interactive Swing appplication (see item #10 below), the following dialog pops up before starting the model:
 
-![](../images/1-getting-started/des-gui-parameters.png "des-gui-parameters")
+![](des-gui-parameters.png "des-gui-parameters")
 
 The screen has a tab for each submap, and shows the default values provided in the `InputParameter` objects. The items are provided in the order that was given by the last parameter of the `InputParameter` objects.
 
 
 
-### 9. A program that can be started to create the model
-As shown above, the `Simulator`, `Model`, and `Experiment` can be created in a constructor:
+### 9. Obtaining the statistics at the end of a replication
 
-```java
-  protected MM1Application()
-  {
-    this.simulator = new DevsSimulator<Double>("MM1.Simulator");
-    this.model = new MM1Model(this.simulator);
-    this.experiment = new Experiment<>("mm1", this.simulator, 
-        this.model, 0.0, 0.0, 1000.0, 10);
-    this.experiment.start();
-  }
-
-  public static void main(final String[] args)
-  {
-    new MM1Application();
-  }
-```
-
-When we want to print the results of the replication and of the entire experiment, this is not straightforward, since we have no clue when a replication or the experiment has finished. For the replication, there are *two ways* in which we can print the results at the end of the replication. 
+When we want to print the results of the replication and of the entire experiment, this is not straightforward, since we do not know when a replication or the experiment has finished. For the replication, there are *two ways* in which we can print the results at the end of the replication. 
 
 #### Printing results at the end of a replication option #1: simulation event
 We can print the results of the output statistics at the end of a replication by scheduling a method on the event list, just before the simulation has ended. E.g., by including the following code in the `constructModel()` method:
