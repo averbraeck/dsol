@@ -6,6 +6,7 @@ import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
+import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
 
 /**
  * Discrete event queueing application.
@@ -42,6 +43,7 @@ class DesQueueingApplication10 extends DsolApplication
         var simulator = new DevsSimulator<Double>("MM1.Simulator");
         var model = new DesQueueingModel10(simulator);
         var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+        new TabbedParameterDialog(model.getInputParameterMap());
         simulator.initialize(model, replication);
         DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, simulator);
         new DesQueueingApplication10(new DesQueueingPanel(controlPanel));
