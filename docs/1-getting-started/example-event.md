@@ -817,7 +817,7 @@ Tables like this will also be printed for the queue length, server utilization, 
 
 !!! Warning
     The above example clearly shows that even for a simple model like a M/M/1 queuing model, the values between replications vary significantly. If you would carry out only one replication, you could have gotten the result 0.382 as the average time in queue, or if you would have done another single run, you could have gotten 0.684... Only after a number of replications, e.g., 10, you get a good sense of the *actual* value of the average waiting time in the queue.
-    
+
 !!! Warning
     When carrying out multiple replications, make sure that no state variables can 'leak' from one replication to the next. In this particular example, this means that we explicitly have to re-initialize `busy`, `queue` and `entityCounter` in the `constructModel()` method. 
     
