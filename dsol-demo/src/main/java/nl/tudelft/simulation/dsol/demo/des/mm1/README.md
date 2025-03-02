@@ -765,7 +765,7 @@ Printing the results at the end of an entire experiment can only be done with th
       }
     }
     
-    protected reportFinalStats()
+    protected void reportFinalStats()
     {
       System.out.println("Final statistics:");
       SortedMap<String, SortedMap<String, Tally>> stats 
@@ -791,32 +791,40 @@ It will report, e.g. the following (small excerpt of the summary statistics):
 
 ```text
 Summary statistic for: Time in Queue
---------------------------------------------------------------------------------------------------
-| Tally name                        |      n |       mean |     st.dev |    minimum |    maximum |
---------------------------------------------------------------------------------------------------
-| Max                               |     10 |      5.607 |      1.595 |      3.477 |      9.591 |
-| Min                               |     10 |      0.000 |      0.000 |      0.000 |      0.000 |
-| N                                 |     10 |   1007.300 |     26.702 |    956.000 |   1047.000 |
-| PopulationExcessKurtosis          |     10 |      8.286 |      5.518 |      2.627 |     22.921 |
-| PopulationKurtosis                |     10 |     11.286 |      5.518 |      5.627 |     25.921 |
-| PopulationMean                    |     10 |      0.507 |      0.074 |      0.382 |      0.684 |
-| PopulationSkewness                |     10 |      2.560 |      0.652 |      1.808 |      4.142 |
-| PopulationStDev                   |     10 |      0.874 |      0.135 |      0.622 |      1.113 |
-| PopulationVariance                |     10 |      0.783 |      0.238 |      0.387 |      1.238 |
-| SampleExcessKurtosis              |     10 |      8.333 |      5.547 |      2.645 |     23.045 |
-| SampleKurtosis                    |     10 |     11.274 |      5.512 |      5.621 |     25.894 |
-| SampleMean                        |     10 |      0.507 |      0.074 |      0.382 |      0.684 |
-| SampleSkewness                    |     10 |      2.564 |      0.653 |      1.811 |      4.148 |
-| SampleStDev                       |     10 |      0.875 |      0.135 |      0.622 |      1.113 |
-| SampleVariance                    |     10 |      0.783 |      0.238 |      0.387 |      1.239 |
-| Sum                               |     10 |    511.195 |     79.132 |    386.626 |    705.454 |
---------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+| Tally name                  |      n |       mean |     st.dev |    minimum |    maximum |
+--------------------------------------------------------------------------------------------
+| Max                         |     10 |      5.607 |      1.595 |      3.477 |      9.591 |
+| Min                         |     10 |      0.000 |      0.000 |      0.000 |      0.000 |
+| N                           |     10 |   1007.300 |     26.702 |    956.000 |   1047.000 |
+| PopulationExcessKurtosis    |     10 |      8.286 |      5.518 |      2.627 |     22.921 |
+| PopulationKurtosis          |     10 |     11.286 |      5.518 |      5.627 |     25.921 |
+| PopulationMean              |     10 |      0.507 |      0.074 |      0.382 |      0.684 |
+| PopulationSkewness          |     10 |      2.560 |      0.652 |      1.808 |      4.142 |
+| PopulationStDev             |     10 |      0.874 |      0.135 |      0.622 |      1.113 |
+| PopulationVariance          |     10 |      0.783 |      0.238 |      0.387 |      1.238 |
+| SampleExcessKurtosis        |     10 |      8.333 |      5.547 |      2.645 |     23.045 |
+| SampleKurtosis              |     10 |     11.274 |      5.512 |      5.621 |     25.894 |
+| SampleMean                  |     10 |      0.507 |      0.074 |      0.382 |      0.684 |
+| SampleSkewness              |     10 |      2.564 |      0.653 |      1.811 |      4.148 |
+| SampleStDev                 |     10 |      0.875 |      0.135 |      0.622 |      1.113 |
+| SampleVariance              |     10 |      0.783 |      0.238 |      0.387 |      1.239 |
+| Sum                         |     10 |    511.195 |     79.132 |    386.626 |    705.454 |
+--------------------------------------------------------------------------------------------
 ```
 
 Tables like this will also be printed for the queue length, server utilization, and time in system. A summary table like this might take some time to comprehend. We have, for instance, the maximum of the mean (0.684), and the mean of the maximum (5.607). The maximum of the mean has the following interpretation: the time in queue had different mean values in each of the 10 runs. The highest mean value in the 10 runs had 0.684 as the mean (and the lowest had 0.382; over 10 runs the mean of the mean values was 0.507). The mean of the maximum, however, tells something very different: what was the average *largest time in queue* over the 10 runs? As we can see, there was a run with 3.477 as the longest time in queue (lowest over the 10 replications), and there was a run with 9.591 as the longest time in queue (highest over the 10 replications). On *average* however, the maximum time in queue over the 10 replications was 5.607. 
 
 !!! Warning
     The above example clearly shows that even for a simple model like a M/M/1 queuing model, the values between replications vary significantly. If you would carry out only one replication, you could have gotten the result 0.382 as the average time in queue, or if you would have done another single run, you could have gotten 0.684... Only after a number of replications, e.g., 10, you get a good sense of the *actual* value of the average waiting time in the queue.
+    
+!!! Warning
+    When carrying out multiple replications, make sure that no state variables can 'leak' from one replication to the next. In this particular example, this means that we explicitly have to re-initialize `busy`, `queue` and `entityCounter` in the `constructModel()` method. 
+    
+!!! Note
+    The statistics are automatically initialized at the start of each replication, and automatically added to the summary statistics when they are of type `SimCounter`, `SimTally` or `SimPersistent` (the `Sim` means that they are aware that they are part of a simulation run with potentially multiple replications). 
+
+A fully worked-out example of a simulation run with multiple replications is given in [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/experiment](https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/experiment).
 
 
 
