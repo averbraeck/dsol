@@ -651,21 +651,35 @@ We can print the results of the output statistics at the end of a replication by
 The replication takes care that **first** all regular events at the time when the replication ends are executed before ending the simulation. If, however, the time is even the slightest bit later, e.g., because of a calculation, the `reportStats()` method might not be scheduled. Since we directly use the value of `getReplication().getRunLength()` here, there is no danger of the method not being executed.
 
 #### Printing results at the end of a replication option #2: pub/sub event
-The second way to print the results at the end of the run is to subscribe to an event of the `Simulator` that indicates the end of the replication, called `Replication.END_REPLICATION_EVENT`. The subscription is done as follows (e.g., in the setup of the simulator, model and experiment):
+The second, and more elegant, way to print the results at the end of the run is to subscribe to an event of the `Simulator` that indicates the end of the replication, called `Replication.END_REPLICATION_EVENT`. The subscription is for instance done as follows (e.g., in the setup of the simulator, model and experiment):
 
 ```java
-  class MM1Application implements EventListener
+class DesQueueingModel9 extends AbstractDsolModel<Double, 
+  DevsSimulatorInterface<Double>> implements EventListener
+{
+
+  public DesQueueingModel9(final DevsSimulatorInterface<Double> simulator)
   {
-    protected MM1Application()
-    {
-      this.simulator = new DevsSimulator<Double>("MM1.Simulator");
-      this.model = new MM1Model(this.simulator);
-      this.experiment = new Experiment<>("mm1", this.simulator, 
-          this.model, 0.0, 0.0, 1000.0, 10);
-      this.experiment.addListener(this, Replication.END_REPLICATION_EVENT);
-      this.experiment.start();
-    }
+    super(simulator);
+    // make input parameter map -- see step 8
+    this.simulator.addListener(this, Replication.END_REPLICATION_EVENT);
+  }
+  
+  @Override
+  public void constructModel() throws SimRuntimeException
+  {
+    // retrieve input parameters -- see step 8
+    this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
+    this.tallyTimeInSystem = new SimTally<>("Time in system", this);
+    this.persistentQueueLength = new SimPersistent<>("Queue length", this);
+    this.persistentUtilization = new SimPersistent<>("Server utilization", this);
+    this.persistentQueueLength.register(0.0, 0.0);
+    this.persistentUtilization.register(0.0, 0.0);
+    this.simulator.scheduleEventRel(startTime, this, "generate", null);
+  }  
 ```
+
+In the above code for `constructModel`, we explicitly start the registration of the persistent statistics with a value of 0; at the start of the simulation, the queue is empty, and the server is not utilized. 
 
 When the end of the replication is reached, the `notify(event)` method is called. We can then print the results if the event is indeed the `END_REPLICATION_EVENT`:
 
@@ -680,13 +694,54 @@ When the end of the replication is reached, the `notify(event)` method is called
   }
 ```
 
+The `reportStats()` method looks, e.g., as follows:
+
+```java
+  protected void reportStats()
+  {
+    this.persistentUtilization.endObservations(getSimulator().getReplication().getRunLength());
+    this.persistentQueueLength.endObservations(getSimulator().getReplication().getRunLength());
+
+    System.out.println(SimTally.reportHeader());
+    System.out.println(this.tallyTimeInQueue.reportLine());
+    System.out.println(this.tallyTimeInSystem.reportLine());
+    System.out.println(SimTally.reportFooter());
+
+    System.out.println(SimPersistent.reportHeader());
+    System.out.println(this.persistentQueueLength.reportLine());
+    System.out.println(this.persistentUtilization.reportLine());
+    System.out.println(SimPersistent.reportFooter());
+  }
+```
+
+First, the two persistent statistics register a final time with the last value of the persistent variable at the end of the run. After that, the default reporting methods for the tally and persistent statistics are used to provide an overview of the output on the console. The output, e.g. , looks as follows:
+
+```
+------------------------------------------------------------------------------------
+| Tally name          |      n |       mean |     st.dev |    minimum |    maximum |
+------------------------------------------------------------------------------------
+| Time in queue       |   1018 |      7.659 |      5.909 |      0.000 |     22.348 |
+| Time in system      |   1017 |      8.555 |      5.967 |  9.144e-03 |     23.265 |
+------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+| Weighted Tally name |      n |   interval |     w.mean |   w.st.dev |    min obs |    max obs |
+-------------------------------------------------------------------------------------------------
+| Queue length        |   1836 |   1000.000 |      7.831 |      6.370 |      0.000 |     25.000 |
+| Server utilization  |   1121 |   1000.000 |      0.912 |      0.284 |      0.000 |      1.000 |
+-------------------------------------------------------------------------------------------------
+```
+
+As can be seen, the two persistent variables have reported over the entire period of of the run length, i.e. 1000 time units. The maximum waiting time has ben 22.3 time units, and the maximum queue length has been 25, with an average queue length of 7.8.
+
+
 #### printing results at the end of an experiment
 Printing the results at the end of an entire experiment can only be done with the publish/subscribe method shown above, but then for the `Experiment.END_EXPERIMENT_EVENT` event. The code would look, e.g., as follows (also including the `Replication.END_REPLICATION_EVENT`:
 
 ```java
-  class MM1Application implements EventListener
+  class DesQueueingApplication9 implements EventListener
   {
-    protected MM1Application()
+    protected DesQueueingApplication9()
     {
       this.simulator = new DevsSimulator<Double>("MM1.Simulator");
       this.model = new MM1Model(this.simulator);
@@ -768,14 +823,14 @@ Tables like this will also be printed for the queue length, server utilization, 
 ### 10. A GUI to display statistics and graphs to the user
 The dsol-swing project offers plenty of possibilities to show statistics and graphs to the user. This takes a bit more effort, since the results need to be placed on the screen, with possibly tabs and headers. An example is shown below:
 
-![](../images/1-getting-started/des-gui-screenshot.png "des-gui-screenshot")
+![](des-gui-screenshot.png "des-gui-screenshot")
 
 In order to get such a screen, only a few things in the application need to be adapted. The model itself remains *unchanged*. In the main program, we indicate that it inherits from `DsolApplication`, and in the program, we create a panel that will show the above results:
 
 ```java
-public class MM1SwingApplication extends DsolApplication
+public class DesQueueingApplication10 extends DsolApplication
 {
-  public MM1SwingApplication(final MM1Panel panel)
+  public DesQueueingApplication10(final DesQueueingPanel panel)
   {
     super(panel, "MM1 queuing model");
   }
@@ -784,21 +839,21 @@ public class MM1SwingApplication extends DsolApplication
   {
     DevsSimulator<Double> simulator = new DevsSimulator<>("MM1.Simulator");
     DsolModel<Double, DevsSimulatorInterface<Double>> model 
-        = new MM1Model(simulator);
+        = new DesQueueingModel10(simulator);
     Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
     simulator.initialize(model, replication);
     DevsControlPanel.TimeDouble controlPanel 
         = new DevsControlPanel.TimeDouble(model, simulator);
-    new MM1SwingApplication(new MM1Panel(controlPanel));
+    new DesQueueingApplication10(new DesQueueingPanel(controlPanel));
   }
 ```
 
 In this case we run a single replication, since we want to study the results. We make a `ControlPanel` with buttons to start and stop the simulation, and to keep track of the simulator's time, and we create our own `MM1Panel` with the statistics. The complete code for the `MM1Panel` class is given below:
 
 ```java
-public class MM1Panel extends DsolPanel
+public class DesQueueingPanel extends DsolPanel
 {
-  public MM1Panel(final DevsControlPanel.TimeDouble controlPanel) throws RemoteException
+  public DesQueueingPanel(final DevsControlPanel.TimeDouble controlPanel) throws RemoteException
   {
     super(controlPanel);
     addTabs();
@@ -938,11 +993,7 @@ This extended example for modeling an M/M/1 queuing system showed the following 
 
 
 ## Code
-The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1](https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1). 
+The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1]https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1). 
 
-- `MM1Application` executes a single replication and presents the output statistics textually on the screen.
-- `MM1ExperimentApplication` carries out 10 replications and displays replication statistics and summary statistics on the screen.
-- `MM1SwingApplication` executes a single replication and displays the results in a graphical user interface.
-
-
+All 10 steps are provided, with a self-contained directory for each step.
 

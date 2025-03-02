@@ -739,9 +739,9 @@ As can be seen, the two persistent variables have reported over the entire perio
 Printing the results at the end of an entire experiment can only be done with the publish/subscribe method shown above, but then for the `Experiment.END_EXPERIMENT_EVENT` event. The code would look, e.g., as follows (also including the `Replication.END_REPLICATION_EVENT`:
 
 ```java
-  class MM1Application implements EventListener
+  class DesQueueingApplication9 implements EventListener
   {
-    protected MM1Application()
+    protected DesQueueingApplication9()
     {
       this.simulator = new DevsSimulator<Double>("MM1.Simulator");
       this.model = new MM1Model(this.simulator);
@@ -823,14 +823,14 @@ Tables like this will also be printed for the queue length, server utilization, 
 ### 10. A GUI to display statistics and graphs to the user
 The dsol-swing project offers plenty of possibilities to show statistics and graphs to the user. This takes a bit more effort, since the results need to be placed on the screen, with possibly tabs and headers. An example is shown below:
 
-![](../images/1-getting-started/des-gui-screenshot.png "des-gui-screenshot")
+![](des-gui-screenshot.png "des-gui-screenshot")
 
 In order to get such a screen, only a few things in the application need to be adapted. The model itself remains *unchanged*. In the main program, we indicate that it inherits from `DsolApplication`, and in the program, we create a panel that will show the above results:
 
 ```java
-public class MM1SwingApplication extends DsolApplication
+public class DesQueueingApplication10 extends DsolApplication
 {
-  public MM1SwingApplication(final MM1Panel panel)
+  public DesQueueingApplication10(final DesQueueingPanel panel)
   {
     super(panel, "MM1 queuing model");
   }
@@ -839,21 +839,21 @@ public class MM1SwingApplication extends DsolApplication
   {
     DevsSimulator<Double> simulator = new DevsSimulator<>("MM1.Simulator");
     DsolModel<Double, DevsSimulatorInterface<Double>> model 
-        = new MM1Model(simulator);
+        = new DesQueueingModel10(simulator);
     Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
     simulator.initialize(model, replication);
     DevsControlPanel.TimeDouble controlPanel 
         = new DevsControlPanel.TimeDouble(model, simulator);
-    new MM1SwingApplication(new MM1Panel(controlPanel));
+    new DesQueueingApplication10(new DesQueueingPanel(controlPanel));
   }
 ```
 
 In this case we run a single replication, since we want to study the results. We make a `ControlPanel` with buttons to start and stop the simulation, and to keep track of the simulator's time, and we create our own `MM1Panel` with the statistics. The complete code for the `MM1Panel` class is given below:
 
 ```java
-public class MM1Panel extends DsolPanel
+public class DesQueueingPanel extends DsolPanel
 {
-  public MM1Panel(final DevsControlPanel.TimeDouble controlPanel) throws RemoteException
+  public DesQueueingPanel(final DevsControlPanel.TimeDouble controlPanel) throws RemoteException
   {
     super(controlPanel);
     addTabs();
@@ -993,11 +993,7 @@ This extended example for modeling an M/M/1 queuing system showed the following 
 
 
 ## Code
-The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1](https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/event/mm1). 
+The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1]https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1). 
 
-- `MM1Application` executes a single replication and presents the output statistics textually on the screen.
-- `MM1ExperimentApplication` carries out 10 replications and displays replication statistics and summary statistics on the screen.
-- `MM1SwingApplication` executes a single replication and displays the results in a graphical user interface.
-
-
+All 10 steps are provided, with a self-contained directory for each step.
 
