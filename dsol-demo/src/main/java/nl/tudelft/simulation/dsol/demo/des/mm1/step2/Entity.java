@@ -12,7 +12,7 @@ package nl.tudelft.simulation.dsol.demo.des.mm1.step2;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-class Entity
+public class Entity
 {
     /** time of creation for statistics. */
     private final double createTime;
