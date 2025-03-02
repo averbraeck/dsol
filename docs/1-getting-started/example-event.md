@@ -265,7 +265,7 @@ whereas a persistent statistic needs a timestamp AND a new value to be registere
   this.persistentQueueLength.register(time, this.queue.size());
 ```
 
-The `tallyTimeInQueue` keeps the statistics for the time the entities spent in the queue. Every time an entity leaves the queue, the statistic is updated. The `tallyTimeInQueue` statistic registers the value for the time-in-queue statistic, by subtracting the time the entity entered the queue (`queueEntry.getQueueInTime()` from the current simulation time. This is the time that the entity has spent in the queue. When there is **no** waiting time in the queue, we have to explicitly register this as a zero waiting time.
+The `tallyTimeInQueue` keeps the statistics for the time the entities spent in the queue. Every time an entity leaves the queue, the statistic is updated. The `tallyTimeInQueue` statistic registers the value for the time-in-queue statistic, by subtracting the time the entity entered the queue (`queueEntry.getQueueInTime()`) from the current simulation time. This is the time that the entity has spent in the queue. When there is **no** waiting time in the queue, we have to explicitly register this as a zero waiting time.
 
 The `persistentQueueLength` keeps the statistics for the queue length. Every time an entity enters the queue or leaves the queue, the statistic is updated. 
 
@@ -304,11 +304,11 @@ In the `startProcess` method, we have to explicitly update the utilization of th
     this.persistentUtilization.register(time, this.busy);
     this.simulator.scheduleEventRel(this.processingTime.draw(), 
         this, "endProcess", new Object[] {entity});
- ```
+```
  
- In the `endProcess` method, we update all four statistics:
+In the `endProcess` method, we update all four statistics:
  
- ```java
+```java
   protected void endProcess(final Entity entity)
   {
     double time = getSimulator().getSimulatorTime();
@@ -374,7 +374,7 @@ The `constructModel` method looks as follows:
 It creates the four statistics, and schedules for the `generate` method to instantiate the first entity after a stochastic `interarrivalTime`. When the model is started, this will be the first event to be carried out. 
 
 !!! Warning
-    Note that we do not explicitly **call** the `generate` method, since this would mean that we already execute simulation code during the construction of a class, before the entire model has been properly created, and before we explicitly started an experiment. Therefore, it is good practice to always defer the execution of model code with a `ScheduleEvent` method in `constructModel`.
+    Note that we do not explicitly **call** the `generate` method, since this would mean that we already execute simulation code during the construction of a model, before the entire model has been properly initialized, and before we explicitly started an experiment. Therefore, it is good practice to always defer the execution of model code with a `ScheduleEvent` method in `constructModel`.
 
 
 ### 6. Experiment management

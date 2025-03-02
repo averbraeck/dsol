@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.demo.des.mm1.step7;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -41,7 +40,7 @@ class DesQueueingModel7 extends AbstractDsolModel<Double, DevsSimulatorInterface
 
     /** the parameter of the exponentially distributed interarrival time between entities. */
     private final double lambda;
-    
+
     /** the distribution of the interarrival time between entities. */
     private DistContinuous interArrivalTime;
 
@@ -77,11 +76,11 @@ class DesQueueingModel7 extends AbstractDsolModel<Double, DevsSimulatorInterface
     }
 
     @Override
-    public void constructModel() throws SimRuntimeException
+    public void constructModel()
     {
         this.interArrivalTime = new DistExponential(getDefaultStream(), this.lambda);
         this.processingTime = new DistExponential(getDefaultStream(), this.mu);
-        
+
         this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
         this.tallyTimeInSystem = new SimTally<>("Time in system", this);
         this.persistentQueueLength = new SimPersistent<>("Queue length", this);
@@ -92,9 +91,8 @@ class DesQueueingModel7 extends AbstractDsolModel<Double, DevsSimulatorInterface
 
     /**
      * Generate an entity.
-     * @throws SimRuntimeException when the next generation cannot be scheduled
      */
-    protected void generate() throws SimRuntimeException
+    protected void generate()
     {
         double time = getSimulator().getSimulatorTime();
         Entity entity = new Entity(this.entityCounter++, time);
