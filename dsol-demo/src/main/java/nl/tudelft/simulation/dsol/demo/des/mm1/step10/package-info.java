@@ -1,5 +1,5 @@
 /**
- * Discrete Event Simulation model example for an M/M/1 system - step 4. See
+ * Discrete Event Simulation model example for an M/M/1 system - step 10. See
  * <a href= "https://simulation.tudelft.nl/dsol/manual/1-getting-started/example-event/">DES Model Example</a> for more
  * information.
  * <p>
