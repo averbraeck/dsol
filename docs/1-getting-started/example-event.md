@@ -651,21 +651,35 @@ We can print the results of the output statistics at the end of a replication by
 The replication takes care that **first** all regular events at the time when the replication ends are executed before ending the simulation. If, however, the time is even the slightest bit later, e.g., because of a calculation, the `reportStats()` method might not be scheduled. Since we directly use the value of `getReplication().getRunLength()` here, there is no danger of the method not being executed.
 
 #### Printing results at the end of a replication option #2: pub/sub event
-The second way to print the results at the end of the run is to subscribe to an event of the `Simulator` that indicates the end of the replication, called `Replication.END_REPLICATION_EVENT`. The subscription is done as follows (e.g., in the setup of the simulator, model and experiment):
+The second, and more elegant, way to print the results at the end of the run is to subscribe to an event of the `Simulator` that indicates the end of the replication, called `Replication.END_REPLICATION_EVENT`. The subscription is for instance done as follows (e.g., in the setup of the simulator, model and experiment):
 
 ```java
-  class MM1Application implements EventListener
+class DesQueueingModel9 extends AbstractDsolModel<Double, 
+  DevsSimulatorInterface<Double>> implements EventListener
+{
+
+  public DesQueueingModel9(final DevsSimulatorInterface<Double> simulator)
   {
-    protected MM1Application()
-    {
-      this.simulator = new DevsSimulator<Double>("MM1.Simulator");
-      this.model = new MM1Model(this.simulator);
-      this.experiment = new Experiment<>("mm1", this.simulator, 
-          this.model, 0.0, 0.0, 1000.0, 10);
-      this.experiment.addListener(this, Replication.END_REPLICATION_EVENT);
-      this.experiment.start();
-    }
+    super(simulator);
+    // make input parameter map -- see step 8
+    this.simulator.addListener(this, Replication.END_REPLICATION_EVENT);
+  }
+  
+  @Override
+  public void constructModel() throws SimRuntimeException
+  {
+    // retrieve input parameters -- see step 8
+    this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
+    this.tallyTimeInSystem = new SimTally<>("Time in system", this);
+    this.persistentQueueLength = new SimPersistent<>("Queue length", this);
+    this.persistentUtilization = new SimPersistent<>("Server utilization", this);
+    this.persistentQueueLength.register(0.0, 0.0);
+    this.persistentUtilization.register(0.0, 0.0);
+    this.simulator.scheduleEventRel(startTime, this, "generate", null);
+  }  
 ```
+
+In the above code for `constructModel`, we explicitly start the registration of the persistent statistics with a value of 0; at the start of the simulation, the queue is empty, and the server is not utilized. 
 
 When the end of the replication is reached, the `notify(event)` method is called. We can then print the results if the event is indeed the `END_REPLICATION_EVENT`:
 
@@ -679,6 +693,47 @@ When the end of the replication is reached, the `notify(event)` method is called
     }
   }
 ```
+
+The `reportStats()` method looks, e.g., as follows:
+
+```java
+  protected void reportStats()
+  {
+    this.persistentUtilization.endObservations(getSimulator().getReplication().getRunLength());
+    this.persistentQueueLength.endObservations(getSimulator().getReplication().getRunLength());
+
+    System.out.println(SimTally.reportHeader());
+    System.out.println(this.tallyTimeInQueue.reportLine());
+    System.out.println(this.tallyTimeInSystem.reportLine());
+    System.out.println(SimTally.reportFooter());
+
+    System.out.println(SimPersistent.reportHeader());
+    System.out.println(this.persistentQueueLength.reportLine());
+    System.out.println(this.persistentUtilization.reportLine());
+    System.out.println(SimPersistent.reportFooter());
+  }
+```
+
+First, the two persistent statistics register a final time with the last value of the persistent variable at the end of the run. After that, the default reporting methods for the tally and persistent statistics are used to provide an overview of the output on the console. The output, e.g. , looks as follows:
+
+```
+------------------------------------------------------------------------------------
+| Tally name          |      n |       mean |     st.dev |    minimum |    maximum |
+------------------------------------------------------------------------------------
+| Time in queue       |   1018 |      7.659 |      5.909 |      0.000 |     22.348 |
+| Time in system      |   1017 |      8.555 |      5.967 |  9.144e-03 |     23.265 |
+------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+| Weighted Tally name |      n |   interval |     w.mean |   w.st.dev |    min obs |    max obs |
+-------------------------------------------------------------------------------------------------
+| Queue length        |   1836 |   1000.000 |      7.831 |      6.370 |      0.000 |     25.000 |
+| Server utilization  |   1121 |   1000.000 |      0.912 |      0.284 |      0.000 |      1.000 |
+-------------------------------------------------------------------------------------------------
+```
+
+As can be seen, the two persistent variables have reported over the entire period of of the run length, i.e. 1000 time units. The maximum waiting time has ben 22.3 time units, and the maximum queue length has been 25, with an average queue length of 7.8.
+
 
 #### printing results at the end of an experiment
 Printing the results at the end of an entire experiment can only be done with the publish/subscribe method shown above, but then for the `Experiment.END_EXPERIMENT_EVENT` event. The code would look, e.g., as follows (also including the `Replication.END_REPLICATION_EVENT`:
