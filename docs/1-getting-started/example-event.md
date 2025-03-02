@@ -421,7 +421,7 @@ When we would want to carry out 10 replications, the construction of the simulat
   DesQueueingApplication6()
   {
     var simulator = new DevsSimulator<Double>("MM1.Simulator");
-    var stream = new MersenneTwister(1);
+    var stream = new MersenneTwister(12);
     var interArrivalTime = new DistExponential(stream, 1.0);
     var processingTime = new DistExponential(stream, 0.9);
     var model = new DesQueueingModel6(simulator, interArrivalTime, processingTime);
@@ -475,11 +475,12 @@ where 12 is the (fixed) seed of the RNG. The disadvantage of defining your own R
 A model can define multiple stochastic distributions, by specifying the type of distribution, the parameters for the distribution, and the RNG to be used for drawing the random numbers. DSOL offers both continuous distributions such as Exponential, Triangular, Normal, Uniform, Weibull, Gamma, Beta, Lognormal, and discrete distributions such as Poisson, Discrete Uniform, Bernoulli, and Geometric. A distribution is a class that is instantiated, e.g., as follows for the inter-arrival distribution and the service time distribution:
 
 ```java
-  private DistContinuous interarrivalTime = new DistExponential(stream, 1.0);
+  private DistContinuous interArrivalTime = new DistExponential(stream, 1.0);
   private DistContinuous processingTime = new DistExponential(stream, 0.9);
 ```
 
-Drawing a value from such a distribution is done by, e.g., `this.interarrivalTime.draw()`. 
+Drawing a value from such a distribution is done by, e.g., `this.interArrivalTime.draw()`. 
+
 
 #### Seed management
 The `SingleRreplication` example for the RNG is not using seed management, and has the same value for the seed for all replications. That is clearly not what we would want for an experiment with multiple replications. For this use case, the `Experiment` class in DSOL takes care of proper seed management, updating the seed value for each new replication in a reproducible way. You can create as many properly managed random streams in the experiment as needed, but there is always one default stream available in the `Experiment` that you can use. You can access it by:
@@ -491,11 +492,55 @@ The `SingleRreplication` example for the RNG is not using seed management, and h
 This stream can now be used in the stochastic distributions for the inter-arrival time and the service time:
 
 ```java
-  this.interarrivalTime = new DistExponential(defaultStream, 1.0);
+  this.interArrivalTime = new DistExponential(defaultStream, 1.0);
   this.processingTime = new DistExponential(defaultStream, 0.9);
 ```
 
 The streams will automatically be reset with a new seed before a new replication starts. 
+
+The above insights have been used in the application `DesQueueingApplication7` and the model `DesQueueingModel7`. The constructor of the application now looks as follows:
+
+```java
+  DesQueueingApplication7()
+  {
+    var simulator = new DevsSimulator<Double>("MM1.Simulator");
+    double lambda = 1.0;
+    double mu = 0.9;
+    var model = new DesQueueingModel7(simulator, lambda, mu);
+    var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+    simulator.initialize(model, replication);
+    simulator.start();
+  }
+```
+
+Instead of the distributions, their parameters `lambda` and `mu` are provided to the model. Thereby, the model can initialize the random generators based on seed management in the `constructModel()` method of the model for each experiment or replication:
+
+```java
+  public DesQueueingModel7(final DevsSimulatorInterface<Double> simulator, 
+      final double lambda, final double mu)
+  {
+    super(simulator);
+    this.lambda = lambda;
+    this.mu = mu;
+  }
+
+  @Override
+  public void constructModel() throws SimRuntimeException
+  {
+    this.interArrivalTime = new DistExponential(getDefaultStream(), this.lambda);
+    this.processingTime = new DistExponential(getDefaultStream(), this.mu);
+    
+    this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
+    this.tallyTimeInSystem = new SimTally<>("Time in system", this);
+    this.persistentQueueLength = new SimPersistent<>("Queue length", this);
+    this.persistentUtilization = new SimPersistent<>("Server utilization", this);
+
+    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+  }
+```
+
+By using the `DefaultStream`, an implicit connection to seed management and properly initializing the random number generators at each replication is guaranteed.
+
 
 
 ### 8. Input parameters for the model to set the experimental conditions

@@ -1,9 +1,7 @@
-package nl.tudelft.simulation.dsol.demo.des.mm1.step6;
+package nl.tudelft.simulation.dsol.demo.des.mm1.step7;
 
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
-import nl.tudelft.simulation.jstats.distributions.DistExponential;
-import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
  * Discrete event queueing application.
@@ -16,21 +14,20 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-class DesQueueingApplication6
+class DesQueueingApplication7
 {
     /**
      * Constructor for the discrete event queueing application.
      */
-    DesQueueingApplication6()
+    DesQueueingApplication7()
     {
-      var simulator = new DevsSimulator<Double>("MM1.Simulator");
-      var stream = new MersenneTwister(12);
-      var interArrivalTime = new DistExponential(stream, 1.0);
-      var processingTime = new DistExponential(stream, 0.9);
-      var model = new DesQueueingModel6(simulator, interArrivalTime, processingTime);
-      var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
-      simulator.initialize(model, replication);
-      simulator.start();
+        var simulator = new DevsSimulator<Double>("MM1.Simulator");
+        double lambda = 1.0;
+        double mu = 0.9;
+        var model = new DesQueueingModel7(simulator, lambda, mu);
+        var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+        simulator.initialize(model, replication);
+        simulator.start();
     }
 
     /**
@@ -39,7 +36,7 @@ class DesQueueingApplication6
      */
     public static void main(final String[] args)
     {
-        new DesQueueingApplication6();
+        new DesQueueingApplication7();
     }
 
 }
