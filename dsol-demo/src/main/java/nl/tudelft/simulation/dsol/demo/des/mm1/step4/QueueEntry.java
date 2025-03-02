@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.demo.des.mm1.step2;
+package nl.tudelft.simulation.dsol.demo.des.mm1.step4;
 
 /**
  * The QueueEntry class for the M/M/1 Discrete Event Simulation (DES) model example that stores waiting Entity instances. The
