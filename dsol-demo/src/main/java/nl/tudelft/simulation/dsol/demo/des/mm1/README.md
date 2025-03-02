@@ -993,7 +993,7 @@ This extended example for modeling an M/M/1 queuing system showed the following 
 
 
 ## Code
-The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1]https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1). 
+The working example code for this model can be found at: [https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1](https://github.com/averbraeck/dsol/tree/main/dsol-demo/src/main/java/nl/tudelft/simulation/dsol/demo/des/mm1). 
 
 All 10 steps are provided, with a self-contained directory for each step.
 
