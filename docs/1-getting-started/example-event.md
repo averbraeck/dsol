@@ -374,36 +374,40 @@ The `constructModel` method looks as follows:
 It creates the four statistics, and schedules for the `generate` method to instantiate the first entity after a stochastic `interarrivalTime`. When the model is started, this will be the first event to be carried out. 
 
 !!! Warning
-    Note that we do not explicitly **call* the `generate` method, since this would mean that we already execute simulation code during the construction of a class, before the entire model has been properly created, and before we explicitly started an experiment. Therefore, it is good practice to always defer the execution of model code with a `ScheduleEvent` method in `constructModel`.
+    Note that we do not explicitly **call** the `generate` method, since this would mean that we already execute simulation code during the construction of a class, before the entire model has been properly created, and before we explicitly started an experiment. Therefore, it is good practice to always defer the execution of model code with a `ScheduleEvent` method in `constructModel`.
 
 
 ### 6. Experiment management
 A simulation model is executed as part of a properly designed experiment. The experiment sets the input parameters, measures the output statistics, and establishes a relationship between the input parameters and the calculated indicators. Often, the model is ran multiple times (so-called *replications* of the simulation run), to avoid any dependency on the particularities of a specific run. When the model is stable, and the indicators easily converge towards the same value, a handful of replications, typically 5 or 10, is sufficient. When the model has rare events that can happen at particular times, such as weather events, failures, or disturbances, many more replications are needed to assess the true value of the output statistics, since the outcome of two replications can differ significantly. In such a case, the 95% confidence interval of the output statistics needs to be calculated and replications have to be repeated until the confidence interval is considered to be small enough for the purpose of the experiment. In this case, we start with observing one replication, but want to extend to multiple replications later.
 
-Two other values that need to be set for the experiment are the length of each run, and the so-called warmup period -- the start period of the model that it needs to cover the transient period. When a model needs time to get realistically 'filled' and therefor show realistic behavior, we remove the first part of the run (that shows unrealistic behavior, e.g., because the model is too 'empty') from the statistics. In other words, the warmup period is the duration after which the statistics are all reset to their initial values. For this queuing model, we set the run time to 1000 time units, and the warmup period to 0, since an empty system is quite realistic, and the system is so simple, it does not need any time to get realistically filled.
+Two other values that need to be set for the experiment are the length of each run, and the so-called warmup period -- the start period of the model that it needs to cover the transient period. When a model needs time to get realistically 'filled' and therefore show realistic behavior, we remove the first part of the run (that shows unrealistic behavior, e.g., because the model is too 'empty') from the statistics. In other words, the warmup period is the duration after which the statistics are all reset to their initial values. For this queueing model, we set the run time to 1000 time units, and the warmup period to 0, since an empty system is quite realistic, and the system is so simple, it does not need any time to get realistically filled.
 
 In the code, setting up the `Simulator`, `Model` and `Replication` is pretty straightforward:
 
 ```java
-  protected MM1Application()
+  DesQueueingApplication6()
   {
-    DevsSimulatorInterface<Double> simulator = new DevsSimulator<>("MM1.Simulator");
-    DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
-    Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+    var simulator = new DevsSimulator<Double>("MM1.Simulator");
+    var stream = new MersenneTwister(1);
+    var interArrivalTime = new DistExponential(stream, 1.0);
+    var processingTime = new DistExponential(stream, 0.9);
+    var model = new DesQueueingModel6(simulator, interArrivalTime, processingTime);
+    var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
     simulator.initialize(model, replication);
     simulator.start();
   }
 
   public static void main(final String[] args)
   {
-    new MM1Application();
+    new DesQueueingApplication6();
   }
 ```
 
 Explanation:
 
 - We first create a `DevsSimulator`. The time type for the Simulator is `Double` (it could also be, e.g., `Float`, `Integer`, or `Duration`). The Simulator has a name to identify it: "MM1.Simulator". `DevsSimulator` stands for a Discrete Event Simulator -- a simulator that maintains an event list with future events, and that allows for delayed method invocation. Several other types of simulators exist within DSOL.
-- The `MM1Model` is created and uses the time type `Double` and the `DevsSimulatorInterface<Double>` as its simulator. These generics are important as they help to strongly type the methods that are part of the model and the simulator.
+- We create a random stream and the distribution functions for the inter-arrival time and processing time (see section 7 how to do this in a better way).
+- The `DesQueueingModel6` is created, using the simulator and the two distribution functions.
 - The `Replication` is instantiated next as a `SingleReplication` (so this is not an experiment with multiple replications) with name "rep1", starting time 0.0, warmup period 0.0, and run length 1000 time units. 
 - The simulator initializes the model with data from the replication (timing, seeds, random streams, input variables). 
 - The simulator is asked to start the model execution.
@@ -414,17 +418,42 @@ Explanation:
 When we would want to carry out 10 replications, the construction of the simulator, model, and experiment would look as follows:
 
 ```java
-  protected MM1Application()
+  DesQueueingApplication6()
   {
-    this.simulator = new DevsSimulator<Double>("MM1.Simulator");
-    this.model = new MM1Model(this.simulator);
-    this.experiment = new Experiment<>("mm1", this.simulator, 
+    var simulator = new DevsSimulator<Double>("MM1.Simulator");
+    var stream = new MersenneTwister(1);
+    var interArrivalTime = new DistExponential(stream, 1.0);
+    var processingTime = new DistExponential(stream, 0.9);
+    var model = new DesQueueingModel6(simulator, interArrivalTime, processingTime);
+    var experiment = new Experiment<>("mm1", this.simulator, 
         this.model, 0.0, 0.0, 1000.0, 10);
-    this.experiment.start();
+    experiment.start();
   }
 ```
 
 In this case, the creation of the simulator and the model is the same, but now we create an `Experiment` that has the same arguments as the `SingleReplication` class above, but with one extra argument: the number of replications (10). When starting the experiment, it will create the replications one-by-one, initialize the model with the replication, and start the replication. Summary statistics are gathered that can be used after all 10 replications have been completed.
+
+With a few `println` statements in the single-replication case, we can see that the application works properly and executes a simulation:
+
+```
+Time: 0.123. Generated entity 0
+Time: 0.495. Generated entity 1
+Time: 0.495. Entity 1 entered the queue. Length: 1
+Time: 0.569. Generated entity 2
+Time: 0.569. Entity 2 entered the queue. Length: 2
+Time: 0.734. Entity 0 left the system. Time in system: 0.610
+Time: 0.818. Generated entity 3
+Time: 0.818. Entity 3 entered the queue. Length: 2
+Time: 1.012. Generated entity 4
+Time: 1.012. Entity 4 entered the queue. Length: 3
+Time: 1.245. Entity 1 left the system. Time in system: 0.749
+Time: 1.248. Generated entity 5
+Time: 1.248. Entity 5 entered the queue. Length: 3
+Time: 1.349. Entity 2 left the system. Time in system: 0.780
+Time: 1.788. Entity 3 left the system. Time in system: 0.970
+Time: 2.225. Entity 4 left the system. Time in system: 1.213
+Time: 2.517. Generated entity 6
+```
 
 
 ### 7. Random distributions to draw the inter-arrival time and service times
