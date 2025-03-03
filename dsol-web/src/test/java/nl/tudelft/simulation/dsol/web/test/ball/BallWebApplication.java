@@ -18,6 +18,9 @@ import nl.tudelft.simulation.dsol.web.DsolWebServer;
  */
 public class BallWebApplication extends DsolWebServer
 {
+   /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * @param title String; the tile for the model
      * @param simulator DevsRealTimeClock&lt;Double&gt;; the simulator

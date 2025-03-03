@@ -1,15 +1,19 @@
 package nl.tudelft.simulation.dsol.web.test.ball;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import nl.tudelft.simulation.dsol.animation.Locatable;
+import org.djutils.draw.bounds.Bounds2d;
+
 import nl.tudelft.simulation.dsol.animation.SimRenderable2d;
+import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
@@ -23,11 +27,11 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  * @since 1.4
  */
-public class BallAnimation extends SimRenderable2d<Locatable>
+public class BallAnimation extends SimRenderable2d<Ball>
 {
     /** */
-    private static final long serialVersionUID = 20220201L;
-    
+    private static final long serialVersionUID = 1L;
+
     /**
      * the color of the ballAnimation.
      */
@@ -40,20 +44,28 @@ public class BallAnimation extends SimRenderable2d<Locatable>
      * @throws NamingException on registration error
      * @throws RemoteException on remote animation error
      */
-    public BallAnimation(final Locatable source, final SimulatorInterface<Double> simulator)
-            throws RemoteException, NamingException
+    public BallAnimation(final Ball source, final SimulatorInterface<Double> simulator) throws RemoteException, NamingException
     {
         super(source, simulator);
+        setScaleObject(true);
+        setScaleY(true);
+        setRotate(true);
+        new BallTextAnimation(source, simulator);
+    }
+
+    @Override
+    public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+            final RenderableScale scale, final double worldMargin, final double pixelMargin)
+    {
+        return super.contains(pointScreenCoordinates, extent, screenSize, scale, 0.0, 4.0);
     }
 
     @Override
     public void paint(final Graphics2D graphics, final ImageObserver observer)
     {
         graphics.setColor(this.color);
-        graphics.fillOval(-(int) Ball.RADIUS, -(int) Ball.RADIUS, (int) (Ball.RADIUS * 2.0), (int) (Ball.RADIUS * 2.0));
-        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD));
-        graphics.setColor(Color.GRAY);
-        graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -1.0), (float) (Ball.RADIUS * 1.0));
+        graphics.fillRect(-(int) Ball.RADIUS, -(int) Ball.RADIUS, (int) (Ball.RADIUS * 2.0), (int) (Ball.RADIUS * 2.0));
+        graphics.setFont(graphics.getFont().deriveFont(Font.BOLD).deriveFont(6.0f));
     }
 
     /**
@@ -70,5 +82,46 @@ public class BallAnimation extends SimRenderable2d<Locatable>
     public void setColor(final Color color)
     {
         this.color = color;
+    }
+
+    /** Separately animating text without a ScaleY. */
+    public class BallTextAnimation extends SimRenderable2d<Ball>
+    {
+        /** */
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * constructs a new BallTextAnimation, possibly without a ScaleY.
+         * @param source Locatable; the source
+         * @param simulator SimulatorInterface&lt;Double&gt;; the simulator
+         * @throws NamingException on registration error
+         * @throws RemoteException on remote animation error
+         */
+        public BallTextAnimation(final Ball source, final SimulatorInterface<Double> simulator)
+                throws RemoteException, NamingException
+        {
+            super(source, simulator);
+            setScaleObject(true);
+            setScaleY(false);
+            setRotate(false);
+        }
+
+        @Override
+        public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+                final RenderableScale scale, final double worldMargin, final double pixelMargin)
+        {
+            return false;
+        }
+
+        @Override
+        public void paint(final Graphics2D graphics, final ImageObserver observer)
+        {
+            graphics.setColor(Color.GRAY);
+            if (Integer.parseInt(getSource().toString()) > 9)
+                graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.8), (float) (Ball.RADIUS * 0.5));
+            else
+                graphics.drawString(getSource().toString(), (float) (Ball.RADIUS * -0.5), (float) (Ball.RADIUS * 0.5));
+        }
+
     }
 }

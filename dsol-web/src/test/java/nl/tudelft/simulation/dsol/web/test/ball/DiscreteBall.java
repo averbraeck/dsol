@@ -8,7 +8,7 @@ import org.djutils.draw.point.OrientedPoint3d;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
-import nl.tudelft.simulation.jstats.distributions.DistNormal;
+import nl.tudelft.simulation.jstats.distributions.DistUniform;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 import nl.tudelft.simulation.language.d3.CartesianPoint;
@@ -23,9 +23,6 @@ import nl.tudelft.simulation.language.d3.CartesianPoint;
  */
 public class DiscreteBall extends Ball
 {
-    /** the ball number. */
-    private final int nr;
-
     /** the origin. */
     private CartesianPoint origin = new CartesianPoint(0, 0, 0);
 
@@ -46,16 +43,15 @@ public class DiscreteBall extends Ball
 
     /**
      * constructs a new Ball.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
      * @param nr int; the ball number
+     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
      * @throws RemoteException on remote failure
      * @throws SimRuntimeException on schedule failure
      */
-    public DiscreteBall(final DevsSimulatorInterface<Double> simulator, final int nr)
+    public DiscreteBall(final int nr, final DevsSimulatorInterface<Double> simulator)
             throws RemoteException, SimRuntimeException
     {
-        super();
-        this.nr = nr;
+        super(nr);
         this.simulator = simulator;
         // URL image = URLResource.getResource("/nl/tudelft/simulation/examples/dsol/animation/images/customer.jpg");
         // new SingleImageRenderable(this, simulator, image);
@@ -77,11 +73,10 @@ public class DiscreteBall extends Ball
      */
     private void next() throws RemoteException, SimRuntimeException
     {
-        System.out.println("t=" + this.simulator.getSimulatorTime() + ": ball nr " + this.nr + " bounced");
         this.origin = this.destination;
         this.destination = new CartesianPoint(-100 + stream.nextInt(0, 200), -100 + stream.nextInt(0, 200), 0);
         this.startTime = this.simulator.getSimulatorTime();
-        this.stopTime = this.startTime + Math.abs(new DistNormal(stream, 9, 1.8).draw());
+        this.stopTime = this.startTime + Math.abs(new DistUniform(stream, 2.0, 20.0).draw());
         this.simulator.scheduleEventAbs(this.stopTime, this, "next", null);
     }
 

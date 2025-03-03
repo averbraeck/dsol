@@ -18,9 +18,6 @@ import nl.tudelft.simulation.dsol.animation.Locatable;
  */
 public abstract class Ball implements Locatable
 {
-    /** the number of created balls. */
-    private static int number = 0;
-
     /** the radius of the ball. */
     public static final double RADIUS = 5.0;
 
@@ -32,13 +29,13 @@ public abstract class Ball implements Locatable
 
     /**
      * constructs a new Ball.
+     * @param nr int; the ball number
      */
-    public Ball()
+    public Ball(final int nr)
     {
         super();
         this.theta = 2 * Math.PI * Math.random();
-        Ball.number++;
-        this.name = "" + Ball.number;
+        this.name = "" + nr;
     }
 
     @Override
