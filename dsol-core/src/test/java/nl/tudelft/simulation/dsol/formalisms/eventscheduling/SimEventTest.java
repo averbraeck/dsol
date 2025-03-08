@@ -36,11 +36,13 @@ public class SimEventTest
     @Test
     public void testParallel() throws InterruptedException
     {
+        long timeMs = System.currentTimeMillis();
         for (int i = 0; i < 8; i++)
         {
             new ThreadRunner().start();
         }
-        while (this.activeThreads.get() > 0)
+        // run for max 10 seconds
+        while (this.activeThreads.get() > 0 && System.currentTimeMillis() - timeMs < 10000)
         {
             Thread.sleep(10);
         }
