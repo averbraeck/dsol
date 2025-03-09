@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
