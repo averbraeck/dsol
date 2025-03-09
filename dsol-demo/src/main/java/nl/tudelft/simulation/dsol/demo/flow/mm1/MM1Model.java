@@ -19,6 +19,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
 import nl.tudelft.simulation.jstats.distributions.DistConstant;
+import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
@@ -89,20 +90,13 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             double avgServiceTime = (Double) getInputParameter("resource.serviceTime");
 
             // The Generator
-            Create<Double> generator = new Create<Double>("generate", this.simulator,
-                    new DistContinuousSimulationTime.TimeDouble(avgStartTime == 0.0
-                            ? new DistConstant(defaultStream, avgStartTime) : new DistExponential(defaultStream, avgStartTime)),
-                    new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, avgInterArrivalTime)),
-                    batchSize)
-            {
-                private static final long serialVersionUID = 1L;
-
-                @Override
-                protected Entity<Double> generateEntity()
-                {
-                    return new Entity<Double>("entity", getSimulator().getSimulatorTime());
-                }
-            };
+            Create<Double> generator = new Create<Double>("generate", this.simulator)
+                    .setStartTimeDist(new DistContinuousSimulationTime.TimeDouble(avgStartTime == 0.0
+                            ? new DistConstant(defaultStream, avgStartTime) : new DistExponential(defaultStream, avgStartTime)))
+                    .setIntervalDist(new DistContinuousSimulationTime.TimeDouble(
+                            new DistExponential(defaultStream, avgInterArrivalTime)))
+                    .setBatchSizeDist(new DistDiscreteConstant(defaultStream, batchSize))
+                    .setEntitySupplier(() -> new Entity<Double>("entity", getSimulator().getSimulatorTime()));
 
             // The queue, the resource and the release
             Resource<Double> resource = new Resource<>("resource", this.simulator, capacity);
