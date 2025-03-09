@@ -2,7 +2,6 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -97,12 +96,13 @@ public class CreateTest
                 assertEquals(intervalDist, c1.getIntervalDist());
                 assertEquals(nrEvents + 1, this.simulator.getEventList().size()); // no extra event
 
+                // at t=0, the event is the startTimeDist event that should NOT be replaced
                 var oldNextCreateEvent = c1.getNextCreateEvent();
                 intervalDist = new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 3.0));
                 c1.setIntervalDist(intervalDist);
                 assertEquals(intervalDist, c1.getIntervalDist());
-                assertEquals(nrEvents + 1, this.simulator.getEventList().size()); // no extra event
-                assertNotEquals(oldNextCreateEvent, c1.getNextCreateEvent()); // should be replaced
+                assertEquals(nrEvents + 1, this.simulator.getEventList().size());
+                assertEquals(oldNextCreateEvent, c1.getNextCreateEvent());
 
                 var batchSizeDist = new DistDiscreteConstant(stream, 2);
                 c1.setBatchSizeDist(batchSizeDist);
@@ -159,6 +159,7 @@ public class CreateTest
                 () -> createBlock[0].setStartTimeDist(
                         new DistContinuousSimulationTime.TimeDouble(new DistExponential(model.getDefaultStream(), 2.0))),
                 IllegalStateException.class);
+        simulator.cleanUp();
     }
 
     /**
@@ -193,6 +194,7 @@ public class CreateTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.cleanUp();
     }
 
     /**
@@ -234,6 +236,7 @@ public class CreateTest
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(20, counter.get());
         assertEquals(20, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
     }
 
     /**
@@ -274,6 +277,7 @@ public class CreateTest
         }
         assertEquals(15, counter.get());
         assertEquals(15, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
     }
 
     /**
@@ -316,6 +320,7 @@ public class CreateTest
         assertEquals(9, createBlock[0].getNumberCreationEvents());
         assertEquals(18, counter.get());
         assertEquals(18, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
     }
 
     /**
@@ -359,6 +364,7 @@ public class CreateTest
         assertEquals(8, createBlock[0].getNumberCreationEvents());
         assertEquals(16, counter.get());
         assertEquals(16, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
     }
 
     /**
@@ -401,6 +407,7 @@ public class CreateTest
         assertEquals(9, createBlock[0].getNumberCreationEvents());
         assertEquals(18, counter.get());
         assertEquals(18, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
     }
 
     /**
@@ -441,11 +448,21 @@ public class CreateTest
             sleep(10);
         }
         createBlock[0].setEndTime(15.0);
-        // t = 17, now beyond end time -- setIntervalDist should NOT set a nextCreateEvent
+        // t = 17, now beyond end time -- setIntervalDist should still have a nextCreateEvent
         assertNotNull(createBlock[0].getNextCreateEvent());
         createBlock[0]
                 .setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 2.0)));
-        assertNull(createBlock[0].getNextCreateEvent());
+        assertNotNull(createBlock[0].getNextCreateEvent());
+        simulator.start();
+        while (simulator.isStartingOrRunning())
+        {
+            sleep(10);
+        }
+        // but not generate any extra entities. Expected number = {0, 4, 8, 12, 16} = 5
+        assertEquals(5, createBlock[0].getNumberCreationEvents());
+        assertEquals(10, counter.get());
+        assertEquals(10, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
     }
 
     /**
@@ -486,11 +503,155 @@ public class CreateTest
         {
             sleep(10);
         }
-        // Generation from t=0 till t=17 with step 4 [0, 4, 8, 12, 16] = 5 events. 
-        // From t=17 to t=33 with step 6 [23, 29] = 2 events. Total = 7 events.  
+        // Generation from t=0 till t=17 with step 4 [0, 4, 8, 12, 16] = 5 events.
+        // From t=17 to t=33 with step 6 [23, 29] = 2 events. Total = 7 events.
         assertEquals(7, createBlock[0].getNumberCreationEvents());
         assertEquals(14, counter.get());
         assertEquals(14, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
+    }
+
+    /**
+     * Test with end time, with an interval change that goes from a large interarrival time to a smaller interarrival time. This
+     * tests whether the cancellation of the big gap is done properly.
+     */
+    @Test
+    public void testIntervalChangeDecrease()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        @SuppressWarnings("unchecked")
+        final Create<Double>[] createBlock = new Create[1];
+        final AtomicInteger counter = new AtomicInteger(0);
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var c10 = new Create<Double>("c10", this.simulator);
+                createBlock[0] = c10;
+                var stream = this.simulator.getModel().getDefaultStream();
+                c10.setBatchSizeDist(new DistDiscreteConstant(stream, 2));
+                c10.setEndTime(49.0);
+                c10.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 90.0)));
+                c10.setEntitySupplier(() ->
+                {
+                    counter.incrementAndGet();
+                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                });
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.scheduleEventAbs(20.0, () ->
+        {
+            createBlock[0].setIntervalDist(
+                    new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 5.0)));
+        });
+        simulator.start();
+        while (simulator.isStartingOrRunning())
+        {
+            sleep(10);
+        }
+        // Generation from t=0 till t=20 with step 4 = 1 event at t = 0.
+        // From t=20 to t=49 with step 5 [25, 30, 35, 40, 45] = 5 events. Total = 6 events.
+        assertEquals(6, createBlock[0].getNumberCreationEvents());
+        assertEquals(12, counter.get());
+        assertEquals(12, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
+    }
+
+    /**
+     * Test with an end time that shifts forward, to see if premature generation cancellation does not happen. We start with an
+     * end time at t=19 and generation every 5 time units. at t=18, we shift the end time forward till t=49. In total, 10x2
+     * entities should be generated. See https://github.com/averbraeck/dsol/issues/51.
+     */
+    @Test
+    public void testShiftEndTimeForward()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        @SuppressWarnings("unchecked")
+        final Create<Double>[] createBlock = new Create[1];
+        final AtomicInteger counter = new AtomicInteger(0);
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var c11 = new Create<Double>("c11", this.simulator);
+                createBlock[0] = c11;
+                var stream = this.simulator.getModel().getDefaultStream();
+                c11.setBatchSizeDist(new DistDiscreteConstant(stream, 2));
+                c11.setEndTime(19.0);
+                c11.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 5.0)));
+                c11.setEntitySupplier(() ->
+                {
+                    counter.incrementAndGet();
+                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                });
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.scheduleEventAbs(18.0, () ->
+        { createBlock[0].setEndTime(49.0); });
+        simulator.start();
+        while (simulator.isStartingOrRunning())
+        {
+            sleep(10);
+        }
+        assertEquals(10, createBlock[0].getNumberCreationEvents());
+        assertEquals(20, counter.get());
+        assertEquals(20, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
+    }
+
+    /**
+     * Test that generation after the end time is not resumed when a new IntervalDist is used.
+     */
+    @Test
+    public void testChangeIntervalAfterEndTime()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        @SuppressWarnings("unchecked")
+        final Create<Double>[] createBlock = new Create[1];
+        final AtomicInteger counter = new AtomicInteger(0);
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var c12 = new Create<Double>("c12", this.simulator);
+                createBlock[0] = c12;
+                var stream = this.simulator.getModel().getDefaultStream();
+                c12.setBatchSizeDist(new DistDiscreteConstant(stream, 2));
+                c12.setEndTime(49.0);
+                c12.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 5.0)));
+                c12.setEntitySupplier(() ->
+                {
+                    counter.incrementAndGet();
+                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                });
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.scheduleEventAbs(75.0, () ->
+        {
+            createBlock[0].setIntervalDist(
+                    new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 5.0)));
+        });
+        simulator.start();
+        while (simulator.isStartingOrRunning())
+        {
+            sleep(10);
+        }
+        assertEquals(10, createBlock[0].getNumberCreationEvents());
+        assertEquals(20, counter.get());
+        assertEquals(20, createBlock[0].getNumberGeneratedEntities());
+        simulator.cleanUp();
     }
 
     /**
