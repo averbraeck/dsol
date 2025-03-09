@@ -91,7 +91,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     {
         Throw.whenNull(this.entitySupplier, "Entity supplier has not been initialized");
         Throw.whenNull(this.intervalDist, "Interval distribution has not been initialized");
-        if (this.numberCreationEvents > this.maxNumberCreationEvents)
+        if (this.numberCreationEvents >= this.maxNumberCreationEvents)
         {
             this.nextCreateEvent = null;
             return;
@@ -103,7 +103,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
             this.fireTimedEvent(Create.CREATE_EVENT, 1, getSimulator().getSimulatorTime());
             this.releaseEntity(entity);
             this.numberGeneratedEntities++;
-            if (this.numberGeneratedEntities > this.maxNumberGeneratedEntities)
+            if (this.numberGeneratedEntities >= this.maxNumberGeneratedEntities)
             {
                 this.nextCreateEvent = null;
                 return;
@@ -173,6 +173,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
             if (this.endTime != null
                     && (this.nextCreateEvent.getAbsoluteExecutionTime().doubleValue() > this.endTime.doubleValue()))
             {
+                this.nextCreateEvent = null;
                 return this;
             }
             getSimulator().scheduleEvent(this.nextCreateEvent);
@@ -216,7 +217,8 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
 
     /**
      * Set a new value for the end time when the generator has to stop generating entities. A null value means that there is no
-     * end time.
+     * end time. The end time is inclusive. If entities are to be generated exactly at the end time, this is done before
+     * checking for the end time.
      * @param endTime the new value for the end time when the generator has to stop, can be null
      * @return the Create instance for method chaining
      */
@@ -240,7 +242,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     @Override
     public void receiveEntity(final Entity<T> entity)
     {
-        throw new SimRuntimeException("Generator should not receive any entities");
+        throw new SimRuntimeException("Create block should not receive any entities");
     }
 
     /**
