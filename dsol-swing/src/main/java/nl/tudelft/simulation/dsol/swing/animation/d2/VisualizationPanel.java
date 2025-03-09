@@ -122,6 +122,12 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected double gridSizeY = 100.0;
 
+    /** the rotation in radians. */
+    protected double rotation = 0.0;
+
+    /** the last used rotation in radians. */
+    protected double lastRotation = 0.0;
+
     /** gridColor. */
     private Color gridColor = Color.BLACK;
 
@@ -267,6 +273,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     {
         Graphics2D g2 = (Graphics2D) g;
         super.paintComponent(g);
+        g2.rotate(-this.rotation);
 
         // draw the grid.
         if (!this.getSize().equals(this.lastDimension))
@@ -311,6 +318,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             g.drawLine(this.dragLine[0], this.dragLine[1], this.dragLine[2], this.dragLine[3]);
             this.dragLineEnabled = false;
         }
+        g2.rotate(this.rotation);
     }
 
     /**
@@ -617,6 +625,36 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         this.renderableScale = new RenderableScale(this.renderableScale.getYScaleRatio() * factor,
                 this.renderableScale.getObjectScaleFactor());
         setExtent(new Bounds2d(minX, minX + w, minY, minY + h));
+    }
+
+    /**
+     * zooms in/out for the x-axis only.
+     * @param factor double; The zoom factor
+     * @param mouseX int; x-position of the mouse around which we zoom
+     * @param mouseY int; y-position of the mouse around which we zoom
+     */
+    public synchronized void zoomX(final double factor, final int mouseX, final int mouseY)
+    {
+        Point2d mwc = this.renderableScale.getWorldCoordinates(new Point2D.Double(mouseX, this.getSize().getHeight()),
+                this.extent, this.getSize());
+        double minX = mwc.getX() - (mwc.getX() - this.extent.getMinX()) * factor;
+        double minY = mwc.getY() - (mwc.getY() - this.extent.getMinY()) * factor;
+        double w = this.extent.getDeltaX() * factor;
+        double h = this.extent.getDeltaY();
+        this.renderableScale = new RenderableScale(this.renderableScale.getYScaleRatio() / factor,
+                this.renderableScale.getObjectScaleFactor());
+        setExtent(new Bounds2d(minX, minX + w, minY, minY + h));
+    }
+
+    /**
+     * rotate clockwise or anti-clockwise around the point of the cursor.
+     * @param factor double; the amount of radians to turn
+     * @param mouseX int; x-position of the mouse around which we zoom
+     * @param mouseY int; y-position of the mouse around which we zoom
+     */
+    public synchronized void rotate(final double factor, final int mouseX, final int mouseY)
+    {
+        Point2d mwc = this.renderableScale.getWorldCoordinates(new Point2D.Double(mouseX, 0), this.extent, this.getSize());
     }
 
     /**

@@ -110,18 +110,27 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         int amount = e.getUnitsToScroll();
         if (amount > 0)
         {
-            if (e.isControlDown())
+            if (e.isShiftDown())
                 this.panel.zoomY(VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            else if (e.isAltDown())
+                this.panel.zoomX(VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            else if (e.isControlDown())
+                this.panel.rotate(1.0, e.getX(), e.getY());
             else
                 this.panel.zoom(VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
         }
         else if (amount < 0)
         {
-            if (e.isControlDown())
+            if (e.isShiftDown())
                 this.panel.zoomY(1.0 / VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            else if (e.isAltDown())
+                this.panel.zoomX(1.0 / VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
+            else if (e.isControlDown())
+                this.panel.rotate(-1.0, e.getX(), e.getY());
             else
                 this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, e.getX(), e.getY());
         }
+        e.consume();
     }
 
     @Override
@@ -132,6 +141,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
             this.panel.setDragLine(e.getPoint(), this.mouseClicked);
         }
         this.panel.repaint();
+        e.consume();
     }
 
     @Override
@@ -143,6 +153,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
             this.panel.mouseMoved(mouseEvent.getPoint());
             this.timeLastAnimationMouseMoveEvent = time;
         }
+        mouseEvent.consume();
     }
 
     /**
