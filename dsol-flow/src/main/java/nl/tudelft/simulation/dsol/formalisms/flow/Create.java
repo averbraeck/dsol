@@ -8,9 +8,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
-import nl.tudelft.simulation.dsol.simtime.SimTime;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
@@ -96,6 +94,11 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
             this.nextCreateEvent = null;
             return;
         }
+        if (this.endTime != null && getSimulator().getSimulatorTime().doubleValue() > this.endTime.doubleValue())
+        {
+            this.nextCreateEvent = null;
+            return;
+        }
         this.numberCreationEvents++;
         for (int i = 0; i < this.batchSizeDist.draw(); i++)
         {
@@ -109,15 +112,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
                 return;
             }
         }
-        this.nextCreateEvent = new SimEvent<T>(SimTime.plus(getSimulator().getSimulatorTime(), this.intervalDist.draw()), this,
-                "generate", null);
-        if (this.endTime != null
-                && (this.nextCreateEvent.getAbsoluteExecutionTime().doubleValue() > this.endTime.doubleValue()))
-        {
-            this.nextCreateEvent = null;
-            return;
-        }
-        getSimulator().scheduleEvent(this.nextCreateEvent);
+        this.nextCreateEvent = getSimulator().scheduleEventRel(this.intervalDist.draw(), this, "generate", null);
     }
 
     /**
@@ -151,8 +146,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
         {
             getSimulator().cancelEvent(this.nextCreateEvent);
         }
-        this.nextCreateEvent = getSimulator().scheduleEventRel(
-                SimTime.plus(getSimulator().getSimulatorTime(), this.startTimeDist.draw()), this, "generate", null);
+        this.nextCreateEvent = getSimulator().scheduleEventRel(this.startTimeDist.draw(), this, "generate", null);
         return this;
     }
 
@@ -165,19 +159,16 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     {
         Throw.whenNull(intervalDist, "Interval distribution cannot be null");
         this.intervalDist = intervalDist;
+        if (this.numberCreationEvents == 0)
+        {
+            // start means generation at t=0 or t ~ startTimeDist
+            return this;
+        }
         if (this.nextCreateEvent != null)
         {
             getSimulator().cancelEvent(this.nextCreateEvent);
-            this.nextCreateEvent = new SimEvent<T>(SimTime.plus(getSimulator().getSimulatorTime(), this.intervalDist.draw()),
-                    this, "generate", null);
-            if (this.endTime != null
-                    && (this.nextCreateEvent.getAbsoluteExecutionTime().doubleValue() > this.endTime.doubleValue()))
-            {
-                this.nextCreateEvent = null;
-                return this;
-            }
-            getSimulator().scheduleEvent(this.nextCreateEvent);
         }
+        this.nextCreateEvent = getSimulator().scheduleEventRel(this.intervalDist.draw(), this, "generate", null);
         return this;
     }
 
