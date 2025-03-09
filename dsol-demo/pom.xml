@@ -25,6 +25,11 @@
 
     <dependency>
       <groupId>nl.tudelft.simulation</groupId>
+      <artifactId>dsol-devs</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>nl.tudelft.simulation</groupId>
       <artifactId>dsol-animation-gis-esri</artifactId>
     </dependency>
 
