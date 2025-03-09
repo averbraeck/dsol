@@ -267,20 +267,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     protected void stopImpl()
     {
         this.runState = RunState.STOPPING;
-        // sleep maximally 1 second till the SimulatorWorkerThread gets into the WAITING state
-        int count = 0;
-        while (!this.worker.isWaiting() && this.worker.isAlive() && count < 1000)
-        {
-            try
-            {
-                Thread.sleep(1);
-                count++;
-            }
-            catch (InterruptedException exception)
-            {
-                // ignore
-            }
-        }
+        // since the stop() method might be called from an event, do not wait
+        // see https://github.com/averbraeck/dsol/issues/53
     }
 
     @Override
@@ -337,20 +325,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                     + " is earlier than the replication length " + this.getReplication().getEndTime());
             this.simulatorTime = this.getReplication().getEndTime();
         }
-        // sleep maximally 1 second till the SimulatorWorkerThread finalizes
-        int count = 0;
-        while (this.worker.isAlive() && count < 1000)
-        {
-            try
-            {
-                Thread.sleep(1);
-                count++;
-            }
-            catch (InterruptedException exception)
-            {
-                // ignore
-            }
-        }
+        // since the endReplication() method might be called from an event, do not wait
+        // see https://github.com/averbraeck/dsol/issues/53
     }
 
     @Override
