@@ -39,6 +39,9 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderableNoCache2D>, Locatable
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** the map to display. */
     protected GisMapInterface map = null;
 

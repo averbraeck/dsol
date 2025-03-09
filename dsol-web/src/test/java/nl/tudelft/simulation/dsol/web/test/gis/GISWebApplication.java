@@ -20,6 +20,9 @@ import nl.tudelft.simulation.dsol.web.DsolWebServer;
  */
 public class GISWebApplication extends DsolWebServer
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+    
     /** the default extent. */
     private static Bounds2d extent;
 
