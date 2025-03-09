@@ -173,6 +173,18 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     }
 
     /**
+     * Set a new fixed batch size.
+     * @param batchSize the new batch size
+     * @return the Create instance for method chaining
+     */
+    public Create<T> setBatchSize(final int batchSize)
+    {
+        Throw.when(batchSize < 0, IllegalArgumentException.class, "Batch size should not be negative");
+        this.batchSizeDist = new DistDiscreteConstant(getSimulator().getModel().getDefaultStream(), batchSize);
+        return this;
+    }
+
+    /**
      * Set a new batch size distribution.
      * @param batchSizeDist the new batch size distribution
      * @return the Create instance for method chaining
