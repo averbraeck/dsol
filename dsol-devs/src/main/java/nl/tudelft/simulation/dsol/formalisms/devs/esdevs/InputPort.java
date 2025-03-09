@@ -3,6 +3,7 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
+import nl.tudelft.simulation.dsol.formalisms.devs.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
@@ -62,7 +63,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
         {
             // ATOMIC MODEL
             AtomicModel<T> atomicModel = (AtomicModel<T>) this.model;
-            while (atomicModel.activePort != null)
+            while (atomicModel.getActivePort() != null)
             {
                 this.model.getSimulator().getLogger().filter(Cat.DSOL)
                         .trace("receive: Waiting for event treatement // Another input is being processed");
@@ -76,9 +77,9 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                 }
             }
 
-            if (atomicModel.activePort == null)
+            if (atomicModel.getActivePort() == null)
             {
-                atomicModel.activePort = this;
+                atomicModel.setActivePort(this);
                 boolean passivity = true;
                 SimEvent<T> nextEventCopy = null;
                 this.model.getSimulator().getLogger().filter(Cat.DSOL).debug("receive: TIME IS {}",
@@ -132,7 +133,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                     this.model.getSimulator().cancelEvent(nextEventCopy);
                 }
             }
-            atomicModel.activePort = null;
+            atomicModel.setActivePort(null);
         }
 
         else

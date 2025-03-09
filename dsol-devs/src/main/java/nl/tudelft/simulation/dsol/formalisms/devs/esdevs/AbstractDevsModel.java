@@ -13,6 +13,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.reflection.ClassUtil;
 
+import nl.tudelft.simulation.dsol.formalisms.devs.AtomicModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**

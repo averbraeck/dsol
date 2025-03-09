@@ -1,8 +1,11 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
+package nl.tudelft.simulation.dsol.formalisms.devs;
 
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.AbstractDevsPortModel;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.CoupledModel;
+import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.InputPort;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
@@ -50,6 +53,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     protected T elapsedTime;
 
     /** the active input port that is currently processed in Parallel DEVS. */
+    @Deprecated
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected InputPort<T, ?> activePort = null;
 
@@ -195,7 +199,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @return the elapsed time (e) since the last event.
      * @throws RemoteException a remote exception occurred
      */
-    protected T elapsedTime(final T eventTime) throws RemoteException
+    public T elapsedTime(final T eventTime) throws RemoteException
     {
         return (SimTime.minus(eventTime, this.timeLastEvent));
     }
@@ -237,7 +241,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @param e T; the elapsed time since the last state transition
      * @param value Object; the value that is passed through the port, which triggered the external event
      */
-    protected void deltaExternalEventHandler(final T e, final Object value)
+    public void deltaExternalEventHandler(final T e, final Object value)
     {
         this.deltaExternal(e, value);
         this.schedule();
@@ -248,7 +252,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @param e T; the elapsed time since the last state transition
      * @param value Object; the value that is passed through the port, which triggered the external event
      */
-    protected void deltaConfluent(final T e, final Object value)
+    public void deltaConfluent(final T e, final Object value)
     {
         this.simulator.getLogger().filter(Cat.DSOL).debug("deltaConfluent: CONFLUENT");
         if (this.conflictStrategy == AtomicModel.INTERNAL_FIRST)
@@ -269,7 +273,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * This method handles an internal event. As part of its function, it calls the deltaInternal method that is defined in an
      * extension of this class.
      */
-    protected void deltaInternalEventHandler()
+    public void deltaInternalEventHandler()
     {
         this.lambda();
         this.deltaInternal();
@@ -289,6 +293,25 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     // ///////////////////////////////////////////////////////////////////////////
     // GETTET AND SETTET METHODS
     // ///////////////////////////////////////////////////////////////////////////
+
+    
+    /**
+     * @return the active port
+     */
+    @Deprecated
+    public InputPort<T, ?> getActivePort()
+    {
+        return this.activePort;
+    }
+    
+    /**
+     * @param activePort set activePort
+     */
+    @Deprecated
+    public void setActivePort(final InputPort<T, ?> activePort)
+    {
+        this.activePort = activePort;
+    }
 
     /**
      * @return the next simulation event for this atomic model.
@@ -338,23 +361,23 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * the delta internal function that should be implemented by the extending class.
      */
-    protected abstract void deltaInternal();
+    public abstract void deltaInternal();
 
     /**
      * The user defined deltaExternal method that is defined in an extension of this class.
      * @param e T; the elapsed time since the last state transition
      * @param value Object; the value that has been passed through the port
      */
-    protected abstract void deltaExternal(T e, Object value);
+    public abstract void deltaExternal(T e, Object value);
 
     /**
      * the lambda function that should be implemented by the extending class.
      */
-    protected abstract void lambda();
+    public abstract void lambda();
 
     /**
      * the time advance function that should be implemented by the extending class.
      * @return the ta, which is the time advance from one state to the next.
      */
-    protected abstract T timeAdvance();
+    public abstract T timeAdvance();
 }

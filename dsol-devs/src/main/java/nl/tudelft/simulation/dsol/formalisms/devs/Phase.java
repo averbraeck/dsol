@@ -1,4 +1,4 @@
-package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
+package nl.tudelft.simulation.dsol.formalisms.devs;
 
 import java.io.Serializable;
 

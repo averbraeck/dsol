@@ -3,6 +3,7 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 import java.rmi.RemoteException;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
+import nl.tudelft.simulation.dsol.formalisms.devs.AtomicModel;
 import nl.tudelft.simulation.dsol.logger.Cat;
 
 /**
