@@ -27,6 +27,7 @@
     <module>dsol-base</module>
     <module>dsol-core</module>
     <module>dsol-demo</module>
+    <module>dsol-devs</module>
     <module>dsol-flow</module>
     <module>dsol-introspection</module>
     <module>dsol-naming</module>
@@ -148,6 +149,12 @@
       <dependency>
         <groupId>nl.tudelft.simulation</groupId>
         <artifactId>dsol-flow</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nl.tudelft.simulation</groupId>
+        <artifactId>dsol-devs</artifactId>
         <version>${project.version}</version>
       </dependency>
 
