@@ -1,11 +1,11 @@
 package nl.tudelft.simulation.dsol.demo.flow.mm1.step01;
 
-import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Create;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
 import nl.tudelft.simulation.dsol.formalisms.flow.Destroy;
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
+import nl.tudelft.simulation.dsol.formalisms.flow.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
