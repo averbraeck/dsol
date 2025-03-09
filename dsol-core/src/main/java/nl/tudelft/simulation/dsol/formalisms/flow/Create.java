@@ -151,8 +151,8 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
         {
             getSimulator().cancelEvent(this.nextCreateEvent);
         }
-        this.nextCreateEvent = new SimEvent<T>(SimTime.plus(getSimulator().getSimulatorTime(), this.startTimeDist.draw()), this,
-                "generate", null);
+        this.nextCreateEvent = getSimulator().scheduleEventRel(
+                SimTime.plus(getSimulator().getSimulatorTime(), this.startTimeDist.draw()), this, "generate", null);
         return this;
     }
 
