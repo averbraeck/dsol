@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -107,6 +108,9 @@ public class CreateTest
                 var batchSizeDist = new DistDiscreteConstant(stream, 2);
                 c1.setBatchSizeDist(batchSizeDist);
                 assertEquals(batchSizeDist, c1.getBatchSizeDist());
+                
+                c1.setBatchSize(2);
+                assertNotEquals(batchSizeDist, c1.getBatchSizeDist());
 
                 c1.setEndTime(90.0);
                 assertEquals(90.0, c1.getEndTime());
@@ -183,6 +187,9 @@ public class CreateTest
 
                 // batch size distribution should not be null
                 Try.testFail(() -> c2.setBatchSizeDist(null), NullPointerException.class);
+
+                // batch size should be >= 0
+                Try.testFail(() -> c2.setBatchSize(-1), IllegalArgumentException.class);
 
                 // generator does not have a generator
                 c2.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(
@@ -627,7 +634,7 @@ public class CreateTest
                 var c12 = new Create<Double>("c12", this.simulator);
                 createBlock[0] = c12;
                 var stream = this.simulator.getModel().getDefaultStream();
-                c12.setBatchSizeDist(new DistDiscreteConstant(stream, 2));
+                c12.setBatchSize(2);
                 c12.setEndTime(49.0);
                 c12.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 5.0)));
                 c12.setEntitySupplier(() ->
