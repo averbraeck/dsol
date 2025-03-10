@@ -44,7 +44,7 @@ public class FlowTest
         StreamInterface stream = new MersenneTwister(10L);
         DistContinuousSimulationTime<Double> delayDistribution =
                 new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 10.0));
-        Delay<Double> delay = new Delay<Double>("delay", simulator, delayDistribution);
+        Delay<Double> delay = new Delay<Double>("delay", simulator).setDelayDistribution(delayDistribution);
         assertEquals(simulator, delay.getSimulator());
         assertEquals(nrEvents, simulator.getEventList().size());
 
