@@ -232,12 +232,12 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     }
 
     /**
-     * Turn on the statistics for this flow block.
+     * Turn on the default statistics for this flow block.
      * @return the Create instance for method chaining
      */
-    public Create<T> setStatistics()
+    public Create<T> setDefaultStatistics()
     {
-        this.countStatistic = new SimCounter<>(getId() + " entity count", getSimulator().getModel(), this, Create.CREATE_EVENT);
+        this.countStatistic = new SimCounter<>(getId() + " generated entity count", getSimulator().getModel(), this, Create.CREATE_EVENT);
         this.countStatistic.initialize();
         return this;
     }
@@ -334,7 +334,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
      * Return whether statistics are turned on for this create block.
      * @return whether statistics are turned on for this create block.
      */
-    public boolean hasStatistics()
+    public boolean hasDefaultStatistics()
     {
         return this.countStatistic != null;
     }
