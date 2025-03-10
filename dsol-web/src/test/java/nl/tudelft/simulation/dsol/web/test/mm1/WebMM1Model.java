@@ -1,12 +1,12 @@
 package nl.tudelft.simulation.dsol.web.test.mm1;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.formalisms.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Create;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
 import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
+import nl.tudelft.simulation.dsol.formalisms.flow.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
 import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
