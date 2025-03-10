@@ -73,7 +73,7 @@ public class FlowQueueingModel1 extends AbstractDsolModel<Double, DevsSimulatorI
         generator.setDestination(seize);
 
         // delay for the processing time
-        var delay = new Delay<Double>("delay", getSimulator(), this.processingTime);
+        var delay = new Delay<Double>("delay", getSimulator()).setDelayDistribution(this.processingTime);
         seize.setDestination(delay);
 
         // release the resource

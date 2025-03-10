@@ -108,7 +108,7 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             // The server
             DistContinuousSimulationTime<Double> serviceTime =
                     new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, avgServiceTime));
-            FlowObject<Double> server = new Delay<Double>("Delay", this.simulator, serviceTime);
+            FlowObject<Double> server = new Delay<Double>("Delay", this.simulator).setDelayDistribution(serviceTime);
 
             // The flow
             generator.setDestination(queue);
