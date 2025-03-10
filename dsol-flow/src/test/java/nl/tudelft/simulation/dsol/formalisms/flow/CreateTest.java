@@ -74,7 +74,7 @@ public class CreateTest
                 assertEquals(Long.MAX_VALUE, c1.getMaxNumberGeneratedEntities());
                 assertEquals(0L, c1.getNumberCreationEvents());
                 assertEquals(0L, c1.getNumberGeneratedEntities());
-                assertFalse(c1.hasStatistics());
+                assertFalse(c1.hasDefaultStatistics());
 
                 // set start time dist should create an event
                 StreamInterface stream = new MersenneTwister(12L);
@@ -122,8 +122,8 @@ public class CreateTest
                 assertEquals(1000, c1.getMaxNumberGeneratedEntities());
 
                 int nrListeners = c1.getEventListenerMap().size();
-                c1.setStatistics();
-                assertTrue(c1.hasStatistics());
+                c1.setDefaultStatistics();
+                assertTrue(c1.hasDefaultStatistics());
                 assertNotNull(c1.getCountStatistic());
                 assertEquals(nrListeners + 1, c1.getEventListenerMap().size());
 
