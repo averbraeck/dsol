@@ -8,6 +8,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.statistics.SimCounter;
 
 /**
  * A FlowObject that can receive and/or release Entity objects.
@@ -37,6 +38,12 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
 
     /** the id of the FlowObject. */
     private final String id;
+
+    /** a potential count statistic for the number of received objects; when null, no statistic is calculated. */
+    private SimCounter<T> countReceivedStatistic;
+
+    /** a potential count statistic for the number of released objects; when null, no statistic is calculated. */
+    private SimCounter<T> countReleasedStatistic;
 
     /** RECEIVE_EVENT is fired whenever an entity enters the flow object. */
     public static final EventType RECEIVE_EVENT = new EventType(new MetaData("RECEIVE_EVENT", "Entity received",
@@ -77,6 +84,19 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
     public void setDestination(final FlowObject<T> destination)
     {
         this.destination = destination;
+    }
+
+    /**
+     * Add two statistics to count the number of received and the number of released entities for this flow block.
+     */
+    public void setDefaultFlowObjectStatistics()
+    {
+        this.countReceivedStatistic =
+                new SimCounter<>(getId() + " # of received entities", getSimulator().getModel(), this, RECEIVE_EVENT);
+        this.countReceivedStatistic.initialize();
+        this.countReleasedStatistic =
+                new SimCounter<>(getId() + " # of released entities", getSimulator().getModel(), this, RELEASE_EVENT);
+        this.countReleasedStatistic.initialize();
     }
 
     /**
