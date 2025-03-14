@@ -12,7 +12,7 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 
 /**
- * DelayTest.java.
+ * DelayDemo shows the statistics of the Delay block when linked to a Create block.
  * <p>
  * Copyright (c) 2025-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -22,7 +22,7 @@ import nl.tudelft.simulation.jstats.distributions.DistExponential;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class DelayTest
+public class DelayDemo
 {
     /**
      * @param args not used
