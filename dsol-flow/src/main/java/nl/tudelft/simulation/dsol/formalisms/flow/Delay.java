@@ -99,7 +99,7 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
 
     /**
      * Return the current delay distribution.
-     * @return the current delay distribution
+     * @return the current delay distribution, can be null if not yet set.
      */
     public DistContinuousSimulationTime<T> getDelayDistribution()
     {
@@ -135,7 +135,7 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
 
     /**
      * Return the statistic for the number of concurrent delayed entities.
-     * @return the statistic for the number of concurrent delayed entities
+     * @return the statistic for the number of concurrent delayed entities, can be null if no statistics are calculated
      */
     public SimPersistent<T> getNumberDelayedStatistic()
     {

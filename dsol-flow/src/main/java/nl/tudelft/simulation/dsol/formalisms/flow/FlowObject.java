@@ -124,6 +124,33 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
     }
 
     /**
+     * Return the count statistic for the number of received objects.
+     * @return the count statistic for the number of received objects, can be null if no statistics are calculated.
+     */
+    public SimCounter<T> getCountReceivedStatistic()
+    {
+        return this.countReceivedStatistic;
+    }
+
+    /**
+     * Return the count statistic for the number of released objects
+     * @return the count statistic for the number of released objects, can be null if no statistics are calculated.
+     */
+    public SimCounter<T> getCountReleasedStatistic()
+    {
+        return this.countReleasedStatistic;
+    }
+
+    /**
+     * Return the number of entities in the flow block.
+     * @return the number of entities in the flow block
+     */
+    public int getNumberEntities()
+    {
+        return this.numberEntities;
+    }
+
+    /**
      * Return the simulator.
      * @return DevsSimultorInterface&lt;T&gt;; the simulator
      */
