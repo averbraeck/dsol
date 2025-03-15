@@ -133,4 +133,13 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
         return this.numberDelayedStatistic != null;
     }
 
+    /**
+     * Return the statistic for the number of concurrent delayed entities.
+     * @return the statistic for the number of concurrent delayed entities
+     */
+    public SimPersistent<T> getNumberDelayedStatistic()
+    {
+        return this.numberDelayedStatistic;
+    }
+
 }
