@@ -252,10 +252,7 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(10, counter.get());
         assertEquals(10, createBlock[0].getNumberGeneratedEntities());
@@ -295,10 +292,7 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(100, counter.get());
         assertEquals(100, createBlock[0].getNumberGeneratedEntities());
@@ -338,10 +332,7 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(20, counter.get());
         assertEquals(20, createBlock[0].getNumberGeneratedEntities());
@@ -380,10 +371,7 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         assertEquals(15, counter.get());
         assertEquals(15, createBlock[0].getNumberGeneratedEntities());
         cleanUp(simulator);
@@ -421,10 +409,7 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         // Generation from t=0 till t=33 with step 4 = 9 events
         assertEquals(9, createBlock[0].getNumberCreationEvents());
         assertEquals(18, counter.get());
@@ -465,10 +450,7 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         // Generation from t=4 till t=33 with step 4 = 8 events
         assertEquals(8, createBlock[0].getNumberCreationEvents());
         assertEquals(16, counter.get());
@@ -508,10 +490,7 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         // Generation from t=0 till t=32 with step 4 = 9 events
         assertEquals(9, createBlock[0].getNumberCreationEvents());
         assertEquals(18, counter.get());
@@ -552,10 +531,7 @@ public class CreateTest extends FlowTest
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.scheduleEventAbs(17.0, () -> simulator.stop());
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         createBlock[0].setEndTime(15.0);
         // t = 17, now beyond end time -- setIntervalDist should still have a nextCreateEvent
         assertNotNull(createBlock[0].getNextCreateEvent());
@@ -563,10 +539,7 @@ public class CreateTest extends FlowTest
                 .setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 2.0)));
         assertNotNull(createBlock[0].getNextCreateEvent());
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         // but not generate any extra entities. Expected number = {0, 4, 8, 12, 16} = 5
         assertEquals(5, createBlock[0].getNumberCreationEvents());
         assertEquals(10, counter.get());
@@ -608,10 +581,7 @@ public class CreateTest extends FlowTest
         simulator.scheduleEventAbs(17.0, () -> createBlock[0]
                 .setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 6.0))));
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         // Generation from t=0 till t=17 with step 4 [0, 4, 8, 12, 16] = 5 events.
         // From t=17 to t=33 with step 6 [23, 29] = 2 events. Total = 7 events.
         assertEquals(7, createBlock[0].getNumberCreationEvents());
@@ -658,10 +628,7 @@ public class CreateTest extends FlowTest
                     new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 5.0)));
         });
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         // Generation from t=0 till t=20 with step 4 = 1 event at t = 0.
         // From t=20 to t=49 with step 5 [25, 30, 35, 40, 45] = 5 events. Total = 6 events.
         assertEquals(6, createBlock[0].getNumberCreationEvents());
@@ -706,10 +673,7 @@ public class CreateTest extends FlowTest
         simulator.scheduleEventAbs(18.0, () ->
         { createBlock[0].setEndTime(49.0); });
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(20, counter.get());
         assertEquals(20, createBlock[0].getNumberGeneratedEntities());
@@ -753,10 +717,7 @@ public class CreateTest extends FlowTest
                     new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 5.0)));
         });
         simulator.start();
-        while (simulator.isStartingOrRunning())
-        {
-            sleep(10);
-        }
+        waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(20, counter.get());
         assertEquals(20, createBlock[0].getNumberGeneratedEntities());
