@@ -12,10 +12,14 @@ import javax.naming.NamingException;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
+import org.djutils.metadata.MetaData;
+import org.djutils.metadata.ObjectDescriptor;
 import org.junit.jupiter.api.Test;
 
+import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
@@ -38,7 +42,8 @@ public class SimPersistentTest extends LocalEventProducer
     private static final long serialVersionUID = 1L;
 
     /** update event. */
-    private static final EventType UPDATE_EVENT = new EventType("UpdateEvent");
+    private static final EventType UPDATE_EVENT =
+            new EventType("update", new MetaData("update", "update", new ObjectDescriptor("value", "value", Double.class)));
 
     /**
      * Test the SimPersistent.
@@ -127,4 +132,51 @@ public class SimPersistentTest extends LocalEventProducer
         assertEquals(stDev, persistent.getWeightedSampleStDev(), 1E-6);
     }
 
+    /**
+     * Test the SimPersistent in a DsolModel.
+     * @throws InterruptedException when sleep is interrupted
+     * @throws RemoteException when events cannot be fired
+     * @throws NamingException when context cannot be closed
+     */
+    @Test
+    public void testSimPersistentModel() throws InterruptedException, RemoteException, NamingException
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            public SimPersistent<Double> persistent;
+
+            static EventType EVENT = new EventType("event",
+                    new MetaData("value", "value", new ObjectDescriptor("value", "value", Double.class)));
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                this.persistent = new SimPersistent<>("persistent", this, this, EVENT);
+                this.simulator.scheduleEventAbs(1.0, this, "fire", new Object[] {1.0});
+                this.simulator.scheduleEventAbs(5.0, this, "fire", new Object[] {0.0});
+                this.simulator.scheduleEventAbs(9.0, this, "fire", new Object[] {1.0});
+            }
+
+            @SuppressWarnings("unused")
+            void fire(final double value)
+            {
+                fireTimedEvent(EVENT, value, this.simulator.getSimulatorTime());
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 10.0));
+        simulator.start();
+        while (simulator.isStartingOrRunning())
+        {
+            Thread.sleep(10);
+        }
+        assertEquals(0.5, model.persistent.getWeightedPopulationMean(), 1E-6);
+        assertEquals(0.5, model.persistent.getWeightedSampleMean(), 1E-6);
+        assertEquals(5.0, model.persistent.getWeightedSum(), 1E-6);
+
+        simulator.cleanUp();
+        simulator.getReplication().getContext().close();
+    }
 }
