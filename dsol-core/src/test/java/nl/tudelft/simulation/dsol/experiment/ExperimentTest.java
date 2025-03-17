@@ -448,7 +448,7 @@ public class ExperimentTest
             this.count.register(1);
             Entity entity = new Entity(this.simulator.getSimulatorTime());
             this.queue.add(entity);
-            this.nrInQueuePersistent.register(10.0, this.queue.size());
+            this.nrInQueuePersistent.register(this.simulator.getSimulatorTime(), this.queue.size());
             getSimulator().scheduleEventRel(this.iatDist.draw(), this, "next", null);
             getSimulator().scheduleEventRel(this.procDist.draw(), this, "endWait", new Object[] {entity});
         }
@@ -457,7 +457,7 @@ public class ExperimentTest
         protected void endWait(final Entity entity)
         {
             this.queue.remove(entity);
-            this.nrInQueuePersistent.register(10.0, this.queue.size());
+            this.nrInQueuePersistent.register(this.simulator.getSimulatorTime(), this.queue.size());
             this.queueTimeTally.register(this.simulator.getSimulatorTime() - entity.getCreateTime());
         }
     }
