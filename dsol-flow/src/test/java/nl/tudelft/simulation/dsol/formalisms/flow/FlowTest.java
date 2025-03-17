@@ -1,6 +1,7 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
+import nl.tudelft.simulation.naming.context.ContextInterface;
 
 /**
  * FlowTest tests the flow objects, such as FlowObject, Seize, Delay, Release.
@@ -64,7 +66,7 @@ public class FlowTest
      * @param simulator the simulator
      * @param timeoutMs timeout in ms
      */
-    private void wait(final SimulatorInterface<?> simulator, final long timeoutMs)
+    public void wait(final SimulatorInterface<?> simulator, final long timeoutMs)
     {
         long millis = System.currentTimeMillis();
         while (simulator.isStartingOrRunning())
@@ -81,7 +83,7 @@ public class FlowTest
      * @param simulator the simulator
      * @return DsolModel<Double>
      */
-    private DsolModel<Double, DevsSimulatorInterface<Double>> makeModelDouble(
+    public DsolModel<Double, DevsSimulatorInterface<Double>> makeModelDouble(
             final DevsSimulatorInterface<Double> simulator)
     {
         return new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
@@ -95,5 +97,39 @@ public class FlowTest
                 //
             }
         };
+    }
+    
+    /**
+     * Sleep for a certain amount of ms.
+     * @param ms the time to sleep in ms
+     */
+    public void sleep(final int ms)
+    {
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch (Exception exception)
+        {
+            // do nothing
+        }
+    }
+    
+    /**
+     * Cleanup the simulator and context.
+     * @param simulator the simulator
+     */
+    public void cleanUp(final DevsSimulatorInterface<?> simulator)
+    {
+        try
+        {
+            ContextInterface context = simulator.getReplication().getContext();
+            simulator.cleanUp();
+            context.close();
+        }
+        catch(Exception e)
+        {
+            fail(e);
+        }
     }
 }

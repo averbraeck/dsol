@@ -35,7 +35,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class CreateTest
+public class CreateTest extends FlowTest
 {
     /** */
     private CreateTest()
@@ -70,6 +70,7 @@ public class CreateTest
                 assertNull(c1.getIntervalDist());
                 assertNull(c1.getNextCreateEvent());
                 assertNull(c1.getStartTimeDist());
+                assertNull(c1.getStartTime());
                 assertEquals(Long.MAX_VALUE, c1.getMaxNumberCreationEvents());
                 assertEquals(Long.MAX_VALUE, c1.getMaxNumberGeneratedEntities());
                 assertEquals(0L, c1.getNumberCreationEvents());
@@ -82,6 +83,7 @@ public class CreateTest
                 var startTimeDist = new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 2.0));
                 c1.setStartTimeDist(startTimeDist);
                 assertEquals(startTimeDist, c1.getStartTimeDist());
+                assertNotNull(c1.getStartTime());
                 assertNotNull(c1.getNextCreateEvent());
                 assertEquals(nrEvents + 1, this.simulator.getEventList().size());
 
@@ -89,6 +91,15 @@ public class CreateTest
                 startTimeDist = new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 5.0));
                 c1.setStartTimeDist(startTimeDist);
                 assertEquals(startTimeDist, c1.getStartTimeDist());
+                assertNotNull(c1.getStartTime());
+                assertNotNull(c1.getNextCreateEvent());
+                assertEquals(nrEvents + 1, this.simulator.getEventList().size());
+
+                // applying set start time should replace the existing event, and make startTimeDist null
+                startTimeDist = new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 5.0));
+                c1.setStartTime(5.0);
+                assertEquals(5.0, c1.getStartTime());
+                assertNull(c1.getStartTimeDist());
                 assertNotNull(c1.getNextCreateEvent());
                 assertEquals(nrEvents + 1, this.simulator.getEventList().size());
 
@@ -108,7 +119,7 @@ public class CreateTest
                 var batchSizeDist = new DistDiscreteConstant(stream, 2);
                 c1.setBatchSizeDist(batchSizeDist);
                 assertEquals(batchSizeDist, c1.getBatchSizeDist());
-                
+
                 c1.setBatchSize(2);
                 assertNotEquals(batchSizeDist, c1.getBatchSizeDist());
 
@@ -121,11 +132,12 @@ public class CreateTest
                 c1.setMaxNumberGeneratedEntities(1000);
                 assertEquals(1000, c1.getMaxNumberGeneratedEntities());
 
+                // Default statistics makes 3 listeners, 2 from FlowObject and one from Create.
                 int nrListeners = c1.getEventListenerMap().size();
                 c1.setDefaultStatistics();
                 assertTrue(c1.hasDefaultStatistics());
                 assertNotNull(c1.getCountStatistic());
-                assertEquals(nrListeners + 1, c1.getEventListenerMap().size());
+                assertEquals(nrListeners + 3, c1.getEventListenerMap().size());
 
                 c1.setEntitySupplier(() -> new Entity<Double>("entity", this.simulator.getSimulatorTime()));
 
@@ -163,7 +175,7 @@ public class CreateTest
                 () -> createBlock[0].setStartTimeDist(
                         new DistContinuousSimulationTime.TimeDouble(new DistExponential(model.getDefaultStream(), 2.0))),
                 IllegalStateException.class);
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -201,7 +213,93 @@ public class CreateTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
-        simulator.cleanUp();
+        cleanUp(simulator);
+    }
+
+    /**
+     * Test with a batch size of 1.
+     */
+    @Test
+    public void testBatchSize1()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        @SuppressWarnings("unchecked")
+        final Create<Double>[] createBlock = new Create[1];
+        final AtomicInteger counter = new AtomicInteger(0);
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var c3 = new Create<Double>("c3", this.simulator);
+                createBlock[0] = c3;
+                var stream = this.simulator.getModel().getDefaultStream();
+                c3.setBatchSize(1);
+                c3.setDefaultStatistics();
+                c3.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 10.00001)));
+                c3.setEntitySupplier(() ->
+                {
+                    counter.incrementAndGet();
+                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                });
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.start();
+        while (simulator.isStartingOrRunning())
+        {
+            sleep(10);
+        }
+        assertEquals(10, createBlock[0].getNumberCreationEvents());
+        assertEquals(10, counter.get());
+        assertEquals(10, createBlock[0].getNumberGeneratedEntities());
+        assertEquals(10, createBlock[0].getCountReleasedStatistic().getCount());
+        cleanUp(simulator);
+    }
+
+    /**
+     * Test with a batch size of 10.
+     */
+    @Test
+    public void testBatchSize10()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        @SuppressWarnings("unchecked")
+        final Create<Double>[] createBlock = new Create[1];
+        final AtomicInteger counter = new AtomicInteger(0);
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var c3 = new Create<Double>("c3", this.simulator);
+                createBlock[0] = c3;
+                var stream = this.simulator.getModel().getDefaultStream();
+                c3.setBatchSize(10);
+                c3.setDefaultStatistics();
+                c3.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 10.00001)));
+                c3.setEntitySupplier(() ->
+                {
+                    counter.incrementAndGet();
+                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                });
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.start();
+        while (simulator.isStartingOrRunning())
+        {
+            sleep(10);
+        }
+        assertEquals(10, createBlock[0].getNumberCreationEvents());
+        assertEquals(100, counter.get());
+        assertEquals(100, createBlock[0].getNumberGeneratedEntities());
+        assertEquals(100, createBlock[0].getCountReleasedStatistic().getCount());
+        cleanUp(simulator);
     }
 
     /**
@@ -243,7 +341,7 @@ public class CreateTest
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(20, counter.get());
         assertEquals(20, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -284,7 +382,7 @@ public class CreateTest
         }
         assertEquals(15, counter.get());
         assertEquals(15, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -327,7 +425,7 @@ public class CreateTest
         assertEquals(9, createBlock[0].getNumberCreationEvents());
         assertEquals(18, counter.get());
         assertEquals(18, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -371,7 +469,7 @@ public class CreateTest
         assertEquals(8, createBlock[0].getNumberCreationEvents());
         assertEquals(16, counter.get());
         assertEquals(16, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -414,7 +512,7 @@ public class CreateTest
         assertEquals(9, createBlock[0].getNumberCreationEvents());
         assertEquals(18, counter.get());
         assertEquals(18, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -469,7 +567,7 @@ public class CreateTest
         assertEquals(5, createBlock[0].getNumberCreationEvents());
         assertEquals(10, counter.get());
         assertEquals(10, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -515,7 +613,7 @@ public class CreateTest
         assertEquals(7, createBlock[0].getNumberCreationEvents());
         assertEquals(14, counter.get());
         assertEquals(14, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -565,7 +663,7 @@ public class CreateTest
         assertEquals(6, createBlock[0].getNumberCreationEvents());
         assertEquals(12, counter.get());
         assertEquals(12, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -611,7 +709,7 @@ public class CreateTest
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(20, counter.get());
         assertEquals(20, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
     /**
@@ -658,22 +756,7 @@ public class CreateTest
         assertEquals(10, createBlock[0].getNumberCreationEvents());
         assertEquals(20, counter.get());
         assertEquals(20, createBlock[0].getNumberGeneratedEntities());
-        simulator.cleanUp();
+        cleanUp(simulator);
     }
 
-    /**
-     * Sleep for a certain amount of ms.
-     * @param ms the time to sleep in ms
-     */
-    protected void sleep(final int ms)
-    {
-        try
-        {
-            Thread.sleep(ms);
-        }
-        catch (Exception exception)
-        {
-            // do nothing
-        }
-    }
 }
