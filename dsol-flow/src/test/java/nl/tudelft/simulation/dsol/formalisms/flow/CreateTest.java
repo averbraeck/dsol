@@ -175,6 +175,10 @@ public class CreateTest extends FlowTest
                 () -> createBlock[0].setStartTimeDist(
                         new DistContinuousSimulationTime.TimeDouble(new DistExponential(model.getDefaultStream(), 2.0))),
                 IllegalStateException.class);
+
+        // startTime distribution cannot be changed after entities have been created
+        Try.testFail(() -> createBlock[0].setStartTime(2.0), IllegalStateException.class);
+
         cleanUp(simulator);
     }
 
