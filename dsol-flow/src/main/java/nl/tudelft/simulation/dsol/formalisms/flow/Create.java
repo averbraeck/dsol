@@ -39,8 +39,11 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     /** the inter-arrival time distribution. */
     private DistContinuousSimulationTime<T> intervalDist;
 
-    /** the start time distribution for the generator, can be null when no start time is used. */
+    /** the start time distribution for the generator, can be null when no start time distribution is used. */
     private DistContinuousSimulationTime<T> startTimeDist;
+
+    /** the start time for the generator, can be null when no start time is used. */
+    private T startTime;
 
     /** the distribution of the number of objects generated at each generation event. */
     private DistDiscrete batchSizeDist;
@@ -146,7 +149,29 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
         {
             getSimulator().cancelEvent(this.nextCreateEvent);
         }
-        this.nextCreateEvent = getSimulator().scheduleEventRel(this.startTimeDist.draw(), this, "generate", null);
+        this.startTime = this.startTimeDist.draw();
+        this.nextCreateEvent = getSimulator().scheduleEventRel(this.startTime, this, "generate", null);
+        return this;
+    }
+
+    /**
+     * Set a (new) non-stochastic start time for this create block. An IllegalStateException will be thrown when the create
+     * block has already generated its first entities.
+     * @param startTime the new startTime
+     * @return the Create instance for method chaining
+     * @throws IllegalStateException when the create block has already generated entities
+     */
+    public Create<T> setStartTime(final T startTime)
+    {
+        Throw.when(this.numberCreationEvents > 0, IllegalStateException.class,
+                "startTime cannot be changed after entities have been created");
+        this.startTimeDist = null;
+        this.startTime = startTime;
+        if (this.nextCreateEvent != null)
+        {
+            getSimulator().cancelEvent(this.nextCreateEvent);
+        }
+        this.nextCreateEvent = getSimulator().scheduleEventRel(startTime, this, "generate", null);
         return this;
     }
 
@@ -237,7 +262,9 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
      */
     public Create<T> setDefaultStatistics()
     {
-        this.countStatistic = new SimCounter<>(getId() + " generated entity count", getSimulator().getModel(), this, Create.CREATE_EVENT);
+        super.setDefaultFlowObjectStatistics();
+        this.countStatistic =
+                new SimCounter<>(getId() + " generated entity count", getSimulator().getModel(), this, Create.CREATE_EVENT);
         this.countStatistic.initialize();
         return this;
     }
@@ -285,8 +312,8 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     }
 
     /**
-     * returns the startTime distribution of the generator.
-     * @return DistContinuous
+     * Return the startTime distribution of the generator.
+     * @return the startTime distribution of the generator, can be null
      */
     public DistContinuousSimulationTime<T> getStartTimeDist()
     {
@@ -294,7 +321,17 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
     }
 
     /**
-     * Return the time when entity generation has to stop. This vlue can be null (no stop time).
+     * Return the start time of the generator, either provided or drawn from the start time distribution. When startTime is
+     * null, generation of entities will start immediately when the model starts.
+     * @return the start time of the generator, either provided or drawn from the start time distribution, can be null
+     */
+    public T getStartTime()
+    {
+        return this.startTime;
+    }
+
+    /**
+     * Return the time when entity generation has to stop. This value can be null (no stop time).
      * @return endTime the time when entity generation has to stop, can be null
      */
     public T getEndTime()
@@ -304,7 +341,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
 
     /**
      * Return the number of creation events. This is not equal to the number of generated entities, since that depends on the
-     * batch size (which is drawn from a distribution, and can be zero or larger than one).
+     * batch size (which is drawn from a distribution, and can be zero or larger than one for each generation).
      * @return the number of creation events
      */
     public long getNumberCreationEvents()
