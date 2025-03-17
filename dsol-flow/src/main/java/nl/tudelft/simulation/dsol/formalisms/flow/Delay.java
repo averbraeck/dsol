@@ -72,10 +72,10 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
     public Delay<T> setDefaultStatistics()
     {
         super.setDefaultFlowObjectStatistics();
-        this.numberDelayedStatistic = new SimPersistent<>(getId() + " number of delayed entities", getSimulator().getModel(),
-                this, Delay.NUMBER_DELAYED_EVENT);
+        this.numberDelayedStatistic = new SimPersistent<>(getId() + " number of entities in delay block",
+                getSimulator().getModel(), this, Delay.NUMBER_DELAYED_EVENT);
         this.numberDelayedStatistic.initialize();
-        fireTimedEvent(NUMBER_DELAYED_EVENT, getNumberOfDelayedEntities(), getSimulator().getSimulatorTime());
+        fireTimedEvent(NUMBER_DELAYED_EVENT, getDelayedEntityList().size(), getSimulator().getSimulatorTime());
         return this;
     }
 
@@ -85,7 +85,7 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
         Throw.whenNull(this.delayDistribution, "received entity, but delayDistribution is null");
         super.receiveEntity(entity);
         this.delayedEntityList.add(entity);
-        fireTimedEvent(NUMBER_DELAYED_EVENT, getNumberOfDelayedEntities(), getSimulator().getSimulatorTime());
+        fireTimedEvent(NUMBER_DELAYED_EVENT, getDelayedEntityList().size(), getSimulator().getSimulatorTime());
         getSimulator().scheduleEventRel(this.delayDistribution.draw(), this, "releaseEntity", new Object[] {entity});
     }
 
@@ -93,7 +93,7 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
     protected synchronized void releaseEntity(final Entity<T> entity)
     {
         this.delayedEntityList.remove(entity);
-        fireTimedEvent(NUMBER_DELAYED_EVENT, getNumberOfDelayedEntities(), getSimulator().getSimulatorTime());
+        fireTimedEvent(NUMBER_DELAYED_EVENT, getDelayedEntityList().size(), getSimulator().getSimulatorTime());
         super.releaseEntity(entity);
     }
 
@@ -117,9 +117,9 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
 
     /**
      * Return the number of entities that are currently in the Delay block.
-     * @return the number of delayed entities
+     * @return the number of entities that are currently in the Delay block
      */
-    public int getNumberOfDelayedEntities()
+    public int getNumberDelayedEntities()
     {
         return this.delayedEntityList.size();
     }
