@@ -39,7 +39,7 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
     /** persistent statistic for the number of delayed entities. */
     private SimPersistent<T> numberDelayedStatistic = null;
 
-    /** NUMBER_DELAYED_EVENT is fired on creation. */
+    /** NUMBER_DELAYED_EVENT is fired after receiving and after releasing an entity. */
     public static final EventType NUMBER_DELAYED_EVENT = new EventType(new MetaData("NUMBER_DELAYED_EVENT",
             "Number of delayed entities)", new ObjectDescriptor("numberDelayed", "number of delayed entities", Integer.class)));
 
@@ -125,8 +125,8 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
     }
 
     /**
-     * Return whether statistics are turned on for this create block.
-     * @return whether statistics are turned on for this create block.
+     * Return whether statistics are turned on for this Delay block.
+     * @return whether statistics are turned on for this Delay block.
      */
     public boolean hasDefaultStatistics()
     {
