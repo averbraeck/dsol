@@ -83,8 +83,7 @@ public class FlowTest
      * @param simulator the simulator
      * @return DsolModel<Double>
      */
-    public DsolModel<Double, DevsSimulatorInterface<Double>> makeModelDouble(
-            final DevsSimulatorInterface<Double> simulator)
+    public DsolModel<Double, DevsSimulatorInterface<Double>> makeModelDouble(final DevsSimulatorInterface<Double> simulator)
     {
         return new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
@@ -98,7 +97,7 @@ public class FlowTest
             }
         };
     }
-    
+
     /**
      * Sleep for a certain amount of ms.
      * @param ms the time to sleep in ms
@@ -114,7 +113,26 @@ public class FlowTest
             // do nothing
         }
     }
-    
+
+    /**
+     * Wait for the simulator to stop in a number of milliseconds.
+     * @param simulator the simulator
+     * @param maxMs the maximum number of milliseconds to run
+     */
+    public void waitForCompletion(final DevsSimulatorInterface<?> simulator, final long maxMs)
+    {
+        long count = 0;
+        while (simulator.isStartingOrRunning() && count < maxMs)
+        {
+            sleep(10);
+            count += 10;
+        }
+        if (count >= maxMs)
+        {
+            fail("simulation run took longer than maxMs milliseconds");
+        }
+    }
+
     /**
      * Cleanup the simulator and context.
      * @param simulator the simulator
@@ -127,7 +145,7 @@ public class FlowTest
             simulator.cleanUp();
             context.close();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             fail(e);
         }
