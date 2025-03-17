@@ -33,8 +33,8 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
     /** the next flow object in the process-model chain. */
     private FlowObject<T> destination;
 
-    /** the number of entities in the flow object. */
-    private int numberEntities = 0;
+    /** the number of entities that entered the flow object minus the number of entities that left the object. */
+    private int numberEntitiesInMinusOut = 0;
 
     /** the id of the FlowObject. */
     private final String id;
@@ -72,8 +72,8 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
      */
     public void receiveEntity(final Entity<T> entity)
     {
-        this.numberEntities++;
-        this.fireTimedEvent(RECEIVE_EVENT, this.numberEntities, this.simulator.getSimulatorTime());
+        this.numberEntitiesInMinusOut++;
+        this.fireTimedEvent(RECEIVE_EVENT, 1, this.simulator.getSimulatorTime());
     }
 
     /**
@@ -106,8 +106,8 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
      */
     protected synchronized void releaseEntity(final Entity<T> entity)
     {
-        this.numberEntities--;
-        this.fireTimedEvent(RELEASE_EVENT, this.numberEntities, this.simulator.getSimulatorTime());
+        this.numberEntitiesInMinusOut--;
+        this.fireTimedEvent(RELEASE_EVENT, 1, this.simulator.getSimulatorTime());
         if (this.destination != null)
         {
             this.destination.receiveEntity(entity);
@@ -142,12 +142,12 @@ public abstract class FlowObject<T extends Number & Comparable<T>> extends Local
     }
 
     /**
-     * Return the number of entities in the flow block.
-     * @return the number of entities in the flow block
+     * Return the number of entities that entered the flow object minus the number of entities that left the object.
+     * @return the number of entities that entered the flow object minus the number of entities that left the object
      */
-    public int getNumberEntities()
+    public int getNumberEntitiesInMinusOut()
     {
-        return this.numberEntities;
+        return this.numberEntitiesInMinusOut;
     }
 
     /**
