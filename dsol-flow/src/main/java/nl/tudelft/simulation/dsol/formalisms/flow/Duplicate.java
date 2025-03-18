@@ -14,13 +14,13 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T>
+public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T, Duplicate<T>>
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /** DuplicateDestination which is the duplicate definition. */
-    private FlowObject<T> duplicateDestination;
+    private FlowObject<T, ?> duplicateDestination;
 
     /** numberCopies refers to the number of duplicates. */
     private int numberCopies;
@@ -31,7 +31,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T>
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param duplicateDestination FlowObject&lt;T&gt;; the duplicate destination
      */
-    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T> duplicateDestination)
+    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T, ?> duplicateDestination)
     {
         this(id, simulator, duplicateDestination, 1);
     }
@@ -43,7 +43,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T>
      * @param duplicateDestination FlowObject&lt;T&gt;; which is the duplicate definition
      * @param numberCopies int; the number of copies
      */
-    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T> duplicateDestination,
+    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T, ?> duplicateDestination,
             final int numberCopies)
     {
         super(id, simulator);

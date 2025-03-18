@@ -29,7 +29,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Seize<T extends Number & Comparable<T>> extends FlowObject<T> implements ResourceRequestorInterface<T>
+public class Seize<T extends Number & Comparable<T>> extends FlowObject<T, Seize<T>> implements ResourceRequestorInterface<T>
 {
     /** */
     private static final long serialVersionUID = 20140911L;

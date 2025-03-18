@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.djutils.event.EventType;
 import org.djutils.exceptions.Throw;
@@ -25,13 +26,16 @@ import nl.tudelft.simulation.dsol.statistics.SimPersistent;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
+public class Delay<T extends Number & Comparable<T>> extends FlowObject<T, Delay<T>>
 {
     /** */
     private static final long serialVersionUID = 20140805L;
 
     /** the distribution defining the delay. */
-    private DistContinuousSimulationTime<T> delayDistribution;
+    private DistContinuousSimulationTime<T> delayDistribution = null;
+
+    /** the function defining the delay. */
+    private Function<Entity<T>, T> delayFunction = null;
 
     /** list of the current entities in delay. */
     private final List<Entity<T>> delayedEntityList = new ArrayList<>();
@@ -66,6 +70,16 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
     }
 
     /**
+     * @param delayFunction the function implementing the logic to return the delay time.
+     * @return the Delay instance for method chaining
+     */
+    public Delay<T> setDelayFunction(final Function<Entity<T>, T> delayFunction)
+    {
+        this.delayFunction = delayFunction;
+        return this;
+    }
+
+    /**
      * Turn on the default statistics for this flow block.
      * @return the Delay instance for method chaining
      */
@@ -82,11 +96,13 @@ public class Delay<T extends Number & Comparable<T>> extends FlowObject<T>
     @Override
     public synchronized void receiveEntity(final Entity<T> entity)
     {
-        Throw.whenNull(this.delayDistribution, "received entity, but delayDistribution is null");
+        Throw.when(this.delayFunction == null && this.delayDistribution == null, NullPointerException.class,
+                "received entity, but delayDistribution and delayFunction are both equal to null");
         super.receiveEntity(entity);
         this.delayedEntityList.add(entity);
         fireTimedEvent(NUMBER_DELAYED_EVENT, getDelayedEntityList().size(), getSimulator().getSimulatorTime());
-        getSimulator().scheduleEventRel(this.delayDistribution.draw(), this, "releaseEntity", new Object[] {entity});
+        T delayTime = this.delayFunction != null ? this.delayFunction.apply(entity) : this.delayDistribution.draw();
+        getSimulator().scheduleEventRel(delayTime, this, "releaseEntity", new Object[] {entity});
     }
 
     @Override

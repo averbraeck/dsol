@@ -27,7 +27,7 @@ import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Create<T extends Number & Comparable<T>> extends FlowObject<T>
+public class Create<T extends Number & Comparable<T>> extends FlowObject<T, Create<T>>
 {
     /** */
     public static final long serialVersionUID = 20140805L;

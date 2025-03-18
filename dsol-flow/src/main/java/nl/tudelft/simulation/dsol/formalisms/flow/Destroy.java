@@ -5,6 +5,7 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.statistics.SimTally;
 
 /**
  * The Destroy flow block where entities will be destroyed from the model.
@@ -18,7 +19,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type itself to be able to implement a comparator on the simulation time.
  */
-public class Destroy<T extends Number & Comparable<T>> extends FlowObject<T>
+public class Destroy<T extends Number & Comparable<T>> extends FlowObject<T, Destroy<T>>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -26,6 +27,9 @@ public class Destroy<T extends Number & Comparable<T>> extends FlowObject<T>
     /** TIME_IN_SYSTEM_EVENT is fired when an entity leaves the system. */
     public static final EventType TIME_IN_SYSTEM_EVENT = new EventType(new MetaData("TIME_IN_SYSTEM_EVENT", "Time in system",
             new ObjectDescriptor("Time in system", "time in system", Double.class)));
+
+    /** Tally statistic for the time-in-sysem of the destroyed entities. */
+    private SimTally<T> timeInSystemStatistic = null;
 
     /**
      * Construct a Destroy flow block.
@@ -44,6 +48,37 @@ public class Destroy<T extends Number & Comparable<T>> extends FlowObject<T>
         fireTimedEvent(TIME_IN_SYSTEM_EVENT,
                 getSimulator().getSimulatorTime().doubleValue() - entity.getCreationTime().doubleValue(),
                 getSimulator().getSimulatorTime());
+    }
+
+    /**
+     * Turn on the default statistics for this flow block.
+     * @return the Destroy instance for method chaining
+     */
+    public Destroy<T> setDefaultStatistics()
+    {
+        super.setDefaultFlowObjectStatistics();
+        this.timeInSystemStatistic =
+                new SimTally<>(getId() + " entity time in system", getSimulator().getModel(), this, TIME_IN_SYSTEM_EVENT);
+        this.timeInSystemStatistic.initialize();
+        return this;
+    }
+
+    /**
+     * Return whether statistics are turned on for this Destroy block.
+     * @return whether statistics are turned on for this Destroy block.
+     */
+    public boolean hasDefaultStatistics()
+    {
+        return this.timeInSystemStatistic != null;
+    }
+
+    /**
+     * Return the statistic for the time-in-sysem of the destroyed entities.
+     * @return the statistic for the time-in-sysem of the destroyed entities, can be null if no statistics are calculated
+     */
+    public SimTally<T> getTimeInSystemStatistic()
+    {
+        return this.timeInSystemStatistic;
     }
 
 }

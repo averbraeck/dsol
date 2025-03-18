@@ -14,7 +14,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Release<T extends Number & Comparable<T>> extends FlowObject<T>
+public class Release<T extends Number & Comparable<T>> extends FlowObject<T, Release<T>>
 {
     /** */
     private static final long serialVersionUID = 20151028L;
