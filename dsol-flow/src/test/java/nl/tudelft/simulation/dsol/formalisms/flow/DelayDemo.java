@@ -9,6 +9,8 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.SimTally;
+import nl.tudelft.simulation.jstats.distributions.DistConstant;
+import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 
 /**
@@ -26,11 +28,12 @@ public class DelayDemo
 {
     /**
      * @param args not used
-     * @throws InterruptedException on sleep cancel
      */
-    public static void main(final String... args) throws InterruptedException
+    public static void main(final String... args)
     {
         var simulator = new DevsSimulator<Double>("sim");
+        @SuppressWarnings("unchecked")
+        final Delay<Double>[] delayBlock = new Delay[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -46,36 +49,47 @@ public class DelayDemo
                 var delay = new Delay<Double>("delay", this.simulator)
                         .setDelayDistribution(new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 10.0)))
                         .setDefaultStatistics();
+                delay.executeFunction(() -> {
+                    delay.setNumberAttribute("count", 0);
+                    delay.setAttribute("extraDist", new DistConstant(getSimulator().getModel().getDefaultStream(), 10.0));
+                });
+                delay.setReceiveFunction((entity) -> {
+                    delay.setNumberAttribute("count", delay.getNumberAttribute("count").intValue() + 1);
+                });
+                delayBlock[0] = delay;
                 create.setDestination(delay);
                 var destroy = new Destroy<>("destroy", this.simulator);
                 delay.setDestination(destroy);
             }
         };
-        
+
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
         while (simulator.isStartingOrRunning())
         {
-            Thread.sleep(10);
+            Sleep.sleep(10);
         }
-        
+
+        System.out.println("The delay block's attribute 'count' has the value: " + delayBlock[0].getNumberAttribute("count"));
+        System.out.println("A number drawn from the delay block's attribute 'extraDist': "
+                + delayBlock[0].getAttribute("extraDist", DistContinuous.class).draw());
         for (var statistic : model.getOutputStatistics())
         {
             if (statistic instanceof SimCounter sc)
             {
-                System.out.println(SimCounter.reportHeader());
+                System.out.println("\n" + SimCounter.reportHeader());
                 System.out.println(sc.reportLine());
                 System.out.println(SimCounter.reportFooter());
             }
             else if (statistic instanceof SimPersistent sp)
             {
-                System.out.println(SimPersistent.reportHeader());
+                System.out.println("\n" + SimPersistent.reportHeader());
                 System.out.println(sp.reportLine());
                 System.out.println(SimPersistent.reportFooter());
             }
             else if (statistic instanceof SimTally st)
             {
-                System.out.println(SimTally.reportHeader());
+                System.out.println("\n" + SimTally.reportHeader());
                 System.out.println(st.reportLine());
                 System.out.println(SimTally.reportFooter());
             }
