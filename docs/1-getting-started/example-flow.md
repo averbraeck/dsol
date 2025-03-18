@@ -4,7 +4,7 @@ This is the second example of building a complete model for an M/M/1 queuing sys
 
 ## Introduction
 An M/M/1 queuing system is a system with one server (that's what the 1 stands for in M/M/1), and parts or clients arriving at the server with an exponentially distributed inter-arrival time (the first M denotes that) and an exponentially distributed service time (the second M denotes that). 
-For an M/M/1 system to be stable, the average service time, denoted as $\lambda$ should be less than the average inter-arrival time, denoted as $\mu$. The ratio between $\lambda$ and $\mu$ is called $\rho = \lambda / \mu$, and it is also known as the average utilization of the queuing system. 
+For an M/M/1 system to be stable, the average service time, denoted as $\mu$ should be less than the average inter-arrival time, denoted as $\lambda$. The ratio between $\lambda$ and $\mu$ is called $\rho = \lambda / \mu$, and it is also known as the average utilization of the queuing system. 
 
 For a typical queuing system, we are interested in simulating different arrival rates with different service times, and studying the following main output variables:
 
