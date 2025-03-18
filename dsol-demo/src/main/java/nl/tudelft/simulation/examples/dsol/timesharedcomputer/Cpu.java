@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Cpu extends FlowObject<Double> implements Locatable
+public class Cpu extends FlowObject<Double, Cpu> implements Locatable
 {
     /** */
     private static final long serialVersionUID = 1L;

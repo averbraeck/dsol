@@ -18,7 +18,7 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Terminal extends FlowObject<Double>
+public class Terminal extends FlowObject<Double, Terminal>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class Terminal extends FlowObject<Double>
      * @param thinkDelay DistContinuous; the delay
      * @param jobSize DistContinuous; in time
      */
-    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowObject<Double> cpu, final DistContinuous thinkDelay,
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowObject<Double, Cpu> cpu, final DistContinuous thinkDelay,
             final DistContinuous jobSize)
     {
         super("Terminal", simulator);

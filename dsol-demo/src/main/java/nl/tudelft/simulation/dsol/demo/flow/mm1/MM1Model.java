@@ -4,7 +4,6 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Create;
 import nl.tudelft.simulation.dsol.formalisms.flow.Delay;
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
-import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
@@ -102,13 +101,13 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             Resource<Double> resource = new Resource<>("resource", this.simulator, capacity);
 
             // created the caiming and releasing of the resource
-            FlowObject<Double> queue = new Seize<Double>("Seize", this.simulator, resource);
-            FlowObject<Double> release = new Release<Double>("Release", this.simulator, resource, 1.0);
+            var queue = new Seize<Double>("Seize", this.simulator, resource);
+            var release = new Release<Double>("Release", this.simulator, resource, 1.0);
 
             // The server
             DistContinuousSimulationTime<Double> serviceTime =
                     new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, avgServiceTime));
-            FlowObject<Double> server = new Delay<Double>("Delay", this.simulator).setDelayDistribution(serviceTime);
+            var server = new Delay<Double>("Delay", this.simulator).setDelayDistribution(serviceTime);
 
             // The flow
             generator.setDestination(queue);
