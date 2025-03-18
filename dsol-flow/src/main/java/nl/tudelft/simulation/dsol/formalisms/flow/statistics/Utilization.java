@@ -38,7 +38,7 @@ public class Utilization<T extends Number & Comparable<T>> extends SimPersistent
      * @param target FlowObject&lt;T&gt;; the target
      */
     public Utilization(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
-            final FlowObject<T> target)
+            final FlowObject<T, ?> target)
     {
         super(description, model);
         try
