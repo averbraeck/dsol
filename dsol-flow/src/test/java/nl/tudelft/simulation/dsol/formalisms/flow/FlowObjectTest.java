@@ -64,7 +64,8 @@ public class FlowObjectTest extends FlowTest
                 delay.setReleaseFunction(null);
 
                 // Set initial attributes with a function and test them
-                delay.executeFunction(() -> {
+                delay.executeFunction(() ->
+                {
                     delay.setAttribute("x", 10.0);
                     delay.setNumberAttribute("y", 12);
                     delay.setStringAttribute("s", "string");
@@ -91,7 +92,8 @@ public class FlowObjectTest extends FlowTest
                 delay.setDelayFunction((e) -> 0.0);
 
                 // set attributes upon receiving an entity
-                delay.setReceiveFunction((e) -> {
+                delay.setReceiveFunction((e) ->
+                {
                     delay.setAttribute("x", 20.0);
                     delay.setNumberAttribute("y", delay.getNumberAttribute("y").intValue() + 1);
                     delay.setStringAttribute("s", "other");
@@ -116,7 +118,8 @@ public class FlowObjectTest extends FlowTest
                 assertEquals(0.0, entity.getTimestamp("time"));
 
                 // set attributes upon releasing an entity
-                delay.setReleaseFunction((e) -> {
+                delay.setReleaseFunction((e) ->
+                {
                     delay.setStringAttribute("s", "last");
                     e.setNumberAttribute("ex", e.getNumberAttribute("ex").doubleValue() * 2.0);
                     e.setNumberAttribute("ey", e.getNumberAttribute("ey").intValue() + 1);

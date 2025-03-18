@@ -671,7 +671,9 @@ public class CreateTest extends FlowTest
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.scheduleEventAbs(18.0, () ->
-        { createBlock[0].setEndTime(49.0); });
+        {
+            createBlock[0].setEndTime(49.0);
+        });
         simulator.start();
         waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());

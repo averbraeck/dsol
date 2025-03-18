@@ -151,14 +151,18 @@ public class DelayTest extends FlowTest
                 generator.setEntitySupplier(() -> new Entity<>("e", this.simulator.getSimulatorTime()));
 
                 this.simulator.scheduleEventAbs(2.0, () ->
-                { assertEquals(0, delay.getNumberDelayedEntities()); });
+                {
+                    assertEquals(0, delay.getNumberDelayedEntities());
+                });
                 this.simulator.scheduleEventAbs(6.0, () ->
                 {
                     assertEquals(1, delay.getNumberDelayedEntities());
                     assertEquals(5.0, delay.getDelayedEntityList().get(0).getCreationTime(), 1E-6);
                 });
                 this.simulator.scheduleEventAbs(16.0, () ->
-                { assertEquals(2, delay.getNumberDelayedEntities()); });
+                {
+                    assertEquals(2, delay.getNumberDelayedEntities());
+                });
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

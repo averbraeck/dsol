@@ -49,11 +49,13 @@ public class DelayDemo
                 var delay = new Delay<Double>("delay", this.simulator)
                         .setDelayDistribution(new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 10.0)))
                         .setDefaultStatistics();
-                delay.executeFunction(() -> {
+                delay.executeFunction(() ->
+                {
                     delay.setNumberAttribute("count", 0);
                     delay.setAttribute("extraDist", new DistConstant(getSimulator().getModel().getDefaultStream(), 10.0));
                 });
-                delay.setReceiveFunction((entity) -> {
+                delay.setReceiveFunction((entity) ->
+                {
                     delay.setNumberAttribute("count", delay.getNumberAttribute("count").intValue() + 1);
                 });
                 delayBlock[0] = delay;

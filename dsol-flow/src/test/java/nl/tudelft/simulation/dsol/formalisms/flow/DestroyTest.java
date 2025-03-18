@@ -118,15 +118,18 @@ public class DestroyTest extends FlowTest
             {
                 StreamInterface stream = new MersenneTwister(12L);
                 var delay = new Delay<Double>("d3", this.simulator);
-                delay.executeFunction(() -> {
+                delay.executeFunction(() ->
+                {
                     delay.setAttribute("count", 0);
                 });
-                delay.setDelayFunction((entity) -> {
+                delay.setDelayFunction((entity) ->
+                {
                     if (delay.getNumberAttribute("count").intValue() % 2 == 0)
                         return 4.0;
                     return 8.0;
                 });
-                delay.setReceiveFunction((entity) -> {
+                delay.setReceiveFunction((entity) ->
+                {
                     delay.setAttribute("count", delay.getNumberAttribute("count").intValue() + 1);
                 });
 
@@ -137,7 +140,7 @@ public class DestroyTest extends FlowTest
                 generator.setMaxNumberGeneratedEntities(100);
                 generator.setStartTime(0.0);
                 generator.setEntitySupplier(() -> new Entity<>("e", this.simulator.getSimulatorTime()));
-                
+
                 var destroy = new Destroy<Double>("destroy", this.simulator);
                 destroy.setDefaultStatistics();
                 delay.setDestination(destroy);
