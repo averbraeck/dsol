@@ -171,7 +171,9 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
         if (this.releaseFunction != null)
             this.releaseFunction.accept(entity);
         if (this.destination != null)
-        { this.destination.receiveEntity(entity); }
+        {
+            this.destination.receiveEntity(entity);
+        }
     }
 
     /**

@@ -36,23 +36,21 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
 
     /** the id of the resource. */
     private String resourceId;
-    
+
     /** the counter to give a unique sequence number to the requests. */
     private static long counter = 0;
 
     /** UTILIZATION_EVENT is fired on activity that decreases or increases the utilization. */
-    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT",
-            "Utilization changed", new ObjectDescriptor("newUtilization", "new utilization", Double.class)));
+    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT", "Utilization changed",
+            new ObjectDescriptor("newUtilization", "new utilization", Double.class)));
 
     /** QUEUE_LENGTH_EVENT fired on changes in queue length. */
-    public static final EventType QUEUE_LENGTH_EVENT =
-            new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length changed",
-                    new ObjectDescriptor("newQueueLength", "new queue length", Integer.class)));
+    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length changed",
+            new ObjectDescriptor("newQueueLength", "new queue length", Integer.class)));
 
     /** QUEUE_TIME_EVENT is fired wwhen a request is granted and provides the waiting time (which can be 0). */
-    public static final EventType QUEUE_WAITING_TIME_EVENT =
-            new EventType(new MetaData("QUEUE_WAITING_TIME_EVENT", "Queue waiting time",
-                    new ObjectDescriptor("queue waiting time", "queue waiting time", Number.class)));
+    public static final EventType QUEUE_WAITING_TIME_EVENT = new EventType(new MetaData("QUEUE_WAITING_TIME_EVENT",
+            "Queue waiting time", new ObjectDescriptor("queue waiting time", "queue waiting time", Number.class)));
 
     /** the minimum priority. */
     public static final int MIN_REQUEST_PRIORITY = 0;
@@ -93,7 +91,8 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
         this.resourceId = resourceId;
         this.simulator = simulator;
         this.capacity = capacity;
-        this.requests = Collections.synchronizedSortedSet(new TreeSet<Request<T>>(requestComparator));;
+        this.requests = Collections.synchronizedSortedSet(new TreeSet<Request<T>>(requestComparator));
+        ;
     }
 
     /**
@@ -218,8 +217,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
             {
                 this.requests.add(new Request<T>(requestor, amount, priority));
             }
-            this.fireTimedEvent(Resource.QUEUE_LENGTH_EVENT, this.requests.size(),
-                    this.simulator.getSimulatorTime());
+            this.fireTimedEvent(Resource.QUEUE_LENGTH_EVENT, this.requests.size(), this.simulator.getSimulatorTime());
         }
     }
 
@@ -251,8 +249,7 @@ public class Resource<T extends Number & Comparable<T>> extends LocalEventProduc
                     {
                         i.remove();
                     }
-                    this.fireTimedEvent(Resource.QUEUE_LENGTH_EVENT, this.requests.size(),
-                            this.simulator.getSimulatorTime());
+                    this.fireTimedEvent(Resource.QUEUE_LENGTH_EVENT, this.requests.size(), this.simulator.getSimulatorTime());
                 }
                 else
                 {
