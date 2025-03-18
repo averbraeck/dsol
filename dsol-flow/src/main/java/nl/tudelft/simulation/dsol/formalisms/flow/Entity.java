@@ -7,6 +7,8 @@ import java.util.Map;
 import org.djutils.base.Identifiable;
 import org.djutils.exceptions.Throw;
 
+import com.google.gson.Gson;
+
 /**
  * Entity is a generic object that can flow through the model. It stores its creation time, so it can tally the 'time in system'
  * when leaving the model.
@@ -45,18 +47,32 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
         this.id = id;
         this.creationTime = creationTime;
     }
-    
-    /** 
+
+    /**
+     * Deep clone of a (non-serializable) object.
+     * @param <O> the object type
+     * @param object the object
+     * @param clazz the class of the object
+     * @return a deep copy
+     */
+    protected <O> O deepClone(final Object object, final Class<O> clazz)
+    {
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(object), clazz);
+    }
+
+    /**
      * Return a clone of the entity. This clone is a literal clone, including the creation time and id.
      * @return Entity&lt;T&gt;; a literal clone of the entity
      */
+    @SuppressWarnings("unchecked")
     @Override
     public Entity<T> clone()
     {
         Entity<T> clone = new Entity<T>(this.id, this.creationTime);
         if (this.attributes != null)
         {
-            clone.attributes = new LinkedHashMap<>(this.attributes);
+            clone.attributes = deepClone(this.attributes, LinkedHashMap.class);
         }
         return clone;
     }
