@@ -141,7 +141,7 @@ public class CreateTest extends FlowTest
 
                 c1.setEntitySupplier(() -> new Entity<Double>("entity", this.simulator.getSimulatorTime()));
 
-                c1.setDestination(new FlowObject<Double>("receiver", this.simulator)
+                c1.setDestination(new Destroy<Double>("receiver", this.simulator)
                 {
                     private static final long serialVersionUID = 1L;
 
