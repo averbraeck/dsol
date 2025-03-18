@@ -87,11 +87,11 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
     }
 
     /**
-     * Add a String as an attribute to the entity.
+     * Add an object as an attribute to the entity.
      * @param key String; the key of the attribute
-     * @param value String; the value to store
+     * @param value Object; the value to store
      */
-    public void setStringValue(final String key, final String value)
+    public void setAttribute(final String key, final Object value)
     {
         if (this.attributes == null)
             this.attributes = new LinkedHashMap<>();
@@ -99,11 +99,46 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
     }
 
     /**
+     * Retrieve a typed object attribute value.
+     * @param key String; the id of the attribute
+     * @param clazz Class&lt;VT&gt; the class of the object to return
+     * @return VT; the stored value
+     * @param <VT> the class of the attribute value to return
+     */
+    @SuppressWarnings("unchecked")
+    public <VT> VT getAttribute(final String key, final Class<VT> clazz)
+    {
+        if (this.attributes == null)
+            return null;
+        return (VT) this.attributes.get(key);
+    }
+
+    /**
+     * Retrieve an object attribute value.
+     * @param key String; the id of the attribute
+     * @return Object; the stored value
+     */
+    public Object getAttribute(final String key)
+    {
+        return getAttribute(key, Object.class);
+    }
+
+    /**
+     * Add a String as an attribute to the entity.
+     * @param key String; the key of the attribute
+     * @param value String; the value to store
+     */
+    public void setStringAttribute(final String key, final String value)
+    {
+        setAttribute(key, value);
+    }
+
+    /**
      * Retrieve a stored String attribute value.
      * @param key String; the id of the attribute
      * @return String; the stored value
      */
-    public String getStringValue(final String key)
+    public String getStringAttribute(final String key)
     {
         if (this.attributes == null)
             return null;
@@ -115,11 +150,9 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
      * @param key String; the key of the attribute
      * @param value Number; the value to store
      */
-    public void setNumberValue(final String key, final Number value)
+    public void setNumberAttribute(final String key, final Number value)
     {
-        if (this.attributes == null)
-            this.attributes = new LinkedHashMap<>();
-        this.attributes.put(key, value);
+        setAttribute(key, value);
     }
 
     /**
@@ -127,11 +160,9 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
      * @param key String; the id of the attribute
      * @return Number; the stored value
      */
-    public Number getNumberValue(final String key)
+    public Number getNumberAttribute(final String key)
     {
-        if (this.attributes == null)
-            return null;
-        return (Number) this.attributes.get(key);
+        return getAttribute(key, Number.class);
     }
 
     /**
