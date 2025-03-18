@@ -12,6 +12,8 @@ import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
+import org.djutils.metadata.MetaData;
+import org.djutils.metadata.ObjectDescriptor;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
@@ -73,7 +75,8 @@ public class SimCounterTest extends LocalEventProducer
             }
         }, SimCounter.TIMED_OBSERVATION_ADDED_EVENT);
 
-        EventType et = new EventType("observation");
+        EventType et = new EventType("observation",
+                new MetaData("observation", "observation", new ObjectDescriptor("value", "value", Long.class)));
         long value = 0;
         for (int i = 0; i < 100; i++)
         {

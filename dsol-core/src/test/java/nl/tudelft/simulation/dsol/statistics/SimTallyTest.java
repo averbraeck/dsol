@@ -13,6 +13,8 @@ import javax.naming.NamingException;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.event.TimedEvent;
+import org.djutils.metadata.MetaData;
+import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.stats.ConfidenceInterval;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +40,8 @@ public class SimTallyTest extends LocalEventProducer
     private static final long serialVersionUID = 1L;
 
     /** update event. */
-    private static final EventType UPDATE_EVENT = new EventType("UpdateEvent");
+    private static final EventType UPDATE_EVENT = 
+            new EventType("update", new MetaData("update", "update", new ObjectDescriptor("value", "value", Double.class)));
 
     /**
      * Test the tally.
