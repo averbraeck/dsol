@@ -45,7 +45,6 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
 
     static
     {
-        Cloner cloner = Cloner.standard();
         cloner.dontCloneInstanceOf(StreamInterface.class, SimulatorInterface.class, AbstractDsolModel.class, Replication.class);
     }
 
