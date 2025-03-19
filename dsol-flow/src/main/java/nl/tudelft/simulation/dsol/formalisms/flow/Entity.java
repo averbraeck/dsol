@@ -7,7 +7,12 @@ import java.util.Map;
 import org.djutils.base.Identifiable;
 import org.djutils.exceptions.Throw;
 
-import com.google.gson.Gson;
+import com.rits.cloning.Cloner;
+
+import nl.tudelft.simulation.dsol.experiment.Replication;
+import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
+import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
+import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
 /**
  * Entity is a generic object that can flow through the model. It stores its creation time, so it can tally the 'time in system'
@@ -35,6 +40,15 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
     /** private attributes; the map is only created when needed. */
     private Map<String, Object> attributes = null;
 
+    /** the cloner to clone entities. */
+    private static final Cloner cloner = Cloner.standard();
+
+    static
+    {
+        Cloner cloner = Cloner.standard();
+        cloner.dontCloneInstanceOf(StreamInterface.class, SimulatorInterface.class, AbstractDsolModel.class, Replication.class);
+    }
+
     /**
      * Construct a new Entity with a creation time.
      * @param id String; the entity's id
@@ -49,32 +63,13 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
     }
 
     /**
-     * Deep clone of a (non-serializable) object.
-     * @param <O> the object type
-     * @param object the object
-     * @param clazz the class of the object
-     * @return a deep copy
-     */
-    protected <O> O deepClone(final Object object, final Class<O> clazz)
-    {
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(object), clazz);
-    }
-
-    /**
      * Return a clone of the entity. This clone is a literal clone, including the creation time and id.
      * @return Entity&lt;T&gt;; a literal clone of the entity
      */
-    @SuppressWarnings("unchecked")
     @Override
     public Entity<T> clone()
     {
-        Entity<T> clone = new Entity<T>(this.id, this.creationTime);
-        if (this.attributes != null)
-        {
-            clone.attributes = deepClone(this.attributes, LinkedHashMap.class);
-        }
-        return clone;
+        return cloner.deepClone(this);
     }
 
     /**
