@@ -1,6 +1,12 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
+import java.util.function.Consumer;
+
+import org.djutils.exceptions.Throw;
+
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.jstats.distributions.DistDiscrete;
+import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
 
 /**
  * The Duplicate flow block makes a number of copies of incoming entities and sends them to a destination.
@@ -19,47 +25,88 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T, D
     /** */
     private static final long serialVersionUID = 1L;
 
-    /** DuplicateDestination which is the duplicate definition. */
+    /** The destination of the duplicates. */
     private FlowObject<T, ?> duplicateDestination;
 
-    /** numberCopies refers to the number of duplicates. */
-    private int numberCopies;
+    /** The distrbution of the number of duplicates to generate. */
+    private DistDiscrete numberCopiesDist = null;
+
+    /** the function to apply just before releasing a duplicate entity. */
+    private Consumer<Entity<T>> duplicateReleaseFunction = null;
 
     /**
-     * Create a new Duplicate flow block that makes 1 copy.
+     * Create a new Duplicate flow block.
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param duplicateDestination FlowObject&lt;T&gt;; the duplicate destination
      */
-    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T, ?> duplicateDestination)
+    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator)
     {
-        this(id, simulator, duplicateDestination, 1);
+        super(id, simulator);
     }
 
     /**
-     * Create a new Duplicate flock block that makes numberCopies copies.
-     * @param id String; the id of the FlowObject
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param duplicateDestination FlowObject&lt;T&gt;; which is the duplicate definition
-     * @param numberCopies int; the number of copies
+     * Set the destination of the duplicate entity / entities. The destination can be null, in that case the duplicates are
+     * destroyed after creation.
+     * @param duplicateDestination the new destination of the duplicate entities
+     * @return this object for method chaining
      */
-    public Duplicate(final String id, final DevsSimulatorInterface<T> simulator, final FlowObject<T, ?> duplicateDestination,
-            final int numberCopies)
+    public Duplicate<T> setDuplicateDestination(final FlowObject<T, ?> duplicateDestination)
     {
-        super(id, simulator);
         this.duplicateDestination = duplicateDestination;
-        this.numberCopies = numberCopies;
+        return this;
+    }
+
+    /**
+     * Set the distribution of the number of copies to generate.
+     * @param numberCopiesDist set numberCopiesDist
+     * @return this object for method chaining
+     */
+    public Duplicate<T> setNumberCopiesDist(final DistDiscrete numberCopiesDist)
+    {
+        Throw.whenNull(numberCopiesDist, "distribution for number copies cannot be null");
+        this.numberCopiesDist = numberCopiesDist;
+        return this;
+    }
+
+    /**
+     * Set a fixed number of copies to generate.
+     * @param numberCopies set the fixed number of copies to generate
+     * @return this object for method chaining
+     */
+    public Duplicate<T> setNumberCopies(final int numberCopies)
+    {
+        Throw.when(numberCopies < 0, IllegalArgumentException.class, "number of copies cannot be negative");
+        this.numberCopiesDist = new DistDiscreteConstant(getSimulator().getModel().getDefaultStream(), numberCopies);
+        return this;
+    }
+
+    /**
+     * Set the function to apply just before releasing a duplicate entity.
+     * @param duplicateReleaseFunction the function to apply just before releasing a duplicate entity, can be null to remove an
+     *            existing duplicate release function
+     * @return this object for method chaining
+     */
+    public Duplicate<T> setDuplicateReleaseFunction(final Consumer<Entity<T>> duplicateReleaseFunction)
+    {
+        this.duplicateReleaseFunction = duplicateReleaseFunction;
+        return this;
     }
 
     @Override
     public synchronized void receiveEntity(final Entity<T> entity)
     {
+        Throw.whenNull(this.numberCopiesDist, "distribution for number copies cannot be null when running");
+        Throw.whenNull(this.duplicateDestination, "destination for copies cannot be null when running");
         super.receiveEntity(entity);
         this.releaseEntity(entity);
-        for (int i = 0; i < this.numberCopies; i++)
+        long nr = this.numberCopiesDist.draw();
+        Throw.when(nr < 0, IllegalArgumentException.class, "number of copies cannot be negative");
+        for (int i = 0; i < nr; i++)
         {
             Entity<T> clone = entity.clone();
             this.fireTimedEvent(FlowObject.RELEASE_EVENT, clone, getSimulator().getSimulatorTime());
+            if (this.duplicateReleaseFunction != null)
+                this.duplicateReleaseFunction.accept(entity);
             this.duplicateDestination.receiveEntity(clone);
         }
     }
