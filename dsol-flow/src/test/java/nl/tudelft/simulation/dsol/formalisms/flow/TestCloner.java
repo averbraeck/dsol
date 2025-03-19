@@ -1,5 +1,10 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import java.util.ArrayList;
+
 import com.rits.cloning.Cloner;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
@@ -23,6 +28,13 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class TestCloner
 {
+    /** the cloner to clone entities. */
+    private static final Cloner cloner = Cloner.standard();
+
+    static
+    {
+        cloner.dontCloneInstanceOf(StreamInterface.class, SimulatorInterface.class, AbstractDsolModel.class, Replication.class);
+    }
 
     /**
      * @param args not used
@@ -32,12 +44,20 @@ public class TestCloner
         StreamInterface stream = new MersenneTwister(12L);
         DistContinuous dist1 = new DistExponential(stream, 2.0);
         System.out.println(dist1 + "  " + System.identityHashCode(dist1) + "  " + System.identityHashCode(dist1.getStream()));
-        Cloner cloner = Cloner.standard();
-        cloner.dontCloneInstanceOf(StreamInterface.class, SimulatorInterface.class, AbstractDsolModel.class, Replication.class);
         DistContinuous dist2 = cloner.deepClone(dist1);
         System.out.println(dist2 + "  " + System.identityHashCode(dist2) + "  " + System.identityHashCode(dist2.getStream()));
         System.out.println(dist1.draw());
-        System.out.println(dist2.draw());
+        System.out.println(dist2.draw()+ "\n");
+
+        var list1 = new ArrayList<DistContinuous>();
+        list1.add(dist1);
+        list1.add(dist1);
+        var list2 = cloner.deepClone(list1);
+        for (int i = 0; i<2; i++)
+        System.out.println(list2.get(i) + "  " + System.identityHashCode(list2.get(i)) + "  "
+                + System.identityHashCode(list2.get(i).getStream()));
+        assertNotEquals(dist1, list2.get(0));
+        assertEquals(dist1.getStream(), list2.get(0).getStream());
     }
 
 }
