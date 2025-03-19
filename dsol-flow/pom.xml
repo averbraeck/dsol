@@ -18,5 +18,10 @@
       <artifactId>dsol-core</artifactId>
     </dependency>
     
+    <dependency>
+      <groupId>io.github.kostaskougios</groupId>
+      <artifactId>cloning</artifactId>
+      <version>1.12.0</version>
+    </dependency>
   </dependencies>
 </project>
