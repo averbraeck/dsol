@@ -62,11 +62,11 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
 
     /** RECEIVE_EVENT is fired whenever an entity enters the flow object. */
     public static final EventType RECEIVE_EVENT = new EventType(new MetaData("RECEIVE_EVENT", "Entity received",
-            new ObjectDescriptor("receivedEntity", "number of entities in flow object", Integer.class)));
+            new ObjectDescriptor("receivedEntity", "the number of received entities (1)", Integer.class)));
 
     /** RELEASE_EVENT is fired whenever an entity leaves the flow object. */
     public static final EventType RELEASE_EVENT = new EventType(new MetaData("RELEASE_EVENT", "Entity released",
-            new ObjectDescriptor("releasedEntity", "number of entities in flow object", Integer.class)));
+            new ObjectDescriptor("releasedEntity", "the number of released entities (1)", Integer.class)));
 
     /**
      * Construct a new FlowObject.
