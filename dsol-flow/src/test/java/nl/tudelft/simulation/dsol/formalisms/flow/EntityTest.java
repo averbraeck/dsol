@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,7 @@ public class EntityTest
         assertNull(e1.getNumberAttribute("y"));
         assertNull(e1.getStringAttribute("s"));
         assertNull(e1.getTimestamp("t"));
+        assertNotNull(e1.toString());
 
         // check deep copy
         e1.setTimestamp("t", 2.0);
