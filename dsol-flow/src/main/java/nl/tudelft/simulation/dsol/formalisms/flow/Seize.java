@@ -1,10 +1,12 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.ToDoubleFunction;
 
 import org.djutils.event.EventType;
+import org.djutils.exceptions.Throw;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -12,13 +14,13 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * The Seize flow block requests a resource and keeps the entity within the flow block's queue until the resource is actually
- * claimed. Note that the Seize block has a queue in which the Entity is waiting, while the Resource has a queue in which the
- * request is waiting. This sounds like we store the same information twice. This is, however, not the case. (1) Multiple Seize
- * blocks can share the same Resource, each holding their own entities that make the request, where the total set of requests is
- * stored at the Resource. (2) A Seize could potentially request access to two resources, where the entity is held at the Seize
- * block until both are available. Each Resource keeps and grants its own requests. Since there nam be an n:m relationship
- * between Seize blocks and Resources, each have their own queue, with its own sorting mechanism (ideally the same).
+ * The Seize flow block requests a certain amount of capacity from a resource and keeps the entity within the flow block's
+ * storage until the resource is actually claimed. Note that the Seize block has a storage in which the Entity is waiting, while
+ * the Resource has a queue in which the request is waiting. This sounds like we store the same information twice. This is,
+ * however, not the case. (1) Multiple Seize blocks can share the same Resource, each holding their own entities that make the
+ * request, where the total set of requests is stored at the Resource. (2) A Seize could potentially request access to two
+ * resources, where the entity is held at the Seize block until both are available. Each Resource keeps and grants its own
+ * requests. So, there is an n:m relationship between Seize blocks and Resources, each have their own queue / storage.
  * <p>
  * Copyright (c) 2002-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -29,182 +31,170 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Seize<T extends Number & Comparable<T>> extends FlowObject<T, Seize<T>> implements ResourceRequestorInterface<T>
+public abstract class Seize<T extends Number & Comparable<T>> extends FlowObject<T, Seize<T>> implements CapacityRequestor<T>
 {
     /** */
     private static final long serialVersionUID = 20140911L;
 
-    /** QUEUE_LENGTH_EVENT is fired when the queue length is changed. */
-    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length",
-            new ObjectDescriptor("queueLength", "Queue length", Integer.class)));
+    /** NUMBER_STORED_EVENT is fired when the queue length changes. */
+    public static final EventType NUMBER_STORED_EVENT = new EventType(new MetaData("NUMBER_STORED_EVENT",
+            "Number of entities stored", new ObjectDescriptor("numberStored", "Number entities stored", Integer.class)));
 
-    /** DELAY_TIME is fired when a new delayTime is computed. */
-    public static final EventType DELAY_TIME = new EventType(new MetaData("DELAY_TIME", "Delay time",
-            new ObjectDescriptor("delayTime", "Delay time (as a double)", Double.class)));
+    /** STORAGE_TIME is fired when an entity leaves the storage. */
+    public static final EventType STORAGE_TIME_EVENT = new EventType(new MetaData("STORAGE_TIME_EVENT", "Storage time",
+            new ObjectDescriptor("storageTime", "Storage time (as a double)", Double.class)));
 
-    /** queue refers to the list of waiting requestors. */
-    private List<Request<T>> queue = Collections.synchronizedList(new ArrayList<Request<T>>());
-
-    /** requestedCapacity is the amount of resource requested on the resource. */
-    private double requestedCapacity = Double.NaN;
-
-    /** resource on which the capacity is requested. */
-    private Resource<T> resource;
+    /** Storage for waiting entities with their arrival time. */
+    protected final Set<StoredEntity<T>> storage = Collections.synchronizedSet(new HashSet<>());
 
     /**
      * Constructor for Seize flow object.
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
-     * @param resource Resource&lt;T&gt;; which is claimed
      */
-    public Seize(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
-    {
-        this(id, simulator, resource, 1.0);
-    }
-
-    /**
-     * Constructor for Seize flow object.
-     * @param id String; the id of the FlowObject
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
-     * @param resource Resource&lt;T&gt;; which is claimed
-     * @param requestedCapacity double; is the amount which is claimed by the seize
-     */
-    public Seize(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource,
-            final double requestedCapacity)
+    public Seize(final String id, final DevsSimulatorInterface<T> simulator)
     {
         super(id, simulator);
-        if (requestedCapacity < 0.0)
-        {
-            throw new IllegalArgumentException("requestedCapacity cannot < 0.0");
-        }
-        this.requestedCapacity = requestedCapacity;
-        this.resource = resource;
     }
 
     /**
-     * Receive an object that requests an amount of units from a resource.
-     * @param entity Entity&lt;T&gt;; the object
-     * @param pRequestedCapacity double; the requested capacity
+     * Return the storage for waiting entities with their arrival time.
+     * @return the storage for waiting entities with their arrival time
      */
-    public synchronized void receiveObject(final Entity<T> entity, final double pRequestedCapacity)
-
+    public Set<StoredEntity<T>> getStorage()
     {
-        super.receiveEntity(entity);
-        Request<T> request = new Request<T>(entity, pRequestedCapacity, getSimulator().getSimulatorTime());
-        synchronized (this.queue)
-        {
-            this.queue.add(request);
-        }
-        try
-        {
-            this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
-            this.resource.requestCapacity(pRequestedCapacity, this);
-        }
-        catch (Exception exception)
-        {
-            getSimulator().getLogger().always().warn(exception, "receiveObject");
-        }
-    }
-
-    @Override
-    public void receiveEntity(final Entity<T> entity)
-    {
-        this.receiveObject(entity, this.requestedCapacity);
+        return this.storage;
     }
 
     /**
-     * sets the queue to this seize. This enables seize blocks to share one queue.
-     * @param queue List&lt;Request&lt;T&gt;&gt;; is a new queue.
+     * Return the resource that is claimed by entities in this Seize block.
+     * @return the resource that is claimed by entities in this Seize block
      */
-    public void setQueue(final List<Request<T>> queue)
-    {
-        this.queue = queue;
-    }
+    public abstract Resource<T> getResource();
 
     /**
-     * Return the queue.
-     * @return List&lt;Request&lt;T&gt;&gt;; the queue with requests to claim the resource
+     * Resource with floating point capacity.
+     * @param <T> the time type
      */
-    public List<Request<T>> getQueue()
+    public static class DoubleCapacity<T extends Number & Comparable<T>> extends Seize<T>
     {
-        return this.queue;
-    }
+        /** */
+        private static final long serialVersionUID = 1L;
 
-    @Override
-    public void receiveRequestedResource(final double pRequestedCapacity, final Resource<T> pResource)
+        /** The resource that is claimed by entities in this Seize block. */
+        protected final Resource.DoubleCapacity<T> resource;
 
-    {
-        for (Request<T> request : this.queue)
+        /** The fixed amount of resource requested by each entity. */
+        private double fixedCapacityClaim = Double.NaN;
+
+        /** The flexible, possibly entity-dependent, amount of resource requested by an entity. */
+        private ToDoubleFunction<Entity<T>> capacityClaimFunction;
+
+        /**
+         * Constructor for Seize flow object with floating point capacity.
+         * @param id String; the id of the FlowObject
+         * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
+         * @param resource Resource&lt;T&gt;; that is claimed in this Seize block
+         */
+        public DoubleCapacity(final String id, final DevsSimulatorInterface<T> simulator,
+                final Resource.DoubleCapacity<T> resource)
         {
-            if (request.getAmount() == pRequestedCapacity)
+            super(id, simulator);
+            this.resource = resource;
+        }
+
+        /**
+         * Set a fixed capacity claim. The alternative is a capacity claim calculated by a function.
+         * @param fixedCapacityClaim the fixed claim that every entity makes for a fixed capacity
+         * @return the object for method chaining
+         */
+        public Seize.DoubleCapacity<T> setFixedCapacityClaim(final double fixedCapacityClaim)
+        {
+            Throw.when(fixedCapacityClaim < 0.0, IllegalArgumentException.class, "capacity cannot be < 0");
+            this.fixedCapacityClaim = fixedCapacityClaim;
+            this.capacityClaimFunction = (entity) ->
             {
-                synchronized (this.queue)
+                return this.fixedCapacityClaim;
+            };
+            return this;
+        }
+
+        /**
+         * Set an entity-specific capacity claim as indicated by a function.
+         * @param capacityClaimFunction the function that calculates the needed capacity
+         * @return the object for method chaining
+         */
+        public Seize.DoubleCapacity<T> setFlexibleCapacityClaim(final ToDoubleFunction<Entity<T>> capacityClaimFunction)
+        {
+            this.fixedCapacityClaim = Double.NaN;
+            this.capacityClaimFunction = capacityClaimFunction;
+            return this;
+        }
+
+        /**
+         * Return the resource that is claimed by entities in this Seize block.
+         * @return the resource that is claimed by entities in this Seize block
+         */
+        @Override
+        public Resource.DoubleCapacity<T> getResource()
+        {
+            return this.resource;
+        }
+
+        /**
+         * Receive an object that requests an amount of units from a resource.
+         * @param entity Entity&lt;T&gt;; the object
+         * @param requestedCapacity double; the requested capacity
+         */
+        protected synchronized void receiveEntity(final Entity<T> entity, final double requestedCapacity)
+        {
+            var storedEntity = new StoredEntity<T>(entity, requestedCapacity, getSimulator().getSimulatorTime());
+            synchronized (this.storage)
+            {
+                this.storage.add(storedEntity);
+            }
+            this.fireTimedEvent(Seize.NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
+            getResource().requestCapacity(requestedCapacity, this);
+        }
+
+        @Override
+        public void receiveEntity(final Entity<T> entity)
+        {
+            super.receiveEntity(entity);
+            double capacityClaim = this.capacityClaimFunction.applyAsDouble(entity);
+            Throw.when(capacityClaim < 0.0, IllegalArgumentException.class, "capacity cannot be < 0");
+            this.receiveEntity(entity, capacityClaim);
+        }
+
+        @Override
+        public void receiveRequestedCapacity(final double capacityClaim, final Resource<T> resource)
+        {
+            for (StoredEntity<T> storedEntity : this.storage)
+            {
+                if (storedEntity.amount().doubleValue() == capacityClaim)
                 {
-                    this.queue.remove(request);
+                    synchronized (this.storage)
+                    {
+                        this.storage.remove(storedEntity);
+                    }
+                    this.fireTimedEvent(Seize.NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
+                    T delay = SimTime.minus(getSimulator().getSimulatorTime(), storedEntity.storeTime());
+                    this.fireTimedEvent(Seize.STORAGE_TIME_EVENT, delay.doubleValue(), getSimulator().getSimulatorTime());
+                    this.releaseEntity(storedEntity.entity());
+                    return;
                 }
-                this.fireTimedEvent(Seize.QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
-                T delay = SimTime.minus(getSimulator().getSimulatorTime(), request.getQueueEntryTime());
-                this.fireTimedEvent(Seize.DELAY_TIME, delay.doubleValue(), getSimulator().getSimulatorTime());
-                this.releaseEntity(request.getEntity());
-                return;
             }
         }
     }
 
     /**
-     * The Request Class defines the requests for resource.
+     * The stored entity.
      * @param <T> the time type
+     * @param entity the entity making the capacity request
+     * @param amount the amount of resources that the entity requested
+     * @param storeTime the time of storage
      */
-    public static class Request<T extends Number & Comparable<T>>
+    static record StoredEntity<T extends Number & Comparable<T>>(Entity<T> entity, Number amount, T storeTime)
     {
-        /** amount is the requested amount. */
-        private final double amount;
-
-        /** entity is the object requesting the amount. */
-        private final Entity<T> entity;
-
-        /** the time when the request was created. */
-        private final T queueEntryTime;
-
-        /**
-         * Method Request.
-         * @param entity Entity&lt;T&gt;; the requesting entity
-         * @param amount double; is the requested amount
-         * @param queueEntryTime T; the time the request was created
-         */
-        public Request(final Entity<T> entity, final double amount, final T queueEntryTime)
-        {
-            this.entity = entity;
-            this.amount = amount;
-            this.queueEntryTime = queueEntryTime;
-        }
-
-        /**
-         * Return the requested amount.
-         * @return double; the requested amount
-         */
-        public double getAmount()
-        {
-            return this.amount;
-        }
-
-        /**
-         * Return the entity.
-         * @return Entity&lt;T&gt;; the entity
-         */
-        public Entity<T> getEntity()
-        {
-            return this.entity;
-        }
-
-        /**
-         * Returns the time when the request was made.
-         * @return T; the time when the request was made
-         */
-        public T getQueueEntryTime()
-        {
-            return this.queueEntryTime;
-        }
     }
-
 }

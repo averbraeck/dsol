@@ -1,10 +1,8 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import java.rmi.RemoteException;
-
 /**
- * This interface provides a callback method to the resource. Whenever resource is available this method is invoked on the
- * requestor.
+ * This interface provides a callback method to the requestor of the capacity for a resource. Whenever the resource is available
+ * this method is invoked on the requestor.
  * <p>
  * Copyright (c) 2002-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -15,13 +13,12 @@ import java.rmi.RemoteException;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the simulation time type.
  */
-public interface ResourceRequestorInterface<T extends Number & Comparable<T>>
+public interface CapacityRequestor<T extends Number & Comparable<T>>
 {
     /**
-     * receive the requested resource.
-     * @param requestedCapacity double; reflects the amount requested.
+     * receive the requested capacity for the resource.
+     * @param requestedCapacity double; the amount requested.
      * @param resource Resource&lt;T&gt;; the requested resource.
-     * @throws RemoteException on network failure.
      */
-    void receiveRequestedResource(double requestedCapacity, Resource<T> resource) throws RemoteException;
+    void receiveRequestedCapacity(double requestedCapacity, Resource<T> resource);
 }

@@ -56,7 +56,7 @@ public class Release<T extends Number & Comparable<T>> extends FlowObject<T, Rel
         super.receiveEntity(entity);
         try
         {
-            this.resource.releaseCapacity(this.amount);
+            ((Resource.DoubleCapacity<T>) this.resource).releaseCapacity(this.amount);
             this.releaseEntity(entity);
         }
         catch (Exception exception)
