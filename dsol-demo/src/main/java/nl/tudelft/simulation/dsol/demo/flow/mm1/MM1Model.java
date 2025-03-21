@@ -98,10 +98,11 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
                     .setEntitySupplier(() -> new Entity<Double>("entity", getSimulator().getSimulatorTime()));
 
             // The queue, the resource and the release
-            Resource<Double> resource = new Resource<>("resource", this.simulator, capacity);
+            var resource = new Resource.DoubleCapacity<>("resource", this.simulator, capacity);
 
             // created the caiming and releasing of the resource
-            var queue = new Seize<Double>("Seize", this.simulator, resource);
+            var seize = new Seize.DoubleCapacity<Double>("Seize", this.simulator, resource);
+            seize.setFixedCapacityClaim(1.0);
             var release = new Release<Double>("Release", this.simulator, resource, 1.0);
 
             // The server
@@ -110,13 +111,13 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             var server = new Delay<Double>("Delay", this.simulator).setDelayDistribution(serviceTime);
 
             // The flow
-            generator.setDestination(queue);
-            queue.setDestination(server);
+            generator.setDestination(seize);
+            seize.setDestination(server);
             server.setDestination(release);
 
             // Statistics
-            this.dN = new SimTally<Double>("d(n)", this, queue, Seize.DELAY_TIME);
-            this.qN = new SimPersistent<Double>("q(n)", this, queue, Seize.QUEUE_LENGTH_EVENT);
+            this.dN = new SimTally<Double>("d(n)", this, seize, Seize.STORAGE_TIME_EVENT);
+            this.qN = new SimPersistent<Double>("q(n)", this, seize, Seize.NUMBER_STORED_EVENT);
             this.uN = new Utilization<>("u(n)", this, server);
 
         }

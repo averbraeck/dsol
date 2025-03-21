@@ -66,10 +66,11 @@ public class FlowQueueingModel1 extends AbstractDsolModel<Double, DevsSimulatorI
         });
 
         // the resource
-        var resource = new Resource<Double>("resource", getSimulator(), 1);
+        var resource = new Resource.DoubleCapacity<Double>("resource", getSimulator(), 1.0);
 
         // seize the resource
-        var seize = new Seize<Double>("seize", getSimulator(), resource);
+        var seize = new Seize.DoubleCapacity<Double>("seize", getSimulator(), resource);
+        seize.setFixedCapacityClaim(1.0);
         generator.setDestination(seize);
 
         // delay for the processing time
