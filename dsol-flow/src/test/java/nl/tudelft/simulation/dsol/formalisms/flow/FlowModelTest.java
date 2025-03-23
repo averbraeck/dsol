@@ -94,4 +94,60 @@ public class FlowModelTest extends FlowTest
         cleanUp(simulator);
     }
 
+    /** Test the FlowModel for constructor errors. */
+    @Test
+    public void testFlowModelConstructorError()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null)
+                {
+                    private static final long serialVersionUID = 1L;
+
+                    @Override
+                    public void constructModel() throws SimRuntimeException
+                    {
+                    }
+                });
+        
+        var streamInfo = new StreamInformation(new MersenneTwister(10L));
+        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, streamInfo, null)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+            }
+        });
+        
+        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(null, BlockNamingType.AUTOMATIC)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+            }
+        });
+
+        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(null, streamInfo, BlockNamingType.AUTOMATIC)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+            }
+        });
+
+        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null, BlockNamingType.AUTOMATIC)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+            }
+        });
+    }
 }
