@@ -9,8 +9,15 @@ import org.djutils.exceptions.Throw;
 
 import com.rits.cloning.Cloner;
 
+import nl.tudelft.simulation.dsol.eventlists.EventListInterface;
+import nl.tudelft.simulation.dsol.experiment.Experiment;
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
+import nl.tudelft.simulation.dsol.experiment.RunControl;
+import nl.tudelft.simulation.dsol.experiment.StreamInformation;
+import nl.tudelft.simulation.dsol.experiment.Treatment;
+import nl.tudelft.simulation.dsol.logger.SimLogger;
+import nl.tudelft.simulation.dsol.model.DsolModel;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
@@ -45,7 +52,9 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
 
     static
     {
-        cloner.dontCloneInstanceOf(StreamInterface.class, SimulatorInterface.class, AbstractDsolModel.class, Replication.class);
+        cloner.dontCloneInstanceOf(StreamInterface.class, SimulatorInterface.class, DsolModel.class, Replication.class,
+                Experiment.class, RunControl.class, Treatment.class, StreamInformation.class, EventListInterface.class,
+                InputParameter.class, SimLogger.class);
     }
 
     /**
