@@ -118,7 +118,7 @@ public class DuplicateTest extends FlowTest
                 var d2 = new Duplicate<Double>("d2", this.simulator);
 
                 // duplicate block does not have a distribution for the number of copies
-                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", 1.0)), NullPointerException.class);
+                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), NullPointerException.class);
 
                 // number of copies distribution should not be null
                 Try.testFail(() -> d2.setNumberCopiesDist(null), NullPointerException.class);
@@ -129,7 +129,7 @@ public class DuplicateTest extends FlowTest
                 // number of copies distribution should not have a distribution with negative numbers
                 StreamInterface stream = getSimulator().getModel().getDefaultStream();
                 d2.setNumberCopiesDist(new DistDiscreteConstant(stream, -2));
-                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", 1.0)), IllegalArgumentException.class);
+                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), IllegalArgumentException.class);
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
@@ -170,7 +170,7 @@ public class DuplicateTest extends FlowTest
                 generator.setDestination(duplicate);
                 generator.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 10.0)));
                 generator.setStartTime(5.0);
-                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator.getSimulatorTime()));
+                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator));
                 generator.setReleaseFunction((entity) ->
                 {
                     entity.setAttribute("dist", new DistExponential(stream, 2.0));
@@ -233,7 +233,7 @@ public class DuplicateTest extends FlowTest
                 generator.setDestination(duplicate);
                 generator.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 10.0)));
                 generator.setStartTime(5.0);
-                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator.getSimulatorTime()));
+                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

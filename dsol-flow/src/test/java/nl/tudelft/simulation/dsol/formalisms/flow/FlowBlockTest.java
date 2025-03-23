@@ -81,7 +81,7 @@ public class FlowBlockTest extends FlowTest
                 assertEquals("12", delay.getStringAttribute("y"));
 
                 // create entity and check attributes
-                var entity = new Entity<Double>("e1", 0.0);
+                var entity = new Entity<Double>("e1", getSimulator());
                 assertNull(entity.getTimestamp("t"));
                 assertNull(entity.getAttribute("x"));
                 assertNull(entity.getAttribute("y", Integer.class));

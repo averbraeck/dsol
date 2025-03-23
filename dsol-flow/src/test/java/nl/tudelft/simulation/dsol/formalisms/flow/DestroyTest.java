@@ -139,7 +139,7 @@ public class DestroyTest extends FlowTest
                 generator.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 1)));
                 generator.setMaxNumberGeneratedEntities(100);
                 generator.setStartTime(0.0);
-                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator.getSimulatorTime()));
+                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator));
 
                 var destroy = new Destroy<Double>("destroy", this.simulator);
                 destroy.setDefaultStatistics();

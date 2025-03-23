@@ -111,7 +111,7 @@ public class DelayTest extends FlowTest
                 var d2 = new Delay<Double>("d2", this.simulator);
 
                 // delay block does not have a delay distribution
-                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", 1.0)), NullPointerException.class);
+                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), NullPointerException.class);
 
                 // delay distribution should not be null
                 Try.testFail(() -> d2.setDelayDistribution(null), NullPointerException.class);
@@ -148,7 +148,7 @@ public class DelayTest extends FlowTest
                 generator.setDestination(delay);
                 generator.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 10.0)));
                 generator.setStartTime(5.0);
-                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator.getSimulatorTime()));
+                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator));
 
                 this.simulator.scheduleEventAbs(2.0, () ->
                 {
@@ -198,7 +198,7 @@ public class DelayTest extends FlowTest
                 generator.setDestination(delay);
                 generator.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(stream, 10.00001)));
                 generator.setStartTime(0.0);
-                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator.getSimulatorTime()));
+                generator.setEntitySupplier(() -> new Entity<>("e", this.simulator));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

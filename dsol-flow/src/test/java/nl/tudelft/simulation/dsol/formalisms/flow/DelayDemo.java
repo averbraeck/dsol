@@ -45,7 +45,7 @@ public class DelayDemo
                 var create = new Create<Double>("create", this.simulator)
                         .setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 1.0)))
                         .setDefaultStatistics()
-                        .setEntitySupplier(() -> new Entity<>("entity", getSimulator().getSimulatorTime()));
+                        .setEntitySupplier(() -> new Entity<>("entity", getSimulator()));
                 var delay = new Delay<Double>("delay", this.simulator)
                         .setDelayDistribution(new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 10.0)))
                         .setDefaultStatistics();

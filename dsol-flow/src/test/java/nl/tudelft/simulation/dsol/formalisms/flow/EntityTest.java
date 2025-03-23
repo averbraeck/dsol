@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
+import nl.tudelft.simulation.dsol.experiment.SingleReplication;
+import nl.tudelft.simulation.dsol.model.DsolModel;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -23,7 +27,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class EntityTest
+public class EntityTest extends FlowTest
 {
 
     /**
@@ -32,7 +36,14 @@ public class EntityTest
     @Test
     public void testEntityMethods()
     {
-        var e1 = new Entity<Double>("e1", 2.0);
+        DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
+        DsolModel<Double, DevsSimulatorInterface<Double>> model = makeModelDouble(simulator);
+        SingleReplication<Double> replication = new SingleReplication<Double>("replication", 0.0, 0.0, 100.0);
+        simulator.initialize(model, replication);
+        simulator.runUpTo(2.0);
+        wait(simulator, 500);
+
+        var e1 = new Entity<Double>("e1", simulator);
         assertEquals("e1", e1.getId());
         assertEquals(2.0, e1.getCreationTime());
         assertNull(e1.getAttribute("x"));
@@ -59,5 +70,7 @@ public class EntityTest
         assertEquals(d1.toString(), d2.toString());
         assertEquals(d1.getStream(), d2.getStream());
         assertNotEquals(d1.draw(), d2.draw()); // the STREAM is not cloned (!)
+        
+        cleanUp(simulator);
     }
 }

@@ -139,7 +139,7 @@ public class CreateTest extends FlowTest
                 assertNotNull(c1.getCountStatistic());
                 assertEquals(nrListeners + 3, c1.getEventListenerMap().size());
 
-                c1.setEntitySupplier(() -> new Entity<Double>("entity", this.simulator.getSimulatorTime()));
+                c1.setEntitySupplier(() -> new Entity<Double>("entity", this.simulator));
 
                 c1.setDestination(new Destroy<Double>("receiver", this.simulator)
                 {
@@ -213,7 +213,7 @@ public class CreateTest extends FlowTest
                 Try.testFail(() -> c2.generate(), NullPointerException.class);
 
                 // Create block should not receive any entities
-                Try.testFail(() -> c2.receiveEntity(new Entity<Double>("e", 1.0)), SimRuntimeException.class);
+                Try.testFail(() -> c2.receiveEntity(new Entity<Double>("e", this.simulator)), SimRuntimeException.class);
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
@@ -246,7 +246,7 @@ public class CreateTest extends FlowTest
                 c3.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -286,7 +286,7 @@ public class CreateTest extends FlowTest
                 c3.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -326,7 +326,7 @@ public class CreateTest extends FlowTest
                 c3.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -365,7 +365,7 @@ public class CreateTest extends FlowTest
                 c4.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -403,7 +403,7 @@ public class CreateTest extends FlowTest
                 c5.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -444,7 +444,7 @@ public class CreateTest extends FlowTest
                 c6.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -484,7 +484,7 @@ public class CreateTest extends FlowTest
                 c7.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -524,7 +524,7 @@ public class CreateTest extends FlowTest
                 c8.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -573,7 +573,7 @@ public class CreateTest extends FlowTest
                 c9.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -617,7 +617,7 @@ public class CreateTest extends FlowTest
                 c10.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -665,7 +665,7 @@ public class CreateTest extends FlowTest
                 c11.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
@@ -708,7 +708,7 @@ public class CreateTest extends FlowTest
                 c12.setEntitySupplier(() ->
                 {
                     counter.incrementAndGet();
-                    return new Entity<Double>("entity", this.simulator.getSimulatorTime());
+                    return new Entity<Double>("entity", this.simulator);
                 });
             }
         };
