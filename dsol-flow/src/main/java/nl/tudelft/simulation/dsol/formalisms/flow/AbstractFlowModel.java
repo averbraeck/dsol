@@ -37,7 +37,7 @@ public abstract class AbstractFlowModel<T extends Number & Comparable<T>, S exte
     protected Map<String, Block<T>> blockMap = new HashMap<>();
 
     /** the naming regime: id-based or automatic. */
-    protected BlockNamingType blockNamingType = BlockNamingType.AUTOMATIC;
+    protected final BlockNamingType blockNamingType;
 
     /**
      * Construct a DSOL model and set the simulator.
