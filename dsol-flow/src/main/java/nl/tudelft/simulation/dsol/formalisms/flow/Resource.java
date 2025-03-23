@@ -255,6 +255,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                         request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {
+                            cr.remove();
                             getRequestQueue().remove(request);
                         }
                     }
@@ -386,15 +387,16 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
             changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
             synchronized (getRequestQueue())
             {
-                for (var i = getRequestQueue().iterator(); i.hasNext();)
+                for (var cr = getRequestQueue().iterator(); cr.hasNext();)
                 {
-                    var request = (CapacityRequest.IntegerCapacity<T>) i.next();
+                    var request = (CapacityRequest.IntegerCapacity<T>) cr.next();
                     if ((this.capacity - this.claimedCapacity) >= request.getAmount())
                     {
                         this.changeClaimedCapacity(request.getAmount());
                         request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {
+                            cr.remove();
                             getRequestQueue().remove(request);
                         }
                     }
