@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.djutils.base.Identifiable;
-import org.djutils.exceptions.Throw;
-
 import com.rits.cloning.Cloner;
 
 import nl.tudelft.simulation.dsol.eventlists.EventListInterface;
@@ -18,6 +15,7 @@ import nl.tudelft.simulation.dsol.experiment.Treatment;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
 
@@ -33,13 +31,10 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Entity<T extends Number & Comparable<T>> implements Identifiable, Serializable
+public class Entity<T extends Number & Comparable<T>> extends Block<T> implements Serializable
 {
     /** */
     private static final long serialVersionUID = 20230524L;
-
-    /** the entity's id. */
-    private String id;
 
     /** the creation time. */
     private final T creationTime;
@@ -60,14 +55,12 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
     /**
      * Construct a new Entity with a creation time.
      * @param id String; the entity's id
-     * @param creationTime T; the creation time
+     * @param simulator the simulator to retrieve the creation time
      */
-    public Entity(final String id, final T creationTime)
+    public Entity(final String id, final DevsSimulatorInterface<T> simulator)
     {
-        Throw.whenNull(id, "id cannot be null");
-        Throw.whenNull(creationTime, "creation time cannot be null");
-        this.id = id;
-        this.creationTime = creationTime;
+        super(id, simulator);
+        this.creationTime = simulator.getSimulatorTime();
     }
 
     /**
@@ -194,15 +187,9 @@ public class Entity<T extends Number & Comparable<T>> implements Identifiable, S
     }
 
     @Override
-    public String getId()
-    {
-        return this.id;
-    }
-
-    @Override
     public String toString()
     {
-        return "Entity [id=" + this.id + ", creationTime=" + this.creationTime + "]";
+        return "Entity [id=" + getId() + ", creationTime=" + this.creationTime + "]";
     }
 
 }
