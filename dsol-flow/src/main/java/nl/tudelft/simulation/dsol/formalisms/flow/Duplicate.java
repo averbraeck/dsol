@@ -129,7 +129,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowBlock<T, Du
      */
     public Duplicate<T> setDefaultStatistics()
     {
-        super.setDefaultFlowObjectStatistics();
+        super.setDefaultFlowBlockStatistics();
         this.countDuplicateReleasedStatistic = new SimCounter<>(getId() + " # of released duplicate entities",
                 getSimulator().getModel(), this, DUPLICATE_RELEASE_EVENT);
         this.countDuplicateReleasedStatistic.initialize();
