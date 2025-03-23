@@ -10,6 +10,8 @@ import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.statistics.SimPersistent;
+import nl.tudelft.simulation.dsol.statistics.SimTally;
 
 /**
  * Queue implements the queueing behavior when requests (on behalf of entities or not) have to wait for a resource.
@@ -23,7 +25,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Queue<T extends Number & Comparable<T>> extends FlowObject<T, Queue<T>> implements Iterable<CapacityRequest<T>>
+public class Queue<T extends Number & Comparable<T>> extends Block<T> implements Iterable<CapacityRequest<T>>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -34,13 +36,19 @@ public class Queue<T extends Number & Comparable<T>> extends FlowObject<T, Queue
     /** The counter for a unique id for the requests. */
     private long counter = 0L;
 
+    /** persistent statistic for the queue length. */
+    private SimPersistent<T> queueLengthStatistic = null;
+
+    /** tally statistic for the time-in queue of the requests. */
+    private SimTally<T> timeInQueueStatistic = null;
+
     /** QUEUE_LENGTH_EVENT fired on changes in queue length. */
     public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length changed",
             new ObjectDescriptor("newQueueLength", "new queue length", Integer.class)));
 
     /** QUEUE_TIME_EVENT is fired wwhen a request is granted and provides the waiting time (which can be 0). */
-    public static final EventType QUEUE_WAITING_TIME_EVENT = new EventType(new MetaData("QUEUE_WAITING_TIME_EVENT",
-            "Queue waiting time", new ObjectDescriptor("queue waiting time", "queue waiting time", Number.class)));
+    public static final EventType TIME_IN_QUEUE_EVENT = new EventType(new MetaData("TIME_IN_QUEUE_EVENT", "Time in queue",
+            new ObjectDescriptor("time in queue", "time in queue", Number.class)));
 
     /**
      * Create a new queue, with a priority-based, first-come-first-served sorting mechanism.
@@ -102,7 +110,7 @@ public class Queue<T extends Number & Comparable<T>> extends FlowObject<T, Queue
     {
         return this.queue.first();
     }
-    
+
     /**
      * Remove the first request in the queue.
      * @return the first request in the queue, after removing it
@@ -111,7 +119,9 @@ public class Queue<T extends Number & Comparable<T>> extends FlowObject<T, Queue
     {
         var request = peek();
         this.queue.remove(request);
-        this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
+        T now = getSimulator().getSimulatorTime();
+        this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), now);
+        this.fireTimedEvent(TIME_IN_QUEUE_EVENT, now.doubleValue() - request.getQueueEntryTime().doubleValue(), now);
         return request;
     }
 
@@ -120,7 +130,62 @@ public class Queue<T extends Number & Comparable<T>> extends FlowObject<T, Queue
     {
         return this.queue.iterator();
     }
-    
+
+    /**
+     * Turn on the default statistics for this queue block.
+     * @return the Queue instance for method chaining
+     */
+    public Queue<T> setDefaultStatistics()
+    {
+        this.queueLengthStatistic =
+                new SimPersistent<>(getId() + " queue length", getSimulator().getModel(), this, QUEUE_LENGTH_EVENT);
+        this.queueLengthStatistic.initialize();
+        fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
+        this.timeInQueueStatistic =
+                new SimTally<>(getId() + " time in queue", getSimulator().getModel(), this, TIME_IN_QUEUE_EVENT);
+        return this;
+    }
+
+    /**
+     * Return the number of requests that are currently in the queue.
+     * @return the number of requests that are currently in the queue
+     */
+    public int getNumberRequestsInQueue()
+    {
+        return this.queue.size();
+    }
+
+    /**
+     * Return whether statistics are turned on for this Queue block.
+     * @return whether statistics are turned on for this Queue block.
+     */
+    public boolean hasDefaultStatistics()
+    {
+        return this.queueLengthStatistic != null;
+    }
+
+    /**
+     * Return the persistent statistic for the queue length.
+     * @return the persistent statistic for the queue length, can be null if no statistics are calculated
+     */
+    public SimPersistent<T> getQueueLengthStatistic()
+    {
+        return this.queueLengthStatistic;
+    }
+
+    /**
+     * Return the tally statistic for the time-in queue of the requests.
+     * @return the tally statistic for the time-in queue of the requests, can be null if no statistics are calculated
+     */
+    public SimTally<T> getTimeInQueueStatistic()
+    {
+        return this.timeInQueueStatistic;
+    }
+
+    /* ****************************************************************************************************************** */
+    /* **************************************** REQUEST COMPARATOR CLASSES ********************************************** */
+    /* ****************************************************************************************************************** */
+
     /**
      * the FCFS RequestComparator. This comparator ignores priority, and sorts on the time-of-entry with the id as a tie
      * breaker, where an earlier time comes first.
