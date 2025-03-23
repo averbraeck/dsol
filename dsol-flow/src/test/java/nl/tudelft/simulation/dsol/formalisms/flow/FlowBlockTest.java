@@ -24,7 +24,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class FlowObjectTest extends FlowTest
+public class FlowBlockTest extends FlowTest
 {
     /**
      * Test the assignments in the FlowObject.
