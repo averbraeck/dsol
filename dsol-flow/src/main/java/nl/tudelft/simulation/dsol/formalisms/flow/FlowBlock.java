@@ -4,9 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import org.djutils.base.Identifiable;
 import org.djutils.event.EventType;
-import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
@@ -15,7 +13,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimCounter;
 
 /**
- * A FlowObject that can receive and/or release Entity objects.
+ * A FlowBlock that can receive and/or release Entity objects.
  * <p>
  * Copyright (c) 2002-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -27,23 +25,16 @@ import nl.tudelft.simulation.dsol.statistics.SimCounter;
  * @param <T> the time type
  * @param <F> the flow block for the return type in method chaining
  */
-public abstract class FlowObject<T extends Number & Comparable<T>, F extends FlowObject<T, F>> extends LocalEventProducer
-        implements Identifiable
+public abstract class FlowBlock<T extends Number & Comparable<T>, F extends FlowBlock<T, F>> extends Block<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;
 
-    /** the simulator on which behavior is scheduled. */
-    private DevsSimulatorInterface<T> simulator;
-
     /** the next flow object in the process-model chain. */
-    private FlowObject<T, ?> destination;
+    private FlowBlock<T, ?> destination;
 
     /** the number of entities that entered the flow object minus the number of entities that left the object. */
     private int numberEntitiesInMinusOut = 0;
-
-    /** the id of the FlowObject. */
-    private final String id;
 
     /** a potential count statistic for the number of received objects; when null, no statistic is calculated. */
     private SimCounter<T> countReceivedStatistic;
@@ -73,12 +64,9 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
      * @param id String; the id of the FlowObject
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the simulator on which behavior is scheduled
      */
-    public FlowObject(final String id, final DevsSimulatorInterface<T> simulator)
+    public FlowBlock(final String id, final DevsSimulatorInterface<T> simulator)
     {
-        Throw.whenNull(id, "id cannot be null");
-        Throw.whenNull(simulator, "simulator cannot be null");
-        this.id = id;
-        this.simulator = simulator;
+        super(id, simulator);
     }
 
     /**
@@ -125,7 +113,7 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
     public void receiveEntity(final Entity<T> entity)
     {
         this.numberEntitiesInMinusOut++;
-        this.fireTimedEvent(RECEIVE_EVENT, 1, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(RECEIVE_EVENT, 1, getSimulator().getSimulatorTime());
         if (this.receiveFunction != null)
             this.receiveFunction.accept(entity);
     }
@@ -137,7 +125,7 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
      * @return the flow object for method chaining
      */
     @SuppressWarnings("unchecked")
-    public F setDestination(final FlowObject<T, ?> destination)
+    public F setDestination(final FlowBlock<T, ?> destination)
     {
         this.destination = destination;
         return (F) this;
@@ -167,7 +155,7 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
     protected synchronized void releaseEntity(final Entity<T> entity)
     {
         this.numberEntitiesInMinusOut--;
-        this.fireTimedEvent(RELEASE_EVENT, 1, this.simulator.getSimulatorTime());
+        this.fireTimedEvent(RELEASE_EVENT, 1, getSimulator().getSimulatorTime());
         if (this.releaseFunction != null)
             this.releaseFunction.accept(entity);
         if (this.destination != null)
@@ -259,7 +247,7 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
      * Return the current destination.
      * @return FlowObject; the destination of this flow object
      */
-    public FlowObject<T, ?> getDestination()
+    public FlowBlock<T, ?> getDestination()
     {
         return this.destination;
     }
@@ -291,25 +279,10 @@ public abstract class FlowObject<T extends Number & Comparable<T>, F extends Flo
         return this.numberEntitiesInMinusOut;
     }
 
-    /**
-     * Return the simulator.
-     * @return DevsSimultorInterface&lt;T&gt;; the simulator
-     */
-    public DevsSimulatorInterface<T> getSimulator()
-    {
-        return this.simulator;
-    }
-
-    @Override
-    public String getId()
-    {
-        return this.id;
-    }
-
     @Override
     public String toString()
     {
-        return "FlowObject [id=" + this.id + "]";
+        return "FlowObject [id=" + getId() + "]";
     }
 
 }
