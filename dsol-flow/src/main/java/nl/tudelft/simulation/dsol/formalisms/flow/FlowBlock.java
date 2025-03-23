@@ -60,8 +60,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
             new ObjectDescriptor("releasedEntity", "the number of released entities (1)", Integer.class)));
 
     /**
-     * Construct a new FlowObject.
-     * @param id String; the id of the FlowObject
+     * Construct a new FlowBlock.
+     * @param id String; the id of the FlowBlock
      * @param simulator DevsSimulatorInterface&lt;T&gt;; is the simulator on which behavior is scheduled
      */
     public FlowBlock(final String id, final DevsSimulatorInterface<T> simulator)
@@ -121,7 +121,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
     /**
      * Set the destination of this flow object. The destination is the object the entity will go to when leaving this flow
      * object. The destination can be null, indicating the entity does not go to a next flow object.
-     * @param destination FlowObject&lt;T&gt;; the next flow object in the model, can be null
+     * @param destination FlowBlock&lt;T&gt;; the next flow object in the model, can be null
      * @return the flow object for method chaining
      */
     @SuppressWarnings("unchecked")
@@ -136,7 +136,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
      * @return the flow object for method chaining
      */
     @SuppressWarnings("unchecked")
-    public F setDefaultFlowObjectStatistics()
+    public F setDefaultFlowBlockStatistics()
     {
         this.countReceivedStatistic =
                 new SimCounter<>(getId() + " # of received entities", getSimulator().getModel(), this, RECEIVE_EVENT);
@@ -245,7 +245,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Return the current destination.
-     * @return FlowObject; the destination of this flow object
+     * @return FlowBlock; the destination of this flow object
      */
     public FlowBlock<T, ?> getDestination()
     {
@@ -282,7 +282,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
     @Override
     public String toString()
     {
-        return "FlowObject [id=" + getId() + "]";
+        return "FlowBlock [id=" + getId() + "]";
     }
 
 }
