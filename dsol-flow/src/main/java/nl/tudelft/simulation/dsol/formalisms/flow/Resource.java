@@ -1,14 +1,13 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import org.djutils.base.Identifiable;
 import org.djutils.event.EventType;
-import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 
 /**
  * A resource defines a shared and limited amount that can be claimed by, e.g., an entity.
@@ -21,24 +20,25 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the simulation time type
+ * @param <R> the resource type
  */
-public abstract class Resource<T extends Number & Comparable<T>> extends LocalEventProducer implements Identifiable
+public abstract class Resource<T extends Number & Comparable<T>, R extends Resource<T, R>> extends Block<T>
 {
     /** */
     private static final long serialVersionUID = 20140805L;
 
-    /** the id of the resource. */
-    private final String id;
+    /** persistent statistic for the resource utilization. */
+    private SimPersistent<T> utilizationStatistic = null;
 
-    /** simulator defines the simulator on which is scheduled. */
-    private final DevsSimulatorInterface<T> simulator;
-
-    /** UTILIZATION_EVENT is fired on activity that decreases or increases the utilization. */
-    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT", "Utilization changed",
-            new ObjectDescriptor("newUtilization", "new utilization", Number.class)));
+    /** The release type that indicates how the queue is searched for requests when capacity is available. */
+    private ReleaseType releaseType = ReleaseType.FIRST_ONLY;
 
     /** the queue of requests for this resource. */
     private final Queue<T> requestQueue;
+
+    /** UTILIZATION_EVENT is fired on activity that decreases or increases the utilization. */
+    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT", "Utilization changed",
+            new ObjectDescriptor("newUtilization", "new utilization", Double.class)));
 
     /**
      * Create a new Resource with a capacity and a specific request comparator, e.g., LIFO or sorted on an attribute.
@@ -47,26 +47,8 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
      */
     public Resource(final String id, final DevsSimulatorInterface<T> simulator)
     {
-        Throw.whenNull(id, "resourceId cannot be null");
-        Throw.whenNull(simulator, "simulator cannot be null");
-        this.id = id;
-        this.simulator = simulator;
+        super(id, simulator);
         this.requestQueue = new Queue<T>(id + "_queue", simulator);
-    }
-
-    @Override
-    public String getId()
-    {
-        return this.id;
-    }
-
-    /**
-     * Return the simulator.
-     * @return the simulator
-     */
-    public DevsSimulatorInterface<T> getSimulator()
-    {
-        return this.simulator;
     }
 
     /**
@@ -79,10 +61,68 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
     }
 
     /**
+     * Set the release type that indicates how the queue is searched for requests when capacity is available.
+     * @param releaseType the new release type
+     * @return this object for method chaining
+     */
+    @SuppressWarnings("unchecked")
+    public R setReleaseType(final ReleaseType releaseType)
+    {
+        this.releaseType = releaseType;
+        return (R) this;
+    }
+
+    /**
+     * Return the release type that indicates how the queue is searched for requests when capacity is available.
+     * @return the release type that indicates how the queue is searched for requests when capacity is available
+     */
+    public ReleaseType getReleaseType()
+    {
+        return this.releaseType;
+    }
+
+    /**
+     * Return the maximum, and thus original capacity of the resource.
+     * @return capacity the maximum, and thus original capacity of the resource.
+     */
+    public abstract Number getCapacity();
+
+    /**
+     * Return the amount of currently claimed capacity.
+     * @return the amount of currently claimed capacity.
+     */
+    public abstract Number getClaimedCapacity();
+
+    /**
+     * Turn on the default statistics for this queue block.
+     * @return the Queue instance for method chaining
+     */
+    @SuppressWarnings("unchecked")
+    public R setDefaultStatistics()
+    {
+        this.utilizationStatistic =
+                new SimPersistent<>(getId() + " time in queue", getSimulator().getModel(), this, UTILIZATION_EVENT);
+        fireTimedEvent(UTILIZATION_EVENT,
+                getCapacity().doubleValue() == 0.0 ? 0.0 : getClaimedCapacity().doubleValue() / getCapacity().doubleValue(),
+                getSimulator().getSimulatorTime());
+        this.requestQueue.setDefaultStatistics();
+        return (R) this;
+    }
+
+    /**
+     * Return whether statistics are turned on for this Storage block.
+     * @return whether statistics are turned on for this Storage block.
+     */
+    public boolean hasDefaultStatistics()
+    {
+        return this.utilizationStatistic != null;
+    }
+
+    /**
      * Resource with floating point capacity.
      * @param <T> the time type
      */
-    public static class DoubleCapacity<T extends Number & Comparable<T>> extends Resource<T>
+    public static class DoubleCapacity<T extends Number & Comparable<T>> extends Resource<T, DoubleCapacity<T>>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -106,26 +146,20 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
             this.capacity = capacity;
         }
 
-        /**
-         * returns the maximum, and thus original capacity of the resource.
-         * @return capacity the maximum, and thus original capacity of the resource.
-         */
-        public double getCapacity()
+        @Override
+        public Double getCapacity()
         {
             return this.capacity;
         }
 
-        /**
-         * returns the amount of currently claimed capacity.
-         * @return the amount of currently claimed capacity.
-         */
-        public double getClaimedCapacity()
+        @Override
+        public Double getClaimedCapacity()
         {
             return this.claimedCapacity;
         }
 
         /**
-         * returns the currently available capacity on this resource. This method is implemented as
+         * Return the currently available capacity on this resource. This method is implemented as
          * <code>return this.getCapacity()-this.getClaimedCapacity()</code>
          * @return the currently available capacity on this resource.
          */
@@ -135,17 +169,21 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
         }
 
         /**
-         * Method alterClaimedCapacity.
-         * @param amount double; refers the amount which is added to the claimed capacity
+         * Add the amount to the claimed capacity.
+         * @param amount double; the amount which is added to the claimed capacity
          */
-        private synchronized void alterClaimedCapacity(final double amount)
+        private synchronized void changeClaimedCapacity(final double amount)
         {
             this.claimedCapacity += amount;
-            this.fireTimedEvent(Resource.UTILIZATION_EVENT, this.claimedCapacity, getSimulator().getSimulatorTime());
+            fireTimedEvent(UTILIZATION_EVENT,
+                    getCapacity().doubleValue() == 0.0 ? 0.0 : getClaimedCapacity().doubleValue() / getCapacity().doubleValue(),
+                    getSimulator().getSimulatorTime());
         }
 
         /**
-         * sets the capacity of the resource.
+         * Set the capacity of the resource to a new value. The <code>releaseCapacity</code> method is called after updating the
+         * capacity because in case of a capacity increase, the resource could allow one or more new claims on the capacity from
+         * the queue.
          * @param capacity double; the new maximal capacity
          */
         public void setCapacity(final double capacity)
@@ -155,7 +193,7 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
         }
 
         /**
-         * requests an amount of capacity from the resource.
+         * Request an amount of capacity from the resource, without a priority. A dummy priority value of 0 is used.
          * @param amount double; the requested amount
          * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
          */
@@ -165,17 +203,17 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
         }
 
         /**
-         * Request an amount of capacity from the resource.
+         * Request an amount of capacity from the resource, with an integer priority value.
          * @param amount double; the requested amount
          * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
          * @param priority int; the priority of the request
          */
         public synchronized void requestCapacity(final double amount, final CapacityRequestor<T> requestor, final int priority)
         {
-            Throw.when(amount < 0.0, SimRuntimeException.class, "requested capacity on resource cannot < 0.0");
+            Throw.when(amount < 0.0, SimRuntimeException.class, "requested capacity on resource cannot be < 0.0");
             if ((this.claimedCapacity + amount) <= this.capacity)
             {
-                this.alterClaimedCapacity(amount);
+                changeClaimedCapacity(amount);
                 getSimulator().scheduleEventNow(requestor, "receiveRequestedCapacity",
                         new Object[] {Double.valueOf(amount), this});
             }
@@ -189,16 +227,13 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
         }
 
         /**
-         * releases an amount of capacity from the resource.
+         * Release an amount of capacity from the resource.
          * @param amount double; the amount to release
          */
         public void releaseCapacity(final double amount)
         {
-            Throw.when(amount < 0.0, SimRuntimeException.class, "released capacity on resource cannot < 0.0");
-            if (amount > 0.0)
-            {
-                this.alterClaimedCapacity(-Math.min(this.capacity, amount));
-            }
+            Throw.when(amount < 0.0, SimRuntimeException.class, "released capacity on resource cannot be < 0.0");
+            changeClaimedCapacity(-Math.min(this.capacity, amount));
             synchronized (getRequestQueue())
             {
                 for (var i = getRequestQueue().iterator(); i.hasNext();)
@@ -206,14 +241,14 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
                     var request = (CapacityRequest.DoubleCapacity<T>) i.next();
                     if ((this.capacity - this.claimedCapacity) >= request.getAmount())
                     {
-                        this.alterClaimedCapacity(request.getAmount());
+                        this.changeClaimedCapacity(request.getAmount());
                         request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {
                             i.remove();
                         }
                     }
-                    else
+                    else if (getReleaseType().equals(ReleaseType.FIRST_ONLY))
                     {
                         return;
                     }
@@ -222,4 +257,17 @@ public abstract class Resource<T extends Number & Comparable<T>> extends LocalEv
         }
     }
 
+    /**
+     * The release type, indicating in what way available capacity will be provided to waiting requests: is it only the first
+     * requests in the queue (depending on the sorting algorithm) that receive capacity, or is the entire queue searched for
+     * requests that may benefit from the still available capacity?
+     */
+    public static enum ReleaseType
+    {
+        /** FIRST_ONLY means that the search for requests that can use capacity stops at the first non-fit. */
+        FIRST_ONLY,
+
+        /** ENTIRE_QUEUE means that the search for requests that can use capacity searches the entire queue. */
+        ENTIRE_QUEUE;
+    }
 }
