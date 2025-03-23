@@ -80,9 +80,9 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
      * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
      * @param priority int; the priority of the request
      */
-    public void add(final double amount, final CapacityRequestor<T> requestor, final int priority)
+    public void add(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor, final int priority)
     {
-        var request = new CapacityRequest.DoubleCapacity<>(this.counter++, requestor, amount, priority,
+        var request = new CapacityRequest.DoubleCapacity<T>(this.counter++, requestor, amount, priority,
                 getSimulator().getSimulatorTime());
         this.queue.add(request);
         this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
@@ -94,9 +94,9 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
      * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
      * @param priority int; the priority of the request
      */
-    public void add(final int amount, final CapacityRequestor<T> requestor, final int priority)
+    public void add(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor, final int priority)
     {
-        var request = new CapacityRequest.IntegerCapacity<>(this.counter++, requestor, amount, priority,
+        var request = new CapacityRequest.IntegerCapacity<T>(this.counter++, requestor, amount, priority,
                 getSimulator().getSimulatorTime());
         this.queue.add(request);
         this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
@@ -112,17 +112,15 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
     }
 
     /**
-     * Remove the first request in the queue.
-     * @return the first request in the queue, after removing it
+     * Remove the given request from the queue.
+     * @param request the request to remove from the queue
      */
-    public CapacityRequest<T> remove()
+    public void remove(final CapacityRequest<T> request)
     {
-        var request = peek();
         this.queue.remove(request);
         T now = getSimulator().getSimulatorTime();
         this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), now);
         this.fireTimedEvent(TIME_IN_QUEUE_EVENT, now.doubleValue() - request.getQueueEntryTime().doubleValue(), now);
-        return request;
     }
 
     @Override

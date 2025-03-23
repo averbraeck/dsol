@@ -77,6 +77,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
      * @param <T> the time type
      */
     public static class DoubleCapacity<T extends Number & Comparable<T>> extends Seize<T>
+            implements CapacityRequestor.DoubleCapacity<T>
     {
         /** */
         private static final long serialVersionUID = 1L;
@@ -167,7 +168,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         }
 
         @Override
-        public void receiveRequestedCapacity(final double capacityClaim, final Resource<T, ?> resource)
+        public void receiveRequestedCapacity(final double capacityClaim, final Resource.DoubleCapacity<T> resource)
         {
             for (StoredEntity<T> storedEntity : this.storage)
             {

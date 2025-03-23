@@ -20,9 +20,6 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
     /** the numeric id of this request. */
     private final long id;
 
-    /** the requestor of the amount of capacity. */
-    private final CapacityRequestor<T> requestor;
-
     /** the amount requested by the requestor. */
     protected final Number amount;
 
@@ -35,16 +32,13 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
     /**
      * Create a new capacity request.
      * @param id the numeric id of this request
-     * @param requestor the requestor of the amount of capacity
      * @param amount the amount requested by the requestor
      * @param priority the priority of the request
      * @param queueEntryTime the time when the request was created
      */
-    public CapacityRequest(final long id, final CapacityRequestor<T> requestor, final Number amount,
-            final int priority, final T queueEntryTime)
+    public CapacityRequest(final long id, final Number amount, final int priority, final T queueEntryTime)
     {
         this.id = id;
-        this.requestor = requestor;
         this.amount = amount;
         this.priority = priority;
         this.queueEntryTime = queueEntryTime;
@@ -63,10 +57,7 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
      * Return the requestor of the capacity.
      * @return the requestor of the capacity
      */
-    public CapacityRequestor<T> getRequestor()
-    {
-        return this.requestor;
-    }
+    public abstract CapacityRequestor<T> getRequestor();
 
     /**
      * Return the requested amount of the resource.
@@ -115,46 +106,14 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
     }
 
     /**
-     * Capacity request for integer capacity.
-     * @param <T> the time type
-     */
-    public static class IntegerCapacity<T extends Number & Comparable<T>> extends CapacityRequest<T>
-    {
-        /**
-         * Create a new capacity request for integer capacity.
-         * @param id the numeric id of this request
-         * @param requestor the requestor of the amount of capacity
-         * @param amount the amount requested by the requestor
-         * @param priority the priority of the request
-         * @param queueEntryTime the time when the request was created
-         */
-        public IntegerCapacity(final long id, final CapacityRequestor<T> requestor, final int amount, final int priority,
-                final T queueEntryTime)
-        {
-            super(id, requestor, amount, priority, queueEntryTime);
-        }
-
-        @Override
-        public Integer getAmount()
-        {
-            return this.amount.intValue();
-        }
-
-        @Override
-        public String toString()
-        {
-            return "CapacityRequest.Integer [getId()=" + this.getId() + ", getAmount()=" + this.getAmount() + ", getPriority()="
-                    + this.getPriority() + ", getQueueEntryTime()=" + this.getQueueEntryTime() + "]";
-        }
-
-    }
-
-    /**
      * Capacity request for double capacity.
      * @param <T> the time type
      */
     public static class DoubleCapacity<T extends Number & Comparable<T>> extends CapacityRequest<T>
     {
+        /** the requestor of the amount of capacity. */
+        private final CapacityRequestor.DoubleCapacity<T> requestor;
+
         /**
          * Create a new capacity request for double capacity.
          * @param id the numeric id of this request
@@ -163,10 +122,11 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
          * @param priority the priority of the request
          * @param queueEntryTime the time when the request was created
          */
-        public DoubleCapacity(final long id, final CapacityRequestor<T> requestor, final double amount, final int priority,
-                final T queueEntryTime)
+        public DoubleCapacity(final long id, final CapacityRequestor.DoubleCapacity<T> requestor, final double amount,
+                final int priority, final T queueEntryTime)
         {
-            super(id, requestor, amount, priority, queueEntryTime);
+            super(id, amount, priority, queueEntryTime);
+            this.requestor = requestor;
         }
 
         @Override
@@ -176,12 +136,61 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
         }
 
         @Override
+        public CapacityRequestor.DoubleCapacity<T> getRequestor()
+        {
+            return this.requestor;
+        }
+
+        @Override
         public String toString()
         {
             return "CapacityRequest.Double [getId()=" + this.getId() + ", getAmount()=" + this.getAmount() + ", getPriority()="
                     + this.getPriority() + ", getQueueEntryTime()=" + this.getQueueEntryTime() + "]";
         }
+    }
 
+    /**
+     * Capacity request for integer capacity.
+     * @param <T> the time type
+     */
+    public static class IntegerCapacity<T extends Number & Comparable<T>> extends CapacityRequest<T>
+    {
+        /** the requestor of the amount of capacity. */
+        private final CapacityRequestor.IntegerCapacity<T> requestor;
+
+        /**
+         * Create a new capacity request for integer capacity.
+         * @param id the numeric id of this request
+         * @param requestor the requestor of the amount of capacity
+         * @param amount the amount requested by the requestor
+         * @param priority the priority of the request
+         * @param queueEntryTime the time when the request was created
+         */
+        public IntegerCapacity(final long id, final CapacityRequestor.IntegerCapacity<T> requestor, final int amount,
+                final int priority, final T queueEntryTime)
+        {
+            super(id, amount, priority, queueEntryTime);
+            this.requestor = requestor;
+        }
+
+        @Override
+        public Integer getAmount()
+        {
+            return this.amount.intValue();
+        }
+
+        @Override
+        public CapacityRequestor.IntegerCapacity<T> getRequestor()
+        {
+            return this.requestor;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "CapacityRequest.Integer [getId()=" + this.getId() + ", getAmount()=" + this.getAmount() + ", getPriority()="
+                    + this.getPriority() + ", getQueueEntryTime()=" + this.getQueueEntryTime() + "]";
+        }
     }
 
 }

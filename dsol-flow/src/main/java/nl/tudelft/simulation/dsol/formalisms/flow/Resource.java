@@ -119,6 +119,15 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
     }
 
     /**
+     * Return the utilization statistic.
+     * @return the utilization statistic
+     */
+    public SimPersistent<T> getUtilizationStatistic()
+    {
+        return this.utilizationStatistic;
+    }
+
+    /**
      * Resource with floating point capacity.
      * @param <T> the time type
      */
@@ -197,7 +206,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
          * @param amount double; the requested amount
          * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
          */
-        public synchronized void requestCapacity(final double amount, final CapacityRequestor<T> requestor)
+        public synchronized void requestCapacity(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor)
         {
             this.requestCapacity(amount, requestor, 0);
         }
@@ -208,7 +217,8 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
          * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
          * @param priority int; the priority of the request
          */
-        public synchronized void requestCapacity(final double amount, final CapacityRequestor<T> requestor, final int priority)
+        public synchronized void requestCapacity(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor,
+                final int priority)
         {
             Throw.when(amount < 0.0, SimRuntimeException.class, "requested capacity on resource cannot be < 0.0");
             if ((this.claimedCapacity + amount) <= this.capacity)
@@ -233,19 +243,159 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         public void releaseCapacity(final double amount)
         {
             Throw.when(amount < 0.0, SimRuntimeException.class, "released capacity on resource cannot be < 0.0");
-            changeClaimedCapacity(-Math.min(this.capacity, amount));
+            changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
             synchronized (getRequestQueue())
             {
-                for (var i = getRequestQueue().iterator(); i.hasNext();)
+                for (var cr = getRequestQueue().iterator(); cr.hasNext();)
                 {
-                    var request = (CapacityRequest.DoubleCapacity<T>) i.next();
+                    var request = (CapacityRequest.DoubleCapacity<T>) cr.next();
                     if ((this.capacity - this.claimedCapacity) >= request.getAmount())
                     {
                         this.changeClaimedCapacity(request.getAmount());
                         request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {
-                            i.remove();
+                            getRequestQueue().remove(request);
+                        }
+                    }
+                    else if (getReleaseType().equals(ReleaseType.FIRST_ONLY))
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Resource with integer capacity.
+     * @param <T> the time type
+     */
+    public static class IntegerCapacity<T extends Number & Comparable<T>> extends Resource<T, IntegerCapacity<T>>
+    {
+        /** */
+        private static final long serialVersionUID = 1L;
+
+        /** capacity defines the maximum capacity of the resource. */
+        private int capacity;
+
+        /** claimedCapacity defines the currently claimed capacity. */
+        private int claimedCapacity = 0;
+
+        /**
+         * Create a new Resource with floating point capacity and a specific request comparator, e.g., LIFO or sorted on an
+         * attribute.
+         * @param id the id of this resource
+         * @param simulator the simulator
+         * @param capacity the capacity of the resource
+         */
+        public IntegerCapacity(final String id, final DevsSimulatorInterface<T> simulator, final int capacity)
+        {
+            super(id, simulator);
+            this.capacity = capacity;
+        }
+
+        @Override
+        public Integer getCapacity()
+        {
+            return this.capacity;
+        }
+
+        @Override
+        public Integer getClaimedCapacity()
+        {
+            return this.claimedCapacity;
+        }
+
+        /**
+         * Return the currently available capacity on this resource. This method is implemented as
+         * <code>return this.getCapacity()-this.getClaimedCapacity()</code>
+         * @return the currently available capacity on this resource.
+         */
+        public int getAvailableCapacity()
+        {
+            return this.capacity - this.claimedCapacity;
+        }
+
+        /**
+         * Add the amount to the claimed capacity.
+         * @param amount the amount which is added to the claimed capacity
+         */
+        private synchronized void changeClaimedCapacity(final int amount)
+        {
+            this.claimedCapacity += amount;
+            fireTimedEvent(UTILIZATION_EVENT,
+                    getCapacity().intValue() == 0 ? 0.0 : getClaimedCapacity().doubleValue() / getCapacity().doubleValue(),
+                    getSimulator().getSimulatorTime());
+        }
+
+        /**
+         * Set the capacity of the resource to a new value. The <code>releaseCapacity</code> method is called after updating the
+         * capacity because in case of a capacity increase, the resource could allow one or more new claims on the capacity from
+         * the queue.
+         * @param capacity the new maximal capacity
+         */
+        public void setCapacity(final int capacity)
+        {
+            this.capacity = capacity;
+            this.releaseCapacity(0);
+        }
+
+        /**
+         * Request an amount of capacity from the resource, without a priority. A dummy priority value of 0 is used.
+         * @param amount the requested amount
+         * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
+         */
+        public synchronized void requestCapacity(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor)
+        {
+            this.requestCapacity(amount, requestor, 0);
+        }
+
+        /**
+         * Request an amount of capacity from the resource, with an integer priority value.
+         * @param amount the requested amount
+         * @param requestor the RequestorInterface requesting the amount
+         * @param priority the priority of the request
+         */
+        public synchronized void requestCapacity(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor,
+                final int priority)
+        {
+            Throw.when(amount < 0, SimRuntimeException.class, "requested capacity on resource cannot be < 0");
+            if ((this.claimedCapacity + amount) <= this.capacity)
+            {
+                changeClaimedCapacity(amount);
+                getSimulator().scheduleEventNow(requestor, "receiveRequestedCapacity",
+                        new Object[] {Integer.valueOf(amount), this});
+            }
+            else
+            {
+                synchronized (getRequestQueue())
+                {
+                    getRequestQueue().add(amount, requestor, priority);
+                }
+            }
+        }
+
+        /**
+         * Release an amount of capacity from the resource.
+         * @param amount the amount to release
+         */
+        public void releaseCapacity(final int amount)
+        {
+            Throw.when(amount < 0, SimRuntimeException.class, "released capacity on resource cannot be < 0");
+            changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
+            synchronized (getRequestQueue())
+            {
+                for (var i = getRequestQueue().iterator(); i.hasNext();)
+                {
+                    var request = (CapacityRequest.IntegerCapacity<T>) i.next();
+                    if ((this.capacity - this.claimedCapacity) >= request.getAmount())
+                    {
+                        this.changeClaimedCapacity(request.getAmount());
+                        request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
+                        synchronized (getRequestQueue())
+                        {
+                            getRequestQueue().remove(request);
                         }
                     }
                     else if (getReleaseType().equals(ReleaseType.FIRST_ONLY))

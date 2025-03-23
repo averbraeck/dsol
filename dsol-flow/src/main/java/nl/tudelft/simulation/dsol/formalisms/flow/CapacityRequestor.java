@@ -16,9 +16,33 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 public interface CapacityRequestor<T extends Number & Comparable<T>>
 {
     /**
-     * receive the requested capacity for the resource.
-     * @param requestedCapacity double; the amount requested.
-     * @param resource Resource&lt;T&gt;; the requested resource.
+     * This interface provides a callback method to the requestor of floating point capacity for a resource. Whenever the
+     * resource is available this method is invoked on the requestor.
+     * @param <T> the simulation time type.
      */
-    void receiveRequestedCapacity(double requestedCapacity, Resource<T, ?> resource);
+    public interface DoubleCapacity<T extends Number & Comparable<T>> extends CapacityRequestor<T>
+    {
+        /**
+         * receive the requested capacity for the resource.
+         * @param requestedCapacity double; the amount requested.
+         * @param resource Resource&lt;T&gt;; the requested resource.
+         */
+        void receiveRequestedCapacity(double requestedCapacity, Resource.DoubleCapacity<T> resource);
+    }
+
+    /**
+     * This interface provides a callback method to the requestor of integer capacity for a resource. Whenever the resource is
+     * available this method is invoked on the requestor.
+     * @param <T> the simulation time type.
+     */
+    public interface IntegerCapacity<T extends Number & Comparable<T>> extends CapacityRequestor<T>
+    {
+        /**
+         * receive the requested capacity for the resource.
+         * @param requestedCapacity the amount requested.
+         * @param resource Resource&lt;T&gt;; the requested resource.
+         */
+        void receiveRequestedCapacity(int requestedCapacity, Resource.IntegerCapacity<T> resource);
+    }
+
 }
