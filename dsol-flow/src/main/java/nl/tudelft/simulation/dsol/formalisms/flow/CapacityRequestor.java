@@ -20,5 +20,5 @@ public interface CapacityRequestor<T extends Number & Comparable<T>>
      * @param requestedCapacity double; the amount requested.
      * @param resource Resource&lt;T&gt;; the requested resource.
      */
-    void receiveRequestedCapacity(double requestedCapacity, Resource<T> resource);
+    void receiveRequestedCapacity(double requestedCapacity, Resource<T, ?> resource);
 }
