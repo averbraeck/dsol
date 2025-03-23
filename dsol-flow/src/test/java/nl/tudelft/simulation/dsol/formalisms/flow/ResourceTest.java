@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.djutils.exceptions.Try;
 import org.junit.jupiter.api.Test;
 
@@ -180,6 +183,173 @@ public class ResourceTest extends FlowTest
         cleanUp(simulator);
     }
 
+    /**
+     * Test different queue sorting regimes. The following requests are created for the queue:
+     * 
+     * <pre>
+     * Id Time Priority Amount
+     * 0   0     1        1
+     * 1   0     1        1
+     * 2   0     2        1
+     * 3   0     2        1
+     * 4   1     1        1
+     * 5   1     1        1
+     * 6   1     2        1
+     * 7   1     2        1
+     * </pre>
+     * 
+     * The handling should be as follows:
+     * 
+     * <pre>
+     * FCFS:  0 1 2 3 4 5 6 7
+     * LCFS:  7 6 5 4 3 2 1 0
+     * PFCFC: 2 3 6 7 0 1 4 5
+     * PLCFS: 7 6 3 2 5 4 1 0
+     * </pre>
+     */
+    @Test
+    public void testQueueSorting()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var requestor = new CapacityRequestor.DoubleCapacity<Double>()
+                {
+                    @Override
+                    public void receiveRequestedCapacity(final double requestedCapacity,
+                            final Resource.DoubleCapacity<Double> resource)
+                    {
+                        // do nothing
+                    }
+                };
+
+                var fcfs = new Queue<Double>("fcfs", this.simulator).setComparator(new Queue.FcfsRequestComparator<>());
+                var lcfs = new Queue<Double>("lcfs", this.simulator).setComparator(new Queue.LcfsRequestComparator<>());
+                var fcfsp =
+                        new Queue<Double>("fcfsp", this.simulator).setComparator(new Queue.FcfsPriorityRequestComparator<>());
+                var lcfsp =
+                        new Queue<Double>("lcfsp", this.simulator).setComparator(new Queue.LcfsPriorityRequestComparator<>());
+                var qa = new Queue[] {fcfs, lcfs, fcfsp, lcfsp};
+
+                for (double t : new double[] {0.0, 1.0})
+                {
+                    for (Queue<Double> queue : qa)
+                    {
+                        this.simulator.scheduleEventRel(t, () ->
+                        {
+                            queue.add(1.0, requestor, 1);
+                            queue.add(1.0, requestor, 1);
+                            queue.add(1.0, requestor, 2);
+                            queue.add(1.0, requestor, 2);
+                        });
+                    }
+                }
+
+                this.simulator.scheduleEventRel(2.0, () ->
+                {
+                    var list = new ArrayList<Integer>();
+                    for (var r : fcfs)
+                        list.add((int) r.getId());
+                    assertEquals(List.of(0, 1, 2, 3, 4, 5, 6, 7), list);
+
+                    list.clear();
+                    for (var r : lcfs)
+                        list.add((int) r.getId());
+                    assertEquals(List.of(7, 6, 5, 4, 3, 2, 1, 0), list);
+
+                    list.clear();
+                    for (var r : fcfsp)
+                        list.add((int) r.getId());
+                    assertEquals(List.of(2, 3, 6, 7, 0, 1, 4, 5), list);
+
+                    list.clear();
+                    for (var r : lcfsp)
+                        list.add((int) r.getId());
+                    assertEquals(List.of(7, 6, 3, 2, 5, 4, 1, 0), list);
+                });
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.start();
+        wait(simulator, 500);
+        cleanUp(simulator);
+    }
+
+    /** Test the floating-point capacity resource and queue with FIRST_ONLY versus ENTIRE_QUEUE regime. */
+    @Test
+    public void testResourceDoubleRegime()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var requestor = new CapacityRequestor.DoubleCapacity<Double>()
+                {
+                    public int count = 0;
+
+                    public double received = 0.0;
+
+                    @Override
+                    public void receiveRequestedCapacity(final double requestedCapacity,
+                            final Resource.DoubleCapacity<Double> resource)
+                    {
+                        this.count++;
+                        this.received += requestedCapacity;
+                    }
+                };
+
+                var resource = new Resource.DoubleCapacity<Double>("resource", this.simulator, 0.0);
+                resource.setReleaseType(ReleaseType.FIRST_ONLY);
+                resource.setDefaultStatistics();
+                resource.requestCapacity(0.1, requestor);
+                resource.requestCapacity(0.2, requestor);
+                resource.requestCapacity(1.0, requestor);
+                resource.requestCapacity(0.3, requestor);
+                resource.requestCapacity(0.1, requestor);
+                resource.requestCapacity(0.5, requestor);
+                assertEquals(0, requestor.count);
+                assertEquals(0.0, requestor.received);
+                resource.setCapacity(1.0);
+                assertEquals(2, requestor.count);
+                assertEquals(0.3, requestor.received, 1E-6);
+                resource.setCapacity(10.0);
+                resource.releaseCapacity(2.2);
+                assertEquals(6, requestor.count);
+
+                resource.setCapacity(0.0);
+                resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
+                requestor.count = 0;
+                requestor.received = 0.0;
+                resource.requestCapacity(0.1, requestor);
+                resource.requestCapacity(0.2, requestor);
+                resource.requestCapacity(1.0, requestor);
+                resource.requestCapacity(0.3, requestor);
+                resource.requestCapacity(0.1, requestor);
+                resource.requestCapacity(0.5, requestor);
+                assertEquals(0, requestor.count);
+                assertEquals(0.0, requestor.received);
+                resource.setCapacity(1.0);
+                assertEquals(4, requestor.count);
+                assertEquals(0.7, requestor.received, 1E-6);
+                resource.setCapacity(10.0);
+                resource.releaseCapacity(2.2);
+                assertEquals(6, requestor.count);
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        cleanUp(simulator);
+    }
+
     /** Test the integer-capacity resource and queue. */
     @Test
     public void testResourceInteger()
@@ -331,6 +501,75 @@ public class ResourceTest extends FlowTest
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         simulator.start();
         wait(simulator, 500);
+        cleanUp(simulator);
+    }
+
+    /** Test the integer-capacity resource and queue with FIRST_ONLY versus ENTIRE_QUEUE regime. */
+    @Test
+    public void testResourceIntegerRegime()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var requestor = new CapacityRequestor.IntegerCapacity<Double>()
+                {
+                    public int count = 0;
+
+                    public int received = 0;
+
+                    @Override
+                    public void receiveRequestedCapacity(final int requestedCapacity,
+                            final Resource.IntegerCapacity<Double> resource)
+                    {
+                        this.count++;
+                        this.received += requestedCapacity;
+                    }
+                };
+
+                var resource = new Resource.IntegerCapacity<Double>("resource", this.simulator, 0);
+                resource.setReleaseType(ReleaseType.FIRST_ONLY);
+                resource.setDefaultStatistics();
+                resource.requestCapacity(1, requestor);
+                resource.requestCapacity(2, requestor);
+                resource.requestCapacity(10, requestor);
+                resource.requestCapacity(3, requestor);
+                resource.requestCapacity(1, requestor);
+                resource.requestCapacity(5, requestor);
+                assertEquals(0, requestor.count);
+                assertEquals(0, requestor.received);
+                resource.setCapacity(10);
+                assertEquals(2, requestor.count);
+                assertEquals(3, requestor.received);
+                resource.setCapacity(100);
+                resource.releaseCapacity(22);
+                assertEquals(6, requestor.count);
+
+                resource.setCapacity(0);
+                resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
+                requestor.count = 0;
+                requestor.received = 0;
+                resource.requestCapacity(1, requestor);
+                resource.requestCapacity(2, requestor);
+                resource.requestCapacity(10, requestor);
+                resource.requestCapacity(3, requestor);
+                resource.requestCapacity(1, requestor);
+                resource.requestCapacity(5, requestor);
+                assertEquals(0, requestor.count);
+                assertEquals(0, requestor.received);
+                resource.setCapacity(10);
+                assertEquals(4, requestor.count);
+                assertEquals(7, requestor.received);
+                resource.setCapacity(100);
+                resource.releaseCapacity(22);
+                assertEquals(6, requestor.count);
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
         cleanUp(simulator);
     }
 
