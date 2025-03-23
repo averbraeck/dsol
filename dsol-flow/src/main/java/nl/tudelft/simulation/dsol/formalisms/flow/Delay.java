@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.statistics.SimPersistent;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Delay<T extends Number & Comparable<T>> extends FlowObject<T, Delay<T>>
+public class Delay<T extends Number & Comparable<T>> extends FlowBlock<T, Delay<T>>
 {
     /** */
     private static final long serialVersionUID = 20140805L;

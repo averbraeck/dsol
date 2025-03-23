@@ -31,7 +31,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public abstract class Seize<T extends Number & Comparable<T>> extends FlowObject<T, Seize<T>> implements CapacityRequestor<T>
+public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<T, Seize<T>> implements CapacityRequestor<T>
 {
     /** */
     private static final long serialVersionUID = 20140911L;
@@ -70,7 +70,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowObject
      * Return the resource that is claimed by entities in this Seize block.
      * @return the resource that is claimed by entities in this Seize block
      */
-    public abstract Resource<T> getResource();
+    public abstract Resource<T, ?> getResource();
 
     /**
      * Resource with floating point capacity.
@@ -167,7 +167,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowObject
         }
 
         @Override
-        public void receiveRequestedCapacity(final double capacityClaim, final Resource<T> resource)
+        public void receiveRequestedCapacity(final double capacityClaim, final Resource<T, ?> resource)
         {
             for (StoredEntity<T> storedEntity : this.storage)
             {

@@ -14,13 +14,13 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Release<T extends Number & Comparable<T>> extends FlowObject<T, Release<T>>
+public class Release<T extends Number & Comparable<T>> extends FlowBlock<T, Release<T>>
 {
     /** */
     private static final long serialVersionUID = 20151028L;
 
     /** resource refers to the resource released. */
-    private Resource<T> resource;
+    private Resource<T, ?> resource;
 
     /** amount defines the amount to be released. */
     private double amount = 1.0;
@@ -31,7 +31,7 @@ public class Release<T extends Number & Comparable<T>> extends FlowObject<T, Rel
      * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
      * @param resource Resource&lt;T&gt;; which is released
      */
-    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource)
+    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T, ?> resource)
     {
         this(id, simulator, resource, 1.0);
     }
@@ -43,7 +43,7 @@ public class Release<T extends Number & Comparable<T>> extends FlowObject<T, Rel
      * @param resource Resource&lt;T&gt;; which is released
      * @param amount double; of resource which is released
      */
-    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T> resource, final double amount)
+    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T, ?> resource, final double amount)
     {
         super(id, simulator);
         this.resource = resource;

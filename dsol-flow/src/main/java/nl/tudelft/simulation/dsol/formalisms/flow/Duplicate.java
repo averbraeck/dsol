@@ -24,13 +24,13 @@ import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T, Duplicate<T>>
+public class Duplicate<T extends Number & Comparable<T>> extends FlowBlock<T, Duplicate<T>>
 {
     /** */
     private static final long serialVersionUID = 1L;
 
     /** The destination of the duplicates. */
-    private FlowObject<T, ?> duplicateDestination;
+    private FlowBlock<T, ?> duplicateDestination;
 
     /** The distribution of the number of duplicates to generate. */
     private DistDiscrete numberCopiesDist = null;
@@ -62,7 +62,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T, D
      * @param duplicateDestination the new destination of the duplicate entities
      * @return this object for method chaining
      */
-    public Duplicate<T> setDuplicateDestination(final FlowObject<T, ?> duplicateDestination)
+    public Duplicate<T> setDuplicateDestination(final FlowBlock<T, ?> duplicateDestination)
     {
         this.duplicateDestination = duplicateDestination;
         return this;
@@ -158,7 +158,7 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowObject<T, D
      * Return the destination flow block where the duplicates go.
      * @return the destination flow block where the duplicates go, can be null if not yet set
      */
-    public FlowObject<T, ?> getDuplicateDestination()
+    public FlowBlock<T, ?> getDuplicateDestination()
     {
         return this.duplicateDestination;
     }

@@ -19,7 +19,7 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type itself to be able to implement a comparator on the simulation time.
  */
-public class Destroy<T extends Number & Comparable<T>> extends FlowObject<T, Destroy<T>>
+public class Destroy<T extends Number & Comparable<T>> extends FlowBlock<T, Destroy<T>>
 {
     /** */
     private static final long serialVersionUID = 1L;
