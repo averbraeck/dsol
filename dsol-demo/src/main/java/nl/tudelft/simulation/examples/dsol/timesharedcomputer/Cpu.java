@@ -13,7 +13,7 @@ import org.djutils.metadata.ObjectDescriptor;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
-import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowBlock;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Cpu extends FlowObject<Double, Cpu> implements Locatable
+public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
 {
     /** */
     private static final long serialVersionUID = 1L;

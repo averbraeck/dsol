@@ -4,7 +4,7 @@ import org.djutils.event.EventType;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
-import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowBlock;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
@@ -18,7 +18,7 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  * </p>
  * @author <a href="http://www.tbm.tudelft.nl/webstaf/peterja/index.htm">Peter Jacobs </a>
  */
-public class Terminal extends FlowObject<Double, Terminal>
+public class Terminal extends FlowBlock<Double, Terminal>
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class Terminal extends FlowObject<Double, Terminal>
      * @param thinkDelay DistContinuous; the delay
      * @param jobSize DistContinuous; in time
      */
-    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowObject<Double, Cpu> cpu, final DistContinuous thinkDelay,
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowBlock<Double, Cpu> cpu, final DistContinuous thinkDelay,
             final DistContinuous jobSize)
     {
         super("Terminal", simulator);
@@ -73,8 +73,8 @@ public class Terminal extends FlowObject<Double, Terminal>
     public synchronized void releaseEntity(final Entity<Double> entity)
     {
         String id = "job:" + this.jobCounter++;
-        Job job = new Job(id, this.jobSize, this, getSimulator().getSimulatorTime());
-        this.fireTimedEvent(FlowObject.RELEASE_EVENT, 1, getSimulator().getSimulatorTime());
+        Job job = new Job(id, this.jobSize, this, getSimulator());
+        this.fireTimedEvent(FlowBlock.RELEASE_EVENT, 1, getSimulator().getSimulatorTime());
         getDestination().receiveEntity(job);
     }
 }

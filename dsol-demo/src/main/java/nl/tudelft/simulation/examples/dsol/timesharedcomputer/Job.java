@@ -1,7 +1,8 @@
 package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
-import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowBlock;
+import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 
 /**
@@ -20,21 +21,22 @@ public class Job extends Entity<Double>
     private double serviceTime = Double.NaN;
 
     /** source refers to the source of the job. */
-    private FlowObject source;
+    private FlowBlock<Double, ?> source;
 
     /**
      * constructs a new Job.
      * @param id String; the job id
      * @param serviceTimeDistribution DistContinuous; the distribution from which to draw the serviceTime
      * @param source Station; the source of the job
-     * @param creationTime double; time of creation
+     * @param simulator the simulator to retrieve the creation time of the job
      */
-    public Job(final String id, final DistContinuous serviceTimeDistribution, final FlowObject source, final double creationTime)
+    public Job(final String id, final DistContinuous serviceTimeDistribution, final FlowBlock<Double, ?> source,
+            final DevsSimulatorInterface<Double> simulator)
     {
-        super(id, creationTime);
+        super(id, simulator);
         this.source = source;
         this.serviceTime = serviceTimeDistribution.draw();
-        this.creationTime = creationTime;
+        this.creationTime = simulator.getSimulatorTime();
     }
 
     /**
@@ -59,7 +61,7 @@ public class Job extends Entity<Double>
      * returns the source.
      * @return Station the owning terminal
      */
-    public FlowObject getOwner()
+    public FlowBlock<Double, ?> getOwner()
     {
         return this.source;
     }

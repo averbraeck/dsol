@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import org.djutils.event.Event;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.formalisms.flow.FlowObject;
+import nl.tudelft.simulation.dsol.formalisms.flow.FlowBlock;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
@@ -73,7 +73,7 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
             for (int i = 0; i < NUMBER_OF_TERMINALS; i++)
             {
                 Terminal terminal = new Terminal(this.simulator, cpu, thinkDelay, processDelay);
-                terminal.addListener(exitCounter, FlowObject.RELEASE_EVENT);
+                terminal.addListener(exitCounter, FlowBlock.RELEASE_EVENT);
                 terminal.addListener(persistent, Terminal.SERVICE_TIME);
             }
         }
