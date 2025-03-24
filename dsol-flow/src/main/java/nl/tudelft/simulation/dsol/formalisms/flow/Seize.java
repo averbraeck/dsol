@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
 
 import org.djutils.event.EventType;
 import org.djutils.exceptions.Throw;
@@ -12,6 +13,8 @@ import org.djutils.metadata.ObjectDescriptor;
 
 import nl.tudelft.simulation.dsol.simtime.SimTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.statistics.SimPersistent;
+import nl.tudelft.simulation.dsol.statistics.SimTally;
 
 /**
  * The Seize flow block requests a certain amount of capacity from a resource and keeps the entity within the flow block's
@@ -36,6 +39,15 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
     /** */
     private static final long serialVersionUID = 20140911L;
 
+    /** Storage for waiting entities with their arrival time. */
+    protected final Set<StoredEntity<T>> storage = Collections.synchronizedSet(new HashSet<>());
+
+    /** persistent statistic for the number in store. */
+    private SimPersistent<T> numberStoredStatistic = null;
+
+    /** tally statistic for the time-in-storage of the entities. */
+    private SimTally<T> storageTimeStatistic = null;
+
     /** NUMBER_STORED_EVENT is fired when the queue length changes. */
     public static final EventType NUMBER_STORED_EVENT = new EventType(new MetaData("NUMBER_STORED_EVENT",
             "Number of entities stored", new ObjectDescriptor("numberStored", "Number entities stored", Integer.class)));
@@ -43,9 +55,6 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
     /** STORAGE_TIME is fired when an entity leaves the storage. */
     public static final EventType STORAGE_TIME_EVENT = new EventType(new MetaData("STORAGE_TIME_EVENT", "Storage time",
             new ObjectDescriptor("storageTime", "Storage time (as a double)", Double.class)));
-
-    /** Storage for waiting entities with their arrival time. */
-    protected final Set<StoredEntity<T>> storage = Collections.synchronizedSet(new HashSet<>());
 
     /**
      * Constructor for Seize flow object.
@@ -71,6 +80,41 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
      * @return the resource that is claimed by entities in this Seize block
      */
     public abstract Resource<T, ?> getResource();
+
+    /**
+     * Turn on the default statistics for this Seize block.
+     * @return the Seize instance for method chaining
+     */
+    public Seize<T> setDefaultStatistics()
+    {
+        super.setDefaultFlowBlockStatistics();
+        this.numberStoredStatistic =
+                new SimPersistent<>(getId() + " nr entities stored", getSimulator().getModel(), this, NUMBER_STORED_EVENT);
+        this.numberStoredStatistic.initialize();
+        fireTimedEvent(NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
+        this.storageTimeStatistic =
+                new SimTally<>(getId() + " entity storage time", getSimulator().getModel(), this, STORAGE_TIME_EVENT);
+        return this;
+    }
+
+    
+    /**
+     * Return the persistent statistic for the number of entities in store. 
+     * @return the persistent statistic for the number of entities in store
+     */
+    public SimPersistent<T> getNumberStoredStatistic()
+    {
+        return this.numberStoredStatistic;
+    }
+
+    /**
+     * Return the tally statistic for the time-in-storage of the entities.
+     * @return the tally statistic for the time-in-storage of the entities
+     */
+    public SimTally<T> getStorageTimeStatistic()
+    {
+        return this.storageTimeStatistic;
+    }
 
     /**
      * Resource with floating point capacity.
@@ -188,6 +232,122 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         }
     }
 
+    /**
+     * Resource with integer capacity.
+     * @param <T> the time type
+     */
+    public static class IntegerCapacity<T extends Number & Comparable<T>> extends Seize<T>
+            implements CapacityRequestor.IntegerCapacity<T>
+    {
+        /** */
+        private static final long serialVersionUID = 1L;
+
+        /** The resource that is claimed by entities in this Seize block. */
+        protected final Resource.IntegerCapacity<T> resource;
+
+        /** The fixed amount of resource requested by each entity. */
+        private int fixedCapacityClaim = -1;
+
+        /** The flexible, possibly entity-dependent, amount of resource requested by an entity. */
+        private ToIntFunction<Entity<T>> capacityClaimFunction;
+
+        /**
+         * Constructor for Seize flow object with floating point capacity.
+         * @param id String; the id of the FlowObject
+         * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
+         * @param resource Resource&lt;T&gt;; that is claimed in this Seize block
+         */
+        public IntegerCapacity(final String id, final DevsSimulatorInterface<T> simulator,
+                final Resource.IntegerCapacity<T> resource)
+        {
+            super(id, simulator);
+            this.resource = resource;
+        }
+
+        /**
+         * Set a fixed capacity claim. The alternative is a capacity claim calculated by a function.
+         * @param fixedCapacityClaim the fixed claim that every entity makes for a fixed capacity
+         * @return the object for method chaining
+         */
+        public Seize.IntegerCapacity<T> setFixedCapacityClaim(final int fixedCapacityClaim)
+        {
+            Throw.when(fixedCapacityClaim < 0.0, IllegalArgumentException.class, "capacity cannot be < 0");
+            this.fixedCapacityClaim = fixedCapacityClaim;
+            this.capacityClaimFunction = (entity) ->
+            {
+                return this.fixedCapacityClaim;
+            };
+            return this;
+        }
+
+        /**
+         * Set an entity-specific capacity claim as indicated by a function.
+         * @param capacityClaimFunction the function that calculates the needed capacity
+         * @return the object for method chaining
+         */
+        public Seize.IntegerCapacity<T> setFlexibleCapacityClaim(final ToIntFunction<Entity<T>> capacityClaimFunction)
+        {
+            this.fixedCapacityClaim = -1;
+            this.capacityClaimFunction = capacityClaimFunction;
+            return this;
+        }
+
+        /**
+         * Return the resource that is claimed by entities in this Seize block.
+         * @return the resource that is claimed by entities in this Seize block
+         */
+        @Override
+        public Resource.IntegerCapacity<T> getResource()
+        {
+            return this.resource;
+        }
+
+        /**
+         * Receive an object that requests an amount of units from a resource.
+         * @param entity Entity&lt;T&gt;; the object
+         * @param requestedCapacity int; the requested capacity
+         */
+        protected synchronized void receiveEntity(final Entity<T> entity, final int requestedCapacity)
+        {
+            var storedEntity = new StoredEntity<T>(entity, requestedCapacity, getSimulator().getSimulatorTime());
+            synchronized (this.storage)
+            {
+                this.storage.add(storedEntity);
+            }
+            this.fireTimedEvent(Seize.NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
+            getResource().requestCapacity(requestedCapacity, this);
+        }
+
+        @Override
+        public void receiveEntity(final Entity<T> entity)
+        {
+            super.receiveEntity(entity);
+            int capacityClaim = this.capacityClaimFunction.applyAsInt(entity);
+            Throw.when(capacityClaim < 0.0, IllegalArgumentException.class, "capacity cannot be < 0");
+            this.receiveEntity(entity, capacityClaim);
+        }
+
+        @Override
+        public void receiveRequestedCapacity(final int capacityClaim, final Resource.IntegerCapacity<T> resource)
+        {
+            for (StoredEntity<T> storedEntity : this.storage)
+            {
+                if (storedEntity.amount().intValue() == capacityClaim)
+                {
+                    synchronized (this.storage)
+                    {
+                        this.storage.remove(storedEntity);
+                    }
+                    this.fireTimedEvent(Seize.NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
+                    T delay = SimTime.minus(getSimulator().getSimulatorTime(), storedEntity.storeTime());
+                    this.fireTimedEvent(Seize.STORAGE_TIME_EVENT, delay.intValue(), getSimulator().getSimulatorTime());
+                    this.releaseEntity(storedEntity.entity());
+                    return;
+                }
+            }
+        }
+    }
+    
     /**
      * The stored entity.
      * @param <T> the time type
