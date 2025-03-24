@@ -58,8 +58,7 @@ public class FlowQueueingModel1 extends AbstractDsolModel<Double, DevsSimulatorI
         var generator = new Create<Double>("create", getSimulator());
         generator.setIntervalDist(this.interArrivalTime);
         generator.setEntitySupplier(() -> {
-            var entity = new Entity<Double>(String.valueOf(++FlowQueueingModel1.this.entityNumber),
-                    getSimulator().getSimulatorTime());
+            var entity = new Entity<Double>(String.valueOf(++FlowQueueingModel1.this.entityNumber), getSimulator());
             System.out.println(
                     String.format("Time: %.2f  Entity %s generated", getSimulator().getSimulatorTime(), entity.getId()));
             return entity;

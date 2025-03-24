@@ -7,7 +7,6 @@ import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
 import nl.tudelft.simulation.dsol.formalisms.flow.Release;
 import nl.tudelft.simulation.dsol.formalisms.flow.Resource;
 import nl.tudelft.simulation.dsol.formalisms.flow.Seize;
-import nl.tudelft.simulation.dsol.formalisms.flow.statistics.Utilization;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
@@ -47,7 +46,7 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
 
     /** utilization uN. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    Utilization<Double> uN;
+    SimPersistent<Double> uN;
 
     /**
      * @param simulator DevsSimulator&lt;Double&gt;; the simulator
@@ -95,14 +94,17 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
                     .setIntervalDist(new DistContinuousSimulationTime.TimeDouble(
                             new DistExponential(defaultStream, avgInterArrivalTime)))
                     .setBatchSizeDist(new DistDiscreteConstant(defaultStream, batchSize))
-                    .setEntitySupplier(() -> new Entity<Double>("entity", getSimulator().getSimulatorTime()));
+                    .setEntitySupplier(() -> new Entity<Double>("entity", getSimulator()));
 
             // The queue, the resource and the release
             var resource = new Resource.DoubleCapacity<>("resource", this.simulator, capacity);
+            resource.setDefaultStatistics();
 
-            // created the caiming and releasing of the resource
+            // created the claiming and releasing of the resource
             var seize = new Seize.DoubleCapacity<Double>("Seize", this.simulator, resource);
             seize.setFixedCapacityClaim(1.0);
+            seize.setDefaultStatistics();
+            
             var release = new Release<Double>("Release", this.simulator, resource, 1.0);
 
             // The server
@@ -116,9 +118,9 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             server.setDestination(release);
 
             // Statistics
-            this.dN = new SimTally<Double>("d(n)", this, seize, Seize.STORAGE_TIME_EVENT);
-            this.qN = new SimPersistent<Double>("q(n)", this, seize, Seize.NUMBER_STORED_EVENT);
-            this.uN = new Utilization<>("u(n)", this, server);
+            this.dN = seize.getStorageTimeStatistic();
+            this.qN = seize.getNumberStoredStatistic();
+            this.uN = resource.getUtilizationStatistic();
 
         }
         catch (InputParameterException e)
