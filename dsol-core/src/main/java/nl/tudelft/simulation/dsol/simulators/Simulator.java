@@ -397,13 +397,17 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         exception.printStackTrace();
         if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_PAUSE))
         {
-            this.runState = RunState.STOPPING;
+            stop();
         }
-        if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_END))
+        else if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_THROW))
+        {
+            throw new SimRuntimeException(exception);
+        }
+        else if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_END))
         {
             cleanUp();
         }
-        if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_EXIT))
+        else if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_EXIT))
         {
             System.exit(-1);
         }
