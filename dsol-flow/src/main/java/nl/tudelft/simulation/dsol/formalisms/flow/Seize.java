@@ -94,10 +94,19 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         fireTimedEvent(NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
         this.storageTimeStatistic =
                 new SimTally<>(getId() + " entity storage time", getSimulator().getModel(), this, STORAGE_TIME_EVENT);
+        getResource().setDefaultStatistics();
         return this;
     }
 
-    
+    /**
+     * Return whether statistics are turned on for this Storage block.
+     * @return whether statistics are turned on for this Storage block.
+     */
+    public boolean hasDefaultStatistics()
+    {
+        return this.numberStoredStatistic != null;
+    }
+
     /**
      * Return the persistent statistic for the number of entities in store. 
      * @return the persistent statistic for the number of entities in store
@@ -130,7 +139,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         protected final Resource.DoubleCapacity<T> resource;
 
         /** The fixed amount of resource requested by each entity. */
-        private double fixedCapacityClaim = Double.NaN;
+        private double fixedCapacityClaim;
 
         /** The flexible, possibly entity-dependent, amount of resource requested by an entity. */
         private ToDoubleFunction<Entity<T>> capacityClaimFunction;
@@ -146,6 +155,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         {
             super(id, simulator);
             this.resource = resource;
+            setFixedCapacityClaim(1.0);
         }
 
         /**
@@ -171,6 +181,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
          */
         public Seize.DoubleCapacity<T> setFlexibleCapacityClaim(final ToDoubleFunction<Entity<T>> capacityClaimFunction)
         {
+            Throw.whenNull(capacityClaimFunction, "capacityClaimFunction cannot be null");
             this.fixedCapacityClaim = Double.NaN;
             this.capacityClaimFunction = capacityClaimFunction;
             return this;
@@ -184,6 +195,15 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         public Resource.DoubleCapacity<T> getResource()
         {
             return this.resource;
+        }
+
+        /**
+         * Return the fixed capacity claim, or NaN when the capacity claim is calculated by a provided function.
+         * @return the fixed capacity claim, or NaN when the capacity claim is calculated by a provided function
+         */
+        public double getFixedCapacityClaim()
+        {
+            return this.fixedCapacityClaim;
         }
 
         /**
@@ -246,7 +266,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         protected final Resource.IntegerCapacity<T> resource;
 
         /** The fixed amount of resource requested by each entity. */
-        private int fixedCapacityClaim = -1;
+        private int fixedCapacityClaim;
 
         /** The flexible, possibly entity-dependent, amount of resource requested by an entity. */
         private ToIntFunction<Entity<T>> capacityClaimFunction;
@@ -262,6 +282,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         {
             super(id, simulator);
             this.resource = resource;
+            setFixedCapacityClaim(1);
         }
 
         /**
@@ -287,6 +308,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
          */
         public Seize.IntegerCapacity<T> setFlexibleCapacityClaim(final ToIntFunction<Entity<T>> capacityClaimFunction)
         {
+            Throw.whenNull(capacityClaimFunction, "capacityClaimFunction cannot be null");
             this.fixedCapacityClaim = -1;
             this.capacityClaimFunction = capacityClaimFunction;
             return this;
@@ -300,6 +322,14 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         public Resource.IntegerCapacity<T> getResource()
         {
             return this.resource;
+        }
+        /**
+         * Return the fixed capacity claim, or -1 when the capacity claim is calculated by a provided function.
+         * @return the fixed capacity claim, or -1 when the capacity claim is calculated by a provided function
+         */
+        public int getFixedCapacityClaim()
+        {
+            return this.fixedCapacityClaim;
         }
 
         /**
@@ -340,7 +370,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
                     }
                     this.fireTimedEvent(Seize.NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
                     T delay = SimTime.minus(getSimulator().getSimulatorTime(), storedEntity.storeTime());
-                    this.fireTimedEvent(Seize.STORAGE_TIME_EVENT, delay.intValue(), getSimulator().getSimulatorTime());
+                    this.fireTimedEvent(Seize.STORAGE_TIME_EVENT, delay.doubleValue(), getSimulator().getSimulatorTime());
                     this.releaseEntity(storedEntity.entity());
                     return;
                 }
