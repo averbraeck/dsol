@@ -37,6 +37,13 @@ public enum ErrorStrategy
     WARN_AND_PAUSE(Level.ERROR),
 
     /**
+     * Send the error to logger as ERROR and print the exception on stderr The error will be thrown as a SimRuntimeException,
+     * which can, e.g., be used in unit tests since the exception will be thrown by the simulator rather than in the event
+     * itself.
+     */
+    WARN_AND_THROW(Level.ERROR),
+
+    /**
      * Send the error to logger as ERROR and print the exception on stderr The Simulator.cleanup() method is called to ensure
      * the SimulatorWorkerThread.run() method completely ends and can be garbage collected. If there is a UI thread, it will
      * keep running.
