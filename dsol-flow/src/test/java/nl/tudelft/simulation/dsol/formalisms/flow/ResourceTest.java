@@ -18,6 +18,7 @@ import nl.tudelft.simulation.dsol.formalisms.flow.Resource.ReleaseType;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.ErrorStrategy;
 
 /**
  * ResourceTest.java.
@@ -178,6 +179,7 @@ public class ResourceTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         wait(simulator, 500);
         cleanUp(simulator);
@@ -276,6 +278,7 @@ public class ResourceTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         wait(simulator, 500);
         cleanUp(simulator);
@@ -499,6 +502,7 @@ public class ResourceTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         wait(simulator, 500);
         cleanUp(simulator);

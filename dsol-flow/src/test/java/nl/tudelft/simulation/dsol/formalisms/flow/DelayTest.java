@@ -15,6 +15,7 @@ import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.ErrorStrategy;
 import nl.tudelft.simulation.jstats.distributions.DistConstant;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -166,6 +167,7 @@ public class DelayTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 1000);
         cleanUp(simulator);
@@ -202,6 +204,7 @@ public class DelayTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 1000);
 

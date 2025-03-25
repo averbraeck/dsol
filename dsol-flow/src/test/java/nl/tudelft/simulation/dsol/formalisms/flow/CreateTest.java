@@ -18,6 +18,7 @@ import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.ErrorStrategy;
 import nl.tudelft.simulation.jstats.distributions.DistConstant;
 import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
 import nl.tudelft.simulation.jstats.distributions.DistExponential;
@@ -156,6 +157,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         double simTime = simulator.getSimulatorTime();
         simulator.step(); // warmup
         simulator.step(); // generate 2 entities (batch size = 2)
@@ -251,6 +253,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
@@ -291,6 +294,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
@@ -331,6 +335,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 2000);
         assertEquals(10, createBlock[0].getNumberCreationEvents());
@@ -370,6 +375,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 2000);
         assertEquals(15, counter.get());
@@ -408,6 +414,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 2000);
         // Generation from t=0 till t=33 with step 4 = 9 events
@@ -449,6 +456,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 2000);
         // Generation from t=4 till t=33 with step 4 = 8 events
@@ -489,6 +497,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         waitForCompletion(simulator, 2000);
         // Generation from t=0 till t=32 with step 4 = 9 events
@@ -529,6 +538,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.scheduleEventAbs(17.0, () -> simulator.stop());
         simulator.start();
         waitForCompletion(simulator, 2000);
@@ -578,6 +588,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.scheduleEventAbs(17.0, () -> createBlock[0]
                 .setIntervalDist(new DistContinuousSimulationTime.TimeDouble(new DistConstant(model.getDefaultStream(), 6.0))));
         simulator.start();
@@ -622,6 +633,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.scheduleEventAbs(20.0, () ->
         {
             createBlock[0].setIntervalDist(
@@ -670,6 +682,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.scheduleEventAbs(18.0, () ->
         {
             createBlock[0].setEndTime(49.0);
@@ -713,6 +726,7 @@ public class CreateTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.scheduleEventAbs(75.0, () ->
         {
             createBlock[0].setIntervalDist(
