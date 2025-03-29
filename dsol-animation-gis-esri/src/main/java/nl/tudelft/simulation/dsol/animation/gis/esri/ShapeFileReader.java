@@ -111,8 +111,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * Construct a reader for an ESRI ShapeFile.
-     * @param shapeUrl URL; URL may or may not end with their extension.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param shapeUrl URL may or may not end with their extension.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      * @param featuresToRead the features to read
      * @throws IOException throws an IOException if the shxFile is not accessible
      */
@@ -160,8 +160,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * Read a particular shape directly from the shape file, without caching (the cache is stored at the Features).
-     * @param index int; the index of the shape to read from the shape file, without using any caching
-     * @return GisObject; the shape belonging to the index
+     * @param index the index of the shape to read from the shape file, without using any caching
+     * @return the shape belonging to the index
      * @throws IOException when there is a problem reading the ESRI files.
      */
     public synchronized GisObject readShape(final int index) throws IOException
@@ -184,7 +184,7 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * Read all shapes directly from the shape file, without caching (the cache is stored at the Features).
-     * @return List&lt;GisObject&gt;; the shapes that are directly read from the shape file
+     * @return the shapes that are directly read from the shape file
      * @throws IOException when there is a problem reading the ESRI files.
      */
     public synchronized List<GisObject> readAllShapes() throws IOException
@@ -208,8 +208,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * Read all shapes for a certain extent directly from the shape file, without caching (the cache is stored at the Features).
-     * @param extent Bounds2d; the extent for which to read the shapes
-     * @return List&lt;GisObject&gt;; the shapes for the given extent that are directly read from the shape file
+     * @param extent the extent for which to read the shapes
+     * @return the shapes for the given extent that are directly read from the shape file
      * @throws IOException when there is a problem reading the ESRI files.
      */
     public synchronized List<GisObject> readShapes(final Bounds2d extent) throws IOException
@@ -263,8 +263,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * Return the shapes based on a particular value of the attributes.
-     * @param attribute String; the value of the attribute
-     * @param columnName String; the columnName
+     * @param attribute the value of the attribute
+     * @param columnName the columnName
      * @return List the resulting ArrayList of <code>nl.tudelft.simulation.dsol.animation.gis.GisObject</code>
      * @throws IOException on file IO or database connection failure
      */
@@ -281,8 +281,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * Read a shape.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @return Object; the shape
+     * @param input the inputStream
+     * @return the shape
      * @throws IOException on file IO or database connection failure
      */
     private Object readShape(final ObjectEndianInputStream input) throws IOException
@@ -291,11 +291,11 @@ public class ShapeFileReader implements DataSourceInterface
     }
 
     /**
-     * @param input ObjectEndianInputStream; the input stream.
-     * @param fixedShapeNumber int; the shape number, if -1, read from input
-     * @param fixedContentLength int; the length of the content, if -1, read from input
-     * @param fixedType int; shape type; if -1, read from input
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the input stream.
+     * @param fixedShapeNumber the shape number, if -1, read from input
+     * @param fixedContentLength the length of the content, if -1, read from input
+     * @param fixedType shape type; if -1, read from input
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the shape
      * @throws IOException on I/O error reading from the shape file
      */
@@ -353,7 +353,7 @@ public class ShapeFileReader implements DataSourceInterface
      * etc.) supports nulls¾it is valid to have points and null points in the same shapefile. Often null shapes are place
      * holders; they are used during shapefile creation and are populated with geometric data soon after they are created.
      * </p>
-     * @param input ObjectEndianInputStream; the inputStream
+     * @param input the inputStream
      * @return null to indicate this is not a valid shape
      */
     private synchronized Object readNullShape(final ObjectEndianInputStream input)
@@ -375,7 +375,7 @@ public class ShapeFileReader implements DataSourceInterface
      *     Double Y         // byte 12; Y coordinate (8 bytes)
      *   }
      * </pre>
-     * @param input ObjectEndianInputStream; the inputStream
+     * @param input the inputStream
      * @return Point2D.Double; the point
      * @throws IOException on file IO or database connection failure
      */
@@ -414,8 +414,8 @@ public class ShapeFileReader implements DataSourceInterface
      *     Double Y                // Y coordinate (8 bytes)
      *   }
      * </pre>
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the shape as a SerializablePath
      * @throws IOException on file IO or database connection failure
      */
@@ -455,8 +455,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a Polygon.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -496,8 +496,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readMultiPoint.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -521,8 +521,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readPointZ.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
+     * @param input the inputStream
+     * @param contentLength the contentLength
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -537,9 +537,9 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readPolyLineZ.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param contentLength the contentLength
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -584,9 +584,9 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readPolygonZ.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param contentLength the contentLength
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -630,9 +630,9 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readMultiPointZ.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param contentLength the contentLength
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -659,8 +659,8 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readPointM.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
+     * @param input the inputStream
+     * @param contentLength the contentLength
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -674,9 +674,9 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readPolyLineM.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param contentLength the contentLength
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -719,9 +719,9 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readPolyLineM.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param contentLength the contentLength
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -765,9 +765,9 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readMultiPointM.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param contentLength the contentLength
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -794,9 +794,9 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * reads a readMultiPatch.
-     * @param input ObjectEndianInputStream; the inputStream
-     * @param contentLength int; the contentLength
-     * @param skipBoundingBox boolean; whether to skip the bytes of the bounding box because they have not yet been read
+     * @param input the inputStream
+     * @param contentLength the contentLength
+     * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
@@ -819,7 +819,7 @@ public class ShapeFileReader implements DataSourceInterface
 
     /**
      * Return the key names of the attribute data. The attribute values are stored in the GisObject together with the shape.
-     * @return String[]; the key names of the attribute data
+     * @return the key names of the attribute data
      */
     public String[] getAttributeKeyNames()
     {

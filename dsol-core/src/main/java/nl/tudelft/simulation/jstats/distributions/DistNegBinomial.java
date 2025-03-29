@@ -36,9 +36,9 @@ public class DistNegBinomial extends DistDiscrete
 
     /**
      * constructs a new negative binomial distribution.
-     * @param stream StreamInterface; the random number stream
-     * @param s int; the number of successes in the sequence of (x+n) trials, where trial (x+n) is a success
-     * @param p double; the probability of success for each individual trial in the negative binomial distribution
+     * @param stream the random number stream
+     * @param s the number of successes in the sequence of (x+n) trials, where trial (x+n) is a success
+     * @param p the probability of success for each individual trial in the negative binomial distribution
      * @throws IllegalArgumentException when s &lt;= 0 or p &lt;= 0 or p &gt;= 1
      */
     public DistNegBinomial(final StreamInterface stream, final int s, final double p)
@@ -76,7 +76,7 @@ public class DistNegBinomial extends DistDiscrete
 
     /**
      * Return the number of successes in the sequence of (x+n) trials, where trial (x+n) is a success.
-     * @return int; the number of successes in the sequence of (x+n) trials, where trial (x+n) is a success
+     * @return the number of successes in the sequence of (x+n) trials, where trial (x+n) is a success
      */
     public int getS()
     {
@@ -85,7 +85,7 @@ public class DistNegBinomial extends DistDiscrete
 
     /**
      * Return the probability of success for each individual trial in the negative binomial distribution.
-     * @return double; the probability of success for each individual trial in the negative binomial distribution
+     * @return the probability of success for each individual trial in the negative binomial distribution
      */
     public double getP()
     {

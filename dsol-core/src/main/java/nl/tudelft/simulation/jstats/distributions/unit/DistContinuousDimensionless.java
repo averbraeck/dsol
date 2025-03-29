@@ -20,8 +20,8 @@ public class DistContinuousDimensionless extends DistContinuousUnit<Dimensionles
 
     /**
      * Constructs a new continuous distribution that draws Dimensionless scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit DimensionlessUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousDimensionless(final DistContinuous wrappedDistribution, final DimensionlessUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousDimensionless extends DistContinuousUnit<Dimensionles
 
     /**
      * Constructs a new continuous distribution that draws Dimensionless scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousDimensionless(final DistContinuous wrappedDistribution)
     {

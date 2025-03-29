@@ -27,8 +27,8 @@ public final class AnimationToggles
 
     /**
      * Set a class to be shown in the animation to true.
-     * @param panel DsolAnimationPanel; the DsolAnimationPanel where the animation of a class has to be switched off
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which the animation has to be shown.
+     * @param panel the DsolAnimationPanel where the animation of a class has to be switched off
+     * @param locatableClass the class for which the animation has to be shown.
      */
     public static void showAnimationClass(final DsolAnimationTab panel, final Class<? extends Locatable> locatableClass)
     {
@@ -38,8 +38,8 @@ public final class AnimationToggles
 
     /**
      * Set a class to be shown in the animation to false.
-     * @param panel DsolAnimationPanel; the DsolAnimationPanel where the animation of a class has to be switched off
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which the animation has to be shown.
+     * @param panel the DsolAnimationPanel where the animation of a class has to be switched off
+     * @param locatableClass the class for which the animation has to be shown.
      */
     public static void hideAnimationClass(final DsolAnimationTab panel, final Class<? extends Locatable> locatableClass)
     {

@@ -21,7 +21,7 @@ public class Customer
 
     /**
      * constructs a new Customer.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; The simulator to use.
+     * @param simulator The simulator to use.
      */
     public Customer(final DevsSimulatorInterface<Double> simulator)
     {

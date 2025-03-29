@@ -34,19 +34,19 @@ public interface ModelManager
 
     /**
      * sets the class of the default collection object table model.
-     * @param defaultCollectionObjectTableModel Class&lt;?&gt;; the class
+     * @param defaultCollectionObjectTableModel the class
      */
     void setDefaultCollectionObjectTableModel(Class<?> defaultCollectionObjectTableModel);
 
     /**
      * sets the class of the default object table model.
-     * @param defaultObjectTableModel Class&lt;?&gt;; the class
+     * @param defaultObjectTableModel the class
      */
     void setDefaultObjectTableModel(Class<?> defaultObjectTableModel);
 
     /**
      * sets the class of the default map table model.
-     * @param defaultMapTableModel Class&lt;?&gt;; the class
+     * @param defaultMapTableModel the class
      */
     void setDefaultMapObjectTableModel(Class<?> defaultMapTableModel);
 }

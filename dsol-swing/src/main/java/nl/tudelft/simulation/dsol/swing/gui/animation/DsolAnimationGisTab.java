@@ -46,8 +46,8 @@ public class DsolAnimationGisTab extends DsolAnimationTab
 
     /**
      * Construct a tab with an AnimationPane for the animation of a DsolModel, including GIS layers.
-     * @param homeExtent Bounds2d; initial extent of the animation
-     * @param simulator SimulatorInterface; the simulator
+     * @param homeExtent initial extent of the animation
+     * @param simulator the simulator
      * @throws RemoteException when notification of the animation panel fails
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -59,8 +59,8 @@ public class DsolAnimationGisTab extends DsolAnimationTab
 
     /**
      * Construct a tab with an AnimationPane for the animation of a DsolModel, including GIS layers.
-     * @param simulator SimulatorInterface; the simulator
-     * @param animationPanel AnimationPanel; the animation panel to use, e.g. the AutoPanAnimationPanel
+     * @param simulator the simulator
+     * @param animationPanel the animation panel to use, e.g. the AutoPanAnimationPanel
      * @throws RemoteException when notification of the animation panel fails
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -73,9 +73,9 @@ public class DsolAnimationGisTab extends DsolAnimationTab
     /**
      * Construct a tab with an AutoPanAnimationPanel and a linked SearchPanel for the animation of a DsolModel, including GIS
      * layers.
-     * @param homeExtent Bounds2d; initial extent of the animation
-     * @param simulator SimulatorInterface; the simulator
-     * @return DsolAnimationTab; a tab with an AutoPanAnimationPanel and a linked SearchPanel
+     * @param homeExtent initial extent of the animation
+     * @param simulator the simulator
+     * @return a tab with an AutoPanAnimationPanel and a linked SearchPanel
      * @throws RemoteException when notification of the animation panel fails
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -89,9 +89,9 @@ public class DsolAnimationGisTab extends DsolAnimationTab
 
     /**
      * Add buttons for toggling all GIS layers on or off.
-     * @param header String; the name of the group of layers
-     * @param gisMap GisRenderable2d; the GIS map for which the toggles have to be added
-     * @param toolTipText String; the tool tip text to show when hovering over the button
+     * @param header the name of the group of layers
+     * @param gisMap the GIS map for which the toggles have to be added
+     * @param toolTipText the tool tip text to show when hovering over the button
      */
     public void addAllToggleGISButtonText(final String header, final GisRenderable2d gisMap, final String toolTipText)
     {
@@ -112,10 +112,10 @@ public class DsolAnimationGisTab extends DsolAnimationTab
 
     /**
      * Add a button to toggle a GIS Layer on or off.
-     * @param layerName String; the name of the layer
-     * @param displayName String; the name to display next to the tick box
-     * @param gisMap GisRenderable2d; the map
-     * @param toolTipText String; the tool tip text
+     * @param layerName the name of the layer
+     * @param displayName the name to display next to the tick box
+     * @param gisMap the map
+     * @param toolTipText the tool tip text
      */
     public void addToggleGISButtonText(final String layerName, final String displayName, final GisRenderable2d gisMap,
             final String toolTipText)
@@ -141,7 +141,7 @@ public class DsolAnimationGisTab extends DsolAnimationTab
 
     /**
      * Set a GIS layer to be shown in the animation to true.
-     * @param layerName String; the name of the GIS-layer that has to be shown.
+     * @param layerName the name of the GIS-layer that has to be shown.
      */
     public void showGISLayer(final String layerName)
     {
@@ -163,7 +163,7 @@ public class DsolAnimationGisTab extends DsolAnimationTab
 
     /**
      * Set a GIS layer to be hidden in the animation to true.
-     * @param layerName String; the name of the GIS-layer that has to be hidden.
+     * @param layerName the name of the GIS-layer that has to be hidden.
      */
     public void hideGISLayer(final String layerName)
     {
@@ -185,7 +185,7 @@ public class DsolAnimationGisTab extends DsolAnimationTab
 
     /**
      * Toggle a GIS layer to be displayed in the animation to its reverse value.
-     * @param layerName String; the name of the GIS-layer that has to be turned off or vice versa.
+     * @param layerName the name of the GIS-layer that has to be turned off or vice versa.
      */
     public void toggleGISLayer(final String layerName)
     {

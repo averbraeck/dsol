@@ -29,7 +29,7 @@ public abstract class Ball implements Locatable
 
     /**
      * constructs a new Ball.
-     * @param nr int; the ball number
+     * @param nr the ball number
      */
     public Ball(final int nr)
     {

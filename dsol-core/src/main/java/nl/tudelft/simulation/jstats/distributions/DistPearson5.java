@@ -35,9 +35,9 @@ public class DistPearson5 extends DistContinuous
 
     /**
      * constructs a new Pearson5 distribution.
-     * @param stream StreamInterface; the random number stream
-     * @param alpha double; the shape parameter &alpha; of the distribution
-     * @param beta double; the scale parameter &beta; of the distribution
+     * @param stream the random number stream
+     * @param alpha the shape parameter &alpha; of the distribution
+     * @param beta the scale parameter &beta; of the distribution
      * @throws IllegalArgumentException when alpha &lt;= 0 or beta &lt;= 0
      */
     public DistPearson5(final StreamInterface stream, final double alpha, final double beta)
@@ -70,7 +70,7 @@ public class DistPearson5 extends DistContinuous
 
     /**
      * Return the shape parameter &alpha; of the distribution.
-     * @return double; the shape parameter &alpha; of the distribution
+     * @return the shape parameter &alpha; of the distribution
      */
     public double getAlpha()
     {
@@ -79,7 +79,7 @@ public class DistPearson5 extends DistContinuous
 
     /**
      * Return the scale parameter &beta; of the distribution.
-     * @return double; the scale parameter &beta; of the distribution
+     * @return the scale parameter &beta; of the distribution
      */
     public double getBeta()
     {

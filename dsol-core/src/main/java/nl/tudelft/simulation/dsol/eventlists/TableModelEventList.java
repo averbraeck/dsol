@@ -43,7 +43,7 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
 
     /**
      * constructs a new TableModelEventList.
-     * @param origin EventListInterface&lt;T&gt;; the origin
+     * @param origin the origin
      */
     public TableModelEventList(final EventListInterface<T> origin)
     {
@@ -95,7 +95,7 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
 
     /**
      * formats a label representing an object.
-     * @param label String; the label to format.
+     * @param label the label to format.
      * @return String the label
      */
     private String formatObject(final String label)
@@ -113,7 +113,7 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
 
     /**
      * sets the showPackage.
-     * @param showPackage boolean; The showPackage to set.
+     * @param showPackage The showPackage to set.
      */
     public void setShowPackage(final boolean showPackage)
     {

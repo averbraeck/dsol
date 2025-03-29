@@ -328,7 +328,7 @@ public class Waiter
 
     /**
      * Throw the throwable T.
-     * @param t Throwable; the exception to throw
+     * @param t the exception to throw
      * @throws T the thrown exception
      * @param <T> the Throwable type
      */

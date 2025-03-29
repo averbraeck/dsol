@@ -22,7 +22,7 @@ public final class Sleep
 
     /**
      * Sleep millis milliseconds.
-     * @param millis long; the number of milliseconds to sleep
+     * @param millis the number of milliseconds to sleep
      */
     public static void sleep(final long millis)
     {
@@ -38,8 +38,8 @@ public final class Sleep
 
     /**
      * Sleep millis + nanos time.
-     * @param millis long; the number of milliseconds to sleep
-     * @param nanos int; the number of nanoseconds to sleep
+     * @param millis the number of milliseconds to sleep
+     * @param nanos the number of nanoseconds to sleep
      */
     public static void sleep(final long millis, final int nanos)
     {

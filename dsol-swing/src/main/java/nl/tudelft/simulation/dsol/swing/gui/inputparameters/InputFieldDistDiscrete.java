@@ -51,8 +51,8 @@ public class InputFieldDistDiscrete extends AbstractInputField implements ItemLi
 
     /**
      * Create a string field on the screen.
-     * @param panel JPanel; panel to add the field to
-     * @param parameter InputParameterDistDiscreteSelection; the parameter
+     * @param panel panel to add the field to
+     * @param parameter the parameter
      */
     public InputFieldDistDiscrete(final JPanel panel, final InputParameterDistDiscreteSelection parameter)
     {

@@ -53,8 +53,8 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
 
     /**
      * constructs a new GisRenderable2D.
-     * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator.
-     * @param mapFile URL; the mapfile to use.
+     * @param simulator the simulator.
+     * @param mapFile the mapfile to use.
      */
     public GisRenderableNoCache2D(final SimulatorInterface<?> simulator, final URL mapFile)
     {
@@ -63,9 +63,9 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
 
     /**
      * constructs a new GisRenderable2D.
-     * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator.
-     * @param mapFile URL; the mapfile to use.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param simulator the simulator.
+     * @param mapFile the mapfile to use.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      */
     public GisRenderableNoCache2D(final SimulatorInterface<?> simulator, final URL mapFile,
             final CoordinateTransform coordinateTransform)
@@ -75,10 +75,10 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
 
     /**
      * constructs a new GisRenderable2D.
-     * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator.
-     * @param mapFile URL; the mapfile to use.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
-     * @param z double; the z-value to use
+     * @param simulator the simulator.
+     * @param mapFile the mapfile to use.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param z the z-value to use
      */
     public GisRenderableNoCache2D(final SimulatorInterface<?> simulator, final URL mapFile,
             final CoordinateTransform coordinateTransform, final double z)
@@ -105,10 +105,10 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
 
     /**
      * constructs a new GisRenderable2D based on an existing Map.
-     * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator.
-     * @param map GisMapInterface; the map to use.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
-     * @param z double; the z-value to use
+     * @param simulator the simulator.
+     * @param map the map to use.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param z the z-value to use
      */
     public GisRenderableNoCache2D(final SimulatorInterface<?> simulator, final GisMapInterface map,
             final CoordinateTransform coordinateTransform, final double z)
@@ -137,7 +137,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
      * binds a renderable2D to the context. The reason for specifying this in an independent method instead of adding the code
      * in the constructor is related to the RFE submitted by van Houten that in specific distributed context, such binding must
      * be overwritten.
-     * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator used for binding the object.
+     * @param simulator the simulator used for binding the object.
      */
     protected void bind2Context(final SimulatorInterface<?> simulator)
     {

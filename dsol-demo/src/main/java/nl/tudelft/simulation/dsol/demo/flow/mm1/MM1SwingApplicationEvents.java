@@ -39,9 +39,9 @@ public class MM1SwingApplicationEvents extends DsolApplication
     private SimLogger logger;
 
     /**
-     * @param panel DsolPanel; the panel
-     * @param model MM1Model; the model
-     * @param devsSimulator DevsSimulatorInterface&lt;Double&gt;; the simulator
+     * @param panel the panel
+     * @param model the model
+     * @param devsSimulator the simulator
      */
     public MM1SwingApplicationEvents(final MM1Panel panel, final MM1Model model,
             final DevsSimulator<Double> devsSimulator)
@@ -63,7 +63,7 @@ public class MM1SwingApplicationEvents extends DsolApplication
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param args String[]; arguments, expected to be empty
+     * @param args arguments, expected to be empty
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error
@@ -102,7 +102,7 @@ public class MM1SwingApplicationEvents extends DsolApplication
         private final DevsSimulator<Double> devsSimulator;
 
         /**
-         * @param devsSimulator DevsSimulator&lt;Double&gt;; the simulator to provide the events
+         * @param devsSimulator the simulator to provide the events
          */
         SimulatorEventLogger(final DevsSimulator<Double> devsSimulator)
         {

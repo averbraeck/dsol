@@ -32,7 +32,7 @@ public class PredatorPreyModel extends AbstractDsolModel<Double, DessSimulator<D
 
     /**
      * constructs a new Life.
-     * @param simulator DessSimulator&lt;Double&gt;; the continuous simulator
+     * @param simulator the continuous simulator
      */
     public PredatorPreyModel(final DessSimulator<Double> simulator)
     {

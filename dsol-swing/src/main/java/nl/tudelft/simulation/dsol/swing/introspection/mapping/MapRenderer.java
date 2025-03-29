@@ -55,7 +55,7 @@ public class MapRenderer extends DefaultTableCellRenderer
 
     /**
      * Returns the short name of a class.
-     * @param clasz Class&lt;?&gt;; the class
+     * @param clasz the class
      * @return the short name
      */
     private static String getShortName(final Class<?> clasz)

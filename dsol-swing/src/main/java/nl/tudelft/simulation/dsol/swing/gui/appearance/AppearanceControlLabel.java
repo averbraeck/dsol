@@ -27,7 +27,7 @@ public class AppearanceControlLabel extends JLabel implements AppearanceControl
 
     /**
      * Generate a label with appearance control with text.
-     * @param text String; the text of the label
+     * @param text the text of the label
      */
     public AppearanceControlLabel(final String text)
     {

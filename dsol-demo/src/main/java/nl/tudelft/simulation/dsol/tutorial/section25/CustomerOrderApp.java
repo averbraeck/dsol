@@ -51,7 +51,7 @@ public final class CustomerOrderApp implements EventListener
 
     /**
      * executes the model.
-     * @param args String[]; empty
+     * @param args empty
      * @throws NamingException on Context error
      */
     public static void main(final String[] args) throws NamingException

@@ -27,10 +27,10 @@ public abstract class InputParameterMapDistDiscrete extends InputParameterMap
 
     /**
      * Construct a new InputParameterMap.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterMap
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterMap
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -48,7 +48,7 @@ public abstract class InputParameterMapDistDiscrete extends InputParameterMap
 
     /**
      * Return the previously calculated typed value based on the components.
-     * @return T; the previously calculated typed value based on the components
+     * @return the previously calculated typed value based on the components
      * @throws InputParameterException when the value has not been calculated
      */
     public DistDiscrete getDist() throws InputParameterException
@@ -67,7 +67,7 @@ public abstract class InputParameterMapDistDiscrete extends InputParameterMap
     }
 
     /**
-     * @param stream StreamInterface; set stream
+     * @param stream set stream
      */
     public void setStream(final StreamInterface stream)
     {

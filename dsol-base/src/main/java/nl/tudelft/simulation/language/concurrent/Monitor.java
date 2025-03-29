@@ -33,7 +33,7 @@ public final class Monitor
 
     /**
      * locks an object for the current thread.
-     * @param object Object; the object to lock
+     * @param object the object to lock
      */
     public static void lock(final Object object)
     {
@@ -42,8 +42,8 @@ public final class Monitor
 
     /**
      * locks an object for the given requestor.
-     * @param object Object; the object to lock.
-     * @param requestor Thread; the requesting thread.
+     * @param object the object to lock.
+     * @param requestor the requesting thread.
      */
     public static void lock(final Object object, final Thread requestor)
     {
@@ -74,7 +74,7 @@ public final class Monitor
 
     /**
      * unlocks an object locked by the current Thread.
-     * @param object Object; the object to unlock
+     * @param object the object to unlock
      */
     public static void unlock(final Object object)
     {
@@ -83,8 +83,8 @@ public final class Monitor
 
     /**
      * unlocks an object locked by owner.
-     * @param object Object; the object to unlock.
-     * @param owner Thread; the owning thread.
+     * @param object the object to unlock.
+     * @param owner the owning thread.
      */
     public static void unlock(final Object object, final Thread owner)
     {
@@ -110,7 +110,7 @@ public final class Monitor
 
     /**
      * returns the MonitorThread for a specific key.
-     * @param key Object; the key to resolve
+     * @param key the key to resolve
      * @return the MonitorThread
      */
     private static MonitorThread get(final Object key)
@@ -134,8 +134,8 @@ public final class Monitor
 
         /**
          * constructs a new MonitorThread.
-         * @param owner Thread; the owning thread
-         * @param object Object; the object
+         * @param owner the owning thread
+         * @param object the object
          */
          MonitorThread(final Thread owner, final Object object)
         {

@@ -58,8 +58,8 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
 
     /**
      * Constructor for Seize flow object.
-     * @param id String; the id of the FlowObject
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
+     * @param id the id of the FlowObject
+     * @param simulator on which behavior is scheduled
      */
     public Seize(final String id, final DevsSimulatorInterface<T> simulator)
     {
@@ -146,9 +146,9 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
 
         /**
          * Constructor for Seize flow object with floating point capacity.
-         * @param id String; the id of the FlowObject
-         * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
-         * @param resource Resource&lt;T&gt;; that is claimed in this Seize block
+         * @param id the id of the FlowObject
+         * @param simulator on which behavior is scheduled
+         * @param resource that is claimed in this Seize block
          */
         public DoubleCapacity(final String id, final DevsSimulatorInterface<T> simulator,
                 final Resource.DoubleCapacity<T> resource)
@@ -208,8 +208,8 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
 
         /**
          * Receive an object that requests an amount of units from a resource.
-         * @param entity Entity&lt;T&gt;; the object
-         * @param requestedCapacity double; the requested capacity
+         * @param entity the object
+         * @param requestedCapacity the requested capacity
          */
         protected synchronized void receiveEntity(final Entity<T> entity, final double requestedCapacity)
         {
@@ -273,9 +273,9 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
 
         /**
          * Constructor for Seize flow object with floating point capacity.
-         * @param id String; the id of the FlowObject
-         * @param simulator DevsSimulatorInterface&lt;T&gt;; on which behavior is scheduled
-         * @param resource Resource&lt;T&gt;; that is claimed in this Seize block
+         * @param id the id of the FlowObject
+         * @param simulator on which behavior is scheduled
+         * @param resource that is claimed in this Seize block
          */
         public IntegerCapacity(final String id, final DevsSimulatorInterface<T> simulator,
                 final Resource.IntegerCapacity<T> resource)
@@ -334,8 +334,8 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
 
         /**
          * Receive an object that requests an amount of units from a resource.
-         * @param entity Entity&lt;T&gt;; the object
-         * @param requestedCapacity int; the requested capacity
+         * @param entity the object
+         * @param requestedCapacity the requested capacity
          */
         protected synchronized void receiveEntity(final Entity<T> entity, final int requestedCapacity)
         {

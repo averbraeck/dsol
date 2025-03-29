@@ -22,7 +22,7 @@ public class DsolException extends Exception
     }
 
     /**
-     * @param message String; the message of the exception
+     * @param message the message of the exception
      */
     public DsolException(final String message)
     {
@@ -30,7 +30,7 @@ public class DsolException extends Exception
     }
 
     /**
-     * @param cause Throwable; the exception that caused this exception to be triggered
+     * @param cause the exception that caused this exception to be triggered
      */
     public DsolException(final Throwable cause)
     {
@@ -38,8 +38,8 @@ public class DsolException extends Exception
     }
 
     /**
-     * @param message String; the message of the exception
-     * @param cause Throwable; the exception that caused this exception to be triggered
+     * @param message the message of the exception
+     * @param cause the exception that caused this exception to be triggered
      */
     public DsolException(final String message, final Throwable cause)
     {
@@ -47,10 +47,10 @@ public class DsolException extends Exception
     }
 
     /**
-     * @param message String; the message of the exception
-     * @param cause Throwable; the exception that caused this exception to be triggered
-     * @param enableSuppression boolean; whether or not suppression is enabled or disabled
-     * @param writableStackTrace boolean; whether or not the stack trace should be writable
+     * @param message the message of the exception
+     * @param cause the exception that caused this exception to be triggered
+     * @param enableSuppression whether or not suppression is enabled or disabled
+     * @param writableStackTrace whether or not the stack trace should be writable
      */
     public DsolException(final String message, final Throwable cause, final boolean enableSuppression,
             final boolean writableStackTrace)

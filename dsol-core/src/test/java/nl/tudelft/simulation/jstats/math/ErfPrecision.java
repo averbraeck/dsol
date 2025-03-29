@@ -209,7 +209,7 @@ public final class ErfPrecision
 
     /**
      * Test the precision of the erf() inplementations.
-     * @param erfFunction DoubleFunction; the function to use for erf
+     * @param erfFunction the function to use for erf
      */
     private static void erfTest(final DoubleFunction<Double> erfFunction)
     {
@@ -226,7 +226,7 @@ public final class ErfPrecision
 
     /**
      * Test the precision of the erf() inplementations.
-     * @param erfInvFunction DoubleFunction; the function to use for erf
+     * @param erfInvFunction the function to use for erf
      */
     private static void erfInvTest(final DoubleFunction<Double> erfInvFunction)
     {
@@ -246,8 +246,8 @@ public final class ErfPrecision
 
     /**
      * Calculate erf(z), where three different algorithms are used for small, medium, and large values.
-     * @param z double; the value to calculate erf(z) for
-     * @return double; erf(z)
+     * @param z the value to calculate erf(z) for
+     * @return erf(z)
      */
     static double erf(final double z)
     {
@@ -269,8 +269,8 @@ public final class ErfPrecision
      * where the !! operator is the 'double factorial' operator which is (n).(n-2)...8.4.2 for even n, and (n).(n-2)...3.5.1 for
      * odd n. See <a href="https://mathworld.wolfram.com/Erf.html">https://mathworld.wolfram.com/Erf.html</a> formula (9) and
      * (10). This function would work well for z <u>&lt;</u> 0.5.
-     * @param z double; the parameter
-     * @return double; erf(x)
+     * @param z the parameter
+     * @return erf(x)
      */
     static double erfSmall(final double z)
     {
@@ -298,8 +298,8 @@ public final class ErfPrecision
      * where the !! operator is the 'double factorial' operator which is (n).(n-2)...8.4.2 for even n, and (n).(n-2)...3.5.1 for
      * odd n. See <a href="https://mathworld.wolfram.com/Erf.html">https://mathworld.wolfram.com/Erf.html</a> formula (18) to
      * (20). This function would work well for z <u>&gt;</u> 3.7.
-     * @param z double; the argument
-     * @return double; erf(z)
+     * @param z the argument
+     * @return erf(z)
      */
     static double erfBig(final double z)
     {
@@ -325,8 +325,8 @@ public final class ErfPrecision
      * The factors are given by <a href="https://oeis.org/A007680">https://oeis.org/A007680</a>, which evaluates to a(n) =
      * (2n+1)n!. See <a href="https://en.wikipedia.org/wiki/Error_function">https://en.wikipedia.org/wiki/Error_function</a>.
      * This works pretty well on the interval [0.5,3.7].
-     * @param z double; the argument
-     * @return double; erf(z)
+     * @param z the argument
+     * @return erf(z)
      */
     static double erfTaylor(final double z)
     {
@@ -368,7 +368,7 @@ public final class ErfPrecision
      * See <a href="https://mathworld.wolfram.com/InverseErf.html">https://mathworld.wolfram.com/InverseErf.html</a>. <br>
      * The factors are given by <a href="https://oeis.org/A002067">https://oeis.org/A002067</a> which evaluates to and
      * <a href="https://oeis.org/A122551">https://oeis.org/A122551</a>
-     * @param y double; the cumulative probability to calculate the inverse error function for
+     * @param y the cumulative probability to calculate the inverse error function for
      * @return erf<sup>-1</sup>(y)
      */
     static double erfInv(final double y)
@@ -406,8 +406,8 @@ public final class ErfPrecision
 
     /**
      * Calculate based on http://www.naic.edu/~jeffh/inverse_cerf.c code.
-     * @param y double; value to calculate erf-1(y) for
-     * @return double; erf-1(x)
+     * @param y value to calculate erf-1(y) for
+     * @return erf-1(x)
      */
     static double inverseErf(final double y)
     {

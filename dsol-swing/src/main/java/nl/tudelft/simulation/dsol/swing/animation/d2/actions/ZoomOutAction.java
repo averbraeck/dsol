@@ -30,7 +30,7 @@ public class ZoomOutAction extends AbstractAction
 
     /**
      * constructs a new ZoomOutAction.
-     * @param panel GridPanel; the target
+     * @param panel the target
      */
     public ZoomOutAction(final VisualizationPanel panel)
     {

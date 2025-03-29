@@ -22,7 +22,7 @@ public class TogglePanel extends JPanel
 
     /**
      * Create a TogglePanel to switch objects / layers in the animation on or off.
-     * @param animationTab DsolAnimationTab; the tab with the methods to switch objects / layers on or off
+     * @param animationTab the tab with the methods to switch objects / layers on or off
      */
     public TogglePanel(final DsolAnimationTab animationTab)
     {

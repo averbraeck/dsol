@@ -22,8 +22,8 @@ public class BallWebApplication extends DsolWebServer
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param title String; the tile for the model
-     * @param simulator DevsRealTimeClock&lt;Double&gt;; the simulator
+     * @param title the tile for the model
+     * @param simulator the simulator
      * @throws Exception on jetty error
      */
     public BallWebApplication(final String title, final DevsRealTimeAnimator.TimeDouble simulator) throws Exception
@@ -32,7 +32,7 @@ public class BallWebApplication extends DsolWebServer
     }
 
     /**
-     * @param args String[]; arguments, expected to be empty
+     * @param args arguments, expected to be empty
      * @throws Exception on error
      */
     public static void main(final String[] args) throws Exception

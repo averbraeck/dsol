@@ -40,7 +40,7 @@ public class DistNormal extends DistContinuous
     /**
      * constructs a standard normal distribution with mu=0 and sigma=1. Models probabilities that are the sum of a large number
      * of other probabilities by the virtue of the central limit theorem.
-     * @param stream StreamInterface; the random number stream
+     * @param stream the random number stream
      */
     public DistNormal(final StreamInterface stream)
     {
@@ -51,9 +51,9 @@ public class DistNormal extends DistContinuous
 
     /**
      * constructs a normal distribution with provided mu and sigma.
-     * @param stream StreamInterface; the random number stream
-     * @param mu double; the mean
-     * @param sigma double; the standard deviation
+     * @param stream the random number stream
+     * @param mu the mean
+     * @param sigma the standard deviation
      * @throws IllegalArgumentException when sigma &lt;= 0
      */
     public DistNormal(final StreamInterface stream, final double mu, final double sigma)
@@ -72,7 +72,7 @@ public class DistNormal extends DistContinuous
 
     /**
      * returns the cumulative probability of the x-value.
-     * @param x double; the observation x
+     * @param x the observation x
      * @return double the cumulative probability
      */
     public double getCumulativeProbability(final double x)
@@ -82,7 +82,7 @@ public class DistNormal extends DistContinuous
 
     /**
      * returns the x-value of the given cumulativePropability.
-     * @param cumulativeProbability double; reflects cum prob
+     * @param cumulativeProbability reflects cum prob
      * @return double the inverse cumulative probability
      */
     public double getInverseCumulativeProbability(final double cumulativeProbability)

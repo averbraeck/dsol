@@ -26,8 +26,8 @@ import nl.tudelft.simulation.dsol.swing.gui.control.GenericControlPanel;
 public class LotkaVolterraSwingApplication extends DsolApplication
 {
     /**
-     * @param title String; the title
-     * @param panel DsolPanel; the panel
+     * @param title the title
+     * @param panel the panel
      */
     public LotkaVolterraSwingApplication(final String title, final DsolPanel panel)
     {
@@ -39,7 +39,7 @@ public class LotkaVolterraSwingApplication extends DsolApplication
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param args String[]; arguments, expected to be empty
+     * @param args arguments, expected to be empty
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error
@@ -62,8 +62,8 @@ public class LotkaVolterraSwingApplication extends DsolApplication
         private static final long serialVersionUID = 1L;
 
         /**
-         * @param model PredatorPreyModel; the model
-         * @param controlPanel GenericControlPanel; the control panel for the interactive simulation
+         * @param model the model
+         * @param controlPanel the control panel for the interactive simulation
          * @throws RemoteException on error
          */
         LotkaVolterraPanel(final PredatorPreyModel model, final GenericControlPanel.TimeDouble controlPanel)

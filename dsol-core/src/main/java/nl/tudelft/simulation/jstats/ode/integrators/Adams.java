@@ -21,8 +21,8 @@ public class Adams extends CachingNumericalIntegrator
 
     /**
      * constructs a new Adams integrator.
-     * @param stepSize double; the stepSize to use in the estimation.
-     * @param equation DifferentialEquationInterface; the equation to use.
+     * @param stepSize the stepSize to use in the estimation.
+     * @param equation the equation to use.
      */
     public Adams(final double stepSize, final DifferentialEquationInterface equation)
     {
@@ -31,10 +31,10 @@ public class Adams extends CachingNumericalIntegrator
 
     /**
      * constructs a new Adams integrator, indicating the starting method and number of substeps.
-     * @param stepSize double; the stepSize to use in the estimation.
-     * @param equation DifferentialEquationInterface; the equation to use.
-     * @param primerIntegrationMethod NumericalIntegratorType; the primer integrator to use
-     * @param startingSubSteps int; the number of substeps per timestep during starting of the integrator
+     * @param stepSize the stepSize to use in the estimation.
+     * @param equation the equation to use.
+     * @param primerIntegrationMethod the primer integrator to use
+     * @param startingSubSteps the number of substeps per timestep during starting of the integrator
      */
     public Adams(final double stepSize, final DifferentialEquationInterface equation,
             final NumericalIntegratorType primerIntegrationMethod, final int startingSubSteps)

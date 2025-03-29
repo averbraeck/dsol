@@ -89,9 +89,9 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
     /**
      * Constructor for an abstract DEVS model: we have to indicate the simulator to schedule the events on, and the parent model
      * we are part of. A parent model of null means that we are the top model.
-     * @param modelName String; the name of this component
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator to schedule the events on.
-     * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of.
+     * @param modelName the name of this component
+     * @param simulator the simulator to schedule the events on.
+     * @param parentModel the parent model we are part of.
      */
     public AbstractDevsModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
@@ -120,7 +120,7 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
     }
 
     /**
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator to use from now on
+     * @param simulator the simulator to use from now on
      */
     public void setSimulator(final DevsSimulatorInterface<T> simulator)
     {
@@ -159,7 +159,7 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
 
     /**
      * Print the model, preceded by a user provided string.
-     * @param header String; the user provided string to print in front of the model (e.g. newlines, header).
+     * @param header the user provided string to print in front of the model (e.g. newlines, header).
      */
     public abstract void printModel(String header);
 
@@ -255,9 +255,9 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
 
         /**
          * Construct a StateUPdate tuple to report a state update.
-         * @param modelName String; the name of the model
-         * @param variableName String; the name of the variable
-         * @param value Object; the value
+         * @param modelName the name of the model
+         * @param variableName the name of the variable
+         * @param value the value
          */
         public StateUpdate(final String modelName, final String variableName, final Object value)
         {

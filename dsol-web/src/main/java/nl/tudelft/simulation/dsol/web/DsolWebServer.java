@@ -66,8 +66,8 @@ public abstract class DsolWebServer implements EventListener
     private HtmlAnimationPanel animationPanel;
 
     /**
-     * @param title String; the title for the model window
-     * @param simulator SimulatorInterface&lt;?,?,?&gt;; the simulator
+     * @param title the title for the model window
+     * @param simulator the simulator
      * @param extent Rectangle2D.Double; the extent to use for the graphics (min/max coordinates)
      * @throws Exception in case jetty crashes
      */
@@ -206,7 +206,7 @@ public abstract class DsolWebServer implements EventListener
     }
 
     /**
-     * @param speedFactor double; the new speed factor
+     * @param speedFactor the new speed factor
      */
     protected void setSpeedFactor(final double speedFactor)
     {
@@ -250,7 +250,7 @@ public abstract class DsolWebServer implements EventListener
 
         /**
          * Create the handler for Servlet requests.
-         * @param webServer DsolWebServer; web server for callback of actions
+         * @param webServer web server for callback of actions
          */
         public XHRHandler(final DsolWebServer webServer)
         {
@@ -619,8 +619,8 @@ public abstract class DsolWebServer implements EventListener
         }
 
         /**
-         * @param active boolean; is the simulation active?
-         * @param started boolean; has the simulation been started?
+         * @param active is the simulation active?
+         * @param started has the simulation been started?
          * @return XML message to send to the server
          */
         private String controlButtonResponse(final boolean active, final boolean started)
@@ -675,7 +675,7 @@ public abstract class DsolWebServer implements EventListener
 
         /**
          * Returns the simulation speed.
-         * @param simTime double; simulation time
+         * @param simTime simulation time
          * @return simulation speed
          */
         private double getSimulationSpeed(final double simTime)

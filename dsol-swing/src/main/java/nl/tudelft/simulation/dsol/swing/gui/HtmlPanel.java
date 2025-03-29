@@ -42,7 +42,7 @@ public class HtmlPanel extends JEditorPane
 
     /**
      * Construct an HTML panel for the user interface.
-     * @param page URL; the URL of the page to display in the panel.
+     * @param page the URL of the page to display in the panel.
      * @throws IOException in case page cannot be loaded
      */
     public HtmlPanel(final URL page) throws IOException
@@ -66,7 +66,7 @@ public class HtmlPanel extends JEditorPane
 
     /**
      * Method main.
-     * @param args String[]; arguments for main
+     * @param args arguments for main
      * @throws Exception on error
      */
     public static void main(final String[] args) throws Exception

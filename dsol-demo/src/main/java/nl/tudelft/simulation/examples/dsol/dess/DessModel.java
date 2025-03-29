@@ -26,7 +26,7 @@ public class DessModel extends AbstractDsolModel<Double, DessSimulatorInterface<
 
     /**
      * constructs a new DESSModel.
-     * @param simulator DessSimulatorInterface&lt;Double&gt;; the continuous simulator
+     * @param simulator the continuous simulator
      */
     public DessModel(final DessSimulatorInterface<Double> simulator)
     {

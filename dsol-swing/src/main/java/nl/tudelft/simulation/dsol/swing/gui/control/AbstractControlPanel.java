@@ -82,9 +82,9 @@ public abstract class AbstractControlPanel<
      * are used by any simulator (continuous, discrete, real-time) and for any type of simulation time (floating point, integer,
      * or unit based). Specific classes extend this abstract control panel to define the additional features that are
      * necessary for those simulators.
-     * @param model DsolModel&lt;T, ? extends SimulationInterface&lt;T&gt;&gt;; the model for the control panel, to
+     * @param model the model for the control panel, to
      *            allow a reset of the model
-     * @param simulator S; the simulator. Specified separately, because the model can have been specified with a superclass of
+     * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
      *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
      *            whereas the panel needs a RealTimeControlAnimator)
      * @throws RemoteException when simulator cannot be accessed for listener attachment
@@ -115,7 +115,7 @@ public abstract class AbstractControlPanel<
 
     /**
      * Change the enabled/disabled state of the various simulation control buttons.
-     * @param newState boolean; true if the buttons should become enabled; false if the buttons should become disabled
+     * @param newState true if the buttons should become enabled; false if the buttons should become disabled
      */
     public void setControlButtonsState(final boolean newState)
     {
@@ -125,11 +125,11 @@ public abstract class AbstractControlPanel<
 
     /**
      * Create a button.
-     * @param name String; name of the button
-     * @param iconPath String; path to the resource
-     * @param actionCommand String; the action command
-     * @param toolTipText String; the hint to show when the mouse hovers over the button
-     * @param enabled boolean; true if the new button must initially be enable; false if it must initially be disabled
+     * @param name name of the button
+     * @param iconPath path to the resource
+     * @param actionCommand the action command
+     * @param toolTipText the hint to show when the mouse hovers over the button
+     * @param enabled true if the new button must initially be enable; false if it must initially be disabled
      * @return JButton
      */
     protected JButton makeButton(final String name, final String iconPath, final String actionCommand, final String toolTipText,
@@ -166,7 +166,7 @@ public abstract class AbstractControlPanel<
         private AbstractControlPanel<T, S> panel;
 
         /**
-         * @param panel ControlPanel; the control panel container.
+         * @param panel the control panel container.
          */
         public DisposeOnCloseThread(final AbstractControlPanel<T, S> panel)
         {

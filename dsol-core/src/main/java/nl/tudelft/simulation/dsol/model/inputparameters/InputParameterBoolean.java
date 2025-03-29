@@ -15,11 +15,11 @@ public class InputParameterBoolean extends AbstractInputParameter<Boolean, Boole
 
     /**
      * Construct a new InputParameterBoolean.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterBoolean
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param defaultValue boolean; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterBoolean
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -37,7 +37,7 @@ public class InputParameterBoolean extends AbstractInputParameter<Boolean, Boole
 
     /**
      * Check and set the typed value, and call super.setValue to make the actual allocation.
-     * @param newValue boolean; the new value for the input parameter
+     * @param newValue the new value for the input parameter
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
     public void setBooleanValue(final boolean newValue) throws InputParameterException

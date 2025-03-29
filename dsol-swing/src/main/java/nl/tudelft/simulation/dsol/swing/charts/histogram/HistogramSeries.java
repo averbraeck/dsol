@@ -32,10 +32,10 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * constructs a new HistogramSeries.
-     * @param name String; the name of the dataset
-     * @param domain double[]; the domain of the serie
-     * @param range double[]; the range of the serie
-     * @param numberOfBins int; the number of bins to be used
+     * @param name the name of the dataset
+     * @param domain the domain of the serie
+     * @param range the range of the serie
+     * @param numberOfBins the number of bins to be used
      */
     public HistogramSeries(final String name, final double[] domain, final double[] range, final int numberOfBins)
     {
@@ -68,7 +68,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * returns the maxX value for bin.
-     * @param bin int; the bin number
+     * @param bin the bin number
      * @return Number
      */
     public double getEndXValue(final int bin)
@@ -78,7 +78,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * returns the maxY value.
-     * @param bin int; the bin number
+     * @param bin the bin number
      * @return Number
      */
     public double getEndYValue(final int bin)
@@ -88,7 +88,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * returns the minimumX value.
-     * @param bin int; the bin number
+     * @param bin the bin number
      * @return Number
      */
     public double getStartXValue(final int bin)
@@ -98,7 +98,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * returns the minimumY value.
-     * @param bin int; the bin number
+     * @param bin the bin number
      * @return Number
      */
     public double getStartYValue(final int bin)
@@ -117,7 +117,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * returns the x value.
-     * @param bin int; the bin number
+     * @param bin the bin number
      * @return Number
      */
     public double getXValue(final int bin)
@@ -127,7 +127,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * returns the Y value.
-     * @param bin int; the bin number
+     * @param bin the bin number
      * @return Number
      */
     public int getYValue(final int bin)
@@ -145,7 +145,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
     /**
      * resolves the bin for a particular value.
-     * @param value double; the value of the incomming event
+     * @param value the value of the incomming event
      * @return int the bin number
      */
     private int resolveBin(final double value)
@@ -183,8 +183,8 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
         /**
          * constructs a new Bin.
-         * @param domain double[]; the domain of the bin
-         * @param range double[]; the range of the bin
+         * @param domain the domain of the bin
+         * @param range the range of the bin
          */
         Bin(final double[] domain, final double[] range)
         {
@@ -268,7 +268,7 @@ public class HistogramSeries extends AbstractDataset implements EventListener
 
         /**
          * sets the fixed attributed.
-         * @param fixed boolean; is the bin fixed in range
+         * @param fixed is the bin fixed in range
          */
         public void setFixed(final boolean fixed)
         {

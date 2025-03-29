@@ -42,8 +42,8 @@ public class RungeKuttaFehlberg extends NumericalIntegrator
 
     /**
      * constructs a new RungeKuttaFehlberg.
-     * @param stepSize double; the stepSize
-     * @param equation DifferentialEquationInterface; the differentialEquation
+     * @param stepSize the stepSize
+     * @param equation the differentialEquation
      */
     public RungeKuttaFehlberg(final double stepSize, final DifferentialEquationInterface equation)
     {

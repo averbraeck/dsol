@@ -26,7 +26,7 @@ public class SimRuntimeException extends RuntimeException
 
     /**
      * constructs a new SimRuntimeException.
-     * @param message String; the exception message
+     * @param message the exception message
      */
     public SimRuntimeException(final String message)
     {
@@ -35,8 +35,8 @@ public class SimRuntimeException extends RuntimeException
 
     /**
      * constructs a new SimRuntimeException.
-     * @param message String; the exception message
-     * @param cause Throwable; the originating throwable
+     * @param message the exception message
+     * @param cause the originating throwable
      */
     public SimRuntimeException(final String message, final Throwable cause)
     {
@@ -45,7 +45,7 @@ public class SimRuntimeException extends RuntimeException
 
     /**
      * Constructor for SimRuntimeException.
-     * @param cause Throwable; the originating throwable
+     * @param cause the originating throwable
      */
     public SimRuntimeException(final Throwable cause)
     {

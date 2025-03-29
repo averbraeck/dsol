@@ -20,8 +20,8 @@ public class BeanUtils extends Object
 {
     /**
      * resolves whether the bean is null
-     * @param bean Object; A bean instance.
-     * @param pd PropertyDescriptor; A PropertyDescriptor for the property to be examined.
+     * @param bean A bean instance.
+     * @param pd A PropertyDescriptor for the property to be examined.
      * @return True, if the value of the property described by 'pd' for the instance 'bean' is null indeed. Returns false
      *         otherwise.
      */

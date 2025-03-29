@@ -30,9 +30,9 @@ public class DsolAnimationApplication extends DsolApplication
 
     /**
      * Create a DSOL application with animation. 
-     * @param panel DsolPanel; this should be the tabbed panel of the simulation
-     * @param title String; the title of the window
-     * @param homeExtent Bounds2d; the home extent of the animation
+     * @param panel this should be the tabbed panel of the simulation
+     * @param title the title of the window
+     * @param homeExtent the home extent of the animation
      * @throws RemoteException on network error
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -48,9 +48,9 @@ public class DsolAnimationApplication extends DsolApplication
 
     /**
      * Create a DSOL application with a custom animation tab. 
-     * @param panel DsolPanel; this should be the tabbed panel of the simulation
-     * @param title String; the title of the window
-     * @param animationTab DsolAnimationTab; the animation tab to add, e.g. one containing GIS
+     * @param panel this should be the tabbed panel of the simulation
+     * @param title the title of the window
+     * @param animationTab the animation tab to add, e.g. one containing GIS
      * @throws RemoteException on network error
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -65,7 +65,7 @@ public class DsolAnimationApplication extends DsolApplication
     }
 
     /**
-     * @return DsolAnimationTab; the animationTab
+     * @return the animationTab
      */
     public DsolAnimationTab getAnimationTab()
     {

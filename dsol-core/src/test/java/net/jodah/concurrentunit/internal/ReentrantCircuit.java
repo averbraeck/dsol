@@ -38,7 +38,7 @@ public class ReentrantCircuit
 
         /**
          * Closes the circuit.
-         * @param ignored int; release does not use the int param.
+         * @param ignored release does not use the int param.
          */
         @Override
         public boolean tryReleaseShared(final int ignored)
@@ -132,7 +132,7 @@ public class ReentrantCircuit
 
     /**
      * Returns whether the circuit is closed.
-     * @return boolean; whether the circuit is closed.
+     * @return whether the circuit is closed.
      */
     public boolean isClosed()
     {

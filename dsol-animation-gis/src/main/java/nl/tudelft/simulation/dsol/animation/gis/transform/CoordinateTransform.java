@@ -17,16 +17,16 @@ public interface CoordinateTransform
 {
     /**
      * transform the (x, y) coordinate to a new (x', y') coordinate represented as a FloatXY record.
-     * @param x double; the original x-coordinate, e.g. lon in dd (double degrees)
-     * @param y double; the original y-coordinate, e.g. lat in dd (double degrees)
+     * @param x the original x-coordinate, e.g. lon in dd (double degrees)
+     * @param y the original y-coordinate, e.g. lat in dd (double degrees)
      * @return the new (x', y') coordinate represented as a float[2]
      */
     FloatXY floatTransform(float x, float y);
 
     /**
      * transform the (x, y) coordinate to a new (x', y') coordinate represented as a FloatXY record.
-     * @param x double; the original x-coordinate, e.g. lon in dd (double degrees)
-     * @param y double; the original y-coordinate, e.g. lat in dd (double degrees)
+     * @param x the original x-coordinate, e.g. lon in dd (double degrees)
+     * @param y the original y-coordinate, e.g. lat in dd (double degrees)
      * @return the new (x', y') coordinate represented as a float[2]
      */
     default FloatXY floatTransform(final double x, final double y)
@@ -36,8 +36,8 @@ public interface CoordinateTransform
 
     /**
      * transform the (x, y) coordinate to a new (x', y') coordinate represented as a DoubleXY record.
-     * @param x double; the original x-coordinate, e.g. lon in dd (double degrees)
-     * @param y double; the original y-coordinate, e.g. lat in dd (double degrees)
+     * @param x the original x-coordinate, e.g. lon in dd (double degrees)
+     * @param y the original y-coordinate, e.g. lat in dd (double degrees)
      * @return the new (x', y') coordinate represented as a double[2]
      */
     DoubleXY doubleTransform(double x, double y);

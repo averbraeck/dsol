@@ -70,7 +70,7 @@ public class WebMM1Application
     }
 
     /**
-     * @param args String[]; can be left empty
+     * @param args can be left empty
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error

@@ -35,8 +35,8 @@ public class BallSwingApplication extends DsolAnimationApplication
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param title String; the title
-     * @param panel DsolPanel; the panel
+     * @param title the title
+     * @param panel the panel
      * @throws DsolException when simulator is not an animator
      * @throws IllegalArgumentException for illegal bounds
      * @throws RemoteException on network error
@@ -82,7 +82,7 @@ public class BallSwingApplication extends DsolAnimationApplication
     }
 
     /**
-     * @param args String[]; arguments, expected to be empty
+     * @param args arguments, expected to be empty
      * @throws Exception on error
      */
     public static void main(final String[] args) throws Exception

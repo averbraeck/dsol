@@ -34,7 +34,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
 
     /**
      * Constructor for the input port where the model is a coupled model.
-     * @param coupledModel CoupledModel&lt;T&gt;; the coupled model to which the port is added.
+     * @param coupledModel the coupled model to which the port is added.
      */
     public InputPort(final CoupledModel<T> coupledModel)
     {
@@ -44,7 +44,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
 
     /**
      * Constructor for the input port where the model is an atomic model.
-     * @param atomicModel AtomicModel&lt;T&gt;; the atomic model to which the port is added.
+     * @param atomicModel the atomic model to which the port is added.
      */
     public InputPort(final AtomicModel<T> atomicModel)
     {

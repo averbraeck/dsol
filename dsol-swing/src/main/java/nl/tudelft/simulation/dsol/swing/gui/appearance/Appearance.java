@@ -57,11 +57,11 @@ public enum Appearance
 
     /**
      * Constructor for Appearance.
-     * @param name String; name
-     * @param background Color; background color
-     * @param foreground Color; foreground color
-     * @param backdrop Color; backdrop color (animation panel)
-     * @param font String; font name
+     * @param name name
+     * @param background background color
+     * @param foreground foreground color
+     * @param backdrop backdrop color (animation panel)
+     * @param font font name
      */
     Appearance(final String name, final Color background, final Color foreground, final Color backdrop, final String font)
     {
@@ -74,7 +74,7 @@ public enum Appearance
 
     /**
      * Returns the name.
-     * @return String; name
+     * @return name
      */
     public String getName()
     {
@@ -83,7 +83,7 @@ public enum Appearance
 
     /**
      * Returns the background color.
-     * @return Color; color
+     * @return color
      */
     public Color getBackground()
     {
@@ -92,7 +92,7 @@ public enum Appearance
 
     /**
      * Returns the foreground color.
-     * @return Color; color
+     * @return color
      */
     public Color getForeground()
     {
@@ -101,7 +101,7 @@ public enum Appearance
 
     /**
      * Returns the backdrop color.
-     * @return Color; color
+     * @return color
      */
     public Color getBackdrop()
     {
@@ -110,7 +110,7 @@ public enum Appearance
 
     /**
      * Returns the font name.
-     * @return String; font name
+     * @return font name
      */
     public String getFont()
     {

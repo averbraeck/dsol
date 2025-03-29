@@ -30,9 +30,9 @@ public class DistWeibull extends DistContinuous
 
     /**
      * constructs a new Weibull distribution.
-     * @param stream StreamInterface; the random number stream
-     * @param alpha double; the shape parameter &alpha;
-     * @param beta double; the scale parameter &beta;
+     * @param stream the random number stream
+     * @param alpha the shape parameter &alpha;
+     * @param beta the scale parameter &beta;
      */
     public DistWeibull(final StreamInterface stream, final double alpha, final double beta)
     {
@@ -61,7 +61,7 @@ public class DistWeibull extends DistContinuous
 
     /**
      * Return the shape parameter &alpha;.
-     * @return double; the shape parameter &alpha;
+     * @return the shape parameter &alpha;
      */
     public double getAlpha()
     {
@@ -70,7 +70,7 @@ public class DistWeibull extends DistContinuous
 
     /**
      * Return the scale parameter &beta;.
-     * @return double; the scale parameter &beta;
+     * @return the scale parameter &beta;
      */
     public double getBeta()
     {

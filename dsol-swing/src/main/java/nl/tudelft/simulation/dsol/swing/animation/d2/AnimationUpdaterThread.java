@@ -47,7 +47,7 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
 
     /**
      * Construct an UpdaterThread with a specific EventProducer.
-     * @param eventProducer EventProducer; the event producer to use (remote, local, etc.)
+     * @param eventProducer the event producer to use (remote, local, etc.)
      */
     public AnimationUpdaterThread(final EventProducer eventProducer)
     {
@@ -90,7 +90,7 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
 
     /**
      * Add another listener for the UPDATE_ANIMATION_EVENT.
-     * @param listener EventListener; a panel that listen to this UpdaterThread
+     * @param listener a panel that listen to this UpdaterThread
      * @throws RemoteException on network error for remote listener
      */
     void addListener(final EventListener listener) throws RemoteException
@@ -100,7 +100,7 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
 
     /**
      * Return the update frequency.
-     * @return Frequency; the update frequency
+     * @return the update frequency
      */
     public Frequency getUpdateFrequency()
     {
@@ -109,7 +109,7 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
 
     /**
      * Set a new update frequency.
-     * @param updateFrequency Frequency; the new update frequency
+     * @param updateFrequency the new update frequency
      */
     public void setUpdateFrequency(final Frequency updateFrequency)
     {

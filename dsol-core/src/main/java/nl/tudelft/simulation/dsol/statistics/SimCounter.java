@@ -52,8 +52,8 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
 
     /**
      * Construct a new SimCounter, and register the counter in the OutputStatistics of the model.
-     * @param description String; refers to the description of this counter
-     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param description refers to the description of this counter
+     * @param model the model
      */
     public SimCounter(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
@@ -80,10 +80,10 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
 
     /**
      * constructs a new SimCounter.
-     * @param description String; the description
-     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
-     * @param target EventProducer; the target on which to count
-     * @param eventType EventType; the EventType for which counting takes place
+     * @param description the description
+     * @param model the model
+     * @param target the target on which to count
+     * @param eventType the EventType for which counting takes place
      */
     public SimCounter(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)

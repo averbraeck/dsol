@@ -66,7 +66,7 @@ public interface GisMapInterface extends Serializable
 
     /**
      * draws the map on a graphics object.
-     * @param graphics Graphics2D; the graphics object
+     * @param graphics the graphics object
      * @return Graphics2D
      * @throws DsolGisException on drawing failure
      * @throws RemoteException on network failure
@@ -75,21 +75,21 @@ public interface GisMapInterface extends Serializable
 
     /**
      * Getter for property extent.
-     * @return Bounds2d; the extent of the map
+     * @return the extent of the map
      * @throws RemoteException on network exception
      */
     Bounds2d getExtent() throws RemoteException;
 
     /**
      * Getter for property image.
-     * @return ImageInterface; the value of property image.
+     * @return the value of property image.
      * @throws RemoteException on network exception
      */
     MapImageInterface getImage() throws RemoteException;
 
     /**
      * Getter for the map of layer names to property layers.
-     * @return Bounds2d; the value of property layers.
+     * @return the value of property layers.
      * @throws RemoteException on network exception
      */
     ImmutableMap<String, LayerInterface> getLayerMap() throws RemoteException;
@@ -145,7 +145,7 @@ public interface GisMapInterface extends Serializable
 
     /**
      * Setter for property extent.
-     * @param extent Bounds2d; New value of the map extent.
+     * @param extent New value of the map extent.
      * @throws RemoteException on network exception
      */
     void setExtent(Bounds2d extent) throws RemoteException;
@@ -153,93 +153,93 @@ public interface GisMapInterface extends Serializable
     /**
      * Setter for the map image, which acts as the basic 'canvas' for the drawing process. The image has a background color, but
      * could also have a background picture or watermark.
-     * @param image ImageInterface; New value of the map image, which acts as the basic 'canvas' for the drawing process.
+     * @param image New value of the map image, which acts as the basic 'canvas' for the drawing process.
      * @throws RemoteException on network exception
      */
     void setImage(MapImageInterface image) throws RemoteException;
 
     /**
      * Setter for property layers.
-     * @param layers List&lt;LayerInterface&gt;; New value of property layers.
+     * @param layers New value of property layers.
      * @throws RemoteException on network exception
      */
     void setLayers(List<LayerInterface> layers) throws RemoteException;
 
     /**
      * Setter for property layers.
-     * @param index int; Index value of layer
-     * @param layer LayerInterface; New value of property layers.
+     * @param index Index value of layer
+     * @param layer New value of property layers.
      * @throws RemoteException on network exception
      */
     void setLayer(int index, LayerInterface layer) throws RemoteException;
 
     /**
      * Setter for property layers.
-     * @param layer LayerInterface; New value of property layers.
+     * @param layer New value of property layers.
      * @throws RemoteException on network exception
      */
     void addLayer(LayerInterface layer) throws RemoteException;
 
     /**
      * Hide a layer.
-     * @param layer LayerInterface; the layer to hide
+     * @param layer the layer to hide
      * @throws RemoteException on network exception
      */
     void hideLayer(LayerInterface layer) throws RemoteException;
 
     /**
      * Show a layer.
-     * @param layer LayerInterface; the layer to show
+     * @param layer the layer to show
      * @throws RemoteException on network exception
      */
     void showLayer(LayerInterface layer) throws RemoteException;
 
     /**
      * Hide a layer.
-     * @param layerName String; the name of the layer to hide
+     * @param layerName the name of the layer to hide
      * @throws RemoteException on network exception
      */
     void hideLayer(String layerName) throws RemoteException;
 
     /**
      * Show a layer.
-     * @param layerName String; the name of the layer to show
+     * @param layerName the name of the layer to show
      * @throws RemoteException on network exception
      */
     void showLayer(String layerName) throws RemoteException;
 
     /**
      * Setter for property name.
-     * @param name String; new value of property name.
+     * @param name new value of property name.
      * @throws RemoteException on network exception
      */
     void setName(String name) throws RemoteException;
 
     /**
      * Setter for property units.
-     * @param units MapUnits; new value of property units.
+     * @param units new value of property units.
      * @throws RemoteException on network exception
      */
     void setUnits(MapUnits units) throws RemoteException;
 
     /**
      * zooms the map with a particular factor.
-     * @param zoomFactor double; (0=1)
+     * @param zoomFactor (0=1)
      * @throws RemoteException on network exception
      */
     void zoom(double zoomFactor) throws RemoteException;
 
     /**
      * zooms the map based on a given position in the image.
-     * @param pixelPosition Point2D; the position in the image
-     * @param zoomFactor double; the zoomFactor (0=1)
+     * @param pixelPosition the position in the image
+     * @param zoomFactor the zoomFactor (0=1)
      * @throws RemoteException on network exception
      */
     void zoomPoint(Point2D pixelPosition, double zoomFactor) throws RemoteException;
 
     /**
      * zooms the map based on a given rectangle.
-     * @param rectangle SerializableRectangle2D; a rectangle in the map (image units)
+     * @param rectangle a rectangle in the map (image units)
      * @throws RemoteException on network exception
      */
     void zoomRectangle(SerializableRectangle2d rectangle) throws RemoteException;
@@ -252,7 +252,7 @@ public interface GisMapInterface extends Serializable
 
     /**
      * set whether background is drawn or not.
-     * @param drawBackground boolean; set drawBackground
+     * @param drawBackground set drawBackground
      */
     void setDrawBackground(boolean drawBackground);
 

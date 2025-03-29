@@ -26,8 +26,8 @@ public class DistEmpiricalInterpolated extends DistContinuous
 
     /**
      * constructs a new DistEmpirical.
-     * @param stream StreamInterface; the stream to use
-     * @param empiricalDistribution InterpolatedEmpiricalDistribution; the cumulative distribution to use
+     * @param stream the stream to use
+     * @param empiricalDistribution the cumulative distribution to use
      */
     public DistEmpiricalInterpolated(final StreamInterface stream,
             final InterpolatedEmpiricalDistribution empiricalDistribution)

@@ -137,7 +137,7 @@ public class ContextTest
      * test basics for a Context.
      * @param context the context to test
      * @param expectedRootContext the expected root context (different from context in case of wrapping)
-     * @param testSub boolean; temporary switch to not test Subtrees for Remote
+     * @param testSub temporary switch to not test Subtrees for Remote
      * @throws RemoteException on RMI error
      * @throws NamingException on error
      */

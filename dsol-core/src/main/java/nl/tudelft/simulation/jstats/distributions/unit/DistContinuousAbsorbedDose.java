@@ -20,8 +20,8 @@ public class DistContinuousAbsorbedDose extends DistContinuousUnit<AbsorbedDoseU
 
     /**
      * Constructs a new continuous distribution that draws AbsorbedDose scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit AbsorbedDoseUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousAbsorbedDose(final DistContinuous wrappedDistribution, final AbsorbedDoseUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousAbsorbedDose extends DistContinuousUnit<AbsorbedDoseU
 
     /**
      * Constructs a new continuous distribution that draws AbsorbedDose scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousAbsorbedDose(final DistContinuous wrappedDistribution)
     {

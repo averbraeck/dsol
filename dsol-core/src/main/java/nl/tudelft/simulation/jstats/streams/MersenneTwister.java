@@ -70,7 +70,7 @@ public class MersenneTwister extends RandomNumberGenerator
 
     /**
      * Constructor using a given seed.
-     * @param seed long; The initial seed.
+     * @param seed The initial seed.
      */
     public MersenneTwister(final long seed)
     {

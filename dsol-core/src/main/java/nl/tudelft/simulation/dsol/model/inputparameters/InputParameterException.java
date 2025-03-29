@@ -25,7 +25,7 @@ public class InputParameterException extends Exception
 
     /**
      * Construct a new InputParameterException.
-     * @param message String; description of the problem
+     * @param message description of the problem
      */
     public InputParameterException(final String message)
     {
@@ -34,7 +34,7 @@ public class InputParameterException extends Exception
 
     /**
      * Construct a new InputParameterException.
-     * @param cause Throwable; the cause of this ValueException
+     * @param cause the cause of this ValueException
      */
     public InputParameterException(final Throwable cause)
     {
@@ -43,8 +43,8 @@ public class InputParameterException extends Exception
 
     /**
      * Construct a new InputParameterException.
-     * @param message String; description of the problem
-     * @param cause Throwable; the cause of this ValueException
+     * @param message description of the problem
+     * @param cause the cause of this ValueException
      */
     public InputParameterException(final String message, final Throwable cause)
     {
@@ -53,10 +53,10 @@ public class InputParameterException extends Exception
 
     /**
      * Construct a new InputParameterException.
-     * @param message String; description of the problem
-     * @param cause Throwable; the cause of this ValueException
-     * @param enableSuppression boolean; whether or not suppression is enabled or disabled
-     * @param writableStackTrace boolean; whether or not the stack trace should be writable
+     * @param message description of the problem
+     * @param cause the cause of this ValueException
+     * @param enableSuppression whether or not suppression is enabled or disabled
+     * @param writableStackTrace whether or not the stack trace should be writable
      */
     public InputParameterException(final String message, final Throwable cause, final boolean enableSuppression,
             final boolean writableStackTrace)

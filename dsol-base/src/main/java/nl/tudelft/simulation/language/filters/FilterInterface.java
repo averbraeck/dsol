@@ -18,14 +18,14 @@ public interface FilterInterface extends Serializable
 {
     /**
      * a filter defines whether to accept a value in a chart.
-     * @param entry Object; the entry to filter
+     * @param entry the entry to filter
      * @return whether to accept this entry
      */
     boolean accept(Object entry);
 
     /**
      * inverts the filter.
-     * @param inverted boolean; whether to invert the filter
+     * @param inverted whether to invert the filter
      */
     void setInverted(boolean inverted);
 
@@ -43,14 +43,14 @@ public interface FilterInterface extends Serializable
 
     /**
      * adds filter to this filter and returns the composed filter.
-     * @param filter FilterInterface; the filter to add
+     * @param filter the filter to add
      * @return the composed filter
      */
     FilterInterface and(FilterInterface filter);
 
     /**
      * creates a new composite filter which is one or two.
-     * @param filter FilterInterface; the filter to add
+     * @param filter the filter to add
      * @return the composed filter
      */
     FilterInterface or(FilterInterface filter);

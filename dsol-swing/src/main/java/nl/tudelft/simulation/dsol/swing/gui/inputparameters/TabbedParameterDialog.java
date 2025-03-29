@@ -63,7 +63,7 @@ public class TabbedParameterDialog extends JDialog implements ActionListener
 
     /**
      * Construct a tabbed parameter dialog that is not a part of a higher dialog.
-     * @param inputParameterMap InputParameterMap; the parameter map to use
+     * @param inputParameterMap the parameter map to use
      */
     public TabbedParameterDialog(final InputParameterMap inputParameterMap)
     {
@@ -164,8 +164,8 @@ public class TabbedParameterDialog extends JDialog implements ActionListener
     /**
      * Add the right type of field for this parameter and do the housekeeping to retrieve the value. When overriding, do not
      * forget to call super.addParameterField() for the options that should be handled in a standard way.
-     * @param panel JPanel; the panel in which to put the parameter
-     * @param parameter InputParameter&lt;?,?&gt;; the input parameter to display
+     * @param panel the panel in which to put the parameter
+     * @param parameter the input parameter to display
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void addParameterField(final JPanel panel, final InputParameter<?, ?> parameter)
@@ -310,7 +310,7 @@ public class TabbedParameterDialog extends JDialog implements ActionListener
 
     /**
      * Construct a tabbed parameter dialog that is not a part of a higher dialog.
-     * @param inputParameterMap InputParameterMap; the parameter map to use
+     * @param inputParameterMap the parameter map to use
      * @return whether the data was entered correctly or not
      */
     public static boolean process(final InputParameterMap inputParameterMap)

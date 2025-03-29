@@ -157,8 +157,8 @@ public final class ReadInputParameters
     /**
      * Read the input parameters from a properties file. Note: the input parameter map given as input will be used to store the
      * values read.
-     * @param filename String; the file to read (URLResource is used to resolve the file), with one key=value entry per line
-     * @param map InputParameterMap; the map of input parameters to be read
+     * @param filename the file to read (URLResource is used to resolve the file), with one key=value entry per line
+     * @param map the map of input parameters to be read
      * @throws InputParameterException when the parameter cannot be found or is given an illegal value
      * @throws FileNotFoundException when the file cannot be found
      * @throws IOException on read error from properties file
@@ -192,9 +192,9 @@ public final class ReadInputParameters
      * map given as input will be used to store the values read. Do not use whitespace on either side of the equals sign. Values
      * with spaces can be escaped with double quotes or single quotes. These quotes will be removed. Escaping the first single
      * or double quote can be done with a backslash.
-     * @param args String[]; the strings to contain the parameters with one key=value entry per string
-     * @param ignore boolean; whether to ignore entries without an 'equals' sign
-     * @param map InputParameterMap; the map of input parameters to be read
+     * @param args the strings to contain the parameters with one key=value entry per string
+     * @param ignore whether to ignore entries without an 'equals' sign
+     * @param map the map of input parameters to be read
      * @throws InputParameterException when the parameter cannot be found or is given an illegal value
      */
     public static void loadFromArgs(final String[] args, final boolean ignore, final InputParameterMap map)
@@ -249,8 +249,8 @@ public final class ReadInputParameters
      * map given as input will be used to store the values read. This method ignores arguments without an 'equals' sign. Do not
      * use whitespace on either side of the equals sign. Values with spaces can be escaped with double quotes or single quotes.
      * These quotes will be removed. Escaping the first single or double quote can be done with a backslash.
-     * @param args String[]; the strings to contain the parameters with one key=value entry per string
-     * @param map InputParameterMap; the map of input parameters to be read
+     * @param args the strings to contain the parameters with one key=value entry per string
+     * @param map the map of input parameters to be read
      * @throws InputParameterException when the parameter cannot be found or is given an illegal value
      */
     public static void loadFromArgs(final String[] args, final InputParameterMap map) throws InputParameterException

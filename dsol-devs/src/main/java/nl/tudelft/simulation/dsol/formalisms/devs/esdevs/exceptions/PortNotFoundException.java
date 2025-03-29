@@ -26,7 +26,7 @@ public class PortNotFoundException extends Exception
     }
 
     /**
-     * @param message String; the message to display / print for the exception
+     * @param message the message to display / print for the exception
      */
     public PortNotFoundException(final String message)
     {
@@ -34,7 +34,7 @@ public class PortNotFoundException extends Exception
     }
 
     /**
-     * @param cause Throwable; the Throwable or Exception that caused this exception to occur
+     * @param cause the Throwable or Exception that caused this exception to occur
      */
     public PortNotFoundException(final Throwable cause)
     {
@@ -42,8 +42,8 @@ public class PortNotFoundException extends Exception
     }
 
     /**
-     * @param message String; the message to display / print for the exception
-     * @param cause Throwable; the Throwable or Exception that caused this exception to occur
+     * @param message the message to display / print for the exception
+     * @param cause the Throwable or Exception that caused this exception to occur
      */
     public PortNotFoundException(final String message, final Throwable cause)
     {

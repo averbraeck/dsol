@@ -31,9 +31,9 @@ public class SingleImageRenderable<L extends Locatable> extends ImageRenderable<
 
     /**
      * constructs a new SingleImageRenderable.
-     * @param source T; the moving source
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param image URL; the image to animate
+     * @param source the moving source
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param image the image to animate
      * @throws NamingException when animation context cannot be created or retrieved
      * @throws RemoteException when remote context cannot be found
      */
@@ -45,10 +45,10 @@ public class SingleImageRenderable<L extends Locatable> extends ImageRenderable<
 
     /**
      * constructs a new SingleImageRenderable.
-     * @param staticLocation Point3d; the static location
-     * @param size Bounds3d; the size
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param image URL; the image
+     * @param staticLocation the static location
+     * @param size the size
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param image the image
      * @throws NamingException when animation context cannot be created or retrieved
      * @throws RemoteException when remote context cannot be found
      */
@@ -60,10 +60,10 @@ public class SingleImageRenderable<L extends Locatable> extends ImageRenderable<
 
     /**
      * constructs a new SingleImageRenderable.
-     * @param staticLocation OrientedPoint3d; the static location
-     * @param size Bounds3d; the size of the image
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param image URL; the image
+     * @param staticLocation the static location
+     * @param size the size of the image
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param image the image
      * @throws NamingException when animation context cannot be created or retrieved
      * @throws RemoteException when remote context cannot be found
      */

@@ -41,8 +41,8 @@ public class OsmFileReader implements DataSourceInterface
 
     /**
      * Constructs a new reader for a layer in an OSM shape file.
-     * @param osmURL URL; URL can have several valid extensions: .pbf, .osm, .osm.gz, and .osm.bz2
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param osmURL URL can have several valid extensions: .pbf, .osm, .osm.gz, and .osm.bz2
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      * @param featuresToRead the features to read
      * @throws IOException throws an IOException if the url is not accessible
      */

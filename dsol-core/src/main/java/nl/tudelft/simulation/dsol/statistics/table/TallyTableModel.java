@@ -30,7 +30,7 @@ public class TallyTableModel extends StatisticsTableModel
 
     /**
      * Constructor.
-     * @param tally SimTally; the tally for which the table is created
+     * @param tally the tally for which the table is created
      * @throws RemoteException when communication with the tally fails
      */
     public TallyTableModel(final SimTally<?> tally) throws RemoteException

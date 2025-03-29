@@ -23,8 +23,8 @@ public final class ColorParser
     /**
      * Parse a string that contains a color as rgb(r,g,b), rgba(r,g,b,a), or hex #rrggbb or #rrggbbaa. When the string is empty
      * or contains "null", null is returned.
-     * @param colorString String; the textual representation of the color
-     * @return Color; the parsed color, or null in casethe input was "null" or empty
+     * @param colorString the textual representation of the color
+     * @return the parsed color, or null in casethe input was "null" or empty
      * @throws IllegalArgumentException when the text representation is not valid
      * @throws IllegalArgumentException if r, g, b or a are outside of the range0 to 255, inclusive
      * @throws NumberFormatException when one of the r, g, b, or a values could not be converted from string to int

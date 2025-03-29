@@ -29,7 +29,7 @@ public class HomeAction extends AbstractAction
 
     /**
      * constructs a new ZoomIn.
-     * @param panel GridPanel; the target
+     * @param panel the target
      */
     public HomeAction(final VisualizationPanel panel)
     {

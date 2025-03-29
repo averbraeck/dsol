@@ -27,7 +27,7 @@ public class SnippetFilter extends AbstractFilter
     /**
      * constructs a new SnippetFilter. A snippet filter test only accepts one entry per snippet value. A snippet is a range in
      * x-value.
-     * @param snippet double; the snippet to use. A snippet is a range in the x-value.
+     * @param snippet the snippet to use. A snippet is a range in the x-value.
      */
     public SnippetFilter(final double snippet)
     {

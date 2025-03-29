@@ -37,7 +37,7 @@ public class StreamInformation implements Serializable
 
     /**
      * Construct a StreamInformation object that can be used to pass information about streams to to a model.
-     * @param defaultStream StreamInterface; the default stream that can be retrieved with the name "default"
+     * @param defaultStream the default stream that can be retrieved with the name "default"
      * @throws NullPointerException when defaultStream is null
      */
     public StreamInformation(final StreamInterface defaultStream)
@@ -49,8 +49,8 @@ public class StreamInformation implements Serializable
     /**
      * Add a new stream, based on a stream id, possibly overwriting a previous existing stream with the same name. No warning
      * will be given if previous information is overwritten.
-     * @param streamId String; the id of the stream to be added
-     * @param stream StreamInterface; the stream
+     * @param streamId the id of the stream to be added
+     * @param stream the stream
      * @throws NullPointerException when streamId is null or stream is null
      */
     public void addStream(final String streamId, final StreamInterface stream)
@@ -62,7 +62,7 @@ public class StreamInformation implements Serializable
 
     /**
      * Return the streams of this model, mapping stream ids to streams.
-     * @return Map&lt;String, StreamInterface&gt;; the stored streams
+     * @return the stored streams
      */
     public Map<String, StreamInterface> getStreams()
     {
@@ -71,8 +71,8 @@ public class StreamInformation implements Serializable
 
     /**
      * Return a specific stream, based on a stream id, or null when no stream with that id is present.
-     * @param streamId String; the id of the stream to be retrieved
-     * @return StreamInterface; the stream, or null when no stream with that id is present
+     * @param streamId the id of the stream to be retrieved
+     * @return the stream, or null when no stream with that id is present
      * @throws NullPointerException when streamId is null
      */
     public StreamInterface getStream(final String streamId)

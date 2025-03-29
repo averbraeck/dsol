@@ -19,13 +19,13 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 {
     /**
      * Return the RunControl object that contains the treatment information.
-     * @return RunControl; the RunControl object that contains the treatment information
+     * @return the RunControl object that contains the treatment information
      */
     RunControl<T> getRunControl();
 
     /**
      * Return the id of this replication.
-     * @return String; the id of this replication
+     * @return the id of this replication
      */
     default String getId()
     {
@@ -34,7 +34,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 
     /**
      * Sets the description of this replication.
-     * @param description String; the description of this replication
+     * @param description the description of this replication
      */
     default void setDescription(final String description)
     {
@@ -43,7 +43,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 
     /**
      * Return the description of this replication.
-     * @return String; the description of this replication
+     * @return the description of this replication
      */
     default String getDescription()
     {
@@ -52,7 +52,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 
     /**
      * Return the run length of this replication in relative units.
-     * @return T; the runLength.
+     * @return the runLength.
      */
     default T getRunLength()
     {
@@ -61,7 +61,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 
     /**
      * Return the warmup period of this replication in relative units.
-     * @return T; the warmup period.
+     * @return the warmup period.
      */
     default T getWarmupPeriod()
     {
@@ -70,7 +70,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 
     /**
      * Return the absolute start time of the simulation.
-     * @return T; the absolute start time of the simulation
+     * @return the absolute start time of the simulation
      */
     default T getStartTime()
     {
@@ -79,7 +79,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 
     /**
      * Return the absolute end time of the simulation.
-     * @return T; the absolute end time of the simulation
+     * @return the absolute end time of the simulation
      */
     default T getEndTime()
     {
@@ -88,7 +88,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
 
     /**
      * Return the absolute moment when the warmup event will take place.
-     * @return T; the absolute moment when the warmup event will take place
+     * @return the absolute moment when the warmup event will take place
      */
     default T getWarmupTime()
     {

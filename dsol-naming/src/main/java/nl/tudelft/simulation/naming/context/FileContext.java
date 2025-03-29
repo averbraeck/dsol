@@ -31,8 +31,8 @@ public class FileContext extends JvmContext
 
     /**
      * constructs a new FileContext.
-     * @param file File; the file to write to
-     * @param atomicName String; the name under which the root context will be registered
+     * @param file the file to write to
+     * @param atomicName the name under which the root context will be registered
      */
     public FileContext(final File file, final String atomicName)
     {
@@ -41,9 +41,9 @@ public class FileContext extends JvmContext
 
     /**
      * constructs a new FileContext.
-     * @param file File; the file to which to write
-     * @param parent Context; the parent context
-     * @param atomicName String; the atomicName
+     * @param file the file to which to write
+     * @param parent the parent context
+     * @param atomicName the atomicName
      */
     public FileContext(final File file, final ContextInterface parent, final String atomicName)
     {

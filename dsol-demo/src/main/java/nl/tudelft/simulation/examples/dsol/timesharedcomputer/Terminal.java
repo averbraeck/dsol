@@ -37,10 +37,10 @@ public class Terminal extends FlowBlock<Double, Terminal>
 
     /**
      * constructs a new Terminal.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
-     * @param cpu Station; the destination
-     * @param thinkDelay DistContinuous; the delay
-     * @param jobSize DistContinuous; in time
+     * @param simulator the simulator
+     * @param cpu the destination
+     * @param thinkDelay the delay
+     * @param jobSize in time
      */
     public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowBlock<Double, Cpu> cpu, final DistContinuous thinkDelay,
             final DistContinuous jobSize)

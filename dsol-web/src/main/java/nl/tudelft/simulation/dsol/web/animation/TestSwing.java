@@ -33,7 +33,7 @@ public class TestSwing
     }
 
     /**
-     * @param args String[]; empty
+     * @param args empty
      */
     public static void main(String[] args)
     {

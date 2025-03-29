@@ -20,8 +20,8 @@ public class DistContinuousMagneticFlux extends DistContinuousUnit<MagneticFluxU
 
     /**
      * Constructs a new continuous distribution that draws MagneticFlux scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit MagneticFluxUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousMagneticFlux(final DistContinuous wrappedDistribution, final MagneticFluxUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousMagneticFlux extends DistContinuousUnit<MagneticFluxU
 
     /**
      * Constructs a new continuous distribution that draws MagneticFlux scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousMagneticFlux(final DistContinuous wrappedDistribution)
     {

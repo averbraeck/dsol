@@ -59,10 +59,10 @@ public final class ConsoleRunnerTerminal implements EventListener
     }
 
     /**
-     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
-     * @param numQC int; num QC
-     * @param numAGV int; num AGV
-     * @param rep int; replication number
+     * @param simulator the simulator
+     * @param numQC num QC
+     * @param numAGV num AGV
+     * @param rep replication number
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      */
@@ -87,7 +87,7 @@ public final class ConsoleRunnerTerminal implements EventListener
     }
 
     /**
-     * @param args String[]; args
+     * @param args args
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error

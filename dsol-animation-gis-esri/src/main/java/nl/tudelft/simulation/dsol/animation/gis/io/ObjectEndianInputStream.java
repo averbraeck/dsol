@@ -32,7 +32,7 @@ public class ObjectEndianInputStream implements DataInput
 
     /**
      * constructs a new ObjectEndianInputStream.
-     * @param inputStream InputStream; the inputStream to use
+     * @param inputStream the inputStream to use
      */
     public ObjectEndianInputStream(final InputStream inputStream)
     {
@@ -119,7 +119,7 @@ public class ObjectEndianInputStream implements DataInput
 
     /**
      * reads b from the stream.
-     * @param b byte[]; byte
+     * @param b byte
      * @return in the value
      * @throws IOException on failure
      */
@@ -130,9 +130,9 @@ public class ObjectEndianInputStream implements DataInput
 
     /**
      * reads b from the stream.
-     * @param b byte[]; byte
-     * @param off int; offset
-     * @param len int; length
+     * @param b byte
+     * @param off offset
+     * @param len length
      * @return in the value
      * @throws IOException on failure
      */
@@ -191,7 +191,7 @@ public class ObjectEndianInputStream implements DataInput
 
     /**
      * reads UTF from the stream.
-     * @param dataInput DataInput; data input
+     * @param dataInput data input
      * @return String the value
      * @throws IOException on read failure
      */
@@ -210,7 +210,7 @@ public class ObjectEndianInputStream implements DataInput
 
     /**
      * Return the Endianness, i.e., big endian or little endian encoding.
-     * @return Endianness; big endian or little endian encoding
+     * @return big endian or little endian encoding
      */
     public Endianness getEndianness()
     {
@@ -219,7 +219,7 @@ public class ObjectEndianInputStream implements DataInput
 
     /**
      * Set the Endianness, i.e., big endian or little endian encoding.
-     * @param endianness Endianness; big endian or little endian encoding
+     * @param endianness big endian or little endian encoding
      */
     public void setEndianness(final Endianness endianness)
     {

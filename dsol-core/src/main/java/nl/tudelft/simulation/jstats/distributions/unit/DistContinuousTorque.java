@@ -20,8 +20,8 @@ public class DistContinuousTorque extends DistContinuousUnit<TorqueUnit, Torque>
 
     /**
      * Constructs a new continuous distribution that draws Torque scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit TorqueUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousTorque(final DistContinuous wrappedDistribution, final TorqueUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousTorque extends DistContinuousUnit<TorqueUnit, Torque>
 
     /**
      * Constructs a new continuous distribution that draws Torque scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousTorque(final DistContinuous wrappedDistribution)
     {

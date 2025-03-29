@@ -23,7 +23,7 @@ public abstract class AbstractSuppressIntrospector implements Introspector
 
     /**
      * Constructor for AbstractSuppressIntrospector.
-     * @param parent Introspector; the parent introspector
+     * @param parent the parent introspector
      */
     public AbstractSuppressIntrospector(final Introspector parent)
     {
@@ -74,7 +74,7 @@ public abstract class AbstractSuppressIntrospector implements Introspector
 
     /**
      * Method suppress.
-     * @param type Class&lt;?&gt;; the type of the class
+     * @param type the type of the class
      * @return boolean whether to supress
      */
     protected boolean suppress(final Class<?> type)
@@ -88,7 +88,7 @@ public abstract class AbstractSuppressIntrospector implements Introspector
 
     /**
      * Method suppress.
-     * @param propertyName String; the propertyName
+     * @param propertyName the propertyName
      * @return whether to supress
      */
     protected abstract boolean suppress(final String propertyName);

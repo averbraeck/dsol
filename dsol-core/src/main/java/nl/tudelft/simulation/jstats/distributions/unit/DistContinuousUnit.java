@@ -31,8 +31,8 @@ public abstract class DistContinuousUnit<U extends Unit<U>, S extends DoubleScal
 
     /**
      * constructs a new continuous distribution.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit U; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousUnit(final DistContinuous wrappedDistribution, final U unit)
     {
@@ -49,8 +49,8 @@ public abstract class DistContinuousUnit<U extends Unit<U>, S extends DoubleScal
 
     /**
      * returns the probability density for a value scalar.
-     * @param scalar S; the value for which to calculate the probability density.
-     * @return double; the probability density for value scalar
+     * @param scalar the value for which to calculate the probability density.
+     * @return the probability density for value scalar
      */
     public double probDensity(final S scalar)
     {
@@ -59,7 +59,7 @@ public abstract class DistContinuousUnit<U extends Unit<U>, S extends DoubleScal
 
     /**
      * Return the wrapped distribution.
-     * @return DistContinuous; the wrapped distribution
+     * @return the wrapped distribution
      */
     public DistContinuous getWrappedDistribution()
     {
@@ -68,7 +68,7 @@ public abstract class DistContinuousUnit<U extends Unit<U>, S extends DoubleScal
 
     /**
      * Return the unit in which the samples from the wrapped distribution are returned.
-     * @return U; the unit in which the samples from the wrapped distribution are returned
+     * @return the unit in which the samples from the wrapped distribution are returned
      */
     public U getUnit()
     {

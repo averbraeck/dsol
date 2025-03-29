@@ -95,13 +95,13 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Construct a new Experiment.
-     * @param id String; the id of the experiment
-     * @param simulator S; the simulator
-     * @param model DsolModel&lt;T, S&gt;; the model to experiment with
-     * @param startTime T; the start time of the simulation.
-     * @param warmupPeriod R; the warmup period, included in the runlength (!)
-     * @param runLength R; the total length of the run, including the warm-up period.
-     * @param numberOfReplications int; the number of replications to execute
+     * @param id the id of the experiment
+     * @param simulator the simulator
+     * @param model the model to experiment with
+     * @param startTime the start time of the simulation.
+     * @param warmupPeriod the warmup period, included in the runlength (!)
+     * @param runLength the total length of the run, including the warm-up period.
+     * @param numberOfReplications the number of replications to execute
      * @throws NullPointerException when id, startTime, warmupPeriod or runLength is null
      * @throws IllegalArgumentException when warmup period is negative, or run length is zero or negative, or when the warmup
      *             time is longer than or equal to the runlength, or the number of replications is zero or negative
@@ -114,9 +114,9 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Construct a new Experiment, using a RunControl to store the run control information.
-     * @param simulator S; the simulator
-     * @param model DsolModel&lt;T, S&gt;; the model to experiment with
-     * @param runControl ExperimentRunControl; the run control information
+     * @param simulator the simulator
+     * @param model the model to experiment with
+     * @param runControl the run control information
      * @throws NullPointerException when id, startTime, warmupPeriod or runLength is null
      */
     public Experiment(final S simulator, final DsolModel<T, ? extends S> model, final ExperimentRunControl<T> runControl)
@@ -137,7 +137,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the simulator.
-     * @return S; the simulator
+     * @return the simulator
      */
     public S getSimulator()
     {
@@ -146,7 +146,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the model.
-     * @return DsolModel; the model
+     * @return the model
      */
     public DsolModel<T, ? extends S> getModel()
     {
@@ -155,7 +155,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the list of started replications. Not all replications might have finished yet.
-     * @return List&lt;Replication&lt;T, S&gt;&gt;; the list of started replications
+     * @return the list of started replications
      */
     public List<? extends ExperimentReplication<T, S>> getStartedReplications()
     {
@@ -208,7 +208,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Create a new replication for an experiment. This method can be overridden in the inner classes.
-     * @return ExperimentReplication; a new replication for an experiment
+     * @return a new replication for an experiment
      */
     protected ExperimentReplication<T, S> makeExperimentReplication()
     {
@@ -302,9 +302,9 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Tally a value in a summary statistic over multiple replications.
-     * @param statistic String; the name of the statistic
-     * @param field String; the name of the field for the summary statistic
-     * @param value double; the value to tally by the summary statistic
+     * @param statistic the name of the statistic
+     * @param field the name of the field for the summary statistic
+     * @param value the value to tally by the summary statistic
      */
     protected void addSummaryStatistic(final String statistic, final String field, final double value)
     {
@@ -334,7 +334,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
      * which the final values of the replications for that value have been tallied. The "Population Mean" for "waiting time" in
      * this example therefore contains the average of the 10 average waiting times that have been alculated in the 10
      * replications.
-     * @return summaryStatistics SortedMap&lt;String, SortedMap&lt;String, Tally&gt;&gt;; the summary statistics
+     * @return the summary statistics
      */
     public SortedMap<String, SortedMap<String, Tally>> getSummaryStatistics()
     {
@@ -343,7 +343,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the current (running or finished) replication.
-     * @return int; the current replication (still running or finished in case of last replication)
+     * @return the current replication (still running or finished in case of last replication)
      */
     public int getCurrentReplication()
     {
@@ -389,7 +389,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the current stream updater.
-     * @return streamUpdater StreamUpdater; the current stream updater
+     * @return the current stream updater
      */
     public StreamUpdater getStreamUpdater()
     {
@@ -398,7 +398,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Set a new StreamUpdater to update the random seeds between replications.
-     * @param streamUpdater StreamUpdater; the new stream updater
+     * @param streamUpdater the new stream updater
      */
     public void setStreamUpdater(final StreamUpdater streamUpdater)
     {
@@ -407,7 +407,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the current replication number, which is -1 if the experiment has not yet started.
-     * @return int; the current replication number
+     * @return the current replication number
      */
     public int getCurrentReplicationNumber()
     {
@@ -416,7 +416,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return the total number of replications to execute.
-     * @return int; the total number of replications to execute
+     * @return the total number of replications to execute
      */
     public int getNumberOfReplications()
     {
@@ -425,7 +425,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Return whether the experiment is running or not.
-     * @return boolean; whether the experiment is running or not
+     * @return whether the experiment is running or not
      */
     public boolean isRunning()
     {
@@ -450,7 +450,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
         /**
          * Construct the ExperimentRunner with a pointer to the Experiment.
-         * @param experiment Experiment; the experiment
+         * @param experiment the experiment
          */
         public ExperimentThread(final Experiment<?, ?> experiment)
         {

@@ -56,7 +56,7 @@ public class DoubleAppendList implements Iterable<Double>, Serializable
 
     /**
      * Add a value to the list.
-     * @param value double; the value to add
+     * @param value the value to add
      */
     public void add(final double value)
     {
@@ -73,7 +73,7 @@ public class DoubleAppendList implements Iterable<Double>, Serializable
 
     /**
      * Return the number of elements.
-     * @return int; the number of elements
+     * @return the number of elements
      */
     public int size()
     {
@@ -82,8 +82,8 @@ public class DoubleAppendList implements Iterable<Double>, Serializable
 
     /**
      * Return the value at a position.
-     * @param i int; the position
-     * @return double; the value at the position
+     * @param i the position
+     * @return the value at the position
      * @throws IndexOutOfBoundsException when i &lt; 0 or i &gt; number of values
      */
     public double get(final int i)
@@ -114,7 +114,7 @@ public class DoubleAppendList implements Iterable<Double>, Serializable
 
         /**
          * Make an iterator for the DoubleAppendList.
-         * @param list DoubleAppendList; the list to iterate over
+         * @param list the list to iterate over
          */
         DoubleAppendIterator(final DoubleAppendList list)
         {

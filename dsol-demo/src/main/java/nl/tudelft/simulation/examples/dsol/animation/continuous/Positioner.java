@@ -22,7 +22,7 @@ public class Positioner extends DifferentialEquation<Double>
 
     /**
      * constructs a new Positioner.
-     * @param simulator DessSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator the simulator
      * @throws RemoteException on remote error
      */
     public Positioner(final DessSimulatorInterface<Double> simulator) throws RemoteException
@@ -33,7 +33,7 @@ public class Positioner extends DifferentialEquation<Double>
 
     /**
      * sets the value.
-     * @param value double; the new value
+     * @param value the new value
      */
     public void setValue(final double value)
     {

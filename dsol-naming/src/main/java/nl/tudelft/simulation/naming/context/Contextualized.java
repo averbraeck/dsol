@@ -14,7 +14,7 @@ public interface Contextualized
 {
     /** 
      * Return the context.
-     * @return ContextInterface; the context 
+     * @return the context 
      */
     ContextInterface getContext();
     

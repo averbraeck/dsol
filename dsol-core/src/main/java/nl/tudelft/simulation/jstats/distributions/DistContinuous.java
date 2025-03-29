@@ -22,7 +22,7 @@ public abstract class DistContinuous extends Dist
 
     /**
      * constructs a new continuous distribution.
-     * @param stream StreamInterface; the stream
+     * @param stream the stream
      */
     public DistContinuous(final StreamInterface stream)
     {
@@ -37,8 +37,8 @@ public abstract class DistContinuous extends Dist
 
     /**
      * returns the probability density value of a value x.
-     * @param x double; the value for which the density function needs to be calculated
-     * @return double; the probability density for value x
+     * @param x the value for which the density function needs to be calculated
+     * @return the probability density for value x
      */
     public abstract double getProbabilityDensity(double x);
 }

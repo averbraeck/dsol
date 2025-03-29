@@ -21,9 +21,9 @@ public class CartesianPoint extends Point3d
 
     /**
      * constructs a new CartesianPoint.
-     * @param x double; x
-     * @param y double; y
-     * @param z double; z
+     * @param x x
+     * @param y y
+     * @param z z
      */
     public CartesianPoint(final double x, final double y, final double z)
     {
@@ -32,7 +32,7 @@ public class CartesianPoint extends Point3d
 
     /**
      * constructs a new CartesianPoint.
-     * @param xyz double[]; x,y,z
+     * @param xyz x,y,z
      */
     public CartesianPoint(final double[] xyz)
     {
@@ -41,7 +41,7 @@ public class CartesianPoint extends Point3d
 
     /**
      * constructs a new CartesianPoint.
-     * @param point2D Point2D; a 2D point
+     * @param point2D a 2D point
      */
     public CartesianPoint(final Point2D point2D)
     {
@@ -68,7 +68,7 @@ public class CartesianPoint extends Point3d
 
     /**
      * converts a cartesian point to a sperical point. See https://mathworld.wolfram.com/SphericalCoordinates.html
-     * @param point CartesianPoint; the cartesian point
+     * @param point the cartesian point
      * @return the spherical point
      */
     public static SphericalPoint toSphericalPoint(final CartesianPoint point)

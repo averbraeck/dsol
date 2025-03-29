@@ -30,7 +30,7 @@ public class StatisticsTable implements Swingable
 
     /**
      * Constructor.
-     * @param table StatisticsTableModel; the statistics table that is represented on the screen
+     * @param table the statistics table that is represented on the screen
      */
     public StatisticsTable(final StatisticsTableModel table)
     {
@@ -39,7 +39,7 @@ public class StatisticsTable implements Swingable
 
     /**
      * represents this statisticsObject as Container.
-     * @return Container; the result
+     * @return the result
      * @throws RemoteException on network failure
      */
     @Override

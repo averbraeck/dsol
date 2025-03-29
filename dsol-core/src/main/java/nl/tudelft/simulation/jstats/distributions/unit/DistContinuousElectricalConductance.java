@@ -20,8 +20,8 @@ public class DistContinuousElectricalConductance extends DistContinuousUnit<Elec
 
     /**
      * Constructs a new continuous distribution that draws ElectricalConductance scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit ElectricalConductanceUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousElectricalConductance(final DistContinuous wrappedDistribution, final ElectricalConductanceUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousElectricalConductance extends DistContinuousUnit<Elec
 
     /**
      * Constructs a new continuous distribution that draws ElectricalConductance scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousElectricalConductance(final DistContinuous wrappedDistribution)
     {

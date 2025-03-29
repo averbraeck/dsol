@@ -57,8 +57,8 @@ public class AutoPanAnimationPanel extends AnimationPanel
 
     /**
      * Constructor for the AutoPanAnimationPanel.
-     * @param homeExtent Bounds2d; home extent
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; simulator
+     * @param homeExtent home extent
+     * @param simulator simulator
      * @throws RemoteException on remote animation error
      * @throws DsolException when simulator does not implement AnimatorInterface
      */
@@ -111,7 +111,7 @@ public class AutoPanAnimationPanel extends AnimationPanel
 
     /**
      * returns the list of selected objects at a certain mousePoint.
-     * @param mousePoint Point2D; the mousePoint
+     * @param mousePoint the mousePoint
      * @return the selected objects
      */
     protected Object getSelectedObject(final Point2D mousePoint)
@@ -140,9 +140,9 @@ public class AutoPanAnimationPanel extends AnimationPanel
 
     /**
      * Change auto pan target.
-     * @param newAutoPanId String; id of object to track (or
-     * @param newAutoPanKind String; kind of object to track
-     * @param newAutoPanTrack boolean; if true; tracking is continuously; if false; tracking is once
+     * @param newAutoPanId id of object to track (or
+     * @param newAutoPanKind kind of object to track
+     * @param newAutoPanTrack if true; tracking is continuously; if false; tracking is once
      */
     public void setAutoPan(final String newAutoPanId, final SearchPanel.ObjectKind<?> newAutoPanKind,
             final boolean newAutoPanTrack)

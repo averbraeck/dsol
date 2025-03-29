@@ -88,7 +88,7 @@ public class VisualizationDemo implements Contextualized
         private final Contextualized contextProvider;
 
         /**
-         * @param contextProvider Contextualized; the context provider
+         * @param contextProvider the context provider
          */
         public DrawObjectsThread(final Contextualized contextProvider)
         {
@@ -128,9 +128,9 @@ public class VisualizationDemo implements Contextualized
         private static final long serialVersionUID = 1L;
 
         /**
-         * @param contextProvider Contextualized; the context in which drawing objects will be placed
-         * @param x double; x coordinate
-         * @param y double; y coordinate
+         * @param contextProvider the context in which drawing objects will be placed
+         * @param x x coordinate
+         * @param y y coordinate
          */
         public DrawObject(final Contextualized contextProvider, final double x, final double y)
         {

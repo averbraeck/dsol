@@ -18,7 +18,7 @@ public interface InterpolationInterface
 {
     /**
      * returns the current location.
-     * @param time double; the current time
+     * @param time the current time
      * @return OrientedPoint3d the current location
      * @throws RemoteException on network failure
      */

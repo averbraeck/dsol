@@ -20,8 +20,8 @@ public class DistContinuousFrequency extends DistContinuousUnit<FrequencyUnit, F
 
     /**
      * Constructs a new continuous distribution that draws Frequency scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit FrequencyUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousFrequency(final DistContinuous wrappedDistribution, final FrequencyUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousFrequency extends DistContinuousUnit<FrequencyUnit, F
 
     /**
      * Constructs a new continuous distribution that draws Frequency scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousFrequency(final DistContinuous wrappedDistribution)
     {

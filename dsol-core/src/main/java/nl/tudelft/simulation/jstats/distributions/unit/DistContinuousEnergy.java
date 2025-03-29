@@ -20,8 +20,8 @@ public class DistContinuousEnergy extends DistContinuousUnit<EnergyUnit, Energy>
 
     /**
      * Constructs a new continuous distribution that draws Energy scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit EnergyUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousEnergy(final DistContinuous wrappedDistribution, final EnergyUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousEnergy extends DistContinuousUnit<EnergyUnit, Energy>
 
     /**
      * Constructs a new continuous distribution that draws Energy scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousEnergy(final DistContinuous wrappedDistribution)
     {

@@ -48,7 +48,7 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
 
     /**
      * constructs a new BoxAndWhiskerChart.
-     * @param title String; the title of the chart
+     * @param title the title of the chart
      */
     public BoxAndWhiskerChart(final String title)
     {
@@ -59,8 +59,8 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
 
     /**
      * constructs a new BoxAndWhiskerChart, linked to the simulator-provided context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
+     * @param simulator the simulator
+     * @param title the title
      */
     public BoxAndWhiskerChart(final SimulatorInterface<?> simulator, final String title)
     {
@@ -78,7 +78,7 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
 
     /**
      * adds a tally to the chart.
-     * @param tally EventBasedTally; the tally to be added
+     * @param tally the tally to be added
      * @throws RemoteException on network failure
      */
     public void add(final EventBasedTally tally) throws RemoteException
@@ -88,7 +88,7 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
 
     /**
      * adds a weighted tally to the chart.
-     * @param tally EventBasedWeightedTally; the tally to be added
+     * @param tally the tally to be added
      * @throws RemoteException on network failure
      */
     public void add(final EventBasedWeightedTally tally) throws RemoteException
@@ -98,7 +98,7 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
 
     /**
      * adds a weighted tally to the chart.
-     * @param tally EventBasedTimestampWeightedTally; the tally to be added
+     * @param tally the tally to be added
      * @throws RemoteException on network failure
      */
     public void add(final EventBasedTimestampWeightedTally tally) throws RemoteException
@@ -136,7 +136,7 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
 
     /**
      * sets the confidence interval of the plot. The default value = 0.05 (=5%)
-     * @param confidenceInterval double; the confidence interval
+     * @param confidenceInterval the confidence interval
      */
     public void setConfidenceInterval(final double confidenceInterval)
     {

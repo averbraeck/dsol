@@ -20,8 +20,8 @@ public class DistContinuousRadioActivity extends DistContinuousUnit<RadioActivit
 
     /**
      * Constructs a new continuous distribution that draws RadioActivity scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit RadioActivityUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousRadioActivity(final DistContinuous wrappedDistribution, final RadioActivityUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousRadioActivity extends DistContinuousUnit<RadioActivit
 
     /**
      * Constructs a new continuous distribution that draws RadioActivity scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousRadioActivity(final DistContinuous wrappedDistribution)
     {

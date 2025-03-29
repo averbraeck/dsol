@@ -23,8 +23,8 @@ public class SortDefinition implements Sortable.Definition
 
     /**
      * constructs a new SortDefinition.
-     * @param fieldID int; the fieldID
-     * @param ascending boolean; whether sorting should occur ascending
+     * @param fieldID the fieldID
+     * @param ascending whether sorting should occur ascending
      */
     public SortDefinition(final int fieldID, final boolean ascending)
     {

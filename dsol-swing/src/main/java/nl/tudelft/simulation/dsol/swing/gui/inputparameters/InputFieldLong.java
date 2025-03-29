@@ -17,8 +17,8 @@ public class InputFieldLong extends InputFieldString
 {
     /**
      * Create a long field on the screen.
-     * @param panel JPanel; panel to add the field to
-     * @param parameter InputParameterLong; the parameter
+     * @param panel panel to add the field to
+     * @param parameter the parameter
      */
     public InputFieldLong(final JPanel panel, final InputParameterLong parameter)
     {
@@ -43,8 +43,8 @@ public class InputFieldLong extends InputFieldString
 
     /**
      * Return the numeric value of the field.
-     * @param s String; the String to test
-     * @param shortName String; the name of the field to test
+     * @param s the String to test
+     * @param shortName the name of the field to test
      * @return the long value of the field in the gui.
      * @throws InputParameterException on invalid input
      */

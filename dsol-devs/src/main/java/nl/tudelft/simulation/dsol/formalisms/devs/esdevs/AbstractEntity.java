@@ -23,9 +23,9 @@ public class AbstractEntity<T extends Number & Comparable<T>> extends AbstractDe
     /**
      * Constructor for an abstract entity: we have to indicate the simulator for reporting purposes, and the parent model we are
      * part of. A parent model of null means that we are the top model.
-     * @param modelName String; the name of this component
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator for this model.
-     * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of (can be null for highest level model).
+     * @param modelName the name of this component
+     * @param simulator the simulator for this model.
+     * @param parentModel the parent model we are part of (can be null for highest level model).
      */
     public AbstractEntity(final String modelName, final DevsSimulatorInterface<T> simulator, final CoupledModel<T> parentModel)
     {

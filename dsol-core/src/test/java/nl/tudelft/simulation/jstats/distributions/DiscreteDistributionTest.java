@@ -50,13 +50,13 @@ public class DiscreteDistributionTest
     }
 
     /**
-     * @param name String; the name of the distribution to test
-     * @param dist Dist; the distribution to test
-     * @param expectedMean double; the expected mean of a large number of samples
-     * @param expectedVariance double; the expected variance of a large number of samples; test the standard deviations
-     * @param expectedMin double; the expected lowest value of a large number of samples, or NaN if unbounded
-     * @param expectedMax double; the expected highest value of a large number of samples, or NaN if unbounded
-     * @param precision double; the precision for mean, standard deviation, min and max
+     * @param name the name of the distribution to test
+     * @param dist the distribution to test
+     * @param expectedMean the expected mean of a large number of samples
+     * @param expectedVariance the expected variance of a large number of samples; test the standard deviations
+     * @param expectedMin the expected lowest value of a large number of samples, or NaN if unbounded
+     * @param expectedMax the expected highest value of a large number of samples, or NaN if unbounded
+     * @param precision the precision for mean, standard deviation, min and max
      */
     @SuppressWarnings("checkstyle:parameternumber")
     private void testDist(final String name, final DistDiscrete dist, final double expectedMean, final double expectedVariance,
@@ -323,8 +323,8 @@ public class DiscreteDistributionTest
 
     /**
      * Calculate the number of k-combinations in an n-set, or "n over k" = n! / (k! * (n-k)!)
-     * @param n int; number in the set
-     * @param k int; number of combinations to look for
+     * @param n number in the set
+     * @param k number of combinations to look for
      * @return n over k
      */
     private static double combinations(final int n, final int k)
@@ -334,7 +334,7 @@ public class DiscreteDistributionTest
 
     /**
      * Calculate fac(n) = n * (n-1) * (n-2) * ... 1, where fac(0) = 1.
-     * @param n int; param
+     * @param n param
      * @return n!
      */
     private static long fac(final int n)

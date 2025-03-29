@@ -37,9 +37,9 @@ public class DistBeta extends DistContinuous
 
     /**
      * constructs a new beta distribution.
-     * @param stream StreamInterface; the stream.
-     * @param alpha1 double; the first shape parameter &alpha;<sub>1</sub> for the distribution
-     * @param alpha2 double; the second shape parameter &alpha;<sub>2</sub>for the distribution
+     * @param stream the stream.
+     * @param alpha1 the first shape parameter &alpha;<sub>1</sub> for the distribution
+     * @param alpha2 the second shape parameter &alpha;<sub>2</sub>for the distribution
      * @throws IllegalArgumentException when alpha1 &lt;= 0.0 or alpha2 &lt;= 0.0
      */
     public DistBeta(final StreamInterface stream, final double alpha1, final double alpha2)
@@ -73,7 +73,7 @@ public class DistBeta extends DistContinuous
 
     /**
      * Return the first shape parameter &alpha;<sub>1</sub> for the distribution.
-     * @return double; the first shape parameter &alpha;<sub>1</sub> for the distribution
+     * @return the first shape parameter &alpha;<sub>1</sub> for the distribution
      */
     public double getAlpha1()
     {
@@ -82,7 +82,7 @@ public class DistBeta extends DistContinuous
 
     /**
      * Return the second shape parameter &alpha;<sub>2</sub>for the distribution.
-     * @return double; the second shape parameter &alpha;<sub>2</sub>for the distribution
+     * @return the second shape parameter &alpha;<sub>2</sub>for the distribution
      */
     public double getAlpha2()
     {

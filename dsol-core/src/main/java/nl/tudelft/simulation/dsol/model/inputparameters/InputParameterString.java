@@ -17,11 +17,11 @@ public class InputParameterString extends AbstractInputParameter<String, String>
 
     /**
      * Construct a new InputParameterString.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterString
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param defaultValue String; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterString
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, description, or defaultValue is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -40,7 +40,7 @@ public class InputParameterString extends AbstractInputParameter<String, String>
 
     /**
      * Check and set the typed value, and call super.setValue to make the actual allocation.
-     * @param newValue String; the new value for the input parameter
+     * @param newValue the new value for the input parameter
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
     public void setStringValue(final String newValue) throws InputParameterException

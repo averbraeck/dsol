@@ -49,8 +49,8 @@ public class Delay<T extends Number & Comparable<T>> extends FlowBlock<T, Delay<
 
     /**
      * Construct a new Delay flow block.
-     * @param id String; the id of the Delay flow object
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator
+     * @param id the id of the Delay flow object
+     * @param simulator the simulator
      */
     public Delay(final String id, final DevsSimulatorInterface<T> simulator)
     {

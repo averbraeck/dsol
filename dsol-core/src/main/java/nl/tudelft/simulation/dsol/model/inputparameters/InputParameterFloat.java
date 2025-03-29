@@ -32,11 +32,11 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
 
     /**
      * Construct a new InputParameterFloat.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterFloat
-     * @param shortName String; concise description of the input parameter
-     * @param description String; float description of the input parameter (may use HTML markup)
-     * @param defaultValue float; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterFloat
+     * @param shortName concise description of the input parameter
+     * @param description float description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -48,16 +48,16 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
 
     /**
      * Construct a new InputParameterFloat.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterFloat
-     * @param shortName String; concise description of the input parameter
-     * @param description String; float description of the input parameter (may use HTML markup)
-     * @param defaultValue float; the default value of this input parameter
-     * @param minimumValue float; the lowest value allowed as input
-     * @param maximumValue float; the highest value allowed as input
-     * @param minIncluded boolean; is the minimum value included or excluded in the allowed interval?
-     * @param maxIncluded boolean; is the maximum value included or excluded in the allowed interval?
-     * @param format String; the format to use in displaying the float
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterFloat
+     * @param shortName concise description of the input parameter
+     * @param description float description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param minimumValue the lowest value allowed as input
+     * @param maximumValue the highest value allowed as input
+     * @param minIncluded is the minimum value included or excluded in the allowed interval?
+     * @param maxIncluded is the maximum value included or excluded in the allowed interval?
+     * @param format the format to use in displaying the float
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, description, or format is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -83,7 +83,7 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
 
     /**
      * Check and set the typed value, and call super.setValue to make the actual allocation.
-     * @param newValue float; the new value for the input parameter
+     * @param newValue the new value for the input parameter
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
     public void setFloatValue(final float newValue) throws InputParameterException
@@ -106,7 +106,7 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
     }
 
     /**
-     * @param format String; set format
+     * @param format set format
      * @throws NullPointerException when format is null
      */
     public void setFormat(final String format)
@@ -124,7 +124,7 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
     }
 
     /**
-     * @param minimumValue float; set minimumValue
+     * @param minimumValue set minimumValue
      */
     public void setMinimumValue(final float minimumValue)
     {
@@ -140,7 +140,7 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
     }
 
     /**
-     * @param maximumValue float; set maximumValue
+     * @param maximumValue set maximumValue
      */
     public void setMaximumValue(final float maximumValue)
     {
@@ -156,7 +156,7 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
     }
 
     /**
-     * @param minIncluded boolean; set minIncluded
+     * @param minIncluded set minIncluded
      */
     public void setMinIncluded(final boolean minIncluded)
     {
@@ -172,7 +172,7 @@ public class InputParameterFloat extends AbstractInputParameter<Float, Float>
     }
 
     /**
-     * @param maxIncluded boolean; set maxIncluded
+     * @param maxIncluded set maxIncluded
      */
     public void setMaxIncluded(final boolean maxIncluded)
     {

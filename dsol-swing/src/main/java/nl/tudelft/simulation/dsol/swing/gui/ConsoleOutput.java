@@ -62,8 +62,8 @@ public class ConsoleOutput extends JPanel
 
         /**
          * Create the custom writer.
-         * @param textArea JTextArea; the text area to write to
-         * @param standardOut  PrintSTream; the original stdout
+         * @param textArea the text area to write to
+         * @param standardOut the original stdout
          */
         public CustomOutputStream(final JTextArea textArea, final PrintStream standardOut)
         {
@@ -91,8 +91,8 @@ public class ConsoleOutput extends JPanel
 
         /**
          * Create the custom writer.
-         * @param textArea JTextArea; the text area to write to
-         * @param standardErr PrintSTream; the original stderr
+         * @param textArea the text area to write to
+         * @param standardErr the original stderr
          */
         public CustomErrorStream(final JTextArea textArea, final PrintStream standardErr)
         {

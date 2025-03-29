@@ -38,8 +38,8 @@ public class AnimationPanel extends VisualizationPanel
 
     /**
      * constructs a new AnimationPanel.
-     * @param homeExtent Bounds2d; the home (initial) extent of the panel
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator of which we want to know the events for animation
+     * @param homeExtent the home (initial) extent of the panel
+     * @param simulator the simulator of which we want to know the events for animation
      * @throws RemoteException on network error for one of the listeners
      * @throws DsolException when the simulator is not implementing the AnimatorInterface
      */

@@ -26,7 +26,7 @@ public abstract class Dist implements java.io.Serializable
 
     /**
      * Constructs a new Distribution.
-     * @param stream StreamInterface; the stream for this mathematical distribution.
+     * @param stream the stream for this mathematical distribution.
      * @throws NullPointerException when stream is null
      */
     public Dist(final StreamInterface stream)
@@ -37,7 +37,7 @@ public abstract class Dist implements java.io.Serializable
 
     /**
      * Return the random number stream.
-     * @return StreamInterface; the random number stream
+     * @return the random number stream
      */
     public StreamInterface getStream()
     {
@@ -46,7 +46,7 @@ public abstract class Dist implements java.io.Serializable
 
     /**
      * Replace the random number stream.
-     * @param stream StreamInterface; the new random number stream
+     * @param stream the new random number stream
      * @throws NullPointerException when stream is null
      */
     public void setStream(final StreamInterface stream)

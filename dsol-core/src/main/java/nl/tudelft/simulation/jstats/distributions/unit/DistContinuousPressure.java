@@ -20,8 +20,8 @@ public class DistContinuousPressure extends DistContinuousUnit<PressureUnit, Pre
 
     /**
      * Constructs a new continuous distribution that draws Pressure scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit PressureUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousPressure(final DistContinuous wrappedDistribution, final PressureUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousPressure extends DistContinuousUnit<PressureUnit, Pre
 
     /**
      * Constructs a new continuous distribution that draws Pressure scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousPressure(final DistContinuous wrappedDistribution)
     {

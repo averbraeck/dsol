@@ -42,8 +42,8 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
     /**
      * Create a new Resource with a capacity and a specific request comparator, e.g., LIFO or sorted on an attribute.
-     * @param id String; the id of this resource
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator
+     * @param id the id of this resource
+     * @param simulator the simulator
      */
     public Resource(final String id, final DevsSimulatorInterface<T> simulator)
     {
@@ -145,9 +145,9 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         /**
          * Create a new Resource with floating point capacity and a specific request comparator, e.g., LIFO or sorted on an
          * attribute.
-         * @param id String; the id of this resource
-         * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator
-         * @param capacity double; the capacity of the resource
+         * @param id the id of this resource
+         * @param simulator the simulator
+         * @param capacity the capacity of the resource
          */
         public DoubleCapacity(final String id, final DevsSimulatorInterface<T> simulator, final double capacity)
         {
@@ -179,7 +179,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
         /**
          * Add the amount to the claimed capacity.
-         * @param amount double; the amount which is added to the claimed capacity
+         * @param amount the amount which is added to the claimed capacity
          */
         private synchronized void changeClaimedCapacity(final double amount)
         {
@@ -193,7 +193,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
          * Set the capacity of the resource to a new value. The <code>releaseCapacity</code> method is called after updating the
          * capacity because in case of a capacity increase, the resource could allow one or more new claims on the capacity from
          * the queue.
-         * @param capacity double; the new maximal capacity
+         * @param capacity the new maximal capacity
          */
         public void setCapacity(final double capacity)
         {
@@ -203,8 +203,8 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
         /**
          * Request an amount of capacity from the resource, without a priority. A dummy priority value of 0 is used.
-         * @param amount double; the requested amount
-         * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
+         * @param amount the requested amount
+         * @param requestor the RequestorInterface requesting the amount
          */
         public synchronized void requestCapacity(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor)
         {
@@ -213,9 +213,9 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
         /**
          * Request an amount of capacity from the resource, with an integer priority value.
-         * @param amount double; the requested amount
-         * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
-         * @param priority int; the priority of the request
+         * @param amount the requested amount
+         * @param requestor the RequestorInterface requesting the amount
+         * @param priority the priority of the request
          */
         public synchronized void requestCapacity(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor,
                 final int priority)
@@ -238,7 +238,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
         /**
          * Release an amount of capacity from the resource.
-         * @param amount double; the amount to release
+         * @param amount the amount to release
          */
         public void releaseCapacity(final double amount)
         {
@@ -345,7 +345,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         /**
          * Request an amount of capacity from the resource, without a priority. A dummy priority value of 0 is used.
          * @param amount the requested amount
-         * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
+         * @param requestor the RequestorInterface requesting the amount
          */
         public synchronized void requestCapacity(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor)
         {

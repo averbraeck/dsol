@@ -28,7 +28,7 @@ public final class DistributionFrequencies
      * Create a discrete empirical distribution from two arrays, one with frequencies or weights, and one with corresponding
      * values.
      * @param values Number[] the values
-     * @param frequencies long[]; the frequencies for the corresponding values
+     * @param frequencies the frequencies for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or frequencies array is null, or when one of the values is null
      * @throws IllegalArgumentException when frequencies array or values array are empty, or have unequal length, or when
@@ -66,7 +66,7 @@ public final class DistributionFrequencies
      * Create a discrete empirical distribution from two arrays, one with frequencies or weights, and one with corresponding
      * values.
      * @param values double[] the values
-     * @param frequencies long[]; the frequencies for the corresponding values
+     * @param frequencies the frequencies for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or frequencies array is null, or when one of the values is null
      * @throws IllegalArgumentException when frequencies array or values array are empty, or have unequal length, or when
@@ -87,7 +87,7 @@ public final class DistributionFrequencies
      * Create a discrete empirical distribution from two arrays, one with frequencies or weights, and one with corresponding
      * values.
      * @param values long[] the values
-     * @param frequencies long[]; the frequencies for the corresponding values
+     * @param frequencies the frequencies for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or frequencies array is null, or when one of the values is null
      * @throws IllegalArgumentException when frequencies array or values array are empty, or have unequal length, or when
@@ -108,7 +108,7 @@ public final class DistributionFrequencies
      * Create a discrete empirical distribution from two arrays, one with frequencies or weights, and one with corresponding
      * values.
      * @param values Number[] the values
-     * @param frequencies int[]; the frequencies for the corresponding values
+     * @param frequencies the frequencies for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or frequencies array is null, or when one of the values is null
      * @throws IllegalArgumentException when frequencies array or values array are empty, or have unequal length, or when
@@ -146,7 +146,7 @@ public final class DistributionFrequencies
      * Create a discrete empirical distribution from two arrays, one with frequencies or weights, and one with corresponding
      * values.
      * @param values double[] the values
-     * @param frequencies int[]; the frequencies for the corresponding values
+     * @param frequencies the frequencies for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or frequencies array is null, or when one of the values is null
      * @throws IllegalArgumentException when frequencies array or values array are empty, or have unequal length, or when
@@ -167,7 +167,7 @@ public final class DistributionFrequencies
      * Create a discrete empirical distribution from two arrays, one with frequencies or weights, and one with corresponding
      * values.
      * @param values long[] the values
-     * @param frequencies int[]; the frequencies for the corresponding values
+     * @param frequencies the frequencies for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or frequencies array is null, or when one of the values is null
      * @throws IllegalArgumentException when frequencies array or values array are empty, or have unequal length, or when
@@ -187,8 +187,8 @@ public final class DistributionFrequencies
     /**
      * Create a discrete empirical distribution based on two Lists of the same length, one with sorted values, and one with
      * corresponding frequencies or weights.
-     * @param values List&lt;? extends Number&gt;; the values
-     * @param frequencies List&lt;? extends Number&gt;; the frequencies or weights for the corresponding values
+     * @param values the values
+     * @param frequencies the frequencies or weights for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution lists
      * @throws NullPointerException when frequencies list is null or values list is null, or when one of the values is null
      * @throws IllegalArgumentException when frequencies list or values list are empty, or have unequal length, or when
@@ -226,7 +226,7 @@ public final class DistributionFrequencies
 
     /**
      * Create a discrete empirical distribution based on a sorted map with sorted values mapping to frequencies.
-     * @param frequenciesMap SortedMap&lt;? extends Number, ? extends Number&gt;; the map with the entries
+     * @param frequenciesMap the map with the entries
      * @return the cumulative distribution object belonging to the given distribution map
      * @throws NullPointerException when frequencies map is null, or when one of the values or frequencies is null
      * @throws IllegalArgumentException when frequencies map is empty, or when frequencies are not between 0 and 1, or when the
@@ -243,7 +243,7 @@ public final class DistributionFrequencies
     /**
      * Create a discrete empirical distribution from two arrays, one with weights, and one with corresponding values.
      * @param values Number[] the values
-     * @param weights Number[]; the weights for the corresponding values
+     * @param weights the weights for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or weights array is null, or when one of the values is null
      * @throws IllegalArgumentException when weights array or values array are empty, or have unequal length, or when weights
@@ -264,7 +264,7 @@ public final class DistributionFrequencies
     /**
      * Create a discrete empirical distribution from two arrays, one with weights, and one with corresponding values.
      * @param values Number[] the values
-     * @param weights double[]; the weights for the corresponding values
+     * @param weights the weights for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or weights array is null, or when one of the values is null
      * @throws IllegalArgumentException when weights array or values array are empty, or have unequal length, or when weights
@@ -301,7 +301,7 @@ public final class DistributionFrequencies
     /**
      * Create a discrete empirical distribution from two arrays, one with weights, and one with corresponding values.
      * @param values double[] the values
-     * @param weights int[]; the weights for the corresponding values
+     * @param weights the weights for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or weights array is null, or when one of the values is null
      * @throws IllegalArgumentException when weights array or values array are empty, or have unequal length, or when weights
@@ -321,7 +321,7 @@ public final class DistributionFrequencies
     /**
      * Create a discrete empirical distribution from two arrays, one with weights, and one with corresponding values.
      * @param values long[] the values
-     * @param weights int[]; the weights for the corresponding values
+     * @param weights the weights for the corresponding values
      * @return the cumulative distribution object belonging to the given arrays
      * @throws NullPointerException when values array is null or weights array is null, or when one of the values is null
      * @throws IllegalArgumentException when weights array or values array are empty, or have unequal length, or when weights

@@ -20,7 +20,7 @@ public class CustomerOrderModel extends AbstractDsolModel<Double, DevsSimulator<
 
     /**
      * Construct a new customer ordering model.
-     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
+     * @param simulator the simulator
      */
     public CustomerOrderModel(final DevsSimulator<Double> simulator)
     {

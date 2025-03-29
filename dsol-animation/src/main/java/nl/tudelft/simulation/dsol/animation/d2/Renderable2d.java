@@ -79,8 +79,8 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Constructs a new Renderable2d.
-     * @param source T; the source
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
+     * @param source the source
+     * @param contextProvider the object that can provide the context to store the animation objects
      */
     public Renderable2d(final L source, final Contextualized contextProvider)
     {
@@ -92,7 +92,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Bind a renderable2D to the context. The reason for specifying this in an independent method instead of adding the code in
      * the constructor is related to the RFE submitted by van Houten that in specific distributed context, such binding must be
      * overwritten.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
+     * @param contextProvider the object that can provide the context to store the animation objects
      */
     public void bind2Context(final Contextualized contextProvider)
     {
@@ -110,7 +110,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Return whether to flip the renderable, if the direction is 'left' or not.
-     * @return boolean; whether to flip the renderable, if the direction is 'left' or not
+     * @return whether to flip the renderable, if the direction is 'left' or not
      */
     public boolean isFlip()
     {
@@ -119,7 +119,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Set whether to flip the renderable, if the direction is 'left' or not.
-     * @param flip boolean; whether to flip the renderable, if the direction is 'left' or not
+     * @param flip whether to flip the renderable, if the direction is 'left' or not
      */
     @SuppressWarnings("checkstyle:needbraces")
     public void setFlip(final boolean flip)
@@ -132,7 +132,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Return whether to rotate the renderable or not.
-     * @return boolean; whether to rotate the renderable or not
+     * @return whether to rotate the renderable or not
      */
     public boolean isRotate()
     {
@@ -141,7 +141,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Set whether to rotate the renderable or not.
-     * @param rotate boolean; whether to rotate the renderable or not
+     * @param rotate whether to rotate the renderable or not
      */
     @SuppressWarnings("checkstyle:needbraces")
     public void setRotate(final boolean rotate)
@@ -154,7 +154,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Return whether to scale the renderable or not.
-     * @return boolean; whether to scale the renderable or not
+     * @return whether to scale the renderable or not
      */
     public boolean isScale()
     {
@@ -163,7 +163,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Set whether to scale the renderable or not.
-     * @param scale boolean; whether to scale the renderable or not
+     * @param scale whether to scale the renderable or not
      */
     @SuppressWarnings("checkstyle:needbraces")
     public void setScale(final boolean scale)
@@ -176,7 +176,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Return whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not.
-     * @return boolean; whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
+     * @return whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
      */
     public boolean isScaleY()
     {
@@ -185,7 +185,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Set whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
-     * @param scaleY boolean; whether to scale the renderable in the X/Y-direction with the value of
+     * @param scaleY whether to scale the renderable in the X/Y-direction with the value of
      *     RenderableScale.objectScaleFactor or not
      */
     @SuppressWarnings("checkstyle:needbraces")
@@ -199,7 +199,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
-     * @return boolean; whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor
+     * @return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor
      * or not
      */
     public boolean isScaleObject()
@@ -209,7 +209,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Set whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not.
-     * @param scaleY boolean; whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
+     * @param scaleY whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
      */
     @SuppressWarnings("checkstyle:needbraces")
     public void setScaleY(final boolean scaleY)
@@ -222,7 +222,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Return whether to translate the renderable to its position or not (false means absolute position).
-     * @return boolean; whether to translate the renderable to its position or not (false means absolute position)
+     * @return whether to translate the renderable to its position or not (false means absolute position)
      */
     public boolean isTranslate()
     {
@@ -231,7 +231,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Set whether to translate the renderable to its position or not (false means absolute position).
-     * @param translate boolean; whether to translate the renderable to its position or not (false means absolute position)
+     * @param translate whether to translate the renderable to its position or not (false means absolute position)
      */
     @SuppressWarnings("checkstyle:needbraces")
     public void setTranslate(final boolean translate)
@@ -259,11 +259,11 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     /**
      * The methods that actually paints the object at the right scale, rotation, and position on the screen using the
      * user-implemented <code>paint(graphics, observer)</code> method to do the actual work.
-     * @param graphics Graphics2D; the graphics object
-     * @param extent Bounds2d; the extent of the panel
-     * @param screenSize Dimension; the screen of the panel
-     * @param renderableScale RenderableScale; the scale to use (usually RenderableScaleDefault where X/Y ratio is 1)
-     * @param observer ImageObserver; the observer of the renderableInterface
+     * @param graphics the graphics object
+     * @param extent the extent of the panel
+     * @param screenSize the screen of the panel
+     * @param renderableScale the scale to use (usually RenderableScaleDefault where X/Y ratio is 1)
+     * @param observer the observer of the renderableInterface
      */
     protected synchronized void paint(final Graphics2D graphics, final Bounds2d extent, final Dimension screenSize,
             final RenderableScale renderableScale, final ImageObserver observer)
@@ -382,14 +382,14 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     /**
      * Reference implementation of the contains method that uses the bounding box to determine whether the shape contains the
      * point (e.g., a mouse click) or not.
-     * @param pointRelativeTo00 Point2d; the point relative to the drawing world.
-     * @param scale RenderableScale; the current zoom factor of the screen
-     * @param worldMargin double; the margin to apply 'around' the object, in screen coordinates at a zoom level of 1, which is
+     * @param pointRelativeTo00 the point relative to the drawing world.
+     * @param scale the current zoom factor of the screen
+     * @param worldMargin the margin to apply 'around' the object, in screen coordinates at a zoom level of 1, which is
      *     the same as world coordinates. This margin grows and shrinks in absolute sense with the zoom factor.
-     * @param pixelMargin double; the number of pixels around the drawn object for contains to be 'true'. This guarantees that a
+     * @param pixelMargin the number of pixels around the drawn object for contains to be 'true'. This guarantees that a
      *     mouse click can be pointed to a very small object.
-     * @param xScale double; the ratio between a world x-coordinate and a pixel
-     * @param yScale double; the ratio between a world y-coordinate and a pixel
+     * @param xScale the ratio between a world x-coordinate and a pixel
+     * @param yScale the ratio between a world y-coordinate and a pixel
      * @return whether the point is in the shape or in a margin around the shape
      */
     public boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double worldMargin,
@@ -443,8 +443,8 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Draws an animation on a world coordinate around [x,y] = [0,0].
-     * @param graphics Graphics2D; the graphics object
-     * @param observer ImageObserver; the observer
+     * @param graphics the graphics object
+     * @param observer the observer
      */
     public abstract void paint(Graphics2D graphics, ImageObserver observer);
 

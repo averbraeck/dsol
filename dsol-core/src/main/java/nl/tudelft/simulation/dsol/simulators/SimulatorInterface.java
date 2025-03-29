@@ -90,13 +90,13 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
 
     /**
      * Returns the currently executed replication, or null when the initialize method has not yet been called.
-     * @return Replication&lt;T&gt;; the current replication, or null when the model has not yet been initialized
+     * @return the current replication, or null when the model has not yet been initialized
      */
     Replication<T> getReplication();
 
     /**
      * Returns the currently executed model, or null when the initialize method has not yet been called.
-     * @return DsolModel&lt;T, ? extends SimulatorInterface&gt;; the currently executed model, or null when the model has not
+     * @return the currently executed model, or null when the model has not
      *         yet been initialized
      */
     DsolModel<T, ? extends SimulatorInterface<T>> getModel();
@@ -105,9 +105,9 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * Add a method call that has to be performed at the end if initialize, and before the model starts. This can, for instance,
      * be used to schedule the execution of simulation events before initialize has been called, and solved the problem that,
      * for discrete event simulators, the scheduleEvent(...) methods cannot be called before initialize().
-     * @param target Object; the target on which the method needs to be executed
-     * @param method String; the name of the method to call on initialization of the model
-     * @param args Object[]; the arguments of the method. Use <code>new Object[] {}</code> for no arguments.
+     * @param target the target on which the method needs to be executed
+     * @param method the name of the method to call on initialization of the model
+     * @param args the arguments of the method. Use <code>new Object[] {}</code> for no arguments.
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     void addScheduledMethodOnInitialize(Object target, String method, Object[] args) throws SimRuntimeException;
@@ -116,10 +116,10 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * Add a method call that has to be performed at the end if initialize, and before the model starts. This can, for instance,
      * be used to schedule the execution of simulation events before initialize has been called, and solved the problem that,
      * for discrete event simulators, the scheduleEvent(...) methods cannot be called before initialize().
-     * @param source Object; the source of the scheduled event
-     * @param target Object; the target on which the method needs to be executed
-     * @param method String; the name of the method to call on initialization of the model
-     * @param args Object[]; the arguments of the method. Use <code>new Object[] {}</code> for no arguments.
+     * @param source the source of the scheduled event
+     * @param target the target on which the method needs to be executed
+     * @param method the name of the method to call on initialization of the model
+     * @param args the arguments of the method. Use <code>new Object[] {}</code> for no arguments.
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
@@ -135,8 +135,8 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * only be done after the simulator has been started. Note that the listeners of all statistics objects are removed when the
      * simulator is initialized with the replication. Connecting the statistics objects to the simulation should be done between
      * the initialize(...) method and starting the simulator, or could even be delayed till the WARMUP_EVENT has been fired.
-     * @param model DsolModel&lt;T, S&gt;; the model to initialize
-     * @param replication Replication&lt;T, ? extends SimulatorInterface&lt;T&gt;&gt;; the replication to use for running the
+     * @param model the model to initialize
+     * @param replication the replication to use for running the
      *            model
      * @throws SimRuntimeException when the simulator is running
      */
@@ -173,7 +173,7 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     /**
      * Runs the simulator up to a certain time; any events at that time, or the solving of the differential equation at that
      * timestep, will not yet be executed.
-     * @param stopTime T; the absolute time till when we want to run the simulation, coded as a SimTime object
+     * @param stopTime the absolute time till when we want to run the simulation, coded as a SimTime object
      * @throws SimRuntimeException whenever starting fails. Possible occasions include starting a started simulator
      */
     void runUpTo(T stopTime) throws SimRuntimeException;
@@ -181,7 +181,7 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     /**
      * Runs the simulator up to a certain time; all events at that time, or the solving of the differential equation at that
      * timestep, will be executed.
-     * @param stopTime T; the absolute time till when we want to run the simulation, coded as a SimTime object
+     * @param stopTime the absolute time till when we want to run the simulation, coded as a SimTime object
      * @throws SimRuntimeException whenever starting fails. Possible occasions include starting a started simulator
      */
     void runUpToAndIncluding(T stopTime) throws SimRuntimeException;
@@ -199,20 +199,20 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     /**
      * Get the logger for a simulator. Since the loggers display the simulator time, each logger that runs in the same JVM needs
      * to have its own logger.
-     * @return SimLogger; the logger that is specific for this simulator
+     * @return the logger that is specific for this simulator
      */
     SimLogger getLogger();
 
     /**
      * Get the run state of the simulator.
-     * @return RunState; the run state of the simulator
+     * @return the run state of the simulator
      */
     RunState getRunState();
 
     /**
      * isInitialized is true from the moment that the Simulator has been initialized with the Replication till the moment that
      * the replication has ended.
-     * @return boolean; whether the Simulator has been initialized with a Replication
+     * @return whether the Simulator has been initialized with a Replication
      */
     default boolean isInitialized()
     {
@@ -222,7 +222,7 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     /**
      * isStartingOrRunning is true between the moment the start has been initiated, till the moment the stop has been initiated.
      * It includes the STARTING state and the STARTED state.
-     * @return boolean; whether the Simulator has been started or has successfully started, and has not yet been stopped
+     * @return whether the Simulator has been started or has successfully started, and has not yet been stopped
      */
     default boolean isStartingOrRunning()
     {
@@ -232,7 +232,7 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     /**
      * isStoppingOrStopped is true for all states where it has not been started or it is not running. It includes all states
      * except the STARTING state and the STARTED state.
-     * @return boolean; whether the Simulator has not been started and is not running
+     * @return whether the Simulator has not been started and is not running
      */
     default boolean isStoppingOrStopped()
     {
@@ -241,38 +241,38 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
 
     /**
      * Get the replication state of the simulator.
-     * @return ReplicationState; the replication state of the simulator
+     * @return the replication state of the simulator
      */
     ReplicationState getReplicationState();
 
     /**
      * Return the current error handling strategy for an execution error for a SimEvent.
-     * @return errorStrategy ErrorStrategy; the current error handling strategy for an execution error for a SimEvent
+     * @return the current error handling strategy for an execution error for a SimEvent
      */
     ErrorStrategy getErrorStrategy();
 
     /**
      * Set the error handling strategy for an execution error for a SimEvent, using the default error log level.
-     * @param errorStrategy ErrorStrategy; the error handling strategy for an execution error for a SimEvent
+     * @param errorStrategy the error handling strategy for an execution error for a SimEvent
      */
     void setErrorStrategy(ErrorStrategy errorStrategy);
 
     /**
      * Set the error handling strategy for an execution error for a SimEvent.
-     * @param newErrorStrategy ErrorStrategy; the error handling strategy for an execution error for a SimEvent
-     * @param newErrorLogLevel Level; the error log level to use in the logger for simulation execution errors
+     * @param newErrorStrategy the error handling strategy for an execution error for a SimEvent
+     * @param newErrorLogLevel the error log level to use in the logger for simulation execution errors
      */
     void setErrorStrategy(ErrorStrategy newErrorStrategy, Level newErrorLogLevel);
 
     /**
      * Return the current error log level to use in the logger for simulation execution errors.
-     * @return Level; the current error log level to use in the logger for simulation execution errors
+     * @return the current error log level to use in the logger for simulation execution errors
      */
     Level getErrorLogLevel();
 
     /**
      * Set the error log level to use in the logger for simulation execution errors.
-     * @param errorLogLevel Level; the error log level to use in the logger for simulation execution errors
+     * @param errorLogLevel the error log level to use in the logger for simulation execution errors
      */
     void setErrorLogLevel(Level errorLogLevel);
 

@@ -24,7 +24,7 @@ public class StationaryPolicy implements OrderingPolicy
 
     /**
      * constructs a new StationaryPolicy.
-     * @param simulator SimulatorInterface&lt;Double&gt;; the simulator which is executing the experiment
+     * @param simulator the simulator which is executing the experiment
      */
     public StationaryPolicy(final SimulatorInterface<Double> simulator)
     {

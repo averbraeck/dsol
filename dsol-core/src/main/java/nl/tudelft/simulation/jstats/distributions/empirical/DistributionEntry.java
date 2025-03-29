@@ -25,8 +25,8 @@ public class DistributionEntry implements Serializable
 
     /**
      * Constructs a new Entry, which is a cumulative probability - value pair.
-     * @param cumulativeProbability double; the cumulative probability
-     * @param value Number; the value belonging to the cumulative probability
+     * @param cumulativeProbability the cumulative probability
+     * @param value the value belonging to the cumulative probability
      */
     public DistributionEntry(final Number value, final double cumulativeProbability)
     {
@@ -36,7 +36,7 @@ public class DistributionEntry implements Serializable
 
     /**
      * Returns the cumulative probability corresponding to this entry.
-     * @return double; the cumulative probability corresponding to this entry
+     * @return the cumulative probability corresponding to this entry
      */
     public double getCumulativeProbability()
     {
@@ -45,7 +45,7 @@ public class DistributionEntry implements Serializable
 
     /**
      * Returns the value corresponding to this entry.
-     * @return Number; the value corresponding to this entry
+     * @return the value corresponding to this entry
      */
     public Number getValue()
     {

@@ -47,8 +47,8 @@ public final class EsriFileCsvParser
 
     /**
      * Parses a CSV file with information about the map and layers.
-     * @param csvUrl URL; the url of the CSV file.
-     * @param mapName String; the human readable name of the map
+     * @param csvUrl the url of the CSV file.
+     * @param mapName the human readable name of the map
      * @return MapInterface the parsed map file.
      * @throws IOException on failure
      */
@@ -59,9 +59,9 @@ public final class EsriFileCsvParser
 
     /**
      * Parses a CSV file with information about the map and layers.
-     * @param csvUrl URL; the url of the CSV file.
-     * @param mapName String; the human readable name of the map
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param csvUrl the url of the CSV file.
+     * @param mapName the human readable name of the map
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      * @return MapInterface the parsed map file.
      * @throws IOException on failure
      */
@@ -74,11 +74,11 @@ public final class EsriFileCsvParser
     /**
      * Parses a CSV file with information about the map and layers. FieldSeparateor can be, for instance \t for a tab character,
      * and the quote character can be the double quote, the single quote, or something else.
-     * @param csvUrl URL; the url of the CSV file.
-     * @param mapName String; the human readable name of the map
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
-     * @param fieldSeparator char; field separator, e.g., comma for csv files and tab for tsv files
-     * @param quoteCharacter char; e.g., single or double quote
+     * @param csvUrl the url of the CSV file.
+     * @param mapName the human readable name of the map
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param fieldSeparator field separator, e.g., comma for csv files and tab for tsv files
+     * @param quoteCharacter e.g., single or double quote
      * @return MapInterface the parsed map file.
      * @throws IOException on failure reading the CSV file, the shape files, or making the layers
      * @throws IllegalArgumentException when one of the outline or fill colors can not be parsed

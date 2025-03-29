@@ -63,8 +63,8 @@ public class OsmRenderable2d implements GisRenderable2d
 
     /**
      * constructs a new GisRenderable2d.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param map MapInterface; the map to use.
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param map the map to use.
      */
     public OsmRenderable2d(final Contextualized contextProvider, final GisMapInterface map)
     {
@@ -73,9 +73,9 @@ public class OsmRenderable2d implements GisRenderable2d
 
     /**
      * constructs a new GisRenderable2d.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param map MapInterface; the map to use.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param map the map to use.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      */
     public OsmRenderable2d(final Contextualized contextProvider, final GisMapInterface map,
             final CoordinateTransform coordinateTransform)
@@ -85,10 +85,10 @@ public class OsmRenderable2d implements GisRenderable2d
 
     /**
      * constructs a new GisRenderable2d based on an existing Map.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param map MapInterface; the map to use.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
-     * @param z double; the z-value to use
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param map the map to use.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param z the z-value to use
      */
     public OsmRenderable2d(final Contextualized contextProvider, final GisMapInterface map,
             final CoordinateTransform coordinateTransform, final double z)
@@ -110,7 +110,7 @@ public class OsmRenderable2d implements GisRenderable2d
      * binds a renderable2D to the context. The reason for specifying this in an independent method instead of adding the code
      * in the constructor is related to the RFE submitted by van Houten that in specific distributed context, such binding must
      * be overwritten.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
+     * @param contextProvider the object that can provide the context to store the animation objects
      */
     protected void bind2Context(final Contextualized contextProvider)
     {

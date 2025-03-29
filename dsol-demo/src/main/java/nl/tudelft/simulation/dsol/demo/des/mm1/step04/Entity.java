@@ -21,8 +21,8 @@ public class Entity
     private final int id;
 
     /**
-     * @param id int; entity id number
-     * @param createTime double; time of creation for statistics
+     * @param id entity id number
+     * @param createTime time of creation for statistics
      */
     public Entity(final int id, final double createTime)
     {

@@ -49,7 +49,7 @@ public class DX120Generator extends RandomNumberGenerator
 
     /**
      * constructs a new LC48Generator.
-     * @param seed long; the seed
+     * @param seed the seed
      */
     public DX120Generator(final long seed)
     {

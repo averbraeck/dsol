@@ -20,8 +20,8 @@ public class DistContinuousElectricalPotential extends DistContinuousUnit<Electr
 
     /**
      * Constructs a new continuous distribution that draws ElectricalPotential scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit ElectricalPotentialUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousElectricalPotential(final DistContinuous wrappedDistribution, final ElectricalPotentialUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousElectricalPotential extends DistContinuousUnit<Electr
 
     /**
      * Constructs a new continuous distribution that draws ElectricalPotential scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousElectricalPotential(final DistContinuous wrappedDistribution)
     {

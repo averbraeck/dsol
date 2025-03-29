@@ -67,11 +67,11 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     }
 
     /**
-     * @param key String; unique name for the selection parameter of the distribution function
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param stream StreamInterface; the random number stream to use for the distribution
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique name for the selection parameter of the distribution function
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param stream the random number stream to use for the distribution
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, description, or stream is null
      * @throws IllegalArgumentException when displayPriority is NaN
      * @throws InputParameterException in case the default value is not part of the list; should not happen
@@ -90,7 +90,7 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
 
     /**
      * Return the distribution function corresponding to the chosen distribution and parameters.
-     * @return DistContinuous; the distribution function corresponding to the chosen distribution and parameters
+     * @return the distribution function corresponding to the chosen distribution and parameters
      * @throws InputParameterException on error retrieving the values for the distribution
      */
     public DistContinuous getDist() throws InputParameterException

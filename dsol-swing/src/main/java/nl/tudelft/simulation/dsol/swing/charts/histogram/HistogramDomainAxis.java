@@ -42,10 +42,10 @@ public class HistogramDomainAxis extends NumberAxis
 
     /**
      * constructs a new HistogramDomainAxis.
-     * @param parent XYPlot; the plot to which this axis belongs
-     * @param label String; the label of the axis
-     * @param domain double[]; the domain
-     * @param numberOfBins int; the numberOfBins
+     * @param parent the plot to which this axis belongs
+     * @param label the label of the axis
+     * @param domain the domain
+     * @param numberOfBins the numberOfBins
      */
     public HistogramDomainAxis(final XYPlot parent, final String label, final double[] domain, final int numberOfBins)
     {
@@ -100,8 +100,8 @@ public class HistogramDomainAxis extends NumberAxis
 
     /**
      * creates the labels for the axis
-     * @param domain double[]; the domain of the histogram
-     * @param numberOfBins int; the number of bins
+     * @param domain the domain of the histogram
+     * @param numberOfBins the number of bins
      * @return the result
      */
     private String[] createLabels(final double[] domain, final int numberOfBins)

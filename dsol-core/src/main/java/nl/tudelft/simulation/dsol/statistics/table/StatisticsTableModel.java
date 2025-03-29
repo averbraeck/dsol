@@ -28,10 +28,10 @@ public abstract class StatisticsTableModel extends DefaultTableModel implements 
 
     /**
      * constructs a new StatisticsTableModel.
-     * @param columnNames Object[]; the names of the columns
-     * @param rows int; the number of rows
-     * @param dataProducer EventProducer; the statistic that produces the updates to the table
-     * @param eventTypes EventType[]; the eventTypes after which the StatisticsTable should update its content
+     * @param columnNames the names of the columns
+     * @param rows the number of rows
+     * @param dataProducer the statistic that produces the updates to the table
+     * @param eventTypes the eventTypes after which the StatisticsTable should update its content
      * @throws RemoteException when there is a problem communicating with the data producing table
      */
     public StatisticsTableModel(final Object[] columnNames, final int rows, final EventProducer dataProducer,

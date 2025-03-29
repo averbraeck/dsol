@@ -20,8 +20,8 @@ public class DistContinuousCatalyticActivity extends DistContinuousUnit<Catalyti
 
     /**
      * Constructs a new continuous distribution that draws CatalyticActivity scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit CatalyticActivityUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousCatalyticActivity(final DistContinuous wrappedDistribution, final CatalyticActivityUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousCatalyticActivity extends DistContinuousUnit<Catalyti
 
     /**
      * Constructs a new continuous distribution that draws CatalyticActivity scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousCatalyticActivity(final DistContinuous wrappedDistribution)
     {

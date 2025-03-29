@@ -25,8 +25,8 @@ public class GisObject implements Serializable
 
     /**
      * constructs a GisObject.
-     * @param shape Object; the shape (either a <code>java.awt.geom.Point2D</code> or a <code>java.awt.Shape</code>
-     * @param attributes String[]; attributes for this point or shape
+     * @param shape the shape (either a <code>java.awt.geom.Point2D</code> or a <code>java.awt.Shape</code>
+     * @param attributes attributes for this point or shape
      */
     public GisObject(final Object shape, final String[] attributes)
     {
@@ -45,7 +45,7 @@ public class GisObject implements Serializable
 
     /**
      * returns the attribute values of the shape. The index in the String[] belongs to the attributeKeys in the DataSource.
-     * @return String[]; the array of Strings representing the attributes of the GisObject
+     * @return the array of Strings representing the attributes of the GisObject
      */
     public String[] getAttributeValues()
     {

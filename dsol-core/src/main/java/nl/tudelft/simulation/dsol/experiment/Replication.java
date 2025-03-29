@@ -44,10 +44,10 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
 
     /**
      * Construct a stand-alone replication. Checking the validity of the arguments is left to the RunControl object.
-     * @param id String; the id of the replication; should be unique within the experiment.
-     * @param startTime T; the start time of the simulation.
-     * @param warmupPeriod T; the warmup period, included in the runlength (!)
-     * @param runLength T; the total length of the run, including the warm-up period.
+     * @param id the id of the replication; should be unique within the experiment.
+     * @param startTime the start time of the simulation.
+     * @param warmupPeriod the warmup period, included in the runlength (!)
+     * @param runLength the total length of the run, including the warm-up period.
      * @throws NullPointerException when id, startTime, warmupPeriod or runLength is null
      * @throws IllegalArgumentException when warmup period is negative, or run length is zero or negative, or when a context for
      *             the replication cannot be created, or when the warmup time is longer than or equal to the runlength
@@ -59,7 +59,7 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
 
     /**
      * Construct a stand-alone replication using a RunControl to store the run information.
-     * @param runControl RunControlInterface; the run control for the replication
+     * @param runControl the run control for the replication
      * @throws NullPointerException when runControl is null
      */
     public Replication(final RunControl<T> runControl)
@@ -76,7 +76,7 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
 
     /**
      * Set the context; method is protected so only subclasses can use this setter.
-     * @param context ContextInterface; set new context
+     * @param context set new context
      */
     protected void setContext(final ContextInterface context)
     {

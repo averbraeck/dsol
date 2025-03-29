@@ -30,8 +30,8 @@ public class WorkerThread extends Thread
 
     /**
      * constructs a new SimulatorRunThread.
-     * @param name String; the name of the thread
-     * @param job Runnable; the job to run
+     * @param name the name of the thread
+     * @param job the job to run
      */
     public WorkerThread(final String name, final Runnable job)
     {

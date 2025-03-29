@@ -32,8 +32,8 @@ public class DistExponential extends DistContinuous
      * constructs a new exponential function. The exponential distribution describes the interarrival times of entities to a
      * system that occur randomly at a constant rate. The exponential distribution can also be characterized by this rate
      * parameter &lambda;; mean = 1 / &lambda;.
-     * @param stream StreamInterface; the random number stream
-     * @param mean double; the mean (mean &gt; 0) value of the exponential distribution. The exponential distribution can also
+     * @param stream the random number stream
+     * @param mean the mean (mean &gt; 0) value of the exponential distribution. The exponential distribution can also
      *            be characterized by the rate parameter &lambda;; mean = 1 / &lambda;
      * @throws IllegalArgumentException in case mean &lt;= 0
      */

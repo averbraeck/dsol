@@ -77,11 +77,11 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart and bind it to the replication context.
-     * @param simulator SimulatorInterface; the simulator
-     * @param title String; the title
-     * @param domain double[]; the domain
-     * @param range double[]; the range
-     * @param axisType short; the type of the axsis
+     * @param simulator the simulator
+     * @param title the title
+     * @param domain the domain
+     * @param range the range
+     * @param axisType the type of the axsis
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final double[] domain, final double[] range,
             final short axisType)
@@ -152,8 +152,8 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
+     * @param simulator the simulator
+     * @param title the title
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title)
     {
@@ -162,9 +162,9 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param axisType short; the axisType to use.
+     * @param simulator the simulator
+     * @param title the title
+     * @param axisType the axisType to use.
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final short axisType)
     {
@@ -173,9 +173,9 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param domain double[]; the domain
+     * @param simulator the simulator
+     * @param title the title
+     * @param domain the domain
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final double[] domain)
     {
@@ -184,9 +184,9 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param period double; the period
+     * @param simulator the simulator
+     * @param title the title
+     * @param period the period
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final double period)
     {
@@ -195,10 +195,10 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param domain double[]; the domain
-     * @param axisType short; the axisType to use.
+     * @param simulator the simulator
+     * @param title the title
+     * @param domain the domain
+     * @param axisType the axisType to use.
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final double[] domain, final short axisType)
     {
@@ -207,10 +207,10 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param period double; the period
-     * @param axisType short; the axisType to use.
+     * @param simulator the simulator
+     * @param title the title
+     * @param period the period
+     * @param axisType the axisType to use.
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final double period, final short axisType)
     {
@@ -219,10 +219,10 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param domain double[]; the domain
-     * @param range double[]; the range
+     * @param simulator the simulator
+     * @param title the title
+     * @param domain the domain
+     * @param range the range
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final double[] domain, final double[] range)
     {
@@ -231,10 +231,10 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * constructs a new XYChart that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param period double; the period
-     * @param range double[]; the range
+     * @param simulator the simulator
+     * @param title the title
+     * @param period the period
+     * @param range the range
      */
     public XYChart(final SimulatorInterface<?> simulator, final String title, final double period, final double[] range)
     {
@@ -243,7 +243,7 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * adds a tally to the xyChart.
-     * @param persistent Persistent; the persistent
+     * @param persistent the persistent
      * @throws RemoteException on network failure
      */
     public void add(final SimPersistent<?> persistent) throws RemoteException
@@ -255,9 +255,9 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * adds an eventProducer to the xyChart.
-     * @param description String; the description of the eventProducer
-     * @param source EventProducer; the source
-     * @param eventType EventType; the event
+     * @param description the description of the eventProducer
+     * @param source the source
+     * @param eventType the event
      * @throws RemoteException on network failure
      */
     public void add(final String description, final EventProducer source, final EventType eventType)
@@ -270,7 +270,7 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * Set the label for the X-axis of the XY plot.
-     * @param xLabel String; the new label for the X axis
+     * @param xLabel the new label for the X axis
      * @return the chart for method chaining
      */
     public XYChart setLabelXAxis(final String xLabel)
@@ -281,7 +281,7 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * Set the label for the Y-axis of the XY plot.
-     * @param yLabel String; the new label for the X axis
+     * @param yLabel the new label for the X axis
      * @return the chart for method chaining
      */
     public XYChart setLabelYAxis(final String yLabel)
@@ -319,7 +319,7 @@ public class XYChart implements Swingable, Serializable
 
     /**
      * applies a filter on the chart.
-     * @param filter FilterInterface; the filter to apply
+     * @param filter the filter to apply
      */
     public void setFilter(final FilterInterface filter)
     {

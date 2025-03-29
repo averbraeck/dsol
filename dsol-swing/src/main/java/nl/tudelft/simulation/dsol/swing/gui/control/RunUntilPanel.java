@@ -63,9 +63,9 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
     /**
      * Construct a clock panel.
-     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
-     * @param initialValue String; the initial value of the time to display
-     * @param regex String; the regular expression to which the entered text needs to adhere
+     * @param simulator the simulator
+     * @param initialValue the initial value of the time to display
+     * @param regex the regular expression to which the entered text needs to adhere
      */
     public RunUntilPanel(final SimulatorInterface<T> simulator, final String initialValue, final String regex)
     {
@@ -177,15 +177,15 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
     /**
      * Returns the formatted simulation time.
-     * @param simulationTime T; simulation time
+     * @param simulationTime simulation time
      * @return formatted simulation time
      */
     protected abstract String formatSimulationTime(T simulationTime);
 
     /**
      * Returns the simulation time from the formatted string.
-     * @param simulationTimeString String; simulation time as a string
-     * @return T; simulation time contained in the String or null when not valid
+     * @param simulationTimeString simulation time as a string
+     * @return simulation time contained in the String or null when not valid
      */
     protected abstract T parseSimulationTime(String simulationTimeString);
 
@@ -234,7 +234,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
         /**
          * Construct a clock panel with a double time.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeDouble(final SimulatorInterface<Double> simulator)
         {
@@ -279,7 +279,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
         /**
          * Construct a clock panel with a float time.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeFloat(final SimulatorInterface<Float> simulator)
         {
@@ -324,7 +324,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
         /**
          * Construct a clock panel with a long time.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeLong(final SimulatorInterface<Long> simulator)
         {
@@ -369,7 +369,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
         /**
          * Construct a clock panel with a double djunits Time.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeDoubleUnit(final SimulatorInterface<Duration> simulator)
         {
@@ -417,7 +417,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
         /**
          * Construct a clock panel with a djunits FloatDuration.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeFloatUnit(final SimulatorInterface<FloatDuration> simulator)
         {

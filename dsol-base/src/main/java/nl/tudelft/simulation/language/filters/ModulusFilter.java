@@ -23,7 +23,7 @@ public class ModulusFilter extends AbstractFilter
 
     /**
      * constructs a new ModulusFilter.
-     * @param modulus long; the modulus to use
+     * @param modulus the modulus to use
      */
     public ModulusFilter(final long modulus)
     {

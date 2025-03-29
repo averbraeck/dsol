@@ -63,8 +63,8 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
 
     /**
      * constructs a new Retailer.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator on which we can schedule
-     * @param warehouse SellerInterface; the warehouse to buy at
+     * @param simulator the simulator on which we can schedule
+     * @param warehouse the warehouse to buy at
      */
     public Retailer(final DevsSimulatorInterface<Double> simulator, final SellerInterface warehouse)
     {

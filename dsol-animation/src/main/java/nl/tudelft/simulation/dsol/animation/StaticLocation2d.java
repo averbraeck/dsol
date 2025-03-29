@@ -25,10 +25,10 @@ public class StaticLocation2d extends DirectedPoint2d implements Locatable
 
     /**
      * constructs a new StaticLocation.
-     * @param x double; the x location
-     * @param y double; the y location
-     * @param rotZ double; rotation aroud z-axis
-     * @param bounds Bounds3d; the bounds
+     * @param x the x location
+     * @param y the y location
+     * @param rotZ rotation aroud z-axis
+     * @param bounds the bounds
      */
     public StaticLocation2d(final double x, final double y, final double rotZ, final Bounds2d bounds)
     {
@@ -38,9 +38,9 @@ public class StaticLocation2d extends DirectedPoint2d implements Locatable
 
     /**
      * constructs a new StaticLocation.
-     * @param point2D Point2D; the point2d
-     * @param rotZ double; the rotation in the xy plane
-     * @param bounds Bounds; the bounds
+     * @param point2D the point2d
+     * @param rotZ the rotation in the xy plane
+     * @param bounds the bounds
      */
     public StaticLocation2d(final Point2D point2D, final double rotZ, final Bounds2d bounds)
     {
@@ -50,8 +50,8 @@ public class StaticLocation2d extends DirectedPoint2d implements Locatable
 
     /**
      * constructs a new StaticLocation.
-     * @param location OrientedPoint3d; the location
-     * @param bounds Bounds; the bounds
+     * @param location the location
+     * @param bounds the bounds
      */
     public StaticLocation2d(final DirectedPoint2d location, final Bounds2d bounds)
     {

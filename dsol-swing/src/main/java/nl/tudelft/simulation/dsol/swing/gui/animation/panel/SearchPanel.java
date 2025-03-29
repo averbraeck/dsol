@@ -126,7 +126,7 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
 
     /**
      * Add an object kind to search for.
-     * @param objectKind ObjectKind&lt;?&gt;; the objectKind to add to the list of searcheable objects.
+     * @param objectKind the objectKind to add to the list of searcheable objects.
      */
     public void addObjectKind(final ObjectKind<?> objectKind)
     {
@@ -137,9 +137,9 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
 
     /**
      * Update all values at once.
-     * @param objectKey String; key of the object type to search
-     * @param objectId String; id of object to search
-     * @param track boolean; if true; track continuously; if false; center on it, but do not track
+     * @param objectKey key of the object type to search
+     * @param objectId id of object to search
+     * @param track if true; track continuously; if false; center on it, but do not track
      */
     public void selectAndTrackObject(final String objectKey, final String objectId, final boolean track)
     {
@@ -204,7 +204,7 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
 
         /**
          * Construct a new ObjectKind (entry in the combo box).
-         * @param key String; the key of the new ObjectKind
+         * @param key the key of the new ObjectKind
          */
         public ObjectKind(final String key)
         {
@@ -213,7 +213,7 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
 
         /**
          * Retrieve the key.
-         * @return String; the key
+         * @return the key
          */
         public String getKey()
         {
@@ -222,8 +222,8 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
 
         /**
          * Lookup an object of type T in an network.
-         * @param id String; id of the object to return
-         * @return T; the object in the network of the correct type and matching id, or null if no matching object was found.
+         * @param id id of the object to return
+         * @return the object in the network of the correct type and matching id, or null if no matching object was found.
          */
         public abstract T searchObject(String id);
 
@@ -261,7 +261,7 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
 
     /**
      * Return the delegate event producer.
-     * @return SearchPanelEventProducer; the delegate event producer
+     * @return the delegate event producer
      */
     public SearchPanelEventProducer getSearchPanelEventProducer()
     {

@@ -48,7 +48,7 @@ public class HtmlGraphicsConfiguration extends GraphicsConfiguration
 
     /**
      * Set the {@link HtmlDevice} associated with this <code>HtmlGraphicsConfiguration</code>.
-     * @param htmlDevice HtmlDevice; a &lt;code&gt;GraphicsDevice&lt;/code&gt; object that is associated with this
+     * @param htmlDevice a &lt;code&gt;GraphicsDevice&lt;/code&gt; object that is associated with this
      *            <code>HtmlGraphicsConfiguration</code>.
      */
     public void setDevice(final HtmlDevice htmlDevice)

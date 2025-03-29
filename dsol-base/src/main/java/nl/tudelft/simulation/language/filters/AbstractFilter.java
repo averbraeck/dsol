@@ -53,7 +53,7 @@ public abstract class AbstractFilter implements FilterInterface
 
     /**
      * filters the entry. This method should be implemented by every filter based on its semantic meaning.
-     * @param entry Object; the entry to filter.
+     * @param entry the entry to filter.
      * @return whether to accept the value.
      */
     protected abstract boolean filter(Object entry);

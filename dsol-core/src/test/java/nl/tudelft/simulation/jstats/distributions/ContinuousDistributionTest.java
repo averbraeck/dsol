@@ -56,13 +56,13 @@ public class ContinuousDistributionTest
     }
 
     /**
-     * @param name String; the name of the distribution to test
-     * @param dist DistContinuous; the distribution to test
-     * @param expectedMean double; the expected mean of a large number of samples
-     * @param expectedVariance double; the expected variance of a large number of samples; test the standard deviations
-     * @param expectedMin double; the expected lowest value of a large number of samples, or NaN if unbounded
-     * @param expectedMax double; the expected highest value of a large number of samples, or NaN if unbounded
-     * @param precision double; the precision for mean, standard deviation, min and max
+     * @param name the name of the distribution to test
+     * @param dist the distribution to test
+     * @param expectedMean the expected mean of a large number of samples
+     * @param expectedVariance the expected variance of a large number of samples; test the standard deviations
+     * @param expectedMin the expected lowest value of a large number of samples, or NaN if unbounded
+     * @param expectedMax the expected highest value of a large number of samples, or NaN if unbounded
+     * @param precision the precision for mean, standard deviation, min and max
      */
     @SuppressWarnings("checkstyle:parameternumber")
     private void testDist(final String name, final DistContinuous dist, final double expectedMean,
@@ -710,8 +710,8 @@ public class ContinuousDistributionTest
 
     /**
      * Calculate ln(Gamma(x)). Based on https://introcs.cs.princeton.edu/java/91float/Gamma.java.html.
-     * @param x double; the value for which to calculate the logarithm of the Gamma function
-     * @return double; ln(Gamma(x))
+     * @param x the value for which to calculate the logarithm of the Gamma function
+     * @return ln(Gamma(x))
      */
     private static double logGamma(final double x)
     {
@@ -726,8 +726,8 @@ public class ContinuousDistributionTest
 
     /**
      * Calculate Gamma(x). Based on https://introcs.cs.princeton.edu/java/91float/Gamma.java.html.
-     * @param x double; the value to calculate the Gamma function of
-     * @return double; Gamma(x)
+     * @param x the value to calculate the Gamma function of
+     * @return Gamma(x)
      */
     private static double gamma(final double x)
     {
@@ -736,8 +736,8 @@ public class ContinuousDistributionTest
 
     /**
      * Calculate Beta(p, q). From: https://mathworld.wolfram.com/BetaFunction.html.
-     * @param a double; param 1
-     * @param b double; param 2
+     * @param a param 1
+     * @param b param 2
      * @return Beta(p, q)
      */
     private static double beta(final double a, final double b)
@@ -747,9 +747,9 @@ public class ContinuousDistributionTest
 
     /**
      * Calculate probability density of DistBeta(a, b) for value x. From: https://mathworld.wolfram.com/BetaDistribution.html.
-     * @param a double; parameter 1
-     * @param b double; parameter 2
-     * @param x double; value
+     * @param a parameter 1
+     * @param b parameter 2
+     * @param x value
      * @return probability density of DistBeta(a, b) for value x
      */
     private static double distBeta(final double a, final double b, final double x)
@@ -759,7 +759,7 @@ public class ContinuousDistributionTest
 
     /**
      * Calculate fac(n) = n * (n-1) * (n-2) * ... 1, where fac(0) = 1.
-     * @param n int; param
+     * @param n param
      * @return n!
      */
     private static long fac(final int n)
@@ -770,9 +770,9 @@ public class ContinuousDistributionTest
     /**
      * Calculate probability density of DistErlank(k, b) for value x. From:
      * https://mathworld.wolfram.com/ErlangDistribution.html.
-     * @param k double; parameter 1
-     * @param scale double; parameter 2, 1/rate
-     * @param x double; value
+     * @param k parameter 1
+     * @param scale parameter 2, 1/rate
+     * @param x value
      * @return probability density of DistBeta(a, b) for value x
      */
     private static double distErlang(final int k, final double scale, final double x)
@@ -784,9 +784,9 @@ public class ContinuousDistributionTest
     /**
      * Calculate probability density of DistGamma(alpha, theta) for value x. From:
      * https://mathworld.wolfram.com/GammaDistribution.html.
-     * @param alpha double; shape parameter
-     * @param theta double; scale parameter
-     * @param x double; value
+     * @param alpha shape parameter
+     * @param theta scale parameter
+     * @param x value
      * @return probability density of DistBeta(a, b) for value x
      */
     private static double distGamma(final double alpha, final double theta, final double x)

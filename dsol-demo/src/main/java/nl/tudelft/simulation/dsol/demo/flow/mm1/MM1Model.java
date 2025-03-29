@@ -49,7 +49,7 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
     SimPersistent<Double> uN;
 
     /**
-     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
+     * @param simulator the simulator
      */
     public MM1Model(final DevsSimulator<Double> simulator)
     {

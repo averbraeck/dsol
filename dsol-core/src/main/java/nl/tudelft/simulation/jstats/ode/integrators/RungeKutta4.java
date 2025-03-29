@@ -20,8 +20,8 @@ public class RungeKutta4 extends NumericalIntegrator
 
     /**
      * constructs a new RungeKutta4.
-     * @param stepSize double; the stepSize
-     * @param equation DifferentialEquationInterface; the differentialEquation
+     * @param stepSize the stepSize
+     * @param equation the differentialEquation
      */
     public RungeKutta4(final double stepSize, final DifferentialEquationInterface equation)
     {

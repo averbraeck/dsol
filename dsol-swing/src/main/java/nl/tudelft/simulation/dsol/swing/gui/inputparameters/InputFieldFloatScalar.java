@@ -35,8 +35,8 @@ public class InputFieldFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T
 
     /**
      * Create a float field with a unit on the screen.
-     * @param panel JPanel; panel to add the field to
-     * @param parameter InputParameterFloatScalar&lt;U,T&gt;; the parameter
+     * @param panel panel to add the field to
+     * @param parameter the parameter
      */
     public InputFieldFloatScalar(final JPanel panel, final InputParameterFloatScalar<U, T> parameter)
     {
@@ -96,7 +96,7 @@ public class InputFieldFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T
 
     /**
      * Return the float part of the entered value.
-     * @return float; the float part of the entered value
+     * @return the float part of the entered value
      * @throws InputParameterException on invalid input
      */
     public float getFloatValue() throws InputParameterException
@@ -106,7 +106,7 @@ public class InputFieldFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T
 
     /**
      * Return the unit part of the entered value.
-     * @return U; the unit part of the entered value
+     * @return the unit part of the entered value
      * @throws InputParameterException on invalid input
      */
     public U getUnit() throws InputParameterException
@@ -116,8 +116,8 @@ public class InputFieldFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T
 
     /**
      * Return the numeric value of the field.
-     * @param s String; the String to test
-     * @param shortName String; the name of the field to test
+     * @param s the String to test
+     * @param shortName the name of the field to test
      * @return the float value of the field in the gui.
      * @throws InputParameterException on invalid input
      */

@@ -24,8 +24,8 @@ public class DessPanel extends DsolPanel
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param model DESSModel; the model
-     * @param simulator DessSimulatorInterface&lt;Double&gt;; the simulator
+     * @param model the model
+     * @param simulator the simulator
      * @throws RemoteException on error
      */
     public DessPanel(final DessModel model, final DessSimulatorInterface<Double> simulator) throws RemoteException

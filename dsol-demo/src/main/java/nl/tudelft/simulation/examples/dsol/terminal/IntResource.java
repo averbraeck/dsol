@@ -73,9 +73,9 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * Method Resource.
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param description String; the description of this resource
-     * @param capacity long; of the resource
+     * @param simulator on which is scheduled
+     * @param description the description of this resource
+     * @param capacity of the resource
      */
     public IntResource(final DevsSimulatorInterface<T> simulator, final String description, final long capacity)
     {
@@ -87,8 +87,8 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * Method Resource.
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param capacity long; of the resource
+     * @param simulator on which is scheduled
+     * @param capacity of the resource
      */
     public IntResource(final DevsSimulatorInterface<T> simulator, final long capacity)
     {
@@ -134,7 +134,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * Method alterClaimedCapacity.
-     * @param amount long; refers the amount which is added to the claimed capacity
+     * @param amount refers the amount which is added to the claimed capacity
      * @throws RemoteException on network failure
      */
     private synchronized void alterClaimedCapacity(final long amount) throws RemoteException
@@ -145,7 +145,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * sets the capacity of the resource.
-     * @param capacity long; the new maximal capacity
+     * @param capacity the new maximal capacity
      */
     public void setCapacity(final long capacity)
     {
@@ -163,8 +163,8 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * requests an amount of capacity from the resource.
-     * @param amount long; the requested amount
-     * @param requestor IntResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
+     * @param amount the requested amount
+     * @param requestor the RequestorInterface requesting the amount
      * @throws RemoteException on network failure
      * @throws SimRuntimeException on other failures
      */
@@ -176,9 +176,9 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * requests an amount of capacity from the resource.
-     * @param amount long; the requested amount
-     * @param requestor IntResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
-     * @param priority int; the priority of the request
+     * @param amount the requested amount
+     * @param requestor the RequestorInterface requesting the amount
+     * @param priority the priority of the request
      * @throws RemoteException on network failure
      * @throws SimRuntimeException on other failures
      */
@@ -207,7 +207,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
     /**
      * releases an amount of capacity from the resource.
-     * @param amount long; the amount to release
+     * @param amount the amount to release
      * @throws RemoteException on network failure
      */
     public void releaseCapacity(final long amount) throws RemoteException
@@ -298,9 +298,9 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
 
         /**
          * constructs a new Request.
-         * @param requestor IntResourceRequestorInterface&lt;T&gt;; the requestor
-         * @param amount long; the requested amount
-         * @param priority int; the priority of the request
+         * @param requestor the requestor
+         * @param amount the requested amount
+         * @param priority the priority of the request
          */
         public Request(final IntResourceRequestorInterface<T> requestor, final long amount, final int priority)
         {

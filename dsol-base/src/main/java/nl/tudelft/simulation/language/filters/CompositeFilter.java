@@ -32,7 +32,7 @@ public class CompositeFilter extends AbstractFilter
 
         /**
          * Create a side; store the value from DSOL-1 as well.
-         * @param value int; the value from DSOL-1 before enum was introduced
+         * @param value the value from DSOL-1 before enum was introduced
          */
         Operator(final int value)
         {
@@ -41,7 +41,7 @@ public class CompositeFilter extends AbstractFilter
 
         /**
          * Returns the value from DSOL-1 before enum was introduced.
-         * @return int; the value from DSOL-1 before enum was introduced
+         * @return the value from DSOL-1 before enum was introduced
          */
         public int getValue()
         {
@@ -57,9 +57,9 @@ public class CompositeFilter extends AbstractFilter
 
     /**
      * constructs a new CompositeFilter.
-     * @param filter1 FilterInterface; the first filter
-     * @param filter2 FilterInterface; the second filter
-     * @param operator Operator; the operator (AND or OR)
+     * @param filter1 the first filter
+     * @param filter2 the second filter
+     * @param operator the operator (AND or OR)
      */
     public CompositeFilter(final FilterInterface filter1, final FilterInterface filter2, final Operator operator)
     {

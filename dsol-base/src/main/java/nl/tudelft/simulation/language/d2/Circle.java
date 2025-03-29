@@ -25,10 +25,10 @@ public final class Circle
 
     /**
      * Elegant intersection algorithm from http://astronomy.swin.edu.au/~pbourke/geometry/2circle/.
-     * @param center0 Point2D; the center of the first circle
-     * @param radius0 double; the radius of the first circle
-     * @param center1 Point2D; the center of the second circle
-     * @param radius1 double; the radius of the second circle
+     * @param center0 the center of the first circle
+     * @param radius0 the radius of the first circle
+     * @param center1 the center of the second circle
+     * @param radius1 the radius of the second circle
      * @return the intersection
      */
     public static Point2D[] intersection(final Point2D center0, final double radius0, final Point2D center1,

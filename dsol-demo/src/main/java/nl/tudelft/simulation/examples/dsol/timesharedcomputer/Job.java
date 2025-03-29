@@ -25,9 +25,9 @@ public class Job extends Entity<Double>
 
     /**
      * constructs a new Job.
-     * @param id String; the job id
-     * @param serviceTimeDistribution DistContinuous; the distribution from which to draw the serviceTime
-     * @param source Station; the source of the job
+     * @param id the job id
+     * @param serviceTimeDistribution the distribution from which to draw the serviceTime
+     * @param source the source of the job
      * @param simulator the simulator to retrieve the creation time of the job
      */
     public Job(final String id, final DistContinuous serviceTimeDistribution, final FlowBlock<Double, ?> source,
@@ -50,7 +50,7 @@ public class Job extends Entity<Double>
 
     /**
      * sets the serviceTime.
-     * @param serviceTime double; the time
+     * @param serviceTime the time
      */
     public void setServiceTime(final double serviceTime)
     {

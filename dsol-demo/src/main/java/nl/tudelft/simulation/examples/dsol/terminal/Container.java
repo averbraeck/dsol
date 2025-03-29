@@ -37,11 +37,11 @@ public class Container implements IntResourceRequestorInterface<Double>
     private int phase = 0;
 
     /**
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
-     * @param containerNumber int; the container number
-     * @param qc QC; the QC resources
-     * @param agv AGV; the AGV resources
-     * @param ship Ship; the ship
+     * @param simulator the simulator
+     * @param containerNumber the container number
+     * @param qc the QC resources
+     * @param agv the AGV resources
+     * @param ship the ship
      */
     public Container(final DevsSimulatorInterface<Double> simulator, final int containerNumber, final QuayCrane qc, final Agv agv,
             final Ship ship)

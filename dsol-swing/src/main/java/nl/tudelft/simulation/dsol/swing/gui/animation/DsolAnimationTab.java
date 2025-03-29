@@ -91,8 +91,8 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Construct a tab with an AnimationPanel for the animation of a DsolModel.
-     * @param homeExtent Bounds2d; initial extent of the animation
-     * @param simulator SimulatorInterface; the simulator
+     * @param homeExtent initial extent of the animation
+     * @param simulator the simulator
      * @throws RemoteException on network error in case of a distributed simulation
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -104,8 +104,8 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Construct a tab with an AnimationPanel for the animation of a DsolModel.
-     * @param simulator SimulatorInterface; the simulator
-     * @param animationPanel AnimationPanel; the animation panel to use, e.g. the AutoPanAnimationPanel
+     * @param simulator the simulator
+     * @param animationPanel the animation panel to use, e.g. the AutoPanAnimationPanel
      * @throws RemoteException on network error in case of a distributed simulation
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -127,9 +127,9 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Construct a tab with an AutoPanAnimationPanel and a linked SearchPanel for the animation of a DsolModel.
-     * @param homeExtent Bounds2d; initial extent of the animation
-     * @param simulator SimulatorInterface; the simulator
-     * @return DsolAnimationTab; a tab with an AutoPanAnimationPanel and a linked SearchPanel
+     * @param homeExtent initial extent of the animation
+     * @param simulator the simulator
+     * @return a tab with an AutoPanAnimationPanel and a linked SearchPanel
      * @throws RemoteException on network error in case of a distributed simulation
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
@@ -181,7 +181,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
      * Set the search panel for this animation tab. Register the AnimationPanel as a listener for the SearchPanel, so it can
      * track or highlight objects. Register the PropertiesPanel (if existent) as a listener for the SearchPanel, as it might
      * display the properties of the searched object.
-     * @param searchPanel SearchPanel; the search panel to use.
+     * @param searchPanel the search panel to use.
      */
     public void setSearchPanel(final SearchPanel searchPanel)
     {
@@ -211,12 +211,12 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
      * Add a button for toggling an animatable class on or off. Button icons for which 'idButton' is true will be placed to the
      * right of the previous button, which should be the corresponding button without the id. An example is an icon for
      * showing/hiding the class 'Lane' followed by the button to show/hide the Lane ids.
-     * @param name String; the name of the button
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which the button holds (e.g., Person.class)
-     * @param iconPath String; the path to the 24x24 icon to display
-     * @param toolTipText String; the tool tip text to show when hovering over the button
-     * @param initiallyVisible boolean; whether the class is initially shown or not
-     * @param idButton boolean; id button that needs to be placed next to the previous button
+     * @param name the name of the button
+     * @param locatableClass the class for which the button holds (e.g., Person.class)
+     * @param iconPath the path to the 24x24 icon to display
+     * @param toolTipText the tool tip text to show when hovering over the button
+     * @param initiallyVisible whether the class is initially shown or not
+     * @param idButton id button that needs to be placed next to the previous button
      */
     public void addToggleAnimationButtonIcon(final String name, final Class<? extends Locatable> locatableClass,
             final String iconPath, final String toolTipText, final boolean initiallyVisible, final boolean idButton)
@@ -264,10 +264,10 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Add a button for toggling an animatable class on or off.
-     * @param name String; the name of the button
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which the button holds (e.g., Person.class)
-     * @param toolTipText String; the tool tip text to show when hovering over the button
-     * @param initiallyVisible boolean; whether the class is initially shown or not
+     * @param name the name of the button
+     * @param locatableClass the class for which the button holds (e.g., Person.class)
+     * @param toolTipText the tool tip text to show when hovering over the button
+     * @param initiallyVisible whether the class is initially shown or not
      */
     public void addToggleAnimationButtonText(final String name, final Class<? extends Locatable> locatableClass,
             final String toolTipText, final boolean initiallyVisible)
@@ -301,7 +301,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Add a text to explain animatable classes.
-     * @param text String; the text to show
+     * @param text the text to show
      */
     public void addToggleText(final String text)
     {
@@ -333,7 +333,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Return the animation panel at the center of the screen.
-     * @return AnimationPanel; the animation panel at the center of the screen
+     * @return the animation panel at the center of the screen
      */
     public AnimationPanel getAnimationPanel()
     {
@@ -342,7 +342,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Return the toggle panel to turn objects or layers on the screen on or off.
-     * @return togglePanel TogglePanel; the toggle panel to turn objects or layers on the screen on or off
+     * @return the toggle panel to turn objects or layers on the screen on or off
      */
     public JPanel getTogglePanel()
     {
@@ -351,7 +351,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Return the search panel; can be null.
-     * @return SearchPanel the search panel; can be null
+     * @return can be null
      */
     public SearchPanel getSearchPanel()
     {
@@ -360,7 +360,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Update the checkmark related to a programmatically changed animation state.
-     * @param locatableClass Class&lt;? extends Locatable&gt;; class to show the checkmark for
+     * @param locatableClass class to show the checkmark for
      */
     public void updateAnimationClassCheckBox(final Class<? extends Locatable> locatableClass)
     {
@@ -374,7 +374,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * Return the simulator.
-     * @return SimulatorInterface; the simulator
+     * @return the simulator
      */
     public SimulatorInterface<?> getSimulator()
     {

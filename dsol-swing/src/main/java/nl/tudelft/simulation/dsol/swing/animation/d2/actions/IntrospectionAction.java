@@ -28,7 +28,7 @@ public class IntrospectionAction extends AbstractAction
 
     /**
      * constructs a new IntrospectionAction.
-     * @param target Object; the target to introspect
+     * @param target the target to introspect
      */
     public IntrospectionAction(final Object target)
     {

@@ -33,8 +33,8 @@ public class Destroy<T extends Number & Comparable<T>> extends FlowBlock<T, Dest
 
     /**
      * Construct a Destroy flow block.
-     * @param id String; the id of the Destroy flow block
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator
+     * @param id the id of the Destroy flow block
+     * @param simulator the simulator
      */
     public Destroy(final String id, final DevsSimulatorInterface<T> simulator)
     {

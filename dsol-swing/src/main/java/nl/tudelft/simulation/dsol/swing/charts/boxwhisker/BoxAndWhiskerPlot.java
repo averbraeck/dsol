@@ -73,7 +73,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * adds a tally to the array of targets.
-     * @param tally Tally; the tally to be summarized
+     * @param tally the tally to be summarized
      * @throws RemoteException on network failure
      */
     public synchronized void add(final EventBasedTally tally) throws RemoteException
@@ -84,7 +84,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * adds a tally to the array of targets.
-     * @param tally EventBasedWeightedTally; the tally to be summarized
+     * @param tally the tally to be summarized
      * @throws RemoteException on network failure
      */
     public synchronized void add(final EventBasedWeightedTally tally) throws RemoteException
@@ -95,7 +95,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * adds a tally to the array of targets.
-     * @param tally EventBasedTimestampWeightedTally; the tally to be summarized
+     * @param tally the tally to be summarized
      * @throws RemoteException on network failure
      */
     public synchronized void add(final EventBasedTimestampWeightedTally tally) throws RemoteException
@@ -120,7 +120,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * computes the extent of the targets.
-     * @param tallies Tally[]; the range of tallies
+     * @param tallies the range of tallies
      * @return double[min,max]
      */
     private static double[] extent(final List<TallyStatistic> tallies)
@@ -142,9 +142,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * determines the borders on the left and right side of the tally.
-     * @param g2 Graphics2D; the graphics object
-     * @param context FontRenderContext; the context
-     * @param tallyList Tally[]; tallies
+     * @param g2 the graphics object
+     * @param context the context
+     * @param tallyList tallies
      * @return double[] the extent
      */
     private double[] borders(final Graphics2D g2, final FontRenderContext context, final List<TallyStatistic> tallyList)
@@ -170,8 +170,8 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * returns the bounding box.
-     * @param word String; the word
-     * @param context FontRenderContext; the context
+     * @param word the word
+     * @param context the context
      * @return Rectangle2D the bounds
      */
     private Rectangle2D getBounds(final String word, final FontRenderContext context)
@@ -181,9 +181,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * fills a rectangle.
-     * @param g2 Graphics2D; the graphics object
-     * @param rectangle Rectangle2D; the area
-     * @param color Color; the color
+     * @param g2 the graphics object
+     * @param rectangle the area
+     * @param color the color
      */
     private void fillRectangle(final Graphics2D g2, final Rectangle2D rectangle, final Color color)
     {
@@ -193,12 +193,12 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * paints a tally.
-     * @param g2 Graphics2D; the graphics object
-     * @param rectangle Rectangle2D; the rectangle on which to paint
-     * @param tally Tally; the tally
-     * @param leftX double; the lowest real value
-     * @param leftBorder double; the left border
-     * @param scale double; the scale
+     * @param g2 the graphics object
+     * @param rectangle the rectangle on which to paint
+     * @param tally the tally
+     * @param leftX the lowest real value
+     * @param leftBorder the left border
+     * @param scale the scale
      */
     private void paintTally(final Graphics2D g2, final Rectangle2D rectangle, final TallyStatistic tally, final double leftX,
             final double leftBorder, final double scale)
@@ -288,7 +288,7 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
 
     /**
      * sets the confidence interval of the plot. The default value = 0.05 (=5%)
-     * @param confidenceInterval double; the confidence interval
+     * @param confidenceInterval the confidence interval
      */
     public void setConfidenceInterval(final double confidenceInterval)
     {

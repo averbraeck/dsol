@@ -20,8 +20,8 @@ public class DistContinuousAbsoluteTemperature extends DistContinuousUnit<Absolu
 
     /**
      * Constructs a new continuous distribution that draws AbsoluteTemperature scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit AbsoluteTemperatureUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousAbsoluteTemperature(final DistContinuous wrappedDistribution, final AbsoluteTemperatureUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousAbsoluteTemperature extends DistContinuousUnit<Absolu
 
     /**
      * Constructs a new continuous distribution that draws AbsoluteTemperature scalars in BASE units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousAbsoluteTemperature(final DistContinuous wrappedDistribution)
     {

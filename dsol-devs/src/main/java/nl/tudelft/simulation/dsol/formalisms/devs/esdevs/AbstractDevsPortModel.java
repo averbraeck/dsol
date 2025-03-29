@@ -36,9 +36,9 @@ public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> ex
     /**
      * Constructor for an abstract DEVS model with ports: we have to indicate the simulator to schedule the events on, and the
      * parent model we are part of. A parent model of null means that we are the top model.
-     * @param modelName String; the name of this component
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator to schedule the events on.
-     * @param parentModel CoupledModel&lt;T&gt;; the parent model we are part of.
+     * @param modelName the name of this component
+     * @param simulator the simulator to schedule the events on.
+     * @param parentModel the parent model we are part of.
      */
     public AbstractDevsPortModel(final String modelName, final DevsSimulatorInterface<T> simulator,
             final CoupledModel<T> parentModel)
@@ -48,8 +48,8 @@ public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> ex
 
     /**
      * Add an input port to the model. Use a name to be able to identify the port later.
-     * @param name String; the (unique) name of the input port
-     * @param inputPort InputPortInterface&lt;T,TYPE&gt;; the input port to add
+     * @param name the (unique) name of the input port
+     * @param inputPort the input port to add
      * @param <TYPE> the type of variable of the input port
      * @throws PortAlreadyDefinedException in case the port name already exist for the model
      */
@@ -66,8 +66,8 @@ public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> ex
 
     /**
      * Add an output port to the model. Use a name to be able to identify the port later.
-     * @param name String; the (unique) name of the output port
-     * @param outputPort OutputPortInterface&lt;T,TYPE&gt;; the output port to add
+     * @param name the (unique) name of the output port
+     * @param outputPort the output port to add
      * @param <TYPE> the type of variable of the output port
      * @throws PortAlreadyDefinedException in case the port name already exist for the model
      */
@@ -85,7 +85,7 @@ public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> ex
     /**
      * Remove an input port from the model. Note: override this method in classes that extend the behavior, e.g. to remove
      * couplings from this port in case it is removed.
-     * @param name String; the name of the input port to be removed
+     * @param name the name of the input port to be removed
      * @throws PortNotFoundException in case the port name does not exist for the model
      */
     protected void removeInputPort(final String name) throws PortNotFoundException
@@ -101,7 +101,7 @@ public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> ex
     /**
      * Remove an output port from the model. Note: override this method in classes that extend the behavior, e.g. to remove
      * couplings from this port in case it is removed.
-     * @param name String; the name of the output port to be removed
+     * @param name the name of the output port to be removed
      * @throws PortNotFoundException in case the port name does not exist for the model
      */
     protected void removeOutputPort(final String name) throws PortNotFoundException
@@ -115,7 +115,7 @@ public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> ex
     }
 
     /**
-     * @return inputPortMap; the map of input port names to input ports.
+     * @return the map of input port names to input ports.
      */
     public Map<String, InputPortInterface<T, ?>> getInputPortMap()
     {
@@ -123,7 +123,7 @@ public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> ex
     }
 
     /**
-     * @return outputPortMap; the map of output port names to output ports
+     * @return the map of output port names to output ports
      */
     public Map<String, OutputPortInterface<T, ?>> getOutputPortMap()
     {

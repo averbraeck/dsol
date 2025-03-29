@@ -24,7 +24,7 @@ public interface DataSourceInterface extends Serializable
     /**
      * Return the URL of the data source. Note that the data source can be a 'live' data source, with updates between queries
      * for the shapes! Often, the data source will be static and cache the shapes.
-     * @return URL; the URL of the data source
+     * @return the URL of the data source
      */
     URL getURL();
 
@@ -33,7 +33,7 @@ public interface DataSourceInterface extends Serializable
      * point to the same data source, such as with OSM files), one data source per layer (such as with ESRI shape files), or
      * even individual data sources per feature (e.g., when we have a geo-file per bus line that needs to be colored differently
      * on the map).
-     * @return List&lt;Feature&gt;; the Features that the data source should populate when asked
+     * @return the Features that the data source should populate when asked
      */
     List<FeatureInterface> getFeatures();
 
@@ -48,7 +48,7 @@ public interface DataSourceInterface extends Serializable
 
     /**
      * Return whether the data source is dynamic or not. If the data source is not dynamic, data is collected only once.
-     * @return boolean; whether the data source is dynamic or not
+     * @return whether the data source is dynamic or not
      */
     boolean isDynamic();
 

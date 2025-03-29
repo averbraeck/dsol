@@ -50,8 +50,8 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
 
     /**
      * constructs a new SimTally.
-     * @param description String; refers to the description of this Tally.
-     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param description refers to the description of this Tally.
+     * @param model the model
      */
     public SimTally(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
@@ -78,10 +78,10 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
 
     /**
      * constructs a new SimTally based on an eventType for which statistics are sampled.
-     * @param description String; the description of this tally.
-     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
-     * @param target EventProducer; the target on which to subscribe
-     * @param eventType EventType; the eventType for which statistics are sampled
+     * @param description the description of this tally.
+     * @param model the model
+     * @param target the target on which to subscribe
+     * @param eventType the eventType for which statistics are sampled
      */
     public SimTally(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)

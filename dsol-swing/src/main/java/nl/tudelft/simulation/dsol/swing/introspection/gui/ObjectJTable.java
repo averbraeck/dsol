@@ -63,7 +63,7 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
 
     /**
      * constructs a new ObjectJTable.
-     * @param dm IntrospectingTableModelInterface; the defaultTableModel
+     * @param dm the defaultTableModel
      */
     public ObjectJTable(final IntrospectingTableModelInterface dm)
     {
@@ -72,8 +72,8 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
 
     /**
      * constructs a new ObjectJTable.
-     * @param dm IntrospectingTableModelInterface; the defaultTableModel
-     * @param config CellPresentationConfiguration; the CellPresentationConfiguration
+     * @param dm the defaultTableModel
+     * @param config the CellPresentationConfiguration
      */
     public ObjectJTable(final IntrospectingTableModelInterface dm, final CellPresentationConfiguration config)
     {
@@ -84,8 +84,8 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
 
     /**
      * Constructor for ObjectJTable.
-     * @param dm IntrospectingTableModelInterface; the defaultTableModel
-     * @param cm TableColumnModel; the tableColumnModel
+     * @param dm the defaultTableModel
+     * @param cm the tableColumnModel
      */
     public ObjectJTable(final IntrospectingTableModelInterface dm, final TableColumnModel cm)
     {
@@ -96,9 +96,9 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
 
     /**
      * Constructor for ObjectJTable.
-     * @param dm IntrospectingTableModelInterface; the defaultTableModel
-     * @param cm TableColumnModel; the tableColumnModel
-     * @param sm ListSelectionModel; the listSelectionModel
+     * @param dm the defaultTableModel
+     * @param cm the tableColumnModel
+     * @param sm the listSelectionModel
      */
     public ObjectJTable(final IntrospectingTableModelInterface dm, final TableColumnModel cm, final ListSelectionModel sm)
     {
@@ -115,7 +115,7 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
 
     /**
      * initializes the objectJTable.
-     * @param model IntrospectingTableModelInterface; the model
+     * @param model the model
      */
     private void init(final IntrospectingTableModelInterface model)
     {

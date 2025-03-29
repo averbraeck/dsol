@@ -39,7 +39,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
 
     /**
      * constructs a new InputListener.
-     * @param panel AnimationPanel; the panel
+     * @param panel the panel
      */
     public InputListener(final VisualizationPanel panel)
     {
@@ -158,7 +158,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
 
     /**
      * Return the minimum time between two successive animation mouse move events in milliseconds.
-     * @return long; the minimum time between two successive animation mouse move events in milliseconds
+     * @return the minimum time between two successive animation mouse move events in milliseconds
      */
     public long getTimeBetweenAnimationMouseMoveEventsMs()
     {
@@ -167,7 +167,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
 
     /**
      * Set the minimum time between two successive animation mouse move events in milliseconds.
-     * @param timeBetweenAnimationMouseMoveEventsMs long; set the minimum time between two successive animation mouse move
+     * @param timeBetweenAnimationMouseMoveEventsMs set the minimum time between two successive animation mouse move
      *            events in milliseconds
      */
     public void setTimeBetweenAnimationMouseMoveEventsMs(final long timeBetweenAnimationMouseMoveEventsMs)

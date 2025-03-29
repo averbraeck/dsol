@@ -39,11 +39,11 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
 
     /**
      * Construct a new InputParameterDoubleScalar.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterDoubleUnit
-     * @param shortName String; concise description of the input parameter
-     * @param description String; double description of the input parameter (may use HTML markup)
-     * @param defaultValue T; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterDoubleUnit
+     * @param shortName concise description of the input parameter
+     * @param description double description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      * @throws InputParameterException when unit for the default value cannot be found in the unit definition
@@ -57,16 +57,16 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
 
     /**
      * Construct a new InputParameterDoubleScalar.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterDoubleUnit
-     * @param shortName String; concise description of the input parameter
-     * @param description String; double description of the input parameter (may use HTML markup)
-     * @param defaultValue T; the default value of this input parameter
-     * @param minimumValue T; the lowest value allowed as input
-     * @param maximumValue T; the highest value allowed as input
-     * @param minIncluded boolean; is the minimum value included or excluded in the allowed interval?
-     * @param maxIncluded boolean; is the maximum value included or excluded in the allowed interval?
-     * @param format String; the format to use in displaying the double
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterDoubleUnit
+     * @param shortName concise description of the input parameter
+     * @param description double description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param minimumValue the lowest value allowed as input
+     * @param maximumValue the highest value allowed as input
+     * @param minIncluded is the minimum value included or excluded in the allowed interval?
+     * @param maxIncluded is the maximum value included or excluded in the allowed interval?
+     * @param format the format to use in displaying the double
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, description, format, minimumValue, maximumValue, or
      *             defaultValue is null
      * @throws IllegalArgumentException when displayPriority is NaN
@@ -87,16 +87,16 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
 
     /**
      * Construct a new InputParameterDoubleScalar.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterDoubleUnit
-     * @param shortName String; concise description of the input parameter
-     * @param description String; double description of the input parameter (may use HTML markup)
-     * @param defaultValue T; the default value of this input parameter
-     * @param minimumValueSI double; the lowest value allowed as input (in SI units)
-     * @param maximumValueSI double; the highest value allowed as input (in SI units)
-     * @param minIncluded boolean; is the minimum value included or excluded in the allowed interval?
-     * @param maxIncluded boolean; is the maximum value included or excluded in the allowed interval?
-     * @param format String; the format to use in displaying the double
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterDoubleUnit
+     * @param shortName concise description of the input parameter
+     * @param description double description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param minimumValueSI the lowest value allowed as input (in SI units)
+     * @param maximumValueSI the highest value allowed as input (in SI units)
+     * @param minIncluded is the minimum value included or excluded in the allowed interval?
+     * @param maxIncluded is the maximum value included or excluded in the allowed interval?
+     * @param format the format to use in displaying the double
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, description, format, or defaultValue is null
      * @throws IllegalArgumentException when displayPriority is NaN
      * @throws InputParameterException when unit for the default value cannot be found in the unit definition
@@ -201,7 +201,7 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
     }
 
     /**
-     * @param minimumValueSI double; set minimumValue (SI units)
+     * @param minimumValueSI set minimumValue (SI units)
      */
     public void setMinimumValueSI(final double minimumValueSI)
     {
@@ -217,7 +217,7 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
     }
 
     /**
-     * @param maximumValueSI double; set maximumValue (SI units)
+     * @param maximumValueSI set maximumValue (SI units)
      */
     public void setMaximumValueSI(final double maximumValueSI)
     {
@@ -233,7 +233,7 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
     }
 
     /**
-     * @param minIncluded boolean; set minIncluded
+     * @param minIncluded set minIncluded
      */
     public void setMinIncluded(final boolean minIncluded)
     {
@@ -249,7 +249,7 @@ public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScala
     }
 
     /**
-     * @param maxIncluded boolean; set maxIncluded
+     * @param maxIncluded set maxIncluded
      */
     public void setMaxIncluded(final boolean maxIncluded)
     {

@@ -85,7 +85,7 @@ public class SortingTableHeader extends JTableHeader
 
     /**
      * gets the matching definition.
-     * @param column int; the columnNumber
+     * @param column the columnNumber
      * @return the definition
      */
     protected Sortable.Definition getMatchingDef(final int column)
@@ -102,7 +102,7 @@ public class SortingTableHeader extends JTableHeader
 
     /**
      * clears the header.
-     * @param butThisOne SortingHeaderCell; all but this one
+     * @param butThisOne all but this one
      */
     protected void clearHeaders(final SortingHeaderCell butThisOne)
     {
@@ -142,7 +142,7 @@ public class SortingTableHeader extends JTableHeader
 
     /**
      * gets the sorting of the column.
-     * @param column int; the column number
+     * @param column the column number
      * @return the value
      */
     private int getSort(final int column)

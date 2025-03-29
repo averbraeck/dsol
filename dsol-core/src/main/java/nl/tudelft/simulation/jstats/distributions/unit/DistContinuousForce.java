@@ -20,8 +20,8 @@ public class DistContinuousForce extends DistContinuousUnit<ForceUnit, Force>
 
     /**
      * Constructs a new continuous distribution that draws Force scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit ForceUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousForce(final DistContinuous wrappedDistribution, final ForceUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousForce extends DistContinuousUnit<ForceUnit, Force>
 
     /**
      * Constructs a new continuous distribution that draws Force scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousForce(final DistContinuous wrappedDistribution)
     {

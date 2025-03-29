@@ -22,7 +22,7 @@ public abstract class AbstractInputField implements InputField
 
     /**
      * Abstract constructor for the field on the screen.
-     * @param parameter InputParameter&lt;?,?&gt;; the parameter
+     * @param parameter the parameter
      */
     public AbstractInputField(final InputParameter<?, ?> parameter)
     {

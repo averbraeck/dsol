@@ -49,10 +49,10 @@ public class XmlStreamReader implements RunnableSource
 
     /**
      * Create a new XmlReader based on an InputStream rather than on a File.
-     * @param inputStream InputStream; the stream to read from
-     * @param enableDateParsing boolean; If true, dates will be parsed from xml data, else the current date will be used thus
+     * @param inputStream the stream to read from
+     * @param enableDateParsing If true, dates will be parsed from xml data, else the current date will be used thus
      *            saving parsing time.
-     * @param compressionMethod CompressionMethod; Specifies the compression method to employ
+     * @param compressionMethod Specifies the compression method to employ
      */
     public XmlStreamReader(final InputStream inputStream, final boolean enableDateParsing,
             final CompressionMethod compressionMethod)

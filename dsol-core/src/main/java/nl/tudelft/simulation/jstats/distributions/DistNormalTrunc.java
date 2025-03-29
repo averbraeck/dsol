@@ -46,9 +46,9 @@ public class DistNormalTrunc extends DistContinuous
     /**
      * constructs a normal distribution with mu=0 and sigma=1. Errors of various types, e.g., in the impact point of a bomb;
      * quantities that are the sum of a large number of other quantities by the virtue of the central limit theorem.
-     * @param stream StreamInterface; the numberstream
-     * @param min double; minimum x-value of the distribution
-     * @param max double; maximum x-value of the distribution
+     * @param stream the numberstream
+     * @param min minimum x-value of the distribution
+     * @param max maximum x-value of the distribution
      */
     public DistNormalTrunc(final StreamInterface stream, final double min, final double max)
     {
@@ -57,11 +57,11 @@ public class DistNormalTrunc extends DistContinuous
 
     /**
      * constructs a normal distribution with mu and sigma.
-     * @param stream StreamInterface; the random number stream
-     * @param mu double; the mean
-     * @param sigma double; the standard deviation
-     * @param min double; minimum x-value of the distribution
-     * @param max double; maximum x-value of the distribution
+     * @param stream the random number stream
+     * @param mu the mean
+     * @param sigma the standard deviation
+     * @param min minimum x-value of the distribution
+     * @param max maximum x-value of the distribution
      * @throws IllegalArgumentException when sigma &lt;= 0 or when max &lt;= min, or when the probabilities are so small that
      *             drawing becomes impossible. The cutoff point is at an interval with an overall probability of less than 1E-6
      */
@@ -118,7 +118,7 @@ public class DistNormalTrunc extends DistContinuous
 
     /**
      * returns the cumulative probability of the x-value.
-     * @param x double; the observation x
+     * @param x the observation x
      * @return double the cumulative probability
      */
     public double getCumulativeProbability(final double x)
@@ -136,7 +136,7 @@ public class DistNormalTrunc extends DistContinuous
 
     /**
      * returns the cumulative probability of the x-value.
-     * @param x double; the observation x
+     * @param x the observation x
      * @return double the cumulative probability
      */
     private double getCumulativeProbabilityNotTruncated(final double x)
@@ -146,7 +146,7 @@ public class DistNormalTrunc extends DistContinuous
 
     /**
      * returns the x-value of the given cumulativeProbability.
-     * @param cumulativeProbability double; reflects cum prob
+     * @param cumulativeProbability reflects cum prob
      * @return double the inverse cumulative probability
      */
     private double getInverseCumulativeProbabilityNotTruncated(final double cumulativeProbability)
@@ -156,7 +156,7 @@ public class DistNormalTrunc extends DistContinuous
 
     /**
      * returns the x-value of the given cumulativePropability.
-     * @param cumulativeProbability double; reflects cum prob
+     * @param cumulativeProbability reflects cum prob
      * @return double the inverse cumulative probability
      */
     public double getInverseCumulativeProbability(final double cumulativeProbability)

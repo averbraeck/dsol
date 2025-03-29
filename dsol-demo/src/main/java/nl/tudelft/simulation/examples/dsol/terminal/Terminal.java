@@ -48,8 +48,8 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
 
     /**
      * constructor for the Container Terminal.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
-     * @param rep int; the replication number
+     * @param simulator the simulator
+     * @param rep the replication number
      * @throws InputParameterException on input parameter error
      */
     public Terminal(final DevsSimulatorInterface<Double> simulator, final int rep) throws InputParameterException
@@ -159,13 +159,13 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
 
         /**
          * /**
-         * @param numQC int; qc
-         * @param numAGV int; agv
-         * @param rep int; replication nr
-         * @param delayHours double; delay in hours
-         * @param costs double; costs in Euros
-         * @param ready double; time when ready in hrs
-         * @param nrCont int; nr containers handled
+         * @param numQC qc
+         * @param numAGV agv
+         * @param rep replication nr
+         * @param delayHours delay in hours
+         * @param costs costs in Euros
+         * @param ready time when ready in hrs
+         * @param nrCont nr containers handled
          */
         public Output(final int numQC, final int numAGV, final int rep, final double delayHours, final double costs,
                 final double ready, final int nrCont)

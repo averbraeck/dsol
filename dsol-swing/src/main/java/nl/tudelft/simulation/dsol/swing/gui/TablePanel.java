@@ -51,7 +51,7 @@ public class TablePanel extends JPanel
      * 26, 27, 28, 29, 30 = 5 x 6
      * </pre>
      * 
-     * @param cells int; number of cells
+     * @param cells number of cells
      */
     public TablePanel(final int cells)
     {
@@ -60,8 +60,8 @@ public class TablePanel extends JPanel
 
     /**
      * Constructor for TablePanel.
-     * @param columns int; number of columns (x-direction)
-     * @param rows int; number of rows (y-direction)
+     * @param columns number of columns (x-direction)
+     * @param rows number of rows (y-direction)
      */
     public TablePanel(final int columns, final int rows)
     {
@@ -75,8 +75,8 @@ public class TablePanel extends JPanel
 
     /**
      * Return a nice looking number of rows for the given number of cells.
-     * @param cells int; the number of cells.
-     * @return int; a nice looking number of rows for the given number of cells
+     * @param cells the number of cells.
+     * @return a nice looking number of rows for the given number of cells
      */
     private static int calcRows(final int cells)
     {
@@ -93,8 +93,8 @@ public class TablePanel extends JPanel
     
     /**
      * Return a nice looking number of columns for the given number of cells.
-     * @param cells int; the number of cells.
-     * @return int; a nice looking number of columns for the given number of cells
+     * @param cells the number of cells.
+     * @return a nice looking number of columns for the given number of cells
      */
     private static int calcCols(final int cells)
     {
@@ -119,9 +119,9 @@ public class TablePanel extends JPanel
 
     /**
      * Set the content of the cell at (col, row).
-     * @param container Component; the component to put in the cell
-     * @param column int; the column number (x, 0-based)
-     * @param row int; the row number (y, 0-based)
+     * @param container the component to put in the cell
+     * @param column the column number (x, 0-based)
+     * @param row the row number (y, 0-based)
      */
     public void setCell(final Component container, final int column, final int row)
     {
@@ -130,8 +130,8 @@ public class TablePanel extends JPanel
 
     /**
      * Set the content of the cell with the given number, starting at row 1.
-     * @param container Component; the component to set
-     * @param cell int; the cell number
+     * @param container the component to set
+     * @param cell the cell number
      */
     public void setCell(final Component container, final int cell)
     {
@@ -142,7 +142,7 @@ public class TablePanel extends JPanel
 
     /**
      * Method refractor.
-     * @param value int; the number of cells to be used
+     * @param value the number of cells to be used
      * @return double[] the double factors corresponding to 1/value
      */
     private double[] refractor(final int value)
@@ -161,7 +161,7 @@ public class TablePanel extends JPanel
 
     /**
      * tests the TablePanel.
-     * @param args String[]; arguments
+     * @param args arguments
      */
     public static void main(final String[] args)
     {

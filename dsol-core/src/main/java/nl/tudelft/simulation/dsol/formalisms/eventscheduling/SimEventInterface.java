@@ -35,7 +35,7 @@ public interface SimEventInterface<T extends Number & Comparable<T>> extends Ser
 
     /**
      * Return the scheduled absolute execution time of a simulation event.
-     * @return T; the scheduled absolute execution time of a simulation event
+     * @return the scheduled absolute execution time of a simulation event
      */
     T getAbsoluteExecutionTime();
 
@@ -49,7 +49,7 @@ public interface SimEventInterface<T extends Number & Comparable<T>> extends Ser
     /**
      * Return the event's id to act as a tie breaker when both the time and the priority are equal. Typically, the id is
      * implemented as an incremental counter.
-     * @return long; the event's id to act as a tie breaker when both the time and the priority are equal
+     * @return the event's id to act as a tie breaker when both the time and the priority are equal
      */
     long getId();
 

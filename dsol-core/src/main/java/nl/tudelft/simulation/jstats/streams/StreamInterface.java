@@ -18,59 +18,59 @@ public interface StreamInterface extends Serializable
 {
     /**
      * Return the next pseudo-random, uniformly distributed boolean value.
-     * @return boolean; a pseudo-random boolean with 50/50 chance for true or false
+     * @return a pseudo-random boolean with 50/50 chance for true or false
      */
     boolean nextBoolean();
 
     /**
      * Return a pseudo-random number from the stream over the interval (0,1) using this stream, after advancing its
      * state by one step.
-     * @return double; the pseudo-random number
+     * @return the pseudo-random number
      */
     double nextDouble();
 
     /**
      * Return a pseudo-random number from the stream over the interval (0,1) using this stream, after advancing its
      * state by one step.
-     * @return float; the pseudo-random number
+     * @return the pseudo-random number
      */
     float nextFloat();
 
     /**
      * Return a pseudo-random number from the stream over using this stream, after advancing its state by one step.
-     * @return int; the pseudo-random number
+     * @return the pseudo-random number
      */
     int nextInt();
 
     /**
      * Return pseudo-random number from the stream between the integers i (inclusive) and j (inclusive).
-     * @param i int; the minimal value
-     * @param j int; the maximum value
-     * @return int; a value between i and j
+     * @param i the minimal value
+     * @param j the maximum value
+     * @return a value between i and j
      */
     int nextInt(int i, int j);
 
     /**
      * Return a pseudo-random number from the stream over using this stream, after advancing its state by one step.
-     * @return long; the pseudo-random number
+     * @return the pseudo-random number
      */
     long nextLong();
 
     /**
      * Return the seed of the generator.
-     * @return long; the seed
+     * @return the seed
      */
     long getSeed();
 
     /**
      * Return the original seed of the generator with which it has been first initialized.
-     * @return long; the original seed of the generator when it was first initialized
+     * @return the original seed of the generator when it was first initialized
      */
     long getOriginalSeed();
 
     /**
      * Set the seed of the generator.
-     * @param seed long; the new seed
+     * @param seed the new seed
      */
     void setSeed(long seed);
 
@@ -88,7 +88,7 @@ public interface StreamInterface extends Serializable
 
     /**
      * Restore the state to an earlier saved state object.
-     * @param state Object; the earlier saved state to which the RNG rolls back.
+     * @param state the earlier saved state to which the RNG rolls back.
      * @throws StreamException when resetting the state fails.
      */
     void restoreState(byte[] state) throws StreamException;

@@ -40,11 +40,11 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
 
     /**
      * Construct an object with off-line run control information.
-     * @param id String; the id of the run control that will be used as the id for the replication; should be unique within the
+     * @param id the id of the run control that will be used as the id for the replication; should be unique within the
      *            experiment.
-     * @param startTime T; the start time of the simulation
-     * @param warmupPeriod T; the warmup period, included in the runlength (!)
-     * @param runLength T; the total length of the run, including the warm-up period
+     * @param startTime the start time of the simulation
+     * @param warmupPeriod the warmup period, included in the runlength (!)
+     * @param runLength the total length of the run, including the warm-up period
      * @throws NullPointerException when id, startTime, warmupPeriod or runLength is null
      * @throws IllegalArgumentException when warmup period is negative, or run length is zero or negative, or when the warmup
      *             time is longer than or equal to the runlength

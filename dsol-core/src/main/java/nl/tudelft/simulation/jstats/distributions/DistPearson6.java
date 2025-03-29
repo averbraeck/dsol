@@ -40,10 +40,10 @@ public class DistPearson6 extends DistContinuous
 
     /**
      * constructs a new Pearson6 distribution.
-     * @param stream StreamInterface; the random number stream
-     * @param alpha1 double; the first shape parameter
-     * @param alpha2 double; the second shape parameter
-     * @param beta double; the scale parameter
+     * @param stream the random number stream
+     * @param alpha1 the first shape parameter
+     * @param alpha2 the second shape parameter
+     * @param beta the scale parameter
      * @throws IllegalArgumentException when alpha1 &lt;= 0 or alpha2 &lt;= 0 or beta &lt;= 0
      */
     public DistPearson6(final StreamInterface stream, final double alpha1, final double alpha2, final double beta)
@@ -80,7 +80,7 @@ public class DistPearson6 extends DistContinuous
 
     /**
      * Return the first shape parameter &alpha;1.
-     * @return double; the first shape parameter &alpha;1
+     * @return the first shape parameter &alpha;1
      */
     public double getAlpha1()
     {
@@ -89,7 +89,7 @@ public class DistPearson6 extends DistContinuous
 
     /**
      * Return the second shape parameter &alpha;2.
-     * @return double; the second shape parameter &alpha;2
+     * @return the second shape parameter &alpha;2
      */
     public double getAlpha2()
     {
@@ -98,7 +98,7 @@ public class DistPearson6 extends DistContinuous
 
     /**
      * Return the scale parameter &beta;.
-     * @return double; the scale parameter &beta;
+     * @return the scale parameter &beta;
      */
     public double getBeta()
     {

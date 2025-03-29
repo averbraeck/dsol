@@ -43,10 +43,10 @@ public class HistogramDataset extends SimpleHistogramDataset implements Interval
 
     /**
      * constructs a new HistogramDataset.
-     * @param key Comparable&lt;?&gt;; the key for the dataset
-     * @param domain double[]; the domain of the set.
-     * @param range double[]; the range of the set.
-     * @param numberOfBins int; the number of bins
+     * @param key the key for the dataset
+     * @param domain the domain of the set.
+     * @param range the range of the set.
+     * @param numberOfBins the number of bins
      */
     public HistogramDataset(final Comparable<?> key, final double[] domain, final double[] range, final int numberOfBins)
     {
@@ -58,7 +58,7 @@ public class HistogramDataset extends SimpleHistogramDataset implements Interval
 
     /**
      * adds a series to the dataset.
-     * @param name String; the name of the series.
+     * @param name the name of the series.
      * @return HistogramSeries.
      */
     public synchronized HistogramSeries addSeries(final String name)
@@ -70,7 +70,7 @@ public class HistogramDataset extends SimpleHistogramDataset implements Interval
 
     /**
      * adds a series to the dataset
-     * @param newSeries HistogramSeries; the set to add.
+     * @param newSeries the set to add.
      */
     public synchronized void addSeries(final HistogramSeries newSeries)
     {
@@ -139,7 +139,7 @@ public class HistogramDataset extends SimpleHistogramDataset implements Interval
     }
 
     /**
-     * @param serieNr int; the series number to retrieve the name for
+     * @param serieNr the series number to retrieve the name for
      * @return the series name
      */
     public String getSeriesName(final int serieNr)

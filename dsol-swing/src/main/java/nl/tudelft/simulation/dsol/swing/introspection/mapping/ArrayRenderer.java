@@ -56,7 +56,7 @@ public class ArrayRenderer extends DefaultTableCellRenderer
     }
 
     /**
-     * @param clasz Class&lt;?&gt;; a class
+     * @param clasz a class
      * @return the short name of the class
      */
     private static String getShortName(final Class<?> clasz)

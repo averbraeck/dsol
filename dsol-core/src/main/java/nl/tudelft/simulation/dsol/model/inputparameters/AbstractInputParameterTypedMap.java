@@ -30,11 +30,11 @@ public abstract class AbstractInputParameterTypedMap<T> extends AbstractInputPar
 
     /**
      * Construct a new InputParameterTypedMap.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterMap
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param defaultTypedValue T; the default value in the corresponding type
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterMap
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param defaultTypedValue the default value in the corresponding type
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -61,7 +61,7 @@ public abstract class AbstractInputParameterTypedMap<T> extends AbstractInputPar
 
     /**
      * Return the default value in the corresponding type.
-     * @return T; defaultTypedValue the default typed value
+     * @return defaultTypedValue the default typed value
      */
     public T getDefaultTypedValue()
     {

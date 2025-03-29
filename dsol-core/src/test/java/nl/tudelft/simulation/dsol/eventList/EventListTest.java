@@ -39,7 +39,7 @@ public class EventListTest
 
     /**
      * Test an implementation of the EventList.
-     * @param eventList EventListInterface; the event list to test
+     * @param eventList the event list to test
      */
     public void testEventList(final EventListInterface<Double> eventList)
     {

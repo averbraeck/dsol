@@ -28,8 +28,8 @@ public class DistBernoulli extends DistDiscrete
     /**
      * constructs a new Bernoulli distribution, with p as the probability for success (X=1), where failure is associated with
      * X=0.
-     * @param stream StreamInterface; is the stream
-     * @param p double; the probability for success of the Bernoulli distribution
+     * @param stream is the stream
+     * @param p the probability for success of the Bernoulli distribution
      * @throws IllegalArgumentException when p &lt; 0 or p &gt; 1
      */
     public DistBernoulli(final StreamInterface stream, final double p)
@@ -71,7 +71,7 @@ public class DistBernoulli extends DistDiscrete
 
     /**
      * Return p, the probability for success (X=1), where failure is associated with X=0.
-     * @return double; p, the probability for success (X=1)
+     * @return p, the probability for success (X=1)
      */
     public double getP()
     {

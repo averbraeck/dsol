@@ -20,8 +20,8 @@ public class Order
 
     /**
      * constructs a new Order.
-     * @param product String; the product
-     * @param amount double; the amount to buy
+     * @param product the product
+     * @param amount the amount to buy
      */
     public Order(final String product, final double amount)
     {

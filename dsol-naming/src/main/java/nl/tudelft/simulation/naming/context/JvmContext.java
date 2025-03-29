@@ -48,7 +48,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
 
     /**
      * constructs a new root JvmContext.
-     * @param atomicName String; the name under which the root context will be registered
+     * @param atomicName the name under which the root context will be registered
      */
     public JvmContext(final String atomicName)
     {
@@ -57,8 +57,8 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
 
     /**
      * Constructs a new JvmContext.
-     * @param parent Context; the parent context
-     * @param atomicName String; the name under which the context will be registered
+     * @param parent the parent context
+     * @param atomicName the name under which the context will be registered
      */
     public JvmContext(final ContextInterface parent, final String atomicName)
     {
@@ -156,8 +156,8 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
 
     /**
      * Indicates whether the object has been registered (once or more) in the current Context. The object may be null.
-     * @param object Object; the object to look up; mey be null
-     * @return boolean; whether an object with the given key has been registered once or more in the current context
+     * @param object the object to look up; mey be null
+     * @return whether an object with the given key has been registered once or more in the current context
      */
     @Override
     public boolean hasObject(final Object object) throws RemoteException
@@ -424,7 +424,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
 
     /**
      * Make a key for the object based on object.toString() where the "/" characters are replaced by "#".
-     * @param object Object; the object for which the key has to be generated
+     * @param object the object for which the key has to be generated
      * @return the key based on toString() where the "/" characters are replaced by "#"
      */
     private String makeObjectKey(final Object object)

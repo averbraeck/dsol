@@ -43,13 +43,13 @@ public class RunSpeedSliderPanel extends JPanel
 
     /**
      * Construct a new TimeWarpPanel.
-     * @param minimum double; the minimum value on the scale (the displayed scale may extend a little further than this
+     * @param minimum the minimum value on the scale (the displayed scale may extend a little further than this
      *            value)
-     * @param maximum double; the maximum value on the scale (the displayed scale may extend a little further than this
+     * @param maximum the maximum value on the scale (the displayed scale may extend a little further than this
      *            value)
-     * @param initialValue double; the initially selected value on the scale
-     * @param ticksPerDecade int; the number of steps per decade
-     * @param simulator DevsSimulatorInterface&lt;?, ?, ?&gt;; the simulator to change the speed of
+     * @param initialValue the initially selected value on the scale
+     * @param ticksPerDecade the number of steps per decade
+     * @param simulator the simulator to change the speed of
      */
     RunSpeedSliderPanel(final double minimum, final double maximum, final double initialValue, final int ticksPerDecade,
             final DevsSimulatorInterface<?> simulator)
@@ -160,8 +160,8 @@ public class RunSpeedSliderPanel extends JPanel
 
     /**
      * Convert a position on the slider to a factor.
-     * @param step int; the position on the slider
-     * @return double; the factor that corresponds to step
+     * @param step the position on the slider
+     * @return the factor that corresponds to step
      */
     private double stepToFactor(final int step)
     {
@@ -188,7 +188,7 @@ public class RunSpeedSliderPanel extends JPanel
 
     /**
      * Retrieve the current TimeWarp factor.
-     * @return double; the current TimeWarp factor
+     * @return the current TimeWarp factor
      */
     public double getFactor()
     {
@@ -203,7 +203,7 @@ public class RunSpeedSliderPanel extends JPanel
 
     /**
      * Set the time warp factor to the best possible approximation of a given value.
-     * @param factor double; the requested speed factor
+     * @param factor the requested speed factor
      */
     public void setSpeedFactor(final double factor)
     {

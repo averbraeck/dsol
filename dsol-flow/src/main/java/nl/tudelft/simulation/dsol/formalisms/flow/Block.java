@@ -32,8 +32,8 @@ public abstract class Block<T extends Number & Comparable<T>> extends LocalEvent
 
     /**
      * Construct a new simulation block.
-     * @param id String; the id of the block
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; is the simulator on which behavior is scheduled
+     * @param id the id of the block
+     * @param simulator is the simulator on which behavior is scheduled
      */
     public Block(final String id, final DevsSimulatorInterface<T> simulator)
     {
@@ -50,7 +50,7 @@ public abstract class Block<T extends Number & Comparable<T>> extends LocalEvent
 
     /**
      * Return the simulator.
-     * @return DevsSimultorInterface&lt;T&gt;; the simulator
+     * @return the simulator
      */
     public DevsSimulatorInterface<T> getSimulator()
     {

@@ -51,8 +51,8 @@ public enum NumericalIntegratorType
 
     /**
      * Create a side; store the value from DSOL-1 as well.
-     * @param value int; the value from DSOL-1 before enum was introduced
-     * @param integratorClass Class&lt;? extends NumericalIntegrator&gt;; the class of the integrator
+     * @param value the value from DSOL-1 before enum was introduced
+     * @param integratorClass the class of the integrator
      */
     NumericalIntegratorType(final int value, final Class<? extends NumericalIntegrator> integratorClass)
     {
@@ -62,7 +62,7 @@ public enum NumericalIntegratorType
 
     /**
      * Returns the value from DSOL-1 before enum was introduced.
-     * @return int; the value from DSOL-1 before enum was introduced
+     * @return the value from DSOL-1 before enum was introduced
      */
     public int getValue()
     {
@@ -71,7 +71,7 @@ public enum NumericalIntegratorType
 
     /**
      * Get the integrator class belonging to the name.
-     * @return Class&lt;? extends NumericalIntegrator&gt;; the class of the integrator
+     * @return the class of the integrator
      */
     public Class<? extends NumericalIntegrator> getIntegratorClass()
     {
@@ -80,8 +80,8 @@ public enum NumericalIntegratorType
 
     /**
      * Get an instance of the integrator.
-     * @param stepSize double; the starting step size to use
-     * @param equation DifferentialEquationInterface; the differential equation
+     * @param stepSize the starting step size to use
+     * @param equation the differential equation
      * @return the integrator
      */
     public NumericalIntegrator getInstance(final double stepSize, final DifferentialEquationInterface equation)

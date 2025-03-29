@@ -21,8 +21,8 @@ public abstract class SimRenderable2d<L extends Locatable> extends Renderable2d<
 
     /**
      * Constructs a new Renderable2D.
-     * @param source T; the Locatable source type that provides the location and bounds
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator to provide the context via the replication
+     * @param source the Locatable source type that provides the location and bounds
+     * @param simulator the simulator to provide the context via the replication
      */
     public SimRenderable2d(final L source, final SimulatorInterface<?> simulator)
     {
@@ -31,7 +31,7 @@ public abstract class SimRenderable2d<L extends Locatable> extends Renderable2d<
 
     /**
      * destroys an RenderableObject by unsubscribing it from the context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator to provide the context via the replication
+     * @param simulator the simulator to provide the context via the replication
      */
     public void destroy(final SimulatorInterface<?> simulator)
     {

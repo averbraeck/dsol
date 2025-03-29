@@ -14,8 +14,8 @@ public interface SellerInterface
 {
     /**
      * order a requested amount.
-     * @param buyer BuyerInterface; the requesting buyer
-     * @param amount long; the requested amount
+     * @param buyer the requesting buyer
+     * @param amount the requested amount
      */
     void order(BuyerInterface buyer, long amount);
 }

@@ -75,8 +75,8 @@ public class Create<T extends Number & Comparable<T>> extends FlowBlock<T, Creat
     /**
      * Construct a new generator for objects in a simulation. Constructed objects are sent to the 'destination' of the Create
      * flow object when a destination has been indicated with the setDestination method.
-     * @param id String; the id of the FlowObject
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; is the on which the construction of the objects must be scheduled.
+     * @param id the id of the FlowObject
+     * @param simulator is the on which the construction of the objects must be scheduled.
      */
     public Create(final String id, final DevsSimulatorInterface<T> simulator)
     {
@@ -177,7 +177,7 @@ public class Create<T extends Number & Comparable<T>> extends FlowBlock<T, Creat
 
     /**
      * Set a new interarrival distribution. This is used by, e.g., classes that changes the arrival rate at set intervals.
-     * @param intervalDist DistContinuousSimulationTime&lt;T&gt;; the new interarrival distribution
+     * @param intervalDist the new interarrival distribution
      * @return the Create instance for method chaining
      */
     public Create<T> setIntervalDist(final DistContinuousSimulationTime<T> intervalDist)

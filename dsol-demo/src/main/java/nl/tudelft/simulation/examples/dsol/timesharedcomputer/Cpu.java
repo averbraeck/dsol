@@ -62,7 +62,7 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
 
     /**
      * constructs a new CPU.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; a devs simulator
+     * @param simulator a devs simulator
      */
     public Cpu(final DevsSimulatorInterface<Double> simulator)
     {

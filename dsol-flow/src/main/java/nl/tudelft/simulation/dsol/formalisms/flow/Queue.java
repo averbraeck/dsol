@@ -76,9 +76,9 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
 
     /**
      * Add a request for capacity to the queue.
-     * @param amount double; the requested amount
-     * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
-     * @param priority int; the priority of the request
+     * @param amount the requested amount
+     * @param requestor the RequestorInterface requesting the amount
+     * @param priority the priority of the request
      */
     public void add(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor, final int priority)
     {
@@ -90,9 +90,9 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
 
     /**
      * Add a request for capacity to the queue.
-     * @param amount int; the requested amount
-     * @param requestor ResourceRequestorInterface&lt;T&gt;; the RequestorInterface requesting the amount
-     * @param priority int; the priority of the request
+     * @param amount the requested amount
+     * @param requestor the RequestorInterface requesting the amount
+     * @param priority the priority of the request
      */
     public void add(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor, final int priority)
     {

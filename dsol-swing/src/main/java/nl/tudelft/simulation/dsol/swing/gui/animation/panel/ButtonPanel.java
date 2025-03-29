@@ -33,7 +33,7 @@ public class ButtonPanel extends JPanel implements ActionListener
 
     /**
      * Create a button panel; delegate the construction to the init() method, which can be overridden.
-     * @param animationPanel AnimationPanel; the animation panel on which the buttons work
+     * @param animationPanel the animation panel on which the buttons work
      */
     public ButtonPanel(final AnimationPanel animationPanel)
     {

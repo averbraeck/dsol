@@ -31,7 +31,7 @@ public class UpdateTimer extends TimerTask
 
     /**
      * constructs a new UpdateTimer.
-     * @param period long; the period in milliseconds
+     * @param period the period in milliseconds
      */
     public UpdateTimer(final long period)
     {
@@ -41,7 +41,7 @@ public class UpdateTimer extends TimerTask
 
     /**
      * adds a component to the list.
-     * @param component Component; the component
+     * @param component the component
      */
     @SuppressWarnings("unchecked")
     public synchronized void add(final Component component)
@@ -59,7 +59,7 @@ public class UpdateTimer extends TimerTask
 
     /**
      * removes a component from a list.
-     * @param component Component; the component
+     * @param component the component
      */
     public synchronized void remove(final Component component)
     {
@@ -74,7 +74,7 @@ public class UpdateTimer extends TimerTask
 
     /**
      * removes a reference from a list.
-     * @param reference WeakReference&lt;Component&gt;; the reference
+     * @param reference the reference
      */
     @SuppressWarnings("unchecked")
     private synchronized void remove(final WeakReference<Component> reference)

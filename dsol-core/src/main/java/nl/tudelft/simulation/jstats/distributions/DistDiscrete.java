@@ -22,7 +22,7 @@ public abstract class DistDiscrete extends Dist
 
     /**
      * constructs a new discrete distribution.
-     * @param stream StreamInterface; the random number stream
+     * @param stream the random number stream
      */
     public DistDiscrete(final StreamInterface stream)
     {
@@ -37,7 +37,7 @@ public abstract class DistDiscrete extends Dist
 
     /**
      * returns the probability of the observation in this particular distribution.
-     * @param observation long; the discrete observation.
+     * @param observation the discrete observation.
      * @return double the probability.
      */
     public abstract double probability(long observation);

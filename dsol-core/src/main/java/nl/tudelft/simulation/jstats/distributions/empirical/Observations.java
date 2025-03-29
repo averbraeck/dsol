@@ -108,7 +108,7 @@ public final class Observations
 
     /**
      * Create an empirical distribution from a list with observations.
-     * @param observations List&lt;Number&gt;; the observations
+     * @param observations the observations
      * @return the cumulative distribution object belonging to the given observations
      * @throws NullPointerException when observations list is null, or when one of the observations is null
      * @throws IllegalArgumentException when observations list is empty

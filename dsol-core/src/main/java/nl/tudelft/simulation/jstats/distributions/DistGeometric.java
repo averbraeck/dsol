@@ -34,8 +34,8 @@ public class DistGeometric extends DistDiscrete
     /**
      * Construct a new geometric distribution for a repeated set of Bernoulli trials, indicating the number of failures before
      * the first success.
-     * @param stream StreamInterface; the random number stream
-     * @param p double; the probability of success for each individual trial
+     * @param stream the random number stream
+     * @param p the probability of success for each individual trial
      * @throws IllegalArgumentException when p &lt;= 0 or p &gt;= 1
      */
     public DistGeometric(final StreamInterface stream, final double p)
@@ -65,7 +65,7 @@ public class DistGeometric extends DistDiscrete
 
     /**
      * Return the probability of success for each individual trial.
-     * @return double; the probability of success for each individual trial
+     * @return the probability of success for each individual trial
      */
     public double getP()
     {

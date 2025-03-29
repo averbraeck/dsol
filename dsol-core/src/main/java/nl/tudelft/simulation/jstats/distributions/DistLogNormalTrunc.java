@@ -29,9 +29,9 @@ public class DistLogNormalTrunc extends DistLogNormal
 
     /**
      * Construct a truncated lognormal distribution with mu=0, sigma=1 with given min and max.
-     * @param stream StreamInterface; the random number stream
-     * @param min double; minimum x-value of the distribution
-     * @param max double; maximum x-value of the distribution
+     * @param stream the random number stream
+     * @param min minimum x-value of the distribution
+     * @param max maximum x-value of the distribution
      */
     public DistLogNormalTrunc(final StreamInterface stream, final double min, final double max)
     {
@@ -40,11 +40,11 @@ public class DistLogNormalTrunc extends DistLogNormal
 
     /**
      * constructs a truncated lognormal distribution with mu and sigma and given min and max.
-     * @param stream StreamInterface; the random number stream
-     * @param mu double; the mean
-     * @param sigma double; the standard deviation
-     * @param min double; minimum x-value of the distribution
-     * @param max double; maximum x-value of the distribution
+     * @param stream the random number stream
+     * @param mu the mean
+     * @param sigma the standard deviation
+     * @param min minimum x-value of the distribution
+     * @param max maximum x-value of the distribution
      */
     public DistLogNormalTrunc(final StreamInterface stream, final double mu, final double sigma, final double min,
             final double max)

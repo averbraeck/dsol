@@ -40,7 +40,7 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
 
     /**
      * constructs a new Computer.
-     * @param simulator DevsSimulator&lt;Double&gt;; the simulator
+     * @param simulator the simulator
      */
     public Computer(final DevsSimulator<Double> simulator)
     {
@@ -93,8 +93,8 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
 
         /**
          * constructs a new ExitCounter.
-         * @param description String; the description of the counter
-         * @param model DsolModel&lt;Double, SimulatorInterface&lt;Double&gt;&gt;; the model to register the OutputStatistics
+         * @param description the description of the counter
+         * @param model the model to register the OutputStatistics
          * @throws RemoteException on network failure
          */
         public ExitCounter(final String description, final DsolModel<Double, DevsSimulator<Double>> model)

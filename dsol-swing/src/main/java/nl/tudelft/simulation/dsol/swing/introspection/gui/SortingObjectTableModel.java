@@ -24,7 +24,7 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
 {
     /**
      * constructs a new SortingObjectTableModel.
-     * @param source TableModel; the source of this tableModel
+     * @param source the source of this tableModel
      */
     public SortingObjectTableModel(final TableModel source)
     {

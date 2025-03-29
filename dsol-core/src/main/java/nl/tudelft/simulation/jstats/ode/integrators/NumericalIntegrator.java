@@ -34,8 +34,8 @@ public abstract class NumericalIntegrator implements Serializable
 
     /**
      * constructs a new NumericalIntegrator.
-     * @param stepSize double; the stepSize
-     * @param equation DifferentialEquationInterface; the differentialEquation
+     * @param stepSize the stepSize
+     * @param equation the differentialEquation
      */
     public NumericalIntegrator(final double stepSize, final DifferentialEquationInterface equation)
     {
@@ -45,16 +45,16 @@ public abstract class NumericalIntegrator implements Serializable
 
     /**
      * computes the next value.
-     * @param x double; the x value corresponding to the last y-value computed
-     * @param y double[]; the last y value
+     * @param x the x value corresponding to the last y-value computed
+     * @param y the last y value
      * @return the new value
      */
     public abstract double[] next(double x, double[] y);
 
     /**
      * multiplies a vector with a constant.
-     * @param constant double; the constant
-     * @param vector double[]; the vector
+     * @param constant the constant
+     * @param vector the vector
      * @return the new vector
      */
     protected double[] multiply(final double constant, final double[] vector)
@@ -69,8 +69,8 @@ public abstract class NumericalIntegrator implements Serializable
 
     /**
      * adds two vectors.
-     * @param a double[]; vector a
-     * @param b double[]; vector b
+     * @param a vector a
+     * @param b vector b
      * @return the new vector
      */
     protected double[] add(final double[] a, final double[] b)
@@ -85,9 +85,9 @@ public abstract class NumericalIntegrator implements Serializable
 
     /**
      * adds a number of vectors.
-     * @param a double[]; vector a
-     * @param b double[]; vector b
-     * @param c double[]; vector c
+     * @param a vector a
+     * @param b vector b
+     * @param c vector c
      * @return the new vector
      */
     protected double[] add(final double[] a, final double[] b, final double[] c)
@@ -102,10 +102,10 @@ public abstract class NumericalIntegrator implements Serializable
 
     /**
      * adds a number of vectors.
-     * @param a double[]; vector a
-     * @param b double[]; vector b
-     * @param c double[]; vector c
-     * @param d double[]; vector d
+     * @param a vector a
+     * @param b vector b
+     * @param c vector c
+     * @param d vector d
      * @return the sum
      */
     protected double[] add(final double[] a, final double[] b, final double[] c, final double[] d)
@@ -120,11 +120,11 @@ public abstract class NumericalIntegrator implements Serializable
 
     /**
      * adds a number of vectors.
-     * @param a double[]; vector a
-     * @param b double[]; vector b
-     * @param c double[]; vector c
-     * @param d double[]; vector d
-     * @param e double[]; vector e
+     * @param a vector a
+     * @param b vector b
+     * @param c vector c
+     * @param d vector d
+     * @param e vector e
      * @return the sum
      */
     protected double[] add(final double[] a, final double[] b, final double[] c, final double[] d, final double[] e)
@@ -139,12 +139,12 @@ public abstract class NumericalIntegrator implements Serializable
 
     /**
      * adds a number of vectors.
-     * @param a double[]; vector a
-     * @param b double[]; vector b
-     * @param c double[]; vector c
-     * @param d double[]; vector d
-     * @param e double[]; vector e
-     * @param f double[]; vector f
+     * @param a vector a
+     * @param b vector b
+     * @param c vector c
+     * @param d vector d
+     * @param e vector e
+     * @param f vector f
      * @return the sum
      */
     protected double[] add(final double[] a, final double[] b, final double[] c, final double[] d, final double[] e,
@@ -167,7 +167,7 @@ public abstract class NumericalIntegrator implements Serializable
     }
 
     /**
-     * @param stepSize double; The step size to set.
+     * @param stepSize The step size to set.
      */
     public void setStepSize(final double stepSize)
     {

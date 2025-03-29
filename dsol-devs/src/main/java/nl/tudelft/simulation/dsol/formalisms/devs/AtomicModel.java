@@ -80,10 +80,10 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * Constructor for a stand-alone atomic model with explicit phases.
-     * @param modelName String; the name of this component
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator to schedule on
-     * @param e T; initial elapsed time
-     * @param initphase Phase; the initial phase of the model
+     * @param modelName the name of this component
+     * @param simulator the simulator to schedule on
+     * @param e initial elapsed time
+     * @param initphase the initial phase of the model
      */
     public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator, final T e, final Phase initphase)
     {
@@ -92,10 +92,10 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * Constructor for an atomic model within a coupled model with explicit phases.
-     * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
-     * @param e T; initial elapsed time
-     * @param initphase Phase; the initial phase of the model
+     * @param modelName the name of this component
+     * @param parentModel the coupled model this atomic model is part of
+     * @param e initial elapsed time
+     * @param initphase the initial phase of the model
      */
     public AtomicModel(final String modelName, final CoupledModel<T> parentModel, final T e, final Phase initphase)
     {
@@ -103,8 +103,8 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     }
 
     /**
-     * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
+     * @param modelName the name of this component
+     * @param parentModel the coupled model this atomic model is part of
      */
     public AtomicModel(final String modelName, final CoupledModel<T> parentModel)
     {
@@ -113,8 +113,8 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     }
 
     /**
-     * @param modelName String; the name of this component
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator to schedule on
+     * @param modelName the name of this component
+     * @param simulator the simulator to schedule on
      */
     public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator)
     {
@@ -123,11 +123,11 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * Constructor for a stand-alone atomic model with explicit phases and a conflict strategy.
-     * @param modelName String; the name of this component
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; the simulator to schedule on
-     * @param e T; initial elapsed time
-     * @param initphase Phase; the initial phase of the model to use for explicit phase models
-     * @param conflictStrategy boolean; the conflict strategy to use when internal and external events take place at the same
+     * @param modelName the name of this component
+     * @param simulator the simulator to schedule on
+     * @param e initial elapsed time
+     * @param initphase the initial phase of the model to use for explicit phase models
+     * @param conflictStrategy the conflict strategy to use when internal and external events take place at the same
      *            time
      */
     public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator, final T e, final Phase initphase,
@@ -142,11 +142,11 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * Constructor for an atomic model within a coupled model with explicit phases and a conflict strategy.
-     * @param modelName String; the name of this component
-     * @param parentModel CoupledModel&lt;T&gt;; the coupled model this atomic model is part of
-     * @param e T; initial elapsed time
-     * @param initphase Phase; the initial phase of the model to use for explicit phase models
-     * @param conflictStrategy boolean; the conflict strategy to use when internal and external events take place at the same
+     * @param modelName the name of this component
+     * @param parentModel the coupled model this atomic model is part of
+     * @param e initial elapsed time
+     * @param initphase the initial phase of the model to use for explicit phase models
+     * @param conflictStrategy the conflict strategy to use when internal and external events take place at the same
      *            time
      */
     public AtomicModel(final String modelName, final CoupledModel<T> parentModel, final T e, final Phase initphase,
@@ -164,7 +164,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * Initialize the atomic model. Start the first internal event based on the time 'e'. See Zeigler's model definition for the
      * definition of 'e'.
-     * @param e T; elapsed time since the last state transition
+     * @param e elapsed time since the last state transition
      */
     public void initialize(final T e)
     {
@@ -195,7 +195,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * Return the elapsed time (e) since the last event.
-     * @param eventTime T; the time of the event for which we want to calculate the elapsed time.
+     * @param eventTime the time of the event for which we want to calculate the elapsed time.
      * @return the elapsed time (e) since the last event.
      * @throws RemoteException a remote exception occurred
      */
@@ -238,8 +238,8 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     /**
      * This method handles an incoming external event. As part of its function, it calls the deltaExternal method that is
      * defined in an extension of this class.
-     * @param e T; the elapsed time since the last state transition
-     * @param value Object; the value that is passed through the port, which triggered the external event
+     * @param e the elapsed time since the last state transition
+     * @param value the value that is passed through the port, which triggered the external event
      */
     public void deltaExternalEventHandler(final T e, final Object value)
     {
@@ -249,8 +249,8 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     }
 
     /**
-     * @param e T; the elapsed time since the last state transition
-     * @param value Object; the value that is passed through the port, which triggered the external event
+     * @param e the elapsed time since the last state transition
+     * @param value the value that is passed through the port, which triggered the external event
      */
     public void deltaConfluent(final T e, final Object value)
     {
@@ -346,7 +346,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     }
 
     /**
-     * @param conflict boolean; indicate whether there is a conflict between an intenal event and an external event that take
+     * @param conflict indicate whether there is a conflict between an intenal event and an external event that take
      *            place at the same time.
      */
     public void setConflict(final boolean conflict)
@@ -365,8 +365,8 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
 
     /**
      * The user defined deltaExternal method that is defined in an extension of this class.
-     * @param e T; the elapsed time since the last state transition
-     * @param value Object; the value that has been passed through the port
+     * @param e the elapsed time since the last state transition
+     * @param value the value that has been passed through the port
      */
     public abstract void deltaExternal(T e, Object value);
 

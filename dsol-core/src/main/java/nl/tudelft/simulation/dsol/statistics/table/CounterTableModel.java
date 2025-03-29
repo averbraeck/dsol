@@ -30,7 +30,7 @@ public class CounterTableModel extends StatisticsTableModel
 
     /**
      * Constructor.
-     * @param counter SimCounter; the counter for which the table is created
+     * @param counter the counter for which the table is created
      * @throws RemoteException when communication with the counter fails
      */
     public CounterTableModel(final SimCounter<?> counter) throws RemoteException

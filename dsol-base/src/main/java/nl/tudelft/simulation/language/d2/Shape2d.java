@@ -24,8 +24,8 @@ public final class Shape2d
 
     /**
      * overlaps extent and shape. Overlap = Intersect + Contain
-     * @param extent Bounds2d; the extent
-     * @param shape Bounds2d; the shape
+     * @param extent the extent
+     * @param shape the shape
      * @return whether extent overlaps shape
      */
     public static boolean overlaps(final Bounds2d extent, final Bounds2d shape)
@@ -51,8 +51,8 @@ public final class Shape2d
 
     /**
      * do the rectangles really intersect (so, not being contained)?
-     * @param r1 Bounds2d; the first rectangle
-     * @param r2 Bounds2d; the second rectangle
+     * @param r1 the first rectangle
+     * @param r2 the second rectangle
      * @return whether r1 really intersects r2
      */
     public static boolean intersects(final Bounds2d r1, final Bounds2d r2)
@@ -62,8 +62,8 @@ public final class Shape2d
 
     /**
      * is r1 completely in r2.
-     * @param r1 Bounds2d; the first rectangle
-     * @param r2 Bounds2d; the second rectangle
+     * @param r1 the first rectangle
+     * @param r2 the second rectangle
      * @return whether r1 in r2
      */
     public static boolean contains(final Bounds2d r1, final Bounds2d r2)

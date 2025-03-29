@@ -32,8 +32,8 @@ public class BeanProperty extends AbstractProperty implements Property
 
     /**
      * constructs a new BeanProperty.
-     * @param bean Object; the bean to introspect
-     * @param descriptor PropertyDescriptor; the descriptor of the property
+     * @param bean the bean to introspect
+     * @param descriptor the descriptor of the property
      */
     protected BeanProperty(final Object bean, final PropertyDescriptor descriptor)
     {

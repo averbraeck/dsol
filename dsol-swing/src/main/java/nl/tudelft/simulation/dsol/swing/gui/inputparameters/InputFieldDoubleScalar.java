@@ -35,8 +35,8 @@ public class InputFieldDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U,
 
     /**
      * Create a double field with a unit on the screen.
-     * @param panel JPanel; panel to add the field to
-     * @param parameter InputParameterDoubleScalar&lt;U,T&gt;; the parameter
+     * @param panel panel to add the field to
+     * @param parameter the parameter
      */
     public InputFieldDoubleScalar(final JPanel panel, final InputParameterDoubleScalar<U, T> parameter)
     {
@@ -96,7 +96,7 @@ public class InputFieldDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U,
 
     /**
      * Return the double part of the entered value.
-     * @return double; the double part of the entered value
+     * @return the double part of the entered value
      * @throws InputParameterException on invalid input
      */
     public double getDoubleValue() throws InputParameterException
@@ -106,7 +106,7 @@ public class InputFieldDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U,
 
     /**
      * Return the unit part of the entered value.
-     * @return U; the unit part of the entered value
+     * @return the unit part of the entered value
      * @throws InputParameterException on invalid input
      */
     public U getUnit() throws InputParameterException
@@ -116,8 +116,8 @@ public class InputFieldDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U,
 
     /**
      * Return the numeric value of the field.
-     * @param s String; the String to test
-     * @param shortName String; the name of the field to test
+     * @param s the String to test
+     * @param shortName the name of the field to test
      * @return the double value of the field in the gui.
      * @throws InputParameterException on invalid input
      */

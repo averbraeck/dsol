@@ -21,8 +21,8 @@ public class Euler extends NumericalIntegrator
 
     /**
      * constructs a new Euler.
-     * @param stepSize double; the stepSize
-     * @param equation DifferentialEquationInterface; the differentialEquation
+     * @param stepSize the stepSize
+     * @param equation the differentialEquation
      */
     public Euler(final double stepSize, final DifferentialEquationInterface equation)
     {

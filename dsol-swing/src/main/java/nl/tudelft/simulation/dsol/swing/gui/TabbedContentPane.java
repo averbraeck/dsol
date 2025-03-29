@@ -30,7 +30,7 @@ public class TabbedContentPane extends JTabbedPane
 
     /**
      * Constructor for TabbedContentPane.
-     * @param tabPlacement int; the position in the tab
+     * @param tabPlacement the position in the tab
      */
     public TabbedContentPane(final int tabPlacement)
     {
@@ -39,8 +39,8 @@ public class TabbedContentPane extends JTabbedPane
 
     /**
      * Constructor for TabbedContentPane.
-     * @param tabPlacement int; the position in the tab
-     * @param tabLayoutPolicy int; the policy for laying out tabs when all tabs will not fit on one run
+     * @param tabPlacement the position in the tab
+     * @param tabLayoutPolicy the policy for laying out tabs when all tabs will not fit on one run
      */
     public TabbedContentPane(final int tabPlacement, final int tabLayoutPolicy)
     {
@@ -49,9 +49,9 @@ public class TabbedContentPane extends JTabbedPane
 
     /**
      * add a tab with a title at a specific position in the array of tabs.
-     * @param position int; the position in the tabs
-     * @param title String; the title of the tab
-     * @param component Component; the swing component to link to the tab
+     * @param position the position in the tabs
+     * @param title the title of the tab
+     * @param component the swing component to link to the tab
      * @throws IndexOutOfBoundsException when the tab number smaller than 0 or larger than size
      */
     public void addTab(final int position, final String title, final Component component) throws IndexOutOfBoundsException

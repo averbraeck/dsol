@@ -57,9 +57,9 @@ public class Histogram implements Swingable, Serializable
 
     /**
      * constructs a new Histogram.
-     * @param title String; the title
-     * @param domain double[]; the domain
-     * @param numberofBins int; the numberofbins
+     * @param title the title
+     * @param domain the domain
+     * @param numberofBins the numberofbins
      */
     public Histogram(final String title, final double[] domain, final int numberofBins)
     {
@@ -68,10 +68,10 @@ public class Histogram implements Swingable, Serializable
 
     /**
      * constructs a new Histogram.
-     * @param title String; the title. The title of the histogram
-     * @param domain double[]; the domain of the x-axis.
-     * @param range double[]; the y-axis range of the histogram.
-     * @param numberofBins int; the numberofbins of this histogram.
+     * @param title the title. The title of the histogram
+     * @param domain the domain of the x-axis.
+     * @param range the y-axis range of the histogram.
+     * @param numberofBins the numberofbins of this histogram.
      */
     public Histogram(final String title, final double[] domain, final double[] range, final int numberofBins)
     {
@@ -91,11 +91,11 @@ public class Histogram implements Swingable, Serializable
 
     /**
      * constructs a new Histogram that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title of the plot
-     * @param domain double[]; the domain of the plot
-     * @param range double[]; the range of the plot
-     * @param numberofBins int; the number of bins in this plot
+     * @param simulator the simulator
+     * @param title the title of the plot
+     * @param domain the domain of the plot
+     * @param range the range of the plot
+     * @param numberofBins the number of bins in this plot
      */
     public Histogram(final SimulatorInterface<?> simulator, final String title, final double[] domain,
             final double[] range, final int numberofBins)
@@ -114,10 +114,10 @@ public class Histogram implements Swingable, Serializable
 
     /**
      * constructs a new Histogram that is registered in the simulator-provided jndi context.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator
-     * @param title String; the title
-     * @param domain double[]; the domain
-     * @param numberofBins int; the number of bins
+     * @param simulator the simulator
+     * @param title the title
+     * @param domain the domain
+     * @param numberofBins the number of bins
      */
     public Histogram(final SimulatorInterface<?> simulator, final String title, final double[] domain,
             final int numberofBins)
@@ -137,7 +137,7 @@ public class Histogram implements Swingable, Serializable
     /**
      * adds a counter to the histogramdataset. This histogram then subscribes its dataset to the
      * <code>Counter.COUNT_EVENT</code>.
-     * @param counter Counter; the counter to add.
+     * @param counter the counter to add.
      * @throws RemoteException on network failure
      */
     public synchronized void add(final SimCounter<?> counter) throws RemoteException
@@ -149,9 +149,9 @@ public class Histogram implements Swingable, Serializable
     /**
      * adds an eventProducer to the histogram dataset. The histogram subscribes its dataset subsequentially to the specified
      * event.
-     * @param description String; the description of the eventProducer
-     * @param source EventProducer; the eventproducer which functions as source for this histogram.
-     * @param eventType EventType; the eventType.
+     * @param description the description of the eventProducer
+     * @param source the eventproducer which functions as source for this histogram.
+     * @param eventType the eventType.
      * @throws RemoteException on network error for the (possibly remote) event listener
      */
     public synchronized void add(final String description, final EventProducer source,

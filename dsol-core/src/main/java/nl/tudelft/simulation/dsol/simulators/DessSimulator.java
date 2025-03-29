@@ -29,7 +29,7 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
 
     /**
      * Construct a DessSimulator with an initial time step for the integration process.
-     * @param initialTimeStep T; the initial time step to use in the integration.
+     * @param initialTimeStep the initial time step to use in the integration.
      * @param id the id of the simulator, used in logging and firing of events.
      * @throws SimRuntimeException when initialTimeStep &lt;=0, NaN, or Infinity
      */

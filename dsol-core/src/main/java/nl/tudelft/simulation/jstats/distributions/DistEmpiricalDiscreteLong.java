@@ -27,8 +27,8 @@ public class DistEmpiricalDiscreteLong extends DistDiscrete
 
     /**
      * constructs a new DistEmpirical distribution.
-     * @param stream StreamInterface; the stream to use
-     * @param empiricalDistribution EmpiricalDistributionInterface; the cumulative distribution to use
+     * @param stream the stream to use
+     * @param empiricalDistribution the cumulative distribution to use
      * @throws IllegalArgumentException when the empirical distribution has non-integer values
      */
     public DistEmpiricalDiscreteLong(final StreamInterface stream, final DiscreteEmpiricalDistribution empiricalDistribution)

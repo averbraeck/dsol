@@ -106,7 +106,7 @@ public final class InitialEventContext implements EventContext
      * Constructs an initial context. No environment properties are supplied. Equivalent to
      * <code>new InitialContext(null)</code>.
      * @param environment the overriding environment variables for the Factory that constructs the wrapped Context
-     * @param atomicName String; the name under which the root context will be registered
+     * @param atomicName the name under which the root context will be registered
      * @throws NamingException if a naming exception is encountered
      * @throws RemoteException if a network connection failure occurs
      */
@@ -119,7 +119,7 @@ public final class InitialEventContext implements EventContext
 
     /**
      * Constructs an initial context using the supplied environment; no overriding environment variables are provided.
-     * @param atomicName String; the name under which the root context will be registered
+     * @param atomicName the name under which the root context will be registered
      * @return a singleton instance of InitialEventContext
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
      * @throws RemoteException if a network connection failure occurs
@@ -131,9 +131,9 @@ public final class InitialEventContext implements EventContext
 
     /**
      * Constructs an initial context using the supplied environment.
-     * @param environment Hashtable&lt;?,?&gt;; environment used to create the initial context. Null indicates an empty
+     * @param environment environment used to create the initial context. Null indicates an empty
      *            environment.
-     * @param atomicName String; the name under which the root context will be registered
+     * @param atomicName the name under which the root context will be registered
      * @return a singleton instance of InitialEventContext
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
      * @throws RemoteException if a network connection failure occurs
@@ -153,9 +153,9 @@ public final class InitialEventContext implements EventContext
 
     /**
      * Initializes the initial context using the supplied environment.
-     * @param environment Hashtable&lt;?,?&gt;; environment used to create the initial context. Null indicates an empty
+     * @param environment environment used to create the initial context. Null indicates an empty
      *            environment.
-     * @param atomicName String; the name under which the root context will be registered
+     * @param atomicName the name under which the root context will be registered
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
      * @throws RemoteException if a network connection failure occurs
      */
@@ -174,7 +174,7 @@ public final class InitialEventContext implements EventContext
      * /resources/jndi.properties file, (5) the provided environment. If a property is available in a later evaluation, it takes
      * precedence over an earlier definition.
      * @param environment the final overwriting environment to use (can be null)
-     * @return Hashtable&lt;?,?&gt;; a combined Hashtable with information from system properties, jndi.properties and the
+     * @return a combined Hashtable with information from system properties, jndi.properties and the
      *         provided environment Hashtable
      */
     protected Hashtable<?, ?> buildEnvironment(final Hashtable<?, ?> environment)
@@ -245,7 +245,7 @@ public final class InitialEventContext implements EventContext
     /**
      * Retrieves the initial context by calling NamingManager.getInitialContext() and cache it in defaultInitCtx. Set
      * <code>gotDefault</code> so that we know we've tried this before.
-     * @param atomicName String; the name under which the root context will be registered
+     * @param atomicName the name under which the root context will be registered
      * @return The non-null cached initial context.
      * @throws NamingException if a naming exception was encountered
      * @throws RemoteException if a network connection failure occurs
@@ -281,7 +281,7 @@ public final class InitialEventContext implements EventContext
 
     /**
      * Return a safe copy of the used environment variables.
-     * @return Hashtable&lt;?, ?&gt;; a safe copy of the used environment variables
+     * @return a safe copy of the used environment variables
      */
     public Hashtable<?, ?> getEnvironment()
     {

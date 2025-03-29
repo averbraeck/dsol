@@ -63,7 +63,7 @@ public class SimLogger
 
     /**
      * Construct a simulator-specific logger.
-     * @param simulator SimulatorInterface&lt;?, ?, ?&gt;; the simulator to which this logger belongs
+     * @param simulator the simulator to which this logger belongs
      */
     public SimLogger(final SimulatorInterface<?> simulator)
     {
@@ -72,7 +72,7 @@ public class SimLogger
 
     /**
      * Set the formatter to include the simulator time in the log messages.
-     * @param simTimeFormatter SimTimeFormatter; the new formatter
+     * @param simTimeFormatter the new formatter
      */
     public void setSimTimeFormatter(final SimTimeFormatter simTimeFormatter)
     {
@@ -93,7 +93,7 @@ public class SimLogger
      * - {method} Method name from where the logging request is issued<br>
      * - {package} Package where the logging request is issued<br>
      * @see <a href="https://tinylog.org/configuration#format">https://tinylog.org/configuration</a>
-     * @param newMessageFormat String; the new formatting pattern to use for all registered writers
+     * @param newMessageFormat the new formatting pattern to use for all registered writers
      */
     public void setAllLogMessageFormat(final String newMessageFormat)
     {
@@ -102,7 +102,7 @@ public class SimLogger
 
     /**
      * Set a new logging level for all registered writers.
-     * @param newLevel Level; the new log level for all registered writers
+     * @param newLevel the new log level for all registered writers
      */
     public void setAllLogLevel(final Level newLevel)
     {
@@ -123,8 +123,8 @@ public class SimLogger
      * - {method} Method name from where the logging request is issued<br>
      * - {package} Package where the logging request is issued<br>
      * @see <a href="https://tinylog.org/configuration#format">https://tinylog.org/configuration</a>
-     * @param writer Writer; the writer to change the mesage format for
-     * @param newMessageFormat String; the new formatting pattern to use for all registered writers
+     * @param writer the writer to change the mesage format for
+     * @param newMessageFormat the new formatting pattern to use for all registered writers
      */
     public void setLogMessageFormat(final Writer writer, final String newMessageFormat)
     {
@@ -133,8 +133,8 @@ public class SimLogger
 
     /**
      * Set a new logging level for one of the registered writers.
-     * @param writer Writer; the writer to change the log level for
-     * @param newLevel Level; the new log level for the writer
+     * @param writer the writer to change the log level for
+     * @param newLevel the new log level for the writer
      */
     public void setLogLevel(final Writer writer, final Level newLevel)
     {
@@ -143,7 +143,7 @@ public class SimLogger
 
     /**
      * Add a category to be logged to the Writers.
-     * @param logCategory LogCategory; the LogCategory to add
+     * @param logCategory the LogCategory to add
      */
     public void addLogCategory(final LogCategory logCategory)
     {
@@ -152,7 +152,7 @@ public class SimLogger
 
     /**
      * Remove a category to be logged to the Writers.
-     * @param logCategory LogCategory; the LogCategory to remove
+     * @param logCategory the LogCategory to remove
      */
     public void removeLogCategory(final LogCategory logCategory)
     {
@@ -161,7 +161,7 @@ public class SimLogger
 
     /**
      * Set the categories to be logged to the Writers.
-     * @param newLogCategories LogCategory...; the LogCategories to set, replacing the previous ones
+     * @param newLogCategories the LogCategories to set, replacing the previous ones
      */
     public void setLogCategories(final LogCategory... newLogCategories)
     {
@@ -182,7 +182,7 @@ public class SimLogger
     /**
      * Check whether the provided category needs to be logged. Note that when LogCategory.ALL is contained in the categories,
      * filter will return true.
-     * @param logCategory LogCategory; the category to check for.
+     * @param logCategory the category to check for.
      * @return the logger that either tries to log (delegateLogger), or returns without logging (noLogger)
      */
     public DelegateLogger filter(final LogCategory logCategory)
@@ -197,7 +197,7 @@ public class SimLogger
     /**
      * Check whether the provided categories contain one or more categories that need to be logged. Note that when
      * LogCategory.ALL is contained in the categories, filter will return true.
-     * @param filterCategories LogCategory...; elements or array with the categories to check for
+     * @param filterCategories elements or array with the categories to check for
      * @return the logger that either tries to log (delegateLogger), or returns without logging (noLogger)
      */
     public DelegateLogger filter(final LogCategory... filterCategories)
@@ -215,7 +215,7 @@ public class SimLogger
     /**
      * Check whether the provided categories contain one or more categories that need to be logged. Note that when
      * LogCategory.ALL is contained in the categories, filter will return true.
-     * @param filterCategories Set&lt;LogCategory&gt;; the categories to check for
+     * @param filterCategories the categories to check for
      * @return the logger that either tries to log (delegateLogger), or returns without logging (noLogger)
      */
     public DelegateLogger filter(final Set<LogCategory> filterCategories)

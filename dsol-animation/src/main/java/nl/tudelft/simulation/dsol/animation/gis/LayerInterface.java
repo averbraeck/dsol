@@ -17,55 +17,55 @@ public interface LayerInterface extends Serializable
 {
     /**
      * Return the feature definitions for elements that belong to this Layer.
-     * @return List&lt;Feature&gt;; the feature definitions for elements that belong to this Layer
+     * @return the feature definitions for elements that belong to this Layer
      */
     List<FeatureInterface> getFeatures();
 
     /**
      * Set the feature definitions for elements that belong to this Layer. T
-     * @param features List&lt;Feature&gt;; the feature definitions for elements that belong to this Layer
+     * @param features the feature definitions for elements that belong to this Layer
      */
     void setFeatures(List<FeatureInterface> features);
 
     /**
      * Add a feature to the feature list.
-     * @param feature Feature; the feature to addd to the list of features to draw
+     * @param feature the feature to addd to the list of features to draw
      */
     void addFeature(FeatureInterface feature);
 
     /**
      * Return the layer name.
-     * @return String; layer name
+     * @return layer name
      */
     String getName();
 
     /**
      * Set the layer name.
-     * @param name String; layer name
+     * @param name layer name
      */
     void setName(String name);
 
     /**
      * Return the display status of the layer (displayed or not).
-     * @return boolean; the display status of the layer (displayed or not)
+     * @return the display status of the layer (displayed or not)
      */
     boolean isDisplay();
 
     /**
      * Set the display status of the layer (displayed or not).
-     * @param status boolean; the display status of the layer (displayed or not)
+     * @param status the display status of the layer (displayed or not)
      */
     void setDisplay(boolean status);
 
     /**
      * Return the status for the transformation: should the transform be used for this layer or not?
-     * @return boolean; the status for the transformation: should the transform be used for this layer or not?
+     * @return the status for the transformation: should the transform be used for this layer or not?
      */
     boolean isTransform();
 
     /**
      * Set the status for the transformation: should the transform be used for this layer or not?
-     * @param transform boolean; the status for the transformation: should the transform be used for this layer or not?
+     * @param transform the status for the transformation: should the transform be used for this layer or not?
      */
     void setTransform(boolean transform);
 }

@@ -97,7 +97,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
     /**
      * Create the ContextEventProducerImpl and link to the parent class.
-     * @param parent EventContext; the EventContext for which we do the work
+     * @param parent the EventContext for which we do the work
      * @throws RemoteException on network error
      */
     public ContextEventProducerImpl(final EventContext parent) throws RemoteException
@@ -168,8 +168,8 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * Make a key consisting of the full path of the subcontext (without the trailing slash) or object in the context tree,
      * followed by a hash code (#) and the context scope string (OBJECT_SCOPE, LEVEL_SCOPE, LEVEL_OBJECT_SCOPE, or
      * SUBTREE_SCOPE).
-     * @param absolutePath String; the path for which the key has to be made. The path can point to an object or a subcontext
-     * @param contextScope ContextScope; the scope for which the key has to be made
+     * @param absolutePath the path for which the key has to be made. The path can point to an object or a subcontext
+     * @param contextScope the scope for which the key has to be made
      * @return a concatenation of the path, a hash (#) and the context scope
      */
     protected String makeRegistryKey(final String absolutePath, final ContextScope contextScope)
@@ -202,8 +202,8 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * "/simulation1/sub1", including the "/simulation1/sub1" context itself. In that case, the regular expression is
      * "/simulation1/sub1(/.*)?". The context "sub1" itself is also included, with or without a forward slash at the end.</li>
      * </ul>
-     * @param absolutePath String; the path for which the key has to be made. The path can point to an object or a subcontext
-     * @param contextScope ContextScope; the scope for which the key has to be made
+     * @param absolutePath the path for which the key has to be made. The path can point to an object or a subcontext
+     * @param contextScope the scope for which the key has to be made
      * @return a concatenation of the path, a hash (#) and the context scope
      */
     protected String makeRegex(final String absolutePath, final ContextScope contextScope)
@@ -235,9 +235,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
     /**
      * Add a listener for the provided scope as strong reference to the BEGINNING of a queue of listeners.
-     * @param listener EventListener; the listener which is interested at events of eventType.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener the listener which is interested at events of eventType.
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
      * @return the success of adding the listener. If a listener was already added false is returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
@@ -258,11 +258,11 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
     /**
      * Add a listener for the provided scope to the BEGINNING of a queue of listeners.
-     * @param listener EventListener; the listener which is interested at events of eventType.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener the listener which is interested at events of eventType.
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
-     * @param referenceType ReferenceType; whether the listener is added as a strong or as a weak reference.
+     * @param referenceType whether the listener is added as a strong or as a weak reference.
      * @return the success of adding the listener. If a listener was already added false is returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
      *             context does not exist
@@ -282,11 +282,11 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
     /**
      * Add a listener for the provided scope as strong reference to the specified position of a queue of listeners.
-     * @param listener EventListener; the listener which is interested at events of eventType.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener the listener which is interested at events of eventType.
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
-     * @param position int; the position of the listener in the queue.
+     * @param position the position of the listener in the queue.
      * @return the success of adding the listener. If a listener was already added, or an illegal position is provided false is
      *         returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
@@ -307,12 +307,12 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
     /**
      * Add a listener for the provided scope to the specified position of a queue of listeners.
-     * @param listener EventListener; which is interested at certain events,
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener which is interested at certain events,
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
-     * @param position int; the position of the listener in the queue
-     * @param referenceType ReferenceType; whether the listener is added as a strong or as a weak reference.
+     * @param position the position of the listener in the queue
+     * @param referenceType whether the listener is added as a strong or as a weak reference.
      * @return the success of adding the listener. If a listener was already added or an illegal position is provided false is
      *         returned.
      * @throws InvalidNameException when the path does not start with a slash
@@ -341,8 +341,8 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
     /**
      * Remove the subscription of a listener for the provided scope for a specific event.
-     * @param listener EventListener; which is no longer interested.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
+     * @param listener which is no longer interested.
+     * @param absolutePath the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope;the scope which is of no interest any more.
      * @return the success of removing the listener. If a listener was not subscribed false is returned.
      * @throws InvalidNameException when the path does not start with a slash
@@ -389,8 +389,8 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
         /**
          * Construct a pattern - listener pair.
-         * @param pattern Pattern; the compiled pattern
-         * @param listener EventListener; the registered listener for this pattern
+         * @param pattern the compiled pattern
+         * @param listener the registered listener for this pattern
          */
         public PatternListener(final Pattern pattern, final EventListener listener)
         {
@@ -401,7 +401,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
         /**
          * return the compiled pattern.
-         * @return Pattern; the compiled pattern
+         * @return the compiled pattern
          */
         public Pattern getPattern()
         {
@@ -410,7 +410,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
 
         /**
          * Return the registered listener for this pattern.
-         * @return EventListener; the registered listener for this pattern
+         * @return the registered listener for this pattern
          */
         public EventListener getListener()
         {

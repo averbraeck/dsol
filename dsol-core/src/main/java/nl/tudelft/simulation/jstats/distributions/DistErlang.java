@@ -47,10 +47,10 @@ public class DistErlang extends DistContinuous
      * Construct a new Erlang distribution with k and a mean (so not k and a rate) as parameters. It is the distribution of a
      * sum of k independent exponential variables with the scale parameter as the mean. The scale parameter is equal to 1/rate
      * or 1/&lambda;, giving the entire Erlang distribution a mean of k*scale.
-     * @param stream StreamInterface; the random number stream
-     * @param scale double; the mean of a single sample from the exponential distribution, of which k are summed. Equal to
+     * @param stream the random number stream
+     * @param scale the mean of a single sample from the exponential distribution, of which k are summed. Equal to
      *            1/rate or 1/&lambda;.
-     * @param k int; the shape parameter of the Erlang distribution. The shape k is the number of times a drawing is done from
+     * @param k the shape parameter of the Erlang distribution. The shape k is the number of times a drawing is done from
      *            the exponential distribution, where the Erlang distribution is the sum of these k independent exponential
      *            variables.
      * @throws IllegalArgumentException when k &lt;= 0 or scale &lt;= 0

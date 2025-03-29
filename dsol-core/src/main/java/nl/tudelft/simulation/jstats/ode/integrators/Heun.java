@@ -20,8 +20,8 @@ public class Heun extends NumericalIntegrator
 
     /**
      * constructs a new Heun.
-     * @param stepSize double; the stepSize
-     * @param equation DifferentialEquationInterface; the equation
+     * @param stepSize the stepSize
+     * @param equation the equation
      */
     public Heun(final double stepSize, final DifferentialEquationInterface equation)
     {

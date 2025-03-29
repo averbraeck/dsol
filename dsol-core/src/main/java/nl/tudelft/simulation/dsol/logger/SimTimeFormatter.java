@@ -16,14 +16,14 @@ public interface SimTimeFormatter
 {
     /**
      * Format the message to include the simulation time.
-     * @param message String; the message to format
+     * @param message the message to format
      * @return the formatted message.
      */
     String format(String message);
 
     /**
      * Set the simulator used (can be null).
-     * @param simulator SimulatorInterface&lt;?,?,?&gt;; set the simulator
+     * @param simulator set the simulator
      */
     void setSimulator(SimulatorInterface<?> simulator);
 }

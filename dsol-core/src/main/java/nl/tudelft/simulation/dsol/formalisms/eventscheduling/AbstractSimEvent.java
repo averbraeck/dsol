@@ -41,7 +41,7 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
 
     /**
      * The constructor of the event stores the time the event must be executed and the object and method to invoke.
-     * @param executionTime T; reflects the time the event has to be executed.
+     * @param executionTime reflects the time the event has to be executed.
      */
     public AbstractSimEvent(final T executionTime)
     {
@@ -50,8 +50,8 @@ public abstract class AbstractSimEvent<T extends Number & Comparable<T>>
 
     /**
      * The constructor of the event stores the time the event must be executed and the object and method to invoke.
-     * @param executionTime T; reflects the time the event has to be executed.
-     * @param priority short; reflects the priority of the event
+     * @param executionTime reflects the time the event has to be executed.
+     * @param priority reflects the priority of the event
      */
     public AbstractSimEvent(final T executionTime, final short priority)
     {

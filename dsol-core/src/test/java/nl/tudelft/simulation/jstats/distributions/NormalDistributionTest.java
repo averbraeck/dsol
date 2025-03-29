@@ -47,13 +47,13 @@ public class NormalDistributionTest
     }
 
     /**
-     * @param name String; the name of the distribution to test
-     * @param dist DistContinuous; the distribution to test
-     * @param expectedMean double; the expected mean of a large number of samples
-     * @param expectedVariance double; the expected variance of a large number of samples; test the standard deviations
-     * @param expectedMin double; the expected lowest value of a large number of samples, or NaN if unbounded
-     * @param expectedMax double; the expected highest value of a large number of samples, or NaN if unbounded
-     * @param precision double; the precision for mean, standard deviation, min and max
+     * @param name the name of the distribution to test
+     * @param dist the distribution to test
+     * @param expectedMean the expected mean of a large number of samples
+     * @param expectedVariance the expected variance of a large number of samples; test the standard deviations
+     * @param expectedMin the expected lowest value of a large number of samples, or NaN if unbounded
+     * @param expectedMax the expected highest value of a large number of samples, or NaN if unbounded
+     * @param precision the precision for mean, standard deviation, min and max
      */
     @SuppressWarnings("checkstyle:parameternumber")
     private void testDist(final String name, final DistContinuous dist, final double expectedMean,
@@ -446,8 +446,8 @@ public class NormalDistributionTest
 
     /**
      * phi function is the pdf for the standard normal distribution.
-     * @param xi double; value to calculate the pdf for
-     * @return double; phi(xi)
+     * @param xi value to calculate the pdf for
+     * @return phi(xi)
      */
     private static double phi(final double xi)
     {
@@ -456,8 +456,8 @@ public class NormalDistributionTest
 
     /**
      * PHI function is the CDF for the standard normal distribution.
-     * @param x double; value to calculate the CDF for
-     * @return double; PHI(x)
+     * @param x value to calculate the CDF for
+     * @return PHI(x)
      */
     @SuppressWarnings("checkstyle:methodname")
     private static double PHI(final double x)
@@ -471,7 +471,7 @@ public class NormalDistributionTest
 
     /**
      * Calculate fac(n) = n * (n-1) * (n-2) * ... 1, where fac(0) = 1.
-     * @param n int; param
+     * @param n param
      * @return n!
      */
     private static long fac(final int n)
@@ -482,9 +482,9 @@ public class NormalDistributionTest
     /**
      * Calculate probability density of LogNormal(mu, sigma) for value x. From:
      * https://en.wikipedia.org/wiki/Log-normal_distribution.
-     * @param mu double; shape parameter
-     * @param sigma double; scale parameter
-     * @param x double; value
+     * @param mu shape parameter
+     * @param sigma scale parameter
+     * @param x value
      * @return probability density of DistBeta(a, b) for value x
      */
     private static double lnpdf(final double mu, final double sigma, final double x)
@@ -495,7 +495,7 @@ public class NormalDistributionTest
 
     /**
      * @param x double
-     * @return 1 is even; -1 if not even
+     * @return -1 if not even
      */
     private static int even(final int x)
     {
@@ -504,7 +504,7 @@ public class NormalDistributionTest
 
     /**
      * Approximates erf(z).
-     * @param z double; the value to calculate erf for
+     * @param z the value to calculate erf for
      * @return erf(z)
      */
     private static double erf(final double z)
@@ -530,9 +530,9 @@ public class NormalDistributionTest
     /**
      * Calculate cumulative probability density of LogNormal(mu, sigma) for value x. From:
      * https://en.wikipedia.org/wiki/Log-normal_distribution.
-     * @param mu double; shape parameter
-     * @param sigma double; scale parameter
-     * @param x double; value
+     * @param mu shape parameter
+     * @param sigma scale parameter
+     * @param x value
      * @return probability density of DistBeta(a, b) for value x
      */
     private static double lncdf(final double mu, final double sigma, final double x)
@@ -542,9 +542,9 @@ public class NormalDistributionTest
 
     /**
      * Calculate probability density of Normal(mu, sigma) for value x. From: https://en.wikipedia.org/wiki/Normal_distribution.
-     * @param mu double; shape parameter
-     * @param sigma double; scale parameter
-     * @param x double; value
+     * @param mu shape parameter
+     * @param sigma scale parameter
+     * @param x value
      * @return probability density of DistBeta(a, b) for value x
      */
     private static double normpdf(final double mu, final double sigma, final double x)
@@ -555,9 +555,9 @@ public class NormalDistributionTest
     /**
      * Calculate cumulative probability density of Normal(mu, sigma) for value x. From:
      * https://en.wikipedia.org/wiki/Normal_distribution.
-     * @param mu double; shape parameter
-     * @param sigma double; scale parameter
-     * @param x double; value
+     * @param mu shape parameter
+     * @param sigma scale parameter
+     * @param x value
      * @return probability density of DistBeta(a, b) for value x
      */
     private static double normcdf(final double mu, final double sigma, final double x)

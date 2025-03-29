@@ -43,8 +43,8 @@ public class DiscreteBall extends Ball
 
     /**
      * constructs a new Ball.
-     * @param nr int; the ball number
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
+     * @param nr the ball number
+     * @param simulator the simulator
      * @throws RemoteException on remote failure
      * @throws SimRuntimeException on schedule failure
      */

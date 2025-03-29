@@ -41,7 +41,7 @@ public abstract class AbstractFlowModel<T extends Number & Comparable<T>, S exte
 
     /**
      * Construct a DSOL model and set the simulator.
-     * @param simulator S; the simulator to use for this model
+     * @param simulator the simulator to use for this model
      * @param blockNamingType the naming regime: BY_ID or AUTOMATIC
      * @throws NullPointerException when simulator or blockNamingType is null
      */
@@ -55,8 +55,8 @@ public abstract class AbstractFlowModel<T extends Number & Comparable<T>, S exte
     /**
      * Construct a DSOL model and set the simulator as well as the initial streams, so they can be used in the constructor of
      * the model.
-     * @param simulator S; the simulator to use for this model
-     * @param streamInformation StreamInformation; the streams that have been prepared in a StreamInformation class
+     * @param simulator the simulator to use for this model
+     * @param streamInformation the streams that have been prepared in a StreamInformation class
      * @param blockNamingType the naming regime: BY_ID or AUTOMATIC
      * @throws NullPointerException when simulator or streamInformation or blockNamingType is null
      */

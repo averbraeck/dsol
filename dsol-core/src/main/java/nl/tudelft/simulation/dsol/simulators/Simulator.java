@@ -364,7 +364,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     /**
      * Handle an exception thrown by executing a SimEvent according to the ErrorStrategy. A call to this method needs to be
      * built into the run() method of every Simulator subclass.
-     * @param exception Exception; the exception that was thrown when executing the SimEvent
+     * @param exception the exception that was thrown when executing the SimEvent
      */
     protected void handleSimulationException(final Exception exception)
     {
@@ -472,7 +472,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
     /**
      * writes a serializable method to stream.
-     * @param out ObjectOutputStream; the outputstream
+     * @param out the outputstream
      * @throws IOException on IOException
      */
     private synchronized void writeObject(final ObjectOutputStream out) throws IOException
@@ -519,8 +519,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
 
         /**
          * constructs a new SimulatorRunThread.
-         * @param name String; the name of the thread
-         * @param job Runnable; the job to run
+         * @param name the name of the thread
+         * @param job the job to run
          */
         protected SimulatorWorkerThread(final String name, final Simulator<?> job)
         {

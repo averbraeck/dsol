@@ -20,8 +20,8 @@ public class DistContinuousMass extends DistContinuousUnit<MassUnit, Mass>
 
     /**
      * Constructs a new continuous distribution that draws Mass scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit MassUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousMass(final DistContinuous wrappedDistribution, final MassUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousMass extends DistContinuousUnit<MassUnit, Mass>
 
     /**
      * Constructs a new continuous distribution that draws Mass scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousMass(final DistContinuous wrappedDistribution)
     {

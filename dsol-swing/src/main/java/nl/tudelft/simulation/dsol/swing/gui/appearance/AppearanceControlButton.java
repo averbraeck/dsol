@@ -19,7 +19,7 @@ public class AppearanceControlButton extends JButton implements AppearanceContro
     private static final long serialVersionUID = 20180207L;
 
     /**
-     * @param loadIcon Icon; icon
+     * @param loadIcon icon
      */
     public AppearanceControlButton(final Icon loadIcon)
     {

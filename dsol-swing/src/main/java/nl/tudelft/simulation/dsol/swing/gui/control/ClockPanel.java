@@ -55,7 +55,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
     /**
      * Construct a clock panel.
-     * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+     * @param simulator the simulator
      */
     public ClockPanel(final SimulatorInterface<T> simulator)
     {
@@ -147,7 +147,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
     /**
      * Set the new simulation time to be used in the next calculation for the speed.
-     * @param prevSimTime T; the new simulation time to be used in the next calculation for the speed
+     * @param prevSimTime the new simulation time to be used in the next calculation for the speed
      */
     protected void setPrevSimTime(final T prevSimTime)
     {
@@ -156,7 +156,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
     /**
      * Returns the formatted simulation time.
-     * @param simulationTime T; simulation time
+     * @param simulationTime simulation time
      * @return formatted simulation time
      */
     protected abstract String formatSimulationTime(T simulationTime);
@@ -190,7 +190,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
         /**
          * Construct a clock panel with a double time.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeDouble(final SimulatorInterface<Double> simulator)
         {
@@ -222,7 +222,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
         /**
          * Construct a clock panel with a float time.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeFloat(final SimulatorInterface<Float> simulator)
         {
@@ -254,7 +254,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
         /**
          * Construct a clock panel with a long time.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeLong(final SimulatorInterface<Long> simulator)
         {
@@ -286,7 +286,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
         /**
          * Construct a clock panel with a double time with a unit.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeDoubleUnit(final SimulatorInterface<Duration> simulator)
         {
@@ -318,7 +318,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
         /**
          * Construct a clock panel with a float time with a unit.
-         * @param simulator SimulatorInterface&lt;T&gt;; the simulator
+         * @param simulator the simulator
          */
         public TimeFloatUnit(final SimulatorInterface<FloatDuration> simulator)
         {

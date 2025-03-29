@@ -47,7 +47,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Construct a panel for an interactive simulation model.
-     * @param controlPanel AbstractControlPanel&lt;?, ?&gt;; the control panel to use (especially with relation to time
+     * @param controlPanel the control panel to use (especially with relation to time
      *            control)
      * @throws RemoteException when communications to a remote machine fails
      */
@@ -67,8 +67,8 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Add a tab to the DsolPanel as the last tab.
-     * @param tabTitle String; the title of the tab
-     * @param component Component; the swing component to add as this tab
+     * @param tabTitle the title of the tab
+     * @param component the swing component to add as this tab
      */
     public void addTab(final String tabTitle, final Component component)
     {
@@ -77,9 +77,9 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Add a tab to the DsolPanel at a given position.
-     * @param position int; the position to insert the tab at (0 is first)
-     * @param tabTitle String; the title of the tab
-     * @param component Component; the swing component to add as this tab
+     * @param position the position to insert the tab at (0 is first)
+     * @param tabTitle the title of the tab
+     * @param component the swing component to add as this tab
      * @throws IndexOutOfBoundsException when position is less than zero or larger than the number of tabs
      */
     public void addTab(final int position, final String tabTitle, final Component component)
@@ -89,7 +89,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Adds a console tab for the Logger.
-     * @param logLevel Level the logLevel to use;
+     * @param logLevel 
      */
     public void addConsoleLogger(final Level logLevel)
     {
@@ -130,7 +130,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Return the control panel of this SimulationPanel.
-     * @return ControlPanel; the control panel
+     * @return the control panel
      */
     public AbstractControlPanel<?, ?> getControlPanel()
     {
@@ -187,7 +187,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
         private static final long serialVersionUID = 20180206L;
 
         /**
-         * @param tabPlacement int; tabPlacement
+         * @param tabPlacement tabPlacement
          */
         AppearanceControlTabbedContentPane(final int tabPlacement)
         {

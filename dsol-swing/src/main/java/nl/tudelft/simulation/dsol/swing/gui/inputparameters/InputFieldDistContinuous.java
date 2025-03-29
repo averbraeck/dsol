@@ -51,8 +51,8 @@ public class InputFieldDistContinuous extends AbstractInputField implements Item
 
     /**
      * Create a string field on the screen.
-     * @param panel JPanel; panel to add the field to
-     * @param parameter InputParameterDistContinuousSelection; the parameter
+     * @param panel panel to add the field to
+     * @param parameter the parameter
      */
     public InputFieldDistContinuous(final JPanel panel, final InputParameterDistContinuousSelection parameter)
     {

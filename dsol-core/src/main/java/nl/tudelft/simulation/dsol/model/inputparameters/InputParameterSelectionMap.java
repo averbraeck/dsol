@@ -29,12 +29,12 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
 
     /**
      * Construct a new InputParameterSelectionMap.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterSelectionMap
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param options SortedMap&lt;K,T&gt;; the list of selection options
-     * @param defaultValue T; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterSelectionMap
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param options the list of selection options
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      * @throws InputParameterException in case the default value is not part of the list
@@ -67,7 +67,7 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
 
     /**
      * Return the index of the current value.
-     * @return K; the key in the options belonging to the current value, or null if the list does not contain the value
+     * @return the key in the options belonging to the current value, or null if the list does not contain the value
      */
     public K getKeyforValue()
     {
@@ -76,8 +76,8 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
 
     /**
      * Return the index of the given value in the options.
-     * @param value T; the value to calculate the index for
-     * @return K; the key in the options belonging to the given value, or null if the list does not contain the value
+     * @param value the value to calculate the index for
+     * @return the key in the options belonging to the given value, or null if the list does not contain the value
      */
     public K getKeyforValue(final T value)
     {
@@ -93,7 +93,7 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
 
     /**
      * Set a new value by providing one of the map value options.
-     * @param newValue T; the new value (must be one of the map value options)
+     * @param newValue the new value (must be one of the map value options)
      * @throws InputParameterException when the new value is not part of selectionMap options, or when the map is read-only
      */
     public void setMapValue(final T newValue) throws InputParameterException
@@ -107,7 +107,7 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
 
     /**
      * Change the value of the input parameter, as an object when the generics are not known (e.g., in a user interface).
-     * @param objectValue Object; the new value for the input parameter
+     * @param objectValue the new value for the input parameter
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
     public void setObjectValue(final Object objectValue) throws InputParameterException
@@ -123,7 +123,7 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
 
     /**
      * Return the index of the given value in the options.
-     * @param key K; the index of the new value
+     * @param key the index of the new value
      * @throws InputParameterException when index out of bounds
      */
     public void setKeyforValue(final K key) throws InputParameterException

@@ -40,7 +40,7 @@ public class Java2Random extends Random implements StreamInterface
 
     /**
      * Create a new Java2Random and initialize with a given seed.
-     * @param seed long; the seed to use.
+     * @param seed the seed to use.
      */
     public Java2Random(final long seed)
     {

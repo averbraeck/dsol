@@ -24,8 +24,8 @@ public class InternalCoupling<T extends Number & Comparable<T>, P>
 
     /**
      * Make the wiring between output and input.
-     * @param fromPort OutputPortInterface&lt;T,P&gt;; the output port of the sending component
-     * @param toPort InputPortInterface&lt;T,P&gt;; input port of the receiving component
+     * @param fromPort the output port of the sending component
+     * @param toPort input port of the receiving component
      * @throws Exception in case of wiring to self
      */
     public InternalCoupling(final OutputPortInterface<T, P> fromPort, final InputPortInterface<T, P> toPort) throws Exception

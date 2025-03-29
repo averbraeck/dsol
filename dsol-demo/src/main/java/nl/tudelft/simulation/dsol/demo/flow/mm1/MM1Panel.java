@@ -31,8 +31,8 @@ public class MM1Panel extends DsolPanel
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param controlPanel DevsControlPanel; the control panel
-     * @param model MM1Model; the model
+     * @param controlPanel the control panel
+     * @param model the model
      * @throws DsolException on error
      * @throws RemoteException on error
      */
@@ -46,7 +46,7 @@ public class MM1Panel extends DsolPanel
 
     /**
      * add a number of charts for the demo.
-     * @param model MM1Model; the model from which to take the statistics
+     * @param model the model from which to take the statistics
      */
     public void addTabs(final MM1Model model)
     {

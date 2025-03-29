@@ -22,11 +22,11 @@ public class InputParameterUnit<U extends Unit<U>> extends InputParameterSelecti
 
     /**
      * Construct a new InputParameterUnit.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterUnit
-     * @param shortName String; concise description of the input parameter
-     * @param description String; double description of the input parameter (may use HTML markup)
-     * @param defaultValue U; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterUnit
+     * @param shortName concise description of the input parameter
+     * @param description double description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      * @throws InputParameterException when unit for the default value cannot be found in the unit definition
@@ -39,7 +39,7 @@ public class InputParameterUnit<U extends Unit<U>> extends InputParameterSelecti
 
     /**
      * Make the map of allowed units based on the default value given.
-     * @param defaultUnit U; the unit to derive the alternatives for
+     * @param defaultUnit the unit to derive the alternatives for
      * @return a map of options for this unit
      * @throws InputParameterException when unit for the default value cannot be found in the unit definition
      * @param <U> the unit type

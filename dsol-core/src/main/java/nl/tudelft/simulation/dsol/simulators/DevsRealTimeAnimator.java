@@ -67,7 +67,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
      * parameter. When the DevsRealTimeClock works with djunits Time or Duration, and the simulation is scaled to milliseconds,
      * the simulatorTimeForWallClockMillis of a millisecond is a Duration of 1 millisecond. When 1 simulated time unit stands
      * for a second, the simulatorTimeForWallClockMillis is 0.001.
-     * @param wallMilliseconds double; the number of milliseconds to calculate the corresponding simulation time for
+     * @param wallMilliseconds the number of milliseconds to calculate the corresponding simulation time for
      * @return the relative time step.
      */
     protected abstract T simulatorTimeForWallClockMillis(final double wallMilliseconds);
@@ -326,7 +326,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
 
     /**
      * Indicate whether we support animation or not.
-     * @param animation boolean; whether we support animation or not
+     * @param animation whether we support animation or not
      */
     public void setAnimation(final boolean animation)
     {
@@ -357,7 +357,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     }
 
     /**
-     * @return animation boolean; whether we support animation or not
+     * @return whether we support animation or not
      */
     public boolean isAnimation()
     {
@@ -374,8 +374,8 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
 
     /**
      * Set the speedFactor, and send a CHANGE_SPEED_FACTOR event.
-     * @param newSpeedFactor double; the new speed factor to set
-     * @param fireChangeSpeedFactorEvent boolean; whether to fire a CHANGE_SPEED_FACTOR event or not
+     * @param newSpeedFactor the new speed factor to set
+     * @param fireChangeSpeedFactorEvent whether to fire a CHANGE_SPEED_FACTOR event or not
      */
     public void setSpeedFactor(final double newSpeedFactor, final boolean fireChangeSpeedFactorEvent)
     {
@@ -388,7 +388,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
 
     /**
      * Set the speedFactor, and send a CHANGE_SPEED_FACTOR event.
-     * @param newSpeedFactor double; set speedFactor
+     * @param newSpeedFactor set speedFactor
      */
     public void setSpeedFactor(final double newSpeedFactor)
     {
@@ -404,7 +404,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     }
 
     /**
-     * @param catchup boolean; set catchup
+     * @param catchup set catchup
      */
     public void setCatchup(final boolean catchup)
     {
@@ -428,7 +428,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
      * events. When this is too course, set e.g. to 1, which means that the clock will be updated with 1 kHz between events. The
      * latter can be important in real time simulations. Note that the housekeeping of the simulation clock takes time as well,
      * so 1 kHz can be too fine grained in some situations.
-     * @param updateMsec int; set the relative update delay in milliseconds
+     * @param updateMsec set the relative update delay in milliseconds
      */
     public void setUpdateMsec(final int updateMsec)
     {
@@ -454,7 +454,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         /**
          * Construct a DevsRealTimeClock&lt;Double&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
-         * @param msecWallClockToSimTimeUnit double; the translation between a millisecond on the clock and '1.0' in the
+         * @param msecWallClockToSimTimeUnit the translation between a millisecond on the clock and '1.0' in the
          *            simulation time.
          */
         public TimeDouble(final Serializable id, final double msecWallClockToSimTimeUnit)

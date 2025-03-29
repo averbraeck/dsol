@@ -20,8 +20,8 @@ public class DistContinuousPosition extends DistContinuousUnit<PositionUnit, Pos
 
     /**
      * Constructs a new continuous distribution that draws Position scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit PositionUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousPosition(final DistContinuous wrappedDistribution, final PositionUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousPosition extends DistContinuousUnit<PositionUnit, Pos
 
     /**
      * Constructs a new continuous distribution that draws Position scalars in BASE units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousPosition(final DistContinuous wrappedDistribution)
     {

@@ -33,10 +33,10 @@ public class DistTriangular extends DistContinuous
 
     /**
      * constructs a new triangular distribution with a minimum, mode, and maximum.
-     * @param stream StreamInterface; the random number stream
-     * @param min double; the minimum
-     * @param mode double; the mode
-     * @param max double; the maximum
+     * @param stream the random number stream
+     * @param min the minimum
+     * @param mode the mode
+     * @param max the maximum
      * @throws IllegalArgumentException when mode &lt; min or mode &gt; max or min == max
      */
     public DistTriangular(final StreamInterface stream, final double min, final double mode, final double max)
@@ -76,7 +76,7 @@ public class DistTriangular extends DistContinuous
 
     /**
      * Return the minimum value of the distribution.
-     * @return double; the minimum value of the distribution
+     * @return the minimum value of the distribution
      */
     public double getMin()
     {
@@ -85,7 +85,7 @@ public class DistTriangular extends DistContinuous
 
     /**
      * Return the mode of the distribution.
-     * @return double; the mode of the distribution
+     * @return the mode of the distribution
      */
     public double getMode()
     {
@@ -94,7 +94,7 @@ public class DistTriangular extends DistContinuous
 
     /**
      * Return the maximum value of the distribution.
-     * @return double; the maximum value of the distribution.
+     * @return the maximum value of the distribution.
      */
     public double getMax()
     {

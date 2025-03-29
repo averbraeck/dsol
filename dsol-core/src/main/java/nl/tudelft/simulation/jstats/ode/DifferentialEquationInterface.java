@@ -15,22 +15,22 @@ public interface DifferentialEquationInterface
 {
     /**
      * initializes the differential equation.
-     * @param x0 double; the initial x-value
-     * @param y0 double[]; the initial y-value array
+     * @param x0 the initial x-value
+     * @param y0 the initial y-value array
      */
     void initialize(double x0, double[] y0);
 
     /**
      * returns y as a function of x.
-     * @param x double; the x-value
+     * @param x the x-value
      * @return y
      */
     double[] y(double x);
 
     /**
      * returns dy as a function of x,y.
-     * @param x double; the x-value
-     * @param y double[]; the y-value
+     * @param x the x-value
+     * @param y the y-value
      * @return dy/dx as a function of x,y
      */
     double[] dy(double x, double[] y);

@@ -30,7 +30,7 @@ public class PanRightAction extends AbstractAction
 
     /**
      * constructs a new PanRight.
-     * @param panel GridPanel; the target
+     * @param panel the target
      */
     public PanRightAction(final VisualizationPanel panel)
     {

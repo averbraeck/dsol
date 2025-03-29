@@ -25,8 +25,8 @@ public class DsolGisException extends Exception
 
     /**
      * Constructs a new DsolGisException.
-     * @param message String; the message to display
-     * @param cause Throwable; the underlying exception
+     * @param message the message to display
+     * @param cause the underlying exception
      */
     public DsolGisException(final String message, final Throwable cause)
     {
@@ -35,7 +35,7 @@ public class DsolGisException extends Exception
 
     /**
      * Constructs a new DsolGisException.
-     * @param message String; the message to display
+     * @param message the message to display
      */
     public DsolGisException(final String message)
     {
@@ -44,7 +44,7 @@ public class DsolGisException extends Exception
 
     /**
      * Constructs a new DsolGisException.
-     * @param cause Throwable; the underlying exception
+     * @param cause the underlying exception
      */
     public DsolGisException(final Throwable cause)
     {

@@ -35,12 +35,12 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
 
     /**
      * Construct a replication to be used in an experiment.
-     * @param id String; the id of the replication; should be unique within the experiment.
-     * @param startTime T; the start time of the simulation.
-     * @param warmupPeriod T; the warmup period, included in the runlength (!)
-     * @param runLength T; the total length of the run, including the warm-up period
-     * @param experiment Experiment; the experiment to which this replication belongs
-     * @param replicationNr int; the replication number within the experiment
+     * @param id the id of the replication; should be unique within the experiment.
+     * @param startTime the start time of the simulation.
+     * @param warmupPeriod the warmup period, included in the runlength (!)
+     * @param runLength the total length of the run, including the warm-up period
+     * @param experiment the experiment to which this replication belongs
+     * @param replicationNr the replication number within the experiment
      * @throws NullPointerException when id, startTime, warmupPeriod, runLength or experiment is null
      * @throws IllegalArgumentException when warmup period is negative, or run length is zero or negative, or when the warmup
      *             time is longer than or equal to the runlength, or when a context for the replication cannot be created
@@ -53,9 +53,9 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
 
     /**
      * Construct a replication to be used in an experiment, using a RunControl to store the run information.
-     * @param runControl RunControlInterface; the run control for the replication
-     * @param experiment Experiment; the experiment to which this replication belongs
-     * @param replicationNr int; the replication number within the experiment
+     * @param runControl the run control for the replication
+     * @param experiment the experiment to which this replication belongs
+     * @param replicationNr the replication number within the experiment
      * @throws NullPointerException when runControl or experiment is null
      */
     public ExperimentReplication(final RunControl<T> runControl, final Experiment<T, S> experiment, final int replicationNr)
@@ -113,7 +113,7 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
 
     /**
      * Return the experiment to which this replication belongs.
-     * @return experiment Experiment; experiment to which this replication belongs.
+     * @return experiment to which this replication belongs.
      */
     public Experiment<T, S> getExperiment()
     {
@@ -122,7 +122,7 @@ public class ExperimentReplication<T extends Number & Comparable<T>, S extends S
 
     /**
      * Return the replication number within the experiment.
-     * @return replicationNr int; the replication number within the experiment
+     * @return the replication number within the experiment
      */
     public int getReplicationNr()
     {

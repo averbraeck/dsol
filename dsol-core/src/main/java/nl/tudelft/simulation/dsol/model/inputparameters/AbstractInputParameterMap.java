@@ -24,10 +24,10 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
 
     /**
      * Construct a new AbstractInputParameterMap.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterMap
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterMap
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -40,7 +40,7 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
 
     /**
      * Add an input parameter to this map of input parameters.
-     * @param inputParameter AbstractInputParameter&lt;?,?&gt;; the input parameter to add
+     * @param inputParameter the input parameter to add
      * @throws InputParameterException in case an input parameter with the same key already exists
      */
     public void add(final AbstractInputParameter<?, ?> inputParameter) throws InputParameterException
@@ -58,7 +58,7 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
      * Removes an input parameter from this map of input parameters. The input parameter can point to deeper maps using the
      * dot-notation. E.g., when an InputParameterMap exists in this map with name 'server1', and the server1 map has an input
      * parameter called 'iat', we can remove iat by calling remove("server1.iat");
-     * @param key String; the key of the input parameter to remove
+     * @param key the key of the input parameter to remove
      * @throws InputParameterException in case the input parameter with this key does not exist
      */
     public void remove(final String key) throws InputParameterException
@@ -86,7 +86,7 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
      * Gets an input parameter from this map of input parameters. The input parameter can point to deeper maps using the
      * dot-notation. E.g., when an InputParameterMap exists in this map with name 'server1', and the server1 map has an input
      * parameter called 'iat', we can get the InputParameter iat by calling get("server1.iat");
-     * @param key String; the key of the input parameter to retrieve
+     * @param key the key of the input parameter to retrieve
      * @return the input parameter belonging to the key
      * @throws InputParameterException in case the input parameter with this key does not exist
      */
@@ -136,7 +136,7 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
 
     /**
      * Return a sorted set of sub-parameters of this InputParameterMap.
-     * @return SortedSet&lt;InputParameter&lt;?&gt;&gt;; a sorted set of sub-parameters of this InputParameterMap
+     * @return a sorted set of sub-parameters of this InputParameterMap
      */
     public SortedSet<InputParameter<?, ?>> getSortedSet()
     {
@@ -147,9 +147,9 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
 
     /**
      * Return a formatted human readable list of keys and values, indented with spaces corresponding to the depth.
-     * @param map AbstractInputParameterMap&lt;?&gt;; the map to display
-     * @param depth int; the depth of the tree
-     * @return String; a formatted human readable list of keys and values, indented by depth
+     * @param map the map to display
+     * @param depth the depth of the tree
+     * @return a formatted human readable list of keys and values, indented by depth
      */
     protected String printValues(final AbstractInputParameterMap<?> map, final int depth)
     {
@@ -191,7 +191,7 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
 
     /**
      * Return a formatted human readable list of keys and values.
-     * @return String; a formatted human readable list of keys and values
+     * @return a formatted human readable list of keys and values
      */
     public String printValues()
     {

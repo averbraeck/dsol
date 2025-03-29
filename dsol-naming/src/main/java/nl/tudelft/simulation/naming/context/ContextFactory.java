@@ -23,7 +23,7 @@ public interface ContextFactory
      * A remote context registers itself in the RMI registry using a provided key from the environment. The remote event
      * producer for the remote context uses that same key, extended with the string "_producer".
      * @param environment The possibly null environment specifying information to be used in the creation of the initial context
-     * @param atomicName String; the name under which the root context will be registered
+     * @param atomicName the name under which the root context will be registered
      * @return A non-null initial context object that implements the ContextInterface
      * @throws NamingException when the initial context could not be created
      */

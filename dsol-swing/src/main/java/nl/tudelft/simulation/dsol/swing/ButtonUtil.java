@@ -27,12 +27,12 @@ public final class ButtonUtil
 
     /**
      * Create a button.
-     * @param actionListener ActionListener; the listener to the press of the button
-     * @param name String; name of the button
-     * @param iconPath String; path to the resource
-     * @param actionCommand String; the action command
-     * @param toolTipText String; the hint to show when the mouse hovers over the button
-     * @param enabled boolean; true if the new button must initially be enable; false if it must initially be disabled
+     * @param actionListener the listener to the press of the button
+     * @param name name of the button
+     * @param iconPath path to the resource
+     * @param actionCommand the action command
+     * @param toolTipText the hint to show when the mouse hovers over the button
+     * @param enabled true if the new button must initially be enable; false if it must initially be disabled
      * @return JButton
      */
     public static JButton makeButton(final ActionListener actionListener, final String name, final String iconPath,

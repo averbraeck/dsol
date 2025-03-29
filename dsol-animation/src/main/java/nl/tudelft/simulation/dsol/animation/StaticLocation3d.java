@@ -25,13 +25,13 @@ public class StaticLocation3d extends OrientedPoint3d implements Locatable
 
     /**
      * constructs a new StaticLocation.
-     * @param x double; the x location
-     * @param y double; the y location
-     * @param z double; the z location
-     * @param rotX double; rotation around x-axis (theta)
-     * @param rotY double; rotation around y-axis (phi)
-     * @param rotZ double; rotation around z-axis (rho)
-     * @param bounds Bounds3d; the bounds
+     * @param x the x location
+     * @param y the y location
+     * @param z the z location
+     * @param rotX rotation around x-axis (theta)
+     * @param rotY rotation around y-axis (phi)
+     * @param rotZ rotation around z-axis (rho)
+     * @param bounds the bounds
      */
     public StaticLocation3d(final double x, final double y, final double z, final double rotX, final double rotY,
             final double rotZ, final Bounds3d bounds)
@@ -42,9 +42,9 @@ public class StaticLocation3d extends OrientedPoint3d implements Locatable
 
     /**
      * constructs a new StaticLocation.
-     * @param point2D Point2D; the point2d
-     * @param rotZ double; the rotation in the xy plane
-     * @param bounds Bounds; the bounds
+     * @param point2D the point2d
+     * @param rotZ the rotation in the xy plane
+     * @param bounds the bounds
      */
     public StaticLocation3d(final Point2D point2D, final double rotZ, final Bounds3d bounds)
     {
@@ -54,8 +54,8 @@ public class StaticLocation3d extends OrientedPoint3d implements Locatable
 
     /**
      * constructs a new StaticLocation.
-     * @param location OrientedPoint3d; the location
-     * @param bounds Bounds; the bounds
+     * @param location the location
+     * @param bounds the bounds
      */
     public StaticLocation3d(final OrientedPoint3d location, final Bounds3d bounds)
     {

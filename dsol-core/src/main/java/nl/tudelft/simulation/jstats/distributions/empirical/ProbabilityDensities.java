@@ -40,7 +40,7 @@ public final class ProbabilityDensities
      * Create a discrete empirical distribution, where the probabilities for a value indicate P(value), from two arrays, one
      * with values, and one with corresponding probabilities (summing to 1.0).
      * @param values Number[] the values
-     * @param probabilities double[]; the probabilities for the corresponding values
+     * @param probabilities the probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when probabilities array is null or values array is null, or when one of the values is null
      * @throws IllegalArgumentException when the probabilities array or values array are empty, or have unequal length, or when
@@ -90,7 +90,7 @@ public final class ProbabilityDensities
      * </pre>
      * 
      * @param values Number[] the values
-     * @param densities double[]; the densities for the corresponding values
+     * @param densities the densities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when densities array is null or values array is null, or when one of the values is null
      * @throws IllegalArgumentException when densities array or values array are empty, or when values.length !=
@@ -128,7 +128,7 @@ public final class ProbabilityDensities
      * Create a discrete empirical distribution, where the probabilities for a value indicate P(value), from two arrays, one
      * with values, and one with corresponding densities (summing to 1.0).
      * @param values double[] the values
-     * @param probabilities double[]; the probabilities for the corresponding values
+     * @param probabilities the probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when probabilities array is null or values array is null, or when one of the values is null
      * @throws IllegalArgumentException when probabilities array or values array are empty, or have unequal length, or when
@@ -162,7 +162,7 @@ public final class ProbabilityDensities
      * </pre>
      * 
      * @param values double[] the values
-     * @param densities double[]; the densities for the corresponding values
+     * @param densities the densities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when densities array is null or values array is null, or when one of the values is null
      * @throws IllegalArgumentException when densities array or values array are empty, or when values.length !=
@@ -185,7 +185,7 @@ public final class ProbabilityDensities
      * Create a discrete empirical distribution, where the probabilities for a value indicate P(value), from two arrays, one
      * with values, and one with corresponding probabilities (summing to 1.0).
      * @param values long[] the values
-     * @param probabilities double[]; the probabilities for the corresponding values
+     * @param probabilities the probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when probabilities array is null or values array is null, or when one of the values is null
      * @throws IllegalArgumentException when probabilities array or values array are empty, or have unequal length, or when
@@ -219,7 +219,7 @@ public final class ProbabilityDensities
      * </pre>
      * 
      * @param values long[] the values
-     * @param densities double[]; the densities for the corresponding values
+     * @param densities the densities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when densities array is null or values array is null, or when one of the values is null
      * @throws IllegalArgumentException when densities array or values array are empty, or when values.length !=
@@ -241,8 +241,8 @@ public final class ProbabilityDensities
     /**
      * Create a discrete empirical distribution, where the probabilities for a value indicate P(value), based on two Lists of
      * the same length, one with probability probabilities, and one with sorted values.
-     * @param values List&lt;? extends Number&gt;; the values
-     * @param probabilities List&lt;Double&gt;; the probability probabilities for the corresponding values
+     * @param values the values
+     * @param probabilities the probability probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution lists
      * @throws NullPointerException when probabilities list is null or values list is null, or when one of the values is null
      * @throws IllegalArgumentException when probabilities list or values list are empty, or have unequal length, or when
@@ -273,8 +273,8 @@ public final class ProbabilityDensities
      *    &Sigma; {(value[i+1] - value[i]) * density[i]} = 1.0
      * </pre>
      * 
-     * @param values List&lt;? extends Number&gt;; the values
-     * @param densities List&lt;Double&gt;; the probability densities for the corresponding values
+     * @param values the values
+     * @param densities the probability densities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution lists
      * @throws NullPointerException when densities list is null or values list is null, or when one of the values is null
      * @throws IllegalArgumentException when densities list or values list are empty, or when values.length != (densities.length
@@ -292,7 +292,7 @@ public final class ProbabilityDensities
     /**
      * Create a discrete empirical distribution, where the probabilities for a value indicate P(value), based on a sorted map
      * with sorted values mapping to probability densities.
-     * @param densitiesMap SortedMap&lt;? extends Number, Double&gt;; the map with the entries
+     * @param densitiesMap the map with the entries
      * @return the cumulative distribution object belonging to the given distribution map
      * @throws NullPointerException when densities map is null, or when one of the values or densities is null
      * @throws IllegalArgumentException when densities map is empty, or when densities are not between 0 and 1, or when the sum

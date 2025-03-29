@@ -20,8 +20,8 @@ public interface StreamUpdater extends Serializable
     /**
      * Update all seeds for the given replication number. The method should be fully reproducible, and can be based on the
      * previous seed values, possibly the String representation, and the replication number.
-     * @param streams Map&lt;String, StreamIterface&gt;; the map of the streams for the replication
-     * @param replicationNumber int; the replication number for which to set the seed values
+     * @param streams the map of the streams for the replication
+     * @param replicationNumber the replication number for which to set the seed values
      */
     default void updateSeeds(Map<String, StreamInterface> streams, int replicationNumber)
     {
@@ -34,9 +34,9 @@ public interface StreamUpdater extends Serializable
     /**
      * Update one seed for the given streamId and replication number. The method should be fully reproducible, and can be based
      * on the previous seed value of the stream, possibly the String representation, and the replication number.
-     * @param streamId String; the id of the stream to update
-     * @param stream StreamInterface; the stream to update for this replication
-     * @param replicationNumber int; the replication number for which to set the seed value
+     * @param streamId the id of the stream to update
+     * @param stream the stream to update for this replication
+     * @param replicationNumber the replication number for which to set the seed value
      */
     void updateSeed(String streamId, StreamInterface stream, int replicationNumber);
 

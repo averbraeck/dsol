@@ -33,9 +33,9 @@ public class DistBinomial extends DistDiscrete
     /**
      * constructs a Binomial distribution. It calculates the probability for a number of successes in n independent Bernoulli
      * trials with probability p of success on each trial.
-     * @param stream StreamInterface; the random number stream
-     * @param n long; the number of independent experiments for the Binomial distribution
-     * @param p double; the probability of success for each individual trial in the binomial distribution
+     * @param stream the random number stream
+     * @param n the number of independent experiments for the Binomial distribution
+     * @param p the probability of success for each individual trial in the binomial distribution
      * @throws IllegalArgumentException when n &lt;= 0 or p &lt;= 0 or p &gt;= 1
      */
     public DistBinomial(final StreamInterface stream, final int n, final double p)
@@ -73,7 +73,7 @@ public class DistBinomial extends DistDiscrete
 
     /**
      * Return the number of independent experiments for the Binomial distribution.
-     * @return int; the number of independent experiments for the Binomial distribution
+     * @return the number of independent experiments for the Binomial distribution
      */
     public int getN()
     {
@@ -82,7 +82,7 @@ public class DistBinomial extends DistDiscrete
 
     /**
      * Return the probability of success for each individual trial in the binomial distribution.
-     * @return double; the probability of success for each individual trial in the binomial distribution
+     * @return the probability of success for each individual trial in the binomial distribution
      */
     public double getP()
     {

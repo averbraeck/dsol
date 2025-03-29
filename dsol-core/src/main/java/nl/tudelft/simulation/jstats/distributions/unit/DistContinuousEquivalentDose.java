@@ -20,8 +20,8 @@ public class DistContinuousEquivalentDose extends DistContinuousUnit<EquivalentD
 
     /**
      * Constructs a new continuous distribution that draws EquivalentDose scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit EquivalentDoseUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousEquivalentDose(final DistContinuous wrappedDistribution, final EquivalentDoseUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousEquivalentDose extends DistContinuousUnit<EquivalentD
 
     /**
      * Constructs a new continuous distribution that draws EquivalentDose scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousEquivalentDose(final DistContinuous wrappedDistribution)
     {

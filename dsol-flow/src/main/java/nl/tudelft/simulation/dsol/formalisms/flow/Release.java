@@ -27,9 +27,9 @@ public class Release<T extends Number & Comparable<T>> extends FlowBlock<T, Rele
 
     /**
      * Construct a Release flow object to release seized resource units.
-     * @param id String; the id of the FlowObject
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param resource Resource&lt;T&gt;; which is released
+     * @param id the id of the FlowObject
+     * @param simulator on which is scheduled
+     * @param resource which is released
      */
     public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T, ?> resource)
     {
@@ -38,10 +38,10 @@ public class Release<T extends Number & Comparable<T>> extends FlowBlock<T, Rele
 
     /**
      * Constructor for Release.
-     * @param id String; the id of the FlowObject
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
-     * @param resource Resource&lt;T&gt;; which is released
-     * @param amount double; of resource which is released
+     * @param id the id of the FlowObject
+     * @param simulator on which is scheduled
+     * @param resource which is released
+     * @param amount of resource which is released
      */
     public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T, ?> resource, final double amount)
     {

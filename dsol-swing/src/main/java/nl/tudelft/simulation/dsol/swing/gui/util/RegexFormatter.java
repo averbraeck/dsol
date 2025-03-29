@@ -28,7 +28,7 @@ public class RegexFormatter extends DefaultFormatter
 
     /**
      * Create a new RegexFormatter.
-     * @param pattern String; regular expression pattern that defines what this RexexFormatter will accept
+     * @param pattern regular expression pattern that defines what this RexexFormatter will accept
      */
     public RegexFormatter(final String pattern)
     {

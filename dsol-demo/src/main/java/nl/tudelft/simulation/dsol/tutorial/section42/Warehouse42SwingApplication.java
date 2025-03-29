@@ -32,8 +32,8 @@ import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialo
 public class Warehouse42SwingApplication extends DsolApplication
 {
     /**
-     * @param title String; the title
-     * @param panel DsolPanel&lt;Double,Double,Double&gt;; the panel
+     * @param title the title
+     * @param panel the panel
      */
     public Warehouse42SwingApplication(final String title, final DsolPanel panel)
     {
@@ -45,7 +45,7 @@ public class Warehouse42SwingApplication extends DsolApplication
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param args String[]; arguments, expected to be empty
+     * @param args arguments, expected to be empty
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error
@@ -76,8 +76,8 @@ public class Warehouse42SwingApplication extends DsolApplication
         private static final long serialVersionUID = 1L;
 
         /**
-         * @param model Warehouse42Model; the model
-         * @param simulator DevsSimulator&lt;Double&gt;; the simulator
+         * @param model the model
+         * @param simulator the simulator
          * @throws RemoteException on error
          */
         Warehouse42Panel(final Warehouse42Model model, final DevsSimulator<Double> simulator) throws RemoteException
@@ -88,7 +88,7 @@ public class Warehouse42SwingApplication extends DsolApplication
 
         /**
          * add a number of charts for the demo.
-         * @param model Warehouse42Model; the model from which to take the statistics
+         * @param model the model from which to take the statistics
          */
         public void addTabs(final Warehouse42Model model)
         {

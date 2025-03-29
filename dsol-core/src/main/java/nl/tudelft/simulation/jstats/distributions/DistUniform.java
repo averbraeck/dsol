@@ -30,9 +30,9 @@ public class DistUniform extends DistContinuous
     /**
      * constructs a new uniform distribution. min and max are real numbers with min less than max. min is a location parameter,
      * max-min is a scale parameter.
-     * @param stream StreamInterface; the random number stream
-     * @param min double; the minimum value
-     * @param max double; the maximum value
+     * @param stream the random number stream
+     * @param min the minimum value
+     * @param max the maximum value
      */
     public DistUniform(final StreamInterface stream, final double min, final double max)
     {
@@ -60,7 +60,7 @@ public class DistUniform extends DistContinuous
 
     /**
      * Return the minimum value.
-     * @return double; the minimum value
+     * @return the minimum value
      */
     public double getMin()
     {
@@ -69,7 +69,7 @@ public class DistUniform extends DistContinuous
 
     /**
      * Return the maximum value.
-     * @return double; the maximum value
+     * @return the maximum value
      */
     public double getMax()
     {

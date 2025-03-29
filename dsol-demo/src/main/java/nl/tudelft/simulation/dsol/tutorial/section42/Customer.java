@@ -37,8 +37,8 @@ public class Customer implements BuyerInterface
 
     /**
      * constructs a new Customer.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator to schedule on
-     * @param retailer SellerInterface; the retailer to buy at. In more advanced examples, we would look up this retailer at a
+     * @param simulator the simulator to schedule on
+     * @param retailer the retailer to buy at. In more advanced examples, we would look up this retailer at a
      *            yellow page.
      */
     public Customer(final DevsSimulatorInterface<Double> simulator, final SellerInterface retailer)

@@ -27,8 +27,8 @@ public final class Icons
 
     /**
      * Attempt to load and return an icon.
-     * @param iconPath String; the path that is used to load the icon
-     * @return Icon; or null if loading failed
+     * @param iconPath the path that is used to load the icon
+     * @return or null if loading failed
      */
     public static final Icon loadIcon(final String iconPath)
     {
@@ -45,8 +45,8 @@ public final class Icons
 
     /**
      * Attempt to load and return an icon, which will be made gray-scale.
-     * @param iconPath String; the path that is used to load the icon
-     * @return Icon; or null if loading failed
+     * @param iconPath the path that is used to load the icon
+     * @return or null if loading failed
      */
     public static final Icon loadGrayscaleIcon(final String iconPath)
     {

@@ -58,7 +58,7 @@ public final class EsriFileXmlParser
 
     /**
      * parses a Mapfile URL to a mapFile.
-     * @param url URL; the mapfile url.
+     * @param url the mapfile url.
      * @return MapInterface the parsed mapfile.
      * @throws IOException on failure
      */
@@ -69,8 +69,8 @@ public final class EsriFileXmlParser
 
     /**
      * parses a Mapfile URL to a mapFile.
-     * @param url URL; the mapfile url.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param url the mapfile url.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      * @return MapInterface the parsed mapfile.
      * @throws IOException on failure
      */
@@ -117,7 +117,7 @@ public final class EsriFileXmlParser
 
     /**
      * Parses a xml-element representing the units for the map.
-     * @param units String; the string representation of the units
+     * @param units the string representation of the units
      * @return MapUnits enum
      */
     @SuppressWarnings("checkstyle:needbraces")
@@ -140,9 +140,9 @@ public final class EsriFileXmlParser
 
     /**
      * Creates the extent for the map, in transformed units.
-     * @param node Node; the dom node
-     * @param coordinateTransform CoordinateTransform; the transformation to apply on the coordinates
-     * @return Bounds2d; the extent for the map, in transformed units
+     * @param node the dom node
+     * @param coordinateTransform the transformation to apply on the coordinates
+     * @return the extent for the map, in transformed units
      * @throws IOException on parsing error
      */
     private static Bounds2d parseExtent(final Node node, final CoordinateTransform coordinateTransform) throws IOException
@@ -170,7 +170,7 @@ public final class EsriFileXmlParser
 
     /**
      * parses a xml-element representing the Image.
-     * @param node Node; the map.image dom node
+     * @param node the map.image dom node
      * @return information about the image
      * @throws IOException on parsing error
      */
@@ -195,7 +195,7 @@ public final class EsriFileXmlParser
 
     /**
      * parses a xml-element representing a Color.
-     * @param node Node; the node to parse for the color
+     * @param node the node to parse for the color
      * @return Color of element
      * @throws IOException on parsing error
      */
@@ -221,7 +221,7 @@ public final class EsriFileXmlParser
 
     /**
      * Parse an xml-element representing a Dimension.
-     * @param node Node; the dom node with the dimension information
+     * @param node the dom node with the dimension information
      * @return Dimension of element
      * @throws IOException on parsing error
      */
@@ -241,9 +241,9 @@ public final class EsriFileXmlParser
 
     /**
      * Parse an xml-element representing a Layer.
-     * @param layerNodeList NodeList; the list of layer tags in the map
-     * @param coordinateTransform CoordinateTransform; the transformation to apply to the layer
-     * @return List&lt;LayerInterface&gt;; the list of parsed layers
+     * @param layerNodeList the list of layer tags in the map
+     * @param coordinateTransform the transformation to apply to the layer
+     * @return the list of parsed layers
      * @throws IOException on parsing error
      */
     private static List<LayerInterface> parseLayers(final NodeList layerNodeList, final CoordinateTransform coordinateTransform)
@@ -311,9 +311,9 @@ public final class EsriFileXmlParser
 
     /**
      * Check if one or more nodes with the tag name exist, e.g. from: &lt;node&gt;&lt;tag&gt;text&lt;/tag&gt; ... &lt;/node&gt;.
-     * @param node Node; the node to check
-     * @param tag String; the name of the tag for which we check one copy exists
-     * @return boolean; whether the tag count is larger than zero
+     * @param node the node to check
+     * @param tag the name of the tag for which we check one copy exists
+     * @return whether the tag count is larger than zero
      * @throws IOException on parse error
      */
     private static boolean nodeTagExists(final Node node, final String tag) throws IOException
@@ -332,10 +332,10 @@ public final class EsriFileXmlParser
     /**
      * Return the i-th node with the tag name in the element, e.g. from: &lt;node&gt;&lt;tag&gt;text&lt;/tag&gt; ...
      * &lt;/node&gt;.
-     * @param node Node; the node to check
-     * @param tag String; the name of the tag for which we check one copy exists
-     * @param item int; the number in the list to look up
-     * @return Node; the i-th node with the tag name in the element
+     * @param node the node to check
+     * @param tag the name of the tag for which we check one copy exists
+     * @param item the number in the list to look up
+     * @return the i-th node with the tag name in the element
      * @throws IOException on parse error
      */
     private static Node nodeTagItem(final Node node, final String tag, final int item) throws IOException
@@ -353,9 +353,9 @@ public final class EsriFileXmlParser
 
     /**
      * Get the text of a node with the tag name, e.g. from: &lt;node&gt;&lt;tag&gt;text&lt;/tag&gt; ... &lt;/node&gt;.
-     * @param node Node; the node to get the text from
-     * @param tag String; the name of the tag that contains the text
-     * @return String; text enclosed in the tag
+     * @param node the node to get the text from
+     * @param tag the name of the tag that contains the text
+     * @return text enclosed in the tag
      * @throws IOException on parse error
      */
     private static String nodeText(final Node node, final String tag) throws IOException
@@ -373,9 +373,9 @@ public final class EsriFileXmlParser
 
     /**
      * Get the double value of a node with the tag name, e.g. from: &lt;node&gt;&lt;tag&gt;123.45&lt;/tag&gt; ... &lt;/node&gt;.
-     * @param node Node; the node to get the value from
-     * @param tag String; the name of the tag that contains the value
-     * @return double; value enclosed in the tag
+     * @param node the node to get the value from
+     * @param tag the name of the tag that contains the value
+     * @return value enclosed in the tag
      * @throws IOException on parse error
      */
     private static double nodeDouble(final Node node, final String tag) throws IOException
@@ -392,9 +392,9 @@ public final class EsriFileXmlParser
 
     /**
      * Get the int value of a node with the tag name, e.g. from: &lt;node&gt;&lt;tag&gt;123&lt;/tag&gt; ... &lt;/node&gt;.
-     * @param node Node; the node to get the value from
-     * @param tag String; the name of the tag that contains the value
-     * @return int; value enclosed in the tag
+     * @param node the node to get the value from
+     * @param tag the name of the tag that contains the value
+     * @return value enclosed in the tag
      * @throws IOException on parse error
      */
     private static int nodeInt(final Node node, final String tag) throws IOException
@@ -411,9 +411,9 @@ public final class EsriFileXmlParser
 
     /**
      * Get the boolean value of a node with the tag name, e.g. from: &lt;node&gt;&lt;tag&gt;true&lt;/tag&gt; ... &lt;/node&gt;.
-     * @param node Node; the node to get the value from
-     * @param tag String; the name of the tag that contains the value
-     * @return boolean; value enclosed in the tag
+     * @param node the node to get the value from
+     * @param tag the name of the tag that contains the value
+     * @return value enclosed in the tag
      * @throws IOException on parse error
      */
     private static boolean nodeBoolean(final Node node, final String tag) throws IOException

@@ -38,8 +38,8 @@ public abstract class DifferentialEquation extends LocalEventProducer implements
 
     /**
      * constructs a new DifferentialEquation with a user-specified integrator.
-     * @param stepSize double; the stepSize to use.
-     * @param integratorType NumericalIntegratorType; the integrator to use.
+     * @param stepSize the stepSize to use.
+     * @param integratorType the integrator to use.
      */
     public DifferentialEquation(final double stepSize, final NumericalIntegratorType integratorType)
     {
@@ -79,9 +79,9 @@ public abstract class DifferentialEquation extends LocalEventProducer implements
 
     /**
      * integrates Y.
-     * @param x double; the x-value
-     * @param initialX double; the initial X value, non-final (will be updated)
-     * @param initialY double[]; the initial Y value, non-final (will be updated)
+     * @param x the x-value
+     * @param initialX the initial X value, non-final (will be updated)
+     * @param initialY the initial Y value, non-final (will be updated)
      * @return the new Y value
      */
     @SuppressWarnings("checkstyle:finalparameters")
@@ -126,7 +126,7 @@ public abstract class DifferentialEquation extends LocalEventProducer implements
     }
 
     /**
-     * @param integrator NumericalIntegrator; The integrator to set.
+     * @param integrator The integrator to set.
      */
     public void setIntegrator(final NumericalIntegrator integrator)
     {

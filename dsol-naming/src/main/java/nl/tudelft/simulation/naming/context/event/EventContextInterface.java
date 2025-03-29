@@ -27,9 +27,9 @@ public interface EventContextInterface extends Remote
 {
     /**
      * Add a listener for the provided scope as strong reference to the BEGINNING of a queue of listeners.
-     * @param listener EventListener; the listener which is interested at events of eventType.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener the listener which is interested at events of eventType.
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
      * @return the success of adding the listener. If a listener was already added false is returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
@@ -46,11 +46,11 @@ public interface EventContextInterface extends Remote
 
     /**
      * Add a listener for the provided scope to the BEGINNING of a queue of listeners.
-     * @param listener EventListener; the listener which is interested at events of eventType.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener the listener which is interested at events of eventType.
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
-     * @param referenceType ReferenceType; whether the listener is added as a strong or as a weak reference.
+     * @param referenceType whether the listener is added as a strong or as a weak reference.
      * @return the success of adding the listener. If a listener was already added false is returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
      *             context does not exist
@@ -67,11 +67,11 @@ public interface EventContextInterface extends Remote
 
     /**
      * Add a listener for the provided scope as strong reference to the specified position of a queue of listeners.
-     * @param listener EventListener; the listener which is interested at events of eventType.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener the listener which is interested at events of eventType.
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
-     * @param position int; the position of the listener in the queue.
+     * @param position the position of the listener in the queue.
      * @return the success of adding the listener. If a listener was already added, or an illegal position is provided false is
      *         returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
@@ -89,12 +89,12 @@ public interface EventContextInterface extends Remote
 
     /**
      * Add a listener for the provided scope to the specified position of a queue of listeners.
-     * @param listener EventListener; which is interested at certain events,
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
-     * @param contextScope ContextScope; the part of the tree that the listener is aimed at (current node, current node and
+     * @param listener which is interested at certain events,
+     * @param absolutePath the absolute path of the context or object to subscribe to
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
      *            keys, subtree).
-     * @param position int; the position of the listener in the queue
-     * @param referenceType ReferenceType; whether the listener is added as a strong or as a weak reference.
+     * @param position the position of the listener in the queue
+     * @param referenceType whether the listener is added as a strong or as a weak reference.
      * @return the success of adding the listener. If a listener was already added or an illegal position is provided false is
      *         returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
@@ -112,8 +112,8 @@ public interface EventContextInterface extends Remote
 
     /**
      * Remove the subscription of a listener for the provided scope for a specific event.
-     * @param listener EventListener; which is no longer interested.
-     * @param absolutePath String; the absolute path of the context or object to subscribe to
+     * @param listener which is no longer interested.
+     * @param absolutePath the absolute path of the context or object to subscribe to
      * @param contextScope ContextScope;the scope which is of no interest any more.
      * @return the success of removing the listener. If a listener was not subscribed false is returned.
      * @throws InvalidNameException when the path does not start with a slash

@@ -61,8 +61,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Construct a new FlowBlock.
-     * @param id String; the id of the FlowBlock
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; is the simulator on which behavior is scheduled
+     * @param id the id of the FlowBlock
+     * @param simulator is the simulator on which behavior is scheduled
      */
     public FlowBlock(final String id, final DevsSimulatorInterface<T> simulator)
     {
@@ -108,7 +108,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Arrival of a new entity into the flow object.
-     * @param entity Entity; the arriving entity
+     * @param entity the arriving entity
      */
     public void receiveEntity(final Entity<T> entity)
     {
@@ -121,7 +121,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
     /**
      * Set the destination of this flow object. The destination is the object the entity will go to when leaving this flow
      * object. The destination can be null, indicating the entity does not go to a next flow object.
-     * @param destination FlowBlock&lt;T&gt;; the next flow object in the model, can be null
+     * @param destination the next flow object in the model, can be null
      * @return the flow object for method chaining
      */
     @SuppressWarnings("unchecked")
@@ -150,7 +150,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
     /**
      * Release an entity, making it flow to the next flow object (the destination) when destination is not null. When
      * destination is null, the entity will be discarded.
-     * @param entity Entity; the entity to release
+     * @param entity the entity to release
      */
     protected synchronized void releaseEntity(final Entity<T> entity)
     {
@@ -166,8 +166,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Add an object as an attribute to the flow object.
-     * @param key String; the key of the attribute
-     * @param value Object; the value to store
+     * @param key the key of the attribute
+     * @param value the value to store
      */
     public void setAttribute(final String key, final Object value)
     {
@@ -178,9 +178,9 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Retrieve a typed object attribute value.
-     * @param key String; the id of the attribute
+     * @param key the id of the attribute
      * @param clazz Class&lt;VT&gt; the class of the object to return
-     * @return VT; the stored value
+     * @return the stored value
      * @param <VT> the class of the attribute value to return
      */
     @SuppressWarnings("unchecked")
@@ -193,8 +193,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Retrieve an object attribute value.
-     * @param key String; the id of the attribute
-     * @return Object; the stored value
+     * @param key the id of the attribute
+     * @return the stored value
      */
     public Object getAttribute(final String key)
     {
@@ -203,8 +203,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Add a String as an attribute to the flow object.
-     * @param key String; the key of the attribute
-     * @param value String; the value to store
+     * @param key the key of the attribute
+     * @param value the value to store
      */
     public void setStringAttribute(final String key, final String value)
     {
@@ -213,8 +213,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Retrieve a stored String attribute value.
-     * @param key String; the id of the attribute
-     * @return String; the stored value
+     * @param key the id of the attribute
+     * @return the stored value
      */
     public String getStringAttribute(final String key)
     {
@@ -225,8 +225,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Add a Number as an attribute to the flow object.
-     * @param key String; the key of the attribute
-     * @param value Number; the value to store
+     * @param key the key of the attribute
+     * @param value the value to store
      */
     public void setNumberAttribute(final String key, final Number value)
     {
@@ -235,8 +235,8 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Retrieve a stored Number attribute value.
-     * @param key String; the id of the attribute
-     * @return Number; the stored value
+     * @param key the id of the attribute
+     * @return the stored value
      */
     public Number getNumberAttribute(final String key)
     {
@@ -245,7 +245,7 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
 
     /**
      * Return the current destination.
-     * @return FlowBlock; the destination of this flow object
+     * @return the destination of this flow object
      */
     public FlowBlock<T, ?> getDestination()
     {

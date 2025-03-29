@@ -30,9 +30,9 @@ public class DistLogNormal extends DistNormal
     /**
      * Construct a new Lognormal distribution. The LogNormal distribution for random variable X is such that ln(X) ~ Normal(mu,
      * sigma).
-     * @param stream StreamInterface; the random number stream
-     * @param normalMean double; the mean (mu) for the underlying normal distribution
-     * @param normalStDev double; the standard deviation (sigma) for the underlying normal distribution
+     * @param stream the random number stream
+     * @param normalMean the mean (mu) for the underlying normal distribution
+     * @param normalStDev the standard deviation (sigma) for the underlying normal distribution
      * @throws IllegalArgumentException when normalStDev &lt;= 0
      */
     public DistLogNormal(final StreamInterface stream, final double normalMean, final double normalStDev)

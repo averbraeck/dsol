@@ -22,8 +22,8 @@ public final class DoubleCompare
 
     /**
      * Fuzzy compare of two double variables. When they differ less than 4 ulps, that they are equal.
-     * @param d1 double; the first double to compare
-     * @param d2 double; the second double to compare
+     * @param d1 the first double to compare
+     * @param d2 the second double to compare
      * @return 0 if (almost) equal, -1 of d1 &lt; d2, and 1 if d1 &gt; d2.
      */
     @SuppressWarnings("checkstyle:needbraces")
@@ -60,7 +60,7 @@ public final class DoubleCompare
 
     /**
      * Test.
-     * @param args String[]; empty
+     * @param args empty
      */
     public static void main(final String[] args)
     {
@@ -78,8 +78,8 @@ public final class DoubleCompare
 
     /**
      * Use the compare method for testing.
-     * @param a double; first double
-     * @param b double; second double
+     * @param a first double
+     * @param b second double
      */
     private static void cmp(final double a, final double b)
     {

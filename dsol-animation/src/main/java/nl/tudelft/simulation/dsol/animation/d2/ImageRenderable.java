@@ -84,9 +84,9 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
 
     /**
      * constructs a new ImageRenderable.
-     * @param source T; the source to be animated.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param images URL[]; the image urls.
+     * @param source the source to be animated.
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param images the image urls.
      */
     public ImageRenderable(final L source, final Contextualized contextProvider, final URL[] images)
     {
@@ -97,7 +97,7 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
 
     /**
      * reads and caches the images.
-     * @param images URL[]; the images
+     * @param images the images
      */
     private void readImages(final URL[] images)
     {
@@ -119,10 +119,10 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
 
     /**
      * constructs a new ImageRenderable.
-     * @param staticLocation OrientedPoint3d; the static location of the set of imageIcons
-     * @param size Bounds3; the size of the imageIcons in world coordinates.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param images URL[]; the imageIcons to display.
+     * @param staticLocation the static location of the set of imageIcons
+     * @param size the size of the imageIcons in world coordinates.
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param images the imageIcons to display.
      */
     @SuppressWarnings("unchecked")
     public ImageRenderable(final OrientedPoint3d staticLocation, final Bounds3d size, final Contextualized contextProvider,
@@ -133,10 +133,10 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
 
     /**
      * constructs a new ImageRenderable.
-     * @param staticLocation Point3d; the static location of the set of imageIcons
-     * @param size Bounds3d; the size of the imageIcons in world coordinates.
-     * @param contextProvider Contextualized; the object that can provide the context to store the animation objects
-     * @param images URL[]; the imageIcons to display.
+     * @param staticLocation the static location of the set of imageIcons
+     * @param size the size of the imageIcons in world coordinates.
+     * @param contextProvider the object that can provide the context to store the animation objects
+     * @param images the imageIcons to display.
      */
     @SuppressWarnings("unchecked")
     public ImageRenderable(final Point3d staticLocation, final Bounds3d size, final Contextualized contextProvider,
@@ -184,7 +184,7 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
     public abstract int selectImage();
 
     /**
-     * @param orientation short; The orientation to set.
+     * @param orientation The orientation to set.
      */
     public void setOrientation(final short orientation)
     {
@@ -201,9 +201,9 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
 
     /**
      * resolves the origin of the image.
-     * @param forOrientation short; the orientation (CC,..)
+     * @param forOrientation the orientation (CC,..)
      * @return Bounds2d the location
-     * @param size Dimension; the size of the image.
+     * @param size the size of the image.
      */
     protected Point2D resolveOrigin(final short forOrientation, final Bounds2d size)
     {
@@ -256,7 +256,7 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
 
     /**
      * writes a serializable object to stream.
-     * @param out ObjectOutputStream; the outputstream
+     * @param out the outputstream
      * @throws IOException on IOException
      */
     private synchronized void writeObject(final ObjectOutputStream out) throws IOException

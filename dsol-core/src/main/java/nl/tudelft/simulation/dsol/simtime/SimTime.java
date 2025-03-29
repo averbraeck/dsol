@@ -40,9 +40,9 @@ public final class SimTime
 
     /**
      * Add two numbers.
-     * @param a Number; first number
-     * @param b Number; second number
-     * @return Number; the sum of the two numbers
+     * @param a first number
+     * @param b second number
+     * @return the sum of the two numbers
      * @param <T> The time type, e.g., Double, Long or Duration
      */
     @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
@@ -65,9 +65,9 @@ public final class SimTime
 
     /**
      * Subtract two numbers.
-     * @param a Number; first number
-     * @param b Number; second number
-     * @return Number; the difference of the two numbers
+     * @param a first number
+     * @param b second number
+     * @return the difference of the two numbers
      * @param <T> The time type, e.g., Double, Long or Duration
      */
     @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
@@ -90,8 +90,8 @@ public final class SimTime
 
     /**
      * Return a copy (clone) of the number.
-     * @param a Number; the number to copy
-     * @return Number; a copy of the number
+     * @param a the number to copy
+     * @return a copy of the number
      * @param <T> The time type, e.g., Double, Long or Duration
      */
     @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
@@ -114,8 +114,8 @@ public final class SimTime
 
     /**
      * Return a zero value for the number.
-     * @param a Number; the number to copy
-     * @return Number; a zero value for the number
+     * @param a the number to copy
+     * @return a zero value for the number
      * @param <T> The time type, e.g., Double, Long or Duration
      */
     @SuppressWarnings({"unchecked", "checkstyle:needbraces"})

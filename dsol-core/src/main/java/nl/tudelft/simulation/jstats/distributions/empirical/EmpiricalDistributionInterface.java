@@ -19,7 +19,7 @@ public interface EmpiricalDistributionInterface extends Serializable
 {
     /**
      * Returns the number of probability-value mappings in this structure.
-     * @return int; the number of probability-value mappings in this structure.
+     * @return the number of probability-value mappings in this structure.
      */
     int size();
 
@@ -38,8 +38,8 @@ public interface EmpiricalDistributionInterface extends Serializable
     /**
      * Return the cumulative probability and number below or at the given probability, or null when the cumulative probability
      * is smaller than the lowest cumulative probability.
-     * @param cumulativeProbability double; the cumulative probability to look up
-     * @return DistributionEntry; an entry object with the probability and corresponding value below or at the provided
+     * @param cumulativeProbability the cumulative probability to look up
+     * @return an entry object with the probability and corresponding value below or at the provided
      *         cumulative probability. Return null when the cumulative probability is smaller than the lowest cumulative
      *         probability
      */
@@ -48,8 +48,8 @@ public interface EmpiricalDistributionInterface extends Serializable
     /**
      * Return the cumulative probability and number above or at the given probability, or null when the cumulative probability
      * is larger than the highest cumulative probability (1.0).
-     * @param cumulativeProbability double; the cumulative probability to look up
-     * @return DistributionEntry; an entry object with the probability and corresponding value above or at the provided
+     * @param cumulativeProbability the cumulative probability to look up
+     * @return an entry object with the probability and corresponding value above or at the provided
      *         cumulative probability. Return null when the cumulative probability is larger than the highest cumulative
      *         probability (1.0)
      */
@@ -59,8 +59,8 @@ public interface EmpiricalDistributionInterface extends Serializable
      * Return the cumulative probability and number that precedes in the sequence with respect to the given probability, or null
      * when the cumulative probability is smaller than the lowest cumulative probability. When cumulativeProbability is not a
      * key, the floorEntry is returned instead.
-     * @param cumulativeProbability double; the cumulative probability to look up
-     * @return DistributionEntry; the first entry object with the probability and corresponding value below (but not at) the
+     * @param cumulativeProbability the cumulative probability to look up
+     * @return the first entry object with the probability and corresponding value below (but not at) the
      *         provided cumulative probability. Return null when the cumulative probability is smaller than the lowest
      *         cumulative probability
      */
@@ -70,8 +70,8 @@ public interface EmpiricalDistributionInterface extends Serializable
      * Return the cumulative probability and number that follows in the sequence with respect to the given probability, or null
      * when the cumulative probability is larger than the highest cumulative probability. When cumulativeProbability is not a
      * key, the ceilingEntry is returned instead.
-     * @param cumulativeProbability double; the cumulative probability to look up
-     * @return DistributionEntry; the first entry object with the probability and corresponding value above (but not at) the
+     * @param cumulativeProbability the cumulative probability to look up
+     * @return the first entry object with the probability and corresponding value above (but not at) the
      *         provided cumulative probability. Return null when the cumulative probability is larger than the highest
      *         cumulative probability
      */
@@ -80,8 +80,8 @@ public interface EmpiricalDistributionInterface extends Serializable
     /**
      * Return the cumulative probability and number below or at the given value, or null when the value is smaller than the
      * lowest value in the distribution.
-     * @param value Number; the value to look up
-     * @return DistributionEntry; an entry object with the probability and corresponding value below or at the provided
+     * @param value the value to look up
+     * @return an entry object with the probability and corresponding value below or at the provided
      *         cumulative probability. Return null when the cumulative probability is smaller than the lowest cumulative
      *         probability
      */
@@ -90,8 +90,8 @@ public interface EmpiricalDistributionInterface extends Serializable
     /**
      * Return the cumulative probability and number above or at the given value, or null when the value is larger than the
      * highest value in the distribution.
-     * @param value Number; the value to look up
-     * @return DistributionEntry; an entry object with the probability and corresponding value above or at the provided
+     * @param value the value to look up
+     * @return an entry object with the probability and corresponding value above or at the provided
      *         cumulative probability. Return null when the cumulative probability is larger than the highest cumulative
      *         probability
      */
@@ -99,13 +99,13 @@ public interface EmpiricalDistributionInterface extends Serializable
 
     /**
      * Return the highest value that this empirical distribution can return.
-     * @return Number; the highest value that this empirical distribution can return
+     * @return the highest value that this empirical distribution can return
      */
     Number getHighestValue();
 
     /**
      * Return the lowest value that this empirical distribution can return.
-     * @return Number; the lowest value that this empirical distribution can return
+     * @return the lowest value that this empirical distribution can return
      */
     Number getLowestValue();
 

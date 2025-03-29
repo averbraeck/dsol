@@ -24,8 +24,8 @@ public interface CapacityRequestor<T extends Number & Comparable<T>>
     {
         /**
          * receive the requested capacity for the resource.
-         * @param requestedCapacity double; the amount requested.
-         * @param resource Resource&lt;T&gt;; the requested resource.
+         * @param requestedCapacity the amount requested.
+         * @param resource the requested resource.
          */
         void receiveRequestedCapacity(double requestedCapacity, Resource.DoubleCapacity<T> resource);
     }
@@ -40,7 +40,7 @@ public interface CapacityRequestor<T extends Number & Comparable<T>>
         /**
          * receive the requested capacity for the resource.
          * @param requestedCapacity the amount requested.
-         * @param resource Resource&lt;T&gt;; the requested resource.
+         * @param resource the requested resource.
          */
         void receiveRequestedCapacity(int requestedCapacity, Resource.IntegerCapacity<T> resource);
     }

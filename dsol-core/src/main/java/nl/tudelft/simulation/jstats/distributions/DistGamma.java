@@ -35,9 +35,9 @@ public class DistGamma extends DistContinuous
      * constructs a new gamma distribution. The gamma distribution represents the time to complete some task, e.g. customer
      * service or machine repair. The parameters are not rate-related, but average-related, so the mean is shape*scale (or
      * &alpha;&theta; or k&theta;), and the variance is &alpha;&theta;<sup>2</sup>.
-     * @param stream StreamInterface; the random number stream
-     * @param shape double; is the shape parameter &gt; 0, also known as &alpha; or k
-     * @param scale double; is the scale parameter&gt; 0, also known as &theta;
+     * @param stream the random number stream
+     * @param shape is the shape parameter &gt; 0, also known as &alpha; or k
+     * @param scale is the scale parameter&gt; 0, also known as &theta;
      * @throws IllegalArgumentException when shape &lt;= 0.0 or scale &lt;= 0.0
      */
     public DistGamma(final StreamInterface stream, final double shape, final double scale)

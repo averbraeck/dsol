@@ -69,7 +69,7 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
 
     /**
      * constructs a new CollectionTableModel.
-     * @param parentProperty Property; the parentPropert
+     * @param parentProperty the parentPropert
      */
     public CollectionTableModel(final Property parentProperty)
     {
@@ -78,8 +78,8 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
 
     /**
      * constructs a new CollectionTableModel.
-     * @param parentProperty Property; the parentProperty
-     * @param introspector Introspector; the introspector to use
+     * @param parentProperty the parentProperty
+     * @param introspector the introspector to use
      */
     public CollectionTableModel(final Property parentProperty, final Introspector introspector)
     {
@@ -124,7 +124,7 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
 
     /**
      * Adds a new value to the managed composite property.
-     * @param value Object; the value to add
+     * @param value the value to add
      */
     private void addValue(final Object value)
     {
@@ -228,7 +228,7 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
     }
 
     /**
-     * @param index int; the index of the property
+     * @param index the index of the property
      * @return the Property
      */
     protected Property getProperty(final int index)
@@ -316,7 +316,7 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
 
     /**
      * Sets the modelmanager. By default, a {see DefaultModelManager}is used.
-     * @param manager ModelManager; the manager
+     * @param manager the manager
      */
     public void setModelManager(final ModelManager manager)
     {
@@ -354,8 +354,8 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         /**
          * This implementation is NOT thread-safe. When multiple users will edit the parent at the same time, errors are
          * expected.
-         * @param key Integer; the key
-         * @param name String; the name
+         * @param key the key
+         * @param name the name
          */
         CollectionProperty(final Integer key, final String name)
         {

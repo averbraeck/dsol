@@ -62,20 +62,20 @@ public interface DsolModel<T extends Number & Comparable<T>, S extends Simulator
      * <u>Note 2:</u> The original streams are copied into the model, so they are not cloned (as the streams do not implement
      * cloneable, and as they have inner state that needs to be preserved). So be careful with manipulating the streams in the
      * streamInformation object afterward.
-     * @param streamInformation StreamInformation; the streams that have been prepared in a StreamInformation class
+     * @param streamInformation the streams that have been prepared in a StreamInformation class
      * @throws NullPointerException when streamInformation is null
      */
     void setStreamInformation(StreamInformation streamInformation);
 
     /**
      * Return the available streams of the model stored in a StreamInformation object.
-     * @return streamInformation StreamInformation; the streams that have been prepared in a StreamInformation class
+     * @return the streams that have been prepared in a StreamInformation class
      */
     StreamInformation getStreamInformation();
 
     /**
      * Return the streams of this model, mapping stream ids to streams.
-     * @return Map&lt;String, StreamInterface&gt;; the streams of this model
+     * @return the streams of this model
      */
     default Map<String, StreamInterface> getStreams()
     {
@@ -84,7 +84,7 @@ public interface DsolModel<T extends Number & Comparable<T>, S extends Simulator
 
     /**
      * Return a specific stream of this model, based on a stream id, or null when the stream could not be found.
-     * @param streamId String; the id of the stream to be retrieved
+     * @param streamId the id of the stream to be retrieved
      * @return StreamInterface the stream, or null when the stream could not be found
      * @throws NullPointerException when streamId is null
      */
@@ -99,7 +99,7 @@ public interface DsolModel<T extends Number & Comparable<T>, S extends Simulator
 
     /**
      * Return the default streams of this model.
-     * @return StreamInterface; the default stream of this model
+     * @return the default stream of this model
      */
     default StreamInterface getDefaultStream()
     {

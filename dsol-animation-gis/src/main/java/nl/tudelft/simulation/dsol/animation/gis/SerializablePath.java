@@ -30,7 +30,7 @@ public class SerializablePath extends Path2D.Float implements Serializable, Shap
 
     /**
      * constructs a new SerializablePath with a winding rule.
-     * @param rule int; the windingRule
+     * @param rule the windingRule
      */
     public SerializablePath(final int rule)
     {
@@ -39,8 +39,8 @@ public class SerializablePath extends Path2D.Float implements Serializable, Shap
 
     /**
      * constructs a new SerializablePath with a winding rule and a capacity.
-     * @param rule int; the windingRule
-     * @param initialCapacity int; the initial capacity
+     * @param rule the windingRule
+     * @param initialCapacity the initial capacity
      */
     public SerializablePath(final int rule, final int initialCapacity)
     {
@@ -49,7 +49,7 @@ public class SerializablePath extends Path2D.Float implements Serializable, Shap
 
     /**
      * constructs a new SerializablePath based on a shape.
-     * @param s Shape; the shape
+     * @param s the shape
      */
     public SerializablePath(final Shape s)
     {
@@ -58,9 +58,9 @@ public class SerializablePath extends Path2D.Float implements Serializable, Shap
 
     /**
      * writes a float array of points to a stream.
-     * @param out ObjectOutputStream; the output stream
-     * @param array float[]; the array
-     * @param length int; the length
+     * @param out the output stream
+     * @param array the array
+     * @param length the length
      * @throws IOException on exception
      */
     private void writeFloatArray(final ObjectOutputStream out, final float[] array, final int length) throws IOException
@@ -73,7 +73,7 @@ public class SerializablePath extends Path2D.Float implements Serializable, Shap
 
     /**
      * Serialized an object to the stream.
-     * @param out ObjectOutputStream; the stream
+     * @param out the stream
      * @throws IOException on IO failure
      */
     private void writeObject(final ObjectOutputStream out) throws IOException
@@ -118,7 +118,7 @@ public class SerializablePath extends Path2D.Float implements Serializable, Shap
 
     /**
      * Reads a serialized object from a stream.
-     * @param in ObjectInputStream; the input stream
+     * @param in the input stream
      * @throws IOException on IO Exception
      */
     private void readObject(final ObjectInputStream in) throws IOException

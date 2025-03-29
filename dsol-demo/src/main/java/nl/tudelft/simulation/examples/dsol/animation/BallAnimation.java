@@ -39,8 +39,8 @@ public class BallAnimation extends SimRenderable2d<Ball>
 
     /**
      * constructs a new BallAnimation.
-     * @param source Locatable; the source
-     * @param simulator SimulatorInterface&lt;Double&gt;; the simulator
+     * @param source the source
+     * @param simulator the simulator
      * @throws NamingException on registration error
      * @throws RemoteException on remote animation error
      */
@@ -77,7 +77,7 @@ public class BallAnimation extends SimRenderable2d<Ball>
     }
 
     /**
-     * @param color Color; The color to set.
+     * @param color The color to set.
      */
     public void setColor(final Color color)
     {
@@ -92,8 +92,8 @@ public class BallAnimation extends SimRenderable2d<Ball>
 
         /**
          * constructs a new BallTextAnimation, possibly without a ScaleY.
-         * @param source Locatable; the source
-         * @param simulator SimulatorInterface&lt;Double&gt;; the simulator
+         * @param source the source
+         * @param simulator the simulator
          * @throws NamingException on registration error
          * @throws RemoteException on remote animation error
          */

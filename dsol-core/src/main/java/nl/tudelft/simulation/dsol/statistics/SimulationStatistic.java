@@ -16,19 +16,19 @@ public interface SimulationStatistic<T extends Number & Comparable<T>>
 {
     /**
      * Return the simulator.
-     * @return SimulatorInterface; the simulator for this dsol statistic
+     * @return the simulator for this dsol statistic
      */
     SimulatorInterface<T> getSimulator();
 
     /**
      * Return the description of this statistic.
-     * @return String; the description of this statistic
+     * @return the description of this statistic
      */
     String getDescription();
 
     /**
      * Return the number of samples for this statistic.
-     * @return int; the number of samples of this statistic
+     * @return the number of samples of this statistic
      */
     long getN();
 

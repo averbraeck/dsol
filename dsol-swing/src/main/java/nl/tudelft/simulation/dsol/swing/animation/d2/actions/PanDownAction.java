@@ -31,7 +31,7 @@ public class PanDownAction extends AbstractAction
 
     /**
      * constructs a new PanDown.
-     * @param panel GridPanel; the target
+     * @param panel the target
      */
     public PanDownAction(final VisualizationPanel panel)
     {

@@ -14,7 +14,7 @@ public interface OrderingPolicy
 {
     /**
      * decides the amount of product to order.
-     * @param inventory long; the current inventory
+     * @param inventory the current inventory
      * @return long the amount
      */
     long computeAmountToOrder(long inventory);

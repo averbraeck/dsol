@@ -138,7 +138,7 @@ public class Renderable2dTest
 
         /**
          * Set the angle.
-         * @param angle double; the new angle
+         * @param angle the new angle
          */
         public void setAngle(final double angle)
         {

@@ -23,8 +23,8 @@ import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
 public class DessSwingApplication extends DsolApplication
 {
     /**
-     * @param title String; the title
-     * @param panel DsolPanel&lt;Double,Double,Double&gt;; the panel
+     * @param title the title
+     * @param panel the panel
      */
     public DessSwingApplication(final String title, final DsolPanel panel)
     {
@@ -36,7 +36,7 @@ public class DessSwingApplication extends DsolApplication
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param args String[]; arguments, expected to be empty
+     * @param args arguments, expected to be empty
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error

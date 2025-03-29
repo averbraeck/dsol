@@ -30,9 +30,9 @@ public class DistDiscreteUniform extends DistDiscrete
     /**
      * constructs a new discrete uniform distribution, such as throwing dice with possible outcomes 1..6. Random occurrence with
      * several possible outcomes, each of which is equally likely.
-     * @param stream StreamInterface; the random number stream
-     * @param min long; the minimal value
-     * @param max long; the maximum value
+     * @param stream the random number stream
+     * @param min the minimal value
+     * @param max the maximum value
      * @throws IllegalArgumentException when min &gt;= max
      */
     public DistDiscreteUniform(final StreamInterface stream, final long min, final long max)

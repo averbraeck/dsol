@@ -52,10 +52,10 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
 
         /**
          * constructs a new SerializableRectangle2d.Double.
-         * @param x double; lower x
-         * @param y double; lower y
-         * @param w double; width
-         * @param h double; height
+         * @param x lower x
+         * @param y lower y
+         * @param w width
+         * @param h height
          */
         public Double(final double x, final double y, final double w, final double h)
         {
@@ -136,7 +136,7 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
 
         /**
          * Serialize the object to the stream.
-         * @param out ObjectOutputStream; the outputstream
+         * @param out the outputstream
          * @throws java.io.IOException on exception
          */
         private void writeObject(final ObjectOutputStream out) throws java.io.IOException
@@ -149,7 +149,7 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
 
         /**
          * Read a serialized object from the stream.
-         * @param in ObjectInputStream; the input
+         * @param in the input
          * @throws IOException on exception
          */
         private void readObject(final ObjectInputStream in) throws IOException
@@ -178,10 +178,10 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
 
         /**
          * constructs a new SerializableRectangle2d.Float.
-         * @param x float; the lower x
-         * @param y float; the lower y
-         * @param w float; the width
-         * @param h float; the height
+         * @param x the lower x
+         * @param y the lower y
+         * @param w the width
+         * @param h the height
          */
         public Float(final float x, final float y, final float w, final float h)
         {
@@ -243,10 +243,10 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
         }
 
         /**
-         * @param x float; the lower x
-         * @param y float; the lower y
-         * @param w float; the width
-         * @param h float; the height
+         * @param x the lower x
+         * @param y the lower y
+         * @param w the width
+         * @param h the height
          */
         public void setRect(final float x, final float y, final float w, final float h)
         {
@@ -273,7 +273,7 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
 
         /**
          * Serialize the object to the stream.
-         * @param out ObjectOutputStream; the stream
+         * @param out the stream
          * @throws IOException on IOException
          */
         private void writeObject(final ObjectOutputStream out) throws IOException
@@ -286,7 +286,7 @@ public abstract class SerializableRectangle2d extends Rectangle2D implements Ser
 
         /**
          * Read a serialized object from the stream.
-         * @param in ObjectInputStream; the stream
+         * @param in the stream
          * @throws IOException on IOException
          */
         private void readObject(final ObjectInputStream in) throws IOException

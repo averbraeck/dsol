@@ -29,7 +29,7 @@ public final class CumulativeProbabilities
      * corresponding sorted cumulative probabilities. A copy of the original values is made to deal with mutability of the
      * array.
      * @param values Number[] the values
-     * @param cumulativeProbabilities double[]; the cumulative probabilities for the corresponding values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when cumulativeProbabilities array is null or values array is null, or when one of the
      *             values is null
@@ -51,7 +51,7 @@ public final class CumulativeProbabilities
      * with corresponding sorted cumulative probabilities. A copy of the original values is made to deal with mutability of the
      * array.
      * @param values Number[] the values
-     * @param cumulativeProbabilities double[]; the cumulative probabilities for the corresponding values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when cumulativeProbabilities array is null or values array is null, or when one of the
      *             values is null
@@ -73,7 +73,7 @@ public final class CumulativeProbabilities
      * corresponding sorted cumulative probabilities. A copy of the original values is made to deal with mutability of the
      * array.
      * @param values double[] the values
-     * @param cumulativeProbabilities double[]; the cumulative probabilities for the corresponding values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when cumulativeProbabilities array is null or values array is null, or when one of the
      *             values is null
@@ -100,7 +100,7 @@ public final class CumulativeProbabilities
      * corresponding sorted cumulative probabilities. A copy of the original values is made to deal with mutability of the
      * array.
      * @param values double[] the values
-     * @param cumulativeProbabilities double[]; the cumulative probabilities for the corresponding values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when cumulativeProbabilities array is null or values array is null, or when one of the
      *             values is null
@@ -127,7 +127,7 @@ public final class CumulativeProbabilities
      * corresponding sorted cumulative probabilities. A copy of the original values is made to deal with mutability of the
      * array.
      * @param values long[] the values
-     * @param cumulativeProbabilities double[]; the cumulative probabilities for the corresponding values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when cumulativeProbabilities array is null or values array is null, or when one of the
      *             values is null
@@ -154,7 +154,7 @@ public final class CumulativeProbabilities
      * with corresponding sorted cumulative probabilities. A copy of the original values is made to deal with mutability of the
      * array.
      * @param values long[] the values
-     * @param cumulativeProbabilities double[]; the cumulative probabilities for the corresponding values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution arrays
      * @throws NullPointerException when cumulativeProbabilities array is null or values array is null, or when one of the
      *             values is null
@@ -179,8 +179,8 @@ public final class CumulativeProbabilities
     /**
      * Create a discrete empirical distribution based on two Lists of the same length, one with sorted values, and one with
      * corresponding sorted cumulative probabilities.
-     * @param values List&lt;? extends Number&gt;; the values
-     * @param cumulativeProbabilities List&lt;Double&gt;; the cumulative probabilities for the corresponding values
+     * @param values the values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution lists
      * @throws NullPointerException when cumulativeProbabilities list is null, or when values list is null, or when one of the
      *             values is null
@@ -201,8 +201,8 @@ public final class CumulativeProbabilities
     /**
      * Create an interpolated empirical distribution based on two Lists of the same length, one with sorted values, and one with
      * corresponding sorted cumulative probabilities.
-     * @param values List&lt;? extends Number&gt;; the values
-     * @param cumulativeProbabilities List&lt;Double&gt;; the cumulative probabilities for the corresponding values
+     * @param values the values
+     * @param cumulativeProbabilities the cumulative probabilities for the corresponding values
      * @return the cumulative distribution object belonging to the given distribution lists
      * @throws NullPointerException when cumulativeProbabilities list is null, or when values list is null, or when one of the
      *             values is null
@@ -222,7 +222,7 @@ public final class CumulativeProbabilities
 
     /**
      * Create a discrete empirical distribution based on a sorted map with sorted values mapping to cumulative probabilities.
-     * @param cumulativeProbabilitiesMap SortedMap&lt;Number, Double&gt;; the map with the entries
+     * @param cumulativeProbabilitiesMap the map with the entries
      * @return the cumulative distribution object belonging to the given distribution map
      * @throws NullPointerException when cumulativeProbabilitiesMap is null, or when one of the values in the map is null
      * @throws IllegalArgumentException when cumulativeProbabilitiesMap is empty, or when cumulativeProbabilities are not
@@ -241,7 +241,7 @@ public final class CumulativeProbabilities
     /**
      * Create an interpolated empirical distribution based on a sorted map with sorted values mapping to cumulative
      * probabilities.
-     * @param cumulativeProbabilitiesMap SortedMap&lt;Number, Double&gt;; the map with the entries
+     * @param cumulativeProbabilitiesMap the map with the entries
      * @return the cumulative distribution object belonging to the given distribution map
      * @throws NullPointerException when cumulativeProbabilitiesMap is null, or when one of the values in the map is null
      * @throws IllegalArgumentException when cumulativeProbabilitiesMap is empty, or when cumulativeProbabilities are not

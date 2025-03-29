@@ -20,8 +20,8 @@ public class DistContinuousSpeed extends DistContinuousUnit<SpeedUnit, Speed>
 
     /**
      * Constructs a new continuous distribution that draws Speed scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit SpeedUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousSpeed(final DistContinuous wrappedDistribution, final SpeedUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousSpeed extends DistContinuousUnit<SpeedUnit, Speed>
 
     /**
      * Constructs a new continuous distribution that draws Speed scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousSpeed(final DistContinuous wrappedDistribution)
     {

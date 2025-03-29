@@ -30,7 +30,7 @@ public class ZoomInAction extends AbstractAction
 
     /**
      * constructs a new ZoomInAction.
-     * @param panel GridPanel; the target
+     * @param panel the target
      */
     public ZoomInAction(final VisualizationPanel panel)
     {

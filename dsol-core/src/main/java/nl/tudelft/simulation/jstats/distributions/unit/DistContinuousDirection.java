@@ -20,8 +20,8 @@ public class DistContinuousDirection extends DistContinuousUnit<DirectionUnit, D
 
     /**
      * Constructs a new continuous distribution that draws Direction scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit DirectionUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousDirection(final DistContinuous wrappedDistribution, final DirectionUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousDirection extends DistContinuousUnit<DirectionUnit, D
 
     /**
      * Constructs a new continuous distribution that draws Direction scalars in BASE units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousDirection(final DistContinuous wrappedDistribution)
     {

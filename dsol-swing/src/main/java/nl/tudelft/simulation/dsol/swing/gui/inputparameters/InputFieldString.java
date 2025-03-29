@@ -22,8 +22,8 @@ public class InputFieldString extends AbstractInputField
 
     /**
      * Create a string field on the screen.
-     * @param panel JPanel; panel to add the field to
-     * @param parameter InputParameter&lt;?,?&gt;; the parameter
+     * @param panel panel to add the field to
+     * @param parameter the parameter
      */
     public InputFieldString(final JPanel panel, final InputParameter<?, ?> parameter)
     {

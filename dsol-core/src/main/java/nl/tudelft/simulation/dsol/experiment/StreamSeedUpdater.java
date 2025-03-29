@@ -30,7 +30,7 @@ public class StreamSeedUpdater implements StreamUpdater
 
     /**
      * Construct a new StreamSeedUpdater object an initialize it with the seed map.
-     * @param streamSeedMap Map&lt;String, Map&lt;Integer, Long&gt;&gt;; the stored seed maps
+     * @param streamSeedMap the stored seed maps
      */
     public StreamSeedUpdater(final Map<String, Map<Integer, Long>> streamSeedMap)
     {
@@ -54,7 +54,7 @@ public class StreamSeedUpdater implements StreamUpdater
 
     /**
      * Return the fallback stream updater in case the stream or the replication is not in the seed map.
-     * @return fallbackStreamUpdater StreamUpdater; the fallback stream updater in case the stream or the replication is not in
+     * @return the fallback stream updater in case the stream or the replication is not in
      *         the seed map.
      */
     public StreamUpdater getFallbackStreamUpdater()
@@ -64,7 +64,7 @@ public class StreamSeedUpdater implements StreamUpdater
 
     /**
      * Set a new fallback stream updater in case the stream or the replication is not in the seed map.
-     * @param fallbackStreamUpdater StreamUpdater; the new fallback stream updater in case the stream or the replication is not
+     * @param fallbackStreamUpdater the new fallback stream updater in case the stream or the replication is not
      *            in the seed map.
      * @throws NullPointerException when fallbackStreamUpdater is null
      */
@@ -76,7 +76,7 @@ public class StreamSeedUpdater implements StreamUpdater
 
     /**
      * Return the available seed maps for all stored streams, mapping stream ids to seed maps.
-     * @return Map&lt;String, Map&lt;Integer, Long&gt;&gt;; the stored seed maps
+     * @return the stored seed maps
      */
     public Map<String, Map<Integer, Long>> getStreamSeedMap()
     {

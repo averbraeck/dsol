@@ -20,8 +20,8 @@ public class DistContinuousFlowVolume extends DistContinuousUnit<FlowVolumeUnit,
 
     /**
      * Constructs a new continuous distribution that draws FlowVolume scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit FlowVolumeUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousFlowVolume(final DistContinuous wrappedDistribution, final FlowVolumeUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousFlowVolume extends DistContinuousUnit<FlowVolumeUnit,
 
     /**
      * Constructs a new continuous distribution that draws FlowVolume scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousFlowVolume(final DistContinuous wrappedDistribution)
     {

@@ -25,7 +25,7 @@ public class SerializableMethod implements Serializable
 
     /**
      * constructs a new SerializableMethod.
-     * @param method Method; the method
+     * @param method the method
      */
     public SerializableMethod(final Method method)
     {
@@ -35,8 +35,8 @@ public class SerializableMethod implements Serializable
 
     /**
      * constructs a new SerializableMethod.
-     * @param clazz Class&lt;?&gt;; the clazz this field is instance of
-     * @param methodName String; the name of the method
+     * @param clazz the clazz this field is instance of
+     * @param methodName the name of the method
      * @param parameterTypes Class&lt;?&gt;..; The parameterTypes of the method
      * @throws NoSuchMethodException whenever the method is not defined in clazz
      */
@@ -57,7 +57,7 @@ public class SerializableMethod implements Serializable
 
     /**
      * writes a serializable method to stream.
-     * @param out ObjectOutputStream; the outputstream
+     * @param out the outputstream
      * @throws IOException on IOException
      */
     private void writeObject(final ObjectOutputStream out) throws IOException

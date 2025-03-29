@@ -24,8 +24,8 @@ public class QueueEntry<E>
 
     /**
      * A combination of an entity and a time when the entity entered the queue.
-     * @param entity E; the entity to insert in the queue
-     * @param queueInTime double; the time it gets into the queue
+     * @param entity the entity to insert in the queue
+     * @param queueInTime the time it gets into the queue
      */
     public QueueEntry(final E entity, final double queueInTime)
     {
@@ -35,7 +35,7 @@ public class QueueEntry<E>
 
     /**
      * Return the time when the entity entered the queue.
-     * @return double; the time when the entity entered the queue.
+     * @return the time when the entity entered the queue.
      */
     public double getQueueInTime()
     {
@@ -44,7 +44,7 @@ public class QueueEntry<E>
 
     /**
      * Return the entity that is in the queue.
-     * @return E; the entity that is in the queue
+     * @return the entity that is in the queue
      */
     public E getEntity()
     {

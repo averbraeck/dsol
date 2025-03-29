@@ -33,7 +33,7 @@ public class InputParametersTab extends JPanel
     
     /**
      * Create an InputParametersTab for the given simulation model.
-     * @param model DsolModel; the model.
+     * @param model the model.
      */
     public InputParametersTab(final DsolModel<?, ?> model)
     {
@@ -56,7 +56,7 @@ public class InputParametersTab extends JPanel
         
     /**
      * Return the head portion of the HTML page to display the parameter map.
-     * @return String; the head portion of the HTML page to display the parameter map
+     * @return the head portion of the HTML page to display the parameter map
      */
     protected String makeHead()
     {
@@ -73,7 +73,7 @@ public class InputParametersTab extends JPanel
     
     /**
      * Return the body portion of the HTML page to display the parameter map.
-     * @return String; the body portion of the HTML page to display the parameter map
+     * @return the body portion of the HTML page to display the parameter map
      */
     protected String makeBody()
     {

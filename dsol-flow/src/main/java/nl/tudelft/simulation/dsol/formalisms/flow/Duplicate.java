@@ -48,8 +48,8 @@ public class Duplicate<T extends Number & Comparable<T>> extends FlowBlock<T, Du
 
     /**
      * Create a new Duplicate flow block.
-     * @param id String; the id of the FlowObject
-     * @param simulator DevsSimulatorInterface&lt;T&gt;; on which is scheduled
+     * @param id the id of the FlowObject
+     * @param simulator on which is scheduled
      */
     public Duplicate(final String id, final DevsSimulatorInterface<T> simulator)
     {

@@ -36,7 +36,7 @@ public abstract class RandomNumberGenerator implements StreamInterface
 
     /**
      * Construct a new RandomNumberGenerator.
-     * @param seed long; the seed of the generator.
+     * @param seed the seed of the generator.
      */
     public RandomNumberGenerator(final long seed)
     {
@@ -56,7 +56,7 @@ public abstract class RandomNumberGenerator implements StreamInterface
 
     /**
      * returns the next value in the stream.
-     * @param bits int; the number of bits used
+     * @param bits the number of bits used
      * @return the next value.
      */
     protected abstract long next(int bits);

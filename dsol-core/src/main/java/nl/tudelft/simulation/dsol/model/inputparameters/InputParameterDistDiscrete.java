@@ -23,12 +23,12 @@ public class InputParameterDistDiscrete extends AbstractInputParameter<DistDiscr
 
     /**
      * Construct a new InputParameterDistDiscrete.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterDistDiscrete
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param stream StreamInterface; the random number stream to use for the chosen distribution
-     * @param defaultValue DistDiscrete; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterDistDiscrete
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param stream the random number stream to use for the chosen distribution
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws InputParameterException in case the default value is not part of the list
      * @throws NullPointerException when key, shortName, defaultValue, description, or stream is null
@@ -58,7 +58,7 @@ public class InputParameterDistDiscrete extends AbstractInputParameter<DistDiscr
     }
 
     /**
-     * @param stream StreamInterface; set stream
+     * @param stream set stream
      * @throws NullPointerException when stream is null
      */
     public void setStream(final StreamInterface stream)
@@ -71,7 +71,7 @@ public class InputParameterDistDiscrete extends AbstractInputParameter<DistDiscr
 
     /**
      * Set the value of the distribution.
-     * @param dist DistDiscrete; the distribution to set the value to
+     * @param dist the distribution to set the value to
      * @throws NullPointerException when dist is null
      * @throws InputParameterException when this InputParameter is read-only, or dist is not valid
      */

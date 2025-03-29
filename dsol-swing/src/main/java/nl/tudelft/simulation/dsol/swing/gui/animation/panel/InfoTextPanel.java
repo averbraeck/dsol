@@ -50,7 +50,7 @@ public class InfoTextPanel extends JPanel
     /**
      * Create a panel with info in the north bar of the animation tab. This version show the mouse position. The actual creation
      * is left to an overridable init method.
-     * @param animationPanel AnimationPanel; the animation panel that has the latest mouse coordinate
+     * @param animationPanel the animation panel that has the latest mouse coordinate
      */
     public InfoTextPanel(final AnimationPanel animationPanel)
     {
@@ -100,7 +100,7 @@ public class InfoTextPanel extends JPanel
 
     /**
      * Return the coordinate formatter for x and y of the world coordinates.
-     * @return NumberFormat; the coordinate formatter
+     * @return the coordinate formatter
      */
     public NumberFormat getCoordinateFormatter()
     {
@@ -109,7 +109,7 @@ public class InfoTextPanel extends JPanel
 
     /**
      * Set the coordinate formatter for x and y of the world coordinates.
-     * @param coordinateFormatter NumberFormat; the new coordinate formatter
+     * @param coordinateFormatter the new coordinate formatter
      */
     public void setCoordinateFormatter(final NumberFormat coordinateFormatter)
     {

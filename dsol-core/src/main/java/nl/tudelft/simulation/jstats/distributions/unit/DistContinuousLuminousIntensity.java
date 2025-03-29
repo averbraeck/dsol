@@ -20,8 +20,8 @@ public class DistContinuousLuminousIntensity extends DistContinuousUnit<Luminous
 
     /**
      * Constructs a new continuous distribution that draws LuminousIntensity scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit LuminousIntensityUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousLuminousIntensity(final DistContinuous wrappedDistribution, final LuminousIntensityUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousLuminousIntensity extends DistContinuousUnit<Luminous
 
     /**
      * Constructs a new continuous distribution that draws LuminousIntensity scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousLuminousIntensity(final DistContinuous wrappedDistribution)
     {

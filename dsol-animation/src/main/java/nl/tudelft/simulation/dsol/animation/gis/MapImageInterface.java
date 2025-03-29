@@ -19,13 +19,13 @@ public interface MapImageInterface extends Serializable
 {
     /**
      * Return the backgroundColor.
-     * @return Color; the value of property backgroundColor.
+     * @return the value of property backgroundColor.
      */
     Color getBackgroundColor();
 
     /**
      * Set the backgroundColor.
-     * @param backgroundColor Color; New value of backgroundColor.
+     * @param backgroundColor New value of backgroundColor.
      */
     void setBackgroundColor(Color backgroundColor);
 
@@ -37,7 +37,7 @@ public interface MapImageInterface extends Serializable
 
     /**
      * Setter for the canvas size.
-     * @param size Dimension; New value of the canvas size.
+     * @param size New value of the canvas size.
      */
     void setSize(Dimension size);
 

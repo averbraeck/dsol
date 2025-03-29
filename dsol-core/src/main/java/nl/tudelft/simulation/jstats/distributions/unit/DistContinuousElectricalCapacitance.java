@@ -20,8 +20,8 @@ public class DistContinuousElectricalCapacitance extends DistContinuousUnit<Elec
 
     /**
      * Constructs a new continuous distribution that draws ElectricalCapacitance scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit ElectricalCapacitanceUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousElectricalCapacitance(final DistContinuous wrappedDistribution, final ElectricalCapacitanceUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousElectricalCapacitance extends DistContinuousUnit<Elec
 
     /**
      * Constructs a new continuous distribution that draws ElectricalCapacitance scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousElectricalCapacitance(final DistContinuous wrappedDistribution)
     {

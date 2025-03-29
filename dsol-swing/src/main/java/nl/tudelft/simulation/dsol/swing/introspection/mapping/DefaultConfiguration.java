@@ -67,8 +67,8 @@ public class DefaultConfiguration implements CellPresentationConfiguration
 
     /**
      * adds a renderer to the configuration
-     * @param cellType Class&lt;?&gt;; the cellType
-     * @param renderingClass Class&lt;?&gt;; the renderingClass
+     * @param cellType the cellType
+     * @param renderingClass the renderingClass
      */
     protected synchronized void addRenderer(final Class<?> cellType, final Class<?> renderingClass)
     {
@@ -77,8 +77,8 @@ public class DefaultConfiguration implements CellPresentationConfiguration
 
     /**
      * adds an editingClass to a cellType
-     * @param cellType Class&lt;?&gt;; the cellType
-     * @param editingClass Class&lt;?&gt;; an editingClass
+     * @param cellType the cellType
+     * @param editingClass an editingClass
      */
     protected void addEditor(final Class<?> cellType, final Class<?> editingClass)
     {

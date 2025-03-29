@@ -47,8 +47,8 @@ public class ExpandButton extends JButton
 
     /**
      * constructs a new ExpandButton.
-     * @param property Property; the property
-     * @param model IntrospectingTableModelInterface; the model
+     * @param property the property
+     * @param model the model
      */
     public ExpandButton(final Property property, final IntrospectingTableModelInterface model)
     {
@@ -71,7 +71,7 @@ public class ExpandButton extends JButton
 
     /**
      * Sets the JTable in which this button is actually displayed. The reference is used to facilitate dialog creation.
-     * @param table JTable; the table
+     * @param table the table
      */
     public void setMyJTable(final JTable table)
     {

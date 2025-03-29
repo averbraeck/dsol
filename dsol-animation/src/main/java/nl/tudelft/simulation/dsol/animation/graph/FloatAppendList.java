@@ -56,7 +56,7 @@ public class FloatAppendList implements Iterable<Float>, Serializable
 
     /**
      * Add a value to the list.
-     * @param value float; the value to add
+     * @param value the value to add
      */
     public void add(final float value)
     {
@@ -73,7 +73,7 @@ public class FloatAppendList implements Iterable<Float>, Serializable
 
     /**
      * Return the number of elements.
-     * @return int; the number of elements
+     * @return the number of elements
      */
     public int size()
     {
@@ -82,8 +82,8 @@ public class FloatAppendList implements Iterable<Float>, Serializable
 
     /**
      * Return the value at a position.
-     * @param i int; the position
-     * @return float; the value at the position
+     * @param i the position
+     * @return the value at the position
      * @throws IndexOutOfBoundsException when i &lt; 0 or i &gt; number of values
      */
     public float get(final int i)
@@ -114,7 +114,7 @@ public class FloatAppendList implements Iterable<Float>, Serializable
 
         /**
          * Make an iterator for the FloatAppendList.
-         * @param list FloatAppendList; the list to iterate over
+         * @param list the list to iterate over
          */
         FloatAppendIterator(final FloatAppendList list)
         {

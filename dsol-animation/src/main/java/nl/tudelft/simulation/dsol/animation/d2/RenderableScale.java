@@ -35,9 +35,9 @@ public class RenderableScale
 
     /**
      * Construct a translator between world coordinates and screen coordinates that uses a different scale factor for x and y.
-     * @param yScaleRatio double; the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed
+     * @param yScaleRatio the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed
      *            Y-axis, where yScale &gt; 1 results in an expanded Y-axis
-     * @param objectScaleFactor double; the scale factor for the object, e.g., to get 1 pixel unit to equal 1 meter on a map. A
+     * @param objectScaleFactor the scale factor for the object, e.g., to get 1 pixel unit to equal 1 meter on a map. A
      *            scale factor smaller than 1 means that the object will be drawn smaller on the screen.
      * @throws IllegalArgumentException when yScale &lt;= 0
      */
@@ -51,7 +51,7 @@ public class RenderableScale
 
     /**
      * Construct a translator between world coordinates and screen coordinates that uses a different scale factor for x and y.
-     * @param yScaleRatio double; the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed
+     * @param yScaleRatio the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed
      *            Y-axis, where yScale &gt; 1 results in an expanded Y-axis
      * @throws IllegalArgumentException when yScale &lt;= 0
      */
@@ -72,9 +72,9 @@ public class RenderableScale
     /**
      * Returns the X-scale of a screen compared to an extent. If the height or the width of the screen are &lt; 0 Double.NaN is
      * returned.
-     * @param extent Rectangle2D; the extent of this animation
-     * @param screen Dimension; the screen dimensions
-     * @return double; the scale. Can return Double.NaN
+     * @param extent the extent of this animation
+     * @param screen the screen dimensions
+     * @return the scale. Can return Double.NaN
      */
     public double getXScale(final Bounds2d extent, final Dimension screen)
     {
@@ -88,9 +88,9 @@ public class RenderableScale
     /**
      * Returns the Y-scale of a screen compared to an extent. If the height or the width of the screen are &lt; 0 Double.NaN is
      * returned.
-     * @param extent Rectangle2D; the extent of this animation
-     * @param screen Dimension; the screen dimensions
-     * @return double; the scale. Can return Double.NaN
+     * @param extent the extent of this animation
+     * @param screen the screen dimensions
+     * @return the scale. Can return Double.NaN
      */
     public double getYScale(final Bounds2d extent, final Dimension screen)
     {
@@ -104,9 +104,9 @@ public class RenderableScale
     /**
      * returns the frame xy-coordinates of a point in world coordinates. If parameters are invalid (i.e. screen.size &lt;= 0) a
      * null value is returned. If parameter combinations (i.e !extent.contains(point)) are invalid a null value is returned.
-     * @param worldCoordinates Point&lt;?, ?&gt;; the world coordinates
-     * @param extent Bounds2d; the extent of this animation
-     * @param screen Dimension; the screen dimentsions
+     * @param worldCoordinates the world coordinates
+     * @param extent the extent of this animation
+     * @param screen the screen dimentsions
      * @return Point2D (x,y) on screen. Can be null.
      */
     public Point2D getScreenCoordinates(final Point<?> worldCoordinates, final Bounds2d extent, final Dimension screen)
@@ -119,9 +119,9 @@ public class RenderableScale
     /**
      * returns the frame xy-coordinates of a point in world coordinates. If parameters are invalid (i.e. screen.size &lt;= 0) a
      * null value is returned. If parameter combinations (i.e !extent.contains(point)) are invalid a null value is returned.
-     * @param worldCoordinates Point&lt;?, ?&gt;; the world coordinates
-     * @param extent Bounds2d; the extent of this animation
-     * @param screen Dimension; the screen dimentsions
+     * @param worldCoordinates the world coordinates
+     * @param extent the extent of this animation
+     * @param screen the screen dimentsions
      * @return Point2D (x,y) on screen. Can be null.
      */
     public Point2d getScreenCoordinatesAsPoint2d(final Point<?> worldCoordinates, final Bounds2d extent, final Dimension screen)
@@ -134,9 +134,9 @@ public class RenderableScale
     /**
      * returns the frame xy-coordinates of a point in screen coordinates. If parameters are invalid (i.e. screen.size &lt; 0) a
      * null value is returned. If parameter combinations (i.e !screen.contains(point)) are invalid a null value is returned.
-     * @param screenCoordinates Point2D; the screen coordinates
-     * @param extent Bounds2d; the extent of this animation
-     * @param screen Dimension; the screen dimensions
+     * @param screenCoordinates the screen coordinates
+     * @param extent the extent of this animation
+     * @param screen the screen dimensions
      * @return Point2d (x,y) in the 2D or 3D world
      */
     public Point2d getWorldCoordinates(final Point2D screenCoordinates, final Bounds2d extent, final Dimension screen)
@@ -148,7 +148,7 @@ public class RenderableScale
 
     /**
      * Return the y-scale ratio. A number larger than 1 means the y-axis is compressed.
-     * @return double; the y-scale ratio. A number larger than 1 means the y-axis is compressed
+     * @return the y-scale ratio. A number larger than 1 means the y-axis is compressed
      */
     public double getYScaleRatio()
     {
@@ -158,7 +158,7 @@ public class RenderableScale
     /**
      * Return the scale factor for the object, e.g., to get 1 pixel unit to equal 1 meter on a map. A scale factor smaller than
      * 1 means that the object will be drawn smaller on the screen.
-     * @return double; the scale factor for the object, e.g., to get 1 pixel unit to equal 1 meter on a map
+     * @return the scale factor for the object, e.g., to get 1 pixel unit to equal 1 meter on a map
      */
     public double getObjectScaleFactor()
     {

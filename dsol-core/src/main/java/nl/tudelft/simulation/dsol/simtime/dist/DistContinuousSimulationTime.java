@@ -30,7 +30,7 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
 
     /**
      * constructs a new continuous distribution.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousSimulationTime(final DistContinuous wrappedDistribution)
     {
@@ -46,8 +46,8 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
 
     /**
      * returns the probability density for a value x.
-     * @param x double; the value for which to calculate the probability density.
-     * @return double; the probability density for value x
+     * @param x the value for which to calculate the probability density.
+     * @return the probability density for value x
      */
     public double probDensity(final double x)
     {
@@ -65,7 +65,7 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+         * @param wrappedDistribution the wrapped continuous distribution
          */
         public TimeDouble(final DistContinuous wrappedDistribution)
         {
@@ -86,7 +86,7 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+         * @param wrappedDistribution the wrapped continuous distribution
          */
         public TimeFloat(final DistContinuous wrappedDistribution)
         {
@@ -107,7 +107,7 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
         private static final long serialVersionUID = 20140805L;
 
         /**
-         * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+         * @param wrappedDistribution the wrapped continuous distribution
          */
         public TimeLong(final DistContinuous wrappedDistribution)
         {
@@ -131,8 +131,8 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
         private final DurationUnit unit;
 
         /**
-         * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-         * @param unit DurationUnit; the unit for the parameters (and drawn values) of the wrapped distribution
+         * @param wrappedDistribution the wrapped continuous distribution
+         * @param unit the unit for the parameters (and drawn values) of the wrapped distribution
          */
         public TimeDoubleUnit(final DistContinuous wrappedDistribution, final DurationUnit unit)
         {
@@ -157,8 +157,8 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
         private final DurationUnit unit;
 
         /**
-         * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-         * @param unit DurationUnit; the unit for the parameters (and drawn values) of the wrapped distribution
+         * @param wrappedDistribution the wrapped continuous distribution
+         * @param unit the unit for the parameters (and drawn values) of the wrapped distribution
          */
         public TimeFloatUnit(final DistContinuous wrappedDistribution, final DurationUnit unit)
         {

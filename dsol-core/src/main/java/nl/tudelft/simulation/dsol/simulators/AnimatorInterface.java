@@ -31,14 +31,14 @@ public interface AnimatorInterface
 
     /**
      * returns the animation delay in milliseconds between each consecutive animation update.
-     * @return long; the animation delay in milliseconds of wallclock time
+     * @return the animation delay in milliseconds of wallclock time
      * @throws RemoteException on network failure
      */
     long getAnimationDelay() throws RemoteException;
 
     /**
      * sets the animationDelay using wallclock time in milliseconds.
-     * @param milliseconds long; the animation delay in milliseconds
+     * @param milliseconds the animation delay in milliseconds
      * @throws RemoteException on network failure
      */
     void setAnimationDelay(long milliseconds) throws RemoteException;
@@ -68,7 +68,7 @@ public interface AnimatorInterface
         private final AnimatorInterface animator;
 
         /**
-         * @param animator AnimatorInterface; the animator.
+         * @param animator the animator.
          */
         public AnimationThread(final AnimatorInterface animator)
         {

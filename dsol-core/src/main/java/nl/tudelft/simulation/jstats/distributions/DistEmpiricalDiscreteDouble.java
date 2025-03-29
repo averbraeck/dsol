@@ -29,8 +29,8 @@ public class DistEmpiricalDiscreteDouble extends DistContinuous
 
     /**
      * constructs a new DistEmpirical.
-     * @param stream StreamInterface; the stream to use
-     * @param empiricalDistribution EmpiricalDistributionInterface; the cumulative distribution to use
+     * @param stream the stream to use
+     * @param empiricalDistribution the cumulative distribution to use
      */
     public DistEmpiricalDiscreteDouble(final StreamInterface stream, final DiscreteEmpiricalDistribution empiricalDistribution)
     {

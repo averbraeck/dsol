@@ -30,7 +30,7 @@ public class PanUpAction extends AbstractAction
 
     /**
      * constructs a new PanUp.
-     * @param panel GridPanel; the target
+     * @param panel the target
      */
     public PanUpAction(final VisualizationPanel panel)
     {

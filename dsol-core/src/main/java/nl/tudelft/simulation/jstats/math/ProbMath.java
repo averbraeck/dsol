@@ -72,8 +72,8 @@ public final class ProbMath
 
     /**
      * Compute n factorial as a double. fac(n) = n * (n-1) * (n-2) * ... 2 * 1.
-     * @param n int; the value to calculate n! for
-     * @return double; n factorial
+     * @param n the value to calculate n! for
+     * @return n factorial
      */
     public static double factorial(final int n)
     {
@@ -84,8 +84,8 @@ public final class ProbMath
 
     /**
      * Compute n factorial as a double. fac(n) = n * (n-1) * (n-2) * ... 2 * 1.
-     * @param n long; the value to calculate n! for
-     * @return double; n factorial
+     * @param n the value to calculate n! for
+     * @return n factorial
      */
     public static double factorial(final long n)
     {
@@ -96,8 +96,8 @@ public final class ProbMath
 
     /**
      * Compute n factorial as a long. fac(n) = n * (n-1) * (n-2) * ... 2 * 1.
-     * @param n int; the value to calculate n! for
-     * @return double; n factorial
+     * @param n the value to calculate n! for
+     * @return n factorial
      */
     public static long fac(final int n)
     {
@@ -108,8 +108,8 @@ public final class ProbMath
 
     /**
      * Compute n factorial as a long. fac(n) = n * (n-1) * (n-2) * ... 2 * 1.
-     * @param n long; the value to calculate n! for
-     * @return double; n factorial
+     * @param n the value to calculate n! for
+     * @return n factorial
      */
     public static long fac(final long n)
     {
@@ -120,8 +120,8 @@ public final class ProbMath
 
     /**
      * Compute the k-permutations of n.
-     * @param n int; the first parameter
-     * @param k int; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the k-permutations of n
      */
     public static double permutations(final int n, final int k)
@@ -135,8 +135,8 @@ public final class ProbMath
 
     /**
      * Compute the k-permutations of n.
-     * @param n long; the first parameter
-     * @param k long; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the k-permutations of n
      */
     public static double permutations(final long n, final long k)
@@ -150,8 +150,8 @@ public final class ProbMath
 
     /**
      * Computes the k-permutations of n as a long.
-     * @param n int; the first parameter
-     * @param k int; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the k-permutations of n
      */
     public static long perm(final int n, final int k)
@@ -165,8 +165,8 @@ public final class ProbMath
 
     /**
      * Computes the k-permutations of n as a long.
-     * @param n long; the first parameter
-     * @param k long; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the k-permutations of n
      */
     public static long perm(final long n, final long k)
@@ -180,8 +180,8 @@ public final class ProbMath
 
     /**
      * computes the combinations of n over k.
-     * @param n int; the first parameter
-     * @param k int; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the combinations of n over k
      */
     public static double combinations(final int n, final int k)
@@ -195,8 +195,8 @@ public final class ProbMath
 
     /**
      * computes the combinations of n over k.
-     * @param n long; the first parameter
-     * @param k long; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the combinations of n over k
      */
     public static double combinations(final long n, final long k)
@@ -210,8 +210,8 @@ public final class ProbMath
 
     /**
      * computes the combinations of n over k as a long.
-     * @param n int; the first parameter
-     * @param k int; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the combinations of n over k
      */
     public static long comb(final int n, final int k)
@@ -225,8 +225,8 @@ public final class ProbMath
 
     /**
      * computes the combinations of n over k as a long.
-     * @param n long; the first parameter
-     * @param k long; the second parameter
+     * @param n the first parameter
+     * @param k the second parameter
      * @return the combinations of n over k
      */
     public static long comb(final long n, final long k)
@@ -251,7 +251,7 @@ public final class ProbMath
      * ...)<br>
      * The factors are given by <a href="https://oeis.org/A007680">https://oeis.org/A007680</a>, which evaluates to a(n) =
      * (2n+1)n!. See <a href="https://en.wikipedia.org/wiki/Error_function">https://en.wikipedia.org/wiki/Error_function</a>.
-     * @param z double; the value to calculate the error function for
+     * @param z the value to calculate the error function for
      * @return erf(z)
      */
     public static double erf(final double z)
@@ -274,8 +274,8 @@ public final class ProbMath
      * where the !! operator is the 'double factorial' operator which is (n).(n-2)...8.4.2 for even n, and (n).(n-2)...3.5.1 for
      * odd n. See <a href="https://mathworld.wolfram.com/Erf.html">https://mathworld.wolfram.com/Erf.html</a> formula (9) and
      * (10). This function would work well for z <u>&lt;</u> 0.5.
-     * @param z double; the parameter
-     * @return double; erf(x)
+     * @param z the parameter
+     * @return erf(x)
      */
     private static double erfSmall(final double z)
     {
@@ -303,8 +303,8 @@ public final class ProbMath
      * where the !! operator is the 'double factorial' operator which is (n).(n-2)...8.4.2 for even n, and (n).(n-2)...3.5.1 for
      * odd n. See <a href="https://mathworld.wolfram.com/Erf.html">https://mathworld.wolfram.com/Erf.html</a> formula (18) to
      * (20). This function would work well for z <u>&gt;</u> 3.7.
-     * @param z double; the argument
-     * @return double; erf(z)
+     * @param z the argument
+     * @return erf(z)
      */
     private static double erfBig(final double z)
     {
@@ -330,8 +330,8 @@ public final class ProbMath
      * The factors are given by <a href="https://oeis.org/A007680">https://oeis.org/A007680</a>, which evaluates to a(n) =
      * (2n+1)n!. See <a href="https://en.wikipedia.org/wiki/Error_function">https://en.wikipedia.org/wiki/Error_function</a>.
      * This works pretty well on the interval [0.5,3.7].
-     * @param z double; the argument
-     * @return double; erf(z)
+     * @param z the argument
+     * @return erf(z)
      */
     private static double erfTaylor(final double z)
     {
@@ -355,7 +355,7 @@ public final class ProbMath
     /**
      * Approximates erf<sup>-1</sup>(p) based on
      * <a href="http://www.naic.edu/~jeffh/inverse_cerf.c">http://www.naic.edu/~jeffh/inverse_cerf.c</a> code.
-     * @param y double; the cumulative probability to calculate the inverse error function for
+     * @param y the cumulative probability to calculate the inverse error function for
      * @return erf<sup>-1</sup>(p)
      */
     public static double erfInv(final double y)
@@ -417,8 +417,8 @@ public final class ProbMath
 
     /**
      * Calculates ln(gamma(x)). Java version of gammln function in Numerical Recipes in C, p.214.
-     * @param xx double; the value to calculate the gamma function for
-     * @return double; gamma(x)
+     * @param xx the value to calculate the gamma function for
+     * @return gamma(x)
      * @throws IllegalArgumentException when x is &lt; 0
      */
     public static double gammaln(final double xx)
@@ -439,8 +439,8 @@ public final class ProbMath
 
     /**
      * Calculates gamma(x). Based on the gammln function in Numerical Recipes in C, p.214.
-     * @param x double; the value to calculate the gamma function for
-     * @return double; gamma(x)
+     * @param x the value to calculate the gamma function for
+     * @return gamma(x)
      * @throws IllegalArgumentException when x is &lt; 0
      */
     public static double gamma(final double x)
@@ -450,9 +450,9 @@ public final class ProbMath
 
     /**
      * Calculates Beta(z, w) where Beta(z, w) = &Gamma;(z) &Gamma;(w) / &Gamma;(z + w).
-     * @param z double; beta function parameter 1
+     * @param z beta function parameter 1
      * @param w ; beta function parameter 2
-     * @return double; beta(z, w)
+     * @return beta(z, w)
      * @throws IllegalArgumentException when one of the parameters is &lt; 0
      */
     public static double beta(final double z, final double w)

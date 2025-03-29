@@ -26,7 +26,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
 
     /**
      * constructs a new BallModel.
-     * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
+     * @param simulator the simulator
      */
     public BallModel(final DevsSimulatorInterface<Double> simulator)
     {
@@ -51,7 +51,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
 
     /**
      * Return the ball with number 'i', or null when it is above or below the available balls.
-     * @param i int; the ball number to return
+     * @param i the ball number to return
      * @return the ball with number 'i'
      */
     public Ball getBall(final int i)

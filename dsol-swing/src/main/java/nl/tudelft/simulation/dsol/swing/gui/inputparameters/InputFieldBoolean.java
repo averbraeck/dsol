@@ -21,8 +21,8 @@ public class InputFieldBoolean extends AbstractInputField
 
     /**
      * Create a boolean field on the screen.
-     * @param panel JPanel; panel to add the field to
-     * @param parameter InputParameterBoolean; the parameter
+     * @param panel panel to add the field to
+     * @param parameter the parameter
      */
     public InputFieldBoolean(final JPanel panel, final InputParameterBoolean parameter)
     {

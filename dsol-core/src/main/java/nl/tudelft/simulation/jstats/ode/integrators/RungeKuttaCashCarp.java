@@ -42,8 +42,8 @@ public class RungeKuttaCashCarp extends NumericalIntegrator
 
     /**
      * constructs a new RungeKuttaCashCarp.
-     * @param stepSize double; the stepSize
-     * @param equation DifferentialEquationInterface; the differentialEquation
+     * @param stepSize the stepSize
+     * @param equation the differentialEquation
      */
     public RungeKuttaCashCarp(final double stepSize, final DifferentialEquationInterface equation)
     {

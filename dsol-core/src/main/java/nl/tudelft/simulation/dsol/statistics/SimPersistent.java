@@ -52,8 +52,8 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /**
      * constructs a new SimPersistent.
-     * @param description String; refers to the description of this SimPersistent
-     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
+     * @param description refers to the description of this SimPersistent
+     * @param model the model
      */
     public SimPersistent(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
@@ -88,10 +88,10 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /**
      * constructs a new SimPersistent.
-     * @param model DsolModel&lt;T, SimulatorInterface&lt;T&gt;&gt;; the model
-     * @param description String; the description
-     * @param target EventProducer; the target on which to collect statistics
-     * @param eventType EventType; the eventType for which statistics are sampled
+     * @param model the model
+     * @param description the description
+     * @param target the target on which to collect statistics
+     * @param eventType the eventType for which statistics are sampled
      */
     public SimPersistent(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)

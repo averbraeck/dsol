@@ -60,7 +60,7 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
 
     /**
      * constructs a new CollectionTableModel.
-     * @param parentProperty Property; the parentPropert
+     * @param parentProperty the parentPropert
      */
     public MapTableModel(final Property parentProperty)
     {
@@ -69,8 +69,8 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
 
     /**
      * constructs a new CollectionTableModel.
-     * @param parentProperty Property; the parentProperty
-     * @param introspector Introspector; the introspector to use
+     * @param parentProperty the parentProperty
+     * @param introspector the introspector to use
      */
     public MapTableModel(final Property parentProperty, final Introspector introspector)
     {
@@ -112,8 +112,8 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
 
     /**
      * Adds a new value to the managed composite property.
-     * @param key Object; the key
-     * @param value Object; the value to add
+     * @param key the key
+     * @param value the value to add
      */
     private void addValue(final Object key, final Object value)
     {
@@ -206,7 +206,7 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
     }
 
     /**
-     * @param index int; the index of the property
+     * @param index the index of the property
      * @return the Property
      */
     protected Property getProperty(final int index)
@@ -244,7 +244,7 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
 
     /**
      * Sets the modelmanager. By default, a {see DefaultModelManager}is used.
-     * @param manager ModelManager; the manager
+     * @param manager the manager
      */
     public void setModelManager(final ModelManager manager)
     {
@@ -276,8 +276,8 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
         /**
          * This implementation is NOT thread-safe. When multiple users will edit the parent at the same time, errors are
          * expected.
-         * @param key Integer; the key
-         * @param name String; the name
+         * @param key the key
+         * @param name the name
          */
         MapProperty(final Integer key, final String name)
         {

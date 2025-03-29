@@ -20,8 +20,8 @@ public class DistContinuousAcceleration extends DistContinuousUnit<AccelerationU
 
     /**
      * Constructs a new continuous distribution that draws Acceleration scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit AccelerationUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousAcceleration(final DistContinuous wrappedDistribution, final AccelerationUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousAcceleration extends DistContinuousUnit<AccelerationU
 
     /**
      * Constructs a new continuous distribution that draws Acceleration scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousAcceleration(final DistContinuous wrappedDistribution)
     {

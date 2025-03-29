@@ -220,8 +220,8 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * constructs a new VisualizationPanel.
-     * @param homeExtent Bounds2d; the initial extent.
-     * @param producer EventProducer; the object firing animation update events
+     * @param homeExtent the initial extent.
+     * @param producer the object firing animation update events
      * @throws RemoteException on error when remote panel and producer cannot connect
      */
     public VisualizationPanel(final Bounds2d homeExtent, final EventProducer producer) throws RemoteException
@@ -241,9 +241,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * constructs a new VisualizationPanel with a context, so it can start drawing right away.
-     * @param homeExtent Bounds2d; the initial extent.
-     * @param producer EventProducer; the object firing animation update events
-     * @param context ContextInterface; the context that contains the drawing objects
+     * @param homeExtent the initial extent.
+     * @param producer the object firing animation update events
+     * @param context the context that contains the drawing objects
      * @throws RemoteException on error when remote panel and producer cannot connect
      * @throws NamingException on context error
      */
@@ -323,7 +323,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Test whether the element needs to be shown on the screen or not.
-     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the renderable element to test
+     * @param element the renderable element to test
      * @return whether the element needs to be shown or not
      */
     public boolean isShowElement(final Renderable2dInterface<? extends Locatable> element)
@@ -334,7 +334,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     /**
      * Test whether a certain class needs to be shown on the screen or not. The class needs to implement Locatable, otherwise it
      * cannot be shown at all.
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class to test
+     * @param locatableClass the class to test
      * @return whether the class needs to be shown or not
      */
     public boolean isShowClass(final Class<? extends Locatable> locatableClass)
@@ -433,7 +433,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * set a new extent for this panel.
-     * @param extent Bounds2d; set a new extent
+     * @param extent set a new extent
      */
     public void setExtent(final Bounds2d extent)
     {
@@ -449,7 +449,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * show the grid?
-     * @param bool boolean; true/false
+     * @param bool true/false
      */
     public synchronized void showGrid(final boolean bool)
     {
@@ -459,7 +459,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Set the world coordinates based on a mouse move.
-     * @param point Point2D; the x,y world coordinates
+     * @param point the x,y world coordinates
      */
     public synchronized void setWorldCoordinate(final Point2d point)
     {
@@ -496,7 +496,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     }
 
     /**
-     * @param showToolTip boolean; set showToolTip
+     * @param showToolTip set showToolTip
      */
     public synchronized void setShowToolTip(final boolean showToolTip)
     {
@@ -505,8 +505,8 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * pans the panel in a specified direction.
-     * @param direction int; the direction
-     * @param percentage double; the percentage
+     * @param direction the direction
+     * @param percentage the percentage
      */
     public synchronized void pan(final int direction, final double percentage)
     {
@@ -558,7 +558,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     }
 
     /**
-     * @param showGrid boolean; The showGrid to set.
+     * @param showGrid The showGrid to set.
      */
     public void setShowGrid(final boolean showGrid)
     {
@@ -585,7 +585,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * zooms in/out.
-     * @param factor double; The zoom factor
+     * @param factor The zoom factor
      */
     public synchronized void zoom(final double factor)
     {
@@ -594,9 +594,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * zooms in/out.
-     * @param factor double; The zoom factor
-     * @param mouseX int; x-position of the mouse around which we zoom
-     * @param mouseY int; y-position of the mouse around which we zoom
+     * @param factor The zoom factor
+     * @param mouseX x-position of the mouse around which we zoom
+     * @param mouseY y-position of the mouse around which we zoom
      */
     public synchronized void zoom(final double factor, final int mouseX, final int mouseY)
     {
@@ -611,9 +611,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * zooms in/out for the y-axis only.
-     * @param factor double; The zoom factor
-     * @param mouseX int; x-position of the mouse around which we zoom
-     * @param mouseY int; y-position of the mouse around which we zoom
+     * @param factor The zoom factor
+     * @param mouseX x-position of the mouse around which we zoom
+     * @param mouseY y-position of the mouse around which we zoom
      */
     public synchronized void zoomY(final double factor, final int mouseX, final int mouseY)
     {
@@ -629,9 +629,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * zooms in/out for the x-axis only.
-     * @param factor double; The zoom factor
-     * @param mouseX int; x-position of the mouse around which we zoom
-     * @param mouseY int; y-position of the mouse around which we zoom
+     * @param factor The zoom factor
+     * @param mouseX x-position of the mouse around which we zoom
+     * @param mouseY y-position of the mouse around which we zoom
      */
     public synchronized void zoomX(final double factor, final int mouseX, final int mouseY)
     {
@@ -648,9 +648,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * rotate clockwise or anti-clockwise around the point of the cursor.
-     * @param factor double; the amount of radians to turn
-     * @param mouseX int; x-position of the mouse around which we zoom
-     * @param mouseY int; y-position of the mouse around which we zoom
+     * @param factor the amount of radians to turn
+     * @param mouseX x-position of the mouse around which we zoom
+     * @param mouseY y-position of the mouse around which we zoom
      */
     public synchronized void rotate(final double factor, final int mouseX, final int mouseY)
     {
@@ -669,7 +669,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     /**
      * Added to make sure the recursive render-call calls THIS render method instead of a potential super-class defined
      * 'paintComponent' render method.
-     * @param g Graphics; the graphics object
+     * @param g the graphics object
      */
     protected synchronized void drawGrid(final Graphics g)
     {
@@ -833,7 +833,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Add a locatable object to the animation.
-     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the element to add to the animation
+     * @param element the element to add to the animation
      */
     public void objectAdded(final Renderable2dInterface<? extends Locatable> element)
     {
@@ -846,7 +846,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Remove a locatable object from the animation.
-     * @param element Renderable2dInterface&lt;? extends Locatable&gt;; the element to add to the animation
+     * @param element the element to add to the animation
      */
     public void objectRemoved(final Renderable2dInterface<? extends Locatable> element)
     {
@@ -859,7 +859,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Calculate the full extent based on the current positions of the objects.
-     * @return Bounds2d; the full extent of the animation.
+     * @return the full extent of the animation.
      */
     public synchronized Bounds2d fullExtent()
     {
@@ -909,7 +909,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Set a class to be shown in the animation to true.
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which the animation has to be shown.
+     * @param locatableClass the class for which the animation has to be shown.
      */
     public void showClass(final Class<? extends Locatable> locatableClass)
     {
@@ -924,7 +924,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Set a class to be hidden in the animation to true.
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which the animation has to be hidden.
+     * @param locatableClass the class for which the animation has to be hidden.
      */
     public void hideClass(final Class<? extends Locatable> locatableClass)
     {
@@ -939,7 +939,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Toggle a class to be displayed in the animation to its reverse value.
-     * @param locatableClass Class&lt;? extends Locatable&gt;; the class for which a visible animation has to be turned off or
+     * @param locatableClass the class for which a visible animation has to be turned off or
      *     vice versa.
      */
     public void toggleClass(final Class<? extends Locatable> locatableClass)
@@ -959,7 +959,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Handle the movement of the mouse.
-     * @param point Point; the location of the mouse relative to the AnimationPanel
+     * @param point the location of the mouse relative to the AnimationPanel
      */
     public void mouseMoved(final java.awt.Point point)
     {
@@ -984,8 +984,8 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * What to do if the left mouse button was released after a drag.
-     * @param mouseClickedPoint Point2D; the point where the mouse was clicked
-     * @param mouseReleasedPoint Point2D; the point where the mouse was released
+     * @param mouseClickedPoint the point where the mouse was clicked
+     * @param mouseReleasedPoint the point where the mouse was released
      */
     protected void pan(final Point2D mouseClickedPoint, final Point2D mouseReleasedPoint)
     {
@@ -1001,7 +1001,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * returns the list of selected objects at a certain mousePoint.
-     * @param mousePoint Point2D; the mousePoint
+     * @param mousePoint the mousePoint
      * @return the selected objects
      */
     protected List<Locatable> getSelectedObjects(final Point2D mousePoint)
@@ -1028,7 +1028,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * popup on a mouseEvent.
-     * @param e MouseEvent; the mouseEvent
+     * @param e the mouseEvent
      */
     protected void popup(final MouseEvent e)
     {
@@ -1048,7 +1048,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Returns the clicked Renderable2d with the highest z-value.
-     * @param targets List&lt;Locatable&gt;; which are selected by the mouse.
+     * @param targets which are selected by the mouse.
      * @return the selected Object (e.g. the one with the highest zValue).
      */
     protected Object getSelectedObject(final List<Locatable> targets)
@@ -1076,8 +1076,8 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * set the drag line: a line that shows where the user is dragging.
-     * @param mousePosition Point2D; the position of the mouse pointer
-     * @param mouseClicked Point2D; the position where the mouse was clicked before dragging
+     * @param mousePosition the position of the mouse pointer
+     * @param mouseClicked the position where the mouse was clicked before dragging
      */
     protected void setDragLine(final Point2D mousePosition, final Point2D mouseClicked)
     {
@@ -1110,7 +1110,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     }
 
     /**
-     * @param dragLineEnabled boolean; the dragLineEnabled to set.
+     * @param dragLineEnabled the dragLineEnabled to set.
      */
     public void setDragLineEnabled(final boolean dragLineEnabled)
     {
@@ -1149,7 +1149,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Return the delegate event producer.
-     * @return AnimationEventProducer; the delegate event producer
+     * @return the delegate event producer
      */
     public AnimationEventProducer getAnimationEventProducer()
     {

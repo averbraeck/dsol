@@ -49,7 +49,7 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
 
     /**
      * Construct a DSOL model and set the simulator.
-     * @param simulator S; the simulator to use for this model
+     * @param simulator the simulator to use for this model
      * @throws NullPointerException when simulator is null
      */
     public AbstractDsolModel(final S simulator)
@@ -60,8 +60,8 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
     /**
      * Construct a DSOL model and set the simulator as well as the initial streams, so they can be used in the constructor of
      * the model.
-     * @param simulator S; the simulator to use for this model
-     * @param streamInformation StreamInformation; the streams that have been prepared in a StreamInformation class
+     * @param simulator the simulator to use for this model
+     * @param streamInformation the streams that have been prepared in a StreamInformation class
      * @throws NullPointerException when simulator or streamInformation is null
      */
     public AbstractDsolModel(final S simulator, final StreamInformation streamInformation)
@@ -98,7 +98,7 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
 
     /**
      * Add an input parameter to the list of input parameters.
-     * @param inputParameter AbstractInputParameter&lt;?,?&gt;; the input parameter to add
+     * @param inputParameter the input parameter to add
      * @throws InputParameterException in case an input parameter with the same key already exists
      */
     public void addInputParameter(final AbstractInputParameter<?, ?> inputParameter) throws InputParameterException
@@ -109,7 +109,7 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
     /**
      * Retrieve the value of an input parameter from the map of input parameters, based on a key. The key can use the 'dot
      * notation' to access values in sub-maps of input parameters.
-     * @param key String; the key of the input parameter to retrieve
+     * @param key the key of the input parameter to retrieve
      * @return the value belonging to the key, or null if the key could not be found
      * @throws InputParameterException in case the input parameter with this key does not exist
      */

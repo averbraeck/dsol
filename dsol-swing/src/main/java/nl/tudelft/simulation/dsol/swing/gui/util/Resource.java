@@ -25,7 +25,7 @@ public final class Resource
 
     /**
      * Obtains stream for resource, either in IDE or java.
-     * @param name String; name of resource
+     * @param name name of resource
      * @return the resolved input stream
      */
     public static InputStream getResourceAsStream(final String name)

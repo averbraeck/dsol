@@ -25,8 +25,8 @@ public class DistConstant extends DistContinuous
 
     /**
      * constructs a new constant distribution.
-     * @param stream StreamInterface; the random number stream
-     * @param constant double; the value
+     * @param stream the random number stream
+     * @param constant the value
      */
     public DistConstant(final StreamInterface stream, final double constant)
     {
@@ -53,7 +53,7 @@ public class DistConstant extends DistContinuous
 
     /**
      * Return the constant.
-     * @return double; the constant
+     * @return the constant
      */
     public double getConstant()
     {

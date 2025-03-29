@@ -49,7 +49,7 @@ public class WebMM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>
     SimPersistent<Double> uN;
 
     /**
-     * @param simulator DevsSimulator&lt;Double&gt;; the simulator to use for this model
+     * @param simulator the simulator to use for this model
      */
     public WebMM1Model(final DevsSimulator<Double> simulator)
     {

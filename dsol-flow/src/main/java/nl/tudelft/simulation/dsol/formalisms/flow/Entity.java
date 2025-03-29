@@ -54,7 +54,7 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Construct a new Entity with a creation time.
-     * @param id String; the entity's id
+     * @param id the entity's id
      * @param simulator the simulator to retrieve the creation time
      */
     public Entity(final String id, final DevsSimulatorInterface<T> simulator)
@@ -65,7 +65,7 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Return a clone of the entity. This clone is a literal clone, including the creation time and id.
-     * @return Entity&lt;T&gt;; a literal clone of the entity
+     * @return a literal clone of the entity
      */
     @Override
     public Entity<T> clone()
@@ -75,8 +75,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Add a timestamp to the entity, e.g., to register a tally statistic later.
-     * @param timestampId String; the id of the timestamp
-     * @param time T; the time to store
+     * @param timestampId the id of the timestamp
+     * @param time the time to store
      */
     public void setTimestamp(final String timestampId, final T time)
     {
@@ -87,8 +87,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Retrieve a stored timestamp.
-     * @param timestampId String; the id of the timestamp
-     * @return T; the creation time
+     * @param timestampId the id of the timestamp
+     * @return the creation time
      */
     @SuppressWarnings("unchecked")
     public T getTimestamp(final String timestampId)
@@ -100,8 +100,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Add an object as an attribute to the entity.
-     * @param key String; the key of the attribute
-     * @param value Object; the value to store
+     * @param key the key of the attribute
+     * @param value the value to store
      */
     public void setAttribute(final String key, final Object value)
     {
@@ -112,9 +112,9 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Retrieve a typed object attribute value.
-     * @param key String; the id of the attribute
+     * @param key the id of the attribute
      * @param clazz Class&lt;VT&gt; the class of the object to return
-     * @return VT; the stored value
+     * @return the stored value
      * @param <VT> the class of the attribute value to return
      */
     @SuppressWarnings("unchecked")
@@ -127,8 +127,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Retrieve an object attribute value.
-     * @param key String; the id of the attribute
-     * @return Object; the stored value
+     * @param key the id of the attribute
+     * @return the stored value
      */
     public Object getAttribute(final String key)
     {
@@ -137,8 +137,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Add a String as an attribute to the entity.
-     * @param key String; the key of the attribute
-     * @param value String; the value to store
+     * @param key the key of the attribute
+     * @param value the value to store
      */
     public void setStringAttribute(final String key, final String value)
     {
@@ -147,8 +147,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Retrieve a stored String attribute value.
-     * @param key String; the id of the attribute
-     * @return String; the stored value
+     * @param key the id of the attribute
+     * @return the stored value
      */
     public String getStringAttribute(final String key)
     {
@@ -159,8 +159,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Add a Number as an attribute to the entity.
-     * @param key String; the key of the attribute
-     * @param value Number; the value to store
+     * @param key the key of the attribute
+     * @param value the value to store
      */
     public void setNumberAttribute(final String key, final Number value)
     {
@@ -169,8 +169,8 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Retrieve a stored Number attribute value.
-     * @param key String; the id of the attribute
-     * @return Number; the stored value
+     * @param key the id of the attribute
+     * @return the stored value
      */
     public Number getNumberAttribute(final String key)
     {
@@ -179,7 +179,7 @@ public class Entity<T extends Number & Comparable<T>> extends Block<T> implement
 
     /**
      * Return the creation time.
-     * @return T; the creation time
+     * @return the creation time
      */
     public T getCreationTime()
     {

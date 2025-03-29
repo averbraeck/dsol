@@ -20,8 +20,8 @@ public class DistContinuousElectricalResistance extends DistContinuousUnit<Elect
 
     /**
      * Constructs a new continuous distribution that draws ElectricalResistance scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit ElectricalResistanceUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousElectricalResistance(final DistContinuous wrappedDistribution, final ElectricalResistanceUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousElectricalResistance extends DistContinuousUnit<Elect
 
     /**
      * Constructs a new continuous distribution that draws ElectricalResistance scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousElectricalResistance(final DistContinuous wrappedDistribution)
     {

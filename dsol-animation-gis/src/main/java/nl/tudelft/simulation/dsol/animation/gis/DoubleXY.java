@@ -9,8 +9,8 @@ package nl.tudelft.simulation.dsol.animation.gis;
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
- * @param x double; the x-coordinate
- * @param y double; the y-coordinate
+ * @param x the x-coordinate
+ * @param y the y-coordinate
  */
 public record DoubleXY(double x, double y)
 {

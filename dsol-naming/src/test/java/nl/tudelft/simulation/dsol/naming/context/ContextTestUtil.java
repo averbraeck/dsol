@@ -29,7 +29,7 @@ public final class ContextTestUtil
 
     /**
      * Destroy the initialEventContext so next tests are not confronted with an already existing initial event context.
-     * @param ctx InitialEventContext; the context to destroy
+     * @param ctx the context to destroy
      */
     public static void destroyInitialEventContext(final InitialEventContext ctx)
     {

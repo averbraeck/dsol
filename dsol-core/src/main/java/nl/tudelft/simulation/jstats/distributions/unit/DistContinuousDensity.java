@@ -20,8 +20,8 @@ public class DistContinuousDensity extends DistContinuousUnit<DensityUnit, Densi
 
     /**
      * Constructs a new continuous distribution that draws Density scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit DensityUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousDensity(final DistContinuous wrappedDistribution, final DensityUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousDensity extends DistContinuousUnit<DensityUnit, Densi
 
     /**
      * Constructs a new continuous distribution that draws Density scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousDensity(final DistContinuous wrappedDistribution)
     {

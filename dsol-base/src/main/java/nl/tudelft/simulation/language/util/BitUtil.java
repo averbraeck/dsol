@@ -29,7 +29,7 @@ public final class BitUtil implements Serializable
     }
 
     /**
-     * @param bits BitSet; the bitset to convert
+     * @param bits the bitset to convert
      * @return Returns a byte array of at least length 1. The most significant bit in the result is guaranteed not to be a 1
      *         (since BitSet does not support sign extension). The byte-ordering of the result is big-endian which means the
      *         most significant bit is in element 0. The bit at index 0 of the bit set is assumed to be the least significant
@@ -53,8 +53,8 @@ public final class BitUtil implements Serializable
 
     /**
      * returns the bitset of an integer value.
-     * @param value int; the value
-     * @param length int; the length of the bitSet to produce
+     * @param value the value
+     * @param length the length of the bitSet to produce
      * @return the BitSet
      */
     public static BitSet fromInt(final int value, final int length)
@@ -64,8 +64,8 @@ public final class BitUtil implements Serializable
 
     /**
      * returns the bitset of an integer value.
-     * @param value Integer; the value
-     * @param length int; the length of
+     * @param value the value
+     * @param length the length of
      * @return the BitSet
      */
     public static BitSet fromInteger(final Integer value, final int length) 
@@ -77,8 +77,8 @@ public final class BitUtil implements Serializable
     }
 
     /**
-     * @param bits BitSet; the bitset to convert
-     * @param length int; the length of the set
+     * @param bits the bitset to convert
+     * @param length the length of the set
      * @return Returns an int. The most significant bit in the result is guaranteed not to be a 1 (since BitSet does not support
      *         sign extension). The int-ordering of the result is big-endian which means the most significant bit is in element
      *         0. The bit at index 0 of the bit set is assumed to be the least significant bit.
@@ -94,7 +94,7 @@ public final class BitUtil implements Serializable
     /**
      * constructs a new BitSet from a string in the "110110" format, or the {0, 1, 3, 5, 8, 12} format. Note that for the binary
      * representation, the LEAST SIGNIFICANT BIT COMES FIRST. So, 001 represents the value 4 and not 1.
-     * @param value String; the value
+     * @param value the value
      * @return the BitSet
      */
     public static BitSet fromString(final String value)
@@ -140,7 +140,7 @@ public final class BitUtil implements Serializable
     }
 
     /**
-     * @param bytes byte[]; the byteArray
+     * @param bytes the byteArray
      * @return Returns a bitset containing the values in bytes.The byte-ordering of bytes must be big-endian which means the
      *         most significant bit is in element 0.
      */
@@ -159,7 +159,7 @@ public final class BitUtil implements Serializable
 
     /**
      * returns a one-size BitSet with value.
-     * @param value boolean; the value of the bitSet
+     * @param value the value of the bitSet
      * @return the BitSet
      */
     public static BitSet fromBoolean(final boolean value)

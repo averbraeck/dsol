@@ -52,7 +52,7 @@ public class OsmLayerSink implements Sink
      * (e.g., state or country OSM files).<br>
      * TODO: add an optional initial extent in case the sounrce's extent is much larger than the extent we want to display
      * @param featuresToRead the features that the sink needs to read.
-     * @param coordinateTransform CoordinateTransform; the transformation of (x, y) coordinates to (x', y') coordinates.
+     * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      */
     public OsmLayerSink(final List<FeatureInterface> featuresToRead, final CoordinateTransform coordinateTransform)
     {
@@ -151,7 +151,7 @@ public class OsmLayerSink implements Sink
 
     /**
      * Add a way to a feature.
-     * @param way Way; the way to add to the feature shape list
+     * @param way the way to add to the feature shape list
      */
     private void addWay(final MiniWay way)
     {
@@ -204,9 +204,9 @@ public class OsmLayerSink implements Sink
 
         /**
          * Create a MniniNode.
-         * @param id long; the node id
-         * @param lat double; the latitude of the node
-         * @param lon double; the longitude of the node
+         * @param id the node id
+         * @param lat the latitude of the node
+         * @param lon the longitude of the node
          */
         public MiniNode(final long id, final float lat, final float lon)
         {
@@ -240,9 +240,9 @@ public class OsmLayerSink implements Sink
 
         /**
          * Create a MniniWay.
-         * @param id long; the way id
-         * @param feature FeatureInterface; the feature that characterizes this way
-         * @param wayNodes Collection&lt;WayNode&gt;; the way nodes
+         * @param id the way id
+         * @param feature the feature that characterizes this way
+         * @param wayNodes the way nodes
          */
         public MiniWay(final long id, final FeatureInterface feature, final Collection<WayNode> wayNodes)
         {

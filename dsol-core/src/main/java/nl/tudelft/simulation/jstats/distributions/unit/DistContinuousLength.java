@@ -20,8 +20,8 @@ public class DistContinuousLength extends DistContinuousUnit<LengthUnit, Length>
 
     /**
      * Constructs a new continuous distribution that draws Length scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit LengthUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousLength(final DistContinuous wrappedDistribution, final LengthUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousLength extends DistContinuousUnit<LengthUnit, Length>
 
     /**
      * Constructs a new continuous distribution that draws Length scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousLength(final DistContinuous wrappedDistribution)
     {

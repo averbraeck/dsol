@@ -23,7 +23,7 @@ public class MaxPointFilter extends AbstractFilter
 
     /**
      * constructs a new MaxPointFilter.
-     * @param maxPoints long; the maximum points to display
+     * @param maxPoints the maximum points to display
      */
     public MaxPointFilter(final long maxPoints)
     {

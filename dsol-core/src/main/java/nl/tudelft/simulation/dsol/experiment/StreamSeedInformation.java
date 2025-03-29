@@ -37,7 +37,7 @@ public class StreamSeedInformation extends StreamInformation
 
     /**
      * Construct a StreamInformation object that can be used to pass information about streams to to a model.
-     * @param defaultStream StreamInterface; the default stream that can be retrieved with the name "default"
+     * @param defaultStream the default stream that can be retrieved with the name "default"
      * @throws NullPointerException when defaultStream is null
      */
     public StreamSeedInformation(final StreamInterface defaultStream)
@@ -48,8 +48,8 @@ public class StreamSeedInformation extends StreamInformation
     /**
      * Add a new seed map for a stream, based on a stream id, possibly overwriting a previous existing seed map with the same
      * name. No warning will be given is previous information is overwritten. A safe copy is made of the seed map.
-     * @param streamId String; the id of the stream to be added
-     * @param seedMap Map&lt;Integer, Long&gt;; the map of replication number to seed value for that replication
+     * @param streamId the id of the stream to be added
+     * @param seedMap the map of replication number to seed value for that replication
      * @throws NullPointerException when streamId is null or seedMap is null
      * @throws IllegalArgumentException when streamId is not present in the stream map
      */
@@ -64,8 +64,8 @@ public class StreamSeedInformation extends StreamInformation
     /**
      * Add a new seed map for a stream, based on a stream id, possibly overwriting a previous existing seed map with the same
      * name. No warning will be given is previous information is overwritten. Data is provided as a long array.
-     * @param streamId String; the id of the stream to be added
-     * @param seedArray long[]; an array of seed values for that replication using the replication number as index
+     * @param streamId the id of the stream to be added
+     * @param seedArray an array of seed values for that replication using the replication number as index
      * @throws NullPointerException when streamId is null or seedArray is null
      * @throws IllegalArgumentException when streamId is not present in the stream map
      */
@@ -85,8 +85,8 @@ public class StreamSeedInformation extends StreamInformation
     /**
      * Add a new seed map for a stream, based on a stream id, possibly overwriting a previous existing seed map with the same
      * name. No warning will be given is previous information is overwritten. Data is provided as a List of longs.
-     * @param streamId String; the id of the stream to be added
-     * @param seedList List&lt;Long&gt;; a list of seed values for that replication using the replication number as index
+     * @param streamId the id of the stream to be added
+     * @param seedList a list of seed values for that replication using the replication number as index
      * @throws NullPointerException when streamId is null or seedList is null
      * @throws IllegalArgumentException when streamId is not present in the stream map
      */
@@ -105,7 +105,7 @@ public class StreamSeedInformation extends StreamInformation
 
     /**
      * Return the available seed maps for all stored streams, mapping stream ids to seed maps.
-     * @return Map&lt;String, Map&lt;Integer, Long&gt;&gt;; the stored seed maps
+     * @return the stored seed maps
      */
     public Map<String, Map<Integer, Long>> getStreamSeedMap()
     {
@@ -114,8 +114,8 @@ public class StreamSeedInformation extends StreamInformation
 
     /**
      * Return a specific seed map of a stream, based on a stream id, or null when the seed map is not present.
-     * @param streamId String; the stream id of the seed map to be retrieved
-     * @return Map&lt;Integer, Long&gt;; the seed map, or null when the seed map is not present
+     * @param streamId the stream id of the seed map to be retrieved
+     * @return the seed map, or null when the seed map is not present
      * @throws NullPointerException when streamId is null
      */
     public Map<Integer, Long> getSeedMap(final String streamId)

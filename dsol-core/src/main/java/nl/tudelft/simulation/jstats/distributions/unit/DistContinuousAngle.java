@@ -20,8 +20,8 @@ public class DistContinuousAngle extends DistContinuousUnit<AngleUnit, Angle>
 
     /**
      * Constructs a new continuous distribution that draws Angle scalars.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
-     * @param unit AngleUnit; the unit for the values of the distribution
+     * @param wrappedDistribution the wrapped continuous distribution
+     * @param unit the unit for the values of the distribution
      */
     public DistContinuousAngle(final DistContinuous wrappedDistribution, final AngleUnit unit)
     {
@@ -30,7 +30,7 @@ public class DistContinuousAngle extends DistContinuousUnit<AngleUnit, Angle>
 
     /**
      * Constructs a new continuous distribution that draws Angle scalars in SI units.
-     * @param wrappedDistribution DistContinuous; the wrapped continuous distribution
+     * @param wrappedDistribution the wrapped continuous distribution
      */
     public DistContinuousAngle(final DistContinuous wrappedDistribution)
     {

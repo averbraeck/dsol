@@ -38,9 +38,9 @@ import nl.tudelft.simulation.language.DsolException;
 public class EsriXmlSwingApplication extends DsolAnimationApplication
 {
     /**
-     * @param title String; the title
-     * @param panel DsolPanel; the panel
-     * @param animationTab DsolAnimationGisTab; the (custom) animation tab
+     * @param title the title
+     * @param panel the panel
+     * @param animationTab the (custom) animation tab
      * @throws DsolException when simulator is not an animator
      * @throws IllegalArgumentException for illegal bounds
      * @throws RemoteException on network error
@@ -56,7 +56,7 @@ public class EsriXmlSwingApplication extends DsolAnimationApplication
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param args String[]; arguments, expected to be empty
+     * @param args arguments, expected to be empty
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      * @throws NamingException on error
@@ -89,7 +89,7 @@ public class EsriXmlSwingApplication extends DsolAnimationApplication
 
         /**
          * constructs a new EmptyModel.
-         * @param simulator DevsSimulatorInterface&lt;Double&gt;; the simulator
+         * @param simulator the simulator
          */
         EmptyModel(final DevsSimulatorInterface<Double> simulator)
         {

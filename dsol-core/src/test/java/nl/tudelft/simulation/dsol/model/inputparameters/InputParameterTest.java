@@ -95,7 +95,7 @@ public class InputParameterTest
     }
 
     /**
-     * @return InputParameterMap; a new map
+     * @return a new map
      */
     private static InputParameterMap makeInputParameterMap()
     {

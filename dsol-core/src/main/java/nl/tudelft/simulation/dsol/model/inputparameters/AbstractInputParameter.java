@@ -45,11 +45,11 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
 
     /**
      * Construct a new AbstractInputParameter.
-     * @param key String; unique (within this input parameter tree) name of the new AbstractInputParameter
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param defaultValue VT; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within this input parameter tree) name of the new AbstractInputParameter
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN, or when key contains a period
      */
@@ -93,7 +93,7 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
      * their own method to set the value (e.g., setDoubleValue(...)), which has to call, in turn, super.setValue(...) to make
      * the actual setting of the value happen. In case the setValue(...) method would be non-final and public, it would be too
      * easy to forget to call super.setValue(...).
-     * @param newValue VT; the new value for the input parameter
+     * @param newValue the new value for the input parameter
      * @throws NullPointerException when newValue is null
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
@@ -152,7 +152,7 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
 
     /**
      * Set the parent of this AbstractInputParameter.
-     * @param newParent AbstractInputParameterMap&lt;?&gt;; the new parent of this AbstractInputParameter
+     * @param newParent the new parent of this AbstractInputParameter
      */
     public void setParent(final AbstractInputParameterMap<?> newParent)
     {

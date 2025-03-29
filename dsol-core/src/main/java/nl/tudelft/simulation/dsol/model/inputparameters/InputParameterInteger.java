@@ -26,11 +26,11 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
 
     /**
      * Construct a new InputParameterInteger.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterInteger
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param defaultValue int; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterInteger
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -42,14 +42,14 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
 
     /**
      * Construct a new InputParameterInteger.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterInteger
-     * @param shortName String; concise description of the input parameter
-     * @param description String; long description of the input parameter (may use HTML markup)
-     * @param defaultValue int; the default value of this input parameter
-     * @param minimumValue int; the lowest value allowed as input
-     * @param maximumValue int; the highest value allowed as input
-     * @param format String; the format to use in displaying the integer
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterInteger
+     * @param shortName concise description of the input parameter
+     * @param description long description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param minimumValue the lowest value allowed as input
+     * @param maximumValue the highest value allowed as input
+     * @param format the format to use in displaying the integer
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, description, or format is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -72,7 +72,7 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
 
     /**
      * Check and set the typed value, and call super.setValue to make the actual allocation.
-     * @param newValue int; the new value for the input parameter
+     * @param newValue the new value for the input parameter
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
     public void setIntValue(final int newValue) throws InputParameterException
@@ -94,7 +94,7 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
     }
 
     /**
-     * @param format String; set format
+     * @param format set format
      * @throws NullPointerException when format is null
      */
     public void setFormat(final String format)
@@ -112,7 +112,7 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
     }
 
     /**
-     * @param minimumValue int; set minimumValue
+     * @param minimumValue set minimumValue
      */
     public void setMinimumValue(final int minimumValue)
     {
@@ -128,7 +128,7 @@ public class InputParameterInteger extends AbstractInputParameter<Integer, Integ
     }
 
     /**
-     * @param maximumValue int; set maximumValue
+     * @param maximumValue set maximumValue
      */
     public void setMaximumValue(final int maximumValue)
     {

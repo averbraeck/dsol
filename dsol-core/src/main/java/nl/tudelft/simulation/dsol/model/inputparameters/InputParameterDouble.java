@@ -32,11 +32,11 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
 
     /**
      * Construct a new InputParameterDouble.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterDouble
-     * @param shortName String; concise description of the input parameter
-     * @param description String; double description of the input parameter (may use HTML markup)
-     * @param defaultValue double; the default value of this input parameter
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterDouble
+     * @param shortName concise description of the input parameter
+     * @param description double description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, or description is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -48,16 +48,16 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
 
     /**
      * Construct a new InputParameterDouble.
-     * @param key String; unique (within the parent's input parameter map) name of the new InputParameterDouble
-     * @param shortName String; concise description of the input parameter
-     * @param description String; double description of the input parameter (may use HTML markup)
-     * @param defaultValue double; the default value of this input parameter
-     * @param minimumValue double; the lowest value allowed as input
-     * @param maximumValue double; the highest value allowed as input
-     * @param minIncluded boolean; is the minimum value included or excluded in the allowed interval?
-     * @param maxIncluded boolean; is the maximum value included or excluded in the allowed interval?
-     * @param format String; the format to use in displaying the double
-     * @param displayPriority double; sorting order when properties are displayed to the user
+     * @param key unique (within the parent's input parameter map) name of the new InputParameterDouble
+     * @param shortName concise description of the input parameter
+     * @param description double description of the input parameter (may use HTML markup)
+     * @param defaultValue the default value of this input parameter
+     * @param minimumValue the lowest value allowed as input
+     * @param maximumValue the highest value allowed as input
+     * @param minIncluded is the minimum value included or excluded in the allowed interval?
+     * @param maxIncluded is the maximum value included or excluded in the allowed interval?
+     * @param format the format to use in displaying the double
+     * @param displayPriority sorting order when properties are displayed to the user
      * @throws NullPointerException when key, shortName, defaultValue, description, or format is null
      * @throws IllegalArgumentException when displayPriority is NaN
      */
@@ -83,7 +83,7 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
 
     /**
      * Check and set the typed value, and call super.setValue to make the actual allocation.
-     * @param newValue double; the new value for the input parameter
+     * @param newValue the new value for the input parameter
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
     public void setDoubleValue(final double newValue) throws InputParameterException
@@ -106,7 +106,7 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
     }
 
     /**
-     * @param format String; set format
+     * @param format set format
      */
     public void setFormat(final String format)
     {
@@ -123,7 +123,7 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
     }
 
     /**
-     * @param minimumValue double; set minimumValue
+     * @param minimumValue set minimumValue
      */
     public void setMinimumValue(final double minimumValue)
     {
@@ -139,7 +139,7 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
     }
 
     /**
-     * @param maximumValue double; set maximumValue
+     * @param maximumValue set maximumValue
      */
     public void setMaximumValue(final double maximumValue)
     {
@@ -155,7 +155,7 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
     }
 
     /**
-     * @param minIncluded boolean; set minIncluded
+     * @param minIncluded set minIncluded
      */
     public void setMinIncluded(final boolean minIncluded)
     {
@@ -171,7 +171,7 @@ public class InputParameterDouble extends AbstractInputParameter<Double, Double>
     }
 
     /**
-     * @param maxIncluded boolean; set maxIncluded
+     * @param maxIncluded set maxIncluded
      */
     public void setMaxIncluded(final boolean maxIncluded)
     {

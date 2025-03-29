@@ -16,7 +16,7 @@ package nl.tudelft.simulation.introspection;
 public interface Introspector
 {
     /**
-     * @param introspected Object; the introspected object
+     * @param introspected the introspected object
      * @return Retrieves properties of the introspected object. The properties' values can themselves be introspectable. An
      *         empty array is returned if no introspected object has been set.
      */
@@ -24,15 +24,15 @@ public interface Introspector
 
     /**
      * Retrieves the names of the properties of the introspected object.
-     * @param introspected Object; The introspected object.
+     * @param introspected The introspected object.
      * @return An unordered array of the introspected object's property names.
      */
     String[] getPropertyNames(Object introspected);
 
     /**
      * Retrieves the {see Property}with a given name from an introspected object.
-     * @param introspected Object; The introspected object.
-     * @param property String; The name of the property to be retrieved
+     * @param introspected The introspected object.
+     * @param property The name of the property to be retrieved
      * @return A {see Property}instance for the given object and property name.
      */
     Property getProperty(Object introspected, String property);

@@ -57,7 +57,7 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
 
     /**
      * Constructor for Logger Console.
-     * @param logLevel Level the logLevel to use;
+     * @param logLevel 
      */
     public ConsoleLogger(final Level logLevel)
     {
@@ -90,7 +90,7 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
      * - {method} Method name from where the logging request is issued<br>
      * - {package} Package where the logging request is issued<br>
      * @see <a href="https://tinylog.org/configuration#format">https://tinylog.org/configuration</a>
-     * @param newMessageFormat String; the new formatting pattern to use
+     * @param newMessageFormat the new formatting pattern to use
      */
     public void setLogMessageFormat(final String newMessageFormat)
     {
@@ -100,7 +100,7 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
     }
 
     /**
-     * @param newLevel Level; the new log level for the Console
+     * @param newLevel the new log level for the Console
      */
     public void setLogLevel(final Level newLevel)
     {
@@ -112,7 +112,7 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
     /**
      * Set the maximum number of lines in the console before the first lines will be erased. The number of lines should be at
      * least 1. If the provided number of lines is less than 1, it wil be set to 1.
-     * @param maxLines int; set the maximum number of lines before the first lines will be erased
+     * @param maxLines set the maximum number of lines before the first lines will be erased
      */
     public void setMaxLines(final int maxLines)
     {
@@ -157,7 +157,7 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
         protected int maxLines = 20000;
 
         /**
-         * @param textPane JTextPane; the text area to write the messages to.
+         * @param textPane the text area to write the messages to.
          */
         public ConsoleLogWriter(final JTextPane textPane)
         {

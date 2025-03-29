@@ -30,7 +30,7 @@ public class PersistentTableModel extends StatisticsTableModel
 
     /**
      * Constructor.
-     * @param persistent SimPersistent; the persistent for which the table is created
+     * @param persistent the persistent for which the table is created
      * @throws RemoteException when communication with the persistent fails
      */
     public PersistentTableModel(final SimPersistent<?> persistent) throws RemoteException

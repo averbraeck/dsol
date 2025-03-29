@@ -13,13 +13,13 @@ public interface DelegateIntrospection
 {
     /**
      * Return an intermediate object to which the introspection is delegated.
-     * @return Object; the intermediate object to which the introspection is delegated
+     * @return the intermediate object to which the introspection is delegated
      */
     Object getParentIntrospectionObject();
 
     /**
      * Check for introspection delegation to allow for the right object to be shown on the screen.
-     * @param introspectedObject Object; the object that is displayed on the screen and might have delegation
+     * @param introspectedObject the object that is displayed on the screen and might have delegation
      * @return the toString() of the (delegated) object
      */
     static String checkDelegation(final Object introspectedObject)

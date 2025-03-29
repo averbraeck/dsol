@@ -29,9 +29,9 @@ public class SphericalPoint implements Serializable
 
     /**
      * constructs a new SphericalPoint.
-     * @param radius double; radius
-     * @param theta double; theta
-     * @param phi double; phi
+     * @param radius radius
+     * @param theta theta
+     * @param phi phi
      */
     public SphericalPoint(final double radius, final double theta, final double phi)
     {
@@ -76,7 +76,7 @@ public class SphericalPoint implements Serializable
 
     /**
      * converts a spherical point to a Cartesian point.
-     * @param point SphericalPoint; the spherical point
+     * @param point the spherical point
      * @return the Cartesian point
      */
     public static CartesianPoint toCartesianPoint(final SphericalPoint point)

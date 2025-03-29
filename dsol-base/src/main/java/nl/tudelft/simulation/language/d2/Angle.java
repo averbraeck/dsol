@@ -23,7 +23,7 @@ public final class Angle
 
     /**
      * Normalize an angle between 0 and 2*pi.
-     * @param angle double; the angle to normalize
+     * @param angle the angle to normalize
      * @return normalized angle
      */
     public static double normalize2Pi(final double angle)
@@ -36,7 +36,7 @@ public final class Angle
 
     /**
      * Normalize an angle between -pi and +pi.
-     * @param angle double; the angle to normalize
+     * @param angle the angle to normalize
      * @return normalized angle
      */
     public static double normalizePi(final double angle)

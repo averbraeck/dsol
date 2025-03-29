@@ -26,9 +26,9 @@ public class ContextUtil
     /**
      * Lookup or create a sub-context in the parentContext with the name as its path. The path can be absolute or relative. The
      * terminating part of the name will be used as the key under which the created subcontext will be registered.
-     * @param parentContext ContextInterface; the parent context
-     * @param name String; the name to register the new subcontext
-     * @return ContextInterface; the newly created subcontext
+     * @param parentContext the parent context
+     * @param name the name to register the new subcontext
+     * @return the newly created subcontext
      * @throws NamingException when terminating key in the name is blank or contains "/" character(s)
      * @throws RemoteException on a network error when the Context is used over RMI
      */
@@ -56,9 +56,9 @@ public class ContextUtil
     /**
      * Lookup a sub-context in the parentContext with the name as its path. The path can be absolute or relative. The
      * terminating part of the name will be used as the key under which the created subcontext will be registered.
-     * @param parentContext ContextInterface; the parent context
-     * @param name String; the name to register the new subcontext
-     * @return ContextInterface; the newly created subcontext
+     * @param parentContext the parent context
+     * @param name the name to register the new subcontext
+     * @return the newly created subcontext
      * @throws NamingException when terminating key in the name is blank or contains "/" character(s)
      * @throws RemoteException on a network error when the Context is used over RMI
      */
@@ -79,8 +79,8 @@ public class ContextUtil
     /**
      * Destroy a sub-context in the parentContext with the name as its path. The path can be absolute or relative. The
      * terminating part of the name will be used as the key under for the subcontext to be removed.
-     * @param parentContext ContextInterface; the parent context
-     * @param name String; the name to use to find the subcontext to remove
+     * @param parentContext the parent context
+     * @param name the name to use to find the subcontext to remove
      * @throws NamingException when terminating key in the name is blank or contains "/" character(s)
      * @throws RemoteException on a network error when the Context is used over RMI
      */
@@ -95,9 +95,9 @@ public class ContextUtil
      * object can be registered zero or more times in the context, so a List of keys under which the object is registered will
      * be returned. The keys are relative to the startContext. The method starts with the given context. It is possible to look
      * up null objects in the Context.
-     * @param startContext ContextInterface; the context to start the search
-     * @param object Object; the object to look up in the tree under the startContext
-     * @return List&lt;String&gt;; the list of keys that are bound to the object, or an empty list if no bindings for the object
+     * @param startContext the context to start the search
+     * @param object the object to look up in the tree under the startContext
+     * @return the list of keys that are bound to the object, or an empty list if no bindings for the object
      *         were found
      * @throws NamingException when an error occurs during searching
      * @throws RemoteException on a network error when the Context is used over RMI
@@ -115,9 +115,9 @@ public class ContextUtil
      * object can be registered zero or more times in the context, so a List of keys under which the object is registered will
      * be returned. The keys are relative to the startContext. The method starts with the given context. It is possible to look
      * up null objects in the Context.
-     * @param context ContextInterface; the context to start the search
-     * @param object Object; the object to look up in the tree under the startContext
-     * @param result List&lt;String&gt;; the current list of keys that are bound to the object, or an empty list if no bindings
+     * @param context the context to start the search
+     * @param object the object to look up in the tree under the startContext
+     * @param result the current list of keys that are bound to the object, or an empty list if no bindings
      *            for the object were found yet
      * @param partialKey the key of the current level in the tree, relative to the original start context of the search
      * @throws NamingException when an error occurs during searching

@@ -19,31 +19,31 @@ public interface InputParameter<VT, CT> extends Serializable, Cloneable
 {
     /**
      * Retrieve the key of this InputParameter. The key is set at time of construction and it is immutable.
-     * @return String; the key of this InputParameter
+     * @return the key of this InputParameter
      */
     String getKey();
 
     /**
      * Retrieve the extended key of this AbstractInputParameter including parents with a dot-notation.
-     * @return String; the extended key of this AbstractInputParameter
+     * @return the extended key of this AbstractInputParameter
      */
     String getExtendedKey();
 
     /**
      * Retrieve the current value of the input parameter.
-     * @return VT; the current value of the input parameter
+     * @return the current value of the input parameter
      */
     VT getValue();
 
     /**
      * Retrieve the default value of the input parameter.
-     * @return VT; the default value of the input parameter
+     * @return the default value of the input parameter
      */
     VT getDefaultValue();
 
     /**
      * Change the default value of the input parameter.
-     * @param newValue VT; the new default value for the input parameter
+     * @param newValue the new default value for the input parameter
      * @throws NullPointerException when newValue is null
      * @throws InputParameterException when this InputParameter is read-only, or newValue is not valid
      */
@@ -54,39 +54,39 @@ public interface InputParameter<VT, CT> extends Serializable, Cloneable
      * where a sub-map or sub-list calculates a different value. This is, for instance, the case with distribution functions
      * where the parameters are present in a sub-map (the value) and the return type of the value is a distribution function
      * class.
-     * @return CT; the calculated value of the input parameter
+     * @return the calculated value of the input parameter
      * @throws InputParameterException when calculation fails
      */
     CT getCalculatedValue() throws InputParameterException;
 
     /**
      * Return a short description of the input parameter.
-     * @return String; a short description of the input parameter
+     * @return a short description of the input parameter
      */
     String getShortName();
 
     /**
      * Return a description of the input parameter (may use HTML markup).
-     * @return String; the description of the input parameter
+     * @return the description of the input parameter
      */
     String getDescription();
 
     /**
      * Specify if the input parameter can be altered.
-     * @param readOnly boolean; true if this input parameter can not be altered, false if this input parameter can be altered
+     * @param readOnly true if this input parameter can not be altered, false if this input parameter can be altered
      */
     void setReadOnly(boolean readOnly);
 
     /**
      * Return true if the input parameter can not be altered.
-     * @return boolean; true if this input parameter can not be altered, false if this input parameter can be altered
+     * @return true if this input parameter can not be altered, false if this input parameter can be altered
      */
     boolean isReadOnly();
 
     /**
      * Display priority determines the order in which properties should be displayed. Properties with lower values should be
      * displayed above or before those with higher values.
-     * @return double; the display priority of this InputParameter
+     * @return the display priority of this InputParameter
      */
     double getDisplayPriority();
 

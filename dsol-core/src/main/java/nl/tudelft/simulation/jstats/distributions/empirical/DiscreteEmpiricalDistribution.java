@@ -26,8 +26,8 @@ public class DiscreteEmpiricalDistribution extends AbstractEmpiricalDistribution
      * avoid changes to their content after the construction of the distribution. Tests for arrays not being equal to null
      * should have been carried out when calling this constructor. Since the values will not be interpolated, the first
      * cumulative probability cannot be 0.0.
-     * @param values Number[] Number[]; the values belonging to each cumulative probability
-     * @param cumulativeProbabilities double[]; the cumulative probabilities
+     * @param values the values belonging to each cumulative probability
+     * @param cumulativeProbabilities the cumulative probabilities
      * @throws NullPointerException when one of the values is null
      * @throws IllegalArgumentException when cumulativeProbabilities array or values array are empty, or have unequal length, or
      *             when cumulativeProbabilities are not between 0 and 1, or when cumulativeProbabilities are not in ascending

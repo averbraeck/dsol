@@ -25,7 +25,7 @@ public class ShowGridAction extends AbstractAction
 
     /**
      * constructs a new ShowGridAction.
-     * @param panel GridPanel; the target
+     * @param panel the target
      */
     public ShowGridAction(final VisualizationPanel panel)
     {
