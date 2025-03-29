@@ -110,15 +110,11 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
                 double ready = this.simulator.getSimulatorTime() / 60.0;
                 double delayHours = Math.max(0.0, Math.ceil(ready) - 20.0);
                 if (DEBUG)
-                {
-                    System.out.println("Delay = " + delayHours);
-                }
+                { System.out.println("Delay = " + delayHours); }
                 double costs =
                         Math.max(20.0, Math.ceil(ready)) * (300.0 * this.numQC + 12.0 * this.numAGV) + 2500.0 * delayHours;
                 if (DEBUG)
-                {
-                    System.out.println("Costs = " + costs);
-                }
+                { System.out.println("Costs = " + costs); }
                 int nrCont = (Integer) event.getContent();
                 fireEvent(Terminal.READY_EVENT,
                         new Output(this.numQC, this.numAGV, this.rep, delayHours, costs, ready, nrCont));

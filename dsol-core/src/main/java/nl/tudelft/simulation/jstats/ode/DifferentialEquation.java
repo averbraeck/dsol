@@ -60,20 +60,14 @@ public abstract class DifferentialEquation extends LocalEventProducer implements
     {
         // If the ODE is not initialized, the cache is empty.
         if (Double.isNaN(this.lastX))
-        {
-            throw new RuntimeException("differential equation not initialized");
-        }
+        { throw new RuntimeException("differential equation not initialized"); }
 
         if (x == this.lastX)
-        {
-            return this.lastY;
-        }
+        { return this.lastY; }
 
         // Are we integrating in the right direction?
         if (Math.signum(this.stepSize) != Math.signum(x - this.lastX))
-        {
-            throw new RuntimeException("Sign of the stepsize does not integrate towards x from x0");
-        }
+        { throw new RuntimeException("Sign of the stepsize does not integrate towards x from x0"); }
         return this.integrateY(x, this.lastX, this.lastY);
     }
 

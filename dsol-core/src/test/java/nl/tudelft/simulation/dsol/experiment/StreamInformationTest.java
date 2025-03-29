@@ -49,10 +49,18 @@ public class StreamInformationTest
         assertEquals(2, si.getStreams().size());
         assertEquals(202L, si.getStream("stream").getSeed());
 
-        Try.testFail(() -> { new StreamInformation(null); });
-        Try.testFail(() -> { si.getStream(null); });
-        Try.testFail(() -> { si.addStream(null, new MersenneTwister(1L)); });
-        Try.testFail(() -> { si.addStream("xyz", null); });
+        Try.testFail(() -> {
+            new StreamInformation(null);
+        });
+        Try.testFail(() -> {
+            si.getStream(null);
+        });
+        Try.testFail(() -> {
+            si.addStream(null, new MersenneTwister(1L));
+        });
+        Try.testFail(() -> {
+            si.addStream("xyz", null);
+        });
     }
 
     /**
@@ -82,20 +90,48 @@ public class StreamInformationTest
         assertEquals(10L, si.getSeedMap("default").get(0).longValue());
 
         // failures
-        Try.testFail(() -> { new StreamSeedInformation(null); });
-        Try.testFail(() -> { si.getStream(null); });
-        Try.testFail(() -> { si.addStream(null, new MersenneTwister(1L)); });
-        Try.testFail(() -> { si.addStream("xyz", null); });
-        Try.testFail(() -> { si.getSeedMap(null); });
-        Try.testFail(() -> { si.putSeedArray(null, new long[] {1L, 2L}); });
-        Try.testFail(() -> { si.putSeedList(null, new ArrayList<Long>()); });
-        Try.testFail(() -> { si.putSeedMap(null, new LinkedHashMap<Integer, Long>()); });
-        Try.testFail(() -> { si.putSeedArray("default", (long[]) null); });
-        Try.testFail(() -> { si.putSeedList("default", (List<Long>) null); });
-        Try.testFail(() -> { si.putSeedMap("default", (Map<Integer, Long>) null); });
-        Try.testFail(() -> { si.putSeedArray("d", new long[] {1L, 2L}); });
-        Try.testFail(() -> { si.putSeedList("d", new ArrayList<Long>()); });
-        Try.testFail(() -> { si.putSeedMap("d", new LinkedHashMap<Integer, Long>()); });
+        Try.testFail(() -> {
+            new StreamSeedInformation(null);
+        });
+        Try.testFail(() -> {
+            si.getStream(null);
+        });
+        Try.testFail(() -> {
+            si.addStream(null, new MersenneTwister(1L));
+        });
+        Try.testFail(() -> {
+            si.addStream("xyz", null);
+        });
+        Try.testFail(() -> {
+            si.getSeedMap(null);
+        });
+        Try.testFail(() -> {
+            si.putSeedArray(null, new long[] {1L, 2L});
+        });
+        Try.testFail(() -> {
+            si.putSeedList(null, new ArrayList<Long>());
+        });
+        Try.testFail(() -> {
+            si.putSeedMap(null, new LinkedHashMap<Integer, Long>());
+        });
+        Try.testFail(() -> {
+            si.putSeedArray("default", (long[]) null);
+        });
+        Try.testFail(() -> {
+            si.putSeedList("default", (List<Long>) null);
+        });
+        Try.testFail(() -> {
+            si.putSeedMap("default", (Map<Integer, Long>) null);
+        });
+        Try.testFail(() -> {
+            si.putSeedArray("d", new long[] {1L, 2L});
+        });
+        Try.testFail(() -> {
+            si.putSeedList("d", new ArrayList<Long>());
+        });
+        Try.testFail(() -> {
+            si.putSeedMap("d", new LinkedHashMap<Integer, Long>());
+        });
     }
 
     /**
@@ -120,7 +156,7 @@ public class StreamInformationTest
         assertNotEquals(120L, si.getStream("default").getSeed());
         assertNotEquals(10L, si.getStream("default").getSeed());
         ssu.updateSeed("xyz", si.getStream("default"), 2);
-        
+
         // fallback
         ssu.setFallbackStreamUpdater(new StreamUpdater()
         {

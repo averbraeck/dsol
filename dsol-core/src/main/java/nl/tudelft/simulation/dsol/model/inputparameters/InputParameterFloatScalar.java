@@ -19,8 +19,7 @@ import org.djutils.reflection.ClassUtil;
  * @param <U> the unit type
  * @param <T> the scalar type
  */
-public class InputParameterFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T>>
-        extends AbstractInputParameterTypedMap<T>
+public class InputParameterFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T>> extends AbstractInputParameterTypedMap<T>
 {
     /** */
     private static final long serialVersionUID = 1L;

@@ -44,9 +44,7 @@ public final class CustomerOrderApp implements EventListener
     public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
-        {
-            System.exit(0);
-        }
+        { System.exit(0); }
     }
 
     /**

@@ -130,11 +130,15 @@ public class DistEmpiricalTest
 
         double[] vd = {1.0, 2.0, 3.0, 4.0};
         DiscreteEmpiricalDistribution empDist2 = CumulativeProbabilities.createDiscreteDistribution(vd, cpd);
-        Try.testFail(() -> { new DistEmpiricalDiscreteLong(stream, empDist2); });
+        Try.testFail(() -> {
+            new DistEmpiricalDiscreteLong(stream, empDist2);
+        });
 
         Number[] vf = {1.0f, 2.0f, 3.0f, 4.0f};
         DiscreteEmpiricalDistribution empDist3 = CumulativeProbabilities.createDiscreteDistribution(vf, cpd);
-        Try.testFail(() -> { new DistEmpiricalDiscreteLong(stream, empDist3); });
+        Try.testFail(() -> {
+            new DistEmpiricalDiscreteLong(stream, empDist3);
+        });
     }
 
 }

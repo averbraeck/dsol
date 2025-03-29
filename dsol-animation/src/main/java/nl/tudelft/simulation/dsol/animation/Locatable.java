@@ -32,8 +32,7 @@ public interface Locatable
 
     /**
      * Return the z-value of the location, or 0.0 when the location is in 2 dimensions.
-     * @return the z-value of the location, or 0.0 when the location is in 2 dimensions, or when getLocation() returns
-     * null
+     * @return the z-value of the location, or 0.0 when the location is in 2 dimensions, or when getLocation() returns null
      * @throws RemoteException on network failure
      */
     default double getZ() throws RemoteException
@@ -44,8 +43,8 @@ public interface Locatable
 
     /**
      * Return the z-direction of the location in radians, or 0.0 when the location has no direction.
-     * @return the z-direction of the location in radians, or 0.0 when the location has no direction, or when
-     * getLocation() returns null
+     * @return the z-direction of the location in radians, or 0.0 when the location has no direction, or when getLocation()
+     *         returns null
      * @throws RemoteException on network failure
      */
     default double getDirZ() throws RemoteException

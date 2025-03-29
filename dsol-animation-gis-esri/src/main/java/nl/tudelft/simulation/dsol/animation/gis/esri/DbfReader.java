@@ -58,9 +58,7 @@ public class DbfReader implements Serializable
         this.dbfFile = dbfFile;
         ObjectEndianInputStream dbfInput = new ObjectEndianInputStream(dbfFile.openStream());
         if (dbfInput.readByte() != 3)
-        {
-            throw new IOException("dbf file does not seem to be a Dbase III file");
-        }
+        { throw new IOException("dbf file does not seem to be a Dbase III file"); }
 
         dbfInput.skipBytes(3);
         dbfInput.setEndianness(Endianness.LITTLE_ENDIAN);
@@ -81,9 +79,7 @@ public class DbfReader implements Serializable
             {
                 byte b = dbfInput.readByte();
                 if (b > 31)
-                {
-                    buffer.append((char) b);
-                }
+                { buffer.append((char) b); }
             }
             this.columnNames[i] = buffer.toString();
             dbfInput.setEndianness(Endianness.BIG_ENDIAN);
@@ -93,9 +89,7 @@ public class DbfReader implements Serializable
 
             this.columnLength[i] = dbfInput.readByte();
             if (this.columnLength[i] < 0)
-            {
-                this.columnLength[i] += 256;
-            }
+            { this.columnLength[i] += 256; }
             dbfInput.skipBytes(15);
         }
         dbfInput.close();
@@ -120,9 +114,7 @@ public class DbfReader implements Serializable
     public String[] getRow(final int rowNumber) throws IOException, IndexOutOfBoundsException
     {
         if (rowNumber > this.numRecords)
-        {
-            throw new IndexOutOfBoundsException("dbfFile : rowNumber > numRecords");
-        }
+        { throw new IndexOutOfBoundsException("dbfFile : rowNumber > numRecords"); }
 
         // Either we may not cache of the cache is still empty
         String[] row = new String[this.numColumns];
@@ -158,9 +150,7 @@ public class DbfReader implements Serializable
                 dbfInput.read(bytes);
                 result[row][col] = new String(bytes);
                 if (col == this.numColumns - 1)
-                {
-                    dbfInput.skipBytes(1);
-                }
+                { dbfInput.skipBytes(1); }
             }
         }
         dbfInput.close();
@@ -185,9 +175,7 @@ public class DbfReader implements Serializable
                 for (int row = 0; row < this.numRecords; row++)
                 {
                     if (rows[row][col].equals(attribute))
-                    {
-                        result.add(Integer.valueOf(row));
-                    }
+                    { result.add(Integer.valueOf(row)); }
                 }
             }
         }

@@ -159,9 +159,7 @@ public class DevsRealTimeClockDoubleTest implements EventListener
         try
         {
             if ((int) this.workTimeDist.draw() == 500)
-            {
-                Thread.sleep(50);
-            }
+            { Thread.sleep(50); }
         }
         catch (InterruptedException exception)
         {

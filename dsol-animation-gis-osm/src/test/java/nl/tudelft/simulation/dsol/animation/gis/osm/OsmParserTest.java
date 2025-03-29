@@ -31,7 +31,7 @@ public class OsmParserTest implements Contextualized
 {
     /** context for the gis test. */
     private ContextInterface context;
-    
+
     /**
      * Test the PBF map parser.
      * @throws IOException on error
@@ -45,7 +45,7 @@ public class OsmParserTest implements Contextualized
         URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.pbf");
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");
         assertEquals("tudelft", map.getName());
-        
+
         GisRenderable2d renderable = new OsmRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
@@ -67,7 +67,7 @@ public class OsmParserTest implements Contextualized
         URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.gz");
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");
         assertEquals("tudelft", map.getName());
-        
+
         GisRenderable2d renderable = new OsmRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
@@ -75,7 +75,7 @@ public class OsmParserTest implements Contextualized
 
         this.context.destroySubcontext("animation");
     }
-    
+
     @Override
     public ContextInterface getContext()
     {

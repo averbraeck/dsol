@@ -104,7 +104,7 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             var seize = new Seize.DoubleCapacity<Double>("Seize", this.simulator, resource);
             seize.setFixedCapacityClaim(1.0);
             seize.setDefaultStatistics();
-            
+
             var release = new Release<Double>("Release", this.simulator, resource, 1.0);
 
             // The server

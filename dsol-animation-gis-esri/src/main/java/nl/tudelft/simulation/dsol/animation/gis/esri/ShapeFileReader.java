@@ -123,9 +123,7 @@ public class ShapeFileReader implements DataSourceInterface
         this.featuresToRead = featuresToRead;
         String fileName = shapeUrl.toString();
         if (fileName.endsWith(".shp") || fileName.endsWith(".shx") || fileName.endsWith(".dbf"))
-        {
-            fileName = fileName.substring(0, fileName.length() - 4);
-        }
+        { fileName = fileName.substring(0, fileName.length() - 4); }
         this.shpFile = new URL(fileName + ".shp");
         this.shxFile = new URL(fileName + ".shx");
         this.dbfFile = new URL(fileName + ".dbf");
@@ -167,9 +165,7 @@ public class ShapeFileReader implements DataSourceInterface
     public synchronized GisObject readShape(final int index) throws IOException
     {
         if (index > this.numShapes || index < 0)
-        {
-            throw new IndexOutOfBoundsException("Index =" + index + ", while number of shapes in layer :" + this.numShapes);
-        }
+        { throw new IndexOutOfBoundsException("Index =" + index + ", while number of shapes in layer :" + this.numShapes); }
 
         ObjectEndianInputStream indexInput = new ObjectEndianInputStream(this.shxFile.openStream());
         indexInput.skipBytes(8 * index + 100);
@@ -198,9 +194,7 @@ public class ShapeFileReader implements DataSourceInterface
         {
             Object shape = this.readShape(shapeInput);
             if (shape != null) // skip Null Shape type 0
-            {
-                results.add(new GisObject(shape, attributes[i]));
-            }
+            { results.add(new GisObject(shape, attributes[i])); }
         }
         shapeInput.close();
         return results;
@@ -252,9 +246,7 @@ public class ShapeFileReader implements DataSourceInterface
             {
                 Point2D temp = (Point2D) this.readShape(shapeInput, shapeNumber, contentLength, type, false);
                 if (extent.toRectangle2D().contains(temp))
-                {
-                    results.add(new GisObject(temp, attributes[i]));
-                }
+                { results.add(new GisObject(temp, attributes[i])); }
             }
         }
         shapeInput.close();
@@ -366,6 +358,7 @@ public class ShapeFileReader implements DataSourceInterface
      * <p>
      * A point consists of a pair of double-precision coordinates in the order X,Y.
      * </p>
+     * 
      * <pre>
      *   All byte orders are Little Endian.
      *   Integer ShapeType  // byte  0; Value 1 for Point
@@ -375,6 +368,7 @@ public class ShapeFileReader implements DataSourceInterface
      *     Double Y         // byte 12; Y coordinate (8 bytes)
      *   }
      * </pre>
+     * 
      * @param input the inputStream
      * @return Point2D.Double; the point
      * @throws IOException on file IO or database connection failure
@@ -395,6 +389,7 @@ public class ShapeFileReader implements DataSourceInterface
      * specification does not forbid consecutive points with identical coordinates, shapefile readers must handle such cases. On
      * the other hand, the degenerate, zero length parts that might result are not allowed.
      * </p>
+     * 
      * <pre>
      *   All byte orders are Little Endian.
      *   Integer ShapeType         // byte  0; Value 8 for PolyLine
@@ -414,6 +409,7 @@ public class ShapeFileReader implements DataSourceInterface
      *     Double Y                // Y coordinate (8 bytes)
      *   }
      * </pre>
+     * 
      * @param input the inputStream
      * @param skipBoundingBox whether to skip the bytes of the bounding box because they have not yet been read
      * @return the shape as a SerializablePath
@@ -424,9 +420,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.LINE;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         int numParts = input.readInt();
         int numPoints = input.readInt();
@@ -465,9 +459,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.POLYGON;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         int numParts = input.readInt();
         int numPoints = input.readInt();
@@ -506,9 +498,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.POINT;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         Point2D[] result = new Point2D.Double[input.readInt()];
         for (int i = 0; i < result.length; i++)
@@ -548,9 +538,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.LINE;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         int numParts = input.readInt();
         int numPoints = input.readInt();
@@ -595,9 +583,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.POLYGON;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         int numParts = input.readInt();
         int numPoints = input.readInt();
@@ -641,9 +627,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.POINT;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         Point2D[] result = new Point2D.Double[input.readInt()];
         int byteCounter = 40;
@@ -685,9 +669,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.LINE;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         int numParts = input.readInt();
         int numPoints = input.readInt();
@@ -730,9 +712,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.POLYGON;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         int numParts = input.readInt();
         int numPoints = input.readInt();
@@ -776,9 +756,7 @@ public class ShapeFileReader implements DataSourceInterface
     {
         this.currentType = GisMapInterface.POINT;
         if (skipBoundingBox)
-        {
-            input.skipBytes(32);
-        }
+        { input.skipBytes(32); }
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         Point2D[] result = new Point2D.Double[input.readInt()];
         int byteCounter = 40;

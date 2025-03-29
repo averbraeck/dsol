@@ -34,29 +34,29 @@ public interface FeatureInterface extends Serializable
     /**
      * Return the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data source
      * that have the correct key have to be drawn.
-     * @return the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the
-     *         data source that have the correct key have to be drawn.
+     * @return the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data source
+     *         that have the correct key have to be drawn.
      */
     String getValue();
-//
-//    /**
-//     * Return the data source, which contains the location of the GIS datasource.
-//     * @return DataSourceInterface the data source, contains the location of the GIS datasource
-//     */
-//    DataSourceInterface getDataSource();
+    //
+    // /**
+    // * Return the data source, which contains the location of the GIS datasource.
+    // * @return DataSourceInterface the data source, contains the location of the GIS datasource
+    // */
+    // DataSourceInterface getDataSource();
 
     /**
      * Return whether the data has been initialized for this feature.
      * @return whether the data has been initialized for this feature
      */
     boolean isInitialized();
-    
+
     /**
      * Set whether the data has been initialized for this feature.
      * @param initialized whether the data has been initialized for this feature
      */
     void setInitialized(boolean initialized);
-    
+
     /**
      * Return the number of shapes for this feature at this moment.
      * @return the number of shapes in the data source
@@ -82,19 +82,19 @@ public interface FeatureInterface extends Serializable
      * @param rectangle the extent of the box (in geo-coordinates)
      * @return List the resulting List of <code>nl.tudelft.simulation.dsol.animation.gis.GisObject</code>
      */
-     List<GisObject> getShapes(Bounds2d rectangle);
+    List<GisObject> getShapes(Bounds2d rectangle);
 
-//    /**
-//     * Set the data source, which contains the location of the GIS data.
-//     * @param dataSource the data source, contains the location of the GIS data
-//     */
-//    void setDataSource(DataSourceInterface dataSource);
+    // /**
+    // * Set the data source, which contains the location of the GIS data.
+    // * @param dataSource the data source, contains the location of the GIS data
+    // */
+    // void setDataSource(DataSourceInterface dataSource);
 
     /**
      * Set the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data source
      * that have the correct key have to be drawn.
-     * @param value the value belonging to the key that defines the feature in a layer, can be "*" if all elements in
-     *            the data source that have the correct key have to be drawn.
+     * @param value the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data
+     *            source that have the correct key have to be drawn.
      */
     void setValue(String value);
 

@@ -33,8 +33,8 @@ public class DistExponential extends DistContinuous
      * system that occur randomly at a constant rate. The exponential distribution can also be characterized by this rate
      * parameter &lambda;; mean = 1 / &lambda;.
      * @param stream the random number stream
-     * @param mean the mean (mean &gt; 0) value of the exponential distribution. The exponential distribution can also
-     *            be characterized by the rate parameter &lambda;; mean = 1 / &lambda;
+     * @param mean the mean (mean &gt; 0) value of the exponential distribution. The exponential distribution can also be
+     *            characterized by the rate parameter &lambda;; mean = 1 / &lambda;
      * @throws IllegalArgumentException in case mean &lt;= 0
      */
     public DistExponential(final StreamInterface stream, final double mean)
@@ -54,9 +54,7 @@ public class DistExponential extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x >= 0)
-        {
-            return (1 / this.mean) * Math.exp(-x / this.mean);
-        }
+        { return (1 / this.mean) * Math.exp(-x / this.mean); }
         return 0.0;
     }
 

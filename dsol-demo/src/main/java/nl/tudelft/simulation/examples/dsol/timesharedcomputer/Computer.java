@@ -112,9 +112,7 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
                 try
                 {
                     if (getSimulator().isStartingOrRunning())
-                    {
-                        getSimulator().stop();
-                    }
+                    { getSimulator().stop(); }
                 }
                 catch (SimRuntimeException exception)
                 {

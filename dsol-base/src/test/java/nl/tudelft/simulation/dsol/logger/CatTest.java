@@ -30,5 +30,5 @@ public class CatTest
         assertNotEquals(Cat.DSOL, Cat.EVENT);
         assertNotEquals(Cat.DSOL.hashCode(), Cat.EVENT.hashCode());
     }
-    
+
 }

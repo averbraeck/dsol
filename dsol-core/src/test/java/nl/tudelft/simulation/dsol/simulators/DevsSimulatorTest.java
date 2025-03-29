@@ -38,13 +38,13 @@ public class DevsSimulatorTest implements EventListener
     @Test
     public void testDevsSimulator() throws TimeoutException, InterruptedException, RemoteException
     {
-//        this.waiter = new Waiter();
-//        DevsSimulatorInterface<Double> devsSimulator = new DevsSimulator<Double>("DevsSimulatorTest");
-//        devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
-//        ExperimentalFrame experimentalFrame =
-//                ExperimentUtilDouble.createExperimentalFrame(devsSimulator, new DEVSTestModel(devsSimulator));
-//        experimentalFrame.start();
-//        this.waiter.await(5000);
+        // this.waiter = new Waiter();
+        // DevsSimulatorInterface<Double> devsSimulator = new DevsSimulator<Double>("DevsSimulatorTest");
+        // devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
+        // ExperimentalFrame experimentalFrame =
+        // ExperimentUtilDouble.createExperimentalFrame(devsSimulator, new DEVSTestModel(devsSimulator));
+        // experimentalFrame.start();
+        // this.waiter.await(5000);
     }
 
     @Override

@@ -64,9 +64,7 @@ public class DistLogNormal extends DistNormal
     public double getCumulativeProbability(final double x)
     {
         if (x <= 0.0)
-        {
-            return 0.0;
-        }
+        { return 0.0; }
         return super.getCumulativeProbability(Math.log(x));
     }
 

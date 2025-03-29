@@ -25,8 +25,8 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  * @param <T> the time type
  * @param <S> the simulator type to use
  */
-public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
-        implements DsolModel<T, S>
+public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>>
+        extends LocalEventProducer implements DsolModel<T, S>
 {
     /** */
     private static final long serialVersionUID = 20181117L;

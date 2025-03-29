@@ -71,9 +71,7 @@ public class DX120Generator extends RandomNumberGenerator
             this.setSeed(System.currentTimeMillis());
         }
         if (this.buffer[0] < 0)
-        {
-            this.buffer[0] = Math.abs(this.buffer[0] - 1);
-        }
+        { this.buffer[0] = Math.abs(this.buffer[0] - 1); }
         for (int i = 1; i < K; i++)
         {
             this.buffer[i] = (MULTIPLIER * this.buffer[i - 1]) & MASK;
@@ -89,9 +87,7 @@ public class DX120Generator extends RandomNumberGenerator
         // u_dx4 (BB4) variant of http://www.cs.memphis.edu/~dengl/dx-rng/dx-120.c
         // note that the DX120 RNG provides 31 bits max.
         if (bits > 63)
-        {
-            throw new IllegalArgumentException("bits (" + bits + ") not in range [0,63]");
-        }
+        { throw new IllegalArgumentException("bits (" + bits + ") not in range [0,63]"); }
         int tempIndex = this.index;
         if (++this.index >= K)
         {

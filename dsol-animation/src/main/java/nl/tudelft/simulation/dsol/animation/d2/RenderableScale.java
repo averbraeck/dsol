@@ -35,10 +35,10 @@ public class RenderableScale
 
     /**
      * Construct a translator between world coordinates and screen coordinates that uses a different scale factor for x and y.
-     * @param yScaleRatio the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed
-     *            Y-axis, where yScale &gt; 1 results in an expanded Y-axis
-     * @param objectScaleFactor the scale factor for the object, e.g., to get 1 pixel unit to equal 1 meter on a map. A
-     *            scale factor smaller than 1 means that the object will be drawn smaller on the screen.
+     * @param yScaleRatio the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed Y-axis,
+     *            where yScale &gt; 1 results in an expanded Y-axis
+     * @param objectScaleFactor the scale factor for the object, e.g., to get 1 pixel unit to equal 1 meter on a map. A scale
+     *            factor smaller than 1 means that the object will be drawn smaller on the screen.
      * @throws IllegalArgumentException when yScale &lt;= 0
      */
     public RenderableScale(final double yScaleRatio, final double objectScaleFactor)
@@ -51,8 +51,8 @@ public class RenderableScale
 
     /**
      * Construct a translator between world coordinates and screen coordinates that uses a different scale factor for x and y.
-     * @param yScaleRatio the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed
-     *            Y-axis, where yScale &gt; 1 results in an expanded Y-axis
+     * @param yScaleRatio the Y-scale ratio with respect to the X-scale (when yScale &lt; 1 it results in a condensed Y-axis,
+     *            where yScale &gt; 1 results in an expanded Y-axis
      * @throws IllegalArgumentException when yScale &lt;= 0
      */
     public RenderableScale(final double yScaleRatio)
@@ -79,9 +79,7 @@ public class RenderableScale
     public double getXScale(final Bounds2d extent, final Dimension screen)
     {
         if (screen.getHeight() <= 0 || screen.getWidth() <= 0)
-        {
-            return Double.NaN;
-        }
+        { return Double.NaN; }
         return extent.getDeltaX() / screen.getWidth();
     }
 
@@ -95,9 +93,7 @@ public class RenderableScale
     public double getYScale(final Bounds2d extent, final Dimension screen)
     {
         if (screen.getHeight() <= 0 || screen.getWidth() <= 0)
-        {
-            return Double.NaN;
-        }
+        { return Double.NaN; }
         return extent.getDeltaY() / screen.getHeight();
     }
 

@@ -135,9 +135,7 @@ public class GisMap implements GisMapInterface
     public void hideLayer(final String layerName) throws RemoteException
     {
         if (this.layerMap.keySet().contains(layerName))
-        {
-            hideLayer(this.layerMap.get(layerName));
-        }
+        { hideLayer(this.layerMap.get(layerName)); }
         this.same = false;
     }
 
@@ -152,9 +150,7 @@ public class GisMap implements GisMapInterface
     public void showLayer(final String layerName) throws RemoteException
     {
         if (this.layerMap.keySet().contains(layerName))
-        {
-            showLayer(this.layerMap.get(layerName));
-        }
+        { showLayer(this.layerMap.get(layerName)); }
         this.same = false;
     }
 
@@ -214,22 +210,20 @@ public class GisMap implements GisMapInterface
                         for (Iterator<GisObject> shapeIterator = shapes.iterator(); shapeIterator.hasNext();)
                         {
                             GisObject gisObject = shapeIterator.next();
-//                            if (feature.getDataSource().getType() == POINT)
-//                            {
-//                                shape = new SerializablePath();
-//                                Point2D point = (Point2D) gisObject.getShape();
-//                                shape.moveTo((float) point.getX(), (float) point.getY());
-//                                // TODO: points are not drawn -- we have to do this differently
-//                            }
-//                            else
-//                            {
-                                shape = (SerializablePath) gisObject.getShape();
-//                            }
+                            // if (feature.getDataSource().getType() == POINT)
+                            // {
+                            // shape = new SerializablePath();
+                            // Point2D point = (Point2D) gisObject.getShape();
+                            // shape.moveTo((float) point.getX(), (float) point.getY());
+                            // // TODO: points are not drawn -- we have to do this differently
+                            // }
+                            // else
+                            // {
+                            shape = (SerializablePath) gisObject.getShape();
+                            // }
                             if (layer.isTransform())
-                            {
-                                shape.transform(transform);
-                            }
-                            if (/*feature.getDataSource().getType() == POLYGON &&*/ feature.getFillColor() != null)
+                            { shape.transform(transform); }
+                            if (/* feature.getDataSource().getType() == POLYGON && */ feature.getFillColor() != null)
                             {
                                 graphics.setColor(feature.getFillColor());
                                 graphics.fill(shape);
@@ -240,9 +234,7 @@ public class GisMap implements GisMapInterface
                                 graphics.draw(shape);
                             }
                             if (layer.isTransform())
-                            {
-                                shape.transform(antiTransform);
-                            }
+                            { shape.transform(antiTransform); }
                         }
                     }
                 }

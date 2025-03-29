@@ -39,8 +39,8 @@ public class Feature implements FeatureInterface
      */
     private String value = "*";
 
-//    /** the dataSource to use. */
-//    private DataSourceInterface dataSource;
+    // /** the dataSource to use. */
+    // private DataSourceInterface dataSource;
 
     /** the list of shapes that have been retrieved for this feature. */
     private List<GisObject> shapes = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Feature implements FeatureInterface
 
     /** the outlineColor. */
     private Color outlineColor = Color.BLACK;
-    
+
     /** whether the shapes have been read or not. */
     private boolean initialized = false;
 
@@ -72,12 +72,12 @@ public class Feature implements FeatureInterface
         return this.value;
     }
 
-//    /** {@inheritDoc} */
-//    @Override
-//    public DataSourceInterface getDataSource()
-//    {
-//        return this.dataSource;
-//    }
+    // /** {@inheritDoc} */
+    // @Override
+    // public DataSourceInterface getDataSource()
+    // {
+    // return this.dataSource;
+    // }
 
     @Override
     public boolean isInitialized()
@@ -119,16 +119,12 @@ public class Feature implements FeatureInterface
             if (shape.getShape() instanceof SerializablePath)
             {
                 if (Shape.overlaps(rectangle2D, ((SerializablePath) shape.getShape()).getBounds2D()))
-                {
-                    result.add(shape);
-                }
+                { result.add(shape); }
             }
             else if (shape.getShape() instanceof Point2D)
             {
                 if (rectangle2D.contains((Point2D) shape.getShape()))
-                {
-                    result.add(shape);
-                }
+                { result.add(shape); }
             }
             else
             {
@@ -138,12 +134,12 @@ public class Feature implements FeatureInterface
         return result;
     }
 
-//    /** {@inheritDoc} */
-//    @Override
-//    public void setDataSource(final DataSourceInterface dataSource)
-//    {
-//        this.dataSource = dataSource;
-//    }
+    // /** {@inheritDoc} */
+    // @Override
+    // public void setDataSource(final DataSourceInterface dataSource)
+    // {
+    // this.dataSource = dataSource;
+    // }
 
     @Override
     public final void setValue(final String value)

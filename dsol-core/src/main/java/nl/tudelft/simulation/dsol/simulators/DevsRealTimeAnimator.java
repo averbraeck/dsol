@@ -142,9 +142,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
                         T absSyncTime = SimTime.plus(this.simulatorTime, delta);
                         T eventOrUntilTime = this.eventList.first().getAbsoluteExecutionTime();
                         if (this.runUntilTime.compareTo(eventOrUntilTime) < 0)
-                        {
-                            eventOrUntilTime = this.runUntilTime;
-                        }
+                        { eventOrUntilTime = this.runUntilTime; }
                         if (absSyncTime.compareTo(eventOrUntilTime) < 0)
                         {
                             this.simulatorTime = SimTime.copy(absSyncTime);
@@ -381,9 +379,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     {
         this.speedFactor = newSpeedFactor;
         if (fireChangeSpeedFactorEvent)
-        {
-            this.fireEvent(CHANGE_SPEED_FACTOR_EVENT, newSpeedFactor);
-        }
+        { this.fireEvent(CHANGE_SPEED_FACTOR_EVENT, newSpeedFactor); }
     }
 
     /**
@@ -454,8 +450,8 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         /**
          * Construct a DevsRealTimeClock&lt;Double&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
-         * @param msecWallClockToSimTimeUnit the translation between a millisecond on the clock and '1.0' in the
-         *            simulation time.
+         * @param msecWallClockToSimTimeUnit the translation between a millisecond on the clock and '1.0' in the simulation
+         *            time.
          */
         public TimeDouble(final Serializable id, final double msecWallClockToSimTimeUnit)
         {

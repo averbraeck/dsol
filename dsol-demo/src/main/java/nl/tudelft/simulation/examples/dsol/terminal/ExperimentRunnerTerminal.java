@@ -84,7 +84,8 @@ public class ExperimentRunnerTerminal implements EventListener
                     model.addListener(this, Terminal.READY_EVENT);
                     this.numruns++;
                     simulator.start();
-                    simulator.scheduleEventAbs(runtime - 0.00001, this, "terminate", new Object[] {simulator, numQC, numAGV, rep, model});
+                    simulator.scheduleEventAbs(runtime - 0.00001, this, "terminate",
+                            new Object[] {simulator, numQC, numAGV, rep, model});
                 }
             }
         }
@@ -99,17 +100,15 @@ public class ExperimentRunnerTerminal implements EventListener
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      */
-    public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV,
-            final int rep, final Terminal model) throws SimRuntimeException, RemoteException
+    public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV, final int rep,
+            final Terminal model) throws SimRuntimeException, RemoteException
     {
         simulator.stop();
         System.out.println(numQC + "\t" + numAGV + "\t" + rep + "\tNaN\tNaN\t40\t" + model.getShip().getContainers());
         this.numruns--;
         this.completed++;
         if (this.completed == RUNS)
-        {
-            System.exit(0);
-        }
+        { System.exit(0); }
     }
 
     @Override
@@ -123,9 +122,7 @@ public class ExperimentRunnerTerminal implements EventListener
             this.numruns--;
             this.completed++;
             if (this.completed == RUNS)
-            {
-                System.exit(0);
-            }
+            { System.exit(0); }
         }
     }
 

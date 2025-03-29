@@ -114,7 +114,7 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
         try
         {
             this.simulator.scheduleEvent(
-                    new SimEvent<Double>(this.simulator.getSimulatorTime() + 1.0, this,"reviewInventory", null));
+                    new SimEvent<Double>(this.simulator.getSimulatorTime() + 1.0, this, "reviewInventory", null));
         }
         catch (Exception exception)
         {
@@ -128,9 +128,7 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
         long actualOrderSize = Math.min(amount, this.inventory);
         this.inventory = this.inventory - actualOrderSize;
         if (actualOrderSize < amount)
-        {
-            this.backLog = this.backLog + (amount - actualOrderSize);
-        }
+        { this.backLog = this.backLog + (amount - actualOrderSize); }
         this.fireTimedEvent(INVENTORY_LEVEL_EVENT, this.inventory, this.simulator.getSimulatorTime());
         this.fireTimedEvent(BACKLOG_LEVEL, this.backLog, this.simulator.getSimulatorTime());
         buyer.receiveProduct(actualOrderSize);

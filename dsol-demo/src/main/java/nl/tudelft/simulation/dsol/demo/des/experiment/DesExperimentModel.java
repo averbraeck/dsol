@@ -108,11 +108,11 @@ class DesExperimentModel extends AbstractDsolModel<Double, DevsSimulatorInterfac
         {
             throw new SimRuntimeException("Error retrieving parameters for the model", e);
         }
-        
+
         this.queue = new ArrayList<>();
         this.entityCounter = 0;
         this.busy = 0;
-        
+
         this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
         this.tallyTimeInSystem = new SimTally<>("Time in system", this);
         this.persistentQueueLength = new SimPersistent<>("Queue length", this);

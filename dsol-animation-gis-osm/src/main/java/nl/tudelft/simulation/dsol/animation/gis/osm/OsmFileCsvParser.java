@@ -105,9 +105,7 @@ public final class OsmFileCsvParser
         if (!header.contains("layerName") || !header.contains("key") || !header.contains("value")
                 || !header.contains("outlineColor") || !header.contains("fillColor") || !header.contains("display")
                 || !header.contains("transform"))
-        {
-            throw new IOException("OSM GIS map csv-file header row did not contain all column headers\n" + header.toString());
-        }
+        { throw new IOException("OSM GIS map csv-file header row did not contain all column headers\n" + header.toString()); }
 
         Iterator<NamedCsvRow> it = csvReader.iterator();
         while (it.hasNext())

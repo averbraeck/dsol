@@ -321,9 +321,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
             fieldMap.put(field, summaryTally);
         }
         if (!Double.isNaN(value))
-        {
-            summaryTally.register(value);
-        }
+        { summaryTally.register(value); }
     }
 
     /**

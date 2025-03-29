@@ -36,9 +36,7 @@ public class MaxPointFilter extends AbstractFilter
     {
         this.accepted++;
         if (this.accepted > this.maxPoints)
-        {
-            return false;
-        }
+        { return false; }
         return true;
     }
 

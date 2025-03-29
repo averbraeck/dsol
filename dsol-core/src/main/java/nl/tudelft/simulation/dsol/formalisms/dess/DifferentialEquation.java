@@ -111,9 +111,7 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
         if (event.getType().equals(SimulatorInterface.TIME_CHANGED_EVENT))
         {
             if (this.simulator.getSimulatorTime().doubleValue() < super.lastX || Double.isNaN(super.lastX))
-            {
-                return;
-            }
+            { return; }
             // do not put super here!
             this.previousY = integrateY(this.simulator.getSimulatorTime().doubleValue(), this.previousX, this.previousY);
             for (int i = 0; i < super.lastY.length; i++)

@@ -186,9 +186,7 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
             final int priority) throws RemoteException, SimRuntimeException
     {
         if (amount < 0)
-        {
-            throw new SimRuntimeException("requested capacity on resource cannot < 0.0");
-        }
+        { throw new SimRuntimeException("requested capacity on resource cannot < 0.0"); }
         if ((this.claimedCapacity + amount) <= this.capacity)
         {
             this.alterClaimedCapacity(amount);
@@ -213,13 +211,9 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
     public void releaseCapacity(final long amount) throws RemoteException
     {
         if (amount < 0)
-        {
-            throw new IllegalArgumentException("released capacity on resource cannot < 0.0");
-        }
+        { throw new IllegalArgumentException("released capacity on resource cannot < 0.0"); }
         if (amount > 0)
-        {
-            this.alterClaimedCapacity(-Math.min(this.capacity, amount));
-        }
+        { this.alterClaimedCapacity(-Math.min(this.capacity, amount)); }
         synchronized (this.requests)
         {
             for (Iterator<Request<T>> i = this.requests.iterator(); i.hasNext();)
@@ -259,21 +253,13 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
         public int compare(final Request<T> arg0, final Request<T> arg1)
         {
             if (arg0.getPriority() > arg1.getPriority())
-            {
-                return -1;
-            }
+            { return -1; }
             if (arg0.getPriority() < arg1.getPriority())
-            {
-                return 1;
-            }
+            { return 1; }
             if (arg0.getId() < arg1.getId())
-            {
-                return -1;
-            }
+            { return -1; }
             if (arg0.getId() > arg1.getId())
-            {
-                return 1;
-            }
+            { return 1; }
             return 0;
         }
     }

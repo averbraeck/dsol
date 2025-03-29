@@ -41,9 +41,7 @@ public abstract class RandomNumberGenerator implements StreamInterface
     public RandomNumberGenerator(final long seed)
     {
         if (seed <= 0)
-        {
-            throw new IllegalArgumentException("seed(" + seed + ")<=0");
-        }
+        { throw new IllegalArgumentException("seed(" + seed + ")<=0"); }
         this.setSeed(seed);
         this.originalSeed = seed;
     }
@@ -91,9 +89,7 @@ public abstract class RandomNumberGenerator implements StreamInterface
     public synchronized int nextInt(final int i, final int j)
     {
         if (i < 0 || j <= 0 || i >= j)
-        {
-            throw new IllegalArgumentException("i, j must be positive");
-        }
+        { throw new IllegalArgumentException("i, j must be positive"); }
         return i + (int) Math.floor((j - i + 1) * this.nextDouble());
     }
 

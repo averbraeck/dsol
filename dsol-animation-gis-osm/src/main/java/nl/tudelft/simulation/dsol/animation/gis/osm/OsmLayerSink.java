@@ -111,9 +111,7 @@ public class OsmLayerSink implements Sink
                     }
                 }
                 if (read)
-                {
-                    break;
-                }
+                { break; }
             }
             if (read)
             {

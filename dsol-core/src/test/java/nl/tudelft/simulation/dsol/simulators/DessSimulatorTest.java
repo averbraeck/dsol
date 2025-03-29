@@ -37,13 +37,13 @@ public class DessSimulatorTest implements EventListener
     @Test
     public void testDessSimulator() throws TimeoutException, InterruptedException, RemoteException
     {
-//        this.waiter = new Waiter();
-//        DessSimulatorInterface<Double> dessSimulator = new DessSimulator<Double>("DessSimulatorTest", 0.1);
-//        dessSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
-//        ExperimentalFrame experimentalFrame =
-//                ExperimentUtilDouble.createExperimentalFrame(dessSimulator, new TestModel(dessSimulator));
-//        experimentalFrame.start();
-//        this.waiter.await(1000);
+        // this.waiter = new Waiter();
+        // DessSimulatorInterface<Double> dessSimulator = new DessSimulator<Double>("DessSimulatorTest", 0.1);
+        // dessSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
+        // ExperimentalFrame experimentalFrame =
+        // ExperimentUtilDouble.createExperimentalFrame(dessSimulator, new TestModel(dessSimulator));
+        // experimentalFrame.start();
+        // this.waiter.await(1000);
     }
 
     @Override

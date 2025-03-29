@@ -73,8 +73,8 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
                     ReferenceType.STRONG);
             if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getStartTime()) <= 0)
             {
-            this.simulator.addListener(this, Replication.START_REPLICATION_EVENT, LocalEventProducer.LAST_POSITION,
-                    ReferenceType.STRONG);
+                this.simulator.addListener(this, Replication.START_REPLICATION_EVENT, LocalEventProducer.LAST_POSITION,
+                        ReferenceType.STRONG);
             }
             ContextInterface context =
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");

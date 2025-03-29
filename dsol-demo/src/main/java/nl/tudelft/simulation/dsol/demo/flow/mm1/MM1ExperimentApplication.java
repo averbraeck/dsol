@@ -63,13 +63,9 @@ public class MM1ExperimentApplication implements EventListener
     public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
-        {
-            reportReplicationStatistics();
-        }
+        { reportReplicationStatistics(); }
         if (event.getType().equals(Experiment.END_EXPERIMENT_EVENT))
-        {
-            reportFinalStatistics();
-        }
+        { reportFinalStatistics(); }
     }
 
     /**

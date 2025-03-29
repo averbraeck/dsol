@@ -42,8 +42,8 @@ public class Terminal extends FlowBlock<Double, Terminal>
      * @param thinkDelay the delay
      * @param jobSize in time
      */
-    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowBlock<Double, Cpu> cpu, final DistContinuous thinkDelay,
-            final DistContinuous jobSize)
+    public Terminal(final DevsSimulatorInterface<Double> simulator, final FlowBlock<Double, Cpu> cpu,
+            final DistContinuous thinkDelay, final DistContinuous jobSize)
     {
         super("Terminal", simulator);
         this.thinkDelay = thinkDelay;

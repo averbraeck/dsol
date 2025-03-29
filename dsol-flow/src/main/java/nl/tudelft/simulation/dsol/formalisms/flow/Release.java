@@ -43,7 +43,8 @@ public class Release<T extends Number & Comparable<T>> extends FlowBlock<T, Rele
      * @param resource which is released
      * @param amount of resource which is released
      */
-    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T, ?> resource, final double amount)
+    public Release(final String id, final DevsSimulatorInterface<T> simulator, final Resource<T, ?> resource,
+            final double amount)
     {
         super(id, simulator);
         this.resource = resource;

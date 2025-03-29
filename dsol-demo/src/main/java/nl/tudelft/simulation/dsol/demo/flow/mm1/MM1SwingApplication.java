@@ -36,8 +36,7 @@ public class MM1SwingApplication extends DsolApplication
      * @param model the model
      * @param simulator the simulator
      */
-    public MM1SwingApplication(final MM1Panel panel, final MM1Model model,
-            final DevsSimulator<Double> simulator)
+    public MM1SwingApplication(final MM1Panel panel, final MM1Model model, final DevsSimulator<Double> simulator)
     {
         super(panel, "MM1SwingApplication");
         this.model = model;

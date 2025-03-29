@@ -152,15 +152,11 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
         try
         {
             if (getSource().getLocation() == null)
-            {
-                return;
-            }
+            { return; }
             int image = this.selectImage();
             if (this.imageIcons == null || this.imageIcons[image] == null
                     || this.imageIcons[image].getImageLoadStatus() != MediaTracker.COMPLETE)
-            {
-                return;
-            }
+            { return; }
             Bounds2d size = BoundsUtil.projectBounds(getSource().getLocation(), getSource().getBounds());
             Point2D origin = this.resolveOrigin(this.orientation, size);
             graphics.translate(origin.getX(), origin.getY());
@@ -274,9 +270,7 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
     {
         in.defaultReadObject();
         if (ImageRenderable.cache == null)
-        {
-            ImageRenderable.cache = new LinkedHashMap<URL, ImageIcon>();
-        }
+        { ImageRenderable.cache = new LinkedHashMap<URL, ImageIcon>(); }
         this.readImages(this.imageUrls);
     }
 }

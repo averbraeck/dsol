@@ -185,8 +185,8 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Set whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
-     * @param scaleY whether to scale the renderable in the X/Y-direction with the value of
-     *     RenderableScale.objectScaleFactor or not
+     * @param scaleY whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or
+     *            not
      */
     @SuppressWarnings("checkstyle:needbraces")
     public void setScaleObject(final boolean scaleY)
@@ -199,8 +199,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
 
     /**
      * Return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
-     * @return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor
-     * or not
+     * @return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not
      */
     public boolean isScaleObject()
     {
@@ -269,24 +268,18 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             final RenderableScale renderableScale, final ImageObserver observer)
     {
         if (this.source == null)
-        {
-            return;
-        }
+        { return; }
         // save the transform -- clone because transform is a volatile object
         AffineTransform transform = (AffineTransform) graphics.getTransform().clone();
         try
         {
             Point<?> center = this.source.getLocation();
             if (center == null)
-            {
-                return;
-            }
+            { return; }
 
             Bounds2d rectangle = BoundsUtil.projectBounds(center, this.source.getBounds());
             if (rectangle == null || (!Shape2d.overlaps(extent, rectangle) && isTranslate()))
-            {
-                return;
-            }
+            { return; }
 
             // Let's transform
             if (isTranslate())
@@ -312,13 +305,9 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             if (angle != 0.0)
             {
                 if (isFlip() && angle < -Math.PI)
-                {
-                    angle = angle + Math.PI;
-                }
+                { angle = angle + Math.PI; }
                 if (isRotate())
-                {
-                    graphics.rotate(angle);
-                }
+                { graphics.rotate(angle); }
             }
 
             // Now we paint
@@ -341,9 +330,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         try
         {
             if (pointWorldCoordinates == null || this.source == null || this.source.getLocation() == null)
-            {
-                return false;
-            }
+            { return false; }
             Bounds2d intersect = BoundsUtil.projectBounds(this.source.getLocation(), this.source.getBounds());
             return intersect.contains(pointWorldCoordinates);
         }
@@ -384,10 +371,10 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * point (e.g., a mouse click) or not.
      * @param pointRelativeTo00 the point relative to the drawing world.
      * @param scale the current zoom factor of the screen
-     * @param worldMargin the margin to apply 'around' the object, in screen coordinates at a zoom level of 1, which is
-     *     the same as world coordinates. This margin grows and shrinks in absolute sense with the zoom factor.
-     * @param pixelMargin the number of pixels around the drawn object for contains to be 'true'. This guarantees that a
-     *     mouse click can be pointed to a very small object.
+     * @param worldMargin the margin to apply 'around' the object, in screen coordinates at a zoom level of 1, which is the same
+     *            as world coordinates. This margin grows and shrinks in absolute sense with the zoom factor.
+     * @param pixelMargin the number of pixels around the drawn object for contains to be 'true'. This guarantees that a mouse
+     *            click can be pointed to a very small object.
      * @param xScale the ratio between a world x-coordinate and a pixel
      * @param yScale the ratio between a world y-coordinate and a pixel
      * @return whether the point is in the shape or in a margin around the shape

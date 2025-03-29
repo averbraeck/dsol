@@ -57,33 +57,19 @@ public interface SimEventInterface<T extends Number & Comparable<T>> extends Ser
     default int compareTo(final SimEventInterface<T> simEvent)
     {
         if (this.equals(simEvent))
-        {
-            return 0;
-        }
+        { return 0; }
         if (this.getAbsoluteExecutionTime().compareTo(simEvent.getAbsoluteExecutionTime()) < 0)
-        {
-            return -1;
-        }
+        { return -1; }
         if (this.getAbsoluteExecutionTime().compareTo(simEvent.getAbsoluteExecutionTime()) > 0)
-        {
-            return 1;
-        }
+        { return 1; }
         if (this.getPriority() < simEvent.getPriority())
-        {
-            return 1;
-        }
+        { return 1; }
         if (this.getPriority() > simEvent.getPriority())
-        {
-            return -1;
-        }
+        { return -1; }
         if (this.getId() < simEvent.getId())
-        {
-            return -1;
-        }
+        { return -1; }
         if (this.getId() > simEvent.getId())
-        {
-            return 1;
-        }
+        { return 1; }
         throw new IllegalStateException("This may never occur! " + this + " !=" + simEvent + ". Almost returned 0");
     }
 

@@ -64,7 +64,9 @@ public class InputParameterTest
         assertFalse(ip.isReadOnly());
         ip.setReadOnly(true);
         assertTrue(ip.isReadOnly());
-        Try.testFail(() -> { ip.setValue(false); });
+        Try.testFail(() -> {
+            ip.setValue(false);
+        });
 
         ip.setDefaultValue(false);
         assertEquals(false, ip.getDefaultValue());
@@ -81,17 +83,33 @@ public class InputParameterTest
         assertEquals(false, ipClone.getDefaultValue());
 
         // null and NaN
-        Try.testFail(() -> { new InputParameterBoolean(null, "y", "z", false, 2.0); });
-        Try.testFail(() -> { new InputParameterBoolean("x", null, "z", false, 2.0); });
-        Try.testFail(() -> { new InputParameterBoolean("x", "y", null, false, 2.0); });
-        Try.testFail(() -> { new InputParameterBoolean("x", "y", "z", false, Double.NaN); });
-        Try.testFail(() -> { new InputParameterString("x", "y", "z", null, 2.0); });
+        Try.testFail(() -> {
+            new InputParameterBoolean(null, "y", "z", false, 2.0);
+        });
+        Try.testFail(() -> {
+            new InputParameterBoolean("x", null, "z", false, 2.0);
+        });
+        Try.testFail(() -> {
+            new InputParameterBoolean("x", "y", null, false, 2.0);
+        });
+        Try.testFail(() -> {
+            new InputParameterBoolean("x", "y", "z", false, Double.NaN);
+        });
+        Try.testFail(() -> {
+            new InputParameterString("x", "y", "z", null, 2.0);
+        });
         InputParameterString ips = new InputParameterString("x", "y", "z", "xyz", 1.0);
-        Try.testFail(() -> { ips.setDefaultValue(null); });
-        Try.testFail(() -> { ips.setValue(null); });
+        Try.testFail(() -> {
+            ips.setDefaultValue(null);
+        });
+        Try.testFail(() -> {
+            ips.setValue(null);
+        });
 
         // no period in key
-        Try.testFail(() -> { new InputParameterBoolean("x.y", "y", "z", true, 2.0); });
+        Try.testFail(() -> {
+            new InputParameterBoolean("x.y", "y", "z", true, 2.0);
+        });
     }
 
     /**
@@ -149,7 +167,9 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() -> { ipmm.setDoubleValue(0.0); });
+                    Try.testFail(() -> {
+                        ipmm.setDoubleValue(0.0);
+                    });
                 }
                 if (includeMax)
                 {
@@ -158,13 +178,25 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() -> { ipmm.setDoubleValue(20.0); });
+                    Try.testFail(() -> {
+                        ipmm.setDoubleValue(20.0);
+                    });
                 }
-                Try.testFail(() -> { ipmm.setDoubleValue(Double.NaN); });
-                Try.testFail(() -> { ipmm.setDoubleValue(Double.POSITIVE_INFINITY); });
-                Try.testFail(() -> { ipmm.setDoubleValue(Double.NEGATIVE_INFINITY); });
-                Try.testFail(() -> { ipmm.setDoubleValue(-50.0); });
-                Try.testFail(() -> { ipmm.setDoubleValue(50.0); });
+                Try.testFail(() -> {
+                    ipmm.setDoubleValue(Double.NaN);
+                });
+                Try.testFail(() -> {
+                    ipmm.setDoubleValue(Double.POSITIVE_INFINITY);
+                });
+                Try.testFail(() -> {
+                    ipmm.setDoubleValue(Double.NEGATIVE_INFINITY);
+                });
+                Try.testFail(() -> {
+                    ipmm.setDoubleValue(-50.0);
+                });
+                Try.testFail(() -> {
+                    ipmm.setDoubleValue(50.0);
+                });
 
                 ipmm.setFormat("%8.4f");
                 assertEquals("%8.4f", ipmm.getFormat());
@@ -178,13 +210,21 @@ public class InputParameterTest
                 assertEquals(100.0, ipmm.getMaximumValue(), 1E-6);
                 ipmm.setValue(-50.0);
                 ipmm.setValue(50.0);
-                Try.testFail(() -> { ipmm.setDoubleValue(-150.0); });
-                Try.testFail(() -> { ipmm.setDoubleValue(150.0); });
+                Try.testFail(() -> {
+                    ipmm.setDoubleValue(-150.0);
+                });
+                Try.testFail(() -> {
+                    ipmm.setDoubleValue(150.0);
+                });
             }
         }
 
-        Try.testFail(() -> { ip.setFormat(null); });
-        Try.testFail(() -> { new InputParameterDouble("d", "d", "d", 12.34, 0.0, 20.0, false, false, null, 3.0); });
+        Try.testFail(() -> {
+            ip.setFormat(null);
+        });
+        Try.testFail(() -> {
+            new InputParameterDouble("d", "d", "d", 12.34, 0.0, 20.0, false, false, null, 3.0);
+        });
         InputParameterDouble ipClone = ip.clone();
         assertFalse(ip == ipClone);
         assertEquals(ip.getCalculatedValue(), ipClone.getCalculatedValue(), 1E-6);
@@ -231,7 +271,9 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() -> { ipmm.setFloatValue(0.0f); });
+                    Try.testFail(() -> {
+                        ipmm.setFloatValue(0.0f);
+                    });
                 }
                 if (includeMax)
                 {
@@ -240,13 +282,25 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() -> { ipmm.setFloatValue(20.0f); });
+                    Try.testFail(() -> {
+                        ipmm.setFloatValue(20.0f);
+                    });
                 }
-                Try.testFail(() -> { ipmm.setFloatValue(Float.NaN); });
-                Try.testFail(() -> { ipmm.setFloatValue(Float.POSITIVE_INFINITY); });
-                Try.testFail(() -> { ipmm.setFloatValue(Float.NEGATIVE_INFINITY); });
-                Try.testFail(() -> { ipmm.setFloatValue(-50.0f); });
-                Try.testFail(() -> { ipmm.setFloatValue(50.0f); });
+                Try.testFail(() -> {
+                    ipmm.setFloatValue(Float.NaN);
+                });
+                Try.testFail(() -> {
+                    ipmm.setFloatValue(Float.POSITIVE_INFINITY);
+                });
+                Try.testFail(() -> {
+                    ipmm.setFloatValue(Float.NEGATIVE_INFINITY);
+                });
+                Try.testFail(() -> {
+                    ipmm.setFloatValue(-50.0f);
+                });
+                Try.testFail(() -> {
+                    ipmm.setFloatValue(50.0f);
+                });
 
                 ipmm.setFormat("%8.4f");
                 assertEquals("%8.4f", ipmm.getFormat());
@@ -260,13 +314,21 @@ public class InputParameterTest
                 assertEquals(100.0, ipmm.getMaximumValue(), 1E-6);
                 ipmm.setValue(-50.0f);
                 ipmm.setValue(50.0f);
-                Try.testFail(() -> { ipmm.setFloatValue(-150.0f); });
-                Try.testFail(() -> { ipmm.setFloatValue(150.0f); });
+                Try.testFail(() -> {
+                    ipmm.setFloatValue(-150.0f);
+                });
+                Try.testFail(() -> {
+                    ipmm.setFloatValue(150.0f);
+                });
             }
         }
 
-        Try.testFail(() -> { ip.setFormat(null); });
-        Try.testFail(() -> { new InputParameterFloat("f", "f", "f", 12.34f, 0.0f, 20.0f, false, false, null, 3.0); });
+        Try.testFail(() -> {
+            ip.setFormat(null);
+        });
+        Try.testFail(() -> {
+            new InputParameterFloat("f", "f", "f", 12.34f, 0.0f, 20.0f, false, false, null, 3.0);
+        });
         InputParameterFloat ipClone = ip.clone();
         assertFalse(ip == ipClone);
         assertEquals(ip.getCalculatedValue(), ipClone.getCalculatedValue(), 1E-6);
@@ -299,8 +361,12 @@ public class InputParameterTest
         assertEquals("%6d", ipmm.getFormat());
         ipmm.setIntValue(0);
         ipmm.setIntValue(20);
-        Try.testFail(() -> { ipmm.setIntValue(-50); });
-        Try.testFail(() -> { ipmm.setIntValue(50); });
+        Try.testFail(() -> {
+            ipmm.setIntValue(-50);
+        });
+        Try.testFail(() -> {
+            ipmm.setIntValue(50);
+        });
 
         ipmm.setFormat("%8d");
         assertEquals("%8d", ipmm.getFormat());
@@ -310,11 +376,19 @@ public class InputParameterTest
         assertEquals(100, ipmm.getMaximumValue().intValue());
         ipmm.setValue(-50);
         ipmm.setValue(50);
-        Try.testFail(() -> { ipmm.setIntValue(-150); });
-        Try.testFail(() -> { ipmm.setIntValue(150); });
+        Try.testFail(() -> {
+            ipmm.setIntValue(-150);
+        });
+        Try.testFail(() -> {
+            ipmm.setIntValue(150);
+        });
 
-        Try.testFail(() -> { ip.setFormat(null); });
-        Try.testFail(() -> { new InputParameterInteger("i", "i", "i", 12, 0, 20, null, 3.0); });
+        Try.testFail(() -> {
+            ip.setFormat(null);
+        });
+        Try.testFail(() -> {
+            new InputParameterInteger("i", "i", "i", 12, 0, 20, null, 3.0);
+        });
         InputParameterInteger ipClone = ip.clone();
         assertFalse(ip == ipClone);
         assertEquals(ip.getCalculatedValue().intValue(), ipClone.getCalculatedValue().intValue());
@@ -347,8 +421,12 @@ public class InputParameterTest
         assertEquals("%6d", ipmm.getFormat());
         ipmm.setLongValue(0L);
         ipmm.setLongValue(20L);
-        Try.testFail(() -> { ipmm.setLongValue(-50L); });
-        Try.testFail(() -> { ipmm.setLongValue(50L); });
+        Try.testFail(() -> {
+            ipmm.setLongValue(-50L);
+        });
+        Try.testFail(() -> {
+            ipmm.setLongValue(50L);
+        });
 
         ipmm.setFormat("%8d");
         assertEquals("%8d", ipmm.getFormat());
@@ -358,11 +436,19 @@ public class InputParameterTest
         assertEquals(100L, ipmm.getMaximumValue().longValue());
         ipmm.setValue(-50L);
         ipmm.setValue(50L);
-        Try.testFail(() -> { ipmm.setLongValue(-150L); });
-        Try.testFail(() -> { ipmm.setLongValue(150); });
+        Try.testFail(() -> {
+            ipmm.setLongValue(-150L);
+        });
+        Try.testFail(() -> {
+            ipmm.setLongValue(150);
+        });
 
-        Try.testFail(() -> { ip.setFormat(null); });
-        Try.testFail(() -> { new InputParameterLong("L", "L", "L", 12L, 0L, 20L, null, 3.0); });
+        Try.testFail(() -> {
+            ip.setFormat(null);
+        });
+        Try.testFail(() -> {
+            new InputParameterLong("L", "L", "L", 12L, 0L, 20L, null, 3.0);
+        });
         InputParameterLong ipClone = ip.clone();
         assertFalse(ip == ipClone);
         assertEquals(ip.getCalculatedValue().longValue(), ipClone.getCalculatedValue().longValue());
@@ -394,14 +480,22 @@ public class InputParameterTest
         assertEquals("abc", ip.getDefaultValue());
         assertEquals("def", ip.getCalculatedValue());
         assertEquals("def", ip.getValue());
-        Try.testFail(() -> { ip.setValue(null); });
-        Try.testFail(() -> { ip.setStringValue(null); });
-        Try.testFail(() -> { ip.setDefaultValue(null); });
+        Try.testFail(() -> {
+            ip.setValue(null);
+        });
+        Try.testFail(() -> {
+            ip.setStringValue(null);
+        });
+        Try.testFail(() -> {
+            ip.setDefaultValue(null);
+        });
         InputParameterString ipClone = ip.clone();
         assertFalse(ip == ipClone);
         assertEquals(ip.getCalculatedValue(), ipClone.getCalculatedValue());
 
-        Try.testFail(() -> { new InputParameterString("s", "string", "string value", null, 2.0); });
+        Try.testFail(() -> {
+            new InputParameterString("s", "string", "string value", null, 2.0);
+        });
     }
 
     /**
@@ -553,12 +647,18 @@ public class InputParameterTest
                 assertEquals(100.0, ipmm.getDoubleParameter().getMaximumValue(), 1E-6);
                 ipmm.getDoubleParameter().setValue(-50.0);
                 ipmm.getDoubleParameter().setValue(50.0);
-                Try.testFail(() -> { ipmm.getDoubleParameter().setDoubleValue(-150.0); });
-                Try.testFail(() -> { ipmm.getDoubleParameter().setDoubleValue(150.0); });
+                Try.testFail(() -> {
+                    ipmm.getDoubleParameter().setDoubleValue(-150.0);
+                });
+                Try.testFail(() -> {
+                    ipmm.getDoubleParameter().setDoubleValue(150.0);
+                });
             }
         }
 
-        Try.testFail(() -> { ip.getDoubleParameter().setFormat(null); });
+        Try.testFail(() -> {
+            ip.getDoubleParameter().setFormat(null);
+        });
         Try.testFail(() -> {
             new InputParameterDoubleScalar<LengthUnit, Length>("len", "len", "len", new Length(12.34, LengthUnit.CENTIMETER),
                     new Length(0.0, LengthUnit.CENTIMETER), new Length(20.0, LengthUnit.CENTIMETER), false, false, null, 3.0);
@@ -627,7 +727,9 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() -> { ipBreak1.setCalculatedValue(); });
+        Try.testFail(() -> {
+            ipBreak1.setCalculatedValue();
+        });
 
         // break the scalar constructor
         InputParameterDoubleScalar<LengthUnit, Length> ipBreak2 = new InputParameterDoubleScalar<>("len", "length",
@@ -642,7 +744,9 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() -> { ipBreak2.setCalculatedValue(); });
+        Try.testFail(() -> {
+            ipBreak2.setCalculatedValue();
+        });
 
         // break the map
         InputParameterDoubleScalar<LengthUnit, Length> ipBreak3 = new InputParameterDoubleScalar<>("len", "length",
@@ -650,8 +754,12 @@ public class InputParameterTest
         SortedMap<String, InputParameter<?, ?>> ipMap = ipBreak3.getValue();
         ipMap.remove("value");
         ipMap.remove("unit");
-        Try.testFail(() -> { ipBreak3.getDoubleParameter(); });
-        Try.testFail(() -> { ipBreak3.getUnitParameter(); });
+        Try.testFail(() -> {
+            ipBreak3.getDoubleParameter();
+        });
+        Try.testFail(() -> {
+            ipBreak3.getUnitParameter();
+        });
     }
 
     /**
@@ -803,12 +911,18 @@ public class InputParameterTest
                 assertEquals(100.0f, ipmm.getFloatParameter().getMaximumValue(), 1E-6);
                 ipmm.getFloatParameter().setValue(-50.0f);
                 ipmm.getFloatParameter().setValue(50.0f);
-                Try.testFail(() -> { ipmm.getFloatParameter().setFloatValue(-150.0f); });
-                Try.testFail(() -> { ipmm.getFloatParameter().setFloatValue(150.0f); });
+                Try.testFail(() -> {
+                    ipmm.getFloatParameter().setFloatValue(-150.0f);
+                });
+                Try.testFail(() -> {
+                    ipmm.getFloatParameter().setFloatValue(150.0f);
+                });
             }
         }
 
-        Try.testFail(() -> { ip.getFloatParameter().setFormat(null); });
+        Try.testFail(() -> {
+            ip.getFloatParameter().setFormat(null);
+        });
         Try.testFail(() -> {
             new InputParameterFloatScalar<LengthUnit, FloatLength>("len", "len", "len",
                     new FloatLength(12.34, LengthUnit.CENTIMETER), new FloatLength(0.0, LengthUnit.CENTIMETER),
@@ -878,7 +992,9 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() -> { ipBreak1.setCalculatedValue(); });
+        Try.testFail(() -> {
+            ipBreak1.setCalculatedValue();
+        });
 
         // break the scalar constructor
         InputParameterFloatScalar<LengthUnit, FloatLength> ipBreak2 = new InputParameterFloatScalar<>("len", "length",
@@ -893,7 +1009,9 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() -> { ipBreak2.setCalculatedValue(); });
+        Try.testFail(() -> {
+            ipBreak2.setCalculatedValue();
+        });
 
         // break the map
         InputParameterFloatScalar<LengthUnit, FloatLength> ipBreak3 = new InputParameterFloatScalar<>("len", "length",
@@ -901,8 +1019,12 @@ public class InputParameterTest
         SortedMap<String, InputParameter<?, ?>> ipMap = ipBreak3.getValue();
         ipMap.remove("value");
         ipMap.remove("unit");
-        Try.testFail(() -> { ipBreak3.getFloatParameter(); });
-        Try.testFail(() -> { ipBreak3.getUnitParameter(); });
+        Try.testFail(() -> {
+            ipBreak3.getFloatParameter();
+        });
+        Try.testFail(() -> {
+            ipBreak3.getUnitParameter();
+        });
     }
 
     /**
@@ -932,9 +1054,15 @@ public class InputParameterTest
         assertEquals(DurationUnit.HOUR, ip.getDefaultValue());
         assertEquals(DurationUnit.MINUTE, ip.getCalculatedValue());
         assertEquals(DurationUnit.MINUTE, ip.getValue());
-        Try.testFail(() -> { ip.setValue(null); });
-        Try.testFail(() -> { ip.setObjectValue(null); });
-        Try.testFail(() -> { ip.setDefaultValue(null); });
+        Try.testFail(() -> {
+            ip.setValue(null);
+        });
+        Try.testFail(() -> {
+            ip.setObjectValue(null);
+        });
+        Try.testFail(() -> {
+            ip.setDefaultValue(null);
+        });
         InputParameterUnit<DurationUnit> ipClone = ip.clone();
         assertFalse(ip == ipClone);
         assertEquals(ip.getCalculatedValue(), ipClone.getCalculatedValue());
@@ -943,16 +1071,26 @@ public class InputParameterTest
 
         SortedMap<String, DurationUnit> optionMap = ip.getOptions();
         optionMap.remove("second");
-        Try.testFail(() -> { ip.setMapValue(DurationUnit.SECOND); });
-        Try.testFail(() -> { ip.setKeyforValue("second"); });
-        Try.testFail(() -> { ip.setKeyforValue("xyz"); });
-        Try.testFail(() -> { ip.setKeyforValue(null); });
+        Try.testFail(() -> {
+            ip.setMapValue(DurationUnit.SECOND);
+        });
+        Try.testFail(() -> {
+            ip.setKeyforValue("second");
+        });
+        Try.testFail(() -> {
+            ip.setKeyforValue("xyz");
+        });
+        Try.testFail(() -> {
+            ip.setKeyforValue(null);
+        });
         ip.setKeyforValue("day");
         assertEquals("day", ip.getKeyforValue());
 
         SortedMap<String, String> stringMap = new TreeMap<>();
         stringMap.put("a", "a");
-        Try.testFail(() -> { new InputParameterSelectionMap<String, String>("s", "s", "s", stringMap, "zz", 1.0); });
+        Try.testFail(() -> {
+            new InputParameterSelectionMap<String, String>("s", "s", "s", stringMap, "zz", 1.0);
+        });
     }
 
 }

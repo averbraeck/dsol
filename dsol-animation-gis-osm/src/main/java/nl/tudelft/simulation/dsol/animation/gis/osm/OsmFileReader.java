@@ -53,7 +53,7 @@ public class OsmFileReader implements DataSourceInterface
         this.coordinateTransform = coordinateTransform;
         this.featuresToRead = featuresToRead;
     }
-    
+
     @Override
     public List<FeatureInterface> getFeatures()
     {
@@ -80,9 +80,7 @@ public class OsmFileReader implements DataSourceInterface
             compression = CompressionMethod.GZip;
         }
         else if (filename.endsWith(".bz2"))
-        {
-            compression = CompressionMethod.BZip2;
-        }
+        { compression = CompressionMethod.BZip2; }
 
         if (pbf)
         {

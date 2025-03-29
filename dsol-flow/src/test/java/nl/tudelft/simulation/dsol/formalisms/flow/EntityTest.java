@@ -70,7 +70,7 @@ public class EntityTest extends FlowTest
         assertEquals(d1.toString(), d2.toString());
         assertEquals(d1.getStream(), d2.getStream());
         assertNotEquals(d1.draw(), d2.draw()); // the STREAM is not cloned (!)
-        
+
         cleanUp(simulator);
     }
 }

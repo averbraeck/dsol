@@ -51,7 +51,7 @@ public class ModelTest
                     }
                 };
         assertEquals(simulator, model.getSimulator());
-        
+
         // stream management
         assertNotNull(model.getStream("default"));
         assertNotNull(model.getDefaultStream());
@@ -66,7 +66,7 @@ public class ModelTest
         streamMap.put("default", new MersenneTwister(20L));
         streamMap.put("stream1", new MersenneTwister(1L));
         assertNotNull(model.getStream("stream1"));
-        
+
         // initial streams
         StreamInformation streamInfo = new StreamInformation();
         streamInfo.addStream("default", new MersenneTwister(20L));
@@ -75,7 +75,7 @@ public class ModelTest
         assertEquals(2, model.getStreams().size());
         assertEquals(20, model.getStream("default").getSeed());
         assertEquals(10, model.getStream("extra").getSeed());
-                
+
         // input parameter management
         assertNotNull(model.getInputParameterMap());
         model.getInputParameterMap().add(new InputParameterDouble("double", "double", "double", 10.0, 1.0));

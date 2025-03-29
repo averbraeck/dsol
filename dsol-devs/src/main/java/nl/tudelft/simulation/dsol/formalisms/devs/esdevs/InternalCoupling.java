@@ -34,9 +34,7 @@ public class InternalCoupling<T extends Number & Comparable<T>, P>
         this.toPort = toPort;
 
         if (this.fromPort.getModel().equals(toPort.getModel()))
-        {
-            throw new Exception("no self coupling allowed");
-        }
+        { throw new Exception("no self coupling allowed"); }
 
     }
 

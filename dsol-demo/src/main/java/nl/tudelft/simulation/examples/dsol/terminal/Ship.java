@@ -44,9 +44,7 @@ public class Ship extends LocalEventProducer
         if (this.containers >= this.capacity)
         {
             if (Terminal.DEBUG)
-            {
-                System.out.println("SHIP IS FULL -- EVENT FIRED");
-            }
+            { System.out.println("SHIP IS FULL -- EVENT FIRED"); }
             fireEvent(SHIP_FULL_EVENT, this.containers);
         }
     }

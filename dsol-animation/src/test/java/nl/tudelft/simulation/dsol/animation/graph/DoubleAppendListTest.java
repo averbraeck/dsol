@@ -31,8 +31,12 @@ public class DoubleAppendListTest
         list.add(1.0);
         assertEquals(1, list.size());
         assertEquals(1.0, list.get(0), 0.0001);
-        Try.testFail(() -> { list.get(1); }, IndexOutOfBoundsException.class);
-        Try.testFail(() -> { list.get(-1); }, IndexOutOfBoundsException.class);
+        Try.testFail(() -> {
+            list.get(1);
+        }, IndexOutOfBoundsException.class);
+        Try.testFail(() -> {
+            list.get(-1);
+        }, IndexOutOfBoundsException.class);
 
         DoubleAppendList list2 = new DoubleAppendList();
         for (int i = 0; i < 1000; i++)

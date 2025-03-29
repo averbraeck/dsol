@@ -23,15 +23,15 @@ public interface StreamInterface extends Serializable
     boolean nextBoolean();
 
     /**
-     * Return a pseudo-random number from the stream over the interval (0,1) using this stream, after advancing its
-     * state by one step.
+     * Return a pseudo-random number from the stream over the interval (0,1) using this stream, after advancing its state by one
+     * step.
      * @return the pseudo-random number
      */
     double nextDouble();
 
     /**
-     * Return a pseudo-random number from the stream over the interval (0,1) using this stream, after advancing its
-     * state by one step.
+     * Return a pseudo-random number from the stream over the interval (0,1) using this stream, after advancing its state by one
+     * step.
      * @return the pseudo-random number
      */
     float nextFloat();

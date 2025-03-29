@@ -66,9 +66,7 @@ public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
         double y = Math.sin(this.angle) * this.positioner.y(this.simulator.getSimulatorTime())[1] + this.origin.getY();
         if (Math.abs(x - this.origin.getX()) > Math.abs(this.destination.getX() - this.origin.getX())
                 || Math.abs(y - this.origin.getY()) > Math.abs(this.destination.getY() - this.origin.getY()))
-        {
-            this.next();
-        }
+        { this.next(); }
         return new OrientedPoint3d(x, y, 0, 0.0, 0.0, this.theta);
     }
 

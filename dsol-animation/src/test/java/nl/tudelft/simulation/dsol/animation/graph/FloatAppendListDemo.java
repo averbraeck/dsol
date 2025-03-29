@@ -39,17 +39,13 @@ public final class FloatAppendListDemo
         for (int i = 0; i < num; i++)
         {
             if (i != list.get(i))
-            {
-                System.err.println("get-error at " + i);
-            }
+            { System.err.println("get-error at " + i); }
         }
         int count = 0;
         for (float d : list)
         {
             if (count != d)
-            {
-                System.err.println("iterate-error at " + count);
-            }
+            { System.err.println("iterate-error at " + count); }
             count++;
         }
         System.out.println("msec FloatArrayList = " + (System.currentTimeMillis() - t));
@@ -64,17 +60,13 @@ public final class FloatAppendListDemo
         for (int i = 0; i < num; i++)
         {
             if (i != alist.get(i))
-            {
-                System.err.println("get-error at " + i);
-            }
+            { System.err.println("get-error at " + i); }
         }
         count = 0;
         for (float d : alist)
         {
             if (count != d)
-            {
-                System.err.println("iterate-error at " + count);
-            }
+            { System.err.println("iterate-error at " + count); }
             count++;
         }
         System.out.println("msec      ArrayList = " + (System.currentTimeMillis() - t));

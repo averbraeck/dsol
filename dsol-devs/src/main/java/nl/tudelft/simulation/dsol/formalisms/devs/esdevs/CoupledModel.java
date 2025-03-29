@@ -70,9 +70,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     {
         super(modelName, parentModel.getSimulator(), parentModel);
         if (this.parentModel != null)
-        {
-            this.parentModel.addModelComponent(this);
-        }
+        { this.parentModel.addModelComponent(this); }
     }
 
     /**
@@ -124,16 +122,12 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (InternalCoupling<T, ?> o : this.internalCouplingSet)
         {
             if (o.getFromPort() == x)
-            {
-                ((InternalCoupling<T, TYPE>) o).getToPort().receive(y, this.simulator.getSimulatorTime());
-            }
+            { ((InternalCoupling<T, TYPE>) o).getToPort().receive(y, this.simulator.getSimulatorTime()); }
         }
         for (ExternalOutputCoupling<T, ?> o : this.externalOutputCouplingSet)
         {
             if (o.getFromPort() == x)
-            {
-                ((ExternalOutputCoupling<T, TYPE>) o).getToPort().send(y);
-            }
+            { ((ExternalOutputCoupling<T, TYPE>) o).getToPort().send(y); }
         }
     }
 
@@ -143,10 +137,10 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * @param <TYPE> the type of message / event for which the coupling is added.
-     * @param fromPort the output port of an internal component that transfers the
-     *            message / event to another internal component (start of the coupling)
-     * @param toPort the input port of an internal component that receives a message /
-     *            event from the other componet (end of the coupling)
+     * @param fromPort the output port of an internal component that transfers the message / event to another internal component
+     *            (start of the coupling)
+     * @param toPort the input port of an internal component that receives a message / event from the other componet (end of the
+     *            coupling)
      */
     public <TYPE> void addInternalCoupling(final OutputPortInterface<T, TYPE> fromPort,
             final InputPortInterface<T, TYPE> toPort)
@@ -164,10 +158,10 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
 
     /**
      * @param <TYPE> the type of message / event for which the coupling is removed.
-     * @param fromPort the output port of an internal component that transfers the
-     *            message / event to another internal component (start of the coupling)
-     * @param toPort the input port of an internal component that receives a message /
-     *            event from the other componet (end of the coupling)
+     * @param fromPort the output port of an internal component that transfers the message / event to another internal component
+     *            (start of the coupling)
+     * @param toPort the input port of an internal component that receives a message / event from the other componet (end of the
+     *            coupling)
      */
     public <TYPE> void removeInternalCoupling(final OutputPortInterface<T, TYPE> fromPort,
             final InputPortInterface<T, TYPE> toPort)
@@ -175,9 +169,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort().getModel() == fromPort && ic.getToPort().getModel() == toPort)
-            {
-                this.internalCouplingSet.remove(ic);
-            }
+            { this.internalCouplingSet.remove(ic); }
         }
 
     }
@@ -185,10 +177,10 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Add an IOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is added.
-     * @param fromPort the input port of this coupled model that transfers the message /
-     *            event to the internal component (start of the coupling)
-     * @param toPort the input port of the internal component that receives a message /
-     *            event from the overarching coupled model (end of the coupling)
+     * @param fromPort the input port of this coupled model that transfers the message / event to the internal component (start
+     *            of the coupling)
+     * @param toPort the input port of the internal component that receives a message / event from the overarching coupled model
+     *            (end of the coupling)
      */
     public <TYPE> void addExternalInputCoupling(final InputPortInterface<T, TYPE> fromPort,
             final InputPortInterface<T, TYPE> toPort)
@@ -206,10 +198,10 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Remove an IOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is removed.
-     * @param fromPort the input port of this coupled model that transfers the message /
-     *            event to the internal component (start of the coupling)
-     * @param toPort the input port of the internal component that receives a message /
-     *            event from the overarching coupled model (end of the coupling)
+     * @param fromPort the input port of this coupled model that transfers the message / event to the internal component (start
+     *            of the coupling)
+     * @param toPort the input port of the internal component that receives a message / event from the overarching coupled model
+     *            (end of the coupling)
      */
     public <TYPE> void removeExternalInputCoupling(final InputPortInterface<T, TYPE> fromPort,
             final InputPortInterface<T, TYPE> toPort)
@@ -217,19 +209,17 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort() == fromPort && eic.getToPort() == toPort)
-            {
-                this.externalInputCouplingSet.remove(eic);
-            }
+            { this.externalInputCouplingSet.remove(eic); }
         }
     }
 
     /**
      * Add an EOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is added.
-     * @param fromPort the output port of the internal component that produces an event
-     *            for the outside of the overarching coupled model (start of the coupling)
-     * @param toPort the output port of this coupled model that transfers the message /
-     *            event to the outside (end of the coupling)
+     * @param fromPort the output port of the internal component that produces an event for the outside of the overarching
+     *            coupled model (start of the coupling)
+     * @param toPort the output port of this coupled model that transfers the message / event to the outside (end of the
+     *            coupling)
      */
     public <TYPE> void addExternalOutputCoupling(final OutputPortInterface<T, TYPE> fromPort,
             final OutputPortInterface<T, TYPE> toPort)
@@ -247,10 +237,10 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     /**
      * Remove an EOC within this coupled model.
      * @param <TYPE> the type of message / event for which the coupling is removed.
-     * @param fromPort the output port of the internal component that produces an event
-     *            for the outside of the overarching coupled model (start of the coupling)
-     * @param toPort the output port of this coupled model that transfers the message /
-     *            event to the outside (end of the coupling)
+     * @param fromPort the output port of the internal component that produces an event for the outside of the overarching
+     *            coupled model (start of the coupling)
+     * @param toPort the output port of this coupled model that transfers the message / event to the outside (end of the
+     *            coupling)
      */
     public <TYPE> void removeExternalOutputCoupling(final OutputPortInterface<T, TYPE> fromPort,
             final OutputPortInterface<T, TYPE> toPort)
@@ -258,9 +248,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort() == fromPort && eoc.getToPort() == toPort)
-            {
-                this.externalOutputCouplingSet.remove(eoc);
-            }
+            { this.externalOutputCouplingSet.remove(eoc); }
         }
     }
 
@@ -279,9 +267,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         List<Reference<EventListener>> elis = getListenerReferences(AbstractDevsModel.STATE_UPDATE);
 
         if (elis == null)
-        {
-            return;
-        }
+        { return; }
 
         for (Reference<EventListener> eli : elis)
         {
@@ -298,25 +284,19 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort().getModel() == model || eoc.getToPort().getModel() == model)
-            {
-                this.externalOutputCouplingSet.remove(eoc);
-            }
+            { this.externalOutputCouplingSet.remove(eoc); }
         }
 
         for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort().getModel() == model || eic.getToPort().getModel() == model)
-            {
-                this.externalInputCouplingSet.remove(eic);
-            }
+            { this.externalInputCouplingSet.remove(eic); }
         }
 
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort().getModel() == model || ic.getToPort().getModel() == model)
-            {
-                this.internalCouplingSet.remove(ic);
-            }
+            { this.internalCouplingSet.remove(ic); }
         }
 
         // this will also take care of the removal of the ports as they are not
@@ -337,17 +317,13 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort() == inputPort || eic.getToPort() == inputPort)
-            {
-                this.externalInputCouplingSet.remove(eic);
-            }
+            { this.externalInputCouplingSet.remove(eic); }
         }
 
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getToPort() == inputPort)
-            {
-                this.internalCouplingSet.remove(ic);
-            }
+            { this.internalCouplingSet.remove(ic); }
         }
     }
 
@@ -363,17 +339,13 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort() == outputPort || eoc.getToPort() == outputPort)
-            {
-                this.externalOutputCouplingSet.remove(eoc);
-            }
+            { this.externalOutputCouplingSet.remove(eoc); }
         }
 
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort() == outputPort)
-            {
-                this.internalCouplingSet.remove(ic);
-            }
+            { this.internalCouplingSet.remove(ic); }
         }
     }
 

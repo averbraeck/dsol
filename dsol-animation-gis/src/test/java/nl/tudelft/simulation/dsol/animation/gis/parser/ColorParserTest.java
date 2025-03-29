@@ -114,7 +114,7 @@ public class ColorParserTest
                 ColorParser.parse("rgb(10,20,30");
             }
         }, IllegalArgumentException.class);
-        
+
         Try.testFail(new Try.Execution()
         {
             @Override
@@ -188,7 +188,6 @@ public class ColorParserTest
         }, NumberFormatException.class);
 
     }
-
 
     /** Test the ColorParser class for hex parser exceptions. */
     @Test

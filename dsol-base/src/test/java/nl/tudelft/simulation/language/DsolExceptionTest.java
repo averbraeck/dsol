@@ -54,7 +54,7 @@ public class DsolExceptionTest
         assertEquals(null, e1.getCause().getCause());
         assertEquals(0, e1.getSuppressed().length);
     }
-    
+
     /**
      * Test DsolException.
      */

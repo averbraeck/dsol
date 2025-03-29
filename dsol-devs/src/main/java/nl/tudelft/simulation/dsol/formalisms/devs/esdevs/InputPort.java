@@ -129,9 +129,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                             SimTime.minus(this.model.getSimulator().getSimulatorTime(), atomicModel.getTimeLastEvent()), value);
                 }
                 if (!passivity)
-                {
-                    this.model.getSimulator().cancelEvent(nextEventCopy);
-                }
+                { this.model.getSimulator().cancelEvent(nextEventCopy); }
             }
             atomicModel.setActivePort(null);
         }

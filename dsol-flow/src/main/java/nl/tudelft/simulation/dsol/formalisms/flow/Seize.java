@@ -108,7 +108,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
     }
 
     /**
-     * Return the persistent statistic for the number of entities in store. 
+     * Return the persistent statistic for the number of entities in store.
      * @return the persistent statistic for the number of entities in store
      */
     public SimPersistent<T> getNumberStoredStatistic()
@@ -323,6 +323,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         {
             return this.resource;
         }
+
         /**
          * Return the fixed capacity claim, or -1 when the capacity claim is calculated by a provided function.
          * @return the fixed capacity claim, or -1 when the capacity claim is calculated by a provided function
@@ -377,7 +378,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
             }
         }
     }
-    
+
     /**
      * The stored entity.
      * @param <T> the time type

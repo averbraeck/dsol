@@ -109,9 +109,7 @@ public class InputParameterSelectionList<T> extends AbstractInputParameter<T, T>
     public void setListValue(final T newValue) throws InputParameterException
     {
         if (getIndex(newValue) == -1)
-        {
-            throw new InputParameterException("value " + newValue + " not part of selectionList options for key " + getKey());
-        }
+        { throw new InputParameterException("value " + newValue + " not part of selectionList options for key " + getKey()); }
         super.setValue(newValue);
     }
 

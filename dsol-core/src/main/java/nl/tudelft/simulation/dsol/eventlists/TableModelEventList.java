@@ -101,13 +101,9 @@ public class TableModelEventList<T extends Number & Comparable<T>> extends RedBl
     private String formatObject(final String label)
     {
         if (label == null)
-        {
-            return "null";
-        }
+        { return "null"; }
         if (this.showPackage)
-        {
-            return label;
-        }
+        { return label; }
         return label.substring(label.lastIndexOf(".") + 1);
     }
 

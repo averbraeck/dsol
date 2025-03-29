@@ -54,8 +54,7 @@ public class StreamSeedUpdater implements StreamUpdater
 
     /**
      * Return the fallback stream updater in case the stream or the replication is not in the seed map.
-     * @return the fallback stream updater in case the stream or the replication is not in
-     *         the seed map.
+     * @return the fallback stream updater in case the stream or the replication is not in the seed map.
      */
     public StreamUpdater getFallbackStreamUpdater()
     {
@@ -64,8 +63,8 @@ public class StreamSeedUpdater implements StreamUpdater
 
     /**
      * Set a new fallback stream updater in case the stream or the replication is not in the seed map.
-     * @param fallbackStreamUpdater the new fallback stream updater in case the stream or the replication is not
-     *            in the seed map.
+     * @param fallbackStreamUpdater the new fallback stream updater in case the stream or the replication is not in the seed
+     *            map.
      * @throws NullPointerException when fallbackStreamUpdater is null
      */
     public void setFallbackStreamUpdater(final StreamUpdater fallbackStreamUpdater)

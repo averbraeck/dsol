@@ -31,7 +31,7 @@ public interface FlowModel<T extends Number & Comparable<T>, S extends Simulator
      * @param block the new block to add to the model
      */
     void addBlock(final Block<T> block);
-    
+
     /** The block naming type enum: id-based or automatic. */
     public enum BlockNamingType
     {

@@ -19,7 +19,7 @@ import nl.tudelft.simulation.naming.context.Contextualized;
 import nl.tudelft.simulation.naming.context.JvmContext;
 
 /**
- * EsriParserTest tests the parser for the Esri shape files. 
+ * EsriParserTest tests the parser for the Esri shape files.
  * <p>
  * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -32,7 +32,7 @@ public class EsriParserTest implements Contextualized
 {
     /** context for the gis test. */
     private ContextInterface context;
-    
+
     /**
      * Test the XML map parser.
      * @throws IOException on error
@@ -47,7 +47,7 @@ public class EsriParserTest implements Contextualized
         GisMapInterface map = EsriFileXmlParser.parseMapFile(url);
         assertEquals("tudelft", map.getName());
         assertEquals(MapUnits.DECIMAL_DEGREES, map.getUnits());
-        
+
         GisRenderable2d renderable = new EsriRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
@@ -69,7 +69,7 @@ public class EsriParserTest implements Contextualized
         assertNotNull(url);
         GisMapInterface map = EsriFileCsvParser.parseMapFile(url, "tudelft");
         assertEquals("tudelft", map.getName());
-        
+
         GisRenderable2d renderable = new EsriRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());

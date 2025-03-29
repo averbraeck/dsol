@@ -66,8 +66,8 @@ public final class ConsoleRunnerTerminal implements EventListener
      * @throws SimRuntimeException on error
      * @throws RemoteException on error
      */
-    public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV,
-            final int rep) throws SimRuntimeException, RemoteException
+    public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV, final int rep)
+            throws SimRuntimeException, RemoteException
     {
         simulator.stop();
         System.out.println(numQC + "\t" + numAGV + "\t" + rep + "\tNaN\tNaN");

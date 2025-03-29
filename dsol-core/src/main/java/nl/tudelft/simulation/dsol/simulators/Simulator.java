@@ -113,9 +113,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         synchronized (this.semaphore)
         {
             if (this.worker != null)
-            {
-                cleanUp();
-            }
+            { cleanUp(); }
             this.worker = new SimulatorWorkerThread(this.id.toString(), this);
             this.replication = replication;
             this.model = model;
@@ -294,9 +292,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     {
         stopImpl();
         if (hasListeners())
-        {
-            this.removeAllListeners();
-        }
+        { this.removeAllListeners(); }
         if (this.worker != null)
         {
             this.worker.cleanUp();
@@ -315,9 +311,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                 SimRuntimeException.class, "State of the replication should be INITIALIZED or STARTED to end it");
         this.replicationState = ReplicationState.ENDING;
         if (isStartingOrRunning())
-        {
-            this.runState = RunState.STOPPING;
-        }
+        { this.runState = RunState.STOPPING; }
         this.worker.interrupt(); // just to be sure that the run will end, and the state will be moved to 'ENDED'
         if (this.simulatorTime.compareTo(this.getReplication().getEndTime()) < 0)
         {
@@ -390,9 +384,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                 break;
         }
         if (this.errorStrategy.equals(ErrorStrategy.LOG_AND_CONTINUE))
-        {
-            return;
-        }
+        { return; }
         System.err.println(s);
         exception.printStackTrace();
         if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_PAUSE))
@@ -408,9 +400,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             cleanUp();
         }
         else if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_EXIT))
-        {
-            System.exit(-1);
-        }
+        { System.exit(-1); }
     }
 
     /**

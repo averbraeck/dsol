@@ -40,15 +40,13 @@ public final class BoundsUtil
      * center point coordinates, and possibly rotated by the orientation of the center point.
      * @param center the point relative to which the bounds need to be calculated
      * @param bounds the bounds for which the intersection needs to be calculated. The Bounds3d are <b>relative to the
-     *     center</b> that is provided
+     *            center</b> that is provided
      * @return Bounds2d the projected rectangle of the intersection, or null if there is no intersection
      */
     public static Bounds2d projectBounds(final Point<?> center, final Bounds<?, ?> bounds)
     {
         if (center == null)
-        {
-            return new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
-        }
+        { return new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY()); }
         if (center instanceof Oriented<?> o)
         {
             Bounds2d b = new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
@@ -88,9 +86,7 @@ public final class BoundsUtil
     public static Bounds3d transform(final OrientedPoint3d center, final Bounds3d bounds)
     {
         if (center == null)
-        {
-            return bounds;
-        }
+        { return bounds; }
         Transform3d transform = new Transform3d();
         transform.translate(center); // note: opposite order of how it should be carried out (!)
         transform.rotX(center.getDirX());
@@ -109,9 +105,7 @@ public final class BoundsUtil
     public static Bounds2d transform(final DirectedPoint2d center, final Bounds2d bounds)
     {
         if (center == null)
-        {
-            return bounds;
-        }
+        { return bounds; }
         Transform2d transform = new Transform2d();
         transform.translate(center); // note: opposite order of how it should be carried out (!)
         transform.rotation(center.getDirZ());
@@ -125,16 +119,14 @@ public final class BoundsUtil
      * rotation (as if center is 0,0,0) and has no direction (rotX, rotY and rotZ are 0.0).
      * @param center the 'center' of the bounds.
      * @param bounds the bounds relative to 0,0,0
-     * @param point the point that might be in or out of the bounds after they have been rotated and translated
-     *     relative to the center.
+     * @param point the point that might be in or out of the bounds after they have been rotated and translated relative to the
+     *            center.
      * @return whether or not the point is in the bounds
      */
     public static boolean contains(final OrientedPoint3d center, final Bounds3d bounds, final Point3d point)
     {
         if (center == null)
-        {
-            return false;
-        }
+        { return false; }
         Transform3d transform = new Transform3d();
         transform.translate(center);
         transform.rotX(center.getDirX());
@@ -151,16 +143,14 @@ public final class BoundsUtil
      * rotation (as if center is 0,0) and has no direction (rotation 0.0).
      * @param center the 'center' of the bounds.
      * @param bounds the bounds relative to 0,0
-     * @param point the point that might be in or out of the bounds after they have been rotated and translated
-     *     relative to the center.
+     * @param point the point that might be in or out of the bounds after they have been rotated and translated relative to the
+     *            center.
      * @return whether or not the point is in the bounds
      */
     public static boolean contains(final DirectedPoint2d center, final Bounds2d bounds, final Point2d point)
     {
         if (center == null)
-        {
-            return false;
-        }
+        { return false; }
         Transform2d transform = new Transform2d();
         transform.translate(center);
         transform.rotation(center.getDirZ());

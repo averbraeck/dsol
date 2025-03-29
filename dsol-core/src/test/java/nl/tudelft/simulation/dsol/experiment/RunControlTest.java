@@ -72,27 +72,31 @@ public class RunControlTest
         assertTrue(rcd.toString().contains("rc"));
 
         // errors
-        Try.testFail(() ->
-        {
+        Try.testFail(() -> {
             new RunControl<Duration>(null, new Duration(10.0, DurationUnit.HOUR), new Duration(5.0, DurationUnit.DAY),
                     new Duration(20.0, DurationUnit.HOUR));
         });
-        Try.testFail(() ->
-        { new RunControl<Duration>("rc", null, new Duration(5.0, DurationUnit.DAY), new Duration(20.0, DurationUnit.HOUR)); });
-        Try.testFail(() ->
-        {
+        Try.testFail(() -> {
+            new RunControl<Duration>("rc", null, new Duration(5.0, DurationUnit.DAY), new Duration(20.0, DurationUnit.HOUR));
+        });
+        Try.testFail(() -> {
             new RunControl<Duration>("rc", new Duration(10.0, DurationUnit.HOUR), null, new Duration(20.0, DurationUnit.HOUR));
         });
-        Try.testFail(() ->
-        { new RunControl<Duration>("rc", new Duration(10.0, DurationUnit.HOUR), new Duration(5.0, DurationUnit.DAY), null); });
-        Try.testFail(() ->
-        { new RunControl<Double>("rc", 10.0, 5.0, 5.0); });
-        Try.testFail(() ->
-        { new RunControl<Double>("rc", 10.0, -1.0, 15.0); });
-        Try.testFail(() ->
-        { new RunControl<Double>("rc", 10.0, 5.0, -15.0); });
-        Try.testFail(() ->
-        { new RunControl<Double>("rc", 10.0, 5.0, 0.0); });
+        Try.testFail(() -> {
+            new RunControl<Duration>("rc", new Duration(10.0, DurationUnit.HOUR), new Duration(5.0, DurationUnit.DAY), null);
+        });
+        Try.testFail(() -> {
+            new RunControl<Double>("rc", 10.0, 5.0, 5.0);
+        });
+        Try.testFail(() -> {
+            new RunControl<Double>("rc", 10.0, -1.0, 15.0);
+        });
+        Try.testFail(() -> {
+            new RunControl<Double>("rc", 10.0, 5.0, -15.0);
+        });
+        Try.testFail(() -> {
+            new RunControl<Double>("rc", 10.0, 5.0, 0.0);
+        });
     }
 
     /**
@@ -127,8 +131,7 @@ public class RunControlTest
                 new Duration(5.0, DurationUnit.HOUR), new Duration(20.0, DurationUnit.HOUR), 10);
         assertEquals(30.0, rcdu.getEndTime().getInUnit(), 1E-6);
         ExperimentRunControl<FloatDuration> rcdf =
-                new ExperimentRunControl<FloatDuration>("rc",
-                        new FloatDuration(10.0f, DurationUnit.HOUR),
+                new ExperimentRunControl<FloatDuration>("rc", new FloatDuration(10.0f, DurationUnit.HOUR),
                         new FloatDuration(5.0f, DurationUnit.HOUR), new FloatDuration(20.0f, DurationUnit.HOUR), 10);
         assertEquals(30.0f, rcdf.getEndTime().getInUnit(), 1E-6);
 
@@ -148,38 +151,40 @@ public class RunControlTest
         assertTrue(rcd.toString().contains("rc"));
 
         // errors
-        Try.testFail(() ->
-        {
+        Try.testFail(() -> {
             new ExperimentRunControl<Duration>(null, new Duration(10.0, DurationUnit.HOUR), new Duration(5.0, DurationUnit.DAY),
                     new Duration(20.0, DurationUnit.HOUR), 10);
         });
-        Try.testFail(() ->
-        {
+        Try.testFail(() -> {
             new ExperimentRunControl<Duration>("rc", null, new Duration(5.0, DurationUnit.DAY),
                     new Duration(20.0, DurationUnit.HOUR), 10);
         });
-        Try.testFail(() ->
-        {
+        Try.testFail(() -> {
             new ExperimentRunControl<Duration>("rc", new Duration(10.0, DurationUnit.HOUR), null,
                     new Duration(20.0, DurationUnit.HOUR), 10);
         });
-        Try.testFail(() ->
-        {
+        Try.testFail(() -> {
             new ExperimentRunControl<Duration>("rc", new Duration(10.0, DurationUnit.HOUR), new Duration(5.0, DurationUnit.DAY),
                     null, 10);
         });
-        Try.testFail(() ->
-        { new ExperimentRunControl<Double>("rc", 10.0, 5.0, 5.0, 10); });
-        Try.testFail(() ->
-        { new ExperimentRunControl<Double>("rc", 10.0, -1.0, 15.0, 10); });
-        Try.testFail(() ->
-        { new ExperimentRunControl<Double>("rc", 10.0, 5.0, -15.0, 10); });
-        Try.testFail(() ->
-        { new ExperimentRunControl<Double>("rc", 10.0, 5.0, 0.0, 10); });
-        Try.testFail(() ->
-        { new ExperimentRunControl<Double>("rc", 10.0, 5.0, 15.0, 0); });
-        Try.testFail(() ->
-        { new ExperimentRunControl<Double>("rc", 10.0, 5.0, 15.0, -1); });
+        Try.testFail(() -> {
+            new ExperimentRunControl<Double>("rc", 10.0, 5.0, 5.0, 10);
+        });
+        Try.testFail(() -> {
+            new ExperimentRunControl<Double>("rc", 10.0, -1.0, 15.0, 10);
+        });
+        Try.testFail(() -> {
+            new ExperimentRunControl<Double>("rc", 10.0, 5.0, -15.0, 10);
+        });
+        Try.testFail(() -> {
+            new ExperimentRunControl<Double>("rc", 10.0, 5.0, 0.0, 10);
+        });
+        Try.testFail(() -> {
+            new ExperimentRunControl<Double>("rc", 10.0, 5.0, 15.0, 0);
+        });
+        Try.testFail(() -> {
+            new ExperimentRunControl<Double>("rc", 10.0, 5.0, 15.0, -1);
+        });
     }
 
 }

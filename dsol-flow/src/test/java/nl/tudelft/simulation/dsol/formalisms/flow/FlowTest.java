@@ -61,7 +61,7 @@ public class FlowTest
         assertEquals(nrEvents, simulator.getEventList().size());
         cleanUp(simulator);
     }
-    
+
     /**
      * Wait as long as simulator is running, or a timeout has happened.
      * @param simulator the simulator

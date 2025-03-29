@@ -41,9 +41,7 @@ public class RedBlackTree<T extends Number & Comparable<T>> implements EventList
     {
         SimEventInterface<T> first = first();
         if (first != null)
-        {
-            this.eventList.remove(first);
-        }
+        { this.eventList.remove(first); }
         return first;
     }
 

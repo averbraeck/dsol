@@ -70,19 +70,45 @@ public class ProbabilityDensitiesTest
         assertEquals(new DistributionEntry(4.0, 1.0), de.getCeilingEntryForValue(3.5));
         ProbabilityDensities.createDiscreteDistribution(new Double[] {10.0}, new double[] {1.0});
 
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 0.2, 1.0}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {-0.1, 0.2, 0.5, 1.0}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.0, 0.2, 0.5, 1.0}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.5, 0.2, 1.0}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 0.5, 1.001}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 0.5, 0.9}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution((double[]) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, (double[]) null); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 1.0}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(new double[] {2, 3, 1, 4}, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, new double[] {}); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(new double[] {}, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(new double[] {}, new double[] {}); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 0.2, 1.0});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {-0.1, 0.2, 0.5, 1.0});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.0, 0.2, 0.5, 1.0});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.5, 0.2, 1.0});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 0.5, 1.001});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 0.5, 0.9});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution((double[]) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, (double[]) null);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 1.0});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(new double[] {2, 3, 1, 4}, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, new double[] {});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(new double[] {}, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(new double[] {}, new double[] {});
+        });
     }
 
     /**
@@ -107,20 +133,45 @@ public class ProbabilityDensitiesTest
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(7.0, de.getHighestValue().doubleValue(), 1E-6);
 
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.0, 0.2, 0.3, 0.2}); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {-0.1, 0.2, 0.5, 1.0}); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.2, 0.3, 0.5, 0.2}); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.2, 0.2, 0.5, 1.001}); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.0, 0.2, 0.5}); });
-        Try.testFail(
-                () -> { ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.0, 0.2, 0.1, 0.1, 0.2}); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution((double[]) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, (double[]) null); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(new double[] {2, 3, 1, 4}, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {}); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(new double[] {}, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(new double[] {}, new double[] {}); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(new double[] {1.0}, new double[] {1.0}); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.0, 0.2, 0.3, 0.2});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {-0.1, 0.2, 0.5, 1.0});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.2, 0.3, 0.5, 0.2});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.2, 0.2, 0.5, 1.001});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.0, 0.2, 0.5});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {0.0, 0.2, 0.1, 0.1, 0.2});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution((double[]) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, (double[]) null);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(new double[] {2, 3, 1, 4}, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, new double[] {});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(new double[] {}, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(new double[] {}, new double[] {});
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(new double[] {1.0}, new double[] {1.0});
+        });
     }
 
     /**
@@ -146,8 +197,12 @@ public class ProbabilityDensitiesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(4.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution((Double[]) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, (double[]) null); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution((Double[]) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, (double[]) null);
+        });
     }
 
     /**
@@ -171,8 +226,12 @@ public class ProbabilityDensitiesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(7.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution((Double[]) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, (double[]) null); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution((Double[]) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, (double[]) null);
+        });
     }
 
     /**
@@ -198,8 +257,12 @@ public class ProbabilityDensitiesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1L, de.getLowestValue().longValue());
         assertEquals(4L, de.getHighestValue().longValue());
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution((long[]) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, (double[]) null); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution((long[]) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, (double[]) null);
+        });
     }
 
     /**
@@ -223,8 +286,12 @@ public class ProbabilityDensitiesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1L, de.getLowestValue().longValue());
         assertEquals(7L, de.getHighestValue().longValue());
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution((long[]) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, (double[]) null); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution((long[]) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, (double[]) null);
+        });
     }
 
     /**
@@ -250,8 +317,12 @@ public class ProbabilityDensitiesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(4.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution((List<Double>) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(vd, (List<Double>) null); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution((List<Double>) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(vd, (List<Double>) null);
+        });
     }
 
     /**
@@ -275,8 +346,12 @@ public class ProbabilityDensitiesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(7.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution((List<Double>) null, dd); });
-        Try.testFail(() -> { ProbabilityDensities.createInterpolatedDistribution(vd, (List<Double>) null); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution((List<Double>) null, dd);
+        });
+        Try.testFail(() -> {
+            ProbabilityDensities.createInterpolatedDistribution(vd, (List<Double>) null);
+        });
     }
 
     /**
@@ -305,7 +380,9 @@ public class ProbabilityDensitiesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(6.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() -> { ProbabilityDensities.createDiscreteDistribution(null); });
+        Try.testFail(() -> {
+            ProbabilityDensities.createDiscreteDistribution(null);
+        });
     }
 
 }

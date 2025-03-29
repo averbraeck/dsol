@@ -36,9 +36,7 @@ public class ModulusFilter extends AbstractFilter
     {
         this.current++;
         if (this.current % this.modulus == 0)
-        {
-            return true;
-        }
+        { return true; }
         return false;
     }
 

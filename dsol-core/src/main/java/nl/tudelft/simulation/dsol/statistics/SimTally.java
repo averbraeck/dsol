@@ -63,9 +63,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         {
             // only if we are before the warmup time, subscribe to the warmul event
             if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) < 0)
-            {
-                this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
-            }
+            { this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG); }
             ContextInterface context =
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");
             context.bindObject(this);

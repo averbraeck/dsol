@@ -96,8 +96,7 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
 
     /**
      * Returns the currently executed model, or null when the initialize method has not yet been called.
-     * @return the currently executed model, or null when the model has not
-     *         yet been initialized
+     * @return the currently executed model, or null when the model has not yet been initialized
      */
     DsolModel<T, ? extends SimulatorInterface<T>> getModel();
 
@@ -123,8 +122,8 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
-    default void addScheduledMethodOnInitialize(final Object source, final Object target, final String method, final Object[] args)
-            throws SimRuntimeException
+    default void addScheduledMethodOnInitialize(final Object source, final Object target, final String method,
+            final Object[] args) throws SimRuntimeException
     {
         addScheduledMethodOnInitialize(target, method, args);
     }
@@ -136,12 +135,10 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * simulator is initialized with the replication. Connecting the statistics objects to the simulation should be done between
      * the initialize(...) method and starting the simulator, or could even be delayed till the WARMUP_EVENT has been fired.
      * @param model the model to initialize
-     * @param replication the replication to use for running the
-     *            model
+     * @param replication the replication to use for running the model
      * @throws SimRuntimeException when the simulator is running
      */
-    void initialize(DsolModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication)
-            throws SimRuntimeException;
+    void initialize(DsolModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication) throws SimRuntimeException;
 
     /**
      * Clean up the simulator after a replication. Remove the worker thread.

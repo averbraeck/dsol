@@ -97,9 +97,7 @@ public class DistNormalTrunc extends DistContinuous
         {
             // rounding error?
             if (Math.abs(d - this.min) < 1.0E-6 * Math.abs(this.min))
-            {
-                return this.min;
-            }
+            { return this.min; }
             throw new IllegalStateException(toString() + ": drawn value outside of interval [min, max]: value " + d
                     + " not in [" + this.min + ", " + this.max + "]");
         }
@@ -107,9 +105,7 @@ public class DistNormalTrunc extends DistContinuous
         {
             // rounding error?
             if (Math.abs(d - this.max) < 1.0E-6 * Math.abs(this.max))
-            {
-                return this.max;
-            }
+            { return this.max; }
             throw new IllegalStateException(toString() + ": drawn value outside of interval [min, max]: value " + d
                     + " not in [" + this.min + ", " + this.max + "]");
         }
@@ -124,13 +120,9 @@ public class DistNormalTrunc extends DistContinuous
     public double getCumulativeProbability(final double x)
     {
         if (x <= this.min)
-        {
-            return 0.0;
-        }
+        { return 0.0; }
         if (x >= this.max)
-        {
-            return 1.0;
-        }
+        { return 1.0; }
         return (getCumulativeProbabilityNotTruncated(x) - this.cumulProbMin) * this.probDensFactor;
     }
 
@@ -162,9 +154,7 @@ public class DistNormalTrunc extends DistContinuous
     public double getInverseCumulativeProbability(final double cumulativeProbability)
     {
         if (cumulativeProbability < 0 || cumulativeProbability > 1)
-        {
-            throw new IllegalArgumentException("1<cumulativeProbability<0 ?");
-        }
+        { throw new IllegalArgumentException("1<cumulativeProbability<0 ?"); }
         /*
          * For extreme cases we return the min and max directly. The method getInverseCumulativeProbabilityNotTruncated() can
          * only return values from "mu - 10*sigma" to "mu + 10*sigma". If min or max is beyond these values, those values would
@@ -172,13 +162,9 @@ public class DistNormalTrunc extends DistContinuous
          * range from "mu - 10*sigma" to "mu + 10*sigma" will always result.
          */
         if (cumulativeProbability == 0.0)
-        {
-            return this.min;
-        }
+        { return this.min; }
         if (cumulativeProbability == 1.0)
-        {
-            return this.max;
-        }
+        { return this.max; }
         return getInverseCumulativeProbabilityNotTruncated(this.cumulProbMin + cumulativeProbability * this.cumulProbDiff);
     }
 
@@ -186,9 +172,7 @@ public class DistNormalTrunc extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x < this.min || x > this.max)
-        {
-            return 0.0;
-        }
+        { return 0.0; }
         return this.probDensFactor / (Math.sqrt(2 * Math.PI * Math.pow(this.sigma, 2)))
                 * Math.exp(-1 * Math.pow(x - this.mu, 2) / (2 * Math.pow(this.sigma, 2)));
     }

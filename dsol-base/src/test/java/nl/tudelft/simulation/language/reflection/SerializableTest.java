@@ -109,7 +109,7 @@ public class SerializableTest
         SerializableMethod sfv3 = (SerializableMethod) ois.readObject();
         assertEquals(sfv1.deSerialize(), sfv3.deSerialize());
     }
-    
+
     /**
      * Test the StateSaver class.
      * @throws DsolException on error
@@ -122,7 +122,7 @@ public class SerializableTest
         TestClass tc2 = new TestClass(1);
         StateSaver.restoreState(tc2, state);
         assertEquals(tc1, tc2);
-        
+
         Try.testFail(new Execution()
         {
             @Override
@@ -143,16 +143,16 @@ public class SerializableTest
                 StateSaver.saveState(tc4);
             }
         }, "storing state of not-serializable class should have failed");
-}
+    }
 
     /** a class to serialize. */
     public static class TestClass implements Serializable
     {
         /** */
         private static final long serialVersionUID = 1L;
-        
+
         /** static self. */
-        private static final TestClass TC = new TestClass(0); 
+        private static final TestClass TC = new TestClass(0);
 
         /** a serializable field. */
         private final TestClass self;
@@ -227,7 +227,7 @@ public class SerializableTest
             return true;
         }
     }
-    
+
     /** a class to serialize. */
     public static class TestClassNotSerialisable
     {

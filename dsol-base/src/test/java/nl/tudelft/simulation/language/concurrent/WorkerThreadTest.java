@@ -22,7 +22,7 @@ public class WorkerThreadTest
 
     /** thread. */
     WorkerThread wt;
-    
+
     /**
      * Test the WorkerThread.
      */
@@ -45,7 +45,7 @@ public class WorkerThreadTest
         {
             // ignore
         }
-        
+
         this.wt.cleanUp();
 
         long startTime = System.currentTimeMillis();
@@ -61,9 +61,7 @@ public class WorkerThreadTest
             }
         }
         if (System.currentTimeMillis() - startTime > 1000)
-        {
-            fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000");
-        }
+        { fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000"); }
 
         assertFalse(this.wt.isAlive());
         assertEquals(1, this.value);
@@ -100,12 +98,10 @@ public class WorkerThreadTest
             }
         }
         if (System.currentTimeMillis() - startTime > 1000)
-        {
-            fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000");
-        }
+        { fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000"); }
         assertFalse(this.wt.isAlive());
     }
-    
+
     /** The worker job. */
     class Job implements Runnable
     {
@@ -116,7 +112,7 @@ public class WorkerThreadTest
             WorkerThreadTest.this.value++;
         }
     }
-    
+
     /** The worker job that throws an exception. */
     class ExceptionJob implements Runnable
     {

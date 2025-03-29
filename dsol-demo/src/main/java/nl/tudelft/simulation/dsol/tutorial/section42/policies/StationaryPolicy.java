@@ -46,9 +46,7 @@ public class StationaryPolicy implements OrderingPolicy
     public long computeAmountToOrder(final long inventory)
     {
         if (inventory <= this.lowerBound)
-        {
-            return this.upperBound - inventory;
-        }
+        { return this.upperBound - inventory; }
         return 0;
     }
 }

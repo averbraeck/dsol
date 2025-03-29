@@ -70,9 +70,7 @@ public class DevDessAnimator<T extends Number & Comparable<T>> extends DevDessSi
             try
             {
                 if (this.animationDelay > 0)
-                {
-                    Thread.sleep(this.animationDelay);
-                }
+                { Thread.sleep(this.animationDelay); }
             }
             catch (Exception exception)
             {
@@ -117,9 +115,7 @@ public class DevDessAnimator<T extends Number & Comparable<T>> extends DevDessSi
                 }
             }
             if (!isStoppingOrStopped())
-            {
-                this.simulatorTime = runUntil;
-            }
+            { this.simulatorTime = runUntil; }
             this.fireTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, this.simulatorTime);
         }
         updateAnimation();

@@ -57,7 +57,7 @@ public class PointTest
         assertTrue(sp.toString().contains("radius=2.5"));
         assertTrue(sp.toString().contains("theta=0.2"));
         assertTrue(sp.toString().contains("phi=1.2"));
-        
+
         cp = new CartesianPoint(1.0, 2.0, 3.0);
         CartesianPoint cp2 = new CartesianPoint(new double[] {1.0, 2.0, 3.0});
         assertEquals(cp, cp2);

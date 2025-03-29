@@ -48,10 +48,10 @@ public class DistErlang extends DistContinuous
      * sum of k independent exponential variables with the scale parameter as the mean. The scale parameter is equal to 1/rate
      * or 1/&lambda;, giving the entire Erlang distribution a mean of k*scale.
      * @param stream the random number stream
-     * @param scale the mean of a single sample from the exponential distribution, of which k are summed. Equal to
-     *            1/rate or 1/&lambda;.
-     * @param k the shape parameter of the Erlang distribution. The shape k is the number of times a drawing is done from
-     *            the exponential distribution, where the Erlang distribution is the sum of these k independent exponential
+     * @param scale the mean of a single sample from the exponential distribution, of which k are summed. Equal to 1/rate or
+     *            1/&lambda;.
+     * @param k the shape parameter of the Erlang distribution. The shape k is the number of times a drawing is done from the
+     *            exponential distribution, where the Erlang distribution is the sum of these k independent exponential
      *            variables.
      * @throws IllegalArgumentException when k &lt;= 0 or scale &lt;= 0
      */
@@ -87,9 +87,7 @@ public class DistErlang extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x < 0)
-        {
-            return 0;
-        }
+        { return 0; }
         return this.lambda * Math.exp(-this.lambda * x) * Math.pow(this.lambda * x, this.k - 1)
                 / ProbMath.factorial(this.k - 1);
     }
@@ -115,9 +113,7 @@ public class DistErlang extends DistContinuous
     {
         super.setStream(stream);
         if (this.distGamma != null)
-        {
-            this.distGamma.setStream(stream);
-        }
+        { this.distGamma.setStream(stream); }
     }
 
     @Override

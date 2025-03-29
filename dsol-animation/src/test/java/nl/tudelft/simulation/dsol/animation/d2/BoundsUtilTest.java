@@ -30,13 +30,13 @@ import nl.tudelft.simulation.dsol.animation.Locatable;
  */
 public class BoundsUtilTest
 {
-    
+
     /** */
     private BoundsUtilTest()
     {
         // do not instantiate the test class
     }
-    
+
     /**
      * test transform method.
      */

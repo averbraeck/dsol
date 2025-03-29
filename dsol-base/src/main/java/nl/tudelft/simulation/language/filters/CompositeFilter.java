@@ -65,9 +65,7 @@ public class CompositeFilter extends AbstractFilter
     {
         super();
         if (operator != Operator.AND && operator != Operator.OR)
-        {
-            throw new IllegalArgumentException("unknown operator");
-        }
+        { throw new IllegalArgumentException("unknown operator"); }
         this.filters[0] = filter1;
         this.filters[1] = filter2;
         this.operator = operator;
@@ -77,9 +75,7 @@ public class CompositeFilter extends AbstractFilter
     protected boolean filter(final Object entry)
     {
         if (this.operator == Operator.AND)
-        {
-            return this.filters[0].accept(entry) && this.filters[1].accept(entry);
-        }
+        { return this.filters[0].accept(entry) && this.filters[1].accept(entry); }
         return this.filters[0].accept(entry) || this.filters[1].accept(entry);
     }
 
@@ -90,9 +86,7 @@ public class CompositeFilter extends AbstractFilter
     protected String operatorToString()
     {
         if (this.operator == Operator.AND)
-        {
-            return "AND";
-        }
+        { return "AND"; }
         return "OR";
     }
 

@@ -40,7 +40,7 @@ public class SimTallyTest extends LocalEventProducer
     private static final long serialVersionUID = 1L;
 
     /** update event. */
-    private static final EventType UPDATE_EVENT = 
+    private static final EventType UPDATE_EVENT =
             new EventType("update", new MetaData("update", "update", new ObjectDescriptor("value", "value", Double.class)));
 
     /**

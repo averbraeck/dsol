@@ -122,9 +122,7 @@ public class StreamTest
                 for (int j = 0; j < nrBins; j++)
                 {
                     if ((value & 1) == 1)
-                    {
-                        bins[j]++;
-                    }
+                    { bins[j]++; }
                     value = value >>> 1;
                 }
             }
@@ -240,9 +238,7 @@ public class StreamTest
                 for (int j = 0; j < nrBins; j++)
                 {
                     if ((value & 1) == 1)
-                    {
-                        bins[j]++;
-                    }
+                    { bins[j]++; }
                     value = value >>> 1;
                 }
             }
@@ -285,5 +281,5 @@ public class StreamTest
             assertEquals(d, stream.nextDouble(), 0.0);
         }
     }
-    
+
 }

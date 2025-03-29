@@ -28,15 +28,14 @@ public class ExternalInputCoupling<T extends Number & Comparable<T>, P>
      * @param toPort input port of the receiving component
      * @throws Exception in case of wiring to self
      */
-    public ExternalInputCoupling(final InputPortInterface<T, P> fromPort, final InputPortInterface<T, P> toPort) throws Exception
+    public ExternalInputCoupling(final InputPortInterface<T, P> fromPort, final InputPortInterface<T, P> toPort)
+            throws Exception
     {
         this.fromPort = fromPort;
         this.toPort = toPort;
 
         if (this.fromPort.getModel().equals(toPort.getModel()))
-        {
-            throw new Exception("no self coupling allowed");
-        }
+        { throw new Exception("no self coupling allowed"); }
     }
 
     /**

@@ -47,15 +47,15 @@ public class TestCloner
         DistContinuous dist2 = cloner.deepClone(dist1);
         System.out.println(dist2 + "  " + System.identityHashCode(dist2) + "  " + System.identityHashCode(dist2.getStream()));
         System.out.println(dist1.draw());
-        System.out.println(dist2.draw()+ "\n");
+        System.out.println(dist2.draw() + "\n");
 
         var list1 = new ArrayList<DistContinuous>();
         list1.add(dist1);
         list1.add(dist1);
         var list2 = cloner.deepClone(list1);
-        for (int i = 0; i<2; i++)
-        System.out.println(list2.get(i) + "  " + System.identityHashCode(list2.get(i)) + "  "
-                + System.identityHashCode(list2.get(i).getStream()));
+        for (int i = 0; i < 2; i++)
+            System.out.println(list2.get(i) + "  " + System.identityHashCode(list2.get(i)) + "  "
+                    + System.identityHashCode(list2.get(i).getStream()));
         assertNotEquals(dist1, list2.get(0));
         assertEquals(dist1.getStream(), list2.get(0).getStream());
     }

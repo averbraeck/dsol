@@ -60,9 +60,7 @@ public class DifferentialEquationTest
             }
             if (integrationMethod == NumericalIntegratorType.ADAMS
                     || integrationMethod == NumericalIntegratorType.RUNGEKUTTAFEHLBERG)
-            {
-                stepSize = 0.0005;
-            }
+            { stepSize = 0.0005; }
             StiffODE ode = new StiffODE(stepSize, integrationMethod);
             String m = "Method " + integrationMethod.toString() + ", x = ";
             for (double x = 0.0; x <= 10.0; x += 0.5)

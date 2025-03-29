@@ -41,9 +41,7 @@ public final class Circle
         double y1 = center1.getY();
         Point2D[] result;
         if ((distance > radius0 + radius1) || (distance < Math.abs(radius0 - radius1)))
-        {
-            return new Point2D.Double[0];
-        }
+        { return new Point2D.Double[0]; }
         double a = (radius0 * radius0 - radius1 * radius1 + distance * distance) / (2 * distance);
         double h = Math.sqrt(radius0 * radius0 - a * a);
         double x2 = x0 + ((a / distance) * (x1 - x0));

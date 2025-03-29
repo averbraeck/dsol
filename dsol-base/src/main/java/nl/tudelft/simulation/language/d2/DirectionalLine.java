@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 
 /**
  * A directional line with normal vector. Based on the BSPLine-example from the book Developing games in Java from David
- * Brackeen. 
+ * Brackeen.
  * <p>
  * Copyright (c) 2003-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -33,10 +33,10 @@ public class DirectionalLine extends Line2D.Double
 
         /** other line is spanning this line. */
         SPANNING(2);
-    
+
         /** the value from DSOL-1 before enum was introduced. */
         private final int value;
-        
+
         /**
          * Create a side; store the value from DSOL-1 as well.
          * @param value the value from DSOL-1 before enum was introduced
@@ -195,9 +195,7 @@ public class DirectionalLine extends Line2D.Double
         {
             Side backSide = getSideThin(x + normalX2 / 2, y + normalY2 / 2);
             if (backSide.equals(Side.BACKSIDE))
-            {
-                return Side.BACKSIDE;
-            }
+            { return Side.BACKSIDE; }
         }
         return Side.COLLINEAR;
     }
@@ -236,9 +234,7 @@ public class DirectionalLine extends Line2D.Double
     public Side getSide(final Line2D.Double line)
     {
         if (this.x1 == line.x1 && this.x2 == line.x2 && this.y1 == line.y1 && this.y2 == line.y2)
-        {
-            return Side.COLLINEAR;
-        }
+        { return Side.COLLINEAR; }
         Side p1Side = getSideThick(line.x1, line.y1);
         Side p2Side = getSideThick(line.x2, line.y2);
         if (p1Side == p2Side)
@@ -279,9 +275,7 @@ public class DirectionalLine extends Line2D.Double
 
         // check if the two lines are parallel
         if (denominator == 0)
-        {
-            return -1;
-        }
+        { return -1; }
 
         double numerator = (line.x2 - line.x1) * (this.y1 - line.y1) - (line.y2 - line.y1) * (this.x1 - line.x1);
 

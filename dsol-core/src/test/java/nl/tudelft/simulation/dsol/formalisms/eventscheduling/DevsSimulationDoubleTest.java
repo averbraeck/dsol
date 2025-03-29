@@ -158,9 +158,7 @@ public class DevsSimulationDoubleTest implements EventListener
         try
         {
             if ((int) this.workTimeDist.draw() == 50)
-            {
-                Thread.sleep(100);
-            }
+            { Thread.sleep(100); }
         }
         catch (InterruptedException exception)
         {

@@ -72,8 +72,8 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
             super.initialize(model, replication);
             this.scheduleEvent(new SimEvent<T>(this.getReplication().getWarmupTime(),
                     (short) (SimEventInterface.MAX_PRIORITY + 1), this, "warmup", null));
-            this.scheduleEvent(new SimEvent<T>(this.getReplication().getEndTime(),
-                    (short) (SimEventInterface.MIN_PRIORITY - 1), this, "endReplication", null));
+            this.scheduleEvent(new SimEvent<T>(this.getReplication().getEndTime(), (short) (SimEventInterface.MIN_PRIORITY - 1),
+                    this, "endReplication", null));
         }
     }
 
@@ -236,9 +236,7 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
 
                 SimEventInterface<T> event = this.eventList.removeFirst();
                 if (event.getAbsoluteExecutionTime().compareTo(super.simulatorTime) != 0)
-                {
-                    fireUnverifiedTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, event.getAbsoluteExecutionTime());
-                }
+                { fireUnverifiedTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, event.getAbsoluteExecutionTime()); }
                 super.simulatorTime = event.getAbsoluteExecutionTime();
                 try
                 {

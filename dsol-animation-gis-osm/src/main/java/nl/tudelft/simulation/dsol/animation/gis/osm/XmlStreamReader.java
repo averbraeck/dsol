@@ -50,8 +50,8 @@ public class XmlStreamReader implements RunnableSource
     /**
      * Create a new XmlReader based on an InputStream rather than on a File.
      * @param inputStream the stream to read from
-     * @param enableDateParsing If true, dates will be parsed from xml data, else the current date will be used thus
-     *            saving parsing time.
+     * @param enableDateParsing If true, dates will be parsed from xml data, else the current date will be used thus saving
+     *            parsing time.
      * @param compressionMethod Specifies the compression method to employ
      */
     public XmlStreamReader(final InputStream inputStream, final boolean enableDateParsing,
@@ -74,7 +74,7 @@ public class XmlStreamReader implements RunnableSource
         try
         {
             SAXParser parser;
-            this.sink.initialize(Collections.<String, Object>emptyMap());
+            this.sink.initialize(Collections.<String, Object> emptyMap());
             this.inputStream = new CompressionActivator(this.compressionMethod).createCompressionInputStream(this.inputStream);
             parser = SaxParserFactory.createParser();
             parser.parse(this.inputStream, new OsmHandler(this.sink, this.enableDateParsing));

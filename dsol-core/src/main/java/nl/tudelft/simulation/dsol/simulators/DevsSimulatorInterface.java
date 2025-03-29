@@ -211,8 +211,8 @@ public interface DevsSimulatorInterface<T extends Number & Comparable<T>> extend
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
-    default SimEventInterface<T> scheduleEventRel(final T relativeDelay, final short priority, final Object source, final Object target, final String method,
-            final Object[] args) throws SimRuntimeException
+    default SimEventInterface<T> scheduleEventRel(final T relativeDelay, final short priority, final Object source,
+            final Object target, final String method, final Object[] args) throws SimRuntimeException
     {
         return scheduleEventRel(relativeDelay, priority, target, method, args);
     }
@@ -229,8 +229,8 @@ public interface DevsSimulatorInterface<T extends Number & Comparable<T>> extend
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
-    default SimEventInterface<T> scheduleEventRel(final T relativeDelay, final Object source, final Object target, final String method, final Object[] args)
-            throws SimRuntimeException
+    default SimEventInterface<T> scheduleEventRel(final T relativeDelay, final Object source, final Object target,
+            final String method, final Object[] args) throws SimRuntimeException
     {
         return scheduleEventRel(relativeDelay, target, method, args);
     }
@@ -248,8 +248,8 @@ public interface DevsSimulatorInterface<T extends Number & Comparable<T>> extend
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
-    default SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final short priority, final Object source, final Object target, final String method,
-            final Object[] args) throws SimRuntimeException
+    default SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final short priority, final Object source,
+            final Object target, final String method, final Object[] args) throws SimRuntimeException
     {
         return scheduleEventAbs(absoluteTime, priority, target, method, args);
     }
@@ -266,8 +266,8 @@ public interface DevsSimulatorInterface<T extends Number & Comparable<T>> extend
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
-    default SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final Object source, final Object target, final String method, final Object[] args)
-            throws SimRuntimeException
+    default SimEventInterface<T> scheduleEventAbs(final T absoluteTime, final Object source, final Object target,
+            final String method, final Object[] args) throws SimRuntimeException
     {
         return scheduleEventAbs(absoluteTime, target, method, args);
     }
@@ -284,8 +284,8 @@ public interface DevsSimulatorInterface<T extends Number & Comparable<T>> extend
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
-    default SimEventInterface<T> scheduleEventNow(final short priority, final Object source, final Object target, final String method, final Object[] args)
-            throws SimRuntimeException
+    default SimEventInterface<T> scheduleEventNow(final short priority, final Object source, final Object target,
+            final String method, final Object[] args) throws SimRuntimeException
     {
         return scheduleEventNow(priority, target, method, args);
     }
@@ -301,8 +301,8 @@ public interface DevsSimulatorInterface<T extends Number & Comparable<T>> extend
      * @throws SimRuntimeException whenever the event is scheduled in the past.
      */
     @Deprecated
-    default SimEventInterface<T> scheduleEventNow(final Object source, final Object target, final String method, final Object[] args)
-            throws SimRuntimeException
+    default SimEventInterface<T> scheduleEventNow(final Object source, final Object target, final String method,
+            final Object[] args) throws SimRuntimeException
     {
         return scheduleEventNow(target, method, args);
     }

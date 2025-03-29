@@ -81,28 +81,39 @@ public class ExperimentTest
         expd.removeFromContext();
 
         // errors
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>(null, simulator, model, 0.0, 10.0, 20.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", null, model, 0.0, 10.0, 20.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, null, 0.0, 10.0, 20.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, (Double) null, 10.0, 20.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, (Double) null, 20.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, (Double) null, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, -10.0, 20.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 0.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, -20.0, 10); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, 0); });
-        Try.testFail(() ->
-        { new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, -10); });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>(null, simulator, model, 0.0, 10.0, 20.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", null, model, 0.0, 10.0, 20.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, null, 0.0, 10.0, 20.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, (Double) null, 10.0, 20.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, (Double) null, 20.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, (Double) null, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, -10.0, 20.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 0.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, -20.0, 10);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, 0);
+        });
+        Try.testFail(() -> {
+            new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, -10);
+        });
 
         // should be ok
         new Experiment<Double, DevsSimulatorInterface<Double>>("Exp1a", simulator, model, 0.0, 0.0, 20.0, 10);

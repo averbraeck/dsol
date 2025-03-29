@@ -135,12 +135,19 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 /**
  * Read InputParameters from a Properties file or from an array of Strings. For the properties file, the format is one parameter
  * per line. Keys for the sub-parameters are indicated with a dot notation. The general format is key=value. The value for an
- * integer value called 'nrServers' in the root category: <pre>
+ * integer value called 'nrServers' in the root category:
+ * 
+ * <pre>
  * nrServers = 2
- * </pre> The key for a Duration parameter called 'serviceTime' in the category 'server':<br>
+ * </pre>
+ * 
+ * The key for a Duration parameter called 'serviceTime' in the category 'server':<br>
+ * 
  * <pre>
  * server.serviceTime = 5.0min
- * </pre> <br>
+ * </pre>
+ * 
+ * <br>
  * Copyright (c) 2003-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://www.simulation.tudelft.nl/" target="_blank">www.simulation.tudelft.nl</a>. The
  * source code and binary code of this software is proprietary information of Delft University of Technology.
@@ -168,9 +175,7 @@ public final class ReadInputParameters
     {
         InputStream stream = URLResource.getResourceAsStream(filename);
         if (stream == null)
-        {
-            throw new FileNotFoundException("Loading InputParameters from properties file; could not find file: " + filename);
-        }
+        { throw new FileNotFoundException("Loading InputParameters from properties file; could not find file: " + filename); }
         Properties properties = new Properties();
         properties.load(stream);
         stream.close();
@@ -217,13 +222,9 @@ public final class ReadInputParameters
             }
             int pos = arg.indexOf("=");
             if (pos == 0)
-            {
-                throw new InputParameterException("Parsing input parameters from properties; blank key for entry: " + arg);
-            }
+            { throw new InputParameterException("Parsing input parameters from properties; blank key for entry: " + arg); }
             if (pos == arg.length() - 1)
-            {
-                throw new InputParameterException("Parsing input parameters from properties; blank value for entry: " + arg);
-            }
+            { throw new InputParameterException("Parsing input parameters from properties; blank value for entry: " + arg); }
             String key = arg.substring(0, pos);
             String value = arg.substring(pos + 1);
             if (value.startsWith("\\") || value.startsWith("\\'"))
@@ -231,9 +232,7 @@ public final class ReadInputParameters
                 value = value.substring(1);
             }
             else if ((value.startsWith("\"") && value.endsWith("\"")) || (value.startsWith("'") && value.endsWith("'")))
-            {
-                value = value.substring(1, value.length() - 1);
-            }
+            { value = value.substring(1, value.length() - 1); }
             InputParameter<?, ?> parameter = map.get(key.toString());
             if (parameter == null)
             {
@@ -319,9 +318,7 @@ public final class ReadInputParameters
                 }
             }
             if (index < 0)
-            {
-                throw new InputParameterException("Input parameter " + value + " not in list: " + param.getOptions());
-            }
+            { throw new InputParameterException("Input parameter " + value + " not in list: " + param.getOptions()); }
             param.setIndex(index);
         }
         else if (parameter instanceof InputParameterDistContinuous)
@@ -568,9 +565,7 @@ public final class ReadInputParameters
         int i1 = s.indexOf('(');
         int i2 = s.lastIndexOf(')');
         if (i1 < 0 || i2 < 0)
-        {
-            throw new InputParameterException("Distribution expression " + s + " does not contain opening / closing bracket");
-        }
+        { throw new InputParameterException("Distribution expression " + s + " does not contain opening / closing bracket"); }
         return new String[] {s.substring(0, i1), s.substring(i1 + 1, i2)};
     }
 

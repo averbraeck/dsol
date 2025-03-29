@@ -127,8 +127,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @param simulator the simulator to schedule on
      * @param e initial elapsed time
      * @param initphase the initial phase of the model to use for explicit phase models
-     * @param conflictStrategy the conflict strategy to use when internal and external events take place at the same
-     *            time
+     * @param conflictStrategy the conflict strategy to use when internal and external events take place at the same time
      */
     public AtomicModel(final String modelName, final DevsSimulatorInterface<T> simulator, final T e, final Phase initphase,
             final boolean conflictStrategy)
@@ -146,8 +145,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * @param parentModel the coupled model this atomic model is part of
      * @param e initial elapsed time
      * @param initphase the initial phase of the model to use for explicit phase models
-     * @param conflictStrategy the conflict strategy to use when internal and external events take place at the same
-     *            time
+     * @param conflictStrategy the conflict strategy to use when internal and external events take place at the same time
      */
     public AtomicModel(final String modelName, final CoupledModel<T> parentModel, final T e, final Phase initphase,
             final boolean conflictStrategy)
@@ -174,7 +172,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
             {
                 this.nextEvent =
                         new SimEvent<T>(SimTime.minus(SimTime.plus(getSimulator().getSimulatorTime(), this.timeAdvance()), e),
-                                this,"deltaInternalEventHandler", null);
+                                this, "deltaInternalEventHandler", null);
                 this.timeLastEvent = this.getSimulator().getSimulatorTime();
                 this.simulator.scheduleEvent(this.nextEvent);
             }
@@ -217,7 +215,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
                 {
                     this.nextEvent =
                             new SimEvent<T>((SimTime.plus(SimTime.minus(this.simulator.getSimulatorTime(), this.timeAdvance()),
-                                    this.elapsedTime)), this,"deltaInternalEventHandler", null);
+                                    this.elapsedTime)), this, "deltaInternalEventHandler", null);
                     this.timeLastEvent = this.simulator.getSimulatorTime();
                     this.simulator.getLogger().filter(Cat.DSOL).trace("schedule {}", this.nextEvent.toString());
                     this.simulator.scheduleEvent(this.nextEvent);
@@ -294,7 +292,6 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     // GETTET AND SETTET METHODS
     // ///////////////////////////////////////////////////////////////////////////
 
-    
     /**
      * @return the active port
      */
@@ -303,7 +300,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     {
         return this.activePort;
     }
-    
+
     /**
      * @param activePort set activePort
      */
@@ -346,8 +343,8 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
     }
 
     /**
-     * @param conflict indicate whether there is a conflict between an intenal event and an external event that take
-     *            place at the same time.
+     * @param conflict indicate whether there is a conflict between an intenal event and an external event that take place at
+     *            the same time.
      */
     public void setConflict(final boolean conflict)
     {

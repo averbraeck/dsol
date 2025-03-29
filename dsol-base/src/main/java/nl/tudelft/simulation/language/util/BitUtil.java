@@ -43,9 +43,7 @@ public final class BitUtil implements Serializable
             for (int i = 0; i < bits.length(); i++)
             {
                 if (bits.get(i))
-                {
-                    bytes[bytes.length - i / 8 - 1] |= 1 << (i % 8);
-                }
+                { bytes[bytes.length - i / 8 - 1] |= 1 << (i % 8); }
             }
             return bytes;
         }
@@ -68,7 +66,7 @@ public final class BitUtil implements Serializable
      * @param length the length of
      * @return the BitSet
      */
-    public static BitSet fromInteger(final Integer value, final int length) 
+    public static BitSet fromInteger(final Integer value, final int length)
     {
         Throw.when(length <= 0, IllegalArgumentException.class, "BitUtil.fromInt should have a positive number of bits");
         Throw.when(length > 31, IllegalArgumentException.class, "BitUtil.fromInt can have maximum 31 bits");
@@ -122,14 +120,10 @@ public final class BitUtil implements Serializable
         BitSet set = new BitSet();
         String array = value.trim();
         if (!array.endsWith("}"))
-        {
-            throw new IllegalArgumentException("value that starts with { should end with }");
-        }
+        { throw new IllegalArgumentException("value that starts with { should end with }"); }
         array = array.substring(1, array.length() - 1).trim();
         if (array.length() == 0)
-        {
-            return set;
-        }
+        { return set; }
         String[] bits = array.split(",");
         for (int i = 0; i < bits.length; i++)
         {
@@ -150,9 +144,7 @@ public final class BitUtil implements Serializable
         for (int i = 0; i < bytes.length * 8; i++)
         {
             if ((bytes[bytes.length - i / 8 - 1] & (1 << (i % 8))) > 0)
-            {
-                bits.set(i);
-            }
+            { bits.set(i); }
         }
         return bits;
     }

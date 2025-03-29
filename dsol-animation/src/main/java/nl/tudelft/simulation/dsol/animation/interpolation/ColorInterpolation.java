@@ -51,9 +51,7 @@ public class ColorInterpolation
     {
         super();
         if (endTime < startTime)
-        {
-            throw new IllegalArgumentException("endTime < startTime");
-        }
+        { throw new IllegalArgumentException("endTime < startTime"); }
         this.origin = originalStartingColor;
         this.destination = originalDestinationColor;
         this.startTime = startTime;
@@ -68,9 +66,7 @@ public class ColorInterpolation
         for (int i = 0; i < this.calculatedRGBValues.length; i++)
         {
             if (this.originalStartingRGBValues[i] == this.originalDestinationRGBValues[i])
-            {
-                this.calculatedRGBValues[i] = this.originalStartingRGBValues[i];
-            }
+            { this.calculatedRGBValues[i] = this.originalStartingRGBValues[i]; }
         }
     }
 
@@ -82,13 +78,9 @@ public class ColorInterpolation
     public Color getColor(final double time)
     {
         if (time <= this.startTime)
-        {
-            return this.origin;
-        }
+        { return this.origin; }
         if (time >= this.endTime)
-        {
-            return this.destination;
-        }
+        { return this.destination; }
         double fraction = (time - this.startTime) / (this.endTime - this.startTime);
         for (int i = 0; i < this.calculatedRGBValues.length; i++)
         {
@@ -111,13 +103,9 @@ public class ColorInterpolation
         if (this.origin.getAlpha() != this.destination.getAlpha())
         {
             if (this.origin.getAlpha() < this.destination.getAlpha())
-            {
-                alpha = this.origin.getAlpha() + (int) ((this.destination.getAlpha() - this.origin.getAlpha()) * fraction);
-            }
+            { alpha = this.origin.getAlpha() + (int) ((this.destination.getAlpha() - this.origin.getAlpha()) * fraction); }
             if (this.origin.getAlpha() > this.destination.getAlpha())
-            {
-                alpha = this.origin.getAlpha() - (int) ((this.origin.getAlpha() - this.destination.getAlpha()) * fraction);
-            }
+            { alpha = this.origin.getAlpha() - (int) ((this.origin.getAlpha() - this.destination.getAlpha()) * fraction); }
         }
         return new Color(this.calculatedRGBValues[0], this.calculatedRGBValues[1], this.calculatedRGBValues[2], alpha);
     }

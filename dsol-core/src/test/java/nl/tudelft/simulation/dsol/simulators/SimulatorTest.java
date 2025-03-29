@@ -77,9 +77,9 @@ public class SimulatorTest
                 // expected
             }
             // use scheduled initialization instead
-            simulator.addScheduledMethodOnInitialize(this,"add", new Object[] {1});
-            simulator.addScheduledMethodOnInitialize(this,"add", new Object[] {2});
-            simulator.addScheduledMethodOnInitialize(this,"schedule", new Object[] {});
+            simulator.addScheduledMethodOnInitialize(this, "add", new Object[] {1});
+            simulator.addScheduledMethodOnInitialize(this, "add", new Object[] {2});
+            simulator.addScheduledMethodOnInitialize(this, "schedule", new Object[] {});
 
         }
 

@@ -41,7 +41,7 @@ public abstract class Block<T extends Number & Comparable<T>> extends LocalEvent
         Throw.whenNull(simulator, "simulator cannot be null");
         this.id = id;
         this.simulator = simulator;
-        
+
         if (simulator.getModel() instanceof FlowModel<T, ?> flowModel)
         {
             flowModel.addBlock(this);

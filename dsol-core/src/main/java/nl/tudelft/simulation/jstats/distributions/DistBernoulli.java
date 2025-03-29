@@ -49,9 +49,7 @@ public class DistBernoulli extends DistDiscrete
     public long draw()
     {
         if (this.stream.nextDouble() <= this.p)
-        {
-            return 1L;
-        }
+        { return 1L; }
         return 0L;
     }
 
@@ -59,13 +57,9 @@ public class DistBernoulli extends DistDiscrete
     public double probability(final long observation)
     {
         if (observation == 0)
-        {
-            return 1 - this.p;
-        }
+        { return 1 - this.p; }
         if (observation == 1)
-        {
-            return this.p;
-        }
+        { return this.p; }
         return 0;
     }
 

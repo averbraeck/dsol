@@ -61,16 +61,16 @@ public interface Renderable2dInterface<L extends Locatable> extends Serializable
     /**
      * This method determines whether the shape drawn on the screen (rotated, zoomed, translated) contain the provided point
      * that is provided in screen coordinates (e.g., the position of a mouse click on the screen).
-     * @param pointScreenCoordinates the point in screen coordinates, e.g. from a mouse event; note that the point is
-     *     given in AWT/Swing coordinates, so as a `Point2D` and not a `Point2d`
+     * @param pointScreenCoordinates the point in screen coordinates, e.g. from a mouse event; note that the point is given in
+     *            AWT/Swing coordinates, so as a `Point2D` and not a `Point2d`
      * @param extent the extent of the viewport that is visible on the screen, in world coordinates
      * @param screenSize the dimensions of the screen, in screen coordinates
      * @param scale the current zoom factor of the screen, as well as the y-scale ratio
-     * @param worldMargin the margin to apply 'around' the object, in screen coordinates at a zoom level of 1, which is
-     *     the same as world coordinates. This allows for a smaller or larger 'click box', since it is allowed for margin to be
-     *     negative. This margin grows and shrinks in absolute sense withe the zoom factor.
-     * @param pixelMargin the number of pixels around the drawn object for contains to be 'true'. This guarantees that a
-     *     mouse click can be pointed to a very small object. 
+     * @param worldMargin the margin to apply 'around' the object, in screen coordinates at a zoom level of 1, which is the same
+     *            as world coordinates. This allows for a smaller or larger 'click box', since it is allowed for margin to be
+     *            negative. This margin grows and shrinks in absolute sense withe the zoom factor.
+     * @param pixelMargin the number of pixels around the drawn object for contains to be 'true'. This guarantees that a mouse
+     *            click can be pointed to a very small object.
      * @return whether the point is in the shape or in a margin around the shape
      */
     boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,

@@ -66,8 +66,8 @@ public class Warehouse42SwingApplication extends DsolApplication
     /**
      * <p>
      * copyright (c) 2002-2021 <a href="https://simulation.tudelft.nl">Delft University of Technology</a>. <br>
-     * BSD-style license. See <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank"> DSOL License</a>.
-     * <br>
+     * BSD-style license. See <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank"> DSOL
+     * License</a>. <br>
      * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
      */
     protected static class Warehouse42Panel extends DsolPanel

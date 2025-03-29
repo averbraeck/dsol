@@ -136,7 +136,7 @@ public class D2Test
         assertEquals(Side.BACKSIDE, l0010.getSide(new DirectionalLine(0.5, -1.0, 0.5, 0.0)));
         assertEquals(Side.FRONTSIDE, l0010.getSide(new DirectionalLine(0.5, 0.0, 0.5, 1.0)));
         assertEquals(Side.BACKSIDE, l0010.getSide(new DirectionalLine(0.5, 0.0, 0.5, -1.0)));
-        
+
         assertNotEquals(0, l0010.getSideThick(0.5, -5.0).getValue());
         assertEquals(1, l0010.getSideThick(0.5, 5.0).getValue());
         assertEquals(-1, l0010.getSideThick(0.5, -5.0).getValue());
@@ -172,7 +172,7 @@ public class D2Test
         assertFalse(Shape.contains(r0033, r2244));
         assertTrue(Shape.intersects(r2244, r0033));
     }
-    
+
     /**
      * Shape2d test (world coordinates).
      */

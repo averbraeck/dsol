@@ -43,12 +43,12 @@ public final class ExperimentUtilDouble
      * @return ExperimentalFrame
      * @throws NamingException on error
      */
-//    public static Experiment<Double, SimulatorInterface<Double>> createExperiment() throws NamingException
-//    {
-//        Experiment<Double, SimulatorInterface<Double>> experiment = new Experiment<Double>();
-//        experiment.setTreatment(ExperimentUtilDouble.createTreatment(experiment));
-//        experiment.setReplications(ExperimentUtilDouble.createReplications(experiment));
-//        return experiment;
-//    }
+    // public static Experiment<Double, SimulatorInterface<Double>> createExperiment() throws NamingException
+    // {
+    // Experiment<Double, SimulatorInterface<Double>> experiment = new Experiment<Double>();
+    // experiment.setTreatment(ExperimentUtilDouble.createTreatment(experiment));
+    // experiment.setReplications(ExperimentUtilDouble.createReplications(experiment));
+    // return experiment;
+    // }
 
 }

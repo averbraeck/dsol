@@ -113,9 +113,7 @@ public class VisualizationDemo implements Contextualized
                     // ignore
                 }
                 if (drawObjects.size() > 20)
-                {
-                    drawObjects.remove(1).destroy(this.contextProvider);
-                }
+                { drawObjects.remove(1).destroy(this.contextProvider); }
                 drawObjects.add(new DrawObject(this.contextProvider, xDist.draw(), yDist.draw()));
             }
         }

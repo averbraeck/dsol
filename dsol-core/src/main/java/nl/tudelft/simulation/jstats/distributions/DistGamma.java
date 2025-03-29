@@ -67,9 +67,7 @@ public class DistGamma extends DistContinuous
                     double y = Math.pow(p, 1.0d / this.shape);
                     double u2 = this.stream.nextDouble();
                     if (u2 <= Math.exp(-y))
-                    {
-                        return this.scale * y;
-                    }
+                    { return this.scale * y; }
                 }
                 else
                 {
@@ -77,9 +75,7 @@ public class DistGamma extends DistContinuous
                     double y = -Math.log((b - p) / this.shape);
                     double u2 = this.stream.nextDouble();
                     if (u2 <= Math.pow(y, this.shape - 1.0d))
-                    {
-                        return this.scale * y;
-                    }
+                    { return this.scale * y; }
                 }
                 counter++;
             }
@@ -108,14 +104,10 @@ public class DistGamma extends DistContinuous
                 double w = b + q * v - y;
                 // step 3.
                 if ((w + d - theta * z) >= 0.0d)
-                {
-                    return this.scale * y;
-                }
+                { return this.scale * y; }
                 // step 4.
                 if (w > Math.log(z))
-                {
-                    return this.scale * y;
-                }
+                { return this.scale * y; }
                 counter++;
             }
             CategoryLogger.always().info("Gamma distribution -- 1000 tries for alpha>1.0");
@@ -133,9 +125,7 @@ public class DistGamma extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x <= 0)
-        {
-            return 0.0;
-        }
+        { return 0.0; }
         return (Math.pow(this.scale, -this.shape) * Math.pow(x, this.shape - 1) * Math.exp(-1 * x / this.scale))
                 / ProbMath.gamma(this.shape);
     }

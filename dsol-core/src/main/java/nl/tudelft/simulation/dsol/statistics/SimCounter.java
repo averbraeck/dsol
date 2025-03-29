@@ -63,11 +63,9 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         this.simulator = model.getSimulator();
         try
         {
-            // only if we are before the warmup time, subscribe to the warmul event 
+            // only if we are before the warmup time, subscribe to the warmul event
             if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) < 0)
-            {
-                this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG);
-            }
+            { this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG); }
             ContextInterface context =
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");
             context.bindObject(this);
@@ -136,9 +134,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     public void notify(final Event event)
     {
         if (this.stopped)
-        {
-            return;
-        }
+        { return; }
         if (event.getType().equals(Replication.WARMUP_EVENT))
         {
             try

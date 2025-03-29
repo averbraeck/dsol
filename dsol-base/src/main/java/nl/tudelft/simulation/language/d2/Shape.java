@@ -31,26 +31,18 @@ public final class Shape
     public static boolean overlaps(final Rectangle2D extent, final Rectangle2D shape)
     {
         if (extent.getMaxX() < shape.getMinX())
-        {
-            return false;
-        }
+        { return false; }
         if (extent.getMaxY() < shape.getMinY())
-        {
-            return false;
-        }
+        { return false; }
         if (extent.getMinX() > shape.getMaxX())
-        {
-            return false;
-        }
+        { return false; }
         if (extent.getMinY() > shape.getMaxY())
-        {
-            return false;
-        }
+        { return false; }
         return true;
     }
 
     /**
-     * do the rectangles really intersect (so, not being contained)? 
+     * do the rectangles really intersect (so, not being contained)?
      * @param r1 the first rectangle
      * @param r2 the second rectangle
      * @return whether r1 really intersects r2

@@ -38,8 +38,7 @@ public class Customer implements BuyerInterface
     /**
      * constructs a new Customer.
      * @param simulator the simulator to schedule on
-     * @param retailer the retailer to buy at. In more advanced examples, we would look up this retailer at a
-     *            yellow page.
+     * @param retailer the retailer to buy at. In more advanced examples, we would look up this retailer at a yellow page.
      */
     public Customer(final DevsSimulatorInterface<Double> simulator, final SellerInterface retailer)
     {
@@ -69,7 +68,7 @@ public class Customer implements BuyerInterface
         try
         {
             this.simulator.scheduleEvent(new SimEvent<Double>(this.simulator.getSimulatorTime() + this.intervalTime.draw(),
-                    this,"createOrder", null));
+                    this, "createOrder", null));
         }
         catch (Exception exception)
         {

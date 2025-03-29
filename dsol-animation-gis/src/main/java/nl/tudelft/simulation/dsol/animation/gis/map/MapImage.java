@@ -7,7 +7,7 @@ import nl.tudelft.simulation.dsol.animation.gis.MapImageInterface;
 
 /**
  * This class defines the map image, which acts as the basic 'canvas' for the drawing process. The size does not matter that
- * much, as it will be scaled to screen dimensions and clipped with the proper viewport. 
+ * much, as it will be scaled to screen dimensions and clipped with the proper viewport.
  * <p>
  * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL

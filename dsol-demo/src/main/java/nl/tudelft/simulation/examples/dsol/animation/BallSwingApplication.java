@@ -53,9 +53,7 @@ public class BallSwingApplication extends DsolAnimationApplication
             public Ball searchObject(final String id)
             {
                 if (id == null || id.length() == 0)
-                {
-                    return null;
-                }
+                { return null; }
                 try
                 {
                     return ((BallModel) panel.getModel()).getBall(Integer.valueOf(id));

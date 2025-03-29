@@ -81,7 +81,7 @@ public class MonitorTest
             }
         };
         unlockThread.start();
-        
+
         // wait till ready
         long startTime = System.currentTimeMillis();
         while (unlockThread.isAlive() && System.currentTimeMillis() - startTime < 1000)
@@ -96,9 +96,7 @@ public class MonitorTest
             }
         }
         if (System.currentTimeMillis() - startTime > 1000)
-        {
-            fail("unlockThread execution; System.currentTimeMillis() - startTime > 1000");
-        }
+        { fail("unlockThread execution; System.currentTimeMillis() - startTime > 1000"); }
 
         Monitor.unlock(this.lock1);
     }

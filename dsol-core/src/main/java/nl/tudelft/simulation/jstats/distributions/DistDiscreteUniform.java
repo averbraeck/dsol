@@ -53,9 +53,7 @@ public class DistDiscreteUniform extends DistDiscrete
     public double probability(final long observation)
     {
         if (observation >= this.min && observation <= this.max)
-        {
-            return 1 / ((double) this.max - this.min + 1);
-        }
+        { return 1 / ((double) this.max - this.min + 1); }
         return 0.0;
     }
 

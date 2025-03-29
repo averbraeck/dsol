@@ -68,9 +68,7 @@ class DesExperimentApplication implements EventListener
             reportStats();
         }
         else if (event.getType().equals(Experiment.END_EXPERIMENT_EVENT))
-        {
-            reportFinalStats();
-        }
+        { reportFinalStats(); }
     }
 
     /**

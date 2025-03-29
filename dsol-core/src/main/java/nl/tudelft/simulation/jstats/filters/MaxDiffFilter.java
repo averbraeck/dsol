@@ -32,9 +32,7 @@ public class MaxDiffFilter extends AbstractFilter
     {
         super();
         if (acceptedDifferencePercentage <= 0 && acceptedDifferencePercentage > 1.0)
-        {
-            throw new IllegalArgumentException("percentage should be between [0.0,1.0]");
-        }
+        { throw new IllegalArgumentException("percentage should be between [0.0,1.0]"); }
         this.acceptedDifferencePercentage = acceptedDifferencePercentage;
     }
 
@@ -48,9 +46,7 @@ public class MaxDiffFilter extends AbstractFilter
     public boolean filter(final Object entry)
     {
         if (!(entry instanceof double[]) || ((double[]) entry).length != 2)
-        {
-            throw new IllegalArgumentException("entry should be instance of double[2] representing x,y");
-        }
+        { throw new IllegalArgumentException("entry should be instance of double[2] representing x,y"); }
         double[] value = (double[]) entry;
         if ((Math.abs(value[1] - this.lastReceivedValue)) >= this.lastReceivedValue * this.acceptedDifferencePercentage)
         {

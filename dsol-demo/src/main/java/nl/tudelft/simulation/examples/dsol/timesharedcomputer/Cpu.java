@@ -32,12 +32,12 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
     private static final long serialVersionUID = 1L;
 
     /** UTILIZATION_EVENT are fired on utilization. */
-    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT",
-            "Utilization change", new ObjectDescriptor("utilization", "Current utilization", Double.class)));
+    public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT", "Utilization change",
+            new ObjectDescriptor("utilization", "Current utilization", Double.class)));
 
     /** QUEUE_LENGTH_EVENT is fired on changes in the Queue length. */
-    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT",
-            "Queue length change", new ObjectDescriptor("queueLength", "New queue length", Integer.class)));
+    public static final EventType QUEUE_LENGTH_EVENT = new EventType(new MetaData("QUEUE_LENGTH_EVENT", "Queue length change",
+            new ObjectDescriptor("queueLength", "New queue length", Integer.class)));
 
     /** QUANTUM is the QUANTUM of the CPU. */
     public static final double QUANTUM = 0.1;
@@ -129,14 +129,15 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
             {
                 job.setServiceTime(job.getServiceTime() - QUANTUM);
                 Object[] args = {job};
-                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + QUANTUM + SWAP, this, "receiveObject", args);
+                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + QUANTUM + SWAP, this, "receiveObject",
+                        args);
                 getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + QUANTUM + SWAP, this, "next", null);
             }
             else
             {
                 Object[] args = {job};
-                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + job.getServiceTime() + SWAP, this, "releaseObject",
-                        args);
+                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + job.getServiceTime() + SWAP, this,
+                        "releaseObject", args);
             }
         }
         else

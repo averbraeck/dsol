@@ -32,9 +32,9 @@ public class FlowQueueingApplication1
         simulator.initialize(model, replication);
         simulator.start();
     }
-    
+
     /**
-     * Command-line executable FlowQueueingApplication. 
+     * Command-line executable FlowQueueingApplication.
      * @param args not used
      */
     public static void main(final String[] args)

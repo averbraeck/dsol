@@ -36,8 +36,7 @@ public class MM1Panel extends DsolPanel
      * @throws DsolException on error
      * @throws RemoteException on error
      */
-    public MM1Panel(final DevsControlPanel.TimeDouble controlPanel, final MM1Model model)
-            throws RemoteException, DsolException
+    public MM1Panel(final DevsControlPanel.TimeDouble controlPanel, final MM1Model model) throws RemoteException, DsolException
     {
         super(controlPanel);
         addTabs(model);

@@ -23,14 +23,14 @@ class DesQueueingApplication6
      */
     DesQueueingApplication6()
     {
-      var simulator = new DevsSimulator<Double>("MM1.Simulator");
-      var stream = new MersenneTwister(12);
-      var interArrivalTime = new DistExponential(stream, 1.0);
-      var processingTime = new DistExponential(stream, 0.9);
-      var model = new DesQueueingModel6(simulator, interArrivalTime, processingTime);
-      var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
-      simulator.initialize(model, replication);
-      simulator.start();
+        var simulator = new DevsSimulator<Double>("MM1.Simulator");
+        var stream = new MersenneTwister(12);
+        var interArrivalTime = new DistExponential(stream, 1.0);
+        var processingTime = new DistExponential(stream, 0.9);
+        var model = new DesQueueingModel6(simulator, interArrivalTime, processingTime);
+        var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+        simulator.initialize(model, replication);
+        simulator.start();
     }
 
     /**

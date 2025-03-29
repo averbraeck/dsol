@@ -60,9 +60,7 @@ public class RungeKuttaCashCarp extends NumericalIntegrator
             for (int j = 0; j < i; j++)
             {
                 if (b[i][j] != 0.0)
-                {
-                    ysum = add(ysum, multiply(b[i][j], k[j]));
-                }
+                { ysum = add(ysum, multiply(b[i][j], k[j])); }
             }
             k[i] = multiply(this.stepSize, this.equation.dy(x + a[i] * this.stepSize, ysum));
         }

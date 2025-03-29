@@ -43,9 +43,7 @@ public class DistDiscreteConstant extends DistDiscrete
     public double probability(final long observation)
     {
         if (observation == this.constant)
-        {
-            return 1.0;
-        }
+        { return 1.0; }
         return 0.0;
     }
 

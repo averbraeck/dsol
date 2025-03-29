@@ -65,13 +65,9 @@ public class NormalDistributionTest
         {
             double d = dist.draw();
             if (!Double.isNaN(expectedMin))
-            {
-                assertTrue(d >= expectedMin, name + " min: " + d + ">=" + expectedMin);
-            }
+            { assertTrue(d >= expectedMin, name + " min: " + d + ">=" + expectedMin); }
             if (!Double.isNaN(expectedMax))
-            {
-                assertTrue(d <= expectedMax, name + " max: " + d + "<=" + expectedMax);
-            }
+            { assertTrue(d <= expectedMax, name + " max: " + d + "<=" + expectedMax); }
             tally.register(d);
         }
         assertEquals(expectedMean, tally.getPopulationMean(), precision, name + " mean");
@@ -133,11 +129,15 @@ public class NormalDistributionTest
         assertEquals(4.0, dist.getInverseCumulativeProbability(dist.getCumulativeProbability(4.0)), 0.05);
         assertEquals(8.0, dist.getInverseCumulativeProbability(dist.getCumulativeProbability(8.0)), 0.05);
 
-        Try.testFail(() -> { new DistLogNormal(null, 1.0, 2.0); }, NullPointerException.class);
-        Try.testFail(() -> { new DistLogNormal(NormalDistributionTest.this.stream, 2.0, 0.0); },
-                IllegalArgumentException.class);
-        Try.testFail(() -> { new DistLogNormal(NormalDistributionTest.this.stream, 2.0, -1.0); },
-                IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistLogNormal(null, 1.0, 2.0);
+        }, NullPointerException.class);
+        Try.testFail(() -> {
+            new DistLogNormal(NormalDistributionTest.this.stream, 2.0, 0.0);
+        }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistLogNormal(NormalDistributionTest.this.stream, 2.0, -1.0);
+        }, IllegalArgumentException.class);
 
         DistLogNormal dist1 = new DistLogNormal(new MersenneTwister(10L), 1, 2);
         double v = dist1.draw();
@@ -218,9 +218,15 @@ public class NormalDistributionTest
             assertEquals(p, stdDist.getInverseCumulativeProbability(c), 0.0001);
         }
 
-        Try.testFail(() -> { new DistNormal(null, 1.0, 2.0); }, NullPointerException.class);
-        Try.testFail(() -> { new DistNormal(NormalDistributionTest.this.stream, 2.0, 0.0); }, IllegalArgumentException.class);
-        Try.testFail(() -> { new DistNormal(NormalDistributionTest.this.stream, 2.0, -1.0); }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistNormal(null, 1.0, 2.0);
+        }, NullPointerException.class);
+        Try.testFail(() -> {
+            new DistNormal(NormalDistributionTest.this.stream, 2.0, 0.0);
+        }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistNormal(NormalDistributionTest.this.stream, 2.0, -1.0);
+        }, IllegalArgumentException.class);
 
         DistNormal dist1 = new DistNormal(new MersenneTwister(10L), 1, 2);
         double v = dist1.draw();
@@ -251,13 +257,13 @@ public class NormalDistributionTest
             double xi = (x - mu) / sigma;
             if (x < a || x > b)
             {
-                assertEquals(0.0, dist.getProbabilityDensity(x),
-                        0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                assertEquals(0.0, dist.getProbabilityDensity(x), 0.0001,
+                        "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
             }
             else
             {
-                assertEquals(phi(xi) / (sigma * z),
-                        dist.getProbabilityDensity(x), 0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                assertEquals(phi(xi) / (sigma * z), dist.getProbabilityDensity(x), 0.0001,
+                        "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
             }
         }
         double expectedMean = mu + sigma * (phi(alpha) - phi(beta)) / z;
@@ -340,17 +346,17 @@ public class NormalDistributionTest
                             double xi = (x - mu) / sigma;
                             if (x < a || x > b)
                             {
-                                assertEquals(0.0, dist.getProbabilityDensity(x),
-                                        0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
-                                assertEquals(x < a ? 0 : 1,
-                                        dist.getCumulativeProbability(x), 0.0001, "CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                                assertEquals(0.0, dist.getProbabilityDensity(x), 0.0001,
+                                        "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                                assertEquals(x < a ? 0 : 1, dist.getCumulativeProbability(x), 0.0001,
+                                        "CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
                             }
                             else
                             {
-                                assertEquals(phi(xi) / (sigma * z),
-                                        dist.getProbabilityDensity(x), 0.0001, "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
-                                assertEquals((PHI(xi) - PHI(alpha)) / z,
-                                        dist.getCumulativeProbability(x), 0.0001, "CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                                assertEquals(phi(xi) / (sigma * z), dist.getProbabilityDensity(x), 0.0001,
+                                        "pdf(x,m,s,a,b)=pdf(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
+                                assertEquals((PHI(xi) - PHI(alpha)) / z, dist.getCumulativeProbability(x), 0.0001,
+                                        "CDF(x,m,s,a,b)=CDF(" + x + "," + mu + "," + sigma + "," + a + "," + b + ")");
                             }
                         }
                     }
@@ -424,23 +430,34 @@ public class NormalDistributionTest
     public void testTruncatedNormalExceptions()
     {
         this.stream = new MersenneTwister(20L);
-        Try.testFail(() -> { new DistNormalTrunc(null, 1.0, 2.0); }, NullPointerException.class);
-        Try.testFail(() -> { new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.0, 1, 2); },
-                IllegalArgumentException.class);
-        Try.testFail(() -> { new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, -1.0, 1, 2); },
-                IllegalArgumentException.class);
-        Try.testFail(() -> { new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 1.0, 1, 1); },
-                IllegalArgumentException.class);
-        Try.testFail(() -> { new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 1.0, 1, 0); },
-                IllegalArgumentException.class);
-        Try.testFail(() -> { new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.1, 20, 21); },
-                IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistNormalTrunc(null, 1.0, 2.0);
+        }, NullPointerException.class);
+        Try.testFail(() -> {
+            new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.0, 1, 2);
+        }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, -1.0, 1, 2);
+        }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 1.0, 1, 1);
+        }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 1.0, 1, 0);
+        }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.1, 20, 21);
+        }, IllegalArgumentException.class);
 
         DistNormalTrunc dist = new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.1, 1.0, 2.0);
         assertEquals(1.0, dist.getInverseCumulativeProbability(0), 0.0001);
         assertEquals(2.0, dist.getInverseCumulativeProbability(1), 0.0001);
-        Try.testFail(() -> { dist.getInverseCumulativeProbability(-0.1); }, IllegalArgumentException.class);
-        Try.testFail(() -> { dist.getInverseCumulativeProbability(1.1); }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            dist.getInverseCumulativeProbability(-0.1);
+        }, IllegalArgumentException.class);
+        Try.testFail(() -> {
+            dist.getInverseCumulativeProbability(1.1);
+        }, IllegalArgumentException.class);
 
     }
 
@@ -516,14 +533,10 @@ public class NormalDistributionTest
             double term = Math.pow(zpos, 2 * i + 1) / ((2 * i + 1) * fac(i));
             d += even(i) * term;
             if (term < 1E-16)
-            {
-                break;
-            }
+            { break; }
         }
         if (z < 0)
-        {
-            d = -d;
-        }
+        { d = -d; }
         return (2.0 / Math.sqrt(Math.PI)) * d;
     }
 

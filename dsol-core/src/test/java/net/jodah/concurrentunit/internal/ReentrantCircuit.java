@@ -57,15 +57,11 @@ public class ReentrantCircuit
             // Check to make sure the acquisition is not barging in front of a queued thread
             Thread queuedThread = getFirstQueuedThread();
             if (queuedThread != null && queuedThread != Thread.currentThread())
-            {
-                return -1;
-            }
+            { return -1; }
 
             // If await test
             if (acquires == 0)
-            {
-                return isClosed() ? 1 : -1;
-            }
+            { return isClosed() ? 1 : -1; }
 
             // Explicit open call
             setState(1);

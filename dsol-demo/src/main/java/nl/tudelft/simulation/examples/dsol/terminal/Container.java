@@ -43,8 +43,8 @@ public class Container implements IntResourceRequestorInterface<Double>
      * @param agv the AGV resources
      * @param ship the ship
      */
-    public Container(final DevsSimulatorInterface<Double> simulator, final int containerNumber, final QuayCrane qc, final Agv agv,
-            final Ship ship)
+    public Container(final DevsSimulatorInterface<Double> simulator, final int containerNumber, final QuayCrane qc,
+            final Agv agv, final Ship ship)
     {
         this.simulator = simulator;
         this.containerNumber = containerNumber;
@@ -72,8 +72,8 @@ public class Container implements IntResourceRequestorInterface<Double>
     }
 
     @Override
-    public synchronized void receiveRequestedResource(final long requestedCapacity,
-            final IntResource<Double> resource) throws RemoteException
+    public synchronized void receiveRequestedResource(final long requestedCapacity, final IntResource<Double> resource)
+            throws RemoteException
     {
         try
         {
@@ -144,8 +144,6 @@ public class Container implements IntResourceRequestorInterface<Double>
     protected void checkPhase()
     {
         if (this.phase != 5)
-        {
-            System.out.println("Container " + this.containerNumber + " was stuck in phase " + this.phase);
-        }
+        { System.out.println("Container " + this.containerNumber + " was stuck in phase " + this.phase); }
     }
 }
