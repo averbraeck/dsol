@@ -22,9 +22,7 @@ public class JvmContextFactory implements ContextFactory
     public synchronized ContextInterface getInitialContext(final Hashtable<?, ?> environment, final String atomicName)
     {
         if (context == null)
-        {
-            JvmContextFactory.context = new JvmContext(atomicName);
-        }
+        { JvmContextFactory.context = new JvmContext(atomicName); }
         return context;
     }
 }

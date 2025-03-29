@@ -72,9 +72,7 @@ public class BeanIntrospector implements Introspector
             for (int i = 0; i < descrips.length; i++)
             {
                 if (descrips[i].getName().equals(property))
-                {
-                    return new BeanProperty(introspected, descrips[i]);
-                }
+                { return new BeanProperty(introspected, descrips[i]); }
             }
         }
         catch (Exception e)

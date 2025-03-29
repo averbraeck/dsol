@@ -116,9 +116,7 @@ public class XYSeries extends AbstractDataset implements EventListener
         }
         double[] point = {timeStamp.doubleValue(), ((Number) event.getContent()).doubleValue()};
         if (!this.filter.accept(point))
-        {
-            return;
-        }
+        { return; }
         this.entries.add(point);
         if (!(Double.isInfinite(this.PERIOD)))
         {

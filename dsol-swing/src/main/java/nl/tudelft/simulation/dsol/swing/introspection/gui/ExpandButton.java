@@ -84,9 +84,7 @@ public class ExpandButton extends JButton
     public void showTable()
     {
         if (this.PROPERTY.getValue() == null)
-        {
-            return;
-        }
+        { return; }
         if (this.myTable != null)
         {
             Window parentWindow = SwingUtilities.getWindowAncestor(this);

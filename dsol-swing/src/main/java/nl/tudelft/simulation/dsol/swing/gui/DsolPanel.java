@@ -47,8 +47,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Construct a panel for an interactive simulation model.
-     * @param controlPanel the control panel to use (especially with relation to time
-     *            control)
+     * @param controlPanel the control panel to use (especially with relation to time control)
      * @throws RemoteException when communications to a remote machine fails
      */
     public DsolPanel(final AbstractControlPanel<?, ?> controlPanel) throws RemoteException
@@ -89,7 +88,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Adds a console tab for the Logger.
-     * @param logLevel 
+     * @param logLevel
      */
     public void addConsoleLogger(final Level logLevel)
     {

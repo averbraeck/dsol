@@ -260,8 +260,7 @@ public class XYChart implements Swingable, Serializable
      * @param eventType the event
      * @throws RemoteException on network failure
      */
-    public void add(final String description, final EventProducer source, final EventType eventType)
-            throws RemoteException
+    public void add(final String description, final EventProducer source, final EventType eventType) throws RemoteException
     {
         XYSeries set = new XYSeries(description, this.simulator, this.axisType, this.period);
         source.addListener(set, eventType, LocalEventProducer.FIRST_POSITION, ReferenceType.STRONG);

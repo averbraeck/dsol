@@ -51,13 +51,13 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
 
     /** the current logging level. */
     private Level level = Level.INFO;
-    
+
     /** the text pane. */
     private JTextPane textPane;
 
     /**
      * Constructor for Logger Console.
-     * @param logLevel 
+     * @param logLevel
      */
     public ConsoleLogger(final Level logLevel)
     {
@@ -119,7 +119,6 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
         this.consoleLogWriter.maxLines = Math.max(1, maxLines);
     }
 
-    
     @Override
     public boolean isBackground()
     {

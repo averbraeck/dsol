@@ -215,9 +215,7 @@ public class TabbedParameterDialog extends JDialog implements ActionListener
             this.fields.add(new InputFieldDistContinuous(panel, (InputParameterDistContinuousSelection) parameter));
         }
         else if (parameter instanceof InputParameterSelectionMap<?, ?>)
-        {
-            this.fields.add(new InputFieldSelectionMap(panel, (InputParameterSelectionMap<?, ?>) parameter));
-        }
+        { this.fields.add(new InputFieldSelectionMap(panel, (InputParameterSelectionMap<?, ?>) parameter)); }
     }
 
     @Override

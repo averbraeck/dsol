@@ -97,8 +97,8 @@ public class Histogram implements Swingable, Serializable
      * @param range the range of the plot
      * @param numberofBins the number of bins in this plot
      */
-    public Histogram(final SimulatorInterface<?> simulator, final String title, final double[] domain,
-            final double[] range, final int numberofBins)
+    public Histogram(final SimulatorInterface<?> simulator, final String title, final double[] domain, final double[] range,
+            final int numberofBins)
     {
         this(title, domain, range, numberofBins);
         try
@@ -119,8 +119,7 @@ public class Histogram implements Swingable, Serializable
      * @param domain the domain
      * @param numberofBins the number of bins
      */
-    public Histogram(final SimulatorInterface<?> simulator, final String title, final double[] domain,
-            final int numberofBins)
+    public Histogram(final SimulatorInterface<?> simulator, final String title, final double[] domain, final int numberofBins)
     {
         this(title, domain, numberofBins);
         try
@@ -154,8 +153,8 @@ public class Histogram implements Swingable, Serializable
      * @param eventType the eventType.
      * @throws RemoteException on network error for the (possibly remote) event listener
      */
-    public synchronized void add(final String description, final EventProducer source,
-            final EventType eventType) throws RemoteException
+    public synchronized void add(final String description, final EventProducer source, final EventType eventType)
+            throws RemoteException
     {
         HistogramSeries set = this.getDataset().addSeries(description);
         source.addListener(set, eventType, ReferenceType.STRONG);

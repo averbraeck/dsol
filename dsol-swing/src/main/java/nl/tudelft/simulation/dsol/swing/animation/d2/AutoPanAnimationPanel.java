@@ -26,9 +26,9 @@ import nl.tudelft.simulation.language.DsolException;
 /**
  * Animation panel that adds autopan functionality. Code based on OpenTrafficSim project component with the same purpose.
  * <p>
- * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
- * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
- * DSOL project is distributed under a three-clause BSD-style license, which can be found at
+ * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
+ * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
@@ -117,12 +117,10 @@ public class AutoPanAnimationPanel extends AnimationPanel
     protected Object getSelectedObject(final Point2D mousePoint)
     {
         List<Object> targets = new ArrayList<>();
-        Point2d point = getRenderableScale().getWorldCoordinates(mousePoint,
-                getExtent(), getSize());
+        Point2d point = getRenderableScale().getWorldCoordinates(mousePoint, getExtent(), getSize());
         for (Renderable2dInterface<?> renderable : getElements())
         {
-            if (isShowElement(renderable)
-                    && renderable.contains(point, getExtent()))
+            if (isShowElement(renderable) && renderable.contains(point, getExtent()))
             {
                 // TODO: build in a check for the right class.
                 // if (renderable.getSource() instanceof Person)
@@ -132,9 +130,7 @@ public class AutoPanAnimationPanel extends AnimationPanel
             }
         }
         if (targets.size() == 1)
-        {
-            return targets.get(0);
-        }
+        { return targets.get(0); }
         return null;
     }
 
@@ -153,9 +149,7 @@ public class AutoPanAnimationPanel extends AnimationPanel
         this.autoPanOnNextPaintComponent = true;
         // System.out.println("AutoPan id=" + newAutoPanId + ", kind=" + newAutoPanKind + ", track=" + newAutoPanTrack);
         if (null != this.autoPanId && this.autoPanId.length() > 0 && null != this.autoPanKind)
-        {
-            repaint();
-        }
+        { repaint(); }
     }
 
     @Override
@@ -179,8 +173,8 @@ public class AutoPanAnimationPanel extends AnimationPanel
                 }
                 catch (RemoteException exception)
                 {
-                    CategoryLogger.always().warn("Caught RemoteException trying to locate {} with id {}.",
-                            this.autoPanKind, this.autoPanId);
+                    CategoryLogger.always().warn("Caught RemoteException trying to locate {} with id {}.", this.autoPanKind,
+                            this.autoPanId);
                     return;
                 }
             }

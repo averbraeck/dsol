@@ -178,8 +178,8 @@ public abstract class AbstractTestDemoServer
                     SimulatorInterface<Duration> simulator = model.getSimulator();
                     try
                     {
-                        Replication<Duration> newReplication = new SingleReplication<Duration>("rep 1",
-                                Duration.ZERO, Duration.ZERO, Duration.instantiateSI(3600.0));
+                        Replication<Duration> newReplication = new SingleReplication<Duration>("rep 1", Duration.ZERO,
+                                Duration.ZERO, Duration.instantiateSI(3600.0));
                         simulator.initialize(model, newReplication);
                         DsolWebModel webModel = new DsolWebModel(model.toString(), simulator);
                         AbstractTestDemoServer.this.sessionWebModelMap.put(sessionId, webModel);
@@ -238,8 +238,7 @@ public abstract class AbstractTestDemoServer
                 }
                 else if (this.webServer.sessionModelMap.containsKey(sessionId))
                 {
-                    DsolModel<Duration, SimulatorInterface<Duration>> model =
-                            this.webServer.sessionModelMap.get(sessionId);
+                    DsolModel<Duration, SimulatorInterface<Duration>> model = this.webServer.sessionModelMap.get(sessionId);
                     String answer = "<message>ok</message>";
 
                     if (request.getParameter("message") != null)
@@ -250,26 +249,22 @@ public abstract class AbstractTestDemoServer
 
                         switch (command)
                         {
-                            case "getTitle":
-                            {
+                            case "getTitle": {
                                 answer = "<title>" + model.toString() + "</title>";
                                 break;
                             }
 
-                            case "getParameterMap":
-                            {
+                            case "getParameterMap": {
                                 answer = makeParameterMap(model);
                                 break;
                             }
 
-                            case "setParameters":
-                            {
+                            case "setParameters": {
                                 answer = setParameters(model, message);
                                 break;
                             }
 
-                            default:
-                            {
+                            default: {
                                 System.err.println("Got unknown message from client: " + command);
                                 answer = "<message>" + request.getParameter("message") + "</message>";
                                 break;
@@ -489,9 +484,7 @@ public abstract class AbstractTestDemoServer
                 String type = parts[i + 1].trim();
                 String val = parts[i + 2].trim();
                 if (type.equals("UNIT"))
-                {
-                    unitMap.put(id, val);
-                }
+                { unitMap.put(id, val); }
             }
             for (int i = 1; i < parts.length - 3; i += 3)
             {

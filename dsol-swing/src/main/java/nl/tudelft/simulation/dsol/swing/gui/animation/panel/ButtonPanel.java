@@ -59,17 +59,11 @@ public class ButtonPanel extends JPanel implements ActionListener
         try
         {
             if (actionCommand.equals("Home"))
-            {
-                this.animationPanel.home();
-            }
+            { this.animationPanel.home(); }
             if (actionCommand.equals("ZoomAll"))
-            {
-                this.animationPanel.zoomAll();
-            }
+            { this.animationPanel.zoomAll(); }
             if (actionCommand.equals("Grid"))
-            {
-                this.animationPanel.showGrid(!this.animationPanel.isShowGrid());
-            }
+            { this.animationPanel.showGrid(!this.animationPanel.isShowGrid()); }
         }
         catch (Exception exception)
         {

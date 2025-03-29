@@ -474,9 +474,7 @@ public class EventContextTest
         public void notify(final Event event) throws RemoteException
         {
             if (!this.expectingNotification)
-            {
-                fail("Received event " + event + " unexpectedly for scope " + this.contextScope);
-            }
+            { fail("Received event " + event + " unexpectedly for scope " + this.contextScope); }
             this.receivedEvent = event;
         }
     }

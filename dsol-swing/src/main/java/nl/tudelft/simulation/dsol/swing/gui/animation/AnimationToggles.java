@@ -3,9 +3,8 @@ package nl.tudelft.simulation.dsol.swing.gui.animation;
 import nl.tudelft.simulation.dsol.animation.Locatable;
 
 /**
- * 
- * Helper class to set the animation toggles for the animation panel. Code based on OpenTrafficSim project component with the same
- * purpose.
+ * Helper class to set the animation toggles for the animation panel. Code based on OpenTrafficSim project component with the
+ * same purpose.
  * <p>
  * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL

@@ -97,8 +97,7 @@ public class ContextUtil
      * up null objects in the Context.
      * @param startContext the context to start the search
      * @param object the object to look up in the tree under the startContext
-     * @return the list of keys that are bound to the object, or an empty list if no bindings for the object
-     *         were found
+     * @return the list of keys that are bound to the object, or an empty list if no bindings for the object were found
      * @throws NamingException when an error occurs during searching
      * @throws RemoteException on a network error when the Context is used over RMI
      */
@@ -117,8 +116,8 @@ public class ContextUtil
      * up null objects in the Context.
      * @param context the context to start the search
      * @param object the object to look up in the tree under the startContext
-     * @param result the current list of keys that are bound to the object, or an empty list if no bindings
-     *            for the object were found yet
+     * @param result the current list of keys that are bound to the object, or an empty list if no bindings for the object were
+     *            found yet
      * @param partialKey the key of the current level in the tree, relative to the original start context of the search
      * @throws NamingException when an error occurs during searching
      * @throws RemoteException on a network error when the Context is used over RMI
@@ -136,9 +135,7 @@ public class ContextUtil
             }
             // no else; we might be looking for an object that implements ContextInterface
             if ((value == null && object == null) || (value != null && value.equals(object)))
-            {
-                result.add(partialKey + ContextInterface.SEPARATOR + binding.getKey());
-            }
+            { result.add(partialKey + ContextInterface.SEPARATOR + binding.getKey()); }
         }
     }
 

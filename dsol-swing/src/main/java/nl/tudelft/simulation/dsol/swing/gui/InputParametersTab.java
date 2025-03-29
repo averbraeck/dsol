@@ -30,7 +30,7 @@ public class InputParametersTab extends JPanel
     /** The parameter map. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     public InputParameterMap inputParameterMap;
-    
+
     /**
      * Create an InputParametersTab for the given simulation model.
      * @param model the model.
@@ -53,7 +53,7 @@ public class InputParametersTab extends JPanel
         textBuilder.append("</html>\n");
         textPane.setText(textBuilder.toString());
     }
-        
+
     /**
      * Return the head portion of the HTML page to display the parameter map.
      * @return the head portion of the HTML page to display the parameter map
@@ -70,7 +70,7 @@ public class InputParametersTab extends JPanel
         textBuilder.append("  </head>\n");
         return textBuilder.toString();
     }
-    
+
     /**
      * Return the body portion of the HTML page to display the parameter map.
      * @return the body portion of the HTML page to display the parameter map

@@ -35,7 +35,7 @@ public class DemoServer extends RmiObject implements EventProducer
 
     /** */
     private final EventListenerMap eventListenerMap;
-    
+
     /**
      * @throws RemoteException on network error
      * @throws AlreadyBoundException on two demo servers being started
@@ -90,9 +90,7 @@ public class DemoServer extends RmiObject implements EventProducer
             }
 
             if (c == 'x')
-            {
-                continue;
-            }
+            { continue; }
 
             if (c == 'd')
             {
@@ -135,9 +133,7 @@ public class DemoServer extends RmiObject implements EventProducer
             }
 
             if (c == 'l')
-            {
-                print(remoteContext, 0);
-            }
+            { print(remoteContext, 0); }
         }
         fireEvent(DemoServerInterface.EXIT_EVENT);
         s.close();

@@ -27,7 +27,7 @@ public class ConsoleOutput extends JPanel
 
     /** The text area for the output. */
     private JTextArea textArea;
-    
+
     /** Reference to the old stdout. */
     private PrintStream standardOut;
 
@@ -56,7 +56,7 @@ public class ConsoleOutput extends JPanel
     {
         /** the text area to write to. */
         private final JTextArea textArea;
-        
+
         /** the original stdout. */
         private final PrintStream standardOut;
 
@@ -79,13 +79,13 @@ public class ConsoleOutput extends JPanel
             this.standardOut.append(String.valueOf((char) b));
         }
     }
-    
+
     /** The custom error stream that writes to the text pane. */
     public static class CustomErrorStream extends OutputStream
     {
         /** the text area to write to. */
         private final JTextArea textArea;
-        
+
         /** the original stderr. */
         private final PrintStream standardErr;
 

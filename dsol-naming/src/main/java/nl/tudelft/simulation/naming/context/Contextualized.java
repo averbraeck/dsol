@@ -12,10 +12,10 @@ package nl.tudelft.simulation.naming.context;
  */
 public interface Contextualized
 {
-    /** 
+    /**
      * Return the context.
-     * @return the context 
+     * @return the context
      */
     ContextInterface getContext();
-    
+
 }

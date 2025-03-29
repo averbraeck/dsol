@@ -39,9 +39,7 @@ public abstract class AbstractSuppressIntrospector implements Introspector
         for (int i = 0; i < original.length; i++)
         {
             if (!this.suppress(original[i].getType()) && !this.suppress(original[i].getName()))
-            {
-                result.add(original[i]);
-            }
+            { result.add(original[i]); }
         }
         return result.toArray(new Property[0]);
     }
@@ -65,9 +63,7 @@ public abstract class AbstractSuppressIntrospector implements Introspector
         for (int i = 0; i < properties.length; i++)
         {
             if (properties[i].getName().equals(arg1))
-            {
-                return properties[i];
-            }
+            { return properties[i]; }
         }
         return null;
     }
@@ -80,9 +76,7 @@ public abstract class AbstractSuppressIntrospector implements Introspector
     protected boolean suppress(final Class<?> type)
     {
         if (type.equals(Class.class))
-        {
-            return true;
-        }
+        { return true; }
         return false;
     }
 

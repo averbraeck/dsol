@@ -11,7 +11,8 @@ import java.util.TimerTask;
 /**
  * provides a timed update mechanism for components. <br>
  * copyright (c) 2002-2021 <a href="https://simulation.tudelft.nl">Delft University of Technology</a>. <br>
- * BSD-style license. See <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank"> DSOL License</a>. <br>
+ * BSD-style license. See <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank"> DSOL
+ * License</a>. <br>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs</a>.
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>.
  * @author Niels Lang.
@@ -66,9 +67,7 @@ public class UpdateTimer extends TimerTask
         for (int i = (this.components.length - 1); i > -1; i--)
         {
             if (this.components[i].get().equals(component))
-            {
-                this.remove(this.components[i]);
-            }
+            { this.remove(this.components[i]); }
         }
     }
 

@@ -272,7 +272,7 @@ public class HtmlGraphics2D extends Graphics2D
      * - MOVETO, followed by 1 coordinate (2 numbers)<br>
      * - QUADTO, followed by 2 coordinates (4 numbers)<br>
      * @param path Path2D.Float; the path to draw
-     * @param fill 
+     * @param fill
      */
     protected void addTransformPathFloat(Path2D.Float path, boolean fill)
     {
@@ -327,7 +327,7 @@ public class HtmlGraphics2D extends Graphics2D
             }
             i.next();
         }
-            this.commands.append("</transformPath>\n");
+        this.commands.append("</transformPath>\n");
     }
 
     /**
@@ -346,7 +346,7 @@ public class HtmlGraphics2D extends Graphics2D
      * - MOVETO, followed by 1 coordinate (2 numbers)<br>
      * - QUADTO, followed by 2 coordinates (4 numbers)<br>
      * @param path Path2D.Double; the path to draw
-     * @param fill 
+     * @param fill
      */
     protected void addTransformPathDouble(Path2D.Double path, boolean fill)
     {

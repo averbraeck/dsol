@@ -129,13 +129,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
         for (int i = 0; i < tallies.size(); i++)
         {
             if (tallies.get(i).getMin() < result[0])
-            {
-                result[0] = tallies.get(i).getMin();
-            }
+            { result[0] = tallies.get(i).getMin(); }
             if (tallies.get(i).getMax() > result[1])
-            {
-                result[1] = tallies.get(i).getMax();
-            }
+            { result[1] = tallies.get(i).getMax(); }
         }
         return result;
     }
@@ -155,13 +151,9 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
             double left = g2.getFont().getStringBounds(this.formatter.format(tallyList.get(i).getMin()), context).getWidth();
             double rigth = g2.getFont().getStringBounds(this.formatter.format(tallyList.get(i).getMax()), context).getWidth();
             if (left > result[0])
-            {
-                result[0] = left;
-            }
+            { result[0] = left; }
             if (rigth > result[1])
-            {
-                result[1] = rigth;
-            }
+            { result[1] = rigth; }
         }
         result[0] = result[0] + 3;
         result[1] = result[1] + 3;

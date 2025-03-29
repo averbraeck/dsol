@@ -128,9 +128,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
             {
                 String path = (String) content[0] + ContextInterface.SEPARATOR + (String) content[1];
                 if (entry.getValue().getPattern().matcher(path).matches())
-                {
-                    entry.getValue().getListener().notify(event);
-                }
+                { entry.getValue().getListener().notify(event); }
             }
         }
         else if (event.getType().equals(ContextInterface.OBJECT_REMOVED_EVENT))
@@ -146,9 +144,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
             {
                 String path = (String) content[0] + ContextInterface.SEPARATOR + (String) content[1];
                 if (entry.getValue().getPattern().matcher(path).matches())
-                {
-                    entry.getValue().getListener().notify(event);
-                }
+                { entry.getValue().getListener().notify(event); }
             }
         }
         else if (event.getType().equals(ContextInterface.OBJECT_CHANGED_EVENT))
@@ -157,9 +153,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
             {
                 String path = (String) content[0] + ContextInterface.SEPARATOR + (String) content[1];
                 if (entry.getValue().getPattern().matcher(path).matches())
-                {
-                    entry.getValue().getListener().notify(event);
-                }
+                { entry.getValue().getListener().notify(event); }
             }
         }
     }
@@ -176,9 +170,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
     {
         String key = absolutePath;
         if (key.endsWith("/"))
-        {
-            key = key.substring(0, key.length() - 1);
-        }
+        { key = key.substring(0, key.length() - 1); }
         key += "#" + contextScope.name();
         return key;
     }
@@ -210,9 +202,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
     {
         String key = absolutePath;
         if (key.endsWith("/"))
-        {
-            key = key.substring(0, key.length() - 1);
-        }
+        { key = key.substring(0, key.length() - 1); }
         switch (contextScope)
         {
             case LEVEL_SCOPE:
@@ -237,8 +227,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * Add a listener for the provided scope as strong reference to the BEGINNING of a queue of listeners.
      * @param listener the listener which is interested at events of eventType.
      * @param absolutePath the absolute path of the context or object to subscribe to
-     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
-     *            keys, subtree).
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and keys, subtree).
      * @return the success of adding the listener. If a listener was already added false is returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
      *             context does not exist
@@ -260,8 +249,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * Add a listener for the provided scope to the BEGINNING of a queue of listeners.
      * @param listener the listener which is interested at events of eventType.
      * @param absolutePath the absolute path of the context or object to subscribe to
-     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
-     *            keys, subtree).
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and keys, subtree).
      * @param referenceType whether the listener is added as a strong or as a weak reference.
      * @return the success of adding the listener. If a listener was already added false is returned.
      * @throws NameNotFoundException when the absolutePath could not be found in the parent context, or when an intermediate
@@ -284,8 +272,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * Add a listener for the provided scope as strong reference to the specified position of a queue of listeners.
      * @param listener the listener which is interested at events of eventType.
      * @param absolutePath the absolute path of the context or object to subscribe to
-     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
-     *            keys, subtree).
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and keys, subtree).
      * @param position the position of the listener in the queue.
      * @return the success of adding the listener. If a listener was already added, or an illegal position is provided false is
      *         returned.
@@ -309,8 +296,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * Add a listener for the provided scope to the specified position of a queue of listeners.
      * @param listener which is interested at certain events,
      * @param absolutePath the absolute path of the context or object to subscribe to
-     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and
-     *            keys, subtree).
+     * @param contextScope the part of the tree that the listener is aimed at (current node, current node and keys, subtree).
      * @param position the position of the listener in the queue
      * @param referenceType whether the listener is added as a strong or as a weak reference.
      * @return the success of adding the listener. If a listener was already added or an illegal position is provided false is
@@ -369,8 +355,8 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * Pair of regular expression pattern and event listener.
      * <p>
      * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
-     * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>.
-     * The DSOL project is distributed under a three-clause BSD-style license, which can be found at
+     * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
+     * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
      * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
      * </p>

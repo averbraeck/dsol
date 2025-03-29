@@ -85,9 +85,7 @@ public class HistogramDataset extends SimpleHistogramDataset implements Interval
     public void datasetChanged(final DatasetChangeEvent arg0)
     {
         if (arg0 != null)
-        {
-            this.fireDatasetChanged();
-        }
+        { this.fireDatasetChanged(); }
     }
 
     @Override

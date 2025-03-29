@@ -131,8 +131,7 @@ public final class InitialEventContext implements EventContext
 
     /**
      * Constructs an initial context using the supplied environment.
-     * @param environment environment used to create the initial context. Null indicates an empty
-     *            environment.
+     * @param environment environment used to create the initial context. Null indicates an empty environment.
      * @param atomicName the name under which the root context will be registered
      * @return a singleton instance of InitialEventContext
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
@@ -142,9 +141,7 @@ public final class InitialEventContext implements EventContext
             throws NamingException, RemoteException
     {
         if (INSTANCE != null)
-        {
-            return INSTANCE;
-        }
+        { return INSTANCE; }
 
         INSTANCE = new InitialEventContext(environment, atomicName);
         INSTANCE.init(environment == null ? null : (Hashtable<?, ?>) environment.clone(), atomicName);
@@ -153,8 +150,7 @@ public final class InitialEventContext implements EventContext
 
     /**
      * Initializes the initial context using the supplied environment.
-     * @param environment environment used to create the initial context. Null indicates an empty
-     *            environment.
+     * @param environment environment used to create the initial context. Null indicates an empty environment.
      * @param atomicName the name under which the root context will be registered
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
      * @throws RemoteException if a network connection failure occurs
@@ -163,9 +159,7 @@ public final class InitialEventContext implements EventContext
     {
         this.properties = buildEnvironment(environment);
         if (this.properties.get(Context.INITIAL_CONTEXT_FACTORY) != null)
-        {
-            getDefaultInitCtx(atomicName);
-        }
+        { getDefaultInitCtx(atomicName); }
     }
 
     /**
@@ -174,8 +168,8 @@ public final class InitialEventContext implements EventContext
      * /resources/jndi.properties file, (5) the provided environment. If a property is available in a later evaluation, it takes
      * precedence over an earlier definition.
      * @param environment the final overwriting environment to use (can be null)
-     * @return a combined Hashtable with information from system properties, jndi.properties and the
-     *         provided environment Hashtable
+     * @return a combined Hashtable with information from system properties, jndi.properties and the provided environment
+     *         Hashtable
      */
     protected Hashtable<?, ?> buildEnvironment(final Hashtable<?, ?> environment)
     {
@@ -190,9 +184,7 @@ public final class InitialEventContext implements EventContext
         for (String key : keys)
         {
             if (sysEnv.containsKey(key))
-            {
-                result.put(key, sysEnv.get(key));
-            }
+            { result.put(key, sysEnv.get(key)); }
         }
 
         // (3) Java system properties
@@ -200,9 +192,7 @@ public final class InitialEventContext implements EventContext
         for (String key : keys)
         {
             if (javaProps.containsKey(key))
-            {
-                result.put(key, javaProps.get(key).toString());
-            }
+            { result.put(key, javaProps.get(key).toString()); }
         }
 
         // (4) content of the /resources/jndi.properties file
@@ -216,9 +206,7 @@ public final class InitialEventContext implements EventContext
                 for (String key : keys)
                 {
                     if (jndiProps.containsKey(key))
-                    {
-                        result.put(key, jndiProps.get(key).toString());
-                    }
+                    { result.put(key, jndiProps.get(key).toString()); }
                 }
             }
             catch (IOException exception)
@@ -233,9 +221,7 @@ public final class InitialEventContext implements EventContext
             for (String key : keys)
             {
                 if (environment.containsKey(key))
-                {
-                    result.put(key, environment.get(key).toString());
-                }
+                { result.put(key, environment.get(key).toString()); }
             }
         }
 
@@ -267,9 +253,7 @@ public final class InitialEventContext implements EventContext
                 this.gotDefault = true;
             }
             if (this.defaultInitCtx == null)
-            {
-                throw new NoInitialContextException();
-            }
+            { throw new NoInitialContextException(); }
             return this.defaultInitCtx;
         }
         catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
@@ -536,9 +520,7 @@ public final class InitialEventContext implements EventContext
     public String toString(final boolean verbose) throws RemoteException
     {
         if (!verbose)
-        {
-            return "InitialEventContext[" + getAtomicName() + "]";
-        }
+        { return "InitialEventContext[" + getAtomicName() + "]"; }
         return ContextUtil.toText(this);
     }
 

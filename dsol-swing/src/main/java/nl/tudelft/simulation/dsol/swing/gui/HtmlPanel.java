@@ -15,7 +15,7 @@ import org.djutils.logger.CategoryLogger;
 import nl.tudelft.simulation.dsol.logger.Cat;
 
 /**
- * A simple Swing component to show HTML content from a URL. 
+ * A simple Swing component to show HTML content from a URL.
  * <p>
  * Copyright (c) 2002-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL

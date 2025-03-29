@@ -34,9 +34,7 @@ public final class ContextTestUtil
     public static void destroyInitialEventContext(final InitialEventContext ctx)
     {
         if (ctx == null)
-        {
-            return;
-        }
+        { return; }
         try
         {
             // get the instance objects INSTANCE and defaultInitCtx, and set to null
@@ -44,33 +42,33 @@ public final class ContextTestUtil
             instance.setAccessible(true);
             instance.set(null, null);
             instance.setAccessible(false);
-            
+
             Field defaultInitCtx = InitialEventContext.class.getDeclaredField("defaultInitCtx");
             defaultInitCtx.setAccessible(true);
             defaultInitCtx.set(ctx, null);
             defaultInitCtx.setAccessible(false);
-            
+
             Field gotDefault = InitialEventContext.class.getDeclaredField("gotDefault");
             gotDefault.setAccessible(true);
             gotDefault.set(ctx, false);
             gotDefault.setAccessible(false);
-            
+
             Field contextEventProducerImpl = InitialEventContext.class.getDeclaredField("contextEventProducerImpl");
             contextEventProducerImpl.setAccessible(true);
             contextEventProducerImpl.set(ctx, null);
             contextEventProducerImpl.setAccessible(false);
-            
+
             // clean the static fields in the context factories
             Field jvmContext = JvmContextFactory.class.getDeclaredField("context");
             jvmContext.setAccessible(true);
             jvmContext.set(null, null);
             jvmContext.setAccessible(false);
-           
+
             Field fileContext = FileContextFactory.class.getDeclaredField("context");
             fileContext.setAccessible(true);
             fileContext.set(null, null);
             fileContext.setAccessible(false);
-           
+
             Field remoteContext = RemoteContextFactory.class.getDeclaredField("context");
             remoteContext.setAccessible(true);
             remoteContext.set(null, null);

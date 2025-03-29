@@ -207,9 +207,7 @@ public class SortingTableModel implements TableModel, Sortable
                     }
                 }
                 if (!allocated)
-                {
-                    result.add(unsortedEntry);
-                }
+                { result.add(unsortedEntry); }
             }
         }
         return result;
@@ -270,9 +268,7 @@ public class SortingTableModel implements TableModel, Sortable
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
         if (this.expandedIndex == null)
-        {
-            buildIndex();
-        }
+        { buildIndex(); }
         if (rowIndex > this.expandedIndex.length)
         {
             CategoryLogger.always().warn("getValueAt could not retrieve row {} from sorted list. Returning default instead",
@@ -308,9 +304,7 @@ public class SortingTableModel implements TableModel, Sortable
         this.source.setValueAt(aValue, this.expandedIndex[rowIndex].intValue(), columnIndex);
         this.buildIndex();
         if (this.source instanceof DefaultTableModel)
-        {
-            ((DefaultTableModel) this.source).fireTableDataChanged();
-        }
+        { ((DefaultTableModel) this.source).fireTableDataChanged(); }
     }
 
     @Override

@@ -55,9 +55,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         {
             Object selected = this.panel.getSelectedObject(this.panel.getSelectedObjects(e.getPoint()));
             if (selected != null)
-            {
-                new IntrospectionDialog(selected);
-            }
+            { new IntrospectionDialog(selected); }
         }
     }
 
@@ -137,9 +135,7 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
     public void mouseDragged(final MouseEvent e)
     {
         if (e.isShiftDown())
-        {
-            this.panel.setDragLine(e.getPoint(), this.mouseClicked);
-        }
+        { this.panel.setDragLine(e.getPoint(), this.mouseClicked); }
         this.panel.repaint();
         e.consume();
     }
@@ -167,8 +163,8 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
 
     /**
      * Set the minimum time between two successive animation mouse move events in milliseconds.
-     * @param timeBetweenAnimationMouseMoveEventsMs set the minimum time between two successive animation mouse move
-     *            events in milliseconds
+     * @param timeBetweenAnimationMouseMoveEventsMs set the minimum time between two successive animation mouse move events in
+     *            milliseconds
      */
     public void setTimeBetweenAnimationMouseMoveEventsMs(final long timeBetweenAnimationMouseMoveEventsMs)
     {
@@ -193,14 +189,14 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
                 this.panel.pan(VisualizationPanel.UP, 0.1);
                 break;
             case KeyEvent.VK_MINUS:
-                if (e.isControlDown()) 
+                if (e.isControlDown())
                     this.panel.zoomY(VisualizationPanel.ZOOMFACTOR, 0, this.panel.getHeight() / 2);
                 else
                     this.panel.zoom(VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);
                 break;
             case KeyEvent.VK_PLUS:
             case KeyEvent.VK_EQUALS:
-                if (e.isControlDown()) 
+                if (e.isControlDown())
                     this.panel.zoomY(1.0 / VisualizationPanel.ZOOMFACTOR, 0, this.panel.getHeight() / 2);
                 else
                     this.panel.zoom(1.0 / VisualizationPanel.ZOOMFACTOR, this.panel.getWidth() / 2, this.panel.getHeight() / 2);

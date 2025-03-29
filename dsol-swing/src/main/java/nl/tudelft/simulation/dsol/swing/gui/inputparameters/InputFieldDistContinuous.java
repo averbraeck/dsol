@@ -73,9 +73,7 @@ public class InputFieldDistContinuous extends AbstractInputField implements Item
             InputParameterMapDistContinuous value = parameter.getOptions().get(option);
             this.selectionMap.put(selections[i], value);
             if (value.equals(parameter.getDefaultValue()))
-            {
-                defaultIndex = i;
-            }
+            { defaultIndex = i; }
             i++;
         }
         this.distComboBox = new JComboBox<>(selections);

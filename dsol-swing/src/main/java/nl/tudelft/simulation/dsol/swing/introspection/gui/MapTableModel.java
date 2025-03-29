@@ -139,21 +139,13 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
         if (columnIndex == 0)
-        {
-            return Integer.valueOf(rowIndex);
-        }
+        { return Integer.valueOf(rowIndex); }
         if (columnIndex == 1)
-        {
-            return this.buttons.get(rowIndex);
-        }
+        { return this.buttons.get(rowIndex); }
         if (columnIndex == 2)
-        {
-            return this.keyMap.get(this.rowKeys.get(rowIndex));
-        }
+        { return this.keyMap.get(this.rowKeys.get(rowIndex)); }
         if (columnIndex == 3)
-        {
-            return this.valueMap.get(this.rowKeys.get(rowIndex));
-        }
+        { return this.valueMap.get(this.rowKeys.get(rowIndex)); }
         return null;
     }
 
@@ -168,9 +160,7 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
     {
         // NOTE: For a button to be clickable, it needs to be editable!!!
         if (columnIndex == 1)
-        {
-            return true;
-        }
+        { return true; }
         return false;
     }
 
@@ -187,9 +177,7 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
     public Class<?> getColumnClass(final int columnIndex)
     {
         if (columnIndex == 1)
-        {
-            return ExpandButton.class;
-        }
+        { return ExpandButton.class; }
         return Object.class;
     }
 
@@ -224,21 +212,13 @@ public class MapTableModel extends AbstractTableModel implements IntrospectingTa
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
         if (columnIndex == 0)
-        {
-            return String.class;
-        }
+        { return String.class; }
         if (columnIndex == 1)
-        {
-            return ExpandButton.class;
-        }
+        { return ExpandButton.class; }
         if (columnIndex == 2)
-        {
-            return this.keyMap.get(this.rowKeys.get(rowIndex)).getClass();
-        }
+        { return this.keyMap.get(this.rowKeys.get(rowIndex)).getClass(); }
         if (columnIndex == 3)
-        {
-            return this.valueMap.get(this.rowKeys.get(rowIndex)).getClass();
-        }
+        { return this.valueMap.get(this.rowKeys.get(rowIndex)).getClass(); }
         return null;
     }
 

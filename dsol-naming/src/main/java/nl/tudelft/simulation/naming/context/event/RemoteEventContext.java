@@ -78,40 +78,40 @@ public class RemoteEventContext extends RemoteContext implements RemoteEventCont
     }
 
     @Override
-    public boolean addListener(final EventListener listener, final String absolutePath,
-            final ContextScope contextScope) throws RemoteException, NameNotFoundException, InvalidNameException,
-            NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
+            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
+            NullPointerException
     {
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope);
     }
 
     @Override
-    public boolean addListener(final EventListener listener, final String absolutePath,
-            final ContextScope contextScope, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
-            InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
+            NotContextException, NamingException, NullPointerException
     {
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, referenceType);
     }
 
     @Override
-    public boolean addListener(final EventListener listener, final String absolutePath,
-            final ContextScope contextScope, final int position) throws RemoteException, NameNotFoundException,
-            InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final int position) throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException,
+            NamingException, NullPointerException
     {
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position);
     }
 
     @Override
-    public boolean addListener(final EventListener listener, final String absolutePath,
-            final ContextScope contextScope, final int position, final ReferenceType referenceType) throws RemoteException,
-            NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
+    public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
+            final int position, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
+            InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position, referenceType);
     }
 
     @Override
-    public boolean removeListener(final EventListener listener, final String absolutePath,
-            final ContextScope contextScope) throws RemoteException, InvalidNameException, NullPointerException
+    public boolean removeListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
+            throws RemoteException, InvalidNameException, NullPointerException
     {
         return this.contextEventProducerImpl.removeListener(listener, absolutePath, contextScope);
     }

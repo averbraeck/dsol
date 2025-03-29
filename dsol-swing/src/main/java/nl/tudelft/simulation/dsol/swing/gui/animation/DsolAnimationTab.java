@@ -114,9 +114,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
     {
         setPreferredSize(new Dimension(1024, 768));
         if (!(simulator instanceof AnimatorInterface))
-        {
-            throw new DsolException("DsolAnimationTab: simulator is not an instance of AnimatorInterface");
-        }
+        { throw new DsolException("DsolAnimationTab: simulator is not an instance of AnimatorInterface"); }
         this.simulator = simulator;
         this.animationPanel = animationPanel;
         this.borderPanel = new JPanel(new BorderLayout());
@@ -190,15 +188,11 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
             this.animationControlPanel.remove(this.searchPanel);
             this.searchPanel.removeListener(this.animationPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
             if (this.propertiesPanel != null)
-            {
-                this.searchPanel.removeListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
-            }
+            { this.searchPanel.removeListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT); }
         }
         searchPanel.addListener(this.animationPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
         if (this.propertiesPanel != null)
-        {
-            this.searchPanel.addListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT);
-        }
+        { this.searchPanel.addListener(this.propertiesPanel, SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT); }
         this.searchPanel = searchPanel;
         this.searchPanel.setMinimumSize(new Dimension(500, 10));
         this.searchPanel.setPreferredSize(new Dimension(500, 10));
@@ -366,9 +360,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
     {
         JToggleButton button = this.toggleButtons.get(locatableClass);
         if (button == null)
-        {
-            return;
-        }
+        { return; }
         button.setSelected(getAnimationPanel().isShowClass(locatableClass));
     }
 

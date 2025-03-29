@@ -19,8 +19,8 @@ import org.djutils.metadata.ObjectDescriptor;
 /**
  * ContextInterface is the lightweight and simplified version of the JNDI EventContext interface in the standard Java
  * distribution. It just contains the services for binding and unbinding of objects, for retrieving objects and Context trees,
- * and for creating an initial context and creating and removing subcontexts. As it extends the EventProducer, it is
- * able to fire events for adding and removing of elements in the Context.
+ * and for creating an initial context and creating and removing subcontexts. As it extends the EventProducer, it is able to
+ * fire events for adding and removing of elements in the Context.
  * <p>
  * A name for a Context can be compound, i.e. consisting of parts separated by a separator string. Usually the separator string
  * is the forward slash. As an example, when the name is "sub1/sub2/ref", sub1 and sub2 must be pointing to a Context, whereas
@@ -185,8 +185,8 @@ public interface ContextInterface extends EventProducer, Serializable
      * terminal atomic reference in the deepest subcontext provided. Name cannot be empty or "/". An OBJECT_ADDED_EVENT is fired
      * containing an object array with a pointer to the context, the relative key, and the object when a new binding has taken
      * place.
-     * @param name the name under which the object will be stored; may be a compound name with the terminal reference
-     *            indicating the key under which the object will be stored
+     * @param name the name under which the object will be stored; may be a compound name with the terminal reference indicating
+     *            the key under which the object will be stored
      * @param object the Context or Object to be stored into the given context; a null object is allowed
      * @throws NamingException when the reference is "/" or empty
      * @throws NameAlreadyBoundException if name is already bound to an object
@@ -213,8 +213,8 @@ public interface ContextInterface extends EventProducer, Serializable
      * Binds an object into the Context using the toString() method of the object as the key. All "/" characters in the
      * toString() result will be replaced by "#" characters. An OBJECT_ADDED_EVENT is fired containing an object array with a
      * pointer to the context, the relative key, and the object when a new binding has taken place.
-     * @param object the Context or Object to be stored into this Context using the toString() result as the key; a null
-     *            object is not allowed
+     * @param object the Context or Object to be stored into this Context using the toString() result as the key; a null object
+     *            is not allowed
      * @throws NamingException when the toString() of the object results in an empty string
      * @throws NameAlreadyBoundException if key is already bound to an object
      * @throws NullPointerException when object is null
@@ -227,8 +227,8 @@ public interface ContextInterface extends EventProducer, Serializable
      * separated by separation strings indicating subcontexts. Name cannot be empty or "/". It is not a problem when there is no
      * object registered with the given name. An OBJECT_REMOVED_EVENT is fired containing an object array with a pointer to the
      * context, the relative key, and the removed object when a binding has been removed.
-     * @param name the name of the object that has to be removed; may be a compound name with the terminal reference
-     *            indicating the key under which the object is stored
+     * @param name the name of the object that has to be removed; may be a compound name with the terminal reference indicating
+     *            the key under which the object is stored
      * @throws NamingException when the reference is "/" or empty
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NullPointerException when name is null
@@ -256,10 +256,10 @@ public interface ContextInterface extends EventProducer, Serializable
      * with a pointer to the context, the relative key, and the removed object when a binding had to be removed, followed by an
      * OBJECT_ADDED_EVENT containing an object array with a pointer to the context, the key, and the new object when a new
      * binding has taken place.
-     * @param name the name of the object to be replaced, or under which the object will be stored; may be a compound
-     *            name with the terminal reference indicating the key under which the object will be stored
-     * @param object the Context or Object to be replaced or stored into this Context using the given name; a null
-     *            object is allowed
+     * @param name the name of the object to be replaced, or under which the object will be stored; may be a compound name with
+     *            the terminal reference indicating the key under which the object will be stored
+     * @param object the Context or Object to be replaced or stored into this Context using the given name; a null object is
+     *            allowed
      * @throws NamingException when the reference is "/" or empty
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NullPointerException when name is null
@@ -274,8 +274,8 @@ public interface ContextInterface extends EventProducer, Serializable
      * be removed, followed by an OBJECT_ADDED_EVENT containing an object array with a pointer to the context, the key, and the
      * new object when a new binding has taken place.
      * @param key the key of the object to be replaced, or under which the object will be stored; NOT a compound name
-     * @param object the Context or Object to be replaced or stored into this Context using the given name; a null
-     *            object is allowed
+     * @param object the Context or Object to be replaced or stored into this Context using the given name; a null object is
+     *            allowed
      * @throws NamingException when key is the empty string or when key contains "/"
      * @throws NullPointerException when name is null
      * @throws RemoteException on a network error when the Context is used over RMI
@@ -309,8 +309,8 @@ public interface ContextInterface extends EventProducer, Serializable
      * cannot be empty or "/". On success, OBJECT_ADDED_EVENTs are fired for the created context and each new intermediate
      * context, containing an object array with an object array with a pointer to the embedding context, the local key in the
      * embedding context, and the newly created (intermediate) context.
-     * @param name the name under which the new context will be stored; may be a compound name with the terminal
-     *            reference indicating the key under which the new context will be stored
+     * @param name the name under which the new context will be stored; may be a compound name with the terminal reference
+     *            indicating the key under which the new context will be stored
      * @return a pointer to the newly created subcontext
      * @throws NamingException when the terminal reference is "/" or empty
      * @throws NameNotFoundException when an intermediate context does not exist
@@ -327,8 +327,8 @@ public interface ContextInterface extends EventProducer, Serializable
      * removed objects and contexts, OBJECT_REMOVED_EVENT events are fired containing an object array with a pointer to the
      * context from which content has been removed, the key of the binding that has been removed, and the removed object. The
      * OBJECT_REMOVED_EVENT events are fired in depth-first order.
-     * @param name the name of the object that has to be removed; may be a compound name with the terminal reference
-     *            indicating the key under which the object is stored
+     * @param name the name of the object that has to be removed; may be a compound name with the terminal reference indicating
+     *            the key under which the object is stored
      * @throws NamingException when the reference is "/" or empty
      * @throws NotContextException if the name is bound but does not name a context
      * @throws NameNotFoundException when an intermediate context does not exist, or when no object is registered with the
@@ -382,8 +382,7 @@ public interface ContextInterface extends EventProducer, Serializable
     /**
      * Returns a (raw) map of bindings in the current context, mapping the name on the registered objects. Both regular objects
      * and subcontexts are returned. Mappings to null objects can exist.
-     * @return a map of registered names and their bound (possibly null) object in the current
-     *         context
+     * @return a map of registered names and their bound (possibly null) object in the current context
      * @throws RemoteException on a network error when the Context is used over RMI
      */
     Map<String, Object> bindings() throws RemoteException;

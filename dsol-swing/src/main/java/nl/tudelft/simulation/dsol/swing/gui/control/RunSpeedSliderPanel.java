@@ -43,10 +43,8 @@ public class RunSpeedSliderPanel extends JPanel
 
     /**
      * Construct a new TimeWarpPanel.
-     * @param minimum the minimum value on the scale (the displayed scale may extend a little further than this
-     *            value)
-     * @param maximum the maximum value on the scale (the displayed scale may extend a little further than this
-     *            value)
+     * @param minimum the minimum value on the scale (the displayed scale may extend a little further than this value)
+     * @param maximum the maximum value on the scale (the displayed scale may extend a little further than this value)
      * @param initialValue the initially selected value on the scale
      * @param ticksPerDecade the number of steps per decade
      * @param simulator the simulator to change the speed of
@@ -104,9 +102,7 @@ public class RunSpeedSliderPanel extends JPanel
             }
             int index = step % this.ratios.length;
             if (index < 0)
-            {
-                index += this.ratios.length;
-            }
+            { index += this.ratios.length; }
             text.append(this.ratios[index]);
             labels.put(step, new JLabel(text.toString()));
             this.tickValues.put(step, Double.parseDouble(text.toString()));
@@ -167,9 +163,7 @@ public class RunSpeedSliderPanel extends JPanel
     {
         int index = step % this.ratios.length;
         if (index < 0)
-        {
-            index += this.ratios.length;
-        }
+        { index += this.ratios.length; }
         double result = this.ratios[index];
         // Make positive to avoid trouble with negative values that round towards 0 on division
         int power = (step + 1000 * this.ratios.length) / this.ratios.length - 1000; // This is ugly
@@ -223,8 +217,6 @@ public class RunSpeedSliderPanel extends JPanel
         // System.out.println("setSpeedfactor: factor is " + factor + ", best slider value is " + bestStep
         // + " current value is " + this.slider.getValue());
         if (this.slider.getValue() != bestStep)
-        {
-            this.slider.setValue(bestStep);
-        }
+        { this.slider.setValue(bestStep); }
     }
 }

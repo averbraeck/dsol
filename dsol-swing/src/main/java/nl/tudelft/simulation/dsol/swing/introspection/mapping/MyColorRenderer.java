@@ -30,13 +30,9 @@ public class MyColorRenderer implements TableCellRenderer
         JPanel result = new JPanel();
         Color color = (Color) value;
         if (isSelected)
-        {
-            color = color.darker();
-        }
+        { color = color.darker(); }
         if (hasFocus)
-        {
-            result.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        }
+        { result.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); }
         result.setBackground(color);
         return result;
     }

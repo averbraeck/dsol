@@ -220,17 +220,11 @@ public class DsolApplication extends JFrame
         {
             AppearanceControl ac = (AppearanceControl) c;
             if (ac.isBackground())
-            {
-                c.setBackground(appear.getBackground());
-            }
+            { c.setBackground(appear.getBackground()); }
             if (ac.isForeground())
-            {
-                c.setForeground(appear.getForeground());
-            }
+            { c.setForeground(appear.getForeground()); }
             if (ac.isFont())
-            {
-                changeFont(c, appear.getFont());
-            }
+            { changeFont(c, appear.getFont()); }
         }
         else if (c instanceof AnimationPanel)
         {
@@ -410,9 +404,7 @@ public class DsolApplication extends JFrame
                 public void stateChanged(final ChangeEvent e)
                 {
                     if (getModel().isArmed() && isShowing())
-                    {
-                        setPath(MenuSelectionManager.defaultManager().getSelectedPath());
-                    }
+                    { setPath(MenuSelectionManager.defaultManager().getSelectedPath()); }
                 }
             });
         }
@@ -443,9 +435,7 @@ public class DsolApplication extends JFrame
             for (MenuElement element : path)
             {
                 if (element instanceof JComponent)
-                {
-                    ((JComponent) element).setVisible(true);
-                }
+                { ((JComponent) element).setVisible(true); }
             }
             JMenu menu = (JMenu) path[path.length - 3];
             MenuSelectionManager.defaultManager()

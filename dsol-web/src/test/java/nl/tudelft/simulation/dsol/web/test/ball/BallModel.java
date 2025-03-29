@@ -51,7 +51,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
                 getSimulator().getLogger().always().error(exception);
             }
         }
-        
+
         Wall wallL = new Wall("L", new Bounds2d(-104, -100, -104, 104), Color.BLUE);
         Wall wallR = new Wall("R", new Bounds2d(208, 4), Color.BLUE, new DirectedPoint2d(102, 0, Math.PI / 2.0));
         Wall wallB = new Wall("B", new Bounds2d(-104, 104, -104, -100), Color.BLUE);

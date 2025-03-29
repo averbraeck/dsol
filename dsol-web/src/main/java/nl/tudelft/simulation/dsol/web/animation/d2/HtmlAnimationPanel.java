@@ -130,9 +130,7 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
         for (Renderable2dInterface<? extends Locatable> element : this.elementList)
         {
             if (isShowElement(element))
-            {
-                element.paintComponent(g2, this.getExtent(), this.getSize(), getRenderableScale(), this);
-            }
+            { element.paintComponent(g2, this.getExtent(), this.getSize(), getRenderableScale(), this); }
         }
 
         // draw drag line if enabled.
@@ -176,9 +174,7 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
                     if (lc.isAssignableFrom(locatableClass))
                     {
                         if (!this.visibilityMap.get(lc))
-                        {
-                            show = false;
-                        }
+                        { show = false; }
                     }
                 }
                 // add to the right cache
@@ -347,15 +343,12 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
 
     /**
      * Toggle a class to be displayed in the animation to its reverse value.
-     * @param locatableClass the class for which a visible animation has to be turned off or
-     *            vice versa.
+     * @param locatableClass the class for which a visible animation has to be turned off or vice versa.
      */
     public void toggleClass(final Class<? extends Locatable> locatableClass)
     {
         if (!this.visibilityMap.containsKey(locatableClass))
-        {
-            showClass(locatableClass);
-        }
+        { showClass(locatableClass); }
         this.visibilityMap.put(locatableClass, !this.visibilityMap.get(locatableClass));
         this.shownClasses.clear();
         this.hiddenClasses.clear();

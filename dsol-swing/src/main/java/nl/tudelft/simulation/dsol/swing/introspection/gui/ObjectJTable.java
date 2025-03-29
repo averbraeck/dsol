@@ -174,9 +174,7 @@ public class ObjectJTable extends JTable implements ObjectJTableInterface, ICell
                     return;
                 }
                 if (ObjectJTable.this.hasShown && !isDisplayable())
-                {
-                    ObjectJTable.this.getModel().removeTableModelListener(ObjectJTable.this);
-                }
+                { ObjectJTable.this.getModel().removeTableModelListener(ObjectJTable.this); }
             }
         }
     }

@@ -39,9 +39,7 @@ public abstract class AbstractProperty implements Property
             return;
         }
         if (!(value instanceof Collection))
-        {
-            throw new IllegalArgumentException(this + " - tried to assign a singular value to composite properties");
-        }
+        { throw new IllegalArgumentException(this + " - tried to assign a singular value to composite properties"); }
         if (this.getComposedType().isArray())
         {
             Object[] array = (Object[]) Array.newInstance(getType().getComponentType(), 0);
@@ -97,9 +95,7 @@ public abstract class AbstractProperty implements Property
             return ComposedTypeEnum.MAP;
         }
         else if (ImmutableMap.class.isAssignableFrom(getType()))
-        {
-            return ComposedTypeEnum.IMMUTABLEMAP;
-        }
+        { return ComposedTypeEnum.IMMUTABLEMAP; }
         return ComposedTypeEnum.NONE;
     }
 
@@ -107,29 +103,21 @@ public abstract class AbstractProperty implements Property
     public Class<?> getComponentType()
     {
         if (!this.getComposedType().isComposed())
-        {
-            return null;
-        }
+        { return null; }
         if (getComposedType().isArray())
-        {
-            return getType().getComponentType();
-        }
+        { return getType().getComponentType(); }
         if (getComposedType().isCollection())
         {
             Collection<?> value = (Collection<?>) getValue();
             if (value == null || value.size() == 0)
-            {
-                return null;
-            }
+            { return null; }
             return value.toArray()[0].getClass();
         }
         if (getComposedType().isImmutableCollection())
         {
             ImmutableCollection<?> value = (ImmutableCollection<?>) getValue();
             if (value == null || value.size() == 0)
-            {
-                return null;
-            }
+            { return null; }
             return value.toArray()[0].getClass();
         }
         // TODO: is this ok? Map or ImmutableMap do not have a single type...

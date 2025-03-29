@@ -35,9 +35,7 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
     public Introspector getIntrospector()
     {
         if (!(this.source instanceof IntrospectingTableModelInterface))
-        {
-            return null;
-        }
+        { return null; }
         return ((IntrospectingTableModelInterface) this.source).getIntrospector();
     }
 
@@ -45,9 +43,7 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
     public Property getProperty(final String propertyName)
     {
         if (!(this.source instanceof IntrospectingTableModelInterface))
-        {
-            return null;
-        }
+        { return null; }
         return ((IntrospectingTableModelInterface) this.source).getProperty(propertyName);
     }
 
@@ -55,9 +51,7 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
         if (!(this.source instanceof IntrospectingTableModelInterface))
-        {
-            return null;
-        }
+        { return null; }
         return ((IntrospectingTableModelInterface) this.source).getTypeAt(this.expandedIndex[rowIndex].intValue(), columnIndex);
     }
 
@@ -65,9 +59,7 @@ public class SortingObjectTableModel extends SortingTableModel implements Intros
     public ModelManager getModelManager()
     {
         if (!(this.source instanceof IntrospectingTableModelInterface))
-        {
-            return null;
-        }
+        { return null; }
         return ((IntrospectingTableModelInterface) this.source).getModelManager();
     }
 

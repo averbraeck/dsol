@@ -47,9 +47,7 @@ public class InputFieldSelectionMap<K, T> extends AbstractInputField
             T value = parameter.getOptions().get(option);
             this.selectionMap.put(selections[i], value);
             if (value.equals(parameter.getDefaultValue()))
-            {
-                defaultIndex = i;
-            }
+            { defaultIndex = i; }
             i++;
         }
         this.selectField = new JComboBox<>(selections);

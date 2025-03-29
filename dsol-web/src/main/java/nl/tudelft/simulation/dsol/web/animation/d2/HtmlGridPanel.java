@@ -180,9 +180,7 @@ public class HtmlGridPanel implements ImageObserver
             this.extent = computeVisibleExtent(this.extent);
         }
         if (this.showGrid)
-        {
-            this.drawGrid(g);
-        }
+        { this.drawGrid(g); }
     }
 
     /**
@@ -274,9 +272,7 @@ public class HtmlGridPanel implements ImageObserver
     public synchronized void pan(final int direction, final double percentage)
     {
         if (percentage <= 0 || percentage > 1.0)
-        {
-            throw new IllegalArgumentException("percentage<=0 || >1.0");
-        }
+        { throw new IllegalArgumentException("percentage<=0 || >1.0"); }
         switch (direction)
         {
             case LEFT:
@@ -397,9 +393,7 @@ public class HtmlGridPanel implements ImageObserver
             this.formatter.setMaximumFractionDigits(maximumNumberOfDigits);
             gridSizePixelsX = (int) Math.round(this.gridSizeX / scaleX);
             if (count++ > 10)
-            {
-                break;
-            }
+            { break; }
         }
 
         count = 0;
@@ -410,9 +404,7 @@ public class HtmlGridPanel implements ImageObserver
             this.gridSizeX = this.gridSizeX / 10;
             gridSizePixelsX = (int) Math.round(this.gridSizeX / scaleX);
             if (count++ > 10)
-            {
-                break;
-            }
+            { break; }
         }
 
         int gridSizePixelsY = (int) Math.round(this.gridSizeY / scaleY);
@@ -423,9 +415,7 @@ public class HtmlGridPanel implements ImageObserver
             this.formatter.setMaximumFractionDigits(maximumNumberOfDigits);
             gridSizePixelsY = (int) Math.round(this.gridSizeY / scaleY);
             if (count++ > 10)
-            {
-                break;
-            }
+            { break; }
         }
 
         count = 0;
@@ -436,9 +426,7 @@ public class HtmlGridPanel implements ImageObserver
             this.gridSizeY = this.gridSizeY / 10;
             gridSizePixelsY = (int) Math.round(this.gridSizeY / scaleY);
             if (count++ > 10)
-            {
-                break;
-            }
+            { break; }
         }
 
         // Let's draw the vertical lines

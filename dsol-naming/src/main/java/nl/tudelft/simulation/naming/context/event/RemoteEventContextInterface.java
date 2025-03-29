@@ -16,8 +16,7 @@ import nl.tudelft.simulation.naming.context.RemoteContextInterface;
  * </p>
  * @author <a href="https://github.com/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface RemoteEventContextInterface
-        extends EventProducer, EventContext, RemoteContextInterface, Remote
+public interface RemoteEventContextInterface extends EventProducer, EventContext, RemoteContextInterface, Remote
 {
     // tagging interface
 }

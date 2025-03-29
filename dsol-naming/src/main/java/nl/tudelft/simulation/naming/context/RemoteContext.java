@@ -263,9 +263,7 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
                 "key [%s] is the empty string or key contains '/'", key);
         if (!hasKey(key))
-        {
-            throw new NameNotFoundException("Could not find object with key " + key + " for fireObjectChangedEvent");
-        }
+        { throw new NameNotFoundException("Could not find object with key " + key + " for fireObjectChangedEvent"); }
         try
         {
             this.remoteEventProducer.fireChangedEvent(ContextInterface.OBJECT_CHANGED_EVENT,
@@ -299,9 +297,7 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     public String toString(final boolean verbose) throws RemoteException
     {
         if (!verbose)
-        {
-            return "RemoteContext[" + getAtomicName() + "]";
-        }
+        { return "RemoteContext[" + getAtomicName() + "]"; }
         return ContextUtil.toText(this);
     }
 
@@ -323,7 +319,8 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     }
 
     @Override
-    public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position) throws RemoteException
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position)
+            throws RemoteException
     {
         return this.embeddedContext.addListener(listener, eventType, position);
     }
@@ -354,7 +351,7 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     }
 
     @Override
-    public List<Reference<EventListener>> getListenerReferences(final EventType eventType)  throws RemoteException
+    public List<Reference<EventListener>> getListenerReferences(final EventType eventType) throws RemoteException
     {
         return this.remoteEventProducer.getListenerReferences(eventType);
     }
@@ -364,7 +361,7 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     {
         return this.remoteEventProducer.getEventListenerMap();
     }
-    
+
     /* ***************************************************************************************************************** */
     /* ****************************************** REMOTECHANGEEVENTPRODUCER ******************************************** */
     /* ***************************************************************************************************************** */
@@ -374,8 +371,8 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
      * changed, but does not extend an EventProducer itself.
      * <p>
      * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
-     * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>.
-     * The DSOL project is distributed under a three-clause BSD-style license, which can be found at
+     * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
+     * DSOL project is distributed under a three-clause BSD-style license, which can be found at
      * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
      * https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
      * </p>
@@ -393,8 +390,7 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
          * Create a remote event listener and register the listener in the RMI registry. When the RMI registry does not exist
          * yet, it will be created, but <b>only</b> on the local host. Remote creation of a registry on another computer is not
          * possible. Any attempt to do so will cause an AccessException to be fired.
-         * @param host the host where the RMI registry resides or will be created. Creation is only possible on
-         *            localhost.
+         * @param host the host where the RMI registry resides or will be created. Creation is only possible on localhost.
          * @param port the port where the RMI registry can be found or will be created
          * @param bindingKey the key under which this object will be bound in the RMI registry
          * @throws RemoteException when there is a problem with the RMI registry

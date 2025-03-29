@@ -90,9 +90,7 @@ public class BeanProperty extends AbstractProperty implements Property
         try
         {
             if (readMethod != null)
-            {
-                result = readMethod.invoke(this.bean, new Object[0]);
-            }
+            { result = readMethod.invoke(this.bean, new Object[0]); }
         }
         catch (Exception exception)
         {

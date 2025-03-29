@@ -84,9 +84,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
             final CoordinateTransform coordinateTransform, final double z)
     {
         if (!(simulator instanceof AnimatorInterface))
-        {
-            return;
-        }
+        { return; }
         try
         {
             this.map = EsriFileXmlParser.parseMapFile(mapFile, coordinateTransform);
@@ -114,9 +112,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
             final CoordinateTransform coordinateTransform, final double z)
     {
         if (!(simulator instanceof AnimatorInterface))
-        {
-            return;
-        }
+        { return; }
         try
         {
             this.map = map;

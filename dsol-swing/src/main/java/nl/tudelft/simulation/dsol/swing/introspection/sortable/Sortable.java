@@ -47,8 +47,8 @@ public interface Sortable
     /**
      * Sets the current definitions defined for this Sortable. The sequence of the definitions matches the sorting sequence, in
      * that a definition will be performed before another definition if having a lower index.
-     * @param definitions An array of sort definitions. If multiple definitions for the same field are included,
-     *            the one with highest index will be applied.
+     * @param definitions An array of sort definitions. If multiple definitions for the same field are included, the one with
+     *            highest index will be applied.
      */
     void setDefinitions(Definition[] definitions);
 

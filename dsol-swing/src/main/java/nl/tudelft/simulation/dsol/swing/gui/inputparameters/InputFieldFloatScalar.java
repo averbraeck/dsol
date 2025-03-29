@@ -55,9 +55,7 @@ public class InputFieldFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T
             selections[i] = option.toString();
             U value = parameter.getUnitParameter().getOptions().get(option);
             if (value.equals(parameter.getUnitParameter().getDefaultValue()))
-            {
-                defaultIndex = i;
-            }
+            { defaultIndex = i; }
             i++;
         }
         this.unitField = new JComboBox<>(selections);

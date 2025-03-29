@@ -29,7 +29,7 @@ public class DsolAnimationApplication extends DsolApplication
     private DsolAnimationTab animationTab;
 
     /**
-     * Create a DSOL application with animation. 
+     * Create a DSOL application with animation.
      * @param panel this should be the tabbed panel of the simulation
      * @param title the title of the window
      * @param homeExtent the home extent of the animation
@@ -47,7 +47,7 @@ public class DsolAnimationApplication extends DsolApplication
     }
 
     /**
-     * Create a DSOL application with a custom animation tab. 
+     * Create a DSOL application with a custom animation tab.
      * @param panel this should be the tabbed panel of the simulation
      * @param title the title of the window
      * @param animationTab the animation tab to add, e.g. one containing GIS

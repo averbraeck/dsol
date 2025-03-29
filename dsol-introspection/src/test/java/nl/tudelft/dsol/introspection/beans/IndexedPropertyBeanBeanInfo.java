@@ -198,43 +198,27 @@ public class IndexedPropertyBeanBeanInfo extends SimpleBeanInfo
         {
             case ICON_COLOR_16x16:
                 if (iconNameC16 == null)
-                {
-                    return null;
-                }
+                { return null; }
                 if (iconColor16 == null)
-                {
-                    iconColor16 = loadImage(iconNameC16);
-                }
+                { iconColor16 = loadImage(iconNameC16); }
                 return iconColor16;
             case ICON_COLOR_32x32:
                 if (iconNameC32 == null)
-                {
-                    return null;
-                }
+                { return null; }
                 if (iconColor32 == null)
-                {
-                    iconColor32 = loadImage(iconNameC32);
-                }
+                { iconColor32 = loadImage(iconNameC32); }
                 return iconColor32;
             case ICON_MONO_16x16:
                 if (iconNameM16 == null)
-                {
-                    return null;
-                }
+                { return null; }
                 if (iconMono16 == null)
-                {
-                    iconMono16 = loadImage(iconNameM16);
-                }
+                { iconMono16 = loadImage(iconNameM16); }
                 return iconMono16;
             case ICON_MONO_32x32:
                 if (iconNameM32 == null)
-                {
-                    return null;
-                }
+                { return null; }
                 if (iconNameM32 == null)
-                {
-                    iconMono32 = loadImage(iconNameM32);
-                }
+                { iconMono32 = loadImage(iconNameM32); }
                 return iconMono32;
             default:
                 return null;

@@ -40,9 +40,7 @@ public class RegexFormatter extends DefaultFormatter
     {
         Matcher matcher = this.pattern.matcher(text);
         if (matcher.matches())
-        {
-            return super.stringToValue(text);
-        }
+        { return super.stringToValue(text); }
         throw new ParseException("Pattern did not match", 0);
     }
 

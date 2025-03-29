@@ -74,7 +74,7 @@ public class DsolWebModel implements EventListener
         this.title = title;
         this.simulator = simulator;
         Bounds2d extent = new Bounds2d(-200, 200, -200, 200);
-        
+
         simulator.addListener(this, SimulatorInterface.START_EVENT);
         simulator.addListener(this, SimulatorInterface.STOP_EVENT);
 
@@ -82,8 +82,8 @@ public class DsolWebModel implements EventListener
         {
             this.animationPanel = new HtmlAnimationPanel(extent, new Dimension(800, 600), this.simulator);
             // get the already created elements in context(/animation/D2)
-            this.animationPanel.notify(
-                    new TimedEvent(Replication.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
+            this.animationPanel
+                    .notify(new TimedEvent(Replication.START_REPLICATION_EVENT, null, this.simulator.getSimulatorTime()));
         }
     }
 
@@ -132,9 +132,7 @@ public class DsolWebModel implements EventListener
             this.simulator.getLogger().always().warn(exception, "Problem starting Simulator");
         }
         if (getSimulator().isStartingOrRunning())
-        {
-            return true;
-        }
+        { return true; }
         this.dirtyControls = false; // undo the notification
         return false;
     }
@@ -146,9 +144,7 @@ public class DsolWebModel implements EventListener
     protected boolean stopSimulator()
     {
         if (getSimulator() == null)
-        {
-            return true;
-        }
+        { return true; }
         try
         {
             System.out.println("STOP THE SIMULATOR");
@@ -159,9 +155,7 @@ public class DsolWebModel implements EventListener
             this.simulator.getLogger().always().warn(exception, "Problem stopping Simulator");
         }
         if (!getSimulator().isStartingOrRunning())
-        {
-            return true;
-        }
+        { return true; }
         this.dirtyControls = false; // undo the notification
         return false;
     }
@@ -172,9 +166,7 @@ public class DsolWebModel implements EventListener
     protected void setSpeedFactor(final double speedFactor)
     {
         if (this.simulator instanceof DevsRealTimeAnimator)
-        {
-            ((DevsRealTimeAnimator<?>) this.simulator).setSpeedFactor(speedFactor);
-        }
+        { ((DevsRealTimeAnimator<?>) this.simulator).setSpeedFactor(speedFactor); }
     }
 
     @Override
@@ -185,9 +177,7 @@ public class DsolWebModel implements EventListener
             this.dirtyControls = true;
         }
         else if (event.getType().equals(SimulatorInterface.STOP_EVENT))
-        {
-            this.dirtyControls = true;
-        }
+        { this.dirtyControls = true; }
     }
 
     /**
@@ -220,22 +210,19 @@ public class DsolWebModel implements EventListener
 
             switch (command)
             {
-                case "getTitle":
-                {
+                case "getTitle": {
                     answer = "<title>" + getTitle() + "</title>";
                     break;
                 }
 
-                case "init":
-                {
+                case "init": {
                     boolean simOk = getSimulator() != null;
                     boolean started = simOk ? getSimulator().isStartingOrRunning() : false;
                     answer = controlButtonResponse(simOk, started);
                     break;
                 }
 
-                case "windowSize":
-                {
+                case "windowSize": {
                     if (parts.length != 3)
                         System.err.println("wrong windowSize commmand: " + message);
                     else
@@ -247,8 +234,7 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                case "startStop":
-                {
+                case "startStop": {
                     boolean simOk = getSimulator() != null;
                     boolean started = simOk ? getSimulator().isStartingOrRunning() : false;
                     if (simOk && started)
@@ -259,62 +245,53 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                case "oneEvent":
-                {
+                case "oneEvent": {
                     // TODO
                     boolean started = false;
                     answer = controlButtonResponse(getSimulator() != null, started);
                     break;
                 }
 
-                case "allEvents":
-                {
+                case "allEvents": {
                     // TODO
                     boolean started = false;
                     answer = controlButtonResponse(getSimulator() != null, started);
                     break;
                 }
 
-                case "reset":
-                {
+                case "reset": {
                     // TODO
                     boolean started = false;
                     answer = controlButtonResponse(getSimulator() != null, started);
                     break;
                 }
 
-                case "animate":
-                {
+                case "animate": {
                     answer = animationPanel.getDrawingCommands();
                     break;
                 }
 
-                case "arrowDown":
-                {
+                case "arrowDown": {
                     animationPanel.pan(HtmlGridPanel.DOWN, 0.1);
                     break;
                 }
 
-                case "arrowUp":
-                {
+                case "arrowUp": {
                     animationPanel.pan(HtmlGridPanel.UP, 0.1);
                     break;
                 }
 
-                case "arrowLeft":
-                {
+                case "arrowLeft": {
                     animationPanel.pan(HtmlGridPanel.LEFT, 0.1);
                     break;
                 }
 
-                case "arrowRight":
-                {
+                case "arrowRight": {
                     animationPanel.pan(HtmlGridPanel.RIGHT, 0.1);
                     break;
                 }
 
-                case "pan":
-                {
+                case "pan": {
                     if (parts.length == 3)
                     {
                         // TODO: probably use the animatinPanel.pan()
@@ -332,8 +309,7 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                case "introspect":
-                {
+                case "introspect": {
                     if (parts.length == 3)
                     {
                         int x = Integer.parseInt(parts[1]);
@@ -347,9 +323,7 @@ public class DsolWebModel implements EventListener
                             {
                                 if (animationPanel.isShowElement(renderable)
                                         && renderable.contains(point, animationPanel.getExtent()))
-                                {
-                                    targets.add(renderable.getSource());
-                                }
+                                { targets.add(renderable.getSource()); }
                             }
                         }
                         catch (Exception exception)
@@ -379,8 +353,7 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                case "zoomIn":
-                {
+                case "zoomIn": {
                     if (parts.length == 1)
                         animationPanel.zoom(0.9);
                     else
@@ -392,8 +365,7 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                case "zoomOut":
-                {
+                case "zoomOut": {
                     if (parts.length == 1)
                         animationPanel.zoom(1.1);
                     else
@@ -405,26 +377,22 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                case "zoomAll":
-                {
+                case "zoomAll": {
                     animationPanel.zoomAll();
                     break;
                 }
 
-                case "home":
-                {
+                case "home": {
                     animationPanel.home();
                     break;
                 }
 
-                case "toggleGrid":
-                {
+                case "toggleGrid": {
                     animationPanel.setShowGrid(!animationPanel.isShowGrid());
                     break;
                 }
 
-                case "getTime":
-                {
+                case "getTime": {
                     Object simTime = getSimulator().getSimulatorTime();
                     if (simTime instanceof Double || simTime instanceof Float)
                     {
@@ -460,8 +428,7 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                case "getSpeed":
-                {
+                case "getSpeed": {
                     Object simTimeObject = getSimulator().getSimulatorTime();
                     double simTime = 0.0;
                     if (simTimeObject instanceof Double)
@@ -477,22 +444,18 @@ public class DsolWebModel implements EventListener
                     double speed = getSimulationSpeed(simTime);
                     String speedText = "";
                     if (!Double.isNaN(speed))
-                    {
-                        speedText = String.format("% 5.2fx  ", speed);
-                    }
+                    { speedText = String.format("% 5.2fx  ", speed); }
                     answer = speedText;
                     break;
                 }
 
-                case "getToggles":
-                {
+                case "getToggles": {
                     answer = getToggles(animationPanel);
                     break;
                 }
 
                 // we expect something of the form toggle|class|Node|true or toggle|gis|streets|false
-                case "toggle":
-                {
+                case "toggle": {
                     if (parts.length != 4)
                         System.err.println("wrong toggle commmand: " + message);
                     else
@@ -518,8 +481,7 @@ public class DsolWebModel implements EventListener
                     break;
                 }
 
-                default:
-                {
+                default: {
                     System.err.println("Got unknown message from client: " + command);
                     answer = "<message>" + request.getParameter("message") + "</message>";
                     break;

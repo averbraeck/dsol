@@ -267,9 +267,7 @@ public class ContextTestPubSub
         public void notify(final Event event) throws RemoteException
         {
             if (!this.expectingNotification)
-            {
-                fail("Received event " + event + " unexpectedly");
-            }
+            { fail("Received event " + event + " unexpectedly"); }
             this.receivedEvent = event;
         }
     }

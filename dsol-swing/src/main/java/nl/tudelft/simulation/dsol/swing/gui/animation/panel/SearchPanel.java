@@ -146,9 +146,7 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
         for (int index = this.typeToSearch.getItemCount(); --index >= 0;)
         {
             if (this.typeToSearch.getItemAt(index).getKey().equals(objectKey))
-            {
-                this.typeToSearch.setSelectedIndex(index);
-            }
+            { this.typeToSearch.setSelectedIndex(index); }
         }
         this.trackObject.setSelected(track);
         this.idTextField.setText("" + objectId);

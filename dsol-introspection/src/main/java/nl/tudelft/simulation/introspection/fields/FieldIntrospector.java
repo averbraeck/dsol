@@ -98,9 +98,7 @@ public class FieldIntrospector implements Introspector
     {
         fieldList.addAll(Arrays.asList(clasz.getDeclaredFields()));
         if (iterate && clasz.getSuperclass() != null)
-        {
-            addFields(fieldList, clasz.getSuperclass(), iterate);
-        }
+        { addFields(fieldList, clasz.getSuperclass(), iterate); }
     }
 
     @Override
@@ -117,9 +115,7 @@ public class FieldIntrospector implements Introspector
             for (int i = 0; i < fields.length; i++)
             {
                 if (fields[i].getName().equals(property))
-                {
-                    return new FieldProperty(introspected, fields[i]);
-                }
+                { return new FieldProperty(introspected, fields[i]); }
             }
         }
         catch (Exception e)

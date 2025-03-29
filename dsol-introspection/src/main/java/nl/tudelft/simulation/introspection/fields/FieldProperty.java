@@ -71,9 +71,7 @@ public class FieldProperty extends AbstractProperty implements Property
     {
         Class<?> type = this.descriptor.getType();
         if (!type.isInstance(value) || !this.editable)
-        {
-            throw new IllegalArgumentException("Cannot assign " + value + " to " + this.owner + ", " + this.descriptor);
-        }
+        { throw new IllegalArgumentException("Cannot assign " + value + " to " + this.owner + ", " + this.descriptor); }
         synchronized (this.owner)
         {
             try

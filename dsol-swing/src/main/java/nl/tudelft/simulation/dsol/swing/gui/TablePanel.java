@@ -90,7 +90,7 @@ public class TablePanel extends JPanel
             return 5;
         return (int) Math.ceil(Math.sqrt(cells));
     }
-    
+
     /**
      * Return a nice looking number of columns for the given number of cells.
      * @param cells the number of cells.
@@ -152,9 +152,7 @@ public class TablePanel extends JPanel
         {
             result[i] = 1.0 / value;
             if (result[i] == 1.0)
-            {
-                result[i] = TableLayoutConstants.FILL;
-            }
+            { result[i] = TableLayoutConstants.FILL; }
         }
         return result;
     }
