@@ -57,7 +57,7 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
 
     /**
      * Constructor for Logger Console.
-     * @param logLevel
+     * @param logLevel the log level
      */
     public ConsoleLogger(final Level logLevel)
     {

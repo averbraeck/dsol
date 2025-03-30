@@ -88,7 +88,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
 
     /**
      * Adds a console tab for the Logger.
-     * @param logLevel
+     * @param logLevel the log level
      */
     public void addConsoleLogger(final Level logLevel)
     {
