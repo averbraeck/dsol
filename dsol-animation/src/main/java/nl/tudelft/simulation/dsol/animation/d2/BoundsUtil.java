@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.dsol.animation.d2;
 
-import org.djutils.draw.Oriented;
+import org.djutils.draw.Directed;
 import org.djutils.draw.Transform2d;
 import org.djutils.draw.Transform3d;
 import org.djutils.draw.bounds.Bounds;
@@ -47,13 +47,13 @@ public final class BoundsUtil
     {
         if (center == null)
         { return new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY()); }
-        if (center instanceof Oriented<?> o)
+        if (center instanceof Directed directed)
         {
             Bounds2d b = new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
             Point2d c = new Point2d(center.getX(), center.getY());
             Transform2d transformation = new Transform2d();
             transformation.translate(c);
-            transformation.rotation(o.getDirZ());
+            transformation.rotation(directed.getDirZ());
             return transformation.transform(b);
         }
         else if (center instanceof DirectedPoint2d dirCenter)

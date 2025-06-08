@@ -2,8 +2,7 @@ package nl.tudelft.simulation.dsol.animation;
 
 import java.rmi.RemoteException;
 
-import org.djutils.draw.Directed2d;
-import org.djutils.draw.Directed3d;
+import org.djutils.draw.Directed;
 import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point3d;
@@ -50,8 +49,7 @@ public interface Locatable
     default double getDirZ() throws RemoteException
     {
         Point<?> p = getLocation();
-        return p == null ? 0.0 : p instanceof Directed2d ? ((Directed2d<?>) p).getDirZ()
-                : p instanceof Directed3d ? ((Directed3d<?>) p).getDirZ() : 0.0;
+        return p == null ? 0.0 : p instanceof Directed ? ((Directed) p).getDirZ() : 0.0;
     }
 
     /**
