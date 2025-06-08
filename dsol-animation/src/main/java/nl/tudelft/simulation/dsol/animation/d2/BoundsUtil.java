@@ -46,7 +46,9 @@ public final class BoundsUtil
     public static Bounds2d projectBounds(final Point<?> center, final Bounds<?, ?> bounds)
     {
         if (center == null)
-        { return new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY()); }
+        {
+            return new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
+        }
         if (center instanceof Directed directed)
         {
             Bounds2d b = new Bounds2d(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
@@ -86,7 +88,9 @@ public final class BoundsUtil
     public static Bounds3d transform(final OrientedPoint3d center, final Bounds3d bounds)
     {
         if (center == null)
-        { return bounds; }
+        {
+            return bounds;
+        }
         Transform3d transform = new Transform3d();
         transform.translate(center); // note: opposite order of how it should be carried out (!)
         transform.rotX(center.getDirX());
@@ -105,7 +109,9 @@ public final class BoundsUtil
     public static Bounds2d transform(final DirectedPoint2d center, final Bounds2d bounds)
     {
         if (center == null)
-        { return bounds; }
+        {
+            return bounds;
+        }
         Transform2d transform = new Transform2d();
         transform.translate(center); // note: opposite order of how it should be carried out (!)
         transform.rotation(center.getDirZ());
@@ -126,7 +132,9 @@ public final class BoundsUtil
     public static boolean contains(final OrientedPoint3d center, final Bounds3d bounds, final Point3d point)
     {
         if (center == null)
-        { return false; }
+        {
+            return false;
+        }
         Transform3d transform = new Transform3d();
         transform.translate(center);
         transform.rotX(center.getDirX());
@@ -150,7 +158,9 @@ public final class BoundsUtil
     public static boolean contains(final DirectedPoint2d center, final Bounds2d bounds, final Point2d point)
     {
         if (center == null)
-        { return false; }
+        {
+            return false;
+        }
         Transform2d transform = new Transform2d();
         transform.translate(center);
         transform.rotation(center.getDirZ());
