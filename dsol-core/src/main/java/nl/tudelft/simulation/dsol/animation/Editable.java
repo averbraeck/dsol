@@ -131,7 +131,7 @@ public abstract class Editable extends LocalEventProducer implements Locatable
     }
 
     @Override
-    public Bounds3d getBounds()
+    public Bounds3d getRelativeBounds()
     {
         return this.bounds;
     }

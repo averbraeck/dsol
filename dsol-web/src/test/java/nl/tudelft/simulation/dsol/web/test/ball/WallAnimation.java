@@ -38,7 +38,7 @@ public class WallAnimation extends SimRenderable2d<Wall>
     public void paint(final Graphics2D graphics, final ImageObserver observer)
     {
         graphics.setColor(getSource().getColor());
-        var b = getSource().getBounds();
+        var b = getSource().getRelativeBounds();
         var rect = new Rectangle2D.Double(b.getMinX(), -b.getMaxY(), b.getDeltaX(), b.getDeltaY());
         graphics.fill(rect);
     }

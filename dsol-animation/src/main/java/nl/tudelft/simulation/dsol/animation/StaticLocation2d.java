@@ -66,7 +66,7 @@ public class StaticLocation2d extends DirectedPoint2d implements Locatable
     }
 
     @Override
-    public Bounds2d getBounds()
+    public Bounds2d getRelativeBounds()
     {
         return this.bounds;
     }

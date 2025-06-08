@@ -119,7 +119,7 @@ public class BoundsUtilTest
             }
 
             @Override
-            public Bounds3d getBounds() throws RemoteException
+            public Bounds3d getRelativeBounds() throws RemoteException
             {
                 return new Bounds3d(-4, 4, -4, 4, -4, 4);
             }
@@ -127,7 +127,7 @@ public class BoundsUtilTest
         }
 
         L l = new L(0.0, 0.0, 0.0);
-        Bounds3d b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        Bounds3d b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(-4, b.getMinX(), 0.001);
         assertEquals(+4, b.getMaxX(), 0.001);
         assertEquals(-4, b.getMinY(), 0.001);
@@ -136,7 +136,7 @@ public class BoundsUtilTest
         assertEquals(+4, b.getMaxZ(), 0.001);
 
         l = new L(20.0, 10.0, 0.0);
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(20 - 4, b.getMinX(), 0.001);
         assertEquals(20 + 4, b.getMaxX(), 0.001);
         assertEquals(10 - 4, b.getMinY(), 0.001);
@@ -145,7 +145,7 @@ public class BoundsUtilTest
         assertEquals(+4, b.getMaxZ(), 0.001);
 
         l = new L(20.0, 10.0, Math.toRadians(90.0));
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(20 - 4, b.getMinX(), 0.001);
         assertEquals(20 + 4, b.getMaxX(), 0.001);
         assertEquals(10 - 4, b.getMinY(), 0.001);
@@ -155,7 +155,7 @@ public class BoundsUtilTest
 
         l = new L(0.0, 0.0, Math.toRadians(45.0));
         double d = 4.0 * Math.sqrt(2.0);
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(-d, b.getMinX(), 0.001);
         assertEquals(d, b.getMaxX(), 0.001);
         assertEquals(-d, b.getMinY(), 0.001);
@@ -164,7 +164,7 @@ public class BoundsUtilTest
 
         l = new L(20.0, 10.0, Math.toRadians(45.0));
         d = 4.0 * Math.sqrt(2.0);
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(20 - d, b.getMinX(), 0.001);
         assertEquals(20 + d, b.getMaxX(), 0.001);
         assertEquals(10 - d, b.getMinY(), 0.001);
@@ -216,7 +216,7 @@ public class BoundsUtilTest
             }
 
             @Override
-            public Bounds2d getBounds() throws RemoteException
+            public Bounds2d getRelativeBounds() throws RemoteException
             {
                 return new Bounds2d(-4, 4, -4, 4);
             }
@@ -224,21 +224,21 @@ public class BoundsUtilTest
         }
 
         L l = new L(0.0, 0.0, 0.0);
-        Bounds2d b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        Bounds2d b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(-4, b.getMinX(), 0.001);
         assertEquals(+4, b.getMaxX(), 0.001);
         assertEquals(-4, b.getMinY(), 0.001);
         assertEquals(+4, b.getMaxY(), 0.001);
 
         l = new L(20.0, 10.0, 0.0);
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(20 - 4, b.getMinX(), 0.001);
         assertEquals(20 + 4, b.getMaxX(), 0.001);
         assertEquals(10 - 4, b.getMinY(), 0.001);
         assertEquals(10 + 4, b.getMaxY(), 0.001);
 
         l = new L(20.0, 10.0, Math.toRadians(90.0));
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(20 - 4, b.getMinX(), 0.001);
         assertEquals(20 + 4, b.getMaxX(), 0.001);
         assertEquals(10 - 4, b.getMinY(), 0.001);
@@ -246,7 +246,7 @@ public class BoundsUtilTest
 
         l = new L(0.0, 0.0, Math.toRadians(45.0));
         double d = 4.0 * Math.sqrt(2.0);
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(-d, b.getMinX(), 0.001);
         assertEquals(d, b.getMaxX(), 0.001);
         assertEquals(-d, b.getMinY(), 0.001);
@@ -254,7 +254,7 @@ public class BoundsUtilTest
 
         l = new L(20.0, 10.0, Math.toRadians(45.0));
         d = 4.0 * Math.sqrt(2.0);
-        b = BoundsUtil.transform(l.getLocation(), l.getBounds());
+        b = BoundsUtil.transform(l.getLocation(), l.getRelativeBounds());
         assertEquals(20 - d, b.getMinX(), 0.001);
         assertEquals(20 + d, b.getMaxX(), 0.001);
         assertEquals(10 - d, b.getMinY(), 0.001);

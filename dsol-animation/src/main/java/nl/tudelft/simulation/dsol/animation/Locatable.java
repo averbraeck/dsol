@@ -54,9 +54,9 @@ public interface Locatable
 
     /**
      * returns the bounds of the locatable object. The bounds is the not rotated bounds around [0;0;0]. In contrast to the
-     * getLocation() method the getBounds() method should never return null.
+     * getLocation() method the getRelativeBounds() method should never return null.
      * @return the bounds of the object around getLocation() as center of the box.
      * @throws RemoteException on network failure
      */
-    Bounds<?, ?> getBounds() throws RemoteException;
+    Bounds<?, ?> getRelativeBounds() throws RemoteException;
 }

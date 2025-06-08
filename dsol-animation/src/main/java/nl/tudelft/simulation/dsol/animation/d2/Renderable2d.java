@@ -277,7 +277,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             if (center == null)
             { return; }
 
-            Bounds2d rectangle = BoundsUtil.projectBounds(center, this.source.getBounds());
+            Bounds2d rectangle = BoundsUtil.projectBounds(center, this.source.getRelativeBounds());
             if (rectangle == null || (!Shape2d.overlaps(extent, rectangle) && isTranslate()))
             { return; }
 
@@ -331,7 +331,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         {
             if (pointWorldCoordinates == null || this.source == null || this.source.getLocation() == null)
             { return false; }
-            Bounds2d intersect = BoundsUtil.projectBounds(this.source.getLocation(), this.source.getBounds());
+            Bounds2d intersect = BoundsUtil.projectBounds(this.source.getLocation(), this.source.getRelativeBounds());
             return intersect.contains(pointWorldCoordinates);
         }
         catch (RemoteException exception)
@@ -384,7 +384,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     {
         try
         {
-            Bounds<?, ?> b = getSource().getBounds();
+            Bounds<?, ?> b = getSource().getRelativeBounds();
             Bounds2d bounds =
                     new Bounds2d(b.getMinX() * scale.getObjectScaleFactor(), b.getMaxX() * scale.getObjectScaleFactor(),
                             b.getMinY() * scale.getObjectScaleFactor(), b.getMaxY() * scale.getObjectScaleFactor());

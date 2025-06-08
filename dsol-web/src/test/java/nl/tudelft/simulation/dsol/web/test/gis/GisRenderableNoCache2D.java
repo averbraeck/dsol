@@ -170,7 +170,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
     }
 
     @Override
-    public Bounds3d getBounds()
+    public Bounds3d getRelativeBounds()
     {
         return this.bounds;
     }

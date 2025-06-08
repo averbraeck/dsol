@@ -154,7 +154,7 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
     }
 
     @Override
-    public Bounds3d getBounds()
+    public Bounds3d getRelativeBounds()
     {
         return new Bounds3d(0, 0, 0);
     }

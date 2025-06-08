@@ -70,7 +70,7 @@ public class StaticLocation3d extends OrientedPoint3d implements Locatable
     }
 
     @Override
-    public Bounds3d getBounds()
+    public Bounds3d getRelativeBounds()
     {
         return this.bounds;
     }

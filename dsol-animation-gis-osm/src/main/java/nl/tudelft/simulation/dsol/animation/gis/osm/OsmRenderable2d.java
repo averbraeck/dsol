@@ -157,7 +157,7 @@ public class OsmRenderable2d implements GisRenderable2d
     }
 
     @Override
-    public Bounds3d getBounds()
+    public Bounds3d getRelativeBounds()
     {
         return this.bounds;
     }

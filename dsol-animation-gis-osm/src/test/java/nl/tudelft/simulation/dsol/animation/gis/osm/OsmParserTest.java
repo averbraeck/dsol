@@ -49,7 +49,7 @@ public class OsmParserTest implements Contextualized
         GisRenderable2d renderable = new OsmRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
-        assertNotNull(renderable.getBounds());
+        assertNotNull(renderable.getRelativeBounds());
 
         this.context.destroySubcontext("animation");
     }
@@ -71,7 +71,7 @@ public class OsmParserTest implements Contextualized
         GisRenderable2d renderable = new OsmRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
-        assertNotNull(renderable.getBounds());
+        assertNotNull(renderable.getRelativeBounds());
 
         this.context.destroySubcontext("animation");
     }

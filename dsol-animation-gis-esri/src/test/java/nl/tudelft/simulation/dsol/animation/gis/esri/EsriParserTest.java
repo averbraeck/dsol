@@ -51,7 +51,7 @@ public class EsriParserTest implements Contextualized
         GisRenderable2d renderable = new EsriRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
-        assertNotNull(renderable.getBounds());
+        assertNotNull(renderable.getRelativeBounds());
 
         this.context.destroySubcontext("animation");
     }
@@ -73,7 +73,7 @@ public class EsriParserTest implements Contextualized
         GisRenderable2d renderable = new EsriRenderable2d(this, map);
         assertNotNull(renderable);
         assertEquals(map, renderable.getMap());
-        assertNotNull(renderable.getBounds());
+        assertNotNull(renderable.getRelativeBounds());
 
         this.context.destroySubcontext("animation");
     }

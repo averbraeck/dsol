@@ -65,7 +65,7 @@ public class HtmlGraphicsConfiguration extends GraphicsConfiguration
     }
 
     @Override
-    public ColorModel getColorModel(int transparency)
+    public ColorModel getColorModel(final int transparency)
     {
         CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getColorModel()");
         return ColorModel.getRGBdefault();
@@ -88,7 +88,7 @@ public class HtmlGraphicsConfiguration extends GraphicsConfiguration
     @Override
     public Rectangle getBounds()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getBounds()");
+        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getRelativeBounds()");
         return this.bounds;
     }
 

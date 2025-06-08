@@ -119,12 +119,16 @@ public class Feature implements FeatureInterface
             if (shape.getShape() instanceof SerializablePath)
             {
                 if (Shape.overlaps(rectangle2D, ((SerializablePath) shape.getShape()).getBounds2D()))
-                { result.add(shape); }
+                {
+                    result.add(shape);
+                }
             }
             else if (shape.getShape() instanceof Point2D)
             {
                 if (rectangle2D.contains((Point2D) shape.getShape()))
-                { result.add(shape); }
+                {
+                    result.add(shape);
+                }
             }
             else
             {

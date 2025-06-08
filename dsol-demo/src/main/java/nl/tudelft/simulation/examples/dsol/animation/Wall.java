@@ -85,7 +85,7 @@ public class Wall implements Locatable
 
     /** {@inheritDoc} */
     @Override
-    public Bounds<?, ?> getBounds()
+    public Bounds<?, ?> getRelativeBounds()
     {
         return this.bounds;
     }

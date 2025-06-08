@@ -854,7 +854,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
                 Point<?> l = renderable.getSource().getLocation();
                 if (l != null)
                 {
-                    Bounds2d b = BoundsUtil.projectBounds(l, renderable.getSource().getBounds());
+                    Bounds2d b = BoundsUtil.projectBounds(l, renderable.getSource().getRelativeBounds());
                     minX = Math.min(minX, b.getMinX());
                     minY = Math.min(minY, b.getMinY());
                     maxX = Math.max(maxX, b.getMaxX());
