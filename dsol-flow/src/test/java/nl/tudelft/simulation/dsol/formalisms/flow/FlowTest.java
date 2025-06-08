@@ -82,7 +82,7 @@ public class FlowTest
 
     /**
      * @param simulator the simulator
-     * @return DsolModel<Double>
+     * @return DsolModel&lt;Double&gt;
      */
     public DsolModel<Double, DevsSimulatorInterface<Double>> makeModelDouble(final DevsSimulatorInterface<Double> simulator)
     {
