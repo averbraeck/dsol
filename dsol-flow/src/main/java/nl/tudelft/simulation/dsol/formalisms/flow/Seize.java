@@ -216,6 +216,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
          */
         protected synchronized void receiveEntity(final Entity<T> entity, final double requestedCapacity)
         {
+            super.receiveEntity(entity);
             var storedEntity = new StoredEntity<T>(entity, requestedCapacity, getSimulator().getSimulatorTime());
             synchronized (this.storage)
             {
@@ -228,7 +229,6 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         @Override
         public void receiveEntity(final Entity<T> entity)
         {
-            super.receiveEntity(entity);
             double capacityClaim = this.capacityClaimFunction.applyAsDouble(entity);
             Throw.when(capacityClaim < 0.0, IllegalArgumentException.class, "capacity cannot be < 0");
             this.receiveEntity(entity, capacityClaim);
@@ -343,6 +343,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
          */
         protected synchronized void receiveEntity(final Entity<T> entity, final int requestedCapacity)
         {
+            super.receiveEntity(entity);
             var storedEntity = new StoredEntity<T>(entity, requestedCapacity, getSimulator().getSimulatorTime());
             synchronized (this.storage)
             {
@@ -355,7 +356,6 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         @Override
         public void receiveEntity(final Entity<T> entity)
         {
-            super.receiveEntity(entity);
             int capacityClaim = this.capacityClaimFunction.applyAsInt(entity);
             Throw.when(capacityClaim < 0.0, IllegalArgumentException.class, "capacity cannot be < 0");
             this.receiveEntity(entity, capacityClaim);
