@@ -42,6 +42,9 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     /** simulator. */
     private SimulatorInterface<T> simulator = null;
 
+    /** the unique key by which to retrieve this simulation statistic. */
+    private String key;
+
     /** OBSERVATION_ADDED_EVENT is fired whenever an observation is processed. */
     public static final EventType TIMED_OBSERVATION_ADDED_EVENT = new EventType(new MetaData("TIMED_OBSERVATION_ADDED_EVENT",
             "observation added to Persistent", new ObjectDescriptor("value", "Observation value", Double.class)));
@@ -52,18 +55,22 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /**
      * constructs a new SimPersistent.
+     * @param key unique key for identifying the statistic
      * @param description refers to the description of this SimPersistent
      * @param model the model
      */
-    public SimPersistent(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
+    public SimPersistent(final String key, final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
         super(description);
         Throw.whenNull(model, "model cannot be null");
+        Throw.whenNull(key, "key cannot be null");
+        Throw.when(key.length() == 0, IllegalArgumentException.class, "key cannot be empty");
+        this.key = key;
         model.getOutputStatistics().add(this);
         this.simulator = model.getSimulator();
         try
         {
-            // only if we are before the warmup time, subscribe to the warmul event
+            // only if we are before the warmup time, subscribe to the warmup event
             if (this.simulator.getSimulatorTime().compareTo(this.simulator.getReplication().getWarmupTime()) < 0)
             {
                 this.simulator.addListener(this, Replication.WARMUP_EVENT, LocalEventProducer.FIRST_POSITION,
@@ -78,7 +85,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
             }
             ContextInterface context =
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");
-            context.bindObject(this);
+            context.bindObject(key);
         }
         catch (NamingException | RemoteException exception)
         {
@@ -88,15 +95,16 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
 
     /**
      * constructs a new SimPersistent.
-     * @param model the model
+     * @param key unique key for identifying the statistic
      * @param description the description
+     * @param model the model
      * @param target the target on which to collect statistics
      * @param eventType the eventType for which statistics are sampled
      */
-    public SimPersistent(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
+    public SimPersistent(final String key, final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)
     {
-        this(description, model);
+        this(key, description, model);
         try
         {
             target.addListener(this, eventType, ReferenceType.STRONG);
@@ -227,6 +235,12 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     public SimulatorInterface<T> getSimulator()
     {
         return this.simulator;
+    }
+
+    @Override
+    public String getKey()
+    {
+        return this.key;
     }
 
 }

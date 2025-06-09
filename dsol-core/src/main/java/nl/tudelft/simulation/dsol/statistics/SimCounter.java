@@ -38,6 +38,9 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
 
     /** the simulator to subscribe to and from. */
     private SimulatorInterface<T> simulator = null;
+    
+    /** the unique key by which to retrieve this simulation statistic. */
+    private String key;
 
     /** OBSERVATION_ADDED_EVENT is fired whenever an observation is processed. */
     public static final EventType TIMED_OBSERVATION_ADDED_EVENT = new EventType(new MetaData("TIMED_OBSERVATION_ADDED_EVENT",
@@ -52,13 +55,17 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
 
     /**
      * Construct a new SimCounter, and register the counter in the OutputStatistics of the model.
+     * @param key unique key for identifying the statistic
      * @param description refers to the description of this counter
      * @param model the model
      */
-    public SimCounter(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
+    public SimCounter(final String key, final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model)
     {
         super(description);
         Throw.whenNull(model, "model cannot be null");
+        Throw.whenNull(key, "key cannot be null");
+        Throw.when(key.length() == 0, IllegalArgumentException.class, "key cannot be empty");
+        this.key = key;
         model.getOutputStatistics().add(this);
         this.simulator = model.getSimulator();
         try
@@ -68,7 +75,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
             { this.simulator.addListener(this, Replication.WARMUP_EVENT, ReferenceType.STRONG); }
             ContextInterface context =
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");
-            context.bindObject(this);
+            context.bindObject(key);
         }
         catch (NamingException | RemoteException exception)
         {
@@ -78,15 +85,16 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
 
     /**
      * constructs a new SimCounter.
+     * @param key unique key for identifying the statistic
      * @param description the description
      * @param model the model
      * @param target the target on which to count
      * @param eventType the EventType for which counting takes place
      */
-    public SimCounter(final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
+    public SimCounter(final String key, final String description, final DsolModel<T, ? extends SimulatorInterface<T>> model,
             final EventProducer target, final EventType eventType)
     {
-        this(description, model);
+        this(key, description, model);
         try
         {
             target.addListener(this, eventType, ReferenceType.STRONG);
@@ -158,6 +166,12 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     public SimulatorInterface<T> getSimulator()
     {
         return this.simulator;
+    }
+
+    @Override
+    public String getKey()
+    {
+        return this.key;
     }
 
 }

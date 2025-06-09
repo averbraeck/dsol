@@ -441,13 +441,13 @@ public class ExperimentTest
         {
             this.queue = new ArrayList<>();
             this.outputStatistics.clear();
-            this.count = new SimCounter<Double>("arrivals", this);
+            this.count = new SimCounter<Double>("arr", "arrivals", this);
             this.count.initialize();
             this.outputStatistics.add(this.count);
-            this.queueTimeTally = new SimTally<Double>("timeInQueue", this);
+            this.queueTimeTally = new SimTally<Double>("tiq", "timeInQueue", this);
             this.queueTimeTally.initialize();
             this.outputStatistics.add(this.queueTimeTally);
-            this.nrInQueuePersistent = new SimPersistent<Double>("nrInQueue", this);
+            this.nrInQueuePersistent = new SimPersistent<Double>("nriq", "nrInQueue", this);
             this.nrInQueuePersistent.initialize();
             this.outputStatistics.add(this.nrInQueuePersistent);
             next();

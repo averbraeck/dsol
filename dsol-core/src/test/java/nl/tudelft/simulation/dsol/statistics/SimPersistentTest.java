@@ -58,10 +58,12 @@ public class SimPersistentTest extends LocalEventProducer
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 
+        String key = "persistent1";
         String description = "THIS PERSISTENT IS TESTED";
-        SimPersistent<Double> persistent = new SimPersistent<Double>(description, model);
+        SimPersistent<Double> persistent = new SimPersistent<Double>(key, description, model);
 
-        // check the description
+        // check the key and description
+        assertEquals(key, persistent.getKey());
         assertEquals(description, persistent.getDescription());
 
         // now we check the initial values
@@ -154,7 +156,7 @@ public class SimPersistentTest extends LocalEventProducer
             @Override
             public void constructModel() throws SimRuntimeException
             {
-                this.persistent = new SimPersistent<>("persistent", this, this, EVENT);
+                this.persistent = new SimPersistent<>("persistent1", "persistent", this, this, EVENT);
                 this.simulator.scheduleEventAbs(1.0, this, "fire", new Object[] {1.0});
                 this.simulator.scheduleEventAbs(5.0, this, "fire", new Object[] {0.0});
                 this.simulator.scheduleEventAbs(9.0, this, "fire", new Object[] {1.0});

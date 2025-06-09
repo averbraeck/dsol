@@ -51,11 +51,13 @@ public class SimCounterTest extends LocalEventProducer
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 
+        String key = "counter";
         String description = "counter description";
-        SimCounter<Double> counter = new SimCounter<Double>(description, model);
+        SimCounter<Double> counter = new SimCounter<Double>(key, description, model);
         assertTrue(counter.toString().startsWith("Counter"));
         assertTrue(counter.toString().contains(description));
         assertEquals(counter.getDescription(), description);
+        assertEquals(counter.getKey(), key);
 
         assertEquals(0L, counter.getN());
         assertEquals(0L, counter.getCount());

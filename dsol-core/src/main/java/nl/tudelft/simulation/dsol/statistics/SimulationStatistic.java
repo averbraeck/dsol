@@ -21,6 +21,12 @@ public interface SimulationStatistic<T extends Number & Comparable<T>>
     SimulatorInterface<T> getSimulator();
 
     /**
+     * Return the unique key of this statistic by which it can be retrieved.
+     * @return the unique key of this statistic
+     */
+    String getKey();
+
+    /**
      * Return the description of this statistic.
      * @return the description of this statistic
      */

@@ -56,8 +56,9 @@ public class SimTallyTest extends LocalEventProducer
         SingleReplication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 
+        String key = "tally";
         String description = "THIS TALLY IS TESTED";
-        SimTally<Double> tally = new SimTally<Double>(description, model);
+        SimTally<Double> tally = new SimTally<Double>(key, description, model);
 
         // check uninitialized tally
         checkBefore(tally);
@@ -91,8 +92,9 @@ public class SimTallyTest extends LocalEventProducer
         SingleReplication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 10.0);
         simulator.initialize(model, replication);
 
+        String key = "tally";
         String description = "THIS TALLY IS TESTED";
-        SimTally<Double> tally = new SimTally<Double>(description, model, this, UPDATE_EVENT);
+        SimTally<Double> tally = new SimTally<Double>(key, description, model, this, UPDATE_EVENT);
 
         // check uninitialized tally
         checkBefore(tally);
@@ -121,6 +123,7 @@ public class SimTallyTest extends LocalEventProducer
     {
         // check the description
         assertEquals("THIS TALLY IS TESTED", tally.getDescription());
+        assertEquals("tally", tally.getKey());
 
         // now we check the initial values
         assertTrue(Double.isNaN(tally.getMin()));
