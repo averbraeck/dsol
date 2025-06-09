@@ -235,11 +235,12 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         }
 
         @Override
-        public void receiveRequestedCapacity(final double capacityClaim, final Resource.DoubleCapacity<T> resource)
+        public void receiveRequestedCapacity(final Entity<T> entity, final double capacityClaim,
+                final Resource.DoubleCapacity<T> resource)
         {
             for (StoredEntity<T> storedEntity : this.storage)
             {
-                if (storedEntity.amount().doubleValue() == capacityClaim)
+                if (storedEntity.entity().equals(entity))
                 {
                     synchronized (this.storage)
                     {
@@ -362,11 +363,12 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         }
 
         @Override
-        public void receiveRequestedCapacity(final int capacityClaim, final Resource.IntegerCapacity<T> resource)
+        public void receiveRequestedCapacity(final Entity<T> entity, final int capacityClaim,
+                final Resource.IntegerCapacity<T> resource)
         {
             for (StoredEntity<T> storedEntity : this.storage)
             {
-                if (storedEntity.amount().intValue() == capacityClaim)
+                if (storedEntity.entity().equals(entity))
                 {
                     synchronized (this.storage)
                     {

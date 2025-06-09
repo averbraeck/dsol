@@ -112,7 +112,7 @@ public class ResourceTest extends FlowTest
                     public double time = Double.NaN;
 
                     @Override
-                    public void receiveRequestedCapacity(final double requestedCapacity,
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final double requestedCapacity,
                             final Resource.DoubleCapacity<Double> resource)
                     {
                         this.receivedCapacity = requestedCapacity;
@@ -126,7 +126,7 @@ public class ResourceTest extends FlowTest
                     public double time = Double.NaN;
 
                     @Override
-                    public void receiveRequestedCapacity(final double requestedCapacity,
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final double requestedCapacity,
                             final Resource.DoubleCapacity<Double> resource)
                     {
                         this.receivedCapacity = requestedCapacity;
@@ -226,7 +226,7 @@ public class ResourceTest extends FlowTest
                 var requestor = new CapacityRequestor.DoubleCapacity<Double>()
                 {
                     @Override
-                    public void receiveRequestedCapacity(final double requestedCapacity,
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final double requestedCapacity,
                             final Resource.DoubleCapacity<Double> resource)
                     {
                         // do nothing
@@ -305,7 +305,7 @@ public class ResourceTest extends FlowTest
                     public double received = 0.0;
 
                     @Override
-                    public void receiveRequestedCapacity(final double requestedCapacity,
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final double requestedCapacity,
                             final Resource.DoubleCapacity<Double> resource)
                     {
                         this.count++;
@@ -434,7 +434,7 @@ public class ResourceTest extends FlowTest
                     public double time = Double.NaN;
 
                     @Override
-                    public void receiveRequestedCapacity(final int requestedCapacity,
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final int requestedCapacity,
                             final Resource.IntegerCapacity<Double> resource)
                     {
                         this.receivedCapacity = requestedCapacity;
@@ -448,7 +448,7 @@ public class ResourceTest extends FlowTest
                     public double time = Double.NaN;
 
                     @Override
-                    public void receiveRequestedCapacity(final int requestedCapacity,
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final int requestedCapacity,
                             final Resource.IntegerCapacity<Double> resource)
                     {
                         this.receivedCapacity = requestedCapacity;
@@ -532,7 +532,7 @@ public class ResourceTest extends FlowTest
                     public int received = 0;
 
                     @Override
-                    public void receiveRequestedCapacity(final int requestedCapacity,
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final int requestedCapacity,
                             final Resource.IntegerCapacity<Double> resource)
                     {
                         this.count++;

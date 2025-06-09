@@ -241,7 +241,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                 changeClaimedCapacity(amount);
                 this.claimMap.put(entity, this.claimMap.getOrDefault(entity, 0.0) + amount);
                 getSimulator().scheduleEventNow(requestor, "receiveRequestedCapacity",
-                        new Object[] {Double.valueOf(amount), this});
+                        new Object[] {entity, Double.valueOf(amount), this});
             }
             else
             {
@@ -284,11 +284,11 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                         changeClaimedCapacity(request.getAmount());
                         this.claimMap.put(request.getEntity(),
                                 this.claimMap.getOrDefault(request.getEntity(), 0.0) + request.getAmount());
-                        request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
+                        request.getRequestor().receiveRequestedCapacity(request.getEntity(), request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {
                             cr.remove();
-                            getRequestQueue().remove(request);
+                            getRequestQueue().remove(request); // for the statistics
                         }
                     }
                     else if (getReleaseType().equals(ReleaseType.FIRST_ONLY))
@@ -406,7 +406,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                 changeClaimedCapacity(amount);
                 this.claimMap.put(entity, this.claimMap.getOrDefault(entity, 0) + amount);
                 getSimulator().scheduleEventNow(requestor, "receiveRequestedCapacity",
-                        new Object[] {Integer.valueOf(amount), this});
+                        new Object[] {entity, Integer.valueOf(amount), this});
             }
             else
             {
@@ -449,11 +449,11 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                         this.changeClaimedCapacity(request.getAmount());
                         this.claimMap.put(request.getEntity(),
                                 this.claimMap.getOrDefault(request.getEntity(), 0) + request.getAmount());
-                        request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
+                        request.getRequestor().receiveRequestedCapacity(request.getEntity(), request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {
                             cr.remove();
-                            getRequestQueue().remove(request);
+                            getRequestQueue().remove(request); // for the statistics
                         }
                     }
                     else if (getReleaseType().equals(ReleaseType.FIRST_ONLY))
