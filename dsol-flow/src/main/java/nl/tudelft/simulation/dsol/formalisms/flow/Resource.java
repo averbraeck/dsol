@@ -100,12 +100,15 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
     @SuppressWarnings("unchecked")
     public R setDefaultStatistics()
     {
-        this.utilizationStatistic =
-                new SimPersistent<>(getId() + " time in queue", getSimulator().getModel(), this, UTILIZATION_EVENT);
-        fireTimedEvent(UTILIZATION_EVENT,
-                getCapacity().doubleValue() == 0.0 ? 0.0 : getClaimedCapacity().doubleValue() / getCapacity().doubleValue(),
-                getSimulator().getSimulatorTime());
-        this.requestQueue.setDefaultStatistics();
+        if (!hasDefaultStatistics())
+        {
+            this.utilizationStatistic =
+                    new SimPersistent<>(getId() + " utilization", getSimulator().getModel(), this, UTILIZATION_EVENT);
+            fireTimedEvent(UTILIZATION_EVENT,
+                    getCapacity().doubleValue() == 0.0 ? 0.0 : getClaimedCapacity().doubleValue() / getCapacity().doubleValue(),
+                    getSimulator().getSimulatorTime());
+            this.requestQueue.setDefaultStatistics();
+        }
         return (R) this;
     }
 

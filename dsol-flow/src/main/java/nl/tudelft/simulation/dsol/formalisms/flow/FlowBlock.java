@@ -138,13 +138,25 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
     @SuppressWarnings("unchecked")
     public F setDefaultFlowBlockStatistics()
     {
-        this.countReceivedStatistic =
-                new SimCounter<>(getId() + " # of received entities", getSimulator().getModel(), this, RECEIVE_EVENT);
-        this.countReceivedStatistic.initialize();
-        this.countReleasedStatistic =
-                new SimCounter<>(getId() + " # of released entities", getSimulator().getModel(), this, RELEASE_EVENT);
-        this.countReleasedStatistic.initialize();
+        if (!hasDefaultFlowBlockStatistics())
+        {
+            this.countReceivedStatistic =
+                    new SimCounter<>(getId() + " # of received entities", getSimulator().getModel(), this, RECEIVE_EVENT);
+            this.countReceivedStatistic.initialize();
+            this.countReleasedStatistic =
+                    new SimCounter<>(getId() + " # of released entities", getSimulator().getModel(), this, RELEASE_EVENT);
+            this.countReleasedStatistic.initialize();
+        }
         return (F) this;
+    }
+
+    /**
+     * Return whether default flow block statistics are turned on for this Storage block.
+     * @return whether default flow block statistics are turned on for this Storage block.
+     */
+    public boolean hasDefaultFlowBlockStatistics()
+    {
+        return this.countReceivedStatistic != null;
     }
 
     /**
