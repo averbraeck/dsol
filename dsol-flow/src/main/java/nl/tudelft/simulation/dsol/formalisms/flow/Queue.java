@@ -137,12 +137,12 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
     {
         if (!hasDefaultStatistics())
         {
-            this.queueLengthStatistic =
-                    new SimPersistent<>(getId() + " queue length", getSimulator().getModel(), this, QUEUE_LENGTH_EVENT);
+            this.queueLengthStatistic = new SimPersistent<>("Queue.QueueLength:" + getBlockNumber(), getId() + " queue length",
+                    getSimulator().getModel(), this, QUEUE_LENGTH_EVENT);
             this.queueLengthStatistic.initialize();
             fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
-            this.timeInQueueStatistic =
-                    new SimTally<>(getId() + " time in queue", getSimulator().getModel(), this, TIME_IN_QUEUE_EVENT);
+            this.timeInQueueStatistic = new SimTally<>("Queue.TimeInQueue:" + getBlockNumber(), getId() + " time in queue",
+                    getSimulator().getModel(), this, TIME_IN_QUEUE_EVENT);
         }
         return this;
     }

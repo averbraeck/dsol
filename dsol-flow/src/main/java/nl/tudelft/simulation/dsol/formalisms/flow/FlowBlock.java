@@ -140,11 +140,11 @@ public abstract class FlowBlock<T extends Number & Comparable<T>, F extends Flow
     {
         if (!hasDefaultFlowBlockStatistics())
         {
-            this.countReceivedStatistic =
-                    new SimCounter<>(getId() + " # of received entities", getSimulator().getModel(), this, RECEIVE_EVENT);
+            this.countReceivedStatistic = new SimCounter<>("FlowBlock.CountReceived:" + getBlockNumber(),
+                    getId() + " # of received entities", getSimulator().getModel(), this, RECEIVE_EVENT);
             this.countReceivedStatistic.initialize();
-            this.countReleasedStatistic =
-                    new SimCounter<>(getId() + " # of released entities", getSimulator().getModel(), this, RELEASE_EVENT);
+            this.countReleasedStatistic = new SimCounter<>("FlowBlock.CountReleased:" + getBlockNumber(),
+                    getId() + " # of released entities", getSimulator().getModel(), this, RELEASE_EVENT);
             this.countReleasedStatistic.initialize();
         }
         return (F) this;

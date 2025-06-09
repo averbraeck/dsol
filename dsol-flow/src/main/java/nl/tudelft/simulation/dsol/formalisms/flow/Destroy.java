@@ -59,8 +59,8 @@ public class Destroy<T extends Number & Comparable<T>> extends FlowBlock<T, Dest
         if (!hasDefaultStatistics())
         {
             super.setDefaultFlowBlockStatistics();
-            this.timeInSystemStatistic =
-                    new SimTally<>(getId() + " entity time in system", getSimulator().getModel(), this, TIME_IN_SYSTEM_EVENT);
+            this.timeInSystemStatistic = new SimTally<>("Destroy.TimeInSystem:" + getBlockNumber(),
+                    getId() + " entity time in system", getSimulator().getModel(), this, TIME_IN_SYSTEM_EVENT);
             this.timeInSystemStatistic.initialize();
         }
         return this;

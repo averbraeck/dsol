@@ -88,8 +88,9 @@ public class Delay<T extends Number & Comparable<T>> extends FlowBlock<T, Delay<
         if (!hasDefaultStatistics())
         {
             super.setDefaultFlowBlockStatistics();
-            this.numberDelayedStatistic = new SimPersistent<>(getId() + " number of entities in delay block",
-                    getSimulator().getModel(), this, Delay.NUMBER_DELAYED_EVENT);
+            this.numberDelayedStatistic =
+                    new SimPersistent<>("Delay.NrDelayed:" + getBlockNumber(), getId() + " number of entities in delay block",
+                            getSimulator().getModel(), this, Delay.NUMBER_DELAYED_EVENT);
             this.numberDelayedStatistic.initialize();
             fireTimedEvent(NUMBER_DELAYED_EVENT, getDelayedEntityList().size(), getSimulator().getSimulatorTime());
         }

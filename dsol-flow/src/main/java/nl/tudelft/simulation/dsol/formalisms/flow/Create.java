@@ -265,8 +265,8 @@ public class Create<T extends Number & Comparable<T>> extends FlowBlock<T, Creat
         if (!hasDefaultStatistics())
         {
             super.setDefaultFlowBlockStatistics();
-            this.countStatistic =
-                    new SimCounter<>(getId() + " generated entity count", getSimulator().getModel(), this, Create.CREATE_EVENT);
+            this.countStatistic = new SimCounter<>("Create.CountEntity:" + getBlockNumber(),
+                    getId() + " generated entity count", getSimulator().getModel(), this, Create.CREATE_EVENT);
             this.countStatistic.initialize();
         }
         return this;

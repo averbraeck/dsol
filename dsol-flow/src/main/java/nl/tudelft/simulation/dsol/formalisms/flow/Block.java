@@ -1,5 +1,7 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.djutils.base.Identifiable;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
@@ -30,6 +32,12 @@ public abstract class Block<T extends Number & Comparable<T>> extends LocalEvent
     /** The id of the Block. */
     private final String id;
 
+    /** unique block number. */
+    private final int blockNumber;
+
+    /** unique block number counter. */
+    private static final AtomicInteger blockNumberCounter = new AtomicInteger(0);
+
     /**
      * Construct a new simulation block.
      * @param id the id of the block
@@ -41,6 +49,7 @@ public abstract class Block<T extends Number & Comparable<T>> extends LocalEvent
         Throw.whenNull(simulator, "simulator cannot be null");
         this.id = id;
         this.simulator = simulator;
+        this.blockNumber = blockNumberCounter.incrementAndGet();
 
         if (simulator.getModel() instanceof FlowModel<T, ?> flowModel)
         {
@@ -55,6 +64,15 @@ public abstract class Block<T extends Number & Comparable<T>> extends LocalEvent
     public DevsSimulatorInterface<T> getSimulator()
     {
         return this.simulator;
+    }
+
+    /**
+     * Return the unique block number of this flow block.
+     * @return the unique block number of this flow block
+     */
+    public int getBlockNumber()
+    {
+        return this.blockNumber;
     }
 
     @Override

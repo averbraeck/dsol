@@ -102,8 +102,8 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
     {
         if (!hasDefaultStatistics())
         {
-            this.utilizationStatistic =
-                    new SimPersistent<>(getId() + " utilization", getSimulator().getModel(), this, UTILIZATION_EVENT);
+            this.utilizationStatistic = new SimPersistent<>("Resource.Unilization:" + getBlockNumber(),
+                    getId() + " utilization", getSimulator().getModel(), this, UTILIZATION_EVENT);
             fireTimedEvent(UTILIZATION_EVENT,
                     getCapacity().doubleValue() == 0.0 ? 0.0 : getClaimedCapacity().doubleValue() / getCapacity().doubleValue(),
                     getSimulator().getSimulatorTime());

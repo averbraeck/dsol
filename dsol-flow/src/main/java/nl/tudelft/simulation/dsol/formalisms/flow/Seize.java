@@ -90,12 +90,12 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
         if (!hasDefaultStatistics())
         {
             super.setDefaultFlowBlockStatistics();
-            this.numberStoredStatistic =
-                    new SimPersistent<>(getId() + " nr entities stored", getSimulator().getModel(), this, NUMBER_STORED_EVENT);
+            this.numberStoredStatistic = new SimPersistent<>("Seize.NumberStored:" + getBlockNumber(),
+                    getId() + " nr entities stored", getSimulator().getModel(), this, NUMBER_STORED_EVENT);
             this.numberStoredStatistic.initialize();
             fireTimedEvent(NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
-            this.storageTimeStatistic =
-                    new SimTally<>(getId() + " entity storage time", getSimulator().getModel(), this, STORAGE_TIME_EVENT);
+            this.storageTimeStatistic = new SimTally<>("Seize.StorageTime:" + getBlockNumber(),
+                    getId() + " entity storage time", getSimulator().getModel(), this, STORAGE_TIME_EVENT);
             getResource().setDefaultStatistics();
         }
         return this;
