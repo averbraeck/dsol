@@ -1,5 +1,8 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.djutils.event.EventType;
 import org.djutils.exceptions.Throw;
 import org.djutils.metadata.MetaData;
@@ -145,6 +148,9 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         /** claimedCapacity defines the currently claimed capacity. */
         private double claimedCapacity = 0.0;
 
+        /** the claims per entity; will be removed if claim fully released. */
+        private Map<Entity<T>, Double> claimMap = new HashMap<>();
+
         /**
          * Create a new Resource with floating point capacity and a specific request comparator, e.g., LIFO or sorted on an
          * attribute.
@@ -187,6 +193,8 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         private synchronized void changeClaimedCapacity(final double amount)
         {
             this.claimedCapacity += amount;
+            if (Math.abs(this.claimedCapacity) < 8 * Math.ulp(amount))
+                this.claimedCapacity = 0.0;
             fireTimedEvent(UTILIZATION_EVENT,
                     getCapacity().doubleValue() == 0.0 ? 0.0 : getClaimedCapacity().doubleValue() / getCapacity().doubleValue(),
                     getSimulator().getSimulatorTime());
@@ -231,6 +239,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
             if ((this.claimedCapacity + amount) <= this.capacity)
             {
                 changeClaimedCapacity(amount);
+                this.claimMap.put(entity, this.claimMap.getOrDefault(entity, 0.0) + amount);
                 getSimulator().scheduleEventNow(requestor, "receiveRequestedCapacity",
                         new Object[] {Double.valueOf(amount), this});
             }
@@ -238,7 +247,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
             {
                 synchronized (getRequestQueue())
                 {
-                    getRequestQueue().add(amount, requestor, priority);
+                    getRequestQueue().add(entity, amount, requestor, priority);
                 }
             }
         }
@@ -252,7 +261,19 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         {
             Throw.when(amount < 0.0, SimRuntimeException.class, "released capacity on resource cannot be < 0.0");
             Throw.when(entity == null && amount != 0, IllegalArgumentException.class, "entity cannot be null when amount > 0");
-            changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
+            if (entity != null && amount != 0.0)
+            {
+                Throw.when(Math.abs(amount - this.claimedCapacity) > 8 * Math.ulp(amount), IllegalStateException.class,
+                        "Trying to release more capacity than claimed for this resource");
+                Throw.when(amount - this.claimMap.getOrDefault(entity, 0.0) > 8 * Math.ulp(amount), IllegalStateException.class,
+                        "Trying to release more capacity than originally claimed by this entity");
+                changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
+                double newClaim = amount - this.claimMap.getOrDefault(entity, 0.0);
+                if (Math.abs(newClaim) < 8 * Math.ulp(amount))
+                    this.claimMap.remove(entity);
+                else
+                    this.claimMap.put(entity, newClaim);
+            }
             synchronized (getRequestQueue())
             {
                 for (var cr = getRequestQueue().iterator(); cr.hasNext();)
@@ -260,7 +281,9 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                     var request = (CapacityRequest.DoubleCapacity<T>) cr.next();
                     if ((this.capacity - this.claimedCapacity) >= request.getAmount())
                     {
-                        this.changeClaimedCapacity(request.getAmount());
+                        changeClaimedCapacity(request.getAmount());
+                        this.claimMap.put(request.getEntity(),
+                                this.claimMap.getOrDefault(request.getEntity(), 0.0) + request.getAmount());
                         request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {
@@ -291,6 +314,9 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
         /** claimedCapacity defines the currently claimed capacity. */
         private int claimedCapacity = 0;
+
+        /** the claims per entity; will be removed if claim fully released. */
+        private Map<Entity<T>, Integer> claimMap = new HashMap<>();
 
         /**
          * Create a new Resource with floating point capacity and a specific request comparator, e.g., LIFO or sorted on an
@@ -378,6 +404,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
             if ((this.claimedCapacity + amount) <= this.capacity)
             {
                 changeClaimedCapacity(amount);
+                this.claimMap.put(entity, this.claimMap.getOrDefault(entity, 0) + amount);
                 getSimulator().scheduleEventNow(requestor, "receiveRequestedCapacity",
                         new Object[] {Integer.valueOf(amount), this});
             }
@@ -385,7 +412,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
             {
                 synchronized (getRequestQueue())
                 {
-                    getRequestQueue().add(amount, requestor, priority);
+                    getRequestQueue().add(entity, amount, requestor, priority);
                 }
             }
         }
@@ -399,7 +426,19 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         {
             Throw.when(amount < 0, SimRuntimeException.class, "released capacity on resource cannot be < 0");
             Throw.when(entity == null && amount != 0, IllegalArgumentException.class, "entity cannot be null when amount > 0");
-            changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
+            if (entity != null && amount != 0.0)
+            {
+                Throw.when(amount > this.claimedCapacity, IllegalStateException.class,
+                        "Trying to release more capacity than claimed for this resource");
+                Throw.when(amount > this.claimMap.getOrDefault(entity, 0), IllegalStateException.class,
+                        "Trying to release more capacity than originally claimed by this entity");
+                changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
+                int newClaim = amount - this.claimMap.getOrDefault(entity, 0);
+                if (Math.abs(newClaim) == 0)
+                    this.claimMap.remove(entity);
+                else
+                    this.claimMap.put(entity, newClaim);
+            }
             synchronized (getRequestQueue())
             {
                 for (var cr = getRequestQueue().iterator(); cr.hasNext();)
@@ -408,6 +447,8 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                     if ((this.capacity - this.claimedCapacity) >= request.getAmount())
                     {
                         this.changeClaimedCapacity(request.getAmount());
+                        this.claimMap.put(request.getEntity(),
+                                this.claimMap.getOrDefault(request.getEntity(), 0) + request.getAmount());
                         request.getRequestor().receiveRequestedCapacity(request.getAmount(), this);
                         synchronized (getRequestQueue())
                         {

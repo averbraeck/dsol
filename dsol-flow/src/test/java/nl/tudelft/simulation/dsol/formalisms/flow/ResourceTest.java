@@ -247,10 +247,10 @@ public class ResourceTest extends FlowTest
                     {
                         this.simulator.scheduleEventRel(t, () ->
                         {
-                            queue.add(1.0, requestor, 1);
-                            queue.add(1.0, requestor, 1);
-                            queue.add(1.0, requestor, 2);
-                            queue.add(1.0, requestor, 2);
+                            queue.add(null, 1.0, requestor, 1);
+                            queue.add(null, 1.0, requestor, 1);
+                            queue.add(null, 1.0, requestor, 2);
+                            queue.add(null, 1.0, requestor, 2);
                         });
                     }
                 }

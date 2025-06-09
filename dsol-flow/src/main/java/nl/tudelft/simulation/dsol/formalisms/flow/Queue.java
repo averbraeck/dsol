@@ -76,13 +76,15 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
 
     /**
      * Add a request for capacity to the queue.
+     * @param entity the entity associated with the request, can be null
      * @param amount the requested amount
      * @param requestor the RequestorInterface requesting the amount
      * @param priority the priority of the request
      */
-    public void add(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor, final int priority)
+    public void add(final Entity<T> entity, final double amount, final CapacityRequestor.DoubleCapacity<T> requestor,
+            final int priority)
     {
-        var request = new CapacityRequest.DoubleCapacity<T>(this.counter++, requestor, amount, priority,
+        var request = new CapacityRequest.DoubleCapacity<T>(this.counter++, entity, requestor, amount, priority,
                 getSimulator().getSimulatorTime());
         this.queue.add(request);
         this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());
@@ -90,13 +92,15 @@ public class Queue<T extends Number & Comparable<T>> extends Block<T> implements
 
     /**
      * Add a request for capacity to the queue.
+     * @param entity the entity associated with the request, can be null
      * @param amount the requested amount
      * @param requestor the RequestorInterface requesting the amount
      * @param priority the priority of the request
      */
-    public void add(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor, final int priority)
+    public void add(final Entity<T> entity, final int amount, final CapacityRequestor.IntegerCapacity<T> requestor,
+            final int priority)
     {
-        var request = new CapacityRequest.IntegerCapacity<T>(this.counter++, requestor, amount, priority,
+        var request = new CapacityRequest.IntegerCapacity<T>(this.counter++, entity, requestor, amount, priority,
                 getSimulator().getSimulatorTime());
         this.queue.add(request);
         this.fireTimedEvent(QUEUE_LENGTH_EVENT, this.queue.size(), getSimulator().getSimulatorTime());

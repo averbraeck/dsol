@@ -29,16 +29,22 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
     /** the time when the request was created. */
     private final T queueEntryTime;
 
+    /** the associated entity, can be null. */
+    private final Entity<T> entity;
+
     /**
      * Create a new capacity request.
      * @param id the numeric id of this request
+     * @param entity the associated entity, can be null
      * @param amount the amount requested by the requestor
      * @param priority the priority of the request
      * @param queueEntryTime the time when the request was created
      */
-    public CapacityRequest(final long id, final Number amount, final int priority, final T queueEntryTime)
+    public CapacityRequest(final long id, final Entity<T> entity, final Number amount, final int priority,
+            final T queueEntryTime)
     {
         this.id = id;
+        this.entity = entity;
         this.amount = amount;
         this.priority = priority;
         this.queueEntryTime = queueEntryTime;
@@ -64,6 +70,15 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
      * @return the requested amount of the resource
      */
     public abstract Number getAmount();
+
+    /**
+     * Return the associated entity, if any. Can be null.
+     * @return the associated entity, can be null
+     */
+    public Entity<T> getEntity()
+    {
+        return this.entity;
+    }
 
     /**
      * Return the priority of the request (higher value is higher priority)
@@ -117,15 +132,16 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
         /**
          * Create a new capacity request for double capacity.
          * @param id the numeric id of this request
+         * @param entity the associated entity, can be null
          * @param requestor the requestor of the amount of capacity
          * @param amount the amount requested by the requestor
          * @param priority the priority of the request
          * @param queueEntryTime the time when the request was created
          */
-        public DoubleCapacity(final long id, final CapacityRequestor.DoubleCapacity<T> requestor, final double amount,
-                final int priority, final T queueEntryTime)
+        public DoubleCapacity(final long id, final Entity<T> entity, final CapacityRequestor.DoubleCapacity<T> requestor,
+                final double amount, final int priority, final T queueEntryTime)
         {
-            super(id, amount, priority, queueEntryTime);
+            super(id, entity, amount, priority, queueEntryTime);
             this.requestor = requestor;
         }
 
@@ -161,15 +177,16 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
         /**
          * Create a new capacity request for integer capacity.
          * @param id the numeric id of this request
+         * @param entity the associated entity, can be null
          * @param requestor the requestor of the amount of capacity
          * @param amount the amount requested by the requestor
          * @param priority the priority of the request
          * @param queueEntryTime the time when the request was created
          */
-        public IntegerCapacity(final long id, final CapacityRequestor.IntegerCapacity<T> requestor, final int amount,
-                final int priority, final T queueEntryTime)
+        public IntegerCapacity(final long id, final Entity<T> entity, final CapacityRequestor.IntegerCapacity<T> requestor,
+                final int amount, final int priority, final T queueEntryTime)
         {
-            super(id, amount, priority, queueEntryTime);
+            super(id, entity, amount, priority, queueEntryTime);
             this.requestor = requestor;
         }
 
