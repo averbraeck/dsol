@@ -59,8 +59,8 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
         try
         {
             // First the statistics
-            SimPersistent<Double> persistent = new SimPersistent<>("service time", this);
-            ExitCounter exitCounter = new ExitCounter("counter", this);
+            SimPersistent<Double> persistent = new SimPersistent<>("tS", "service time", this);
+            ExitCounter exitCounter = new ExitCounter("exit", "counter", this);
 
             // Now the charts
             Histogram histogram = new Histogram(this.simulator, "service time", new double[] {0, 200}, 200);
@@ -93,14 +93,15 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
 
         /**
          * constructs a new ExitCounter.
+         * @param key the unique key for the statistic
          * @param description the description of the counter
          * @param model the model to register the OutputStatistics
          * @throws RemoteException on network failure
          */
-        public ExitCounter(final String description, final DsolModel<Double, DevsSimulator<Double>> model)
+        public ExitCounter(final String key, final String description, final DsolModel<Double, DevsSimulator<Double>> model)
                 throws RemoteException
         {
-            super(description, model);
+            super(key, description, model);
         }
 
         @Override
@@ -112,7 +113,9 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
                 try
                 {
                     if (getSimulator().isStartingOrRunning())
-                    { getSimulator().stop(); }
+                    {
+                        getSimulator().stop();
+                    }
                 }
                 catch (SimRuntimeException exception)
                 {

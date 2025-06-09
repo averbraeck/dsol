@@ -109,10 +109,10 @@ class DesQueueingModel8 extends AbstractDsolModel<Double, DevsSimulatorInterface
             throw new SimRuntimeException("Error retrieving parameters for the model", e);
         }
 
-        this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
-        this.tallyTimeInSystem = new SimTally<>("Time in system", this);
-        this.persistentQueueLength = new SimPersistent<>("Queue length", this);
-        this.persistentUtilization = new SimPersistent<>("Server utilization", this);
+        this.tallyTimeInQueue = new SimTally<>("tQ", "Time in queue", this);
+        this.tallyTimeInSystem = new SimTally<>("tS", "Time in system", this);
+        this.persistentQueueLength = new SimPersistent<>("lQ", "Queue length", this);
+        this.persistentUtilization = new SimPersistent<>("Ut", "Server utilization", this);
 
         this.simulator.scheduleEventRel(startTime, this, "generate", null);
     }

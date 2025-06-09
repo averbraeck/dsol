@@ -66,9 +66,10 @@ public class Warehouse42Model extends AbstractDsolModel<Double, DevsSimulator<Do
 
         try
         {
-            this.orderingCosts = new SimTally<Double>("orderingCosts", this, retailer, Retailer.TOTAL_ORDERING_COST_EVENT);
-            this.inventory = new SimPersistent<Double>("inventory level", this, retailer, Retailer.INVENTORY_LEVEL_EVENT);
-            this.backlog = new SimPersistent<Double>("backlog level", this, retailer, Retailer.BACKLOG_LEVEL);
+            this.orderingCosts =
+                    new SimTally<Double>("oc", "orderingCosts", this, retailer, Retailer.TOTAL_ORDERING_COST_EVENT);
+            this.inventory = new SimPersistent<Double>("il", "inventory level", this, retailer, Retailer.INVENTORY_LEVEL_EVENT);
+            this.backlog = new SimPersistent<Double>("bl", "backlog level", this, retailer, Retailer.BACKLOG_LEVEL);
         }
         catch (Exception exception)
         {

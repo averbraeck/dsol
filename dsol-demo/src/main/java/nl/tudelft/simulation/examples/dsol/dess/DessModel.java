@@ -40,7 +40,7 @@ public class DessModel extends AbstractDsolModel<Double, DessSimulatorInterface<
         {
             Distance distance = new Distance(this.simulator);
             this.distancePersistent =
-                    new SimPersistent<>("persistent on distance", this, distance, distance.VALUE_CHANGED_EVENT[0]);
+                    new SimPersistent<>("distance", "distance statistic", this, distance, distance.VALUE_CHANGED_EVENT[0]);
             this.distancePersistent.initialize();
             this.distanceChart = new XYChart(this.simulator, "xyplot of distance");
             this.distanceChart.add(this.distancePersistent);

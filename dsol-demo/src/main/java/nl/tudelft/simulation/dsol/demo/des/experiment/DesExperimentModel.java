@@ -113,10 +113,10 @@ class DesExperimentModel extends AbstractDsolModel<Double, DevsSimulatorInterfac
         this.entityCounter = 0;
         this.busy = 0;
 
-        this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
-        this.tallyTimeInSystem = new SimTally<>("Time in system", this);
-        this.persistentQueueLength = new SimPersistent<>("Queue length", this);
-        this.persistentUtilization = new SimPersistent<>("Server utilization", this);
+        this.tallyTimeInQueue = new SimTally<>("tQ", "Time in queue", this);
+        this.tallyTimeInSystem = new SimTally<>("tS", "Time in system", this);
+        this.persistentQueueLength = new SimPersistent<>("lQ", "Queue length", this);
+        this.persistentUtilization = new SimPersistent<>("Ut", "Server utilization", this);
         this.persistentQueueLength.register(0.0, 0.0);
         this.persistentUtilization.register(0.0, 0.0);
 

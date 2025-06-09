@@ -72,10 +72,10 @@ class DesQueueingModel5 extends AbstractDsolModel<Double, DevsSimulatorInterface
     @Override
     public void constructModel()
     {
-        this.tallyTimeInQueue = new SimTally<>("Time in queue", this);
-        this.tallyTimeInSystem = new SimTally<>("Time in system", this);
-        this.persistentQueueLength = new SimPersistent<>("Queue length", this);
-        this.persistentUtilization = new SimPersistent<>("Server utilization", this);
+        this.tallyTimeInQueue = new SimTally<>("tQ", "Time in queue", this);
+        this.tallyTimeInSystem = new SimTally<>("tS", "Time in system", this);
+        this.persistentQueueLength = new SimPersistent<>("lQ", "Queue length", this);
+        this.persistentUtilization = new SimPersistent<>("Ut", "Server utilization", this);
 
         this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
     }
