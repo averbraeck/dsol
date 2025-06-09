@@ -2,14 +2,9 @@ package nl.tudelft.simulation.dsol.animation.gis.osm;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import org.openstreetmap.osmosis.core.task.v0_6.RunnableSource;
-import org.openstreetmap.osmosis.xml.common.CompressionMethod;
-
-import crosby.binary.osmosis.OsmosisReader;
 import nl.tudelft.simulation.dsol.animation.gis.DataSourceInterface;
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
@@ -66,59 +61,58 @@ public class OsmFileReader implements DataSourceInterface
         String filename = this.osmURL.toString().toLowerCase();
         File inputFile = new File(this.osmURL.getPath());
 
-        OsmLayerSink sinkImplementation = new OsmLayerSink(this.featuresToRead, this.coordinateTransform);
-        CompressionMethod compression = CompressionMethod.None;
-        boolean pbf = false;
-        RunnableSource reader = null;
+        OsmEntityProcessor processor = new OsmEntityProcessor(this.featuresToRead, this.coordinateTransform);
+        OsmFormat osmFormat = null;
 
         if (filename.endsWith(".pbf"))
         {
-            pbf = true;
+            osmFormat = OsmFormat.PBF;
         }
         else if (filename.endsWith(".gz"))
         {
-            compression = CompressionMethod.GZip;
+            osmFormat = OsmFormat.GZIP;
         }
         else if (filename.endsWith(".bz2"))
-        { compression = CompressionMethod.BZip2; }
+        {
+            osmFormat = OsmFormat.BZIP2;
+        }
+        else if (filename.endsWith(".osm"))
+        {
+            osmFormat = OsmFormat.OSM;
+        }
+        else
+        {
+            throw new IOException("Unknown OSM format based on file extension: " + filename);
+        }
 
-        if (pbf)
+        if (osmFormat.equals(OsmFormat.PBF))
         {
             try
             {
-                reader = new OsmosisReader(inputFile);
                 System.out.println("osm pbf map to read: " + filename);
+                processor.initialize();
+                new OsmPbfReader(inputFile, processor);
+                processor.complete();
             }
             catch (Exception exception)
             {
-                sinkImplementation.close();
                 throw new IOException("Error during reading of OSM file " + filename, exception);
             }
         }
         else
         {
-            InputStream fis = this.osmURL.openStream();
-            reader = new XmlStreamReader(fis, false, compression);
-            System.out.println("osm xml map to read: " + filename);
-        }
-
-        reader.setSink(sinkImplementation);
-        Thread readerThread = new Thread(reader);
-        readerThread.start();
-
-        while (readerThread.isAlive())
-        {
             try
             {
-                readerThread.join();
+                System.out.println("osm xml map to read: " + filename);
+                processor.initialize();
+                new OsmXmlReader(inputFile, processor, osmFormat);
+                processor.complete();
             }
-            catch (InterruptedException e)
+            catch (Exception exception)
             {
-                System.err.println("The map reader thread got a problem!");
-                throw new IOException(e);
+                throw new IOException("Error during reading of OSM file " + filename, exception);
             }
         }
-
         System.out.println("OSM layer has been read");
     }
 

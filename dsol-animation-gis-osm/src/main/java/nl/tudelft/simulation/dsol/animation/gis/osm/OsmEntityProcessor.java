@@ -1,20 +1,10 @@
 package nl.tudelft.simulation.dsol.animation.gis.osm;
 
 import java.awt.geom.Path2D;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.openstreetmap.osmosis.core.container.v0_6.EntityContainer;
-import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
-import org.openstreetmap.osmosis.core.domain.v0_6.Node;
-import org.openstreetmap.osmosis.core.domain.v0_6.Relation;
-import org.openstreetmap.osmosis.core.domain.v0_6.Tag;
-import org.openstreetmap.osmosis.core.domain.v0_6.Way;
-import org.openstreetmap.osmosis.core.domain.v0_6.WayNode;
-import org.openstreetmap.osmosis.core.task.v0_6.Sink;
 
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
@@ -23,7 +13,7 @@ import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
 
 /**
- * OsmLayerSink.java.
+ * OsmEntityProcessor processes one read entity from the input file.
  * <p>
  * Copyright (c) 2021-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -32,7 +22,7 @@ import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public class OsmLayerSink implements Sink
+public class OsmEntityProcessor
 {
     /** the ways in the OSM file. */
     private Map<Long, MiniWay> ways = new HashMap<Long, MiniWay>();
@@ -50,25 +40,25 @@ public class OsmLayerSink implements Sink
      * Construct a sink to read the features form the OSM file. For OSM this the Feature list is typically the complete set of
      * features that needs to be read. It is rare that multiple OSM files are available for the data, but this could be the case
      * (e.g., state or country OSM files).<br>
-     * TODO: add an optional initial extent in case the sounrce's extent is much larger than the extent we want to display
+     * TODO: add an optional initial extent in case the source's extent is much larger than the extent we want to display
      * @param featuresToRead the features that the sink needs to read.
      * @param coordinateTransform the transformation of (x, y) coordinates to (x', y') coordinates.
      */
-    public OsmLayerSink(final List<FeatureInterface> featuresToRead, final CoordinateTransform coordinateTransform)
+    public OsmEntityProcessor(final List<FeatureInterface> featuresToRead, final CoordinateTransform coordinateTransform)
     {
         this.featuresToRead = featuresToRead;
         this.coordinateTransform = coordinateTransform;
     }
 
-    @Override
-    public void process(final EntityContainer entityContainer)
+    /**
+     * Process an entity that was just read.
+     * @param entity the node, way or other OSM entity
+     */
+    public void process(final OsmEntity entity)
     {
-        Entity entity = entityContainer.getEntity();
-
-        if (entity instanceof Node)
+        if (entity instanceof Node node)
         {
-            Node node = (Node) entity;
-            MiniNode miniNode = new MiniNode(node.getId(), (float) node.getLatitude(), (float) node.getLongitude());
+            MiniNode miniNode = new MiniNode(node.getId(), (float) node.getLat(), (float) node.getLon());
             this.nodes.put(miniNode.id, miniNode);
             /*-
             Iterator<Tag> tagIterator = entity.getTags().iterator();
@@ -82,16 +72,14 @@ public class OsmLayerSink implements Sink
             */
         }
 
-        else if (entity instanceof Way)
+        else if (entity instanceof Way way)
         {
             boolean read = false;
-            Iterator<Tag> tagIterator = entity.getTags().iterator();
             FeatureInterface featureToUse = null;
-            while (tagIterator.hasNext())
+            for (var entry : way.getTags().entrySet())
             {
-                Tag tag = tagIterator.next();
-                String key = tag.getKey();
-                String value = tag.getValue();
+                String key = entry.getKey();
+                String value = entry.getValue();
                 for (FeatureInterface feature : this.featuresToRead)
                 {
                     if (feature.getKey().equals("*"))
@@ -111,16 +99,26 @@ public class OsmLayerSink implements Sink
                     }
                 }
                 if (read)
-                { break; }
+                {
+                    break;
+                }
             }
             if (read)
             {
-                Way way = (Way) entity;
-                MiniWay miniWay = new MiniWay(way.getId(), featureToUse, way.getWayNodes());
+                List<MiniNode> wayNodes = new ArrayList<>();
+                for (long nodeId : way.getRefs())
+                {
+                    MiniNode node = this.nodes.get(nodeId);
+                    if (node == null)
+                        continue;
+                    wayNodes.add(node);
+                }
+                MiniWay miniWay = new MiniWay(way.getId(), featureToUse, wayNodes);
                 this.ways.put(miniWay.id, miniWay);
             }
         }
 
+        /*-
         else if (entity instanceof Relation)
         {
             Iterator<Tag> tagint = entity.getTags().iterator();
@@ -129,22 +127,28 @@ public class OsmLayerSink implements Sink
                 Tag route = tagint.next();
             }
         }
+        */
 
     }
 
-    @Override
-    public void initialize(final Map<String, Object> metaData)
+    /**
+     * Preprocessing of the data.
+     */
+    public void initialize()
     {
-        // nothing to do right now.
+        // Nothing to do right now
     }
 
-    @Override
+    /**
+     * Postprocessing of the data.
+     */
     public void complete()
     {
         for (MiniWay way : this.ways.values())
         {
             addWay(way);
         }
+        System.out.println("Nodes read: " + this.nodes.size() + ", ways read: " + this.ways.size());
     }
 
     /**
@@ -176,12 +180,6 @@ public class OsmLayerSink implements Sink
         }
         String[] att = new String[0];
         way.feature.getShapes().add(new GisObject(path, att));
-    }
-
-    @Override
-    public void close()
-    {
-        // nothing to do right now.
     }
 
     /**
@@ -242,7 +240,7 @@ public class OsmLayerSink implements Sink
          * @param feature the feature that characterizes this way
          * @param wayNodes the way nodes
          */
-        public MiniWay(final long id, final FeatureInterface feature, final Collection<WayNode> wayNodes)
+        public MiniWay(final long id, final FeatureInterface feature, final List<MiniNode> wayNodes)
         {
             this.id = id;
             this.feature = feature;
@@ -250,14 +248,13 @@ public class OsmLayerSink implements Sink
             this.wayNodesLon = new float[wayNodes.size()];
             this.wayNodesId = new long[wayNodes.size()];
             int i = 0;
-            for (WayNode wayNode : wayNodes)
+            for (MiniNode wayNode : wayNodes)
             {
-                this.wayNodesLat[i] = (float) wayNode.getLatitude();
-                this.wayNodesLon[i] = (float) wayNode.getLongitude();
-                this.wayNodesId[i] = wayNode.getNodeId();
+                this.wayNodesLat[i] = (float) wayNode.lat;
+                this.wayNodesLon[i] = (float) wayNode.lon;
+                this.wayNodesId[i] = wayNode.id;
                 i++;
             }
         }
-
     }
 }
