@@ -99,9 +99,9 @@ public class WebMM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>
             // The queue, the resource and the release
             var resource = new Resource.DoubleCapacity<Double>("resource", this.simulator, capacity);
 
-            // created the caiming and releasing of the resource
+            // created the claiming and releasing of the resource (default capacity = 1)
             var seize = new Seize.DoubleCapacity<Double>("Seize", this.simulator, resource);
-            var release = new Release<Double>("Release", this.simulator, resource, 1.0);
+            var release = new Release.DoubleCapacity<Double>("Release", this.simulator, resource);
 
             // The server
             DistContinuousSimulationTime<Double> serviceTime =
