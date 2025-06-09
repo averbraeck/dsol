@@ -20,30 +20,15 @@
     </dependency>
 
     <dependency>
-      <groupId>org.openstreetmap.osmosis</groupId>
-      <artifactId>osmosis-set</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
     </dependency>
-
+    
     <dependency>
-      <groupId>org.openstreetmap.osmosis</groupId>
-      <artifactId>osmosis-xml</artifactId>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>org.openstreetmap.osmosis</groupId>
-      <artifactId>osmosis-core</artifactId>
-    </dependency>
-
-    <!-- dependency>
-      <groupId>org.openstreetmap.osmosis</groupId>
-      <artifactId>osmosis-osm-binary</artifactId>
-    </dependency-->
-
-    <dependency>
-      <groupId>org.openstreetmap.osmosis</groupId>
-      <artifactId>osmosis-pbf</artifactId>
-    </dependency>
-
+    
     <dependency>
       <groupId>de.siegmar</groupId>
       <artifactId>fastcsv</artifactId>

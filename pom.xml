@@ -52,9 +52,9 @@
     <djutils.version>2.3.2</djutils.version>
     <jetty.version>11.0.25</jetty.version>
     <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
-    <osm.version>0.49.2</osm.version>
     <fastcsv.version>2.2.2</fastcsv.version>
     <commons-compress.version>1.27.1</commons-compress.version>
+    <protobuf.version>4.31.1</protobuf.version>
 
     <maven.compiler.version>3.14.0</maven.compiler.version>
     <maven.site.version>3.21.0</maven.site.version>
@@ -253,37 +253,19 @@
         <artifactId>jakarta.annotation-api</artifactId>
         <version>${jakarta.annotation.version}</version>
       </dependency>
-
+      
       <dependency>
-        <groupId>org.openstreetmap.osmosis</groupId>
-        <artifactId>osmosis-set</artifactId>
-        <version>${osm.version}</version>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>${commons-compress.version}</version>
       </dependency>
-
+      
       <dependency>
-        <groupId>org.openstreetmap.osmosis</groupId>
-        <artifactId>osmosis-xml</artifactId>
-        <version>${osm.version}</version>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java</artifactId>
+        <version>${protobuf.version}</version>
       </dependency>
-
-      <dependency>
-        <groupId>org.openstreetmap.osmosis</groupId>
-        <artifactId>osmosis-core</artifactId>
-        <version>${osm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.openstreetmap.osmosis</groupId>
-        <artifactId>osmosis-osm-binary</artifactId>
-        <version>${osm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.openstreetmap.osmosis</groupId>
-        <artifactId>osmosis-pbf</artifactId>
-        <version>${osm.version}</version>
-      </dependency>
-
+      
       <dependency>
         <groupId>de.siegmar</groupId>
         <artifactId>fastcsv</artifactId>
@@ -409,7 +391,6 @@
         <configuration>
           <offlineLinks>
             <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
-            <offlineLink><url>https://x-stream.github.io/javadoc/</url></offlineLink>
             <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
             <offlineLink><url>https://djunits.org/docs/latest/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/apidocs/</url></offlineLink>
@@ -421,11 +402,6 @@
             <offlineLink><url>https://javadoc.io/doc/org.jfree/jcommon/latest/index.html</url></offlineLink>
             <offlineLink><url>https://javadoc.io/doc/org.eclipse.jetty/jetty-server/latest/org.eclipse.jetty.server/</url></offlineLink>
             <offlineLink><url>https://javadoc.io/doc/jakarta.annotation/jakarta.annotation-api/latest/jakarta.annotation/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-core/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-pbf/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-set/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-osm-binary/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-xml/latest/</url></offlineLink>
             <offlineLink><url>https://javadoc.io/doc/de.siegmar/fastcsv/latest/de.siegmar.fastcsv/</url></offlineLink>
           </offlineLinks>
           <minmemory>256m</minmemory>
@@ -662,7 +638,6 @@
         <configuration>
           <offlineLinks>
             <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
-            <offlineLink><url>https://x-stream.github.io/javadoc/</url></offlineLink>
             <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
             <offlineLink><url>https://djunits.org/docs/latest/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/apidocs/</url></offlineLink>
@@ -674,11 +649,6 @@
             <offlineLink><url>https://javadoc.io/doc/org.jfree/jcommon/latest/index.html</url></offlineLink>
             <offlineLink><url>https://javadoc.io/doc/org.eclipse.jetty/jetty-server/latest/org.eclipse.jetty.server/</url></offlineLink>
             <offlineLink><url>https://javadoc.io/doc/jakarta.annotation/jakarta.annotation-api/latest/jakarta.annotation/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-core/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-pbf/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-set/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-osm-binary/latest/</url></offlineLink>
-            <offlineLink><url>https://javadoc.io/doc/org.openstreetmap.osmosis/osmosis-xml/latest/</url></offlineLink>
             <offlineLink><url>https://javadoc.io/doc/de.siegmar/fastcsv/latest/de.siegmar.fastcsv/</url></offlineLink>
           </offlineLinks>
           <minmemory>256m</minmemory>
