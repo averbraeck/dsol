@@ -201,29 +201,33 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         public void setCapacity(final double capacity)
         {
             this.capacity = capacity;
-            this.releaseCapacity(0.0);
+            this.releaseCapacity(null, 0.0);
         }
 
         /**
          * Request an amount of capacity from the resource, without a priority. A dummy priority value of 0 is used.
+         * @param entity the entity claiming the amount from the resource
          * @param amount the requested amount
          * @param requestor the RequestorInterface requesting the amount
          */
-        public synchronized void requestCapacity(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor)
+        public synchronized void requestCapacity(final Entity<T> entity, final double amount,
+                final CapacityRequestor.DoubleCapacity<T> requestor)
         {
-            this.requestCapacity(amount, requestor, 0);
+            this.requestCapacity(entity, amount, requestor, 0);
         }
 
         /**
          * Request an amount of capacity from the resource, with an integer priority value.
+         * @param entity the entity claiming the amount from the resource
          * @param amount the requested amount
          * @param requestor the RequestorInterface requesting the amount
          * @param priority the priority of the request
          */
-        public synchronized void requestCapacity(final double amount, final CapacityRequestor.DoubleCapacity<T> requestor,
-                final int priority)
+        public synchronized void requestCapacity(final Entity<T> entity, final double amount,
+                final CapacityRequestor.DoubleCapacity<T> requestor, final int priority)
         {
             Throw.when(amount < 0.0, SimRuntimeException.class, "requested capacity on resource cannot be < 0.0");
+            Throw.whenNull(entity, "entity cannot be null");
             if ((this.claimedCapacity + amount) <= this.capacity)
             {
                 changeClaimedCapacity(amount);
@@ -241,11 +245,13 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
         /**
          * Release an amount of capacity from the resource.
+         * @param entity the entity releasing the amount from the resource
          * @param amount the amount to release
          */
-        public void releaseCapacity(final double amount)
+        public void releaseCapacity(final Entity<T> entity, final double amount)
         {
             Throw.when(amount < 0.0, SimRuntimeException.class, "released capacity on resource cannot be < 0.0");
+            Throw.when(entity == null && amount != 0, IllegalArgumentException.class, "entity cannot be null when amount > 0");
             changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
             synchronized (getRequestQueue())
             {
@@ -342,29 +348,33 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
         public void setCapacity(final int capacity)
         {
             this.capacity = capacity;
-            this.releaseCapacity(0);
+            this.releaseCapacity(null, 0);
         }
 
         /**
          * Request an amount of capacity from the resource, without a priority. A dummy priority value of 0 is used.
+         * @param entity the entity claiming the amount from the resource
          * @param amount the requested amount
          * @param requestor the RequestorInterface requesting the amount
          */
-        public synchronized void requestCapacity(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor)
+        public synchronized void requestCapacity(final Entity<T> entity, final int amount,
+                final CapacityRequestor.IntegerCapacity<T> requestor)
         {
-            this.requestCapacity(amount, requestor, 0);
+            this.requestCapacity(entity, amount, requestor, 0);
         }
 
         /**
          * Request an amount of capacity from the resource, with an integer priority value.
+         * @param entity the entity claiming the amount from the resource
          * @param amount the requested amount
          * @param requestor the RequestorInterface requesting the amount
          * @param priority the priority of the request
          */
-        public synchronized void requestCapacity(final int amount, final CapacityRequestor.IntegerCapacity<T> requestor,
-                final int priority)
+        public synchronized void requestCapacity(final Entity<T> entity, final int amount,
+                final CapacityRequestor.IntegerCapacity<T> requestor, final int priority)
         {
             Throw.when(amount < 0, SimRuntimeException.class, "requested capacity on resource cannot be < 0");
+            Throw.whenNull(entity, "entity cannot be null");
             if ((this.claimedCapacity + amount) <= this.capacity)
             {
                 changeClaimedCapacity(amount);
@@ -382,11 +392,13 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
 
         /**
          * Release an amount of capacity from the resource.
+         * @param entity the entity releasing the amount from the resource
          * @param amount the amount to release
          */
-        public void releaseCapacity(final int amount)
+        public void releaseCapacity(final Entity<T> entity, final int amount)
         {
             Throw.when(amount < 0, SimRuntimeException.class, "released capacity on resource cannot be < 0");
+            Throw.when(entity == null && amount != 0, IllegalArgumentException.class, "entity cannot be null when amount > 0");
             changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
             synchronized (getRequestQueue())
             {

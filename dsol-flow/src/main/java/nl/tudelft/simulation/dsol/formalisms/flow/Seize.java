@@ -223,7 +223,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
                 this.storage.add(storedEntity);
             }
             this.fireTimedEvent(Seize.NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
-            getResource().requestCapacity(requestedCapacity, this);
+            getResource().requestCapacity(entity, requestedCapacity, this);
         }
 
         @Override
@@ -350,7 +350,7 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
                 this.storage.add(storedEntity);
             }
             this.fireTimedEvent(Seize.NUMBER_STORED_EVENT, this.storage.size(), getSimulator().getSimulatorTime());
-            getResource().requestCapacity(requestedCapacity, this);
+            getResource().requestCapacity(entity, requestedCapacity, this);
         }
 
         @Override

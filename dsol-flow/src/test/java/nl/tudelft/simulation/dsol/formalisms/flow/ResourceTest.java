@@ -47,6 +47,7 @@ public class ResourceTest extends FlowTest
             public void constructModel() throws SimRuntimeException
             {
                 var resource = new Resource.DoubleCapacity<Double>("resource", this.simulator, 1.0);
+                var entity = new Entity<>("entity:1", this.simulator);
                 assertEquals("resource", resource.getId());
                 assertEquals(this.simulator, resource.getSimulator());
                 assertEquals(1.0, resource.getCapacity());
@@ -62,8 +63,8 @@ public class ResourceTest extends FlowTest
                 resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
                 assertEquals(ReleaseType.ENTIRE_QUEUE, resource.getReleaseType());
                 resource.setReleaseType(ReleaseType.FIRST_ONLY);
-                Try.testFail(() -> resource.requestCapacity(-1.0, null));
-                Try.testFail(() -> resource.releaseCapacity(-1.0));
+                Try.testFail(() -> resource.requestCapacity(entity, -1.0, null));
+                Try.testFail(() -> resource.releaseCapacity(entity, -1.0));
 
                 assertNotNull(resource.getRequestQueue());
                 Queue<Double> queue = resource.getRequestQueue();
@@ -93,6 +94,7 @@ public class ResourceTest extends FlowTest
             public void constructModel() throws SimRuntimeException
             {
                 var resource = new Resource.DoubleCapacity<Double>("resource", this.simulator, 1.0);
+                var entity = new Entity<>("entity:1", this.simulator);
                 resource.setDefaultStatistics();
                 assertTrue(resource.hasDefaultStatistics());
                 assertNotNull(resource.getUtilizationStatistic());
@@ -131,7 +133,7 @@ public class ResourceTest extends FlowTest
                         this.time = resource.getSimulator().getSimulatorTime();
                     }
                 };
-                this.simulator.scheduleEventRel(0.0, () -> resource.requestCapacity(1.0, requestor1));
+                this.simulator.scheduleEventRel(0.0, () -> resource.requestCapacity(entity, 1.0, requestor1));
                 this.simulator.scheduleEventRel(1.0, () ->
                 {
                     assertEquals(1.0, resource.getCapacity());
@@ -143,15 +145,15 @@ public class ResourceTest extends FlowTest
                 });
                 this.simulator.scheduleEventRel(2.0, () ->
                 {
-                    resource.releaseCapacity(1.0);
+                    resource.releaseCapacity(entity, 1.0);
                     assertEquals(1.0, resource.getCapacity());
                     assertEquals(1.0, resource.getAvailableCapacity());
                     assertEquals(0.0, resource.getClaimedCapacity());
                     assertEquals(0, queue.getNumberRequestsInQueue());
                     assertEquals(1.0, resource.getUtilizationStatistic().getWeightedPopulationMean());
                 });
-                this.simulator.scheduleEventRel(4.0, () -> resource.requestCapacity(0.5, requestor1));
-                this.simulator.scheduleEventRel(4.0, () -> resource.requestCapacity(1.0, requestor2));
+                this.simulator.scheduleEventRel(4.0, () -> resource.requestCapacity(entity, 0.5, requestor1));
+                this.simulator.scheduleEventRel(4.0, () -> resource.requestCapacity(entity, 1.0, requestor2));
                 this.simulator.scheduleEventRel(6.0, () ->
                 {
                     assertEquals(1.0, resource.getCapacity());
@@ -166,7 +168,7 @@ public class ResourceTest extends FlowTest
                 });
                 this.simulator.scheduleEventRel(8.0, () ->
                 {
-                    resource.releaseCapacity(0.5);
+                    resource.releaseCapacity(entity, 0.5);
                     assertEquals(1.0, resource.getCapacity());
                     assertEquals(0.0, resource.getAvailableCapacity());
                     assertEquals(1.0, resource.getClaimedCapacity());
@@ -312,40 +314,41 @@ public class ResourceTest extends FlowTest
                 };
 
                 var resource = new Resource.DoubleCapacity<Double>("resource", this.simulator, 0.0);
+                var entity = new Entity<>("entity:1", this.simulator);
                 resource.setReleaseType(ReleaseType.FIRST_ONLY);
                 resource.setDefaultStatistics();
-                resource.requestCapacity(0.1, requestor);
-                resource.requestCapacity(0.2, requestor);
-                resource.requestCapacity(1.0, requestor);
-                resource.requestCapacity(0.3, requestor);
-                resource.requestCapacity(0.1, requestor);
-                resource.requestCapacity(0.5, requestor);
+                resource.requestCapacity(entity, 0.1, requestor);
+                resource.requestCapacity(entity, 0.2, requestor);
+                resource.requestCapacity(entity, 1.0, requestor);
+                resource.requestCapacity(entity, 0.3, requestor);
+                resource.requestCapacity(entity, 0.1, requestor);
+                resource.requestCapacity(entity, 0.5, requestor);
                 assertEquals(0, requestor.count);
                 assertEquals(0.0, requestor.received);
                 resource.setCapacity(1.0);
                 assertEquals(2, requestor.count);
                 assertEquals(0.3, requestor.received, 1E-6);
                 resource.setCapacity(10.0);
-                resource.releaseCapacity(2.2);
+                resource.releaseCapacity(entity, 2.2);
                 assertEquals(6, requestor.count);
 
                 resource.setCapacity(0.0);
                 resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
                 requestor.count = 0;
                 requestor.received = 0.0;
-                resource.requestCapacity(0.1, requestor);
-                resource.requestCapacity(0.2, requestor);
-                resource.requestCapacity(1.0, requestor);
-                resource.requestCapacity(0.3, requestor);
-                resource.requestCapacity(0.1, requestor);
-                resource.requestCapacity(0.5, requestor);
+                resource.requestCapacity(entity, 0.1, requestor);
+                resource.requestCapacity(entity, 0.2, requestor);
+                resource.requestCapacity(entity, 1.0, requestor);
+                resource.requestCapacity(entity, 0.3, requestor);
+                resource.requestCapacity(entity, 0.1, requestor);
+                resource.requestCapacity(entity, 0.5, requestor);
                 assertEquals(0, requestor.count);
                 assertEquals(0.0, requestor.received);
                 resource.setCapacity(1.0);
                 assertEquals(4, requestor.count);
                 assertEquals(0.7, requestor.received, 1E-6);
                 resource.setCapacity(10.0);
-                resource.releaseCapacity(2.2);
+                resource.releaseCapacity(entity, 2.2);
                 assertEquals(6, requestor.count);
             }
         };
@@ -366,6 +369,7 @@ public class ResourceTest extends FlowTest
             public void constructModel() throws SimRuntimeException
             {
                 var resource = new Resource.IntegerCapacity<Double>("resource", this.simulator, 1);
+                var entity = new Entity<>("entity:1", this.simulator);
                 assertEquals("resource", resource.getId());
                 assertEquals(this.simulator, resource.getSimulator());
                 assertEquals(1, resource.getCapacity());
@@ -381,8 +385,8 @@ public class ResourceTest extends FlowTest
                 resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
                 assertEquals(ReleaseType.ENTIRE_QUEUE, resource.getReleaseType());
                 resource.setReleaseType(ReleaseType.FIRST_ONLY);
-                Try.testFail(() -> resource.requestCapacity(-1, null));
-                Try.testFail(() -> resource.releaseCapacity(-1));
+                Try.testFail(() -> resource.requestCapacity(entity, -1, null));
+                Try.testFail(() -> resource.releaseCapacity(entity, -1));
 
                 assertNotNull(resource.getRequestQueue());
                 Queue<Double> queue = resource.getRequestQueue();
@@ -412,6 +416,7 @@ public class ResourceTest extends FlowTest
             public void constructModel() throws SimRuntimeException
             {
                 var resource = new Resource.IntegerCapacity<Double>("resource", this.simulator, 1);
+                var entity = new Entity<>("entity:1", this.simulator);
                 resource.setDefaultStatistics();
                 assertTrue(resource.hasDefaultStatistics());
                 assertNotNull(resource.getUtilizationStatistic());
@@ -450,7 +455,7 @@ public class ResourceTest extends FlowTest
                         this.time = resource.getSimulator().getSimulatorTime();
                     }
                 };
-                this.simulator.scheduleEventRel(0.0, () -> resource.requestCapacity(1, requestor1));
+                this.simulator.scheduleEventRel(0.0, () -> resource.requestCapacity(entity, 1, requestor1));
                 this.simulator.scheduleEventRel(1.0, () ->
                 {
                     assertEquals(1, resource.getCapacity());
@@ -462,7 +467,7 @@ public class ResourceTest extends FlowTest
                 });
                 this.simulator.scheduleEventRel(2.0, () ->
                 {
-                    resource.releaseCapacity(1);
+                    resource.releaseCapacity(entity, 1);
                     assertEquals(1, resource.getCapacity());
                     assertEquals(1, resource.getAvailableCapacity());
                     assertEquals(0, resource.getClaimedCapacity());
@@ -472,9 +477,9 @@ public class ResourceTest extends FlowTest
                 this.simulator.scheduleEventRel(4.0, () ->
                 {
                     resource.setCapacity(2);
-                    resource.requestCapacity(1, requestor1);
+                    resource.requestCapacity(entity, 1, requestor1);
                 });
-                this.simulator.scheduleEventRel(4.0, () -> resource.requestCapacity(2, requestor2));
+                this.simulator.scheduleEventRel(4.0, () -> resource.requestCapacity(entity, 2, requestor2));
                 this.simulator.scheduleEventRel(6.0, () ->
                 {
                     assertEquals(2, resource.getCapacity());
@@ -489,7 +494,7 @@ public class ResourceTest extends FlowTest
                 });
                 this.simulator.scheduleEventRel(8.0, () ->
                 {
-                    resource.releaseCapacity(1);
+                    resource.releaseCapacity(entity, 1);
                     assertEquals(2, resource.getCapacity());
                     assertEquals(0, resource.getAvailableCapacity());
                     assertEquals(2, resource.getClaimedCapacity());
@@ -536,40 +541,41 @@ public class ResourceTest extends FlowTest
                 };
 
                 var resource = new Resource.IntegerCapacity<Double>("resource", this.simulator, 0);
+                var entity = new Entity<>("entity:1", this.simulator);
                 resource.setReleaseType(ReleaseType.FIRST_ONLY);
                 resource.setDefaultStatistics();
-                resource.requestCapacity(1, requestor);
-                resource.requestCapacity(2, requestor);
-                resource.requestCapacity(10, requestor);
-                resource.requestCapacity(3, requestor);
-                resource.requestCapacity(1, requestor);
-                resource.requestCapacity(5, requestor);
+                resource.requestCapacity(entity, 1, requestor);
+                resource.requestCapacity(entity, 2, requestor);
+                resource.requestCapacity(entity, 10, requestor);
+                resource.requestCapacity(entity, 3, requestor);
+                resource.requestCapacity(entity, 1, requestor);
+                resource.requestCapacity(entity, 5, requestor);
                 assertEquals(0, requestor.count);
                 assertEquals(0, requestor.received);
                 resource.setCapacity(10);
                 assertEquals(2, requestor.count);
                 assertEquals(3, requestor.received);
                 resource.setCapacity(100);
-                resource.releaseCapacity(22);
+                resource.releaseCapacity(entity, 22);
                 assertEquals(6, requestor.count);
 
                 resource.setCapacity(0);
                 resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
                 requestor.count = 0;
                 requestor.received = 0;
-                resource.requestCapacity(1, requestor);
-                resource.requestCapacity(2, requestor);
-                resource.requestCapacity(10, requestor);
-                resource.requestCapacity(3, requestor);
-                resource.requestCapacity(1, requestor);
-                resource.requestCapacity(5, requestor);
+                resource.requestCapacity(entity, 1, requestor);
+                resource.requestCapacity(entity, 2, requestor);
+                resource.requestCapacity(entity, 10, requestor);
+                resource.requestCapacity(entity, 3, requestor);
+                resource.requestCapacity(entity, 1, requestor);
+                resource.requestCapacity(entity, 5, requestor);
                 assertEquals(0, requestor.count);
                 assertEquals(0, requestor.received);
                 resource.setCapacity(10);
                 assertEquals(4, requestor.count);
                 assertEquals(7, requestor.received);
                 resource.setCapacity(100);
-                resource.releaseCapacity(22);
+                resource.releaseCapacity(entity, 22);
                 assertEquals(6, requestor.count);
             }
         };

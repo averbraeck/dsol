@@ -121,7 +121,7 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
         protected synchronized void receiveEntity(final Entity<T> entity, final double releasedCapacity)
         {
             super.receiveEntity(entity);
-            getResource().releaseCapacity(releasedCapacity);
+            getResource().releaseCapacity(entity, releasedCapacity);
             this.releaseEntity(entity);
         }
 
@@ -221,7 +221,7 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
         protected synchronized void receiveEntity(final Entity<T> entity, final int releasedCapacity)
         {
             super.receiveEntity(entity);
-            getResource().releaseCapacity(releasedCapacity);
+            getResource().releaseCapacity(entity, releasedCapacity);
             this.releaseEntity(entity);
         }
 
