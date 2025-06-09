@@ -77,7 +77,8 @@ public class FlowQueueingModel1 extends AbstractDsolModel<Double, DevsSimulatorI
         seize.setDestination(delay);
 
         // release the resource
-        var release = new Release<Double>("release", getSimulator(), resource);
+        var release = new Release.DoubleCapacity<Double>("release", getSimulator(), resource);
+        release.setFixedCapacityRelease(1.0);
         delay.setDestination(release);
 
         // depart from the model

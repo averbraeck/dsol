@@ -100,22 +100,24 @@ public class MM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
             var resource = new Resource.DoubleCapacity<>("resource", this.simulator, capacity);
             resource.setDefaultStatistics();
 
-            // created the claiming and releasing of the resource
+            // created the claiming of the resource
             var seize = new Seize.DoubleCapacity<Double>("Seize", this.simulator, resource);
             seize.setFixedCapacityClaim(1.0);
             seize.setDefaultStatistics();
 
-            var release = new Release<Double>("Release", this.simulator, resource, 1.0);
-
-            // The server
+            // The delay for the service
             DistContinuousSimulationTime<Double> serviceTime =
                     new DistContinuousSimulationTime.TimeDouble(new DistExponential(defaultStream, avgServiceTime));
-            var server = new Delay<Double>("Delay", this.simulator).setDelayDistribution(serviceTime);
+            var service = new Delay<Double>("Delay", this.simulator).setDelayDistribution(serviceTime);
+
+            // release the claimed resource
+            var release = new Release.DoubleCapacity<Double>("Release", this.simulator, resource);
+            release.setFixedCapacityRelease(1.0);
 
             // The flow
             generator.setDestination(seize);
-            seize.setDestination(server);
-            server.setDestination(release);
+            seize.setDestination(service);
+            service.setDestination(release);
 
             // Statistics
             this.dN = seize.getStorageTimeStatistic();
