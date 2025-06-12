@@ -263,7 +263,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
             Throw.when(entity == null && amount != 0, IllegalArgumentException.class, "entity cannot be null when amount > 0");
             if (entity != null && amount != 0.0)
             {
-                Throw.when(Math.abs(amount - this.claimedCapacity) > 8 * Math.ulp(amount), IllegalStateException.class,
+                Throw.when(amount - this.claimedCapacity > 8 * Math.ulp(amount), IllegalStateException.class,
                         "Trying to release more capacity than claimed for this resource");
                 Throw.when(amount - this.claimMap.getOrDefault(entity, 0.0) > 8 * Math.ulp(amount), IllegalStateException.class,
                         "Trying to release more capacity than originally claimed by this entity");
