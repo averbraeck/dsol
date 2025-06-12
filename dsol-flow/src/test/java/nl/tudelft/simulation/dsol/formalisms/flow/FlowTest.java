@@ -1,21 +1,12 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.Test;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
-import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.model.DsolModel;
-import nl.tudelft.simulation.dsol.simtime.dist.DistContinuousSimulationTime;
-import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
-import nl.tudelft.simulation.jstats.distributions.DistExponential;
-import nl.tudelft.simulation.jstats.streams.MersenneTwister;
-import nl.tudelft.simulation.jstats.streams.StreamInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 
 /**
@@ -30,38 +21,6 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
  */
 public class FlowTest
 {
-    /**
-     * Test the Delay.
-     */
-    @Test
-    public void delayTest()
-    {
-        DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
-        DsolModel<Double, DevsSimulatorInterface<Double>> model = makeModelDouble(simulator);
-        SingleReplication<Double> replication = new SingleReplication<Double>("replication", 0.0, 0.0, 100.0);
-        simulator.initialize(model, replication);
-        simulator.runUpTo(1.0);
-        wait(simulator, 500);
-        int nrEvents = simulator.getEventList().size();
-        StreamInterface stream = new MersenneTwister(10L);
-        DistContinuousSimulationTime<Double> delayDistribution =
-                new DistContinuousSimulationTime.TimeDouble(new DistExponential(stream, 10.0));
-        Delay<Double> delay = new Delay<Double>("delay", simulator).setDelayDistribution(delayDistribution);
-        assertEquals(simulator, delay.getSimulator());
-        assertEquals(nrEvents, simulator.getEventList().size());
-
-        Destroy<Double> departure = new Destroy<Double>("departure", simulator);
-        delay.setDestination(departure);
-        assertEquals(departure, delay.getDestination());
-        Entity<Double> object = new Entity<Double>("abc", simulator);
-        delay.receiveEntity(object);
-        assertEquals(nrEvents + 1, simulator.getEventList().size());
-        simulator.runUpTo(5.0);
-        wait(simulator, 500);
-        assertEquals(nrEvents, simulator.getEventList().size());
-        cleanUp(simulator);
-    }
-
     /**
      * Wait as long as simulator is running, or a timeout has happened.
      * @param simulator the simulator

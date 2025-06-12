@@ -12,6 +12,7 @@ import nl.tudelft.simulation.dsol.experiment.StreamInformation;
 import nl.tudelft.simulation.dsol.formalisms.flow.FlowModel.BlockNamingType;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.ErrorStrategy;
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 
 /**
@@ -32,7 +33,7 @@ public class FlowModelTest extends FlowTest
     @Test
     public void testFlowModelAutomaticId()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, BlockNamingType.AUTOMATIC)
         {
             private static final long serialVersionUID = 1L;
@@ -64,7 +65,7 @@ public class FlowModelTest extends FlowTest
     @Test
     public void testFlowModelById()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var streamInfo = new StreamInformation(new MersenneTwister(10L));
         var model = new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, streamInfo, BlockNamingType.BY_ID)
         {
@@ -99,6 +100,7 @@ public class FlowModelTest extends FlowTest
     public void testFlowModelConstructorError()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null)
         {
             private static final long serialVersionUID = 1L;

@@ -38,7 +38,7 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceDouble()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -85,7 +85,7 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceDoubleRequestRelease()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -214,7 +214,7 @@ public class ResourceTest extends FlowTest
     @Test
     public void testQueueSorting()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -290,7 +290,7 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceDoubleRegime()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -360,7 +360,7 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceInteger()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -407,7 +407,7 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceIntegerRequestRelease()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -518,6 +518,7 @@ public class ResourceTest extends FlowTest
     public void testResourceIntegerRegime()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;

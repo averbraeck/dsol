@@ -37,6 +37,7 @@ public class SeizeTest extends FlowTest
     public void testSeizeDouble()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -93,6 +94,7 @@ public class SeizeTest extends FlowTest
     public void testSeizeInteger()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -149,6 +151,7 @@ public class SeizeTest extends FlowTest
     public void testSeizeReceiveDouble()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -201,6 +204,7 @@ public class SeizeTest extends FlowTest
     public void testSeizeReceiveInteger()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -241,7 +245,6 @@ public class SeizeTest extends FlowTest
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
-        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         simulator.start();
         wait(simulator, 500);
         cleanUp(simulator);

@@ -45,7 +45,7 @@ public class DestroyTest extends FlowTest
     @Test
     public void testDestroyMethods()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -85,7 +85,7 @@ public class DestroyTest extends FlowTest
     @Test
     public void testDestroyErrors()
     {
-        var simulator = new DevsSimulator<Double>("sim");
+        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -108,6 +108,7 @@ public class DestroyTest extends FlowTest
     public void testDestroy100Entities()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Destroy<Double>[] destroyBlock = new Destroy[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)

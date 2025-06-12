@@ -51,6 +51,7 @@ public class CreateTest extends FlowTest
     public void testCreateMethods()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
@@ -191,6 +192,7 @@ public class CreateTest extends FlowTest
     public void testCreateErrors()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -270,6 +272,7 @@ public class CreateTest extends FlowTest
     public void testBatchSize10()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -311,6 +314,7 @@ public class CreateTest extends FlowTest
     public void testMaxNumberCreateEvents()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -351,6 +355,7 @@ public class CreateTest extends FlowTest
     public void testMaxNumberCreatedEntities()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -390,6 +395,7 @@ public class CreateTest extends FlowTest
     public void testEndTimeExclusive()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -473,6 +479,7 @@ public class CreateTest extends FlowTest
     public void testEndTimeInclusive()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -564,6 +571,7 @@ public class CreateTest extends FlowTest
     public void testIntervalChange()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -609,6 +617,7 @@ public class CreateTest extends FlowTest
     public void testIntervalChangeDecrease()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -658,6 +667,7 @@ public class CreateTest extends FlowTest
     public void testShiftEndTimeForward()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);
@@ -702,6 +712,7 @@ public class CreateTest extends FlowTest
     public void testChangeIntervalAfterEndTime()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Create<Double>[] createBlock = new Create[1];
         final AtomicInteger counter = new AtomicInteger(0);

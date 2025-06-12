@@ -51,6 +51,7 @@ public class DuplicateTest extends FlowTest
     public void testDuplicateMethods()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Duplicate<Double>[] duplicateBlock = new Duplicate[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
@@ -106,6 +107,7 @@ public class DuplicateTest extends FlowTest
     public void testDuplicateErrors()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -144,6 +146,7 @@ public class DuplicateTest extends FlowTest
     public void testDuplicate1Entity()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Entity<Double>[] entities = new Entity[2];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
@@ -211,6 +214,7 @@ public class DuplicateTest extends FlowTest
     public void testDuplicate100Entities()
     {
         var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         @SuppressWarnings("unchecked")
         final Duplicate<Double>[] duplicateBlock = new Duplicate[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
