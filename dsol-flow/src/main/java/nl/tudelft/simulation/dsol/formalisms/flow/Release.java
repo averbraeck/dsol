@@ -6,6 +6,8 @@ import java.util.function.ToIntFunction;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
+import nl.tudelft.simulation.dsol.statistics.SimPersistent;
+import nl.tudelft.simulation.dsol.statistics.SimTally;
 
 /**
  * The Release flow object releases a given quantity of a released resource.
@@ -32,6 +34,35 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
     public Release(final String id, final DevsSimulatorInterface<T> simulator)
     {
         super(id, simulator);
+    }
+
+    /**
+     * Return the resource that is claimed by entities in this Seize block.
+     * @return the resource that is claimed by entities in this Seize block
+     */
+    public abstract Resource<T, ?> getResource();
+
+    /**
+     * Turn on the default statistics for this Seize block.
+     * @return the Seize instance for method chaining
+     */
+    public Release<T> setDefaultStatistics()
+    {
+        if (!hasDefaultStatistics())
+        {
+            super.setDefaultFlowBlockStatistics();
+            getResource().setDefaultStatistics();
+        }
+        return this;
+    }
+
+    /**
+     * Return whether statistics are turned on for this Storage block.
+     * @return whether statistics are turned on for this Storage block.
+     */
+    public boolean hasDefaultStatistics()
+    {
+        return super.hasDefaultFlowBlockStatistics();
     }
 
     /**
@@ -99,6 +130,7 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
          * Return the resource that is released by entities in this Seize block.
          * @return the resource that is released by entities in this Seize block
          */
+        @Override
         public Resource.DoubleCapacity<T> getResource()
         {
             return this.resource;
@@ -199,6 +231,7 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
          * Return the resource that is released by entities in this Seize block.
          * @return the resource that is released by entities in this Seize block
          */
+        @Override
         public Resource.IntegerCapacity<T> getResource()
         {
             return this.resource;
