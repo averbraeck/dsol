@@ -6,8 +6,6 @@ import java.util.function.ToIntFunction;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
-import nl.tudelft.simulation.dsol.statistics.SimPersistent;
-import nl.tudelft.simulation.dsol.statistics.SimTally;
 
 /**
  * The Release flow object releases a given quantity of a released resource.
@@ -165,7 +163,7 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
             this.receiveEntity(entity, capacityRelease);
         }
     }
-    
+
     /**
      * Resource with integer capacity.
      * @param <T> the time type
