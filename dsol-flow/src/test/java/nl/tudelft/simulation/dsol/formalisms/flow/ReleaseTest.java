@@ -68,6 +68,10 @@ public class ReleaseTest extends FlowTest
                 assertNotNull(release.getResource().getRequestQueue().getQueueLengthStatistic());
                 assertNotNull(release.getResource().getRequestQueue().getTimeInQueueStatistic());
 
+                var rru = release.getResource().getUtilizationStatistic();
+                release.setDefaultStatistics();
+                assertEquals(rru, release.getResource().getUtilizationStatistic(), "Do not initialize statistics twice");
+
                 release.setFixedCapacityRelease(4.0);
                 assertEquals(4.0, release.getFixedCapacityRelease());
                 release.setFlexibleCapacityRelease((entity) -> 4.0);
@@ -160,7 +164,7 @@ public class ReleaseTest extends FlowTest
                 release.setFixedCapacityRelease(1.0);
                 release.setDefaultStatistics();
                 delay.setDestination(release);
-                
+
                 var e1 = new Entity<Double>("e1", this.simulator);
                 var e2 = new Entity<Double>("e2", this.simulator);
                 var e3 = new Entity<Double>("e3", this.simulator);
@@ -184,7 +188,7 @@ public class ReleaseTest extends FlowTest
                     assertEquals(0, release.getCountReceivedStatistic().getCount());
                     assertEquals(0, release.getCountReleasedStatistic().getCount());
                 });
-                
+
                 this.simulator.scheduleEventRel(3.0, () ->
                 {
                     assertEquals(2, release.getCountReceivedStatistic().getCount());
@@ -255,7 +259,7 @@ public class ReleaseTest extends FlowTest
                     assertEquals(0, release.getCountReceivedStatistic().getCount());
                     assertEquals(0, release.getCountReleasedStatistic().getCount());
                 });
-                
+
                 this.simulator.scheduleEventRel(3.0, () ->
                 {
                     assertEquals(2, release.getCountReceivedStatistic().getCount());
