@@ -102,7 +102,7 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
     @Override
     public int hashCode()
     {
-        return Objects.hash(this.id, this.priority, this.queueEntryTime);
+        return Objects.hash(this.amount, this.entity, this.id, this.priority, this.queueEntryTime);
     }
 
     /** {@inheritDoc} */
@@ -116,8 +116,8 @@ public abstract class CapacityRequest<T extends Number & Comparable<T>>
         if (getClass() != obj.getClass())
             return false;
         CapacityRequest<?> other = (CapacityRequest<?>) obj;
-        return this.id == other.id && this.priority == other.priority
-                && Objects.equals(this.queueEntryTime, other.queueEntryTime);
+        return Objects.equals(this.amount, other.amount) && Objects.equals(this.entity, other.entity) && this.id == other.id
+                && this.priority == other.priority && Objects.equals(this.queueEntryTime, other.queueEntryTime);
     }
 
     /**
