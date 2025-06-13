@@ -268,7 +268,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                 Throw.when(amount - this.claimMap.getOrDefault(entity, 0.0) > 8 * Math.ulp(amount), IllegalStateException.class,
                         "Trying to release more capacity than originally claimed by this entity");
                 changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
-                double newClaim = amount - this.claimMap.getOrDefault(entity, 0.0);
+                double newClaim = this.claimMap.get(entity) - amount;
                 if (Math.abs(newClaim) < 8 * Math.ulp(amount))
                     this.claimMap.remove(entity);
                 else
@@ -433,7 +433,7 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
                 Throw.when(amount > this.claimMap.getOrDefault(entity, 0), IllegalStateException.class,
                         "Trying to release more capacity than originally claimed by this entity");
                 changeClaimedCapacity(-Math.min(this.claimedCapacity, amount));
-                int newClaim = amount - this.claimMap.getOrDefault(entity, 0);
+                int newClaim = this.claimMap.get(entity) - amount;
                 if (Math.abs(newClaim) == 0)
                     this.claimMap.remove(entity);
                 else
