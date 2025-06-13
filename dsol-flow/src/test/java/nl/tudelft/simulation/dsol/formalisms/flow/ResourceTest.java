@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,7 +39,8 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceDouble()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -85,7 +87,8 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceDoubleRequestRelease()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -214,7 +217,8 @@ public class ResourceTest extends FlowTest
     @Test
     public void testQueueSorting()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -290,7 +294,8 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceDoubleRegime()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -360,7 +365,8 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceInteger()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -407,7 +413,8 @@ public class ResourceTest extends FlowTest
     @Test
     public void testResourceIntegerRequestRelease()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
             private static final long serialVersionUID = 1L;
@@ -578,6 +585,210 @@ public class ResourceTest extends FlowTest
                 resource.setCapacity(100);
                 resource.releaseCapacity(entity, 22);
                 assertEquals(6, requestor.count);
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        cleanUp(simulator);
+    }
+
+    /**
+     * Test capacity request for Double.
+     */
+    @Test
+    public void testCapacityRequestDouble()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        var entity = new Entity<Double>("e1", simulator);
+        var id = 12L;
+        var queueEntryTime = 0.5;
+        var amount = 1.0;
+        var priority = 4;
+        var requestor = new CapacityRequestor.DoubleCapacity<Double>()
+        {
+            @Override
+            public void receiveRequestedCapacity(final Entity<Double> entity, final double requestedCapacity,
+                    final Resource.DoubleCapacity<Double> resource)
+            {
+            }
+        };
+        var c1 = new CapacityRequest.DoubleCapacity<Double>(id, entity, requestor, amount, priority, queueEntryTime);
+        assertEquals(id, c1.getId());
+        assertEquals(entity, c1.getEntity());
+        assertEquals(requestor, c1.getRequestor());
+        assertEquals(amount, c1.getAmount());
+        assertEquals(priority, c1.getPriority());
+        assertEquals(queueEntryTime, c1.getQueueEntryTime());
+        var c2 = new CapacityRequest.DoubleCapacity<Double>(id, entity, requestor, amount, priority, queueEntryTime);
+        assertEquals(c1, c2);
+        assertEquals(c1, c1);
+        assertEquals(c1.hashCode(), c2.hashCode());
+        assertEquals(c1.toString(), c2.toString());
+        assertNotEquals(c1, new Object());
+        assertNotEquals(c1, null);
+        assertNotEquals(c1,
+                new CapacityRequest.DoubleCapacity<Double>(8L, entity, requestor, amount, priority, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.DoubleCapacity<Double>(id, new Entity<Double>("e2", simulator), requestor,
+                amount, priority, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.DoubleCapacity<Double>(id, entity, requestor, 18.2, priority, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.DoubleCapacity<Double>(id, entity, requestor, amount, 0, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.DoubleCapacity<Double>(id, entity, requestor, amount, priority, 17.2));
+    }
+
+    /**
+     * Test capacity request for Integer.
+     */
+    @Test
+    public void testCapacityRequestInteger()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        var entity = new Entity<Double>("e1", simulator);
+        var id = 12L;
+        var queueEntryTime = 0.5;
+        var amount = 1;
+        var priority = 4;
+        var requestor = new CapacityRequestor.IntegerCapacity<Double>()
+        {
+            @Override
+            public void receiveRequestedCapacity(final Entity<Double> entity, final int requestedCapacity,
+                    final Resource.IntegerCapacity<Double> resource)
+            {
+            }
+        };
+        var c1 = new CapacityRequest.IntegerCapacity<Double>(id, entity, requestor, amount, priority, queueEntryTime);
+        assertEquals(id, c1.getId());
+        assertEquals(entity, c1.getEntity());
+        assertEquals(requestor, c1.getRequestor());
+        assertEquals(amount, c1.getAmount());
+        assertEquals(priority, c1.getPriority());
+        assertEquals(queueEntryTime, c1.getQueueEntryTime());
+        var c2 = new CapacityRequest.IntegerCapacity<Double>(id, entity, requestor, amount, priority, queueEntryTime);
+        assertEquals(c1, c2);
+        assertEquals(c1, c1);
+        assertEquals(c1.hashCode(), c2.hashCode());
+        assertEquals(c1.toString(), c2.toString());
+        assertNotEquals(c1, new Object());
+        assertNotEquals(c1, null);
+        assertNotEquals(c1,
+                new CapacityRequest.IntegerCapacity<Double>(8L, entity, requestor, amount, priority, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.IntegerCapacity<Double>(id, new Entity<Double>("e2", simulator), requestor,
+                amount, priority, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.IntegerCapacity<Double>(id, entity, requestor, 18, priority, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.IntegerCapacity<Double>(id, entity, requestor, amount, 0, queueEntryTime));
+        assertNotEquals(c1, new CapacityRequest.IntegerCapacity<Double>(id, entity, requestor, amount, priority, 17.2));
+    }
+
+    /** Test the double-capacity resource and queue for multiple releases and errors. */
+    @Test
+    public void testMultipleReleaseDouble()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var resource = new Resource.DoubleCapacity<Double>("resource", this.simulator, 1.0);
+                var entity1 = new Entity<>("entity:1", this.simulator);
+                var entity2 = new Entity<>("entity:2", this.simulator);
+                var requestor = new CapacityRequestor.DoubleCapacity<Double>()
+                {
+                    @Override
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final double requestedCapacity,
+                            final Resource.DoubleCapacity<Double> resource)
+                    {
+                        assertEquals(0.5, requestedCapacity);
+                        assertEquals(entity1, entity);
+                    }
+                };
+                assertEquals("resource", resource.getId());
+                assertEquals(this.simulator, resource.getSimulator());
+                assertEquals(1.0, resource.getCapacity());
+                assertEquals(0.0, resource.getClaimedCapacity());
+                assertEquals(1.0, resource.getAvailableCapacity());
+                
+                resource.requestCapacity(entity1, 1.0, requestor);
+                assertEquals(1.0, resource.getCapacity());
+                assertEquals(1.0, resource.getClaimedCapacity());
+                assertEquals(0.0, resource.getAvailableCapacity());
+                
+                resource.releaseCapacity(entity1, 0.5);
+                assertEquals(1.0, resource.getCapacity());
+                assertEquals(0.5, resource.getClaimedCapacity());
+                assertEquals(0.5, resource.getAvailableCapacity());
+
+                Try.testFail(() -> resource.releaseCapacity(entity1, 5.0));
+                Try.testFail(() -> resource.releaseCapacity(null, 0.1));
+                Try.testFail(() -> resource.releaseCapacity(entity2, 0.5));
+
+                resource.releaseCapacity(entity1, 0.5);
+                assertEquals(1.0, resource.getCapacity());
+                assertEquals(0.0, resource.getClaimedCapacity());
+                assertEquals(1.0, resource.getAvailableCapacity());
+
+                Try.testFail(() -> resource.releaseCapacity(entity1, 0.5));
+                Try.testFail(() -> resource.releaseCapacity(entity2, 0.5));
+            }
+        };
+        simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
+        cleanUp(simulator);
+    }
+
+    /** Test the integer-capacity resource and queue for multiple releases and errors. */
+    @Test
+    public void testMultipleReleaseInteger()
+    {
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
+        {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void constructModel() throws SimRuntimeException
+            {
+                var resource = new Resource.IntegerCapacity<Double>("resource", this.simulator, 2);
+                var entity1 = new Entity<>("entity:1", this.simulator);
+                var entity2 = new Entity<>("entity:2", this.simulator);
+                var requestor = new CapacityRequestor.IntegerCapacity<Double>()
+                {
+                    @Override
+                    public void receiveRequestedCapacity(final Entity<Double> entity, final int requestedCapacity,
+                            final Resource.IntegerCapacity<Double> resource)
+                    {
+                        assertEquals(1, requestedCapacity);
+                        assertEquals(entity1, entity);
+                    }
+                };
+                assertEquals("resource", resource.getId());
+                assertEquals(this.simulator, resource.getSimulator());
+                assertEquals(2, resource.getCapacity());
+                assertEquals(0, resource.getClaimedCapacity());
+                assertEquals(2, resource.getAvailableCapacity());
+                
+                resource.requestCapacity(entity1, 2, requestor);
+                assertEquals(2, resource.getCapacity());
+                assertEquals(2, resource.getClaimedCapacity());
+                assertEquals(0, resource.getAvailableCapacity());
+                
+                resource.releaseCapacity(entity1, 1);
+                assertEquals(2, resource.getCapacity());
+                assertEquals(1, resource.getClaimedCapacity());
+                assertEquals(1, resource.getAvailableCapacity());
+                
+                Try.testFail(() -> resource.releaseCapacity(entity1, 5));
+                Try.testFail(() -> resource.releaseCapacity(null, 1));
+                Try.testFail(() -> resource.releaseCapacity(entity2, 1));
+               
+                resource.releaseCapacity(entity1, 1);
+                assertEquals(2, resource.getCapacity());
+                assertEquals(0, resource.getClaimedCapacity());
+                assertEquals(2, resource.getAvailableCapacity());
+
+                Try.testFail(() -> resource.releaseCapacity(entity1, 1));
+                Try.testFail(() -> resource.releaseCapacity(entity2, 1));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

@@ -73,6 +73,10 @@ public class SeizeTest extends FlowTest
                 assertNotNull(seize.getResource().getRequestQueue().getQueueLengthStatistic());
                 assertNotNull(seize.getResource().getRequestQueue().getTimeInQueueStatistic());
 
+                var nss = seize.getNumberStoredStatistic();
+                seize.setDefaultStatistics();
+                assertEquals(nss, seize.getNumberStoredStatistic(), "Do not initialize statistics twice");
+
                 seize.setFixedCapacityClaim(4.0);
                 assertEquals(4.0, seize.getFixedCapacityClaim());
                 seize.setFlexibleCapacityClaim((entity) -> 4.0);
