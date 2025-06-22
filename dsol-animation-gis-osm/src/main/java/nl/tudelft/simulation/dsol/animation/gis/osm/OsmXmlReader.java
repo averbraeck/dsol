@@ -54,7 +54,7 @@ public class OsmXmlReader
             GZIPInputStream gzipInputStream = new GZIPInputStream(new BufferedInputStream(fileInputStream));
             inputStreamReader = new InputStreamReader(gzipInputStream);
         }
-        else if (format.equals(OsmFormat.GZIP))
+        else if (format.equals(OsmFormat.BZIP2))
         {
             BZip2CompressorInputStream bzipInputStream =
                     new BZip2CompressorInputStream(new BufferedInputStream(fileInputStream));
@@ -92,7 +92,7 @@ public class OsmXmlReader
             GZIPInputStream gzipInputStream = new GZIPInputStream(new BufferedInputStream(fileInputStream));
             inputStreamReader = new InputStreamReader(gzipInputStream);
         }
-        else if (format.equals(OsmFormat.GZIP))
+        else if (format.equals(OsmFormat.BZIP2))
         {
             BZip2CompressorInputStream bzipInputStream =
                     new BZip2CompressorInputStream(new BufferedInputStream(fileInputStream));
