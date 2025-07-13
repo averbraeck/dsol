@@ -39,9 +39,6 @@ public class Feature implements FeatureInterface
      */
     private String value = "*";
 
-    // /** the dataSource to use. */
-    // private DataSourceInterface dataSource;
-
     /** the list of shapes that have been retrieved for this feature. */
     private List<GisObject> shapes = new ArrayList<>();
 
@@ -50,6 +47,9 @@ public class Feature implements FeatureInterface
 
     /** the outlineColor. */
     private Color outlineColor = Color.BLACK;
+
+    /** the line width in px. */
+    private int lineWidthPx = 1;
 
     /** whether the shapes have been read or not. */
     private boolean initialized = false;
@@ -71,13 +71,6 @@ public class Feature implements FeatureInterface
     {
         return this.value;
     }
-
-    // /** {@inheritDoc} */
-    // @Override
-    // public DataSourceInterface getDataSource()
-    // {
-    // return this.dataSource;
-    // }
 
     @Override
     public boolean isInitialized()
@@ -138,13 +131,6 @@ public class Feature implements FeatureInterface
         return result;
     }
 
-    // /** {@inheritDoc} */
-    // @Override
-    // public void setDataSource(final DataSourceInterface dataSource)
-    // {
-    // this.dataSource = dataSource;
-    // }
-
     @Override
     public final void setValue(final String value)
     {
@@ -173,6 +159,18 @@ public class Feature implements FeatureInterface
     public void setOutlineColor(final Color outlineColor)
     {
         this.outlineColor = outlineColor;
+    }
+
+    @Override
+    public int getLineWidthPx()
+    {
+        return this.lineWidthPx;
+    }
+
+    @Override
+    public void setLineWidthPx(final int lineWidthPx)
+    {
+        this.lineWidthPx = lineWidthPx;
     }
 
 }

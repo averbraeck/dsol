@@ -38,12 +38,6 @@ public interface FeatureInterface extends Serializable
      *         that have the correct key have to be drawn.
      */
     String getValue();
-    //
-    // /**
-    // * Return the data source, which contains the location of the GIS datasource.
-    // * @return DataSourceInterface the data source, contains the location of the GIS datasource
-    // */
-    // DataSourceInterface getDataSource();
 
     /**
      * Return whether the data has been initialized for this feature.
@@ -84,12 +78,6 @@ public interface FeatureInterface extends Serializable
      */
     List<GisObject> getShapes(Bounds2d rectangle);
 
-    // /**
-    // * Set the data source, which contains the location of the GIS data.
-    // * @param dataSource the data source, contains the location of the GIS data
-    // */
-    // void setDataSource(DataSourceInterface dataSource);
-
     /**
      * Set the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data source
      * that have the correct key have to be drawn.
@@ -121,5 +109,17 @@ public interface FeatureInterface extends Serializable
      * @param outlineColor the rgb(a) outline (line) color for the layer
      */
     void setOutlineColor(Color outlineColor);
+    
+    /**
+     * Get the fixed line width of the (out)line in pixels.
+     * @return the fixed line width of the outline in pixels
+     */
+    int getLineWidthPx();
+
+    /**
+     * Set the fixed line width of the (out)line in pixels.
+     * @param lineWidthPx the fixed line width of the outline in pixels
+     */
+    void setLineWidthPx(int lineWidthPx);
 
 }
