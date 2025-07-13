@@ -1,4 +1,4 @@
-layerName,key,value,outlineColor,fillColor,display,transform
+layer,key,value,outlineColor,fillColor,display,transform
 natural,natural,water,null,#99CCFF,true,true
 natural,landuse,cemetery,"rgb(0,255,0)","rgb(127,255,197)",true,true
 natural,landuse,grass,"rgb(0,255,0)","rgb(127,255,197)",true,true
