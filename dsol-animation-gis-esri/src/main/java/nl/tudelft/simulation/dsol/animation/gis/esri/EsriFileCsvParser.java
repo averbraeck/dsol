@@ -97,7 +97,7 @@ public final class EsriFileCsvParser
         NamedCsvReader csvReader =
                 NamedCsvReader.builder().fieldSeparator(fieldSeparator).quoteCharacter(quoteCharacter).build(reader);
         Set<String> header = csvReader.getHeader();
-        if (!header.contains("layerName") || !header.contains("shapeFile") || !header.contains("outlineColor")
+        if (!header.contains("layer") || !header.contains("shapeFile") || !header.contains("outlineColor")
                 || !header.contains("fillColor") || !header.contains("display") || !header.contains("transform"))
         { throw new IOException("ESRI GIS map csv-file header row did not contain all column headers\n" + header.toString()); }
 
@@ -106,7 +106,7 @@ public final class EsriFileCsvParser
         {
             NamedCsvRow row = it.next();
 
-            String layerName = row.getField("layerName");
+            String layerName = row.getField("layer");
             String shapeFile = row.getField("shapeFile");
             Color outlineColor = ColorParser.parse(row.getField("outlineColor"));
             Color fillColor = ColorParser.parse(row.getField("fillColor"));
