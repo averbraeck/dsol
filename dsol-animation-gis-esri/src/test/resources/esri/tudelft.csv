@@ -1,4 +1,4 @@
-layerName,shapeFile,outlineColor,fillColor,display,transform
+layer,shapeFile,outlineColor,fillColor,display,transform
 natural,/resources/esri/tudelft/natural.shp,"rgb(0,255,0)","rgb(127,255,197)",true,true
 roads,/resources/esri/tudelft/roads.shp,#787878,null,true,true
 railways,/resources/esri/tudelft/railways.shp,"rgb(0,19,127)",null,true,true
