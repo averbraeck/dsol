@@ -102,7 +102,7 @@ public final class OsmFileCsvParser
         NamedCsvReader csvReader =
                 NamedCsvReader.builder().fieldSeparator(fieldSeparator).quoteCharacter(quoteCharacter).build(reader);
         Set<String> header = csvReader.getHeader();
-        if (!header.contains("layerName") || !header.contains("key") || !header.contains("value")
+        if (!header.contains("layer") || !header.contains("key") || !header.contains("value")
                 || !header.contains("outlineColor") || !header.contains("fillColor") || !header.contains("display")
                 || !header.contains("transform"))
         { throw new IOException("OSM GIS map csv-file header row did not contain all column headers\n" + header.toString()); }
@@ -112,7 +112,7 @@ public final class OsmFileCsvParser
         {
             NamedCsvRow row = it.next();
 
-            String layerName = row.getField("layerName");
+            String layerName = row.getField("layer");
             String key = row.getField("key");
             String value = row.getField("value");
             Color outlineColor = ColorParser.parse(row.getField("outlineColor"));
