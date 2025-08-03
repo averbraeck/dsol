@@ -105,19 +105,13 @@ public final class OsmFileYamlParser
             for (int j = 0; j < items.size(); j++)
             {
                 Map<String, Object> item = (Map<String, Object>) items.get(j);
-
-                String key = item.containsKey("key") ? (String) item.get("key") : (String) defaults.get("key");
-                String value = item.containsKey("value") ? (String) item.get("value") : (String) defaults.get("value");
-                Color outlineColor = ColorParser.parse(item.containsKey("outlineColor") ? (String) item.get("outlineColor")
-                        : (String) defaults.get("outlineColor"));
-                Color fillColor = ColorParser.parse(
-                        item.containsKey("fillColor") ? (String) item.get("fillColor") : (String) defaults.get("fillColor"));
-                boolean display =
-                        item.containsKey("display") ? (Boolean) item.get("display") : (Boolean) defaults.get("display");
-                boolean transform =
-                        item.containsKey("transform") ? (Boolean) item.get("transform") : (Boolean) defaults.get("transform");
-                int lineWidthPx = item.containsKey("lineWidth") ? (Integer) item.get("lineWidth")
-                        : defaults.containsKey("lineWidth") ? (Integer) defaults.get("lineWidth") : 1;
+                String key = parseString("key", item, defaults);
+                String value = parseString("value", item, defaults);
+                Color outlineColor = ColorParser.parse(parseString("outlineColor", item, defaults));
+                Color fillColor = ColorParser.parse(parseString("fillColor", item, defaults));
+                boolean display = parseBoolean("display", item, defaults, true);
+                boolean transform = parseBoolean("transform", item, defaults, true);
+                int lineWidthPx = parseInt("lineWidth", item, defaults, 1);
 
                 LayerInterface layer = null;
                 if (layerNames.contains(layerName))
@@ -149,6 +143,72 @@ public final class OsmFileYamlParser
         OsmFileReader osmReader = new OsmFileReader(osmUrl, coordinateTransform, featuresToRead);
         osmReader.populateShapes();
         return map;
+    }
+
+    /**
+     * Parse a yaml string from the JSONObject with a fallback value when defaults is null or the field was not found.
+     * @param field the field to search for in the current object
+     * @param yaml the current yaml object
+     * @param defaults the fallback defaults
+     * @param fallback the fallback value when defaults is null or the field was not found
+     * @return the string in the yaml object, the defaults, or "null" when not found
+     */
+    protected static String parseString(final String field, final Map<String, Object> yaml, final Map<String, Object> defaults,
+            final String fallback)
+    {
+        if (yaml.containsKey(field))
+            return (String) yaml.get(field);
+        if (defaults != null && defaults.containsKey(field))
+            return (String) defaults.get(field);
+        return fallback;
+    }
+
+    /**
+     * Parse a yaml string from the JSONObject.
+     * @param field the field to search for in the current object
+     * @param yaml the current yaml object
+     * @param defaults the fallback defaults
+     * @return the string in the yaml object, the defaults, or "null" when not found
+     */
+    protected static String parseString(final String field, final Map<String, Object> yaml, final Map<String, Object> defaults)
+    {
+        return parseString(field, yaml, defaults, "null");
+    }
+
+    /**
+     * Parse a yaml boolean from the JSONObject with a fallback value when defaults is null or the field was not found.
+     * @param field the field to search for in the current object
+     * @param yaml the current yaml object
+     * @param defaults the fallback defaults
+     * @param fallback the fallback value when defaults is null or the field was not found
+     * @return the string in the yaml object, the defaults, or "null" when not found
+     */
+    protected static boolean parseBoolean(final String field, final Map<String, Object> yaml,
+            final Map<String, Object> defaults, final boolean fallback)
+    {
+        if (yaml.containsKey(field))
+            return (Boolean) yaml.get(field);
+        if (defaults != null && defaults.containsKey(field))
+            return (Boolean) defaults.get(field);
+        return fallback;
+    }
+
+    /**
+     * Parse a yaml int from the JSONObject with a fallback value when defaults is null or the field was not found.
+     * @param field the field to search for in the current object
+     * @param yaml the current yaml object
+     * @param defaults the fallback defaults
+     * @param fallback the fallback value when defaults is null or the field was not found
+     * @return the string in the yaml object, the defaults, or "null" when not found
+     */
+    protected static int parseInt(final String field, final Map<String, Object> yaml, final Map<String, Object> defaults,
+            final int fallback)
+    {
+        if (yaml.containsKey(field))
+            return (Integer) yaml.get(field);
+        if (defaults != null && defaults.containsKey(field))
+            return (Integer) defaults.get(field);
+        return fallback;
     }
 
 }
