@@ -126,7 +126,7 @@ class DesQueueingModel9 extends AbstractDsolModel<Double, DevsSimulatorInterface
         this.persistentQueueLength.register(0.0, 0.0);
         this.persistentUtilization.register(0.0, 0.0);
 
-        this.simulator.scheduleEventRel(startTime, this, "generate", null);
+        this.simulator.scheduleEventRel(startTime, () -> generate());
     }
 
     /**
@@ -151,7 +151,7 @@ class DesQueueingModel9 extends AbstractDsolModel<Double, DevsSimulatorInterface
                 this.persistentQueueLength.register(time, this.queue.size());
             }
         }
-        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
     }
 
     /**
@@ -163,7 +163,7 @@ class DesQueueingModel9 extends AbstractDsolModel<Double, DevsSimulatorInterface
         double time = getSimulator().getSimulatorTime();
         this.busy++;
         this.persistentUtilization.register(time, this.busy);
-        this.simulator.scheduleEventRel(this.processingTime.draw(), this, "endProcess", new Object[] {entity});
+        this.simulator.scheduleEventRel(this.processingTime.draw(), () -> endProcess(entity));
     }
 
     /**

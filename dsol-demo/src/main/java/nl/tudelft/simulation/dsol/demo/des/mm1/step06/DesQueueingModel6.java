@@ -77,7 +77,7 @@ class DesQueueingModel6 extends AbstractDsolModel<Double, DevsSimulatorInterface
         this.persistentQueueLength = new SimPersistent<>("lQ", "Queue length", this);
         this.persistentUtilization = new SimPersistent<>("Ut", "Server utilization", this);
 
-        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
     }
 
     /**
@@ -102,7 +102,7 @@ class DesQueueingModel6 extends AbstractDsolModel<Double, DevsSimulatorInterface
             System.out.println(String.format("Time: %.3f. Entity %d entered the queue. Length: %d", time, entity.getId(),
                     this.queue.size()));
         }
-        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
     }
 
     /**
@@ -114,7 +114,7 @@ class DesQueueingModel6 extends AbstractDsolModel<Double, DevsSimulatorInterface
         double time = getSimulator().getSimulatorTime();
         this.busy++;
         this.persistentUtilization.register(time, this.busy);
-        this.simulator.scheduleEventRel(this.processingTime.draw(), this, "endProcess", new Object[] {entity});
+        this.simulator.scheduleEventRel(this.processingTime.draw(), () -> endProcess(entity));
     }
 
     /**

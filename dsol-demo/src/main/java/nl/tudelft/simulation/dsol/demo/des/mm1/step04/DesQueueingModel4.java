@@ -71,7 +71,7 @@ class DesQueueingModel4
             // queue
             this.queue.add(new QueueEntry<Entity>(entity, time));
         }
-        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
     }
 
     /**
@@ -81,7 +81,7 @@ class DesQueueingModel4
     protected void startProcess(final Entity entity)
     {
         this.busy++;
-        this.simulator.scheduleEventRel(this.processingTime.draw(), this, "endProcess", new Object[] {entity});
+        this.simulator.scheduleEventRel(this.processingTime.draw(), () -> endProcess(entity));
     }
 
     /**

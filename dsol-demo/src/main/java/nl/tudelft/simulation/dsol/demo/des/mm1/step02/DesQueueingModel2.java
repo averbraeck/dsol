@@ -23,7 +23,7 @@ class DesQueueingModel2
     private final DevsSimulatorInterface<Double> simulator;
 
     /** the queue in which entities might be placed. */
-    private List<Entity> queue = new ArrayList<>();;
+    private List<Entity> queue = new ArrayList<>();
 
     /** the entity counter to provide a unique number. */
     private int entityCounter = 0;
@@ -65,7 +65,7 @@ class DesQueueingModel2
             // queue
             this.queue.add(entity);
         }
-        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+        this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
     }
 
     /**
