@@ -107,22 +107,18 @@ public final class OsmFileJsonParser
         {
             JSONObject jsonLayer = jsonLayers.getJSONObject(i);
             String layerName = jsonLayer.getString("layer");
-            JSONObject defaults = jsonLayer.getJSONObject("default");
+            JSONObject defaults = jsonLayer.has("default") ? jsonLayer.getJSONObject("default") : null;
             JSONArray items = jsonLayer.getJSONArray("items");
             for (int j = 0; j < items.length(); j++)
             {
                 JSONObject item = items.getJSONObject(j);
-
-                String key = item.has("key") ? item.getString("key") : defaults.getString("key");
-                String value = item.has("value") ? item.getString("value") : defaults.getString("value");
-                Color outlineColor = ColorParser
-                        .parse(item.has("outlineColor") ? item.getString("outlineColor") : defaults.getString("outlineColor"));
-                Color fillColor = ColorParser
-                        .parse(item.has("fillColor") ? item.getString("fillColor") : defaults.getString("fillColor"));
-                boolean display = item.has("display") ? item.getBoolean("display") : defaults.getBoolean("display");
-                boolean transform = item.has("transform") ? item.getBoolean("transform") : defaults.getBoolean("transform");
-                int lineWidthPx = item.has("lineWidth") ? item.getInt("lineWidth")
-                        : defaults.has("lineWidth") ? defaults.getInt("lineWidth") : 1;
+                String key = parseString("key", item, defaults);
+                String value = parseString("value", item, defaults);
+                Color outlineColor = ColorParser.parse(parseString("outlineColor", item, defaults));
+                Color fillColor = ColorParser.parse(parseString("fillColor", item, defaults));
+                boolean display = parseBoolean("display", item, defaults, true);
+                boolean transform = parseBoolean("transform", item, defaults, true);
+                int lineWidthPx = parseInt("lineWidth", item, defaults, 1);
 
                 LayerInterface layer = null;
                 if (layerNames.contains(layerName))
@@ -156,6 +152,71 @@ public final class OsmFileJsonParser
         OsmFileReader osmReader = new OsmFileReader(osmUrl, coordinateTransform, featuresToRead);
         osmReader.populateShapes();
         return map;
+    }
+
+    /**
+     * Parse a json string from the JSONObject with a fallback value when defaults is null or the field was not found.
+     * @param field the field to search for in the current object
+     * @param json the current json object
+     * @param defaults the fallback defaults
+     * @param fallback the fallback value when defaults is null or the field was not found
+     * @return the string in the json object, the defaults, or "null" when not found
+     */
+    protected static String parseString(final String field, final JSONObject json, final JSONObject defaults,
+            final String fallback)
+    {
+        if (json.has(field))
+            return json.getString(field);
+        if (defaults != null && defaults.has(field))
+            return defaults.getString(field);
+        return fallback;
+    }
+
+    /**
+     * Parse a json string from the JSONObject.
+     * @param field the field to search for in the current object
+     * @param json the current json object
+     * @param defaults the fallback defaults
+     * @return the string in the json object, the defaults, or "null" when not found
+     */
+    protected static String parseString(final String field, final JSONObject json, final JSONObject defaults)
+    {
+        return parseString(field, json, defaults, "null");
+    }
+
+    /**
+     * Parse a json boolean from the JSONObject with a fallback value when defaults is null or the field was not found.
+     * @param field the field to search for in the current object
+     * @param json the current json object
+     * @param defaults the fallback defaults
+     * @param fallback the fallback value when defaults is null or the field was not found
+     * @return the string in the json object, the defaults, or "null" when not found
+     */
+    protected static boolean parseBoolean(final String field, final JSONObject json, final JSONObject defaults,
+            final boolean fallback)
+    {
+        if (json.has(field))
+            return json.getBoolean(field);
+        if (defaults != null && defaults.has(field))
+            return defaults.getBoolean(field);
+        return fallback;
+    }
+
+    /**
+     * Parse a json int from the JSONObject with a fallback value when defaults is null or the field was not found.
+     * @param field the field to search for in the current object
+     * @param json the current json object
+     * @param defaults the fallback defaults
+     * @param fallback the fallback value when defaults is null or the field was not found
+     * @return the string in the json object, the defaults, or "null" when not found
+     */
+    protected static int parseInt(final String field, final JSONObject json, final JSONObject defaults, final int fallback)
+    {
+        if (json.has(field))
+            return json.getInt(field);
+        if (defaults != null && defaults.has(field))
+            return defaults.getInt(field);
+        return fallback;
     }
 
 }
