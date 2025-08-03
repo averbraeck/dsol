@@ -35,7 +35,7 @@ import nl.tudelft.simulation.language.DsolException;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public class OsmSwingApplication extends DsolAnimationApplication
+public class OsmCsvSwingApplication extends DsolAnimationApplication
 {
     /**
      * @param title the title
@@ -45,7 +45,7 @@ public class OsmSwingApplication extends DsolAnimationApplication
      * @throws IllegalArgumentException for illegal bounds
      * @throws RemoteException on network error
      */
-    public OsmSwingApplication(final String title, final DsolPanel panel, final DsolAnimationGisTab animationTab)
+    public OsmCsvSwingApplication(final String title, final DsolPanel panel, final DsolAnimationGisTab animationTab)
             throws RemoteException, IllegalArgumentException, DsolException
     {
         super(panel, title, animationTab);
@@ -75,7 +75,7 @@ public class OsmSwingApplication extends DsolAnimationApplication
         animationTab.getAnimationPanel().setRenderableScale(
                 new RenderableScale(Math.cos(Math.toRadians(mapBounds.midPoint().getY())), 1.0 / 111319.24));
         animationTab.addAllToggleGISButtonText("MAP LAYERS", model.getOsmMap(), "hide or show this GIS layer");
-        new OsmSwingApplication("OSMSwingApplication", panel, animationTab);
+        new OsmCsvSwingApplication("OSMSwingApplication", panel, animationTab);
     }
 
     /** The empty model -- this demo is just to show a map on the screen. */
