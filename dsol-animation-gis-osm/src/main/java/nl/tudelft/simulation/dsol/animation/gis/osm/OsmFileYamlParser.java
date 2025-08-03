@@ -116,6 +116,8 @@ public final class OsmFileYamlParser
                         item.containsKey("display") ? (Boolean) item.get("display") : (Boolean) defaults.get("display");
                 boolean transform =
                         item.containsKey("transform") ? (Boolean) item.get("transform") : (Boolean) defaults.get("transform");
+                int lineWidthPx = item.containsKey("lineWidth") ? (Integer) item.get("lineWidth")
+                        : defaults.containsKey("lineWidth") ? (Integer) defaults.get("lineWidth") : 1;
 
                 LayerInterface layer = null;
                 if (layerNames.contains(layerName))
@@ -135,6 +137,7 @@ public final class OsmFileYamlParser
                 feature.setValue(value);
                 feature.setOutlineColor(outlineColor);
                 feature.setFillColor(fillColor);
+                feature.setLineWidthPx(lineWidthPx);
                 layer.addFeature(feature);
                 featuresToRead.add(feature);
                 layer.setDisplay(display);
