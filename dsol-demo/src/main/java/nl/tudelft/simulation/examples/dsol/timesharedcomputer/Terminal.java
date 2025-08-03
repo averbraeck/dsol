@@ -2,7 +2,6 @@ package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 
 import org.djutils.event.EventType;
 
-import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.Entity;
 import nl.tudelft.simulation.dsol.formalisms.flow.FlowBlock;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
@@ -57,16 +56,7 @@ public class Terminal extends FlowBlock<Double, Terminal>
     {
         this.fireTimedEvent(SERVICE_TIME, getSimulator().getSimulatorTime() - ((Job) entity).getCreationTime(),
                 getSimulator().getSimulatorTime());
-        try
-        {
-            Object[] args = {entity};
-            getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + this.thinkDelay.draw(), this, "releaseObject",
-                    args);
-        }
-        catch (SimRuntimeException exception)
-        {
-            getSimulator().getLogger().always().error(exception);
-        }
+        getSimulator().scheduleEventRel(this.thinkDelay.draw(), () -> releaseEntity(entity));
     }
 
     @Override

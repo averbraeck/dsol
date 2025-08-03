@@ -115,9 +115,8 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
 
     /**
      * services the next job.
-     * @throws SimRuntimeException on simulation failure
      */
-    private void next() throws SimRuntimeException
+    private void next()
     {
         if (this.queue.size() > 0)
         {
@@ -128,16 +127,12 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
             if (job.getServiceTime() > QUANTUM)
             {
                 job.setServiceTime(job.getServiceTime() - QUANTUM);
-                Object[] args = {job};
-                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + QUANTUM + SWAP, this, "receiveObject",
-                        args);
-                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + QUANTUM + SWAP, this, "next", null);
+                getSimulator().scheduleEventRel(QUANTUM + SWAP, () -> receiveEntity(job));
+                getSimulator().scheduleEventRel(QUANTUM + SWAP, () -> next());
             }
             else
             {
-                Object[] args = {job};
-                getSimulator().scheduleEventAbs(getSimulator().getSimulatorTime() + job.getServiceTime() + SWAP, this,
-                        "releaseObject", args);
+                getSimulator().scheduleEventRel(job.getServiceTime() + SWAP, () -> releaseEntity(job));
             }
         }
         else
