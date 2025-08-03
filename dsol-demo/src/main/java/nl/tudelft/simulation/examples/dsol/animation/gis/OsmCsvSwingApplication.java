@@ -64,7 +64,7 @@ public class OsmCsvSwingApplication extends DsolAnimationApplication
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DsolException
     {
-        DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("OSMSwingApplication", 0.001);
+        DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("sim", 0.001);
         EmptyModel model = new EmptyModel(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
         simulator.initialize(model, replication);
@@ -75,7 +75,7 @@ public class OsmCsvSwingApplication extends DsolAnimationApplication
         animationTab.getAnimationPanel().setRenderableScale(
                 new RenderableScale(Math.cos(Math.toRadians(mapBounds.midPoint().getY())), 1.0 / 111319.24));
         animationTab.addAllToggleGISButtonText("MAP LAYERS", model.getOsmMap(), "hide or show this GIS layer");
-        new OsmCsvSwingApplication("OSMSwingApplication", panel, animationTab);
+        new OsmCsvSwingApplication("OSMCsvSwingApplication", panel, animationTab);
     }
 
     /** The empty model -- this demo is just to show a map on the screen. */
