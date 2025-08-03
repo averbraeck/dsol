@@ -33,12 +33,10 @@ public final class ConsoleRunnerTerminal implements EventListener
 
     /**
      * Construct the terminal experiment.
-     * @throws SimRuntimeException on error
-     * @throws RemoteException on error
      * @throws NamingException on error
      * @throws InputParameterException on error
      */
-    private ConsoleRunnerTerminal() throws SimRuntimeException, RemoteException, NamingException, InputParameterException
+    private ConsoleRunnerTerminal() throws NamingException, InputParameterException
     {
         long seed = 127;
         int rep = 1;
@@ -53,7 +51,7 @@ public final class ConsoleRunnerTerminal implements EventListener
         ((InputParameterInteger) parameters.get("numQC")).setIntValue(numQC);
         ((InputParameterInteger) parameters.get("numAGV")).setIntValue(numAGV);
         simulator.initialize(model, replication);
-        simulator.scheduleEventAbs(runtime - 0.00001, this, "terminate", new Object[] {simulator, numQC, numAGV, rep});
+        simulator.scheduleEventAbs(runtime - 0.00001, () -> terminate(simulator, numQC, numAGV, rep));
         model.addListener(this, Terminal.READY_EVENT);
         simulator.start();
     }
@@ -63,11 +61,8 @@ public final class ConsoleRunnerTerminal implements EventListener
      * @param numQC num QC
      * @param numAGV num AGV
      * @param rep replication number
-     * @throws SimRuntimeException on error
-     * @throws RemoteException on error
      */
     public synchronized void terminate(final DevsSimulator<Double> simulator, final int numQC, final int numAGV, final int rep)
-            throws SimRuntimeException, RemoteException
     {
         simulator.stop();
         System.out.println(numQC + "\t" + numAGV + "\t" + rep + "\tNaN\tNaN");

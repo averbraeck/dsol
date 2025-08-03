@@ -1,8 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import java.rmi.RemoteException;
-
-import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
@@ -53,97 +50,69 @@ public class Container implements IntResourceRequestorInterface<Double>
         this.ship = ship;
         synchronized (ship)
         {
-            try
+            if (Terminal.DEBUG)
             {
-                if (Terminal.DEBUG)
-                {
-                    System.out.println(
-                            "T = " + this.simulator.getSimulatorTime() + ", Claim AGV for container " + this.containerNumber);
-                }
-                this.simulator.scheduleEventAbs(39.0 * 60.0, this, "checkPhase", null);
-                this.agv.requestCapacity(1, this);
-                this.phase++;
+                System.out.println(
+                        "T = " + this.simulator.getSimulatorTime() + ", Claim AGV for container " + this.containerNumber);
             }
-            catch (SimRuntimeException | RemoteException e)
-            {
-                this.simulator.getLogger().always().error(e);
-            }
+            this.simulator.scheduleEventAbs(39.0 * 60.0, () -> checkPhase());
+            this.agv.requestCapacity(1, this);
+            this.phase++;
         }
     }
 
     @Override
     public synchronized void receiveRequestedResource(final long requestedCapacity, final IntResource<Double> resource)
-            throws RemoteException
     {
-        try
+        if (resource instanceof Agv)
         {
-            if (resource instanceof Agv)
-            {
-                this.phase++;
-                this.simulator.scheduleEventRel(this.agv.drawDelay(), this, "agvReady", null);
-            }
-
-            if (resource instanceof QuayCrane)
-            {
-                if (Terminal.DEBUG)
-                {
-                    System.out.println(
-                            "T = " + this.simulator.getSimulatorTime() + ", Claim QC for container " + this.containerNumber);
-                }
-                this.phase++;
-                this.simulator.scheduleEventRel(this.qc.drawDelay(), this, "qcReady", null);
-            }
+            this.phase++;
+            this.simulator.scheduleEventRel(this.agv.drawDelay(), () -> agvReady());
         }
-        catch (SimRuntimeException e)
+
+        if (resource instanceof QuayCrane)
         {
-            this.simulator.getLogger().always().error(e);
+            if (Terminal.DEBUG)
+            {
+                System.out.println(
+                        "T = " + this.simulator.getSimulatorTime() + ", Claim QC for container " + this.containerNumber);
+            }
+            this.phase++;
+            this.simulator.scheduleEventRel(this.qc.drawDelay(), () -> qcReady());
         }
     }
 
     /** */
     protected synchronized void agvReady()
     {
-        try
+        this.phase++;
+        if (Terminal.DEBUG)
         {
-            this.phase++;
-            if (Terminal.DEBUG)
-            {
-                System.out.println(
-                        "T = " + this.simulator.getSimulatorTime() + ", AGV ready for container " + this.containerNumber);
-            }
-            this.agv.releaseCapacity(1);
-            this.qc.requestCapacity(1, this);
+            System.out
+                    .println("T = " + this.simulator.getSimulatorTime() + ", AGV ready for container " + this.containerNumber);
         }
-        catch (SimRuntimeException | RemoteException e)
-        {
-            this.simulator.getLogger().always().error(e);
-        }
+        this.agv.releaseCapacity(1);
+        this.qc.requestCapacity(1, this);
     }
 
     /** */
     protected synchronized void qcReady()
     {
-        try
+        if (Terminal.DEBUG)
         {
-            if (Terminal.DEBUG)
-            {
-                System.out.println(
-                        "T = " + this.simulator.getSimulatorTime() + ", QC ready for container " + this.containerNumber);
-            }
-            this.qc.releaseCapacity(1);
-            this.phase++;
-            this.ship.incContainers();
+            System.out.println("T = " + this.simulator.getSimulatorTime() + ", QC ready for container " + this.containerNumber);
         }
-        catch (RemoteException e)
-        {
-            this.simulator.getLogger().always().error(e);
-        }
+        this.qc.releaseCapacity(1);
+        this.phase++;
+        this.ship.incContainers();
     }
 
     /** */
     protected void checkPhase()
     {
         if (this.phase != 5)
-        { System.out.println("Container " + this.containerNumber + " was stuck in phase " + this.phase); }
+        {
+            System.out.println("Container " + this.containerNumber + " was stuck in phase " + this.phase);
+        }
     }
 }

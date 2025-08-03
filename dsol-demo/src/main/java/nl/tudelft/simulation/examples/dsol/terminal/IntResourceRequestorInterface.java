@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import java.rmi.RemoteException;
-
 /**
  * This interface provides a callback method to the resource. Whenever resource is available this method is invoked on the
  * requestor..
@@ -21,17 +19,15 @@ public interface IntResourceRequestorInterface<T extends Number & Comparable<T>>
      * receive the requested resource.
      * @param requestedCapacity reflects the amount requested.
      * @param resource the requested resource.
-     * @throws RemoteException on network failure.
      */
-    void receiveRequestedResource(long requestedCapacity, IntResource<T> resource) throws RemoteException;
+    void receiveRequestedResource(long requestedCapacity, IntResource<T> resource);
 
     /**
      * receive the requested resource.
      * @param requestedCapacity reflects the amount requested.
      * @param resource the requested resource.
-     * @throws RemoteException on network failure.
      */
-    default void receiveRequestedResource(final int requestedCapacity, final IntResource<T> resource) throws RemoteException
+    default void receiveRequestedResource(final int requestedCapacity, final IntResource<T> resource)
     {
         receiveRequestedResource((long) requestedCapacity, resource);
     }

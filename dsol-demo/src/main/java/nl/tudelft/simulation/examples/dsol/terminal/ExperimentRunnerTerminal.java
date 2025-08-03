@@ -45,12 +45,10 @@ public class ExperimentRunnerTerminal implements EventListener
 
     /**
      * Construct the terminal experiment.
-     * @throws SimRuntimeException on error
-     * @throws RemoteException on error
      * @throws NamingException on error
      * @throws InputParameterException on error
      */
-    private ExperimentRunnerTerminal() throws SimRuntimeException, RemoteException, NamingException, InputParameterException
+    private ExperimentRunnerTerminal() throws NamingException, InputParameterException
     {
         long seed = 1;
         int maxConcurrent = 8;
@@ -108,7 +106,9 @@ public class ExperimentRunnerTerminal implements EventListener
         this.numruns--;
         this.completed++;
         if (this.completed == RUNS)
-        { System.exit(0); }
+        {
+            System.exit(0);
+        }
     }
 
     @Override
@@ -122,7 +122,9 @@ public class ExperimentRunnerTerminal implements EventListener
             this.numruns--;
             this.completed++;
             if (this.completed == RUNS)
-            { System.exit(0); }
+            {
+                System.exit(0);
+            }
         }
     }
 

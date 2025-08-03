@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import java.rmi.RemoteException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -79,7 +78,6 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
      */
     public IntResource(final DevsSimulatorInterface<T> simulator, final String description, final long capacity)
     {
-        super();
         this.description = description;
         this.simulator = simulator;
         this.capacity = capacity;
@@ -135,9 +133,8 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
     /**
      * Method alterClaimedCapacity.
      * @param amount refers the amount which is added to the claimed capacity
-     * @throws RemoteException on network failure
      */
-    private synchronized void alterClaimedCapacity(final long amount) throws RemoteException
+    private synchronized void alterClaimedCapacity(final long amount)
     {
         this.claimedCapacity += amount;
         this.fireTimedEvent(IntResource.UTILIZATION_EVENT, this.claimedCapacity, this.simulator.getSimulatorTime());
@@ -150,26 +147,15 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
     public void setCapacity(final long capacity)
     {
         this.capacity = capacity;
-        try
-        {
-            this.releaseCapacity(0);
-        }
-        catch (RemoteException remoteException)
-        {
-            // This exception cannot occur.
-            this.simulator.getLogger().always().error(remoteException, "setCapacity");
-        }
+        this.releaseCapacity(0);
     }
 
     /**
      * requests an amount of capacity from the resource.
      * @param amount the requested amount
      * @param requestor the RequestorInterface requesting the amount
-     * @throws RemoteException on network failure
-     * @throws SimRuntimeException on other failures
      */
     public synchronized void requestCapacity(final long amount, final IntResourceRequestorInterface<T> requestor)
-            throws RemoteException, SimRuntimeException
     {
         this.requestCapacity(amount, requestor, IntResource.DEFAULT_REQUEST_PRIORITY);
     }
@@ -179,18 +165,18 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
      * @param amount the requested amount
      * @param requestor the RequestorInterface requesting the amount
      * @param priority the priority of the request
-     * @throws RemoteException on network failure
-     * @throws SimRuntimeException on other failures
      */
     public synchronized void requestCapacity(final long amount, final IntResourceRequestorInterface<T> requestor,
-            final int priority) throws RemoteException, SimRuntimeException
+            final int priority)
     {
         if (amount < 0)
-        { throw new SimRuntimeException("requested capacity on resource cannot < 0.0"); }
+        {
+            throw new SimRuntimeException("requested capacity on resource cannot < 0.0");
+        }
         if ((this.claimedCapacity + amount) <= this.capacity)
         {
             this.alterClaimedCapacity(amount);
-            this.simulator.scheduleEventNow(requestor, "receiveRequestedResource", new Object[] {Long.valueOf(amount), this});
+            this.simulator.scheduleEventNow(() -> requestor.receiveRequestedResource(amount, this));
         }
         else
         {
@@ -206,14 +192,17 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
     /**
      * releases an amount of capacity from the resource.
      * @param amount the amount to release
-     * @throws RemoteException on network failure
      */
-    public void releaseCapacity(final long amount) throws RemoteException
+    public void releaseCapacity(final long amount)
     {
         if (amount < 0)
-        { throw new IllegalArgumentException("released capacity on resource cannot < 0.0"); }
+        {
+            throw new IllegalArgumentException("released capacity on resource cannot < 0.0");
+        }
         if (amount > 0)
-        { this.alterClaimedCapacity(-Math.min(this.capacity, amount)); }
+        {
+            this.alterClaimedCapacity(-Math.min(this.capacity, amount));
+        }
         synchronized (this.requests)
         {
             for (Iterator<Request<T>> i = this.requests.iterator(); i.hasNext();)
@@ -253,13 +242,21 @@ public class IntResource<T extends Number & Comparable<T>> extends LocalEventPro
         public int compare(final Request<T> arg0, final Request<T> arg1)
         {
             if (arg0.getPriority() > arg1.getPriority())
-            { return -1; }
+            {
+                return -1;
+            }
             if (arg0.getPriority() < arg1.getPriority())
-            { return 1; }
+            {
+                return 1;
+            }
             if (arg0.getId() < arg1.getId())
-            { return -1; }
+            {
+                return -1;
+            }
             if (arg0.getId() > arg1.getId())
-            { return 1; }
+            {
+                return 1;
+            }
             return 0;
         }
     }
