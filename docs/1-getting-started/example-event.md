@@ -91,8 +91,7 @@ The most basic code to generate an entity would be:
       // queue
       this.queue.add(entity);
     }
-    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), 
-        this, "generate", null);
+    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
   }
 ```
 
@@ -100,7 +99,9 @@ A few explanations:
 
 - The `Model` class has a queue called `queue`, which is for now a `List<Entity>`, a server capacity called `capacity` (default 1), and a number of entities being processed by the server at this moment called `busy` (0 or 1 in the default situation).
 - The method `simulator.getSimulatorTime()` returns the current time of the simulator.
-- The last line re-schedules the `generate()` method. It indicates that we should schedule after a relative duration (`scheduleEventRel`) and not at an absolute point in time. The interarrival time is drawn from a distribution object (see #6) called `interArrivalTime`. The last three arguments indicate the object instance on which the method will eventually be scheduled (`this`), the name of the method (`generate`) and the arguments to pass to the method (`null`), so no arguments.
+- The last line re-schedules the `generate()` method. It indicates that we should schedule after a relative duration (`scheduleEventRel`) and not at an absolute point in time. The interarrival time is drawn from a random distribution object (see #6) called `interArrivalTime`. The last argument is a so-called lambda expression that calls the `generate()` method when the interarrival time arrives. 
+- The `generate` method could also have been scheduled with: `this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);`. The last three arguments indicate the object instance on which the method will eventually be scheduled (`this`), the name of the method (`generate`) and the arguments to pass to the method (`null`), so no arguments.
+- Typically, the lambda expression is much more straigtforward to use. It also checks for correctness at compile time rather than at run time, so when we misspell `"genrate"` in the String-based call, the compiler will not notice. The lambda expression `() -> genrate()` will, however, show a compilation error, telling the modeller to repair the mistake in the method name.
 
 !!! Note
     The time stays constant as long as the executed event (method) is busy. If the execution of a method takes 5 minutes on the wall clock (real time), the simulation clock is standing still for that entire duration. On the other hand, if the next event is 1000 years later than the last event, the simulator clock will instantaneously jump 1000 years ahead to execute the next event.
@@ -119,8 +120,7 @@ The `startProcess(entity)` method of the server calculates some statistics, and 
   protected void startProcess(final Entity entity)
   {
     this.busy++;
-    this.simulator.scheduleEventRel(this.processingTime.draw(), 
-        this, "endProcess", new Object[] {entity});
+    this.simulator.scheduleEventRel(this.processingTime.draw(), () -> endProcess(entity));
   }
 ```
 
@@ -205,8 +205,7 @@ The `generate` method stores an entity with the current time in the queue when t
       // queue
       this.queue.add(new QueueEntry<Entity>(entity, time));
     }
-    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), 
-        this, "generate", null);
+    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
   }
 ```
 
@@ -289,8 +288,8 @@ In the `generate` process, we have to update the tally and the persistent statis
       this.queue.add(new QueueEntry<Entity>(entity, time));
       this.persistentQueueLength.register(time, this.queue.size());
     }
-    this.simulator.scheduleEventRel(this.interarrivalTime.draw(), 
-        this, "generate", null);
+    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), 
+        () -> generate());
   }
 ```
 
@@ -303,7 +302,7 @@ In the `startProcess` method, we have to explicitly update the utilization of th
     this.busy++;
     this.persistentUtilization.register(time, this.busy);
     this.simulator.scheduleEventRel(this.processingTime.draw(), 
-        this, "endProcess", new Object[] {entity});
+        () -> endProcess(entity));
 ```
  
 In the `endProcess` method, we update all four statistics:
@@ -367,14 +366,14 @@ The `constructModel` method looks as follows:
     this.persistentQueueLength = new SimPersistent<>("Queue length", this);
     this.persistentUtilization = new SimPersistent<>("Server utilization", this);
 
-    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
   }
 ```
 
 It creates the four statistics, and schedules for the `generate` method to instantiate the first entity after a stochastic `interarrivalTime`. When the model is started, this will be the first event to be carried out. 
 
 !!! Warning
-    Note that we do not explicitly **call** the `generate` method, since this would mean that we already execute simulation code during the construction of a model, before the entire model has been properly initialized, and before we explicitly started an experiment. Therefore, it is good practice to always defer the execution of model code with a `ScheduleEvent` method in `constructModel`.
+    Note that we do not explicitly **call** the `generate` method, since this would mean that we already execute simulation code during the construction of a model, before the entire model has been properly initialized, and before we explicitly started an experiment. Therefore, it is good practice to always defer the execution of model code with a `scheduleEvent` method in `constructModel`.
 
 
 ### 6. Experiment management
@@ -535,7 +534,7 @@ Instead of the distributions, their parameters `lambda` and `mu` are provided to
     this.persistentQueueLength = new SimPersistent<>("Queue length", this);
     this.persistentUtilization = new SimPersistent<>("Server utilization", this);
 
-    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), this, "generate", null);
+    this.simulator.scheduleEventRel(this.interArrivalTime.draw(), () -> generate());
   }
 ```
 
@@ -596,7 +595,7 @@ To retrieve a set input value and either set it to a field, or use it to define 
   this.interarrivalTime = new DistExponential(getDefaultStream(), iat);
   double st = (Double) getInputParameter("resource.serviceTime");
   this.processingTime = new DistExponential(getDefaultStream(), st);
-  getSimulator().scheduleEventRel(startTime, this, "generate", null);
+  getSimulator().scheduleEventRel(startTime, () -> generate());
 ```
 
 The call to `getInputParameter(key)` returns the set *value* for the input parameter that has to be cast to the right type. It is also possible to retrieve the parameter *object* with a call to `this.inputParameterMap.get(key)`. This parameter *object* has `getKey()`, `getDescription()`, `getDefaultValue()` and `getValue()` methods, and several more. Here, we could use the `getValue()` method to retrieve the value set by the user, and cast it to a Double. Typically, however, we just use the `getInputParameter(key)` method since it is the most straightforward, and we don't need the other methods of the `InputParameter` object.
@@ -632,7 +631,7 @@ We can print the results of the output statistics at the end of a replication by
   {
     ...
     this.simulator.scheduleEventAbs(this.simulator.getReplication().getRunLength(), 
-        this. "reportStats()", null);
+        () -> reportStats());
   }
   
   protected void reportStats()
@@ -675,7 +674,7 @@ class DesQueueingModel9 extends AbstractDsolModel<Double,
     this.persistentUtilization = new SimPersistent<>("Server utilization", this);
     this.persistentQueueLength.register(0.0, 0.0);
     this.persistentUtilization.register(0.0, 0.0);
-    this.simulator.scheduleEventRel(startTime, this, "generate", null);
+    this.simulator.scheduleEventRel(startTime, () -> generate());
   }  
 ```
 
