@@ -50,7 +50,7 @@ public class MM1SwingApplicationEvents extends DsolApplication
         this.logger = devsSimulator.getLogger();
         try
         {
-            devsSimulator.scheduleEventAbs(1000.0, this, "terminate", null);
+            devsSimulator.scheduleEventAbs(1000.0, () -> terminate());
         }
         catch (SimRuntimeException exception)
         {

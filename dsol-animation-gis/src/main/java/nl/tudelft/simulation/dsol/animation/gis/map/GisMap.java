@@ -1,5 +1,6 @@
 package nl.tudelft.simulation.dsol.animation.gis.map;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
@@ -230,8 +231,12 @@ public class GisMap implements GisMapInterface
                             }
                             if (feature.getOutlineColor() != null)
                             {
+                                if (feature.getLineWidthPx() > 1)
+                                    graphics.setStroke(new BasicStroke(feature.getLineWidthPx()));
                                 graphics.setColor(feature.getOutlineColor());
                                 graphics.draw(shape);
+                                if (feature.getLineWidthPx() > 1)
+                                    graphics.setStroke(new BasicStroke());
                             }
                             if (layer.isTransform())
                             { shape.transform(antiTransform); }

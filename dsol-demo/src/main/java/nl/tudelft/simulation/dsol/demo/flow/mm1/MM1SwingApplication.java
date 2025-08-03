@@ -42,7 +42,7 @@ public class MM1SwingApplication extends DsolApplication
         this.model = model;
         try
         {
-            simulator.scheduleEventAbs(1000.0, this, "terminate", null);
+            simulator.scheduleEventAbs(1000.0, () -> terminate());
         }
         catch (SimRuntimeException exception)
         {
