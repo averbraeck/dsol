@@ -1,0 +1,103 @@
+layers:
+  - layer: natural
+    default:
+      display: true
+      transform: true
+    items:
+      - key: natural
+        value: water
+        outlineColor: '#99CCFF'
+        fillColor: '#99CCFF'
+      - key: landuse
+        value: cemetary
+        outlineColor: 'rgb(0,255,0)'
+        fillColor: 'rgb(127,255,197)'
+      - key: landuse
+        value: grass
+        outlineColor: 'rgb(0,255,0)'
+        fillColor: 'rgb(127,255,197)'
+      - key: natural
+        value: '*'
+        outlineColor: 'rgb(0,255,0)'
+        fillColor: 'rgb(127,255,197)'
+  - layer: roads
+    default:
+      key: highway
+      display: true
+      transform: true
+    items:
+      - value: motorway
+        outlineColor: 'rgb(127,0,0)'
+        lineWidth: 4
+      - value: motorway_link
+        outlineColor: 'rgb(127,0,0)'
+        lineWidth: 4
+      - value: trunk
+        outlineColor: 'rgb(0,0,0)'
+        lineWidth: 3
+      - value: trunk_link
+        outlineColor: 'rgb(0,0,0)'
+        lineWidth: 3
+      - value: primary
+        outlineColor: 'rgb(127,127,127)'
+        lineWidth: 2
+      - value: primary_link
+        outlineColor: 'rgb(127,127,127)'
+        lineWidth: 2
+      - value: secondary
+        outlineColor: 'rgb(160,160,160)'
+        lineWidth: 1
+      - value: secondary_link
+        outlineColor: 'rgb(160,160,160)'
+        lineWidth: 1
+      - value: tertiary
+        outlineColor: 'rgb(200,200,200)'
+        lineWidth: 1
+      - value: tertiary_link
+        outlineColor: 'rgb(200,200,200)'
+        lineWidth: 1
+      - value: residential
+        outlineColor: 'rgb(200,200,200)'
+        lineWidth: 1
+      - value: living_street
+        outlineColor: 'rgb(200,200,200)'
+        lineWidth: 1
+      - value: pedestrian
+        outlineColor: '#AAAAAA'
+        lineWidth: 1
+      - value: sidewalk
+        outlineColor: '#AAAAAA'
+        lineWidth: 1
+      - value: cycleway
+        outlineColor: '#999999'
+        lineWidth: 1
+      - value: unclassified
+        outlineColor: 'rgb(200,200,200)'
+        lineWidth: 1
+  - layer: railways
+    items:
+      - key: railway
+        value: '*'
+        outlineColor: 'rgb(0,19,127)'
+        lineWidth: 1
+  - layer: waterways
+    items:
+      - key: waterway
+        value: '*'
+        outlineColor: '#99CCFF'
+        fillColor: '#99CCFF'
+  - layer: buildings
+    default:
+      key: building
+      display: true
+      transform: true
+    items:
+      - value: office
+        outlineColor: '#FF00FF'
+        fillColor: '#FF00FF'
+      - value: university
+        outlineColor: '#7F00FF'
+        fillColor: '#FF00FF'
+      - value: '*'
+        outlineColor: 'rgb(200,200,200)'
+        fillColor: 'rgb(200,200,200)'
