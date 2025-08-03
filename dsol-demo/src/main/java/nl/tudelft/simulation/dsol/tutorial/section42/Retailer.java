@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.tutorial.section42;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
@@ -111,15 +110,7 @@ public class Retailer extends LocalEventProducer implements BuyerInterface, Sell
             this.fireTimedEvent(TOTAL_ORDERING_COST_EVENT, costs, this.simulator.getSimulatorTime());
             this.warehouse.order(this, amount);
         }
-        try
-        {
-            this.simulator.scheduleEvent(
-                    new SimEvent<Double>(this.simulator.getSimulatorTime() + 1.0, this, "reviewInventory", null));
-        }
-        catch (Exception exception)
-        {
-            this.simulator.getLogger().always().error(exception, "reviewInventory");
-        }
+        this.simulator.scheduleEventRel(1.0, () -> reviewInventory());
     }
 
     @Override

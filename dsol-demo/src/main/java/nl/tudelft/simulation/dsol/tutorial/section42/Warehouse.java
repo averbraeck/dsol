@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
 import nl.tudelft.simulation.jstats.distributions.DistUniform;
@@ -40,14 +39,6 @@ public class Warehouse implements SellerInterface
     @Override
     public void order(final BuyerInterface buyer, final long amount)
     {
-        try
-        {
-            this.simulator.scheduleEvent(new SimEvent<Double>(this.simulator.getSimulatorTime() + this.leadTime.draw(), buyer,
-                    "receiveProduct", new Long[] {Long.valueOf(amount)}));
-        }
-        catch (Exception exception)
-        {
-            this.simulator.getLogger().always().error(exception, "order");
-        }
+        this.simulator.scheduleEventRel(this.leadTime.draw(), () -> buyer.receiveProduct(amount));
     }
 }

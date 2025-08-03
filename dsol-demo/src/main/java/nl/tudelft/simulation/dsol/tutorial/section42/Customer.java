@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
@@ -65,14 +64,6 @@ public class Customer implements BuyerInterface
     private void createOrder()
     {
         this.retailer.order(this, this.orderBatchSize.draw());
-        try
-        {
-            this.simulator.scheduleEvent(new SimEvent<Double>(this.simulator.getSimulatorTime() + this.intervalTime.draw(),
-                    this, "createOrder", null));
-        }
-        catch (Exception exception)
-        {
-            this.simulator.getLogger().always().error(exception, "createOrder");
-        }
+        this.simulator.scheduleEventRel(this.intervalTime.draw(), () -> createOrder());
     }
 }
