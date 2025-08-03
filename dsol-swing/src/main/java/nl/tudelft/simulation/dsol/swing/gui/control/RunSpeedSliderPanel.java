@@ -49,7 +49,7 @@ public class RunSpeedSliderPanel extends JPanel
      * @param ticksPerDecade the number of steps per decade
      * @param simulator the simulator to change the speed of
      */
-    RunSpeedSliderPanel(final double minimum, final double maximum, final double initialValue, final int ticksPerDecade,
+    public RunSpeedSliderPanel(final double minimum, final double maximum, final double initialValue, final int ticksPerDecade,
             final DevsSimulatorInterface<?> simulator)
     {
         if (minimum <= 0 || minimum > initialValue || initialValue > maximum)
@@ -102,7 +102,9 @@ public class RunSpeedSliderPanel extends JPanel
             }
             int index = step % this.ratios.length;
             if (index < 0)
-            { index += this.ratios.length; }
+            {
+                index += this.ratios.length;
+            }
             text.append(this.ratios[index]);
             labels.put(step, new JLabel(text.toString()));
             this.tickValues.put(step, Double.parseDouble(text.toString()));
@@ -115,12 +117,6 @@ public class RunSpeedSliderPanel extends JPanel
         this.slider.setPaintTicks(true);
         this.slider.setMajorTickSpacing(1);
         this.add(this.slider);
-        /*- Uncomment to verify the stepToFactor method.
-        for (int i = this.slider.getMinimum(); i <= this.slider.getMaximum(); i++)
-        {
-            System.out.println("pos=" + i + " value is " + stepToFactor(i));
-        }
-         */
 
         // initial value of simulation speed
         if (simulator instanceof DevsRealTimeAnimator)
@@ -163,7 +159,9 @@ public class RunSpeedSliderPanel extends JPanel
     {
         int index = step % this.ratios.length;
         if (index < 0)
-        { index += this.ratios.length; }
+        {
+            index += this.ratios.length;
+        }
         double result = this.ratios[index];
         // Make positive to avoid trouble with negative values that round towards 0 on division
         int power = (step + 1000 * this.ratios.length) / this.ratios.length - 1000; // This is ugly
@@ -217,6 +215,8 @@ public class RunSpeedSliderPanel extends JPanel
         // System.out.println("setSpeedfactor: factor is " + factor + ", best slider value is " + bestStep
         // + " current value is " + this.slider.getValue());
         if (this.slider.getValue() != bestStep)
-        { this.slider.setValue(bestStep); }
+        {
+            this.slider.setValue(bestStep);
+        }
     }
 }
