@@ -89,7 +89,9 @@ public class FloatAppendList implements Iterable<Float>, Serializable
     public float get(final int i)
     {
         if (i < 0 || i >= this.numElements)
-        { throw new IndexOutOfBoundsException("FloatAppendList.get(i) -- i out of bounds."); }
+        {
+            throw new IndexOutOfBoundsException("FloatAppendList.get(i) -- i out of bounds.");
+        }
         return this.storage.get(i >> CHUNK_BITS)[i & CHUNK_MASK];
     }
 

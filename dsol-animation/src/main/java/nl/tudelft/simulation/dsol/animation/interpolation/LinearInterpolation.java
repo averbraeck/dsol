@@ -42,7 +42,9 @@ public class LinearInterpolation implements InterpolationInterface
     {
         super();
         if (endTime < startTime)
-        { throw new IllegalArgumentException("endTime < startTime"); }
+        {
+            throw new IllegalArgumentException("endTime < startTime");
+        }
         this.startTime = startTime;
         this.endTime = endTime;
         this.origin = origin; // immutable
@@ -53,9 +55,13 @@ public class LinearInterpolation implements InterpolationInterface
     public OrientedPoint3d getLocation(final double time)
     {
         if (time <= this.startTime)
-        { return this.origin; }
+        {
+            return this.origin;
+        }
         if (time >= this.endTime)
-        { return this.destination; }
+        {
+            return this.destination;
+        }
         double fraction = (time - this.startTime) / (this.endTime - this.startTime);
         double x = this.origin.getX() + (this.destination.getX() - this.origin.getX()) * fraction;
         double y = this.origin.getY() + (this.destination.getY() - this.origin.getY()) * fraction;

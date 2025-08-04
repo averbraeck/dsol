@@ -89,7 +89,9 @@ public class DoubleAppendList implements Iterable<Double>, Serializable
     public double get(final int i)
     {
         if (i < 0 || i >= this.numElements)
-        { throw new IndexOutOfBoundsException("DoubleAppendList.get(i) -- i out of bounds."); }
+        {
+            throw new IndexOutOfBoundsException("DoubleAppendList.get(i) -- i out of bounds.");
+        }
         return this.storage.get(i >> CHUNK_BITS)[i & CHUNK_MASK];
     }
 

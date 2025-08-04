@@ -109,7 +109,7 @@ public interface FeatureInterface extends Serializable
      * @param outlineColor the rgb(a) outline (line) color for the layer
      */
     void setOutlineColor(Color outlineColor);
-    
+
     /**
      * Get the fixed line width of the (out)line in pixels.
      * @return the fixed line width of the outline in pixels

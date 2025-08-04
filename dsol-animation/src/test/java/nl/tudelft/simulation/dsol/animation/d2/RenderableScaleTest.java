@@ -45,16 +45,20 @@ public class RenderableScaleTest
         scale = new RenderableScale(1.0, 0.5);
         assertEquals(0.5, scale.getObjectScaleFactor(), 0.0001);
 
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new RenderableScale(0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new RenderableScale(-10.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new RenderableScale(1.0, 0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new RenderableScale(1.0, -10.0);
         }, IllegalArgumentException.class);
     }

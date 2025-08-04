@@ -31,10 +31,12 @@ public class FloatAppendListTest
         list.add(1.0f);
         assertEquals(1, list.size());
         assertEquals(1.0, list.get(0), 0.0001);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             list.get(1);
         }, IndexOutOfBoundsException.class);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             list.get(-1);
         }, IndexOutOfBoundsException.class);
 

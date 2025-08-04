@@ -268,18 +268,24 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             final RenderableScale renderableScale, final ImageObserver observer)
     {
         if (this.source == null)
-        { return; }
+        {
+            return;
+        }
         // save the transform -- clone because transform is a volatile object
         AffineTransform transform = (AffineTransform) graphics.getTransform().clone();
         try
         {
             Point<?> center = this.source.getLocation();
             if (center == null)
-            { return; }
+            {
+                return;
+            }
 
             Bounds2d rectangle = BoundsUtil.projectBounds(center, this.source.getRelativeBounds());
             if (rectangle == null || (!Shape2d.overlaps(extent, rectangle) && isTranslate()))
-            { return; }
+            {
+                return;
+            }
 
             // Let's transform
             if (isTranslate())
@@ -305,9 +311,13 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             if (angle != 0.0)
             {
                 if (isFlip() && angle < -Math.PI)
-                { angle = angle + Math.PI; }
+                {
+                    angle = angle + Math.PI;
+                }
                 if (isRotate())
-                { graphics.rotate(angle); }
+                {
+                    graphics.rotate(angle);
+                }
             }
 
             // Now we paint
@@ -330,7 +340,9 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
         try
         {
             if (pointWorldCoordinates == null || this.source == null || this.source.getLocation() == null)
-            { return false; }
+            {
+                return false;
+            }
             Bounds2d intersect = BoundsUtil.projectBounds(this.source.getLocation(), this.source.getRelativeBounds());
             return intersect.contains(pointWorldCoordinates);
         }

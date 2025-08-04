@@ -79,7 +79,9 @@ public class RenderableScale
     public double getXScale(final Bounds2d extent, final Dimension screen)
     {
         if (screen.getHeight() <= 0 || screen.getWidth() <= 0)
-        { return Double.NaN; }
+        {
+            return Double.NaN;
+        }
         return extent.getDeltaX() / screen.getWidth();
     }
 
@@ -93,7 +95,9 @@ public class RenderableScale
     public double getYScale(final Bounds2d extent, final Dimension screen)
     {
         if (screen.getHeight() <= 0 || screen.getWidth() <= 0)
-        { return Double.NaN; }
+        {
+            return Double.NaN;
+        }
         return extent.getDeltaY() / screen.getHeight();
     }
 
