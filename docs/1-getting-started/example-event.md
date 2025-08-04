@@ -72,7 +72,7 @@ The simple implementation for such an entity would be:
 ### 2. An arrival generator that makes entities
 For the generation of the entities, we create a method called `generate()`, that we call when constructing the model. The `generate` method creates one entity and either offers it to the `startProcess(Entity)` method when the server is idle, or adds it to the rear of the queue when the server is busy. 
 
-After the just created entity has been handled, the `generate()` method calls itself after a time equal to a random value drawn from the Exponential inter-arrival time distribution. In a sense, the method re-schedules itself indefinitely, each time with an inter-arrival time from a given exponential distribution with $\lambda$ as the parameter.
+After the just created entity has been handled, the `generate()` method calls itself after a time equal to a random value drawn from the Exponential inter-arrival time distribution. The method re-schedules itself indefinitely (only to be stopped at the end of the replication), each time with an inter-arrival time from a given exponential distribution with $\lambda$ as the parameter.
 
 The most basic code to generate an entity would be:
 
@@ -124,7 +124,7 @@ The `startProcess(entity)` method of the server calculates some statistics, and 
   }
 ```
 
-The first statement increases the number of entities that are being processed.The second statement is scheduling the end of the process; it draws a delay from the `processingTime` distribution, and schedules a call to the method named `this.endProcess` after the delay. The methods expects one argument: the `entity`. In a sense, it is calling the method `this.endProcess(entity)` after the delay. 
+The first statement increases the number of entities that are being processed.The second statement is scheduling the end of the process; it draws a delay from the `processingTime` distribution, and schedules a call to `this.endProcess(entity)` after the delay. 
 
 #### endProcess()
 The `endProcess(entity)` method has to do two things: (1) increasing the available capacity of the server, (2) seeing if there are entities waiting in the queue and if yes, removing the first entity from the queue and processing it on the server. The method looks as follows:
