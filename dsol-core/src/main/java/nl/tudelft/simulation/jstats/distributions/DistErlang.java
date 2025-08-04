@@ -87,7 +87,9 @@ public class DistErlang extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x < 0)
-        { return 0; }
+        {
+            return 0;
+        }
         return this.lambda * Math.exp(-this.lambda * x) * Math.pow(this.lambda * x, this.k - 1)
                 / ProbMath.factorial(this.k - 1);
     }
@@ -113,7 +115,9 @@ public class DistErlang extends DistContinuous
     {
         super.setStream(stream);
         if (this.distGamma != null)
-        { this.distGamma.setStream(stream); }
+        {
+            this.distGamma.setStream(stream);
+        }
     }
 
     @Override

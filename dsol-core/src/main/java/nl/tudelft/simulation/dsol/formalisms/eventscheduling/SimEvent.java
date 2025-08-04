@@ -79,7 +79,9 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
             if (this.methodName.equals("<init>"))
             {
                 if (!(this.target instanceof Class))
-                { throw new SimRuntimeException("Invoking a constructor implies that target should be instance of Class"); }
+                {
+                    throw new SimRuntimeException("Invoking a constructor implies that target should be instance of Class");
+                }
                 Constructor<?> constructor = ClassUtil.resolveConstructor((Class<?>) this.target, this.args);
                 constructor.setAccessible(true);
                 constructor.newInstance(this.args);
@@ -148,7 +150,9 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
     public String printArgs()
     {
         if (getArgs() == null)
-        { return "null"; }
+        {
+            return "null";
+        }
         List<String> argsList = new ArrayList<>();
         for (int i = 0; i < this.getArgs().length; i++)
         {

@@ -91,7 +91,9 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
     {
         Map.Entry<Double, Number> floorEntry = this.cumulativeProbabilityMap.floorEntry(cumulativeProbability);
         if (floorEntry == null)
-        { return null; }
+        {
+            return null;
+        }
         return new DistributionEntry(floorEntry.getValue(), floorEntry.getKey());
     }
 
@@ -100,7 +102,9 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
     {
         Map.Entry<Double, Number> ceilingEntry = this.cumulativeProbabilityMap.ceilingEntry(cumulativeProbability);
         if (ceilingEntry == null)
-        { return null; }
+        {
+            return null;
+        }
         return new DistributionEntry(ceilingEntry.getValue(), ceilingEntry.getKey());
     }
 
@@ -111,9 +115,13 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         if (floorEntry != null)
         {
             if (floorEntry.getKey() == cumulativeProbability)
-            { floorEntry = this.cumulativeProbabilityMap.lowerEntry(floorEntry.getKey()); }
+            {
+                floorEntry = this.cumulativeProbabilityMap.lowerEntry(floorEntry.getKey());
+            }
             if (floorEntry != null)
-            { return new DistributionEntry(floorEntry.getValue(), floorEntry.getKey()); }
+            {
+                return new DistributionEntry(floorEntry.getValue(), floorEntry.getKey());
+            }
         }
         return null;
     }
@@ -125,9 +133,13 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         if (ceilingEntry != null)
         {
             if (ceilingEntry.getKey() == cumulativeProbability)
-            { ceilingEntry = this.cumulativeProbabilityMap.higherEntry(ceilingEntry.getKey()); }
+            {
+                ceilingEntry = this.cumulativeProbabilityMap.higherEntry(ceilingEntry.getKey());
+            }
             if (ceilingEntry != null)
-            { return new DistributionEntry(ceilingEntry.getValue(), ceilingEntry.getKey()); }
+            {
+                return new DistributionEntry(ceilingEntry.getValue(), ceilingEntry.getKey());
+            }
         }
         return null;
     }
@@ -140,9 +152,13 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         {
             Map.Entry<Double, Number> entry = this.cumulativeProbabilityMap.floorEntry(key);
             if (entry.getValue().equals(value))
-            { return new DistributionEntry(entry.getValue(), entry.getKey()); }
+            {
+                return new DistributionEntry(entry.getValue(), entry.getKey());
+            }
             if (entry.getValue().doubleValue() > value.doubleValue())
-            { break; }
+            {
+                break;
+            }
             floorEntry = entry;
         }
         return floorEntry == null ? null : new DistributionEntry(floorEntry.getValue(), floorEntry.getKey());
@@ -155,7 +171,9 @@ public abstract class AbstractEmpiricalDistribution implements EmpiricalDistribu
         {
             Map.Entry<Double, Number> entry = this.cumulativeProbabilityMap.floorEntry(key);
             if (entry.getValue().equals(value) || entry.getValue().doubleValue() > value.doubleValue())
-            { return new DistributionEntry(entry.getValue(), entry.getKey()); }
+            {
+                return new DistributionEntry(entry.getValue(), entry.getKey());
+            }
         }
         return null;
     }

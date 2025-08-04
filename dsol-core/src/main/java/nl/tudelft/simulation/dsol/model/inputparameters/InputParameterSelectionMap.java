@@ -84,7 +84,9 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
         for (K key : this.options.keySet())
         {
             if (this.options.get(key).equals(value))
-            { return key; }
+            {
+                return key;
+            }
         }
         return null;
     }
@@ -97,7 +99,9 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
     public void setMapValue(final T newValue) throws InputParameterException
     {
         if (getKeyforValue(newValue) == null)
-        { throw new InputParameterException("Value " + newValue + " not part of selectionMap options"); }
+        {
+            throw new InputParameterException("Value " + newValue + " not part of selectionMap options");
+        }
         super.setValue(newValue);
     }
 
@@ -111,7 +115,9 @@ public class InputParameterSelectionMap<K, T> extends AbstractInputParameter<T, 
         @SuppressWarnings("unchecked")
         T newValue = (T) objectValue;
         if (getKeyforValue(newValue) == null)
-        { throw new InputParameterException("Value " + newValue + " not part of selectionMap options"); }
+        {
+            throw new InputParameterException("Value " + newValue + " not part of selectionMap options");
+        }
         super.setValue(newValue);
     }
 

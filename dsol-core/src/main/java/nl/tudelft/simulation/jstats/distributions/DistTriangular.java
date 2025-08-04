@@ -54,7 +54,9 @@ public class DistTriangular extends DistContinuous
     {
         double u = this.stream.nextDouble();
         if (u <= ((this.mode - this.min) / (this.max - this.min)))
-        { return this.min + Math.sqrt((this.mode - this.min) * (this.max - this.min) * u); }
+        {
+            return this.min + Math.sqrt((this.mode - this.min) * (this.max - this.min) * u);
+        }
         return this.max - Math.sqrt((this.max - this.min) * (this.max - this.mode) * (1.0d - u));
     }
 
@@ -62,9 +64,13 @@ public class DistTriangular extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x >= this.min && x <= this.mode)
-        { return 2.0 * (x - this.min) / ((this.max - this.min) * (this.mode - this.min)); }
+        {
+            return 2.0 * (x - this.min) / ((this.max - this.min) * (this.mode - this.min));
+        }
         if (x >= this.mode && x <= this.max)
-        { return 2.0 * (this.max - x) / ((this.max - this.min) * (this.max - this.mode)); }
+        {
+            return 2.0 * (this.max - x) / ((this.max - this.min) * (this.max - this.mode));
+        }
         return 0.0;
     }
 

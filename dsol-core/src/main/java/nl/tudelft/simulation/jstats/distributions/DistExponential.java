@@ -54,7 +54,9 @@ public class DistExponential extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x >= 0)
-        { return (1 / this.mean) * Math.exp(-x / this.mean); }
+        {
+            return (1 / this.mean) * Math.exp(-x / this.mean);
+        }
         return 0.0;
     }
 

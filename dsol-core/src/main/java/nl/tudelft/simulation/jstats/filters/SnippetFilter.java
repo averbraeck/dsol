@@ -33,7 +33,9 @@ public class SnippetFilter extends AbstractFilter
     {
         super();
         if (snippet <= 0.0)
-        { throw new IllegalArgumentException("snippet should be >0.0"); }
+        {
+            throw new IllegalArgumentException("snippet should be >0.0");
+        }
         this.snippet = snippet;
     }
 
@@ -41,7 +43,9 @@ public class SnippetFilter extends AbstractFilter
     public boolean filter(final Object entry)
     {
         if (!(entry instanceof double[]) || ((double[]) entry).length != 2)
-        { throw new IllegalArgumentException("entry should be instance of double[2] representing x,y"); }
+        {
+            throw new IllegalArgumentException("entry should be instance of double[2] representing x,y");
+        }
         double[] value = (double[]) entry;
         if ((value[0] - this.lastAcceptedXValue) >= this.snippet)
         {

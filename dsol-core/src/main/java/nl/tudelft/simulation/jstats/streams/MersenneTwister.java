@@ -106,7 +106,9 @@ public class MersenneTwister extends RandomNumberGenerator
     public synchronized long next(final int bits)
     {
         if (bits < 0 || bits > 64)
-        { throw new IllegalArgumentException("bits (" + bits + ") not in range [0,64]"); }
+        {
+            throw new IllegalArgumentException("bits (" + bits + ") not in range [0,64]");
+        }
         int y;
         if (this.mti >= N) // generate N words at one time
         {
@@ -131,7 +133,9 @@ public class MersenneTwister extends RandomNumberGenerator
         y ^= (y << 15) & TEMPERING_MASK_C; // TEMPERING_SHIFT_T(y)
         y ^= (y >>> 18); // TEMPERING_SHIFT_L(y)
         if (bits <= 32)
-        { return y >>> (32 - bits); }
+        {
+            return y >>> (32 - bits);
+        }
         return y << 32 + this.next(bits - 32);
     }
 

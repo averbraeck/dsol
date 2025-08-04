@@ -51,7 +51,9 @@ public class DistLogNormalTrunc extends DistLogNormal
     {
         super(stream, mu, sigma);
         if (max < min)
-        { throw new IllegalArgumentException("Error Lognormal Truncated - max < min"); }
+        {
+            throw new IllegalArgumentException("Error Lognormal Truncated - max < min");
+        }
         this.min = min;
         this.max = max;
         this.lognormalProbMin = super.getCumulativeProbability(this.min);
@@ -69,9 +71,13 @@ public class DistLogNormalTrunc extends DistLogNormal
     public double getCumulativeProbability(final double x)
     {
         if (x < this.min)
-        { return 0.0; }
+        {
+            return 0.0;
+        }
         if (x > this.max)
-        { return 1.0; }
+        {
+            return 1.0;
+        }
         return (super.getCumulativeProbability(x) - this.lognormalProbMin) / (this.lognormalProbMax - this.lognormalProbMin);
     }
 
@@ -79,7 +85,9 @@ public class DistLogNormalTrunc extends DistLogNormal
     public double getProbabilityDensity(final double x)
     {
         if (x < this.min || x > this.max)
-        { return 0.0; }
+        {
+            return 0.0;
+        }
         return super.getProbabilityDensity(x) / (this.lognormalProbMax - this.lognormalProbMin);
     }
 

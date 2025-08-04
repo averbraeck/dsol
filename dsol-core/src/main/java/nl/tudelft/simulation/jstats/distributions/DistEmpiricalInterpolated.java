@@ -55,7 +55,9 @@ public class DistEmpiricalInterpolated extends DistContinuous
         DistributionEntry entry0 = this.empiricalDistribution.getFloorEntryForValue(x);
         DistributionEntry entry1 = this.empiricalDistribution.getCeilingEntryForValue(x);
         if (entry0 == null || entry1 == null)
-        { return 0.0; }
+        {
+            return 0.0;
+        }
         double v0 = entry0.getValue().doubleValue();
         double v1 = entry1.getValue().doubleValue();
         double c0 = entry0.getCumulativeProbability();

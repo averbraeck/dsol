@@ -55,7 +55,9 @@ public class DistEmpiricalDiscreteLong extends DistDiscrete
     {
         DistributionEntry entry1 = this.empiricalDistribution.getFloorEntryForValue(observation);
         if (entry1 == null || entry1.getValue().longValue() != observation)
-        { return 0.0; }
+        {
+            return 0.0;
+        }
         double c1 = entry1.getCumulativeProbability();
         DistributionEntry entry0 = this.empiricalDistribution.getPrevEntry(c1);
         return (entry0 == null) ? c1 : c1 - entry0.getCumulativeProbability();

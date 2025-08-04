@@ -45,7 +45,9 @@ public class LambdaSimEvent<T extends Number & Comparable<T>> extends AbstractSi
     {
         super(executionTime, priority);
         if (executable == null)
-        { throw new IllegalArgumentException("executable==null"); }
+        {
+            throw new IllegalArgumentException("executable==null");
+        }
         this.executable = executable;
     }
 

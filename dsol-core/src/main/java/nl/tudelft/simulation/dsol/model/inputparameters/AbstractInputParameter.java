@@ -101,7 +101,9 @@ public abstract class AbstractInputParameter<VT, CT> implements InputParameter<V
     {
         Throw.whenNull(newValue, "InputParameter.setValue not allowed with null argument");
         if (isReadOnly())
-        { throw new InputParameterException("The InputParameter with key " + getExtendedKey() + " is read-only"); }
+        {
+            throw new InputParameterException("The InputParameter with key " + getExtendedKey() + " is read-only");
+        }
         this.value = newValue;
     }
 

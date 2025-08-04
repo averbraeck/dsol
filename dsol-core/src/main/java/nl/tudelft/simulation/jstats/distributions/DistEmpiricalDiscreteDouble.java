@@ -50,7 +50,9 @@ public class DistEmpiricalDiscreteDouble extends DistContinuous
     {
         DistributionEntry entry0 = this.empiricalDistribution.getFloorEntryForValue(x);
         if (entry0 == null || entry0.getValue().longValue() != x)
-        { return 0.0; }
+        {
+            return 0.0;
+        }
         double c1 = entry0.getCumulativeProbability();
         DistributionEntry entryp = this.empiricalDistribution.getPrevEntry(c1);
         return (entryp == null) ? c1 : c1 - entryp.getCumulativeProbability();

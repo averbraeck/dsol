@@ -53,7 +53,9 @@ public class DistBinomial extends DistDiscrete
         for (int i = 0; i < this.n; i++)
         {
             if (this.stream.nextDouble() <= this.p)
-            { x++; }
+            {
+                x++;
+            }
         }
         return x;
     }

@@ -61,7 +61,9 @@ public class DistPoisson extends DistDiscrete
     public double probability(final long observation)
     {
         if (observation >= 0)
-        { return (Math.exp(-this.lambda) * Math.pow(this.lambda, observation)) / ProbMath.factorial(observation); }
+        {
+            return (Math.exp(-this.lambda) * Math.pow(this.lambda, observation)) / ProbMath.factorial(observation);
+        }
         return 0;
     }
 

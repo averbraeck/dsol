@@ -175,7 +175,9 @@ public final class ReadInputParameters
     {
         InputStream stream = URLResource.getResourceAsStream(filename);
         if (stream == null)
-        { throw new FileNotFoundException("Loading InputParameters from properties file; could not find file: " + filename); }
+        {
+            throw new FileNotFoundException("Loading InputParameters from properties file; could not find file: " + filename);
+        }
         Properties properties = new Properties();
         properties.load(stream);
         stream.close();
@@ -222,9 +224,13 @@ public final class ReadInputParameters
             }
             int pos = arg.indexOf("=");
             if (pos == 0)
-            { throw new InputParameterException("Parsing input parameters from properties; blank key for entry: " + arg); }
+            {
+                throw new InputParameterException("Parsing input parameters from properties; blank key for entry: " + arg);
+            }
             if (pos == arg.length() - 1)
-            { throw new InputParameterException("Parsing input parameters from properties; blank value for entry: " + arg); }
+            {
+                throw new InputParameterException("Parsing input parameters from properties; blank value for entry: " + arg);
+            }
             String key = arg.substring(0, pos);
             String value = arg.substring(pos + 1);
             if (value.startsWith("\\") || value.startsWith("\\'"))
@@ -232,7 +238,9 @@ public final class ReadInputParameters
                 value = value.substring(1);
             }
             else if ((value.startsWith("\"") && value.endsWith("\"")) || (value.startsWith("'") && value.endsWith("'")))
-            { value = value.substring(1, value.length() - 1); }
+            {
+                value = value.substring(1, value.length() - 1);
+            }
             InputParameter<?, ?> parameter = map.get(key.toString());
             if (parameter == null)
             {
@@ -318,7 +326,9 @@ public final class ReadInputParameters
                 }
             }
             if (index < 0)
-            { throw new InputParameterException("Input parameter " + value + " not in list: " + param.getOptions()); }
+            {
+                throw new InputParameterException("Input parameter " + value + " not in list: " + param.getOptions());
+            }
             param.setIndex(index);
         }
         else if (parameter instanceof InputParameterDistContinuous)
@@ -565,7 +575,9 @@ public final class ReadInputParameters
         int i1 = s.indexOf('(');
         int i2 = s.lastIndexOf(')');
         if (i1 < 0 || i2 < 0)
-        { throw new InputParameterException("Distribution expression " + s + " does not contain opening / closing bracket"); }
+        {
+            throw new InputParameterException("Distribution expression " + s + " does not contain opening / closing bracket");
+        }
         return new String[] {s.substring(0, i1), s.substring(i1 + 1, i2)};
     }
 

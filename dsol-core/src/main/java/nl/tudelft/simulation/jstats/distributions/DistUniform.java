@@ -52,7 +52,9 @@ public class DistUniform extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x >= this.min && x <= this.max)
-        { return 1.0 / (this.max - this.min); }
+        {
+            return 1.0 / (this.max - this.min);
+        }
         return 0.0;
     }
 

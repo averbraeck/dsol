@@ -36,7 +36,9 @@ public class DefaultSimTimeFormatter implements SimTimeFormatter
     public String format(final String message)
     {
         if (this.simulator == null)
-        { return message; }
+        {
+            return message;
+        }
         return "[T=" + this.simulator.getSimulatorTime() + "] " + message;
     }
 

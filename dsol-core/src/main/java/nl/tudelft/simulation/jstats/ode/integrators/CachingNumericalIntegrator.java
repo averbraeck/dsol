@@ -100,9 +100,13 @@ public abstract class CachingNumericalIntegrator extends NumericalIntegrator
     public double[] getY(final int numberDown)
     {
         if (this.lastCachePlace < this.cachePlaces)
-        { throw new RuntimeException("Tried to retrieve y-value that was not yet primed"); }
+        {
+            throw new RuntimeException("Tried to retrieve y-value that was not yet primed");
+        }
         if (numberDown >= this.cachePlaces)
-        { throw new RuntimeException("Tried to retrieve y-value beyond cache limits"); }
+        {
+            throw new RuntimeException("Tried to retrieve y-value beyond cache limits");
+        }
         return this.cacheY[(this.lastCachePlace - numberDown) % this.cachePlaces].clone();
     }
 
@@ -114,9 +118,13 @@ public abstract class CachingNumericalIntegrator extends NumericalIntegrator
     public double[] getDY(final int numberDown)
     {
         if (this.lastCachePlace < this.cachePlaces)
-        { throw new RuntimeException("Tried to retrieve dy-value that was not yet primed"); }
+        {
+            throw new RuntimeException("Tried to retrieve dy-value that was not yet primed");
+        }
         if (numberDown >= this.cachePlaces)
-        { throw new RuntimeException("Tried to retrieve dy-value beyond cache limits"); }
+        {
+            throw new RuntimeException("Tried to retrieve dy-value beyond cache limits");
+        }
         return this.cacheDY[(this.lastCachePlace - numberDown) % this.cachePlaces].clone();
     }
 

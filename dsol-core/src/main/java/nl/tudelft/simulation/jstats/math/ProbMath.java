@@ -127,7 +127,9 @@ public final class ProbMath
     public static double permutations(final int n, final int k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("permutations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("permutations of (n,k) with k>n");
+        }
         return factorial(n) / factorial(n - k);
     }
 
@@ -140,7 +142,9 @@ public final class ProbMath
     public static double permutations(final long n, final long k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("permutations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("permutations of (n,k) with k>n");
+        }
         return factorial(n) / factorial(n - k);
     }
 
@@ -153,7 +157,9 @@ public final class ProbMath
     public static long perm(final int n, final int k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("permutations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("permutations of (n,k) with k>n");
+        }
         return fac(n) / fac(n - k);
     }
 
@@ -166,7 +172,9 @@ public final class ProbMath
     public static long perm(final long n, final long k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("permutations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("permutations of (n,k) with k>n");
+        }
         return fac(n) / fac(n - k);
     }
 
@@ -179,7 +187,9 @@ public final class ProbMath
     public static double combinations(final int n, final int k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("combinations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("combinations of (n,k) with k>n");
+        }
         return factorial(n) / (factorial(k) * factorial(n - k));
     }
 
@@ -192,7 +202,9 @@ public final class ProbMath
     public static double combinations(final long n, final long k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("combinations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("combinations of (n,k) with k>n");
+        }
         return factorial(n) / (factorial(k) * factorial(n - k));
     }
 
@@ -205,7 +217,9 @@ public final class ProbMath
     public static long comb(final int n, final int k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("combinations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("combinations of (n,k) with k>n");
+        }
         return fac(n) / (fac(k) * fac(n - k));
     }
 
@@ -218,7 +232,9 @@ public final class ProbMath
     public static long comb(final long n, final long k)
     {
         if (k > n)
-        { throw new IllegalArgumentException("combinations of (n,k) with k>n"); }
+        {
+            throw new IllegalArgumentException("combinations of (n,k) with k>n");
+        }
         return fac(n) / (fac(k) * fac(n - k));
     }
 
@@ -242,9 +258,13 @@ public final class ProbMath
     {
         double zpos = Math.abs(z);
         if (zpos < 0.5)
-        { return erfSmall(z); }
+        {
+            return erfSmall(z);
+        }
         if (zpos > 3.8)
-        { return erfBig(z); }
+        {
+            return erfBig(z);
+        }
         return erfTaylor(z);
     }
 
@@ -325,7 +345,9 @@ public final class ProbMath
             double term = zpow / ((2.0 * i + 1.0) * ProbMath.factorial(i));
             d += term * ((i & 1) == 0 ? 1 : -1);
             if (term < 1E-16)
-            { break; }
+            {
+                break;
+            }
         }
         return Math.signum(z) * d * 2.0 / Math.sqrt(Math.PI);
     }

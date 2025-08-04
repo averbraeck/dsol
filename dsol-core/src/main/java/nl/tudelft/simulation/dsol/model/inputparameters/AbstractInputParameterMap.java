@@ -65,7 +65,9 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
     {
         String[] keys = key.split("\\.");
         if (!getValue().containsKey(keys[0]))
-        { throw new InputParameterException("Key " + key + " does not exist in InputParameterMap " + getKey()); }
+        {
+            throw new InputParameterException("Key " + key + " does not exist in InputParameterMap " + getKey());
+        }
         if (keys.length == 1)
         {
             getValue().remove(key);
@@ -92,9 +94,13 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
     {
         String[] keys = key.split("\\.");
         if (!getValue().containsKey(keys[0]))
-        { throw new InputParameterException("Key " + key + " does not exist in InputParameterMap " + getKey()); }
+        {
+            throw new InputParameterException("Key " + key + " does not exist in InputParameterMap " + getKey());
+        }
         if (keys.length == 1)
-        { return getValue().get(key); }
+        {
+            return getValue().get(key);
+        }
         InputParameter<?, ?> parent = getValue().get(keys[0]);
         if (!(parent instanceof AbstractInputParameterMap))
         {
@@ -207,7 +213,9 @@ public abstract class AbstractInputParameterMap<CT> extends AbstractInputParamet
         public int compare(final InputParameter<?, ?> o1, final InputParameter<?, ?> o2)
         {
             if (o1.getDisplayPriority() != o2.getDisplayPriority())
-            { return o1.getDisplayPriority() < o2.getDisplayPriority() ? -1 : 1; }
+            {
+                return o1.getDisplayPriority() < o2.getDisplayPriority() ? -1 : 1;
+            }
             return o1.getKey().compareTo(o2.getKey());
         }
     }

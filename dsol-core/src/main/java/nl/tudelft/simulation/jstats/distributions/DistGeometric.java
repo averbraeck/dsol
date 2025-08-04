@@ -57,7 +57,9 @@ public class DistGeometric extends DistDiscrete
     public double probability(final long observation)
     {
         if (observation >= 0)
-        { return this.p * Math.pow(1 - this.p, observation); }
+        {
+            return this.p * Math.pow(1 - this.p, observation);
+        }
         return 0.0;
     }
 

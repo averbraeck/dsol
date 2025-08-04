@@ -65,7 +65,9 @@ public class DistBeta extends DistContinuous
     public double getProbabilityDensity(final double x)
     {
         if (x > 0 && x < 1)
-        { return (Math.pow(x, this.alpha1 - 1) * Math.pow(1 - x, this.alpha2 - 1)) / ProbMath.beta(this.alpha1, this.alpha2); }
+        {
+            return (Math.pow(x, this.alpha1 - 1) * Math.pow(1 - x, this.alpha2 - 1)) / ProbMath.beta(this.alpha1, this.alpha2);
+        }
         return 0;
     }
 
