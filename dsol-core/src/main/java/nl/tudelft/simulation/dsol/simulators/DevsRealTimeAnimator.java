@@ -58,6 +58,9 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
 
     /** Start an animation thread or not. */
     private Boolean animation = true;
+    
+    /** Synchronization object. */
+    private Object sync = new Object();
 
     /** the current animation thread; null if none. */
     private AnimationThread animationThread = null;
@@ -85,7 +88,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     @SuppressWarnings({"checkstyle:designforextension", "checkstyle:methodlength"})
     public void run()
     {
-        synchronized (this.animation)
+        synchronized (this.sync)
         {
             if (this.animation)
             {
@@ -314,7 +317,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         }
         fireTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, this.simulatorTime);
 
-        synchronized (this.animation)
+        synchronized (this.sync)
         {
             if (this.animation && this.animationThread != null)
             {
@@ -330,7 +333,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
      */
     public void setAnimation(final boolean animation)
     {
-        synchronized (this.animation)
+        synchronized (this.sync)
         {
             if (this.animation == animation)
             {
