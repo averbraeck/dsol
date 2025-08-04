@@ -30,11 +30,28 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 public interface DsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends Serializable
 {
     /**
-     * construct a model on a simulator.
+     * Construct a model on a simulator.
      * @throws SimRuntimeException on model construction failure
      */
     void constructModel() throws SimRuntimeException;
+    
+    /**
+     * Set the executable code for resetting the application at a 'reset' command in the GUI.
+     * @param resetApplicationExecutable the executable code for resetting the application
+     */
+    void setResetApplicationExecutable(Runnable resetApplicationExecutable);
 
+    /**
+     * Get the executable code for resetting the application at a 'reset' command in the GUI.
+     * @return the executable code for resetting the application
+     */
+    Runnable getResetApplicationExecutable();
+
+    /**
+     * Reset the application.
+     */
+    void resetApplication();
+    
     /**
      * Return the simulator for this model.
      * @return the simulator for the model
@@ -43,9 +60,15 @@ public interface DsolModel<T extends Number & Comparable<T>, S extends Simulator
 
     /**
      * Get the input parameters for this model.
-     * @return List&lt;InputParameter&gt; the input parameters for this model
+     * @return InputParameterMap the input parameters for this model
      */
     InputParameterMap getInputParameterMap();
+
+    /**
+     * Set the input parameters for this model.
+     * @param inputParameterMap the new input parameter map for this model
+     */
+    void setInputParameterMap(InputParameterMap inputParameterMap);
 
     /**
      * Get the output statistics for this model.

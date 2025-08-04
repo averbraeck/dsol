@@ -47,6 +47,9 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected StreamInformation streamInformation;
 
+    /** code to execute to rebuild the application at a reset. */
+    private Runnable resetApplicationExecutable = null;
+
     /**
      * Construct a DSOL model and set the simulator.
      * @param simulator the simulator to use for this model
@@ -72,6 +75,27 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
     }
 
     @Override
+    public void setResetApplicationExecutable(final Runnable resetApplicationExecutable)
+    {
+        this.resetApplicationExecutable = resetApplicationExecutable;
+    }
+
+    @Override
+    public Runnable getResetApplicationExecutable()
+    {
+        return this.resetApplicationExecutable;
+    }
+
+    @Override
+    public void resetApplication()
+    {
+        if (this.resetApplicationExecutable != null)
+        {
+            this.resetApplicationExecutable.run();
+        }
+    }
+
+    @Override
     public void setStreamInformation(final StreamInformation streamInformation)
     {
         Throw.whenNull(streamInformation, "streamInformation cannot be null");
@@ -94,6 +118,12 @@ public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S exte
     public InputParameterMap getInputParameterMap()
     {
         return this.inputParameterMap;
+    }
+
+    @Override
+    public void setInputParameterMap(final InputParameterMap inputParameterMap)
+    {
+        this.inputParameterMap = inputParameterMap;
     }
 
     /**
