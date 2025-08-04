@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.swing.gui.control;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -13,7 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import javax.swing.SwingUtilities;
 
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
@@ -26,6 +27,7 @@ import nl.tudelft.simulation.dsol.simulators.RunState;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControlButton;
 import nl.tudelft.simulation.dsol.swing.gui.util.Icons;
+import nl.tudelft.simulation.naming.context.ContextInterface;
 
 /**
  * Simulation control panel. Code based on OpenTrafficSim project component with the same purpose.
@@ -72,9 +74,6 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
 
     /** Has the window close handler been registered? */
     private boolean closeHandlerRegistered = false;
-
-    /** Has cleanup taken place? */
-    private boolean isCleanUp = false;
 
     /**
      * Define a generic control panel with a different set of control buttons. This abstract class defines those features that
@@ -150,7 +149,9 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     public void installWindowCloseHandler()
     {
         if (this.closeHandlerRegistered)
-        { return; }
+        {
+            return;
+        }
 
         // make sure the root frame gets disposed of when the closing X icon is pressed.
         new DisposeOnCloseThread(this).start();
@@ -225,27 +226,30 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
             }
             else if (actionCommand.equals("Reset"))
             {
-                // FIXME: Reset does not work yet, so button is greyed out for now...
                 if (getSimulator().isStartingOrRunning())
-                { getSimulator().stop(); }
+                {
+                    getSimulator().stop();
+                }
+                getSimulator().cleanUp();
 
                 if (null == getModel())
-                { throw new RuntimeException("Do not know how to restart this simulation"); }
-
-                // find the JFrame position and dimensions
-                Container root = this;
-                while (!(root instanceof JFrame))
                 {
-                    root = root.getParent();
+                    throw new RuntimeException("Do not know how to restart this simulation");
                 }
-                JFrame frame = (JFrame) root;
-                frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                frame.dispose();
+
+                // clean up timers, contexts, threads
                 cleanup();
 
                 // re-construct the model and reset the simulator and replication / experiment
-                this.model.constructModel();
-                // TODO reset the simulator and replication / experiment
+                getSimulator().initialize(getModel(), getSimulator().getReplication());
+
+                // refresh the screen, buttons, time, etc.
+                Window window = SwingUtilities.getWindowAncestor(this);
+                if (window instanceof JFrame)
+                {
+                    ((JFrame) window).getContentPane().revalidate();
+                    ((JFrame) window).getContentPane().repaint();
+                }
             }
             fixButtons();
         }
@@ -260,39 +264,49 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
      */
     private void cleanup()
     {
-        if (!this.isCleanUp)
+        try
         {
-            this.isCleanUp = true;
-            try
+            if (this.simulator != null)
             {
-                if (this.simulator != null)
+                if (this.simulator.isStartingOrRunning())
                 {
-                    if (this.simulator.isStartingOrRunning())
-                    { this.simulator.stop(); }
-
-                    // unbind the old animation and statistics
-                    if (getSimulator().getReplication().getContext().hasKey("animation"))
-                    { getSimulator().getReplication().getContext().destroySubcontext("animation"); }
-                    if (getSimulator().getReplication().getContext().hasKey("statistics"))
-                    { getSimulator().getReplication().getContext().destroySubcontext("statistics"); }
-                    if (getSimulator().getReplication().getContext().hasKey("statistics"))
-                    { getSimulator().getReplication().getContext().destroySubcontext("statistics"); }
-                    // TODO: getSimulator().getReplication().getExperiment().removeFromContext(); // clean up the context
+                    this.simulator.stop();
                 }
 
-                if (this.clockPanel != null)
+                // unbind the old animation and statistics
+                if (getSimulator().getReplication().getContext().hasKey("animation"))
                 {
-                    this.clockPanel.cancelTimer(); // cancel the timer on the clock panel.
+                    ContextInterface animationContext =
+                            (ContextInterface) getSimulator().getReplication().getContext().get("animation");
+                    if (animationContext.hasKey("2D"))
+                    {
+                        ContextInterface d2 = (ContextInterface) animationContext.get("2D");
+                        while (!d2.keySet().isEmpty())
+                            d2.unbindObject(d2.keySet().iterator().next());
+                    }
                 }
-                if (this.speedPanel != null)
+                if (getSimulator().getReplication().getContext().hasKey("statistics"))
                 {
-                    this.speedPanel.cancelTimer(); // cancel the timer on the speed panel.
+                    getSimulator().getReplication().getContext().destroySubcontext("statistics");
+                    getSimulator().getReplication().getContext().createSubcontext("statistics");
                 }
+                // TODO: getSimulator().getReplication().getExperiment().removeFromContext(); // clean up the context
             }
-            catch (Throwable exception)
+
+            /*-
+            if (this.clockPanel != null)
             {
-                exception.printStackTrace();
+                this.clockPanel.cancelTimer(); // cancel the timer on the clock panel.
             }
+            if (this.speedPanel != null)
+            {
+                this.speedPanel.cancelTimer(); // cancel the timer on the speed panel.
+            }
+            */
+        }
+        catch (Throwable exception)
+        {
+            exception.printStackTrace();
         }
     }
 
@@ -322,8 +336,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
             }
             else if (actionCommand.equals("Reset"))
             {
-                // FIXME: should be disabled when the simulator was just reset or initialized
-                button.setEnabled(false); // XXX: should be true when "reset" works!
+                button.setEnabled(true);
             }
         }
     }
@@ -444,7 +457,9 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     public void setRunUntilPanel(final RunUntilPanel<T> runUntilPanel)
     {
         if (this.runUntilPanel != null)
-        { remove(this.runUntilPanel); }
+        {
+            remove(this.runUntilPanel);
+        }
         this.runUntilPanel = runUntilPanel;
         add(this.runUntilPanel);
     }
@@ -487,7 +502,9 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
             try
             {
                 if (this.simulator.isStartingOrRunning())
-                { this.simulator.stop(); }
+                {
+                    this.simulator.stop();
+                }
             }
             catch (SimRuntimeException exception)
             {
@@ -530,9 +547,13 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT) || event.getType().equals(SimulatorInterface.STOP_EVENT))
-        { fixButtons(); }
+        {
+            fixButtons();
+        }
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
-        { invalidateButtons(); }
+        {
+            invalidateButtons();
+        }
     }
 
     @Override
