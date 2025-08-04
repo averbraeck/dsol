@@ -65,13 +65,17 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
             if (actionCommand.equals("Step"))
             {
                 if (getSimulator().isStartingOrRunning())
-                { getSimulator().stop(); }
+                {
+                    getSimulator().stop();
+                }
                 getSimulator().step();
             }
             if (actionCommand.equals("NextTime"))
             {
                 if (getSimulator().isStartingOrRunning())
-                { getSimulator().stop(); }
+                {
+                    getSimulator().stop();
+                }
                 T now = getSimulator().getSimulatorTime();
                 try
                 {
@@ -106,7 +110,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
                 button.setEnabled(moreWorkToDo && isControlButtonsEnabled());
             }
             else if (actionCommand.equals("NextTime"))
-            { button.setEnabled(moreWorkToDo && isControlButtonsEnabled()); }
+            {
+                button.setEnabled(moreWorkToDo && isControlButtonsEnabled());
+            }
         }
         super.fixButtons(); // handles the start/stop button
     }
@@ -122,7 +128,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
                 button.setEnabled(false);
             }
             else if (actionCommand.equals("NextTime"))
-            { button.setEnabled(false); }
+            {
+                button.setEnabled(false);
+            }
         }
         super.invalidateButtons(); // handles the start/stop button
     }

@@ -149,11 +149,17 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
     public Object getValueAt(final int rowIndex, final int columnIndex)
     {
         if (columnIndex == 0)
-        { return Integer.valueOf(rowIndex); }
+        {
+            return Integer.valueOf(rowIndex);
+        }
         if (columnIndex == 1)
-        { return this.buttons.get(rowIndex); }
+        {
+            return this.buttons.get(rowIndex);
+        }
         if (columnIndex == 2)
-        { return this.instances.get(this.keys.get(rowIndex)); }
+        {
+            return this.instances.get(this.keys.get(rowIndex));
+        }
         return null;
     }
 
@@ -167,7 +173,9 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
     public boolean isCellEditable(final int rowIndex, final int columnIndex)
     {
         if (columnIndex == 1 || columnIndex == 2)
-        { return true; }
+        {
+            return true;
+        }
         return false;
     }
 
@@ -201,7 +209,9 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
     public Class<?> getColumnClass(final int columnIndex)
     {
         if (columnIndex == 1)
-        { return ExpandButton.class; }
+        {
+            return ExpandButton.class;
+        }
         return Object.class;
     }
 
@@ -233,7 +243,9 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
         {
             this.componentType = this.parentProperty.getComponentType();
             if (this.componentType == null)
-            { return; }
+            {
+                return;
+            }
         }
         try
         {
@@ -288,11 +300,17 @@ public class CollectionTableModel extends AbstractTableModel implements Introspe
     public Class<?> getTypeAt(final int rowIndex, final int columnIndex)
     {
         if (columnIndex == 0)
-        { return String.class; }
+        {
+            return String.class;
+        }
         if (columnIndex == 1)
-        { return ExpandButton.class; }
+        {
+            return ExpandButton.class;
+        }
         if (columnIndex == 2)
-        { return this.instances.get(this.keys.get(rowIndex)).getClass(); }
+        {
+            return this.instances.get(this.keys.get(rowIndex)).getClass();
+        }
         return null;
     }
 

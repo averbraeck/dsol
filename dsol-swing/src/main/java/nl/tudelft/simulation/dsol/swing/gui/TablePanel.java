@@ -152,7 +152,9 @@ public class TablePanel extends JPanel
         {
             result[i] = 1.0 / value;
             if (result[i] == 1.0)
-            { result[i] = TableLayoutConstants.FILL; }
+            {
+                result[i] = TableLayoutConstants.FILL;
+            }
         }
         return result;
     }

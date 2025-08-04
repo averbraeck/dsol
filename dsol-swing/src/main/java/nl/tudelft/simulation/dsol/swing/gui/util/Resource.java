@@ -32,10 +32,14 @@ public final class Resource
     {
         InputStream stream = Resource.class.getResourceAsStream(name);
         if (stream != null)
-        { return stream; }
+        {
+            return stream;
+        }
         stream = Resource.class.getResourceAsStream("/resources" + name);
         if (stream != null)
-        { return stream; }
+        {
+            return stream;
+        }
         throw new RuntimeException("Unable to load resource " + name);
     }
 

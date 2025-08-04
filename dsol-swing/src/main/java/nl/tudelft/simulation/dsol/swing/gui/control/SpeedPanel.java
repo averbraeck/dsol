@@ -78,7 +78,9 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
     public void cancelTimer()
     {
         if (this.timer != null)
-        { this.timer.cancel(); }
+        {
+            this.timer.cancel();
+        }
         this.timer = null;
     }
 
@@ -200,7 +202,9 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         protected String formatSpeed(final Double simulationTime)
         {
             if (simulationTime == null)
-            { return "0.0"; }
+            {
+                return "0.0";
+            }
             double speed = (simulationTime - getPrevSimTime()) / (0.001 * getUpdateIntervalMs());
             setPrevSimTime(simulationTime);
             return String.format("%6.2f x ", speed);
@@ -236,7 +240,9 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         protected String formatSpeed(final Float simulationTime)
         {
             if (simulationTime == null)
-            { return "0.0"; }
+            {
+                return "0.0";
+            }
             double speed = (simulationTime - getPrevSimTime()) / (0.001 * getUpdateIntervalMs());
             setPrevSimTime(simulationTime);
             return String.format("%6.2f x ", speed);
@@ -272,7 +278,9 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         protected String formatSpeed(final Long simulationTime)
         {
             if (simulationTime == null)
-            { return "0.0"; }
+            {
+                return "0.0";
+            }
             double speed = (simulationTime - getPrevSimTime()) / (0.001 * getUpdateIntervalMs());
             setPrevSimTime(simulationTime);
             return String.format("%6.2f x ", speed);
@@ -308,7 +316,9 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         protected String formatSpeed(final Duration simulationTime)
         {
             if (simulationTime == null)
-            { return "0.0"; }
+            {
+                return "0.0";
+            }
             double speed = (simulationTime.si - getPrevSimTime().si) / (0.001 * getUpdateIntervalMs());
             setPrevSimTime(simulationTime);
             return String.format("%6.2f x ", speed);
@@ -344,7 +354,9 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         protected String formatSpeed(final FloatDuration simulationTime)
         {
             if (simulationTime == null)
-            { return "0.0"; }
+            {
+                return "0.0";
+            }
             double speed = (simulationTime.si - getPrevSimTime().si) / (0.001 * getUpdateIntervalMs());
             setPrevSimTime(simulationTime);
             return String.format("%6.2f x ", speed);

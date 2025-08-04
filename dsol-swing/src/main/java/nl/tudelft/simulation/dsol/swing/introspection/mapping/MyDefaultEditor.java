@@ -33,7 +33,9 @@ public class MyDefaultEditor implements TableCellEditor
     {
         TableCellEditor editor = table.getDefaultEditor(value.getClass());
         if (!(editor instanceof MyDefaultEditor))
-        { this.delegate = editor; }
+        {
+            this.delegate = editor;
+        }
         return this.delegate.getTableCellEditorComponent(table, value, isSelected, row, column);
     }
 

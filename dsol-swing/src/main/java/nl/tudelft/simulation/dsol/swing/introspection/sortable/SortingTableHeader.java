@@ -93,7 +93,9 @@ public class SortingTableHeader extends JTableHeader
         for (Sortable.Definition def : this.definitions)
         {
             if (def.getFieldID() == column)
-            { return def; }
+            {
+                return def;
+            }
         }
         return null;
     }
@@ -108,7 +110,9 @@ public class SortingTableHeader extends JTableHeader
         {
             SortingHeaderCell current = (SortingHeaderCell) getColumnModel().getColumn(i).getHeaderRenderer();
             if (!current.equals(butThisOne))
-            { current.setSort(SortingHeaderCell.SORT_NONE); }
+            {
+                current.setSort(SortingHeaderCell.SORT_NONE);
+            }
         }
     }
 
@@ -148,7 +152,9 @@ public class SortingTableHeader extends JTableHeader
             if (def.getFieldID() == column)
             {
                 if (def.isAcendingSort())
-                { return SortingHeaderCell.SORT_ASCENDING; }
+                {
+                    return SortingHeaderCell.SORT_ASCENDING;
+                }
                 return SortingHeaderCell.SORT_DESCENDING;
             }
         }

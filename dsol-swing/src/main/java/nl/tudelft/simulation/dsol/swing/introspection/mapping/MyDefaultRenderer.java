@@ -28,9 +28,13 @@ public class MyDefaultRenderer extends DefaultTableCellRenderer
     {
         TableCellRenderer renderer = table.getDefaultRenderer(Object.class);
         if (value != null)
-        { renderer = table.getDefaultRenderer(value.getClass()); }
+        {
+            renderer = table.getDefaultRenderer(value.getClass());
+        }
         if (renderer instanceof MyDefaultRenderer)
-        { return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); }
+        {
+            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        }
         return renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
     }
 }

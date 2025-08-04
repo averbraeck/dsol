@@ -88,7 +88,9 @@ public class HistogramDomainAxis extends NumberAxis
                 // we draw 90degrees rotated, so heigth = width
                 double height = g2.getFont().getStringBounds(this.labels[i], g2.getFontRenderContext()).getWidth();
                 if (height > this.maxLabelHeight)
-                { this.maxLabelHeight = height + 3; }
+                {
+                    this.maxLabelHeight = height + 3;
+                }
             }
         }
         AxisSpace result = new AxisSpace();

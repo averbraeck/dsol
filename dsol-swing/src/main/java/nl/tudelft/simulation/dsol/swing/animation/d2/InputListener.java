@@ -55,7 +55,9 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
         {
             Object selected = this.panel.getSelectedObject(this.panel.getSelectedObjects(e.getPoint()));
             if (selected != null)
-            { new IntrospectionDialog(selected); }
+            {
+                new IntrospectionDialog(selected);
+            }
         }
     }
 
@@ -135,7 +137,9 @@ public class InputListener implements MouseListener, MouseWheelListener, MouseMo
     public void mouseDragged(final MouseEvent e)
     {
         if (e.isShiftDown())
-        { this.panel.setDragLine(e.getPoint(), this.mouseClicked); }
+        {
+            this.panel.setDragLine(e.getPoint(), this.mouseClicked);
+        }
         this.panel.repaint();
         e.consume();
     }

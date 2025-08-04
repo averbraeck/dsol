@@ -82,9 +82,13 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
     {
         Property requested = this.properties[rowIndex];
         if (columnIndex == 0)
-        { return requested.getName(); }
+        {
+            return requested.getName();
+        }
         if (columnIndex == 1)
-        { return this.buttons[rowIndex]; }
+        {
+            return this.buttons[rowIndex];
+        }
         if (columnIndex == 2)
         {
             try
@@ -110,9 +114,13 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
     public boolean isCellEditable(final int rowIndex, final int columnIndex)
     {
         if (columnIndex == 1)
-        { return true; }
+        {
+            return true;
+        }
         if (columnIndex == 2)
-        { return (this.properties[rowIndex].isEditable() && !this.properties[rowIndex].getType().isArray()); }
+        {
+            return (this.properties[rowIndex].isEditable() && !this.properties[rowIndex].getType().isArray());
+        }
         return false;
     }
 
@@ -120,7 +128,9 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
     public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex)
     {
         if ((columnIndex != 2) || (!isCellEditable(rowIndex, columnIndex)))
-        { return; }
+        {
+            return;
+        }
         Property requested = this.properties[rowIndex];
         try
         {
@@ -136,7 +146,9 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
     public Class<?> getColumnClass(final int columnIndex)
     {
         if (columnIndex == 1)
-        { return ExpandButton.class; }
+        {
+            return ExpandButton.class;
+        }
         return Object.class;
     }
 
@@ -145,11 +157,17 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
     {
         Property requested = this.properties[rowIndex];
         if (columnIndex == 0)
-        { return String.class; }
+        {
+            return String.class;
+        }
         if (columnIndex == 1)
-        { return ExpandButton.class; }
+        {
+            return ExpandButton.class;
+        }
         if (columnIndex == 2)
-        { return requested.getType(); }
+        {
+            return requested.getType();
+        }
         return null;
     }
 
@@ -162,7 +180,9 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
         for (int i = 0; i < this.properties.length; i++)
         {
             if (this.properties[i].getName().equalsIgnoreCase(property))
-            { return i; }
+            {
+                return i;
+            }
         }
         return -1;
     }
@@ -172,7 +192,9 @@ public class ObjectTableModel extends AbstractTableModel implements Introspectin
     {
         int index = getPropertyIndex(propertyName);
         if (index == -1)
-        { return null; }
+        {
+            return null;
+        }
         return this.properties[index];
     }
 

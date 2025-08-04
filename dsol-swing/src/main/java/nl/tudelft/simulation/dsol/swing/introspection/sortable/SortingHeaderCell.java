@@ -119,7 +119,9 @@ public class SortingHeaderCell extends DefaultTableCellRenderer
             g.fillPolygon(new int[] {width - 14, width - 9, width - 4}, new int[] {4, height - 4, 4}, 3);
         }
         else if (this.sortMode == SortingHeaderCell.SORT_ASCENDING)
-        { g.fillPolygon(new int[] {width - 14, width - 9, width - 4}, new int[] {height - 4, 4, height - 4}, 3); }
+        {
+            g.fillPolygon(new int[] {width - 14, width - 9, width - 4}, new int[] {height - 4, 4, height - 4}, 3);
+        }
     }
 
     @Override

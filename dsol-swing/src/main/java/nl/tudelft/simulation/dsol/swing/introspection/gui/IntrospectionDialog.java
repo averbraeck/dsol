@@ -170,7 +170,9 @@ public class IntrospectionDialog extends JDialog
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         if (this.table.getPreferredSize().height >= 0.5 * d.height
                 || this.table.getPreferredSize().height + getLocation().y >= 0.9 * d.height)
-        { return; }
+        {
+            return;
+        }
         this.table.setPreferredScrollableViewportSize(this.table.getPreferredSize());
         pack();
     }

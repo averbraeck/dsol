@@ -146,9 +146,13 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
             synchronized (this)
             {
                 if (getSimulator().isStartingOrRunning())
-                { getSimulator().stop(); }
+                {
+                    getSimulator().stop();
+                }
                 if (getSimulator().getSimulatorTime().compareTo(this.runUntilTime) < 0)
-                { getSimulator().runUpTo(this.runUntilTime); }
+                {
+                    getSimulator().runUpTo(this.runUntilTime);
+                }
             }
             this.applyState = true;
         }

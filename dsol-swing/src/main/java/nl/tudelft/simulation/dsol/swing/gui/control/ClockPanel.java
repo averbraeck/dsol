@@ -78,7 +78,9 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public void cancelTimer()
     {
         if (this.timer != null)
-        { this.timer.cancel(); }
+        {
+            this.timer.cancel();
+        }
         this.timer = null;
     }
 

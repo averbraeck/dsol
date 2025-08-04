@@ -151,7 +151,9 @@ public class InfoTextPanel extends JPanel
                 }
 
                 if (isShowing())
-                { updateWorldCoordinate(); }
+                {
+                    updateWorldCoordinate();
+                }
                 try
                 {
                     Thread.sleep(50); // 20 times per second

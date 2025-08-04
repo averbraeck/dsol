@@ -49,7 +49,9 @@ public class HistogramSeries extends AbstractDataset implements EventListener
         {
             this.bins[i] = new Bin(new double[] {min, min + binWidth}, range);
             if (range != null)
-            { this.bins[i].setFixed(true); }
+            {
+                this.bins[i].setFixed(true);
+            }
             min = min + binWidth;
         }
         this.fireDatasetChanged();
@@ -149,11 +151,15 @@ public class HistogramSeries extends AbstractDataset implements EventListener
     private int resolveBin(final double value)
     {
         if (value <= this.bins[1].getStartXValue())
-        { return 0; }
+        {
+            return 0;
+        }
         for (int i = 1; i < this.bins.length - 1; i++)
         {
             if (value > this.bins[i].getStartXValue() && value <= this.bins[i].getEndXValue())
-            { return i; }
+            {
+                return i;
+            }
         }
         return this.bins.length - 1;
     }
@@ -201,7 +207,9 @@ public class HistogramSeries extends AbstractDataset implements EventListener
         {
             this.observations++;
             if (!this.fixed && this.observations >= this.range[1])
-            { this.range[1] = this.observations; }
+            {
+                this.range[1] = this.observations;
+            }
         }
 
         /**

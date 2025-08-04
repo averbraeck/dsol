@@ -130,7 +130,9 @@ public class AutoPanAnimationPanel extends AnimationPanel
             }
         }
         if (targets.size() == 1)
-        { return targets.get(0); }
+        {
+            return targets.get(0);
+        }
         return null;
     }
 
@@ -149,7 +151,9 @@ public class AutoPanAnimationPanel extends AnimationPanel
         this.autoPanOnNextPaintComponent = true;
         // System.out.println("AutoPan id=" + newAutoPanId + ", kind=" + newAutoPanKind + ", track=" + newAutoPanTrack);
         if (null != this.autoPanId && this.autoPanId.length() > 0 && null != this.autoPanKind)
-        { repaint(); }
+        {
+            repaint();
+        }
     }
 
     @Override

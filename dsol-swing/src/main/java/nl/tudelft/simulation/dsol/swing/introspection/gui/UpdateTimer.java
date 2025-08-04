@@ -67,7 +67,9 @@ public class UpdateTimer extends TimerTask
         for (int i = (this.components.length - 1); i > -1; i--)
         {
             if (this.components[i].get().equals(component))
-            { this.remove(this.components[i]); }
+            {
+                this.remove(this.components[i]);
+            }
         }
     }
 

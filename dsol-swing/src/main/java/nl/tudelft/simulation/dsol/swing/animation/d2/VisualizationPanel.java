@@ -282,7 +282,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             setExtent(computeVisibleExtent(this.extent));
         }
         if (this.showGrid)
-        { this.drawGrid(g); }
+        {
+            this.drawGrid(g);
+        }
 
         // update drawable elements when necessary
         if (this.dirty)
@@ -304,7 +306,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
                 objectRemoved(element);
             }
             else if (isShowElement(element))
-            { element.paintComponent(g2, this.getExtent(), this.getSize(), getRenderableScale(), this); }
+            {
+                element.paintComponent(g2, this.getExtent(), this.getSize(), getRenderableScale(), this);
+            }
         }
 
         // draw drag line if enabled.
@@ -351,7 +355,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
                         if (lc.isAssignableFrom(locatableClass))
                         {
                             if (!this.visibilityMap.get(lc))
-                            { show = false; }
+                            {
+                                show = false;
+                            }
                         }
                     }
                     // add to the right cache
@@ -399,7 +405,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         if (event.getType().equals(AnimatorInterface.UPDATE_ANIMATION_EVENT) && this.isShowing())
         {
             if (this.getWidth() > 0 || this.getHeight() > 0)
-            { this.repaint(); }
+            {
+                this.repaint();
+            }
             return;
         }
 
@@ -409,7 +417,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         }
 
         else if (event.getType().equals(ContextInterface.OBJECT_REMOVED_EVENT))
-        { objectRemoved((Renderable2dInterface<? extends Locatable>) ((Object[]) event.getContent())[2]); }
+        {
+            objectRemoved((Renderable2dInterface<? extends Locatable>) ((Object[]) event.getContent())[2]);
+        }
     }
 
     /**
@@ -501,7 +511,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     public synchronized void pan(final int direction, final double percentage)
     {
         if (percentage <= 0 || percentage > 1.0)
-        { throw new IllegalArgumentException("percentage<=0 || >1.0"); }
+        {
+            throw new IllegalArgumentException("percentage<=0 || >1.0");
+        }
         switch (direction)
         {
             case LEFT:
@@ -676,7 +688,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             this.formatter.setMaximumFractionDigits(maximumNumberOfDigits);
             gridSizePixelsX = (int) Math.round(this.gridSizeX / scaleX);
             if (count++ > 10)
-            { break; }
+            {
+                break;
+            }
         }
 
         count = 0;
@@ -687,7 +701,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             this.gridSizeX = this.gridSizeX / 10;
             gridSizePixelsX = (int) Math.round(this.gridSizeX / scaleX);
             if (count++ > 10)
-            { break; }
+            {
+                break;
+            }
         }
 
         int gridSizePixelsY = (int) Math.round(this.gridSizeY / scaleY);
@@ -698,7 +714,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             this.formatter.setMaximumFractionDigits(maximumNumberOfDigits);
             gridSizePixelsY = (int) Math.round(this.gridSizeY / scaleY);
             if (count++ > 10)
-            { break; }
+            {
+                break;
+            }
         }
 
         count = 0;
@@ -709,7 +727,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             this.gridSizeY = this.gridSizeY / 10;
             gridSizePixelsY = (int) Math.round(this.gridSizeY / scaleY);
             if (count++ > 10)
-            { break; }
+            {
+                break;
+            }
         }
 
         // Let's draw the vertical lines
@@ -773,7 +793,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     {
         Dimension screen = getSize();
         if (this.lastScreen == null || this.lastScreen.getWidth() == 0.0 || this.lastScreen.getHeight() == 0.0)
-        { this.lastScreen = new Dimension(screen); }
+        {
+            this.lastScreen = new Dimension(screen);
+        }
         double ysr = this.renderableScale.getYScaleRatio();
         double xScale = this.renderableScale.getXScale(extent, screen);
         double yScale = this.renderableScale.getYScale(extent, screen) / ysr;
@@ -850,7 +872,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             for (Renderable2dInterface<? extends Locatable> renderable : this.elementList)
             {
                 if (renderable.getSource() == null)
-                { continue; }
+                {
+                    continue;
+                }
                 Point<?> l = renderable.getSource().getLocation();
                 if (l != null)
                 {
@@ -922,7 +946,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
         synchronized (this.visibilityMap)
         {
             if (!this.visibilityMap.containsKey(locatableClass))
-            { showClass(locatableClass); }
+            {
+                showClass(locatableClass);
+            }
             this.visibilityMap.put(locatableClass, !this.visibilityMap.get(locatableClass));
         }
         this.shownClasses.clear();
@@ -987,7 +1013,9 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
                 // if (isShowElement(renderable) && renderable.contains(point, getExtent()))
                 if (isShowElement(renderable)
                         && renderable.contains(mousePoint, this.extent, getSize(), getRenderableScale(), 0.0, 0.0))
-                { targets.add(renderable.getSource()); }
+                {
+                    targets.add(renderable.getSource());
+                }
             }
         }
         catch (Exception exception)

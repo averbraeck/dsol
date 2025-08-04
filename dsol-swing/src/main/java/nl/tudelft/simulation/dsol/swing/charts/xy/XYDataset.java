@@ -44,7 +44,9 @@ public class XYDataset extends AbstractSeriesDataset implements org.jfree.data.x
     public void datasetChanged(final DatasetChangeEvent arg0)
     {
         if (arg0 != null)
-        { this.fireDatasetChanged(); }
+        {
+            this.fireDatasetChanged();
+        }
     }
 
     /**
