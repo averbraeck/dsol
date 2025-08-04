@@ -1,8 +1,12 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
+import java.awt.Color;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.djutils.draw.bounds.Bounds2d;
+import org.djutils.draw.point.DirectedPoint2d;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
@@ -36,6 +40,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
     @Override
     public void constructModel() throws SimRuntimeException
     {
+        makeAnimation();
         for (int i = 1; i <= 10; i++)
         {
             try
@@ -47,6 +52,21 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
                 getSimulator().getLogger().always().error(exception);
             }
         }
+    }
+
+    /**
+     * Make the animation.
+     */
+    protected void makeAnimation()
+    {
+        Wall wallL = new Wall("L", new Bounds2d(-104, -100, -104, 104), Color.BLUE);
+        Wall wallR = new Wall("R", new Bounds2d(208, 4), Color.BLUE, new DirectedPoint2d(102, 0, Math.PI / 2.0));
+        Wall wallB = new Wall("B", new Bounds2d(-104, 104, -104, -100), Color.BLUE);
+        Wall wallT = new Wall("T", new Bounds2d(4, 208), Color.BLUE, new DirectedPoint2d(0, 102, Math.PI / 2.0));
+        new WallAnimation(wallL, getSimulator());
+        new WallAnimation(wallR, getSimulator());
+        new WallAnimation(wallB, getSimulator());
+        new WallAnimation(wallT, getSimulator());
     }
 
     /**

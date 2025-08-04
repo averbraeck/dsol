@@ -71,6 +71,7 @@ public class DiscreteBall extends Ball
      */
     private void next()
     {
+        System.out.println("Ball " + toString() + ": next()");
         this.origin = this.destination;
         this.destination = new CartesianPoint(-100 + stream.nextInt(0, 200), -100 + stream.nextInt(0, 200), 0);
         this.startTime = this.simulator.getSimulatorTime();
