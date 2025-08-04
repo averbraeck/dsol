@@ -53,7 +53,9 @@ public class DevDessSimulator<T extends Number & Comparable<T>> extends DevsSimu
         synchronized (super.semaphore)
         {
             if (!Double.isFinite(timeStep.doubleValue()) || timeStep.doubleValue() <= 0.0)
-            { throw new SimRuntimeException("Timestep for DESSimulator has illegal value: " + timeStep); }
+            {
+                throw new SimRuntimeException("Timestep for DESSimulator has illegal value: " + timeStep);
+            }
             this.timeStep = timeStep;
             this.fireEvent(TIME_STEP_CHANGED_EVENT, timeStep);
         }
@@ -104,7 +106,9 @@ public class DevDessSimulator<T extends Number & Comparable<T>> extends DevsSimu
                     }
                 }
                 if (!isStoppingOrStopped())
-                { this.simulatorTime = runUntil; }
+                {
+                    this.simulatorTime = runUntil;
+                }
                 this.fireTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, this.simulatorTime);
             }
         }

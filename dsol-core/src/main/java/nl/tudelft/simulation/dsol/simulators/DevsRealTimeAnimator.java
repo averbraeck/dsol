@@ -142,7 +142,9 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
                         T absSyncTime = SimTime.plus(this.simulatorTime, delta);
                         T eventOrUntilTime = this.eventList.first().getAbsoluteExecutionTime();
                         if (this.runUntilTime.compareTo(eventOrUntilTime) < 0)
-                        { eventOrUntilTime = this.runUntilTime; }
+                        {
+                            eventOrUntilTime = this.runUntilTime;
+                        }
                         if (absSyncTime.compareTo(eventOrUntilTime) < 0)
                         {
                             this.simulatorTime = SimTime.copy(absSyncTime);
@@ -379,7 +381,9 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     {
         this.speedFactor = newSpeedFactor;
         if (fireChangeSpeedFactorEvent)
-        { this.fireEvent(CHANGE_SPEED_FACTOR_EVENT, newSpeedFactor); }
+        {
+            this.fireEvent(CHANGE_SPEED_FACTOR_EVENT, newSpeedFactor);
+        }
     }
 
     /**

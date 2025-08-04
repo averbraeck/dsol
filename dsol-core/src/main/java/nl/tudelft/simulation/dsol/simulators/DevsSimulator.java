@@ -236,7 +236,9 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
 
                 SimEventInterface<T> event = this.eventList.removeFirst();
                 if (event.getAbsoluteExecutionTime().compareTo(super.simulatorTime) != 0)
-                { fireUnverifiedTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, event.getAbsoluteExecutionTime()); }
+                {
+                    fireUnverifiedTimedEvent(SimulatorInterface.TIME_CHANGED_EVENT, null, event.getAbsoluteExecutionTime());
+                }
                 super.simulatorTime = event.getAbsoluteExecutionTime();
                 try
                 {
