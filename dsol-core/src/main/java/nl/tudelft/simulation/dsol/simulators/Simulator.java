@@ -104,15 +104,15 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     }
 
     @Override
-    public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
-            throws SimRuntimeException
+    public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication,
+            final boolean cleanUp) throws SimRuntimeException
     {
         Throw.whenNull(model, "Simulator.initialize: model cannot be null");
         Throw.whenNull(replication, "Simulator.initialize: replication cannot be null");
         Throw.when(isStartingOrRunning(), SimRuntimeException.class, "Cannot initialize a running simulator");
         synchronized (this.semaphore)
         {
-            if (this.worker != null)
+            if (this.worker != null && cleanUp)
             {
                 cleanUp();
             }

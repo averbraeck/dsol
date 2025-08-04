@@ -61,15 +61,15 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
 
     @Override
     @SuppressWarnings({"hiding", "checkstyle:hiddenfield"})
-    public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
-            throws SimRuntimeException
+    public void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication,
+            final boolean cleanUp) throws SimRuntimeException
     {
         // this check HAS to be done BEFORE clearing the event list
         Throw.when(isStartingOrRunning(), SimRuntimeException.class, "Cannot initialize a running simulator");
         synchronized (super.semaphore)
         {
             this.eventList.clear();
-            super.initialize(model, replication);
+            super.initialize(model, replication, cleanUp);
             this.scheduleEvent(new SimEvent<T>(this.getReplication().getWarmupTime(),
                     (short) (SimEventInterface.MAX_PRIORITY + 1), this, "warmup", null));
             this.scheduleEvent(new SimEvent<T>(this.getReplication().getEndTime(), (short) (SimEventInterface.MIN_PRIORITY - 1),

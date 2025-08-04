@@ -136,12 +136,30 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * the initialize(...) method and starting the simulator, or could even be delayed till the WARMUP_EVENT has been fired.
      * @param model the model to initialize
      * @param replication the replication to use for running the model
+     * @param cleanUp whether to call cleanUp or not; for a reset() cleanup should not be called
      * @throws SimRuntimeException when the simulator is running
      */
-    void initialize(DsolModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication) throws SimRuntimeException;
+    void initialize(DsolModel<T, ? extends SimulatorInterface<T>> model, Replication<T> replication, boolean cleanUp)
+            throws SimRuntimeException;
 
     /**
-     * Clean up the simulator after a replication. Remove the worker thread.
+     * Initializes the simulator with a replication for a model. It immediately fires a START_REPLICATION_EVENT and a
+     * TIME_CHANGED_EVENT with the starting time. It does not yet fire a WARMUP_EVENT in case the warmup time is zero; this will
+     * only be done after the simulator has been started. Note that the listeners of all statistics objects are removed when the
+     * simulator is initialized with the replication. Connecting the statistics objects to the simulation should be done between
+     * the initialize(...) method and starting the simulator, or could even be delayed till the WARMUP_EVENT has been fired.
+     * @param model the model to initialize
+     * @param replication the replication to use for running the model
+     * @throws SimRuntimeException when the simulator is running
+     */
+    default void initialize(final DsolModel<T, ? extends SimulatorInterface<T>> model, final Replication<T> replication)
+            throws SimRuntimeException
+    {
+        initialize(model, replication, true);
+    }
+
+    /**
+     * Clean up the simulator after a replication. Remove the worker thread. Remove all listeners.
      */
     void cleanUp();
 
