@@ -85,17 +85,21 @@ public class InputParameterDistTest
                 ((DistExponential) ipClone.getDefaultValue()).getMean(), 1E-6);
         assertEquals(((DistExponential) ip.getValue()).getMean(), ((DistExponential) ipClone.getValue()).getMean(), 1E-6);
 
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ipClone.setStream(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ipClone.setDistValue(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new InputParameterDistContinuous("dist", "distribution", "continuous distribution", null,
                     new DistExponential(stream, 2.0), 1.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new InputParameterDistContinuous("dist", "distribution", "continuous distribution", stream, null, 1.0);
         });
     }
@@ -146,17 +150,21 @@ public class InputParameterDistTest
                 1E-6);
         assertEquals(((DistPoisson) ip.getValue()).getLambda(), ((DistPoisson) ipClone.getValue()).getLambda(), 1E-6);
 
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ipClone.setStream(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ipClone.setDistValue(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new InputParameterDistDiscrete("dist", "distribution", "discrete distribution", null, new DistPoisson(stream, 2.0),
                     1.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new InputParameterDistDiscrete("dist", "distribution", "discrete distribution", stream, null, 1.0);
         });
     }
@@ -188,13 +196,16 @@ public class InputParameterDistTest
         assertTrue(ip.getValue().printValues().contains("c = "));
 
         // test backing map
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().add(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().get("abc");
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().remove("abc");
         });
         ip.getValue().add(new InputParameterDouble("d", "d", "d", 1.0, 2.0));
@@ -215,12 +226,14 @@ public class InputParameterDistTest
         assertEquals(2.5, ((DistBeta) ip.getDist()).getAlpha2(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("alpha1 = "));
         ((InputParameterDouble) ip.getValue().get("alpha1")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("alpha1")).setValue(1.0);
         ((InputParameterDouble) ip.getValue().get("alpha2")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("alpha2")).setValue(1.0);
@@ -235,12 +248,14 @@ public class InputParameterDistTest
         assertEquals(5, ((DistErlang) ip.getDist()).getK());
         assertTrue(ip.getValue().printValues().contains("scale = "));
         ((InputParameterDouble) ip.getValue().get("scale")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("scale")).setValue(1.0);
         ((InputParameterInteger) ip.getValue().get("k")).setValue(-1);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterInteger) ip.getValue().get("k")).setValue(2);
@@ -253,7 +268,8 @@ public class InputParameterDistTest
         assertEquals(1.5, ((DistExponential) ip.getDist()).getMean(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("lambda = "));
         ((InputParameterDouble) ip.getValue().get("lambda")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("lambda")).setValue(1.0);
@@ -268,12 +284,14 @@ public class InputParameterDistTest
         assertEquals(2.5, ((DistGamma) ip.getDist()).getScale(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("shape = "));
         ((InputParameterDouble) ip.getValue().get("shape")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("shape")).setValue(1.0);
         ((InputParameterDouble) ip.getValue().get("scale")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("scale")).setValue(1.0);
@@ -288,7 +306,8 @@ public class InputParameterDistTest
         assertEquals(0.5, ((DistLogNormal) ip.getDist()).getSigma(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("mu = "));
         ((InputParameterDouble) ip.getValue().get("sigma")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("sigma")).setValue(1.0);
@@ -303,7 +322,8 @@ public class InputParameterDistTest
         assertEquals(0.5, ((DistNormal) ip.getDist()).getSigma(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("mu = "));
         ((InputParameterDouble) ip.getValue().get("sigma")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("sigma")).setValue(1.0);
@@ -318,12 +338,14 @@ public class InputParameterDistTest
         assertEquals(2.5, ((DistPearson5) ip.getDist()).getBeta(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("alpha = "));
         ((InputParameterDouble) ip.getValue().get("alpha")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("alpha")).setValue(1.0);
         ((InputParameterDouble) ip.getValue().get("beta")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("beta")).setValue(1.0);
@@ -340,17 +362,20 @@ public class InputParameterDistTest
         assertEquals(3.5, ((DistPearson6) ip.getDist()).getBeta(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("alpha1 = "));
         ((InputParameterDouble) ip.getValue().get("alpha1")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("alpha1")).setValue(1.0);
         ((InputParameterDouble) ip.getValue().get("alpha2")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("alpha2")).setValue(1.0);
         ((InputParameterDouble) ip.getValue().get("beta")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("beta")).setValue(1.0);
@@ -367,17 +392,20 @@ public class InputParameterDistTest
         assertEquals(3.5, ((DistTriangular) ip.getDist()).getMax(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("min = "));
         ((InputParameterDouble) ip.getValue().get("min")).setValue(5.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("min")).setValue(1.5);
         ((InputParameterDouble) ip.getValue().get("mode")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("mode")).setValue(2.5);
         ((InputParameterDouble) ip.getValue().get("max")).setValue(2.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("max")).setValue(3.5);
@@ -385,7 +413,8 @@ public class InputParameterDistTest
         ((InputParameterDouble) ip.getValue().get("mode")).setValue(1.5);
         ip.getValue().setDist();
         ((InputParameterDouble) ip.getValue().get("max")).setValue(1.5);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
 
@@ -399,12 +428,14 @@ public class InputParameterDistTest
         assertEquals(3.5, ((DistUniform) ip.getDist()).getMax(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("min = "));
         ((InputParameterDouble) ip.getValue().get("min")).setValue(5.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("min")).setValue(1.5);
         ((InputParameterDouble) ip.getValue().get("min")).setValue(3.5);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
 
@@ -418,12 +449,14 @@ public class InputParameterDistTest
         assertEquals(2.5, ((DistWeibull) ip.getDist()).getBeta(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("alpha = "));
         ((InputParameterDouble) ip.getValue().get("alpha")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("alpha")).setValue(1.0);
         ((InputParameterDouble) ip.getValue().get("beta")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("beta")).setValue(1.0);
@@ -456,13 +489,16 @@ public class InputParameterDistTest
         assertTrue(ip.getValue().printValues().contains("c = "));
 
         // test backing map
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().add(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().get("abc");
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().remove("abc");
         });
         ip.getValue().add(new InputParameterDouble("d", "d", "d", 1.0, 2.0));
@@ -481,22 +517,26 @@ public class InputParameterDistTest
         assertEquals(0.25, ((DistBernoulli) ip.getDist()).getP(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("p = "));
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(2.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
@@ -511,32 +551,38 @@ public class InputParameterDistTest
         assertEquals(5, ((DistBinomial) ip.getDist()).getN(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("p = "));
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(2.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterInteger) ip.getValue().get("n")).setValue(0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterInteger) ip.getValue().get("n")).setValue(5);
         ((InputParameterInteger) ip.getValue().get("n")).setValue(-1);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterInteger) ip.getValue().get("n")).setValue(5);
@@ -551,12 +597,14 @@ public class InputParameterDistTest
         assertEquals(10L, ((DistDiscreteUniform) ip.getDist()).getMax(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("min = "));
         ((InputParameterLong) ip.getValue().get("min")).setValue(10L);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterLong) ip.getValue().get("min")).setValue(5L);
         ((InputParameterLong) ip.getValue().get("min")).setValue(15L);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterLong) ip.getValue().get("min")).setValue(5L);
@@ -569,22 +617,26 @@ public class InputParameterDistTest
         assertEquals(0.25, ((DistGeometric) ip.getDist()).getP(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("p = "));
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(2.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
@@ -599,32 +651,38 @@ public class InputParameterDistTest
         assertEquals(5, ((DistNegBinomial) ip.getDist()).getS(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("p = "));
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterDouble) ip.getValue().get("p")).setValue(2.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("p")).setValue(0.5);
         ((InputParameterInteger) ip.getValue().get("n")).setValue(0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterInteger) ip.getValue().get("n")).setValue(5);
         ((InputParameterInteger) ip.getValue().get("n")).setValue(-1);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterInteger) ip.getValue().get("n")).setValue(5);
@@ -637,12 +695,14 @@ public class InputParameterDistTest
         assertEquals(2.5, ((DistPoisson) ip.getDist()).getLambda(), 1E-6);
         assertTrue(ip.getValue().printValues().contains("lambda = "));
         ((InputParameterDouble) ip.getValue().get("lambda")).setValue(0.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("lambda")).setValue(2.5);
         ((InputParameterDouble) ip.getValue().get("lambda")).setValue(-1.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ip.getValue().setDist();
         });
         ((InputParameterDouble) ip.getValue().get("lambda")).setValue(2.5);

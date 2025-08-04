@@ -46,33 +46,42 @@ public class ReplicationTest
         assertNotNull(srd.getContext());
 
         // errors
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>(null, 10.0, 1.0, 12.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("x", (Double) null, 1.0, 12.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("x", 10.0, (Double) null, 12.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("x", 10.0, 1.0, (Double) null);
         });
         new SingleReplication<Double>("xyz1", 10.0, 0.0, 20.0);
         new SingleReplication<Double>("xyz2", -10.0, 0.0, 20.0);
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("xyz", 10.0, -1.0, 20.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("xyz", 10.0, 1.0, 0.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("xyz", 10.0, 1.0, -20.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("xyz", 10.0, 10.0, 5.0);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new SingleReplication<Double>("xyz", 10.0, 10.0, 10.0);
         });
 

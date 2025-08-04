@@ -68,7 +68,9 @@ public final class EventListPerformanceTest2
         public void mArg1(final double arg1)
         {
             if (arg1 != 12.7)
-            { throw new RuntimeException("12.7!"); }
+            {
+                throw new RuntimeException("12.7!");
+            }
         }
     }
 }

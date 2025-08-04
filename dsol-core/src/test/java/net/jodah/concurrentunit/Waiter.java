@@ -51,9 +51,13 @@ public class Waiter
     public void assertEquals(final Object expected, final Object actual)
     {
         if (expected == null && actual == null)
-        { return; }
+        {
+            return;
+        }
         if (expected != null && expected.equals(actual))
-        { return; }
+        {
+            return;
+        }
         fail(format(expected, actual));
     }
 
@@ -84,7 +88,9 @@ public class Waiter
     public void assertFalse(final boolean condition)
     {
         if (condition)
-        { fail("expected false"); }
+        {
+            fail("expected false");
+        }
     }
 
     /**
@@ -95,7 +101,9 @@ public class Waiter
     public void assertNotNull(final Object object)
     {
         if (object == null)
-        { fail("expected not null"); }
+        {
+            fail("expected not null");
+        }
     }
 
     /**
@@ -106,7 +114,9 @@ public class Waiter
     public void assertNull(final Object object)
     {
         if (object != null)
-        { fail(format("null", object)); }
+        {
+            fail(format("null", object));
+        }
     }
 
     /**
@@ -117,7 +127,9 @@ public class Waiter
     public void assertTrue(final boolean condition)
     {
         if (!condition)
-        { fail("expected true"); }
+        {
+            fail("expected true");
+        }
     }
 
     /**
@@ -210,7 +222,9 @@ public class Waiter
                 {
                     int remaining = this.remainingResumes.addAndGet(expectedResumes);
                     if (remaining > 0)
-                    { this.circuit.open(); }
+                    {
+                        this.circuit.open();
+                    }
                 }
 
                 if (delay == 0)
@@ -243,7 +257,9 @@ public class Waiter
     public synchronized void resume()
     {
         if (this.remainingResumes.decrementAndGet() <= 0)
-        { this.circuit.close(); }
+        {
+            this.circuit.close();
+        }
     }
 
     /**

@@ -86,7 +86,8 @@ public class ReadInputParameterTest
         assertEquals(5, ip5.getCalculatedValue().intValue());
 
         final String[] args1 = new String[] {"int=-10"};
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ReadInputParameters.loadFromArgs(args1, map);
         }, "int=-10 should have given an error", InputParameterException.class);
         assertEquals(5, ip5.getCalculatedValue().intValue()); // value should be unchanged
@@ -100,7 +101,8 @@ public class ReadInputParameterTest
         assertEquals(-5L, ip6.getCalculatedValue().intValue());
 
         final String[] args2 = new String[] {"int=200"};
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ReadInputParameters.loadFromArgs(args2, map);
         }, "int=200 should have given an error", InputParameterException.class);
         assertEquals(-5L, ip6.getCalculatedValue().intValue()); // value should be unchanged
@@ -158,7 +160,8 @@ public class ReadInputParameterTest
         assertEquals("NL", ip.getCalculatedValue());
 
         final String[] args1 = new String[] {"list=XY"};
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ReadInputParameters.loadFromArgs(args1, map);
         }, "list=XY should have given an error", InputParameterException.class);
         assertEquals("NL", ip.getCalculatedValue()); // value should be unchanged
@@ -219,7 +222,8 @@ public class ReadInputParameterTest
 
         // wrong nr of args
         final String[] args1 = new String[] {"dc=TRIA(10,20)"};
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             ReadInputParameters.loadFromArgs(args1, map);
         }, "dc=TRIA(10,20) should have given an error");
     }

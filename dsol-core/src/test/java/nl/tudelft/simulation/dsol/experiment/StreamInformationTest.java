@@ -49,16 +49,20 @@ public class StreamInformationTest
         assertEquals(2, si.getStreams().size());
         assertEquals(202L, si.getStream("stream").getSeed());
 
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new StreamInformation(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.getStream(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.addStream(null, new MersenneTwister(1L));
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.addStream("xyz", null);
         });
     }
@@ -90,46 +94,60 @@ public class StreamInformationTest
         assertEquals(10L, si.getSeedMap("default").get(0).longValue());
 
         // failures
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new StreamSeedInformation(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.getStream(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.addStream(null, new MersenneTwister(1L));
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.addStream("xyz", null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.getSeedMap(null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedArray(null, new long[] {1L, 2L});
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedList(null, new ArrayList<Long>());
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedMap(null, new LinkedHashMap<Integer, Long>());
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedArray("default", (long[]) null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedList("default", (List<Long>) null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedMap("default", (Map<Integer, Long>) null);
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedArray("d", new long[] {1L, 2L});
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedList("d", new ArrayList<Long>());
         });
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             si.putSeedMap("d", new LinkedHashMap<Integer, Long>());
         });
     }

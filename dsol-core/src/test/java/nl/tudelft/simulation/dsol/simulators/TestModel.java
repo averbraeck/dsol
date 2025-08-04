@@ -53,8 +53,12 @@ public class TestModel extends AbstractDsolModel<Double, SimulatorInterface<Doub
     public void notify(final Event event)
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT))
-        { System.out.println(getSimulator().getReplication() + " started @ t=" + getSimulator().getSimulatorTime()); }
+        {
+            System.out.println(getSimulator().getReplication() + " started @ t=" + getSimulator().getSimulatorTime());
+        }
         if (event.getType().equals(SimulatorInterface.STOP_EVENT))
-        { System.out.println(getSimulator().getReplication() + " stopped @ t=" + getSimulator().getSimulatorTime()); }
+        {
+            System.out.println(getSimulator().getReplication() + " stopped @ t=" + getSimulator().getSimulatorTime());
+        }
     }
 }

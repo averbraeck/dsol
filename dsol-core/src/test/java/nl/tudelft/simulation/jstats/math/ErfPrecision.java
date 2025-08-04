@@ -253,9 +253,13 @@ public final class ErfPrecision
     {
         double zpos = Math.abs(z);
         if (zpos < 0.5)
-        { return erfSmall(z); }
+        {
+            return erfSmall(z);
+        }
         if (zpos > 3.8)
-        { return erfBig(z); }
+        {
+            return erfBig(z);
+        }
         return erfTaylor(z);
     }
 
@@ -336,7 +340,9 @@ public final class ErfPrecision
             double term = zpow / ((2.0 * i + 1.0) * ProbMath.factorial(i));
             d += term * ((i & 1) == 0 ? 1 : -1);
             if (term < 1E-16)
-            { break; }
+            {
+                break;
+            }
         }
         return Math.signum(z) * d * 2.0 / Math.sqrt(Math.PI);
     }
@@ -380,12 +386,16 @@ public final class ErfPrecision
                 double term = pipow * ppow * A002067[i] / A122551[i];
                 sum += term;
                 if (term < 1E-16)
-                { break; }
+                {
+                    break;
+                }
             }
             return Math.signum(y) * Math.sqrt(Math.PI) * sum;
         }
         if (p < 1)
-        { return Math.signum(y) * Math.sqrt(-Math.log(1.0 - p)); }
+        {
+            return Math.signum(y) * Math.sqrt(-Math.log(1.0 - p));
+        }
         return p < 0 ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
         // double pi = Math.PI;
         // double a = 0.147;
