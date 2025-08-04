@@ -81,7 +81,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
                 }
             }
             if (actionCommand.equals("RunPause") || actionCommand.equals("Reset"))
-            { getSimulator().setAnimationDelay(this.savedAnimationDelay); }
+            {
+                getSimulator().setAnimationDelay(this.savedAnimationDelay);
+            }
         }
         catch (Exception exception)
         {
@@ -98,7 +100,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         {
             final String actionCommand = button.getActionCommand();
             if (actionCommand.equals("FastForward"))
-            { button.setEnabled(moreWorkToDo && isControlButtonsEnabled() && getSimulator().isStoppingOrStopped()); }
+            {
+                button.setEnabled(moreWorkToDo && isControlButtonsEnabled() && getSimulator().isStoppingOrStopped());
+            }
         }
         super.fixButtons(); // handles the start/stop button
     }
@@ -110,7 +114,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         {
             final String actionCommand = button.getActionCommand();
             if (actionCommand.equals("FastForward"))
-            { button.setEnabled(false); }
+            {
+                button.setEnabled(false);
+            }
         }
         super.invalidateButtons(); // handles the start/stop button
     }

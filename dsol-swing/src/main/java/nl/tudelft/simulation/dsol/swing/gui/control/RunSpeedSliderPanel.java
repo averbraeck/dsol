@@ -18,7 +18,7 @@ import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
 /**
- * JPanel that contains a JSider for setting the speed of the simulation using a logarithmic scale
+ * JPanel that contains a JSlider for setting the speed of the simulation using a logarithmic scale
  * <p>
  * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -42,7 +42,7 @@ public class RunSpeedSliderPanel extends JPanel
     private Map<Integer, Double> tickValues = new LinkedHashMap<>();
 
     /**
-     * Construct a new TimeWarpPanel.
+     * Construct a new RunSpeedSliderPanel.
      * @param minimum the minimum value on the scale (the displayed scale may extend a little further than this value)
      * @param maximum the maximum value on the scale (the displayed scale may extend a little further than this value)
      * @param initialValue the initially selected value on the scale
