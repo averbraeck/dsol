@@ -10,7 +10,12 @@ import org.djunits.value.vdouble.scalar.Time;
 
 /**
  * ClockTime is an extension of DJUNITS time, aware of the calendar and clock time. It can read and display ISO time. The
- * ClockTime is used as the absolute time unit in the ClockDevsSimulator and ClockDevsAnimator.
+ * ClockTime is used as the absolute time unit in the ClockDevsSimulator and ClockDevsAnimator. The date is stored in a Time
+ * object where the time is represented as a double number of seconds since 1-1-1970. In 2025, around 20,304 days have passed
+ * since 1-1-1970, with 86,400 seconds per day, resulting in around 1,753,920,000 seconds. This needs around 10 digits for a
+ * representation to a second precise. The double precision storage is precise to around 14 digits, resulting in a precision
+ * better than a millisecond for the ClockTime. Do not use Clockime when a precision better than a millisecond is needed, or
+ * when the dates of the simulation are before 1-1-1970.
  * <p>
  * Copyright (c) 2025-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
@@ -115,6 +120,17 @@ public class ClockTime extends Time
     public static ClockTime ofIso(final String isoDateTime)
     {
         double seconds = LocalDateTime.parse(isoDateTime).toEpochSecond(ZoneOffset.UTC);
+        return new ClockTime(seconds, TimeUnit.EPOCH_SECOND);
+    }
+
+    /**
+     * Instantiate a ClockTime based on an local date and time object with a precision of one second.
+     * @param localDateTime a LocalDateTime object to use in the construction of the ClockTime
+     * @return a ClockTime for the local date and time with a precision of one second
+     */
+    public static ClockTime ofLocalDateTime(final LocalDateTime localDateTime)
+    {
+        double seconds = localDateTime.toEpochSecond(ZoneOffset.UTC);
         return new ClockTime(seconds, TimeUnit.EPOCH_SECOND);
     }
 
