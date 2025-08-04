@@ -61,7 +61,9 @@ public class WorkerThreadTest
             }
         }
         if (System.currentTimeMillis() - startTime > 1000)
-        { fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000"); }
+        {
+            fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000");
+        }
 
         assertFalse(this.wt.isAlive());
         assertEquals(1, this.value);
@@ -98,7 +100,9 @@ public class WorkerThreadTest
             }
         }
         if (System.currentTimeMillis() - startTime > 1000)
-        { fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000"); }
+        {
+            fail("WorkerThread execution; System.currentTimeMillis() - startTime > 1000");
+        }
         assertFalse(this.wt.isAlive());
     }
 

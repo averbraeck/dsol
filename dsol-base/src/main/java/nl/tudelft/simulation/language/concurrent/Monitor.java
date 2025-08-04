@@ -92,9 +92,13 @@ public final class Monitor
         {
             MonitorThread thread = Monitor.get(object);
             if (thread == null)
-            { throw new IllegalMonitorStateException("object(" + object + ") is not locked"); }
+            {
+                throw new IllegalMonitorStateException("object(" + object + ") is not locked");
+            }
             if (!thread.getOwner().equals(owner))
-            { throw new IllegalMonitorStateException(owner + " cannot" + " unlock object owned by " + thread.getOwner()); }
+            {
+                throw new IllegalMonitorStateException(owner + " cannot" + " unlock object owned by " + thread.getOwner());
+            }
             thread.decreaseCounter();
             if (thread.getCounter() == 0)
             {

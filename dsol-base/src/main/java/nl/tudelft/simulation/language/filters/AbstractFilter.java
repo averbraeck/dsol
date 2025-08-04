@@ -45,7 +45,9 @@ public abstract class AbstractFilter implements FilterInterface
     {
         boolean value = this.filter(entry);
         if (!this.inverted)
-        { return value; }
+        {
+            return value;
+        }
         return !value;
     }
 

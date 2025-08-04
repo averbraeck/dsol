@@ -31,13 +31,21 @@ public final class Shape2d
     public static boolean overlaps(final Bounds2d extent, final Bounds2d shape)
     {
         if (extent.getMaxX() < shape.getMinX())
-        { return false; }
+        {
+            return false;
+        }
         if (extent.getMaxY() < shape.getMinY())
-        { return false; }
+        {
+            return false;
+        }
         if (extent.getMinX() > shape.getMaxX())
-        { return false; }
+        {
+            return false;
+        }
         if (extent.getMinY() > shape.getMaxY())
-        { return false; }
+        {
+            return false;
+        }
         return true;
     }
 

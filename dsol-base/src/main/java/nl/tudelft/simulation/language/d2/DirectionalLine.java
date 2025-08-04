@@ -195,7 +195,9 @@ public class DirectionalLine extends Line2D.Double
         {
             Side backSide = getSideThin(x + normalX2 / 2, y + normalY2 / 2);
             if (backSide.equals(Side.BACKSIDE))
-            { return Side.BACKSIDE; }
+            {
+                return Side.BACKSIDE;
+            }
         }
         return Side.COLLINEAR;
     }
@@ -234,7 +236,9 @@ public class DirectionalLine extends Line2D.Double
     public Side getSide(final Line2D.Double line)
     {
         if (this.x1 == line.x1 && this.x2 == line.x2 && this.y1 == line.y1 && this.y2 == line.y2)
-        { return Side.COLLINEAR; }
+        {
+            return Side.COLLINEAR;
+        }
         Side p1Side = getSideThick(line.x1, line.y1);
         Side p2Side = getSideThick(line.x2, line.y2);
         if (p1Side == p2Side)
@@ -275,7 +279,9 @@ public class DirectionalLine extends Line2D.Double
 
         // check if the two lines are parallel
         if (denominator == 0)
-        { return -1; }
+        {
+            return -1;
+        }
 
         double numerator = (line.x2 - line.x1) * (this.y1 - line.y1) - (line.y2 - line.y1) * (this.x1 - line.x1);
 

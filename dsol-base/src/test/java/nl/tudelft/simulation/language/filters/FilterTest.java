@@ -74,7 +74,8 @@ public class FilterTest
         assertEquals(1, CompositeFilter.Operator.OR.getValue());
 
         // test illegal and/or
-        Try.testFail(() -> {
+        Try.testFail(() ->
+        {
             new CompositeFilter(filter1, filter2, null);
         }, IllegalArgumentException.class);
 
