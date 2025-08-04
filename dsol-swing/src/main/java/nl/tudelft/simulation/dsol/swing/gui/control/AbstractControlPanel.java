@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
+import org.djutils.event.EventProducer;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -231,23 +232,24 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
                     getSimulator().stop();
                 }
 
-                if (null == getModel())
+                if (null == getModel() || getModel().getResetApplicationExecutable() == null)
                 {
                     throw new RuntimeException("Do not know how to restart this simulation");
                 }
 
-                // clean up contexts
                 cleanup();
-
-                // re-construct the model and reset the simulator and replication / experiment, do NOT clean up
-                getSimulator().initialize(getModel(), getSimulator().getReplication(), false);
+                getModel().resetApplication();
 
                 // refresh the screen, buttons, time, etc.
                 Window window = SwingUtilities.getWindowAncestor(this);
-                if (window instanceof JFrame)
+                if (window instanceof JFrame frame)
                 {
-                    ((JFrame) window).getContentPane().revalidate();
-                    ((JFrame) window).getContentPane().repaint();
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.dispose();
+                }
+                else
+                {
+                    window.dispose();
                 }
             }
             fixButtons();
@@ -286,8 +288,33 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
                 }
                 if (getSimulator().getReplication().getContext().hasKey("statistics"))
                 {
-                    getSimulator().getReplication().getContext().destroySubcontext("statistics");
-                    getSimulator().getReplication().getContext().createSubcontext("statistics");
+                    ContextInterface statisticsContext =
+                            (ContextInterface) getSimulator().getReplication().getContext().get("statistics");
+                    while (!statisticsContext.keySet().isEmpty())
+                    {
+                        String key = statisticsContext.keySet().iterator().next();
+                        Object object = statisticsContext.getObject(key);
+                        if (object instanceof EventProducer ep)
+                        {
+                            ep.removeAllListeners();
+                        }
+                        statisticsContext.unbindObject(key);
+                    }
+                }
+                if (getSimulator().getReplication().getContext().hasKey("charts"))
+                {
+                    ContextInterface chartsContext =
+                            (ContextInterface) getSimulator().getReplication().getContext().get("charts");
+                    while (!chartsContext.keySet().isEmpty())
+                    {
+                        String key = chartsContext.keySet().iterator().next();
+                        Object object = chartsContext.getObject(key);
+                        if (object instanceof EventProducer ep)
+                        {
+                            ep.removeAllListeners();
+                        }
+                        chartsContext.unbindObject(key);
+                    }
                 }
             }
         }
@@ -323,7 +350,10 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
             }
             else if (actionCommand.equals("Reset"))
             {
-                button.setEnabled(true);
+                if (getModel().getResetApplicationExecutable() != null)
+                {
+                    button.setEnabled(true);
+                }
             }
         }
     }
@@ -503,7 +533,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     @Override
     public void windowClosed(final WindowEvent e)
     {
-        cleanup();
+        // No action. Do NOT call cleanUp() since it destroys the NEW animation after reset().
     }
 
     @Override

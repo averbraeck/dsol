@@ -87,6 +87,23 @@ public class DsolPanel extends JPanel implements AppearanceControl
     }
 
     /**
+     * Remove a tab from the DsolPanel based on its title.
+     * @param tabTitle the title of the tab to remove
+     */
+    public void removeTab(final String tabTitle)
+    {
+        for (int i = 0; i < this.tabbedPane.getTabCount(); i++)
+        {
+            String title = this.tabbedPane.getTitleAt(i);
+            if (tabTitle.equals(title))
+            {
+                this.tabbedPane.removeTabAt(i);
+                break; 
+            }
+        }
+    }
+
+    /**
      * Adds a console tab for the Logger.
      * @param logLevel the log level
      */
