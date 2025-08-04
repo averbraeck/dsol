@@ -51,7 +51,7 @@ public class DesQueueingPanel extends DsolPanel
     protected void addTabs()
     {
         TablePanel charts = new TablePanel(4, 4);
-        getTabbedPane().addTab("statistics", charts);
+        addTab("statistics", charts);
         getTabbedPane().setSelectedIndex(0);
         DesQueueingModel10 model = (DesQueueingModel10) getModel();
 

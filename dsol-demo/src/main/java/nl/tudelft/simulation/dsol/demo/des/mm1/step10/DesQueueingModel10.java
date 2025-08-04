@@ -208,7 +208,9 @@ class DesQueueingModel10 extends AbstractDsolModel<Double, DevsSimulatorInterfac
     public void notify(final Event event) throws RemoteException
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
-        { reportStats(); }
+        {
+            reportStats();
+        }
     }
 
     /**
