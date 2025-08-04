@@ -835,27 +835,55 @@ The dsol-swing project offers plenty of possibilities to show statistics and gra
 In order to get such a screen, only a few things in the application need to be adapted. The model itself remains *unchanged*. In the main program, we indicate that it inherits from `DsolApplication`, and in the program, we create a panel that will show the above results:
 
 ```java
-public class DesQueueingApplication10 extends DsolApplication
+public class DesQueueingApplication10
 {
-  public DesQueueingApplication10(final DesQueueingPanel panel)
+  private InputParameterMap inputParameterMap = null;
+
+  public void build()
   {
-    super(panel, "MM1 queuing model");
+    try
+    {
+      var simulator = new DevsSimulator<Double>("MM1.Simulator");
+      var model = new DesQueueingModel10(simulator);
+      model.setResetApplicationExecutable(() -> build());
+      var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+      if (this.inputParameterMap == null)
+      {
+        new TabbedParameterDialog(model.getInputParameterMap());
+        this.inputParameterMap = model.getInputParameterMap();
+      }
+      else
+      {
+        model.setInputParameterMap(this.inputParameterMap);
+      }
+      model.getSimulator().initialize(model, replication);
+      DevsControlPanel.TimeDouble controlPanel = 
+          new DevsControlPanel.TimeDouble(model, model.getSimulator());
+      new DsolApplication(new DesQueueingPanel(controlPanel), "MM1 queuing model");
+    }
+    catch (RemoteException e)
+    {
+      throw new DsolRuntimeException(e);
+    }
   }
 
-    public static void main(final String[] args)
+  public static void main(final String[] args) throws RemoteException
   {
-    DevsSimulator<Double> simulator = new DevsSimulator<>("MM1.Simulator");
-    DsolModel<Double, DevsSimulatorInterface<Double>> model 
-        = new DesQueueingModel10(simulator);
-    Replication<Double> replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
-    simulator.initialize(model, replication);
-    DevsControlPanel.TimeDouble controlPanel 
-        = new DevsControlPanel.TimeDouble(model, simulator);
-    new DesQueueingApplication10(new DesQueueingPanel(controlPanel));
+    var app = new DesQueueingApplication10();
+    app.build();
   }
+}
 ```
 
-In this case we run a single replication, since we want to study the results. We make a `ControlPanel` with buttons to start and stop the simulation, and to keep track of the simulator's time, and we create our own `MM1Panel` with the statistics. The complete code for the `MM1Panel` class is given below:
+In this case we run a single replication, since we want to study the results. We make a `ControlPanel` with buttons to start and stop the simulation, and to keep track of the simulator's time, and we create our own `MM1Panel` with the statistics. Several of the lines are to help with the ability to reset the model in the GUI. The line:
+
+```java
+  model.setResetApplicationExecutable(() -> build());
+```
+
+is the code that will be executed when the 'reset' button is pushed in the GUI. When the button is pushed, the entire application is re-created, including the GUI, the statistics, the graphs, and the animation (if any). In this case, the `TabbedParameterDialog` is only shown once. When the parameters have been set the first time, they are reused after a reset with the line: `model.setInputParameterMap(this.inputParameterMap);`
+
+The complete code for the `MM1Panel` class that takes care of displaying the graphs is given below:
 
 ```java
 public class DesQueueingPanel extends DsolPanel
