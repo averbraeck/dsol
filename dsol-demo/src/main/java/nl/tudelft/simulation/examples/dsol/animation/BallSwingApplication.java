@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
-import java.rmi.RemoteException;
-
 import org.djutils.draw.bounds.Bounds2d;
 import org.pmw.tinylog.Level;
 
@@ -16,7 +14,7 @@ import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationApplication;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationTab;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel.ObjectKind;
 import nl.tudelft.simulation.dsol.swing.gui.control.RealTimeControlPanel;
-import nl.tudelft.simulation.language.DsolException;
+import nl.tudelft.simulation.language.DsolRuntimeException;
 
 /**
  * <p>
@@ -27,61 +25,63 @@ import nl.tudelft.simulation.language.DsolException;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public class BallSwingApplication extends DsolAnimationApplication
+public class BallSwingApplication
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
-     * @param title the title
-     * @param panel the panel
-     * @throws DsolException when simulator is not an animator
-     * @throws IllegalArgumentException for illegal bounds
-     * @throws RemoteException on network error
+     * Build the demo ball animation application with reset option.
      */
-    public BallSwingApplication(final String title, final DsolPanel panel)
-            throws RemoteException, IllegalArgumentException, DsolException
+    public void build()
     {
-        super(panel, title, DsolAnimationTab.createAutoPanTab(new Bounds2d(-120, 120, -120, 120), panel.getSimulator()));
-        
-        getAnimationTab().getAnimationPanel().setRenderableScale(new RenderableScale(2.0, 0.5));
-        
-        ObjectKind<Ball> objectKind = new ObjectKind<Ball>("Ball")
+        try
         {
-            @Override
-            public Ball searchObject(final String id)
+            DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("sim", 0.001);
+            BallModel model = new BallModel(simulator);
+            Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
+            simulator.initialize(model, replication);
+            DsolPanel panel = new DsolPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
+            panel.addTab("logger", new ConsoleLogger(Level.INFO));
+            panel.addTab("console", new ConsoleOutput());
+            var frame = new DsolAnimationApplication(panel, "BallSwingApplication",
+                    DsolAnimationTab.createAutoPanTab(new Bounds2d(-120, 120, -120, 120), panel.getSimulator()));
+
+            frame.getAnimationTab().getAnimationPanel().setRenderableScale(new RenderableScale(2.0, 0.5));
+
+            ObjectKind<Ball> objectKind = new ObjectKind<Ball>("Ball")
             {
-                if (id == null || id.length() == 0)
-                { return null; }
-                try
+                @Override
+                public Ball searchObject(final String id)
                 {
-                    return ((BallModel) panel.getModel()).getBall(Integer.valueOf(id));
+                    if (id == null || id.length() == 0)
+                    {
+                        return null;
+                    }
+                    try
+                    {
+                        return ((BallModel) panel.getModel()).getBall(Integer.valueOf(id));
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
                 }
-                catch (Exception e)
-                {
-                    return null;
-                }
-            }
 
-        };
-        getAnimationTab().getSearchPanel().addObjectKind(objectKind);
-
-        panel.enableSimulationControlButtons();
+            };
+            frame.getAnimationTab().getSearchPanel().addObjectKind(objectKind);
+            panel.enableSimulationControlButtons();
+            model.setResetApplicationExecutable(() -> build());
+        }
+        catch (Exception e)
+        {
+            throw new DsolRuntimeException(e);
+        }
     }
 
     /**
      * @param args arguments, expected to be empty
-     * @throws Exception on error
      */
-    public static void main(final String[] args) throws Exception
+    public static void main(final String[] args)
     {
-        DevsRealTimeAnimator.TimeDouble simulator = new DevsRealTimeAnimator.TimeDouble("BallSwingApplication", 0.001);
-        BallModel model = new BallModel(simulator);
-        Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
-        simulator.initialize(model, replication);
-        DsolPanel panel = new DsolPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
-        panel.addTab("logger", new ConsoleLogger(Level.INFO));
-        panel.addTab("console", new ConsoleOutput());
-        new BallSwingApplication("BallSwingApplication", panel);
+        var app = new BallSwingApplication();
+        app.build();
     }
 }
