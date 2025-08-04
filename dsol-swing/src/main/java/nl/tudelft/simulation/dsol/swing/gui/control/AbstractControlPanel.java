@@ -230,18 +230,17 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
                 {
                     getSimulator().stop();
                 }
-                getSimulator().cleanUp();
 
                 if (null == getModel())
                 {
                     throw new RuntimeException("Do not know how to restart this simulation");
                 }
 
-                // clean up timers, contexts, threads
+                // clean up contexts
                 cleanup();
 
-                // re-construct the model and reset the simulator and replication / experiment
-                getSimulator().initialize(getModel(), getSimulator().getReplication());
+                // re-construct the model and reset the simulator and replication / experiment, do NOT clean up
+                getSimulator().initialize(getModel(), getSimulator().getReplication(), false);
 
                 // refresh the screen, buttons, time, etc.
                 Window window = SwingUtilities.getWindowAncestor(this);
@@ -260,7 +259,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     }
 
     /**
-     * clean up timers, contexts, threads, etc. that could prevent garbage collection.
+     * clean up contexts that could prevent garbage collection.
      */
     private void cleanup()
     {
@@ -290,19 +289,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
                     getSimulator().getReplication().getContext().destroySubcontext("statistics");
                     getSimulator().getReplication().getContext().createSubcontext("statistics");
                 }
-                // TODO: getSimulator().getReplication().getExperiment().removeFromContext(); // clean up the context
             }
-
-            /*-
-            if (this.clockPanel != null)
-            {
-                this.clockPanel.cancelTimer(); // cancel the timer on the clock panel.
-            }
-            if (this.speedPanel != null)
-            {
-                this.speedPanel.cancelTimer(); // cancel the timer on the speed panel.
-            }
-            */
         }
         catch (Throwable exception)
         {
