@@ -15,13 +15,13 @@ public enum OsmFormat
 {
     /** Protocol buffer, binary. */
     PBF,
-    
+
     /** OSM, XML. */
     OSM,
-    
+
     /** Compressed XML with GZIP. */
     GZIP,
-    
+
     /** Compressed XML with BZIP2. */
     BZIP2;
 }

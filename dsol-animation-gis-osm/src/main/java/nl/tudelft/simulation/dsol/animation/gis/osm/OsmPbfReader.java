@@ -72,7 +72,7 @@ public class OsmPbfReader
                 parsePrimitiveBlock(block, processor);
             }
         }
-        
+
         dis.close();
         fis.close();
     }
@@ -82,8 +82,7 @@ public class OsmPbfReader
      * @param block the block
      * @param processor the processor to further process the entities
      */
-    public static void parsePrimitiveBlock(final OSMPBF.PrimitiveBlock block,
-           final OsmEntityProcessor processor)
+    public static void parsePrimitiveBlock(final OSMPBF.PrimitiveBlock block, final OsmEntityProcessor processor)
     {
         long granularity = block.getGranularity();
         long latOffset = block.getLatOffset();
@@ -127,7 +126,7 @@ public class OsmPbfReader
                     String v = stringTable.get(way.getVals(i)).toStringUtf8();
                     tags.put(k, v);
                 }
-                
+
                 Way w = new Way(wayId, refs, tags);
                 processor.process(w);
             }

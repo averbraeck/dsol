@@ -99,7 +99,9 @@ public final class EsriFileCsvParser
         Set<String> header = csvReader.getHeader();
         if (!header.contains("layer") || !header.contains("shapeFile") || !header.contains("outlineColor")
                 || !header.contains("fillColor") || !header.contains("display") || !header.contains("transform"))
-        { throw new IOException("ESRI GIS map csv-file header row did not contain all column headers\n" + header.toString()); }
+        {
+            throw new IOException("ESRI GIS map csv-file header row did not contain all column headers\n" + header.toString());
+        }
 
         Iterator<NamedCsvRow> it = csvReader.iterator();
         while (it.hasNext())
@@ -121,7 +123,9 @@ public final class EsriFileCsvParser
 
             URL resource = URLResource.getResource(shapeFile);
             if (resource == null)
-            { throw new IOException("Cannot locate shapeFile: " + shapeFile); }
+            {
+                throw new IOException("Cannot locate shapeFile: " + shapeFile);
+            }
             feature.setOutlineColor(outlineColor);
             feature.setFillColor(fillColor);
             layer.setDisplay(display);

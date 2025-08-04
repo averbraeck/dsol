@@ -91,14 +91,18 @@ public final class EsriFileXmlParser
 
             // map.units
             if (nodeTagExists(root, "units"))
-            { map.setUnits(parseUnits(nodeText(root, "units"))); }
+            {
+                map.setUnits(parseUnits(nodeText(root, "units")));
+            }
 
             // map.extent
             map.setExtent(parseExtent(nodeTagItem(root, "extent", 0), coordinateTransform));
 
             // map.image
             if (nodeTagExists(root, "image"))
-            { map.setImage(parseImage(nodeTagItem(root, "image", 0))); }
+            {
+                map.setImage(parseImage(nodeTagItem(root, "image", 0)));
+            }
 
             // map.layer
             map.setLayers(parseLayers(root.getElementsByTagName("layer"), coordinateTransform));
@@ -263,7 +267,9 @@ public final class EsriFileXmlParser
                     String resourceName = nodeText(dataNode, "shapeFile");
                     URL resource = URLResource.getResource(resourceName);
                     if (resource == null)
-                    { throw new IOException("Cannot locate shapeFile: " + resourceName); }
+                    {
+                        throw new IOException("Cannot locate shapeFile: " + resourceName);
+                    }
                     ShapeFileReader dataSource = new ShapeFileReader(resource, coordinateTransform, layer.getFeatures());
                     dataSource.populateShapes();
                 }
@@ -279,13 +285,21 @@ public final class EsriFileXmlParser
                 }
                 */
                 if (nodeTagExists(layerNode, "fillColor"))
-                { feature.setFillColor(parseColor(nodeTagItem(layerNode, "fillColor", 0))); }
+                {
+                    feature.setFillColor(parseColor(nodeTagItem(layerNode, "fillColor", 0)));
+                }
                 if (nodeTagExists(layerNode, "outlineColor"))
-                { feature.setOutlineColor(parseColor(nodeTagItem(layerNode, "outlineColor", 0))); }
+                {
+                    feature.setOutlineColor(parseColor(nodeTagItem(layerNode, "outlineColor", 0)));
+                }
                 if (nodeTagExists(layerNode, "display"))
-                { layer.setDisplay(nodeBoolean(layerNode, "display")); }
+                {
+                    layer.setDisplay(nodeBoolean(layerNode, "display"));
+                }
                 if (nodeTagExists(layerNode, "transform"))
-                { layer.setTransform(nodeBoolean(layerNode, "transform")); }
+                {
+                    layer.setTransform(nodeBoolean(layerNode, "transform"));
+                }
             }
             return layerList;
         }

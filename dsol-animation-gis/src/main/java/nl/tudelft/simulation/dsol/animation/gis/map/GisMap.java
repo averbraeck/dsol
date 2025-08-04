@@ -136,7 +136,9 @@ public class GisMap implements GisMapInterface
     public void hideLayer(final String layerName) throws RemoteException
     {
         if (this.layerMap.keySet().contains(layerName))
-        { hideLayer(this.layerMap.get(layerName)); }
+        {
+            hideLayer(this.layerMap.get(layerName));
+        }
         this.same = false;
     }
 
@@ -151,7 +153,9 @@ public class GisMap implements GisMapInterface
     public void showLayer(final String layerName) throws RemoteException
     {
         if (this.layerMap.keySet().contains(layerName))
-        { showLayer(this.layerMap.get(layerName)); }
+        {
+            showLayer(this.layerMap.get(layerName));
+        }
         this.same = false;
     }
 
@@ -223,7 +227,9 @@ public class GisMap implements GisMapInterface
                             shape = (SerializablePath) gisObject.getShape();
                             // }
                             if (layer.isTransform())
-                            { shape.transform(transform); }
+                            {
+                                shape.transform(transform);
+                            }
                             if (/* feature.getDataSource().getType() == POLYGON && */ feature.getFillColor() != null)
                             {
                                 graphics.setColor(feature.getFillColor());
@@ -239,7 +245,9 @@ public class GisMap implements GisMapInterface
                                     graphics.setStroke(new BasicStroke());
                             }
                             if (layer.isTransform())
-                            { shape.transform(antiTransform); }
+                            {
+                                shape.transform(antiTransform);
+                            }
                         }
                     }
                 }

@@ -44,7 +44,9 @@ public class ObjectEndianInputStream implements DataInput
     public short readShort() throws IOException
     {
         if (this.endianness.equals(Endianness.BIG_ENDIAN))
-        { return this.dataInputStream.readShort(); }
+        {
+            return this.dataInputStream.readShort();
+        }
         this.dataInputStream.readFully(this.buffer, 0, 2);
         return (short) ((this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff));
     }
@@ -53,7 +55,9 @@ public class ObjectEndianInputStream implements DataInput
     public int readUnsignedShort() throws IOException
     {
         if (this.endianness.equals(Endianness.BIG_ENDIAN))
-        { return this.dataInputStream.readUnsignedShort(); }
+        {
+            return this.dataInputStream.readUnsignedShort();
+        }
         this.dataInputStream.readFully(this.buffer, 0, 2);
         return ((this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff));
     }
@@ -62,7 +66,9 @@ public class ObjectEndianInputStream implements DataInput
     public char readChar() throws IOException
     {
         if (this.endianness.equals(Endianness.BIG_ENDIAN))
-        { return this.dataInputStream.readChar(); }
+        {
+            return this.dataInputStream.readChar();
+        }
         this.dataInputStream.readFully(this.buffer, 0, 2);
         return (char) ((this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff));
     }
@@ -71,7 +77,9 @@ public class ObjectEndianInputStream implements DataInput
     public int readInt() throws IOException
     {
         if (this.endianness.equals(Endianness.BIG_ENDIAN))
-        { return this.dataInputStream.readInt(); }
+        {
+            return this.dataInputStream.readInt();
+        }
         this.dataInputStream.readFully(this.buffer, 0, 4);
         return (this.buffer[3]) << 24 | (this.buffer[2] & 0xff) << 16 | (this.buffer[1] & 0xff) << 8 | (this.buffer[0] & 0xff);
     }
@@ -80,7 +88,9 @@ public class ObjectEndianInputStream implements DataInput
     public long readLong() throws IOException
     {
         if (this.endianness.equals(Endianness.BIG_ENDIAN))
-        { return this.dataInputStream.readLong(); }
+        {
+            return this.dataInputStream.readLong();
+        }
         this.dataInputStream.readFully(this.buffer, 0, 8);
         return (long) (this.buffer[7]) << 56 | (long) (this.buffer[6] & 0xff) << 48 | (long) (this.buffer[5] & 0xff) << 40
                 | (long) (this.buffer[4] & 0xff) << 32 | (long) (this.buffer[3] & 0xff) << 24
@@ -91,7 +101,9 @@ public class ObjectEndianInputStream implements DataInput
     public float readFloat() throws IOException
     {
         if (this.endianness.equals(Endianness.BIG_ENDIAN))
-        { return this.dataInputStream.readFloat(); }
+        {
+            return this.dataInputStream.readFloat();
+        }
         return Float.intBitsToFloat(readInt());
     }
 
@@ -99,7 +111,9 @@ public class ObjectEndianInputStream implements DataInput
     public double readDouble() throws IOException
     {
         if (this.endianness.equals(Endianness.BIG_ENDIAN))
-        { return this.dataInputStream.readDouble(); }
+        {
+            return this.dataInputStream.readDouble();
+        }
         return Double.longBitsToDouble(readLong());
     }
 

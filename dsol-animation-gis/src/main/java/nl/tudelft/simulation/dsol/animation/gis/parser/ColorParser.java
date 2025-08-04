@@ -33,7 +33,9 @@ public final class ColorParser
     {
         String lc = colorString.toLowerCase().trim();
         if (lc.equals("null") || lc.length() == 0)
-        { return null; }
+        {
+            return null;
+        }
         if (lc.startsWith("rgba(") && lc.endsWith(")"))
         {
             String[] rgba = lc.substring(5, lc.length() - 1).split(",");

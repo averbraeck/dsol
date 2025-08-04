@@ -21,7 +21,7 @@ public class Way implements OsmEntity
 
     /** the tags. */
     private final Map<String, String> tags;
-    
+
     /**
      * @param id the id
      * @param refs the references
