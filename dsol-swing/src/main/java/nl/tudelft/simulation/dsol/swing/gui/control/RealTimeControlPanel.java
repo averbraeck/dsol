@@ -57,7 +57,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         getControlButtonsPanel().add(makeButton("fastForwardButton", "/resources/FastForward.png", "FastForward",
                 "Run the simulation as fast as possible", true));
 
-        this.runSpeedSliderPanel = new RunSpeedSliderPanel(0.1, 1000, 1, 3, getSimulator());
+        this.runSpeedSliderPanel = new RunSpeedSliderPanel(RunSpeedSliderPanel.makeLogScale(0.1, 1000, 3), getSimulator(), 1);
         add(this.runSpeedSliderPanel);
 
         getSimulator().addListener(this, DevsRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT);
