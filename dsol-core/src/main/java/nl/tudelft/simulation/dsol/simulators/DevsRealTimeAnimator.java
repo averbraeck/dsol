@@ -26,7 +26,7 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  * @since 1.5
  */
 public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> extends DevsAnimator<T>
-        implements DevsSimulatorInterface<T>
+        implements DevsSimulatorInterface<T>, RealTime<T>
 {
     /** */
     private static final long serialVersionUID = 20150428L;
@@ -58,22 +58,12 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
 
     /** Start an animation thread or not. */
     private Boolean animation = true;
-    
+
     /** Synchronization object. */
     private Object sync = new Object();
 
     /** the current animation thread; null if none. */
     private AnimationThread animationThread = null;
-
-    /**
-     * Calculate the how much simulation duration corresponds to the number of wall clock milliseconds indicated in the
-     * parameter. When the DevsRealTimeClock works with djunits Time or Duration, and the simulation is scaled to milliseconds,
-     * the simulatorTimeForWallClockMillis of a millisecond is a Duration of 1 millisecond. When 1 simulated time unit stands
-     * for a second, the simulatorTimeForWallClockMillis is 0.001.
-     * @param wallMilliseconds the number of milliseconds to calculate the corresponding simulation time for
-     * @return the relative time step.
-     */
-    protected abstract T simulatorTimeForWallClockMillis(final double wallMilliseconds);
 
     /**
      * Constructs a new DevsRealTimeClock.
@@ -367,19 +357,13 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         return this.animation;
     }
 
-    /**
-     * @return speedFactor
-     */
+    @Override
     public double getSpeedFactor()
     {
         return this.speedFactor;
     }
 
-    /**
-     * Set the speedFactor, and send a CHANGE_SPEED_FACTOR event.
-     * @param newSpeedFactor the new speed factor to set
-     * @param fireChangeSpeedFactorEvent whether to fire a CHANGE_SPEED_FACTOR event or not
-     */
+    @Override
     public void setSpeedFactor(final double newSpeedFactor, final boolean fireChangeSpeedFactorEvent)
     {
         this.speedFactor = newSpeedFactor;
@@ -389,50 +373,25 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         }
     }
 
-    /**
-     * Set the speedFactor, and send a CHANGE_SPEED_FACTOR event.
-     * @param newSpeedFactor set speedFactor
-     */
-    public void setSpeedFactor(final double newSpeedFactor)
-    {
-        setSpeedFactor(newSpeedFactor, true);
-    }
-
-    /**
-     * @return catchup
-     */
+    @Override
     public boolean isCatchup()
     {
         return this.catchup;
     }
 
-    /**
-     * @param catchup set catchup
-     */
+    @Override
     public void setCatchup(final boolean catchup)
     {
         this.catchup = catchup;
     }
 
-    /**
-     * The relative update delay in milliseconds is the step size in wall clock time by which the time is updated between
-     * events. Default, this value is set at 10 msec, which means that the simulation updates its clock with 100 Hz between
-     * events.
-     * @return the relative update delay in milliseconds
-     */
+    @Override
     public int getUpdateMsec()
     {
         return this.updateMsec;
     }
 
-    /**
-     * The relative update delay in milliseconds is the step size in wall clock time by which the time is updated between
-     * events. Default, this value is set at 10 msec, which means that the simulation updates its clock with 100 Hz between
-     * events. When this is too course, set e.g. to 1, which means that the clock will be updated with 1 kHz between events. The
-     * latter can be important in real time simulations. Note that the housekeeping of the simulation clock takes time as well,
-     * so 1 kHz can be too fine grained in some situations.
-     * @param updateMsec set the relative update delay in milliseconds
-     */
+    @Override
     public void setUpdateMsec(final int updateMsec)
     {
         this.updateMsec = updateMsec;
@@ -480,13 +439,29 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         private static final long serialVersionUID = 20140805L;
 
         /**
+         * the translation from a millisecond on the wall clock to '1.0' in the simulation time. This means that if the wall
+         * clock runs in seconds, the factor should be 0.001.
+         */
+        private final double msecWallClockToSimTimeUnit;
+
+        /**
          * Construct a DevsRealTimeClock&lt;Float&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
+         * @param msecWallClockToSimTimeUnit the translation between a millisecond on the clock and '1.0' in the simulation
+         *            time.
          */
-        public TimeFloat(final Serializable id)
+        public TimeFloat(final Serializable id, final double msecWallClockToSimTimeUnit)
         {
             super(id);
+            this.msecWallClockToSimTimeUnit = msecWallClockToSimTimeUnit;
         }
+
+        @Override
+        public Float simulatorTimeForWallClockMillis(final double wallMilliseconds)
+        {
+            return (float) (this.msecWallClockToSimTimeUnit * wallMilliseconds);
+        }
+
     }
 
     /** Easy access class RealTimeClock&lt;Long&gt;. */
@@ -496,12 +471,27 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
         private static final long serialVersionUID = 20140805L;
 
         /**
+         * the translation from a millisecond on the wall clock to '1' in the simulation time. This means that if the wall clock
+         * runs in seconds, the factor should be 0.001.
+         */
+        private final double msecWallClockToSimTimeUnit;
+
+        /**
          * Construct a DevsRealTimeClock&lt;Long&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
+         * @param msecWallClockToSimTimeUnit the translation between a millisecond on the clock and '1.0' in the simulation
+         *            time.
          */
-        public TimeLong(final Serializable id)
+        public TimeLong(final Serializable id, final double msecWallClockToSimTimeUnit)
         {
             super(id);
+            this.msecWallClockToSimTimeUnit = msecWallClockToSimTimeUnit;
+        }
+
+        @Override
+        public Long simulatorTimeForWallClockMillis(final double wallMilliseconds)
+        {
+            return Math.round(this.msecWallClockToSimTimeUnit * wallMilliseconds);
         }
     }
 

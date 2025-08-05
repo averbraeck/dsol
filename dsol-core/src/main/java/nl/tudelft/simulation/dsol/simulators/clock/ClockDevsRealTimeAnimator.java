@@ -43,7 +43,7 @@ public class ClockDevsRealTimeAnimator extends DevsRealTimeAnimator<Duration> im
     }
 
     @Override
-    protected Duration simulatorTimeForWallClockMillis(final double wallMilliseconds)
+    public Duration simulatorTimeForWallClockMillis(final double wallMilliseconds)
     {
         return Duration.instantiateSI(wallMilliseconds / 1000.0);
     }
