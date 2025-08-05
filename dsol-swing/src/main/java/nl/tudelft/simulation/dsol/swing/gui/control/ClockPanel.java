@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,6 +15,7 @@ import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
 
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.clock.ClockDevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControlLabel;
 
@@ -54,10 +56,11 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     private T prevSimTime;
 
     /**
-     * Construct a clock panel.
+     * Construct a clock panel with a given dimension.
      * @param simulator the simulator
+     * @param dimension the dimension (width x height) of the ClockPanel
      */
-    public ClockPanel(final SimulatorInterface<T> simulator)
+    public ClockPanel(final SimulatorInterface<T> simulator, final Dimension dimension)
     {
         this.simulator = simulator;
         setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -65,11 +68,22 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
 
         this.timeLabel = new AppearanceControlLabel();
         this.timeLabel.setFont(getTimeFont());
-        this.timeLabel.setMaximumSize(new Dimension(150, 35));
+        this.timeLabel.setMinimumSize(dimension);
+        this.timeLabel.setSize(dimension);
+        this.timeLabel.setMaximumSize(dimension);
         add(this.timeLabel);
 
         this.timer = new Timer();
         this.timer.scheduleAtFixedRate(new TimeUpdateTask(), 0, this.updateInterval);
+    }
+
+    /**
+     * Construct a clock panel with a default dimension of 150x35 pixels.
+     * @param simulator the simulator
+     */
+    public ClockPanel(final SimulatorInterface<T> simulator)
+    {
+        this(simulator, new Dimension(150, 35));
     }
 
     /**
@@ -191,6 +205,17 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a double time.
          * @param simulator the simulator
+         * @param dimension the dimension (width x height) of the ClockPanel
+         */
+        public TimeDouble(final SimulatorInterface<Double> simulator, final Dimension dimension)
+        {
+            super(simulator, dimension);
+            setPrevSimTime(0.0);
+        }
+
+        /**
+         * Construct a clock panel with a double time.
+         * @param simulator the simulator
          */
         public TimeDouble(final SimulatorInterface<Double> simulator)
         {
@@ -219,6 +244,17 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     {
         /** */
         private static final long serialVersionUID = 20201227L;
+
+        /**
+         * Construct a clock panel with a float time.
+         * @param simulator the simulator
+         * @param dimension the dimension (width x height) of the ClockPanel
+         */
+        public TimeFloat(final SimulatorInterface<Float> simulator, final Dimension dimension)
+        {
+            super(simulator, dimension);
+            setPrevSimTime(0.0f);
+        }
 
         /**
          * Construct a clock panel with a float time.
@@ -255,6 +291,17 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a long time.
          * @param simulator the simulator
+         * @param dimension the dimension (width x height) of the ClockPanel
+         */
+        public TimeLong(final SimulatorInterface<Long> simulator, final Dimension dimension)
+        {
+            super(simulator, dimension);
+            setPrevSimTime(0L);
+        }
+
+        /**
+         * Construct a clock panel with a long time.
+         * @param simulator the simulator
          */
         public TimeLong(final SimulatorInterface<Long> simulator)
         {
@@ -283,6 +330,17 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     {
         /** */
         private static final long serialVersionUID = 20201227L;
+
+        /**
+         * Construct a clock panel with a double time with unit.
+         * @param simulator the simulator
+         * @param dimension the dimension (width x height) of the ClockPanel
+         */
+        public TimeDoubleUnit(final SimulatorInterface<Duration> simulator, final Dimension dimension)
+        {
+            super(simulator, dimension);
+            setPrevSimTime(Duration.ZERO);
+        }
 
         /**
          * Construct a clock panel with a double time with a unit.
@@ -317,6 +375,17 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         private static final long serialVersionUID = 20201227L;
 
         /**
+         * Construct a clock panel with a float time with unit.
+         * @param simulator the simulator
+         * @param dimension the dimension (width x height) of the ClockPanel
+         */
+        public TimeFloatUnit(final SimulatorInterface<FloatDuration> simulator, final Dimension dimension)
+        {
+            super(simulator, dimension);
+            setPrevSimTime(FloatDuration.ZERO);
+        }
+
+        /**
          * Construct a clock panel with a float time with a unit.
          * @param simulator the simulator
          */
@@ -330,6 +399,49 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         protected String formatSimulationTime(final FloatDuration simulationTime)
         {
             return "t = " + simulationTime.toString(false, true);
+        }
+    }
+
+    /**
+     * ClockLabel for a djunits Time. The formatter can be adjusted.
+     * <p>
+     * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
+     * DSOL project is distributed under a three-clause BSD-style license, which can be found at
+     * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
+     * </p>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
+     */
+    public static class ClockTime extends ClockPanel<Duration>
+    {
+        /** */
+        private static final long serialVersionUID = 20201227L;
+
+        /**
+         * Construct a clock panel with a clock-based time and clock-based simulator.
+         * @param simulator the simulator
+         * @param dimension the dimension (width x height) of the ClockPanel
+         */
+        public ClockTime(final ClockDevsSimulatorInterface simulator, final Dimension dimension)
+        {
+            super(simulator, dimension);
+            setPrevSimTime(Duration.instantiateSI(simulator.getStartClockTime().si));
+        }
+
+        /**
+         * Construct a clock panel with a clock-based time and clock-based simulator.
+         * @param simulator the simulator
+         */
+        public ClockTime(final ClockDevsSimulatorInterface simulator)
+        {
+            this(simulator, new Dimension(200, 35));
+        }
+
+        @Override
+        protected String formatSimulationTime(final Duration simulationTime)
+        {
+            var dt = ((ClockDevsSimulatorInterface) getSimulator()).getSimulatorClockTime().localDateTime();
+            return dt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         }
     }
 
