@@ -740,10 +740,10 @@ Printing the results at the end of an entire experiment can only be done with th
 ```java
   class DesQueueingApplication9 implements EventListener
   {
-    protected DesQueueingApplication9()
+    DesQueueingApplication9()
     {
-      this.simulator = new DevsSimulator<Double>("MM1.Simulator");
-      this.model = new MM1Model(this.simulator);
+      var simulator = new DevsSimulator<Double>("MM1.Simulator");
+      this.model = new DesQueueingModel9(simulator);
       this.experiment = new Experiment<>("mm1", this.simulator, 
           this.model, 0.0, 0.0, 1000.0, 10);
       this.experiment.addListener(this, Experiment.END_EXPERIMENT_EVENT);
@@ -875,7 +875,7 @@ public class DesQueueingApplication10
 }
 ```
 
-In this case we run a single replication, since we want to study the results. We make a `ControlPanel` with buttons to start and stop the simulation, and to keep track of the simulator's time, and we create our own `MM1Panel` with the statistics. Several of the lines are to help with the ability to reset the model in the GUI. The line:
+In this case we run a single replication, since we want to study the results. We make a `ControlPanel` with buttons to start and stop the simulation, and to keep track of the simulator's time, and we create our own `DesQueueingPanel` with the statistics. Several of the lines are to help with the ability to reset the model in the GUI. The line:
 
 ```java
   model.setResetApplicationExecutable(() -> build());
@@ -883,7 +883,7 @@ In this case we run a single replication, since we want to study the results. We
 
 is the code that will be executed when the 'reset' button is pushed in the GUI. When the button is pushed, the entire application is re-created, including the GUI, the statistics, the graphs, and the animation (if any). In this case, the `TabbedParameterDialog` is only shown once. When the parameters have been set the first time, they are reused after a reset with the line: `model.setInputParameterMap(this.inputParameterMap);`
 
-The complete code for the `MM1Panel` class that takes care of displaying the graphs is given below:
+The complete code for the `DesQueueingPanel` class that takes care of displaying the graphs is given below:
 
 ```java
 public class DesQueueingPanel extends DsolPanel
@@ -900,7 +900,7 @@ public class DesQueueingPanel extends DsolPanel
     TablePanel charts = new TablePanel(4, 4);
     getTabbedPane().addTab("statistics", charts);
     getTabbedPane().setSelectedIndex(0);
-    MM1Model model = (MM1Model) getModel();
+    DesQueueingModel10 model = (DesQueueingModel10) getModel();
 
     try
     {
