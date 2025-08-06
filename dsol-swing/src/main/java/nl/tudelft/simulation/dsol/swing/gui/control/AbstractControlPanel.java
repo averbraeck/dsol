@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -65,7 +66,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     private RunUntilPanel<T> runUntilPanel;
 
     /** The control buttons. */
-    private final ArrayList<JButton> controlButtons = new ArrayList<>();
+    private final List<JButton> controlButtons = new ArrayList<>();
 
     /** The control buttons panel. */
     private final JPanel controlButtonsPanel;
@@ -96,17 +97,34 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
         this.simulator = simulator;
 
         setLayout(new FlowLayout(FlowLayout.LEFT));
-
         this.controlButtonsPanel = new JPanel();
-        this.controlButtonsPanel.setLayout(new BoxLayout(this.controlButtonsPanel, BoxLayout.X_AXIS));
-        this.controlButtonsPanel.add(makeButton("resetButton", "/resources/Reset.png", "Reset", "Reset the simulation", false));
-        this.controlButtonsPanel
-                .add(makeButton("runPauseButton", "/resources/Run.png", "RunPause", "Run or pause the simulation", true));
-        this.add(this.controlButtonsPanel);
-        fixButtons();
+        add(this.controlButtonsPanel);
 
+        addButtons();
         installWindowCloseHandler();
+        addListeners();
+    }
 
+    /**
+     * Add the buttons to the control panel. This method can be overridden to add more buttons (call super.addButtons() in that
+     * case), or to have completely different buttons.
+     */
+    public void addButtons()
+    {
+        getControlButtonsPanel().setLayout(new BoxLayout(this.controlButtonsPanel, BoxLayout.X_AXIS));
+        getControlButtonsPanel().add(makeButton("resetButton", "/resources/Reset.png", "Reset", "Reset the simulation", false));
+        getControlButtonsPanel()
+                .add(makeButton("runPauseButton", "/resources/Run.png", "RunPause", "Run or pause the simulation", true));
+        fixButtons();
+    }
+
+    /**
+     * Add the listeners for the control panel. This method can be overridden to add more listeners (call super.addListeners()
+     * in that case), or to have completely different listeners.
+     * @throws RemoteException in case the (remote) simulator cannot be reached
+     */
+    public void addListeners() throws RemoteException
+    {
         this.simulator.addListener(this, Replication.END_REPLICATION_EVENT);
         this.simulator.addListener(this, SimulatorInterface.START_EVENT);
         this.simulator.addListener(this, SimulatorInterface.STOP_EVENT);
@@ -447,7 +465,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     /**
      * @return controlButtons
      */
-    public ArrayList<JButton> getControlButtons()
+    public List<JButton> getControlButtons()
     {
         return this.controlButtons;
     }

@@ -35,14 +35,15 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     private static final long serialVersionUID = 20201227L;
 
     /** The timeWarpPanel to control the speed. */
-    private final RunSpeedSliderPanel runSpeedSliderPanel;
+    private RunSpeedSliderPanel runSpeedSliderPanel;
 
     /** The default animation delay (stored during fast forward). */
     private long savedAnimationDelay = 100L;
 
     /**
-     * Generic control panel with a different set of control buttons. The control panel assumes a RealTimeDevsAnimator and
-     * animation, but the model specification is not necessarily specified as "real time"; its execution is.
+     * DEVS clock-syncronize control panel with a set of control buttons. The control panel assumes a RealTime simulator and
+     * animation, but the model specification is not necessarily specified as "real time"; its execution is. This version adds a
+     * default RunSpeedSliderPanel with logarithmic speeds from 0.1 to 1000 and three steps per decade.
      * @param model the model for the control panel, to allow a reset of the model
      * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of the
      *            simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator, whereas
@@ -52,14 +53,40 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     public RealTimeControlPanel(final DsolModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator)
             throws RemoteException
     {
-        super(model, simulator);
+        this(model, simulator, new RunSpeedSliderPanel(RunSpeedSliderPanel.makeLogScale(0.1, 1000, 3), simulator, 1));
+    }
 
+    /**
+     * DEVS clock-syncronize control panel with a set of control buttons. The control panel assumes a RealTime simulator and
+     * animation, but the model specification is not necessarily specified as "real time"; its execution is. This version adds a
+     * user-specified RunSpeedSliderPanel.
+     * @param model the model for the control panel, to allow a reset of the model
+     * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of the
+     *            simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator, whereas
+     *            the panel needs a RealTimeControlAnimator)
+     * @param runSpeedSliderPanel the SpeedSliderPanel to add to the ControlPanel
+     * @throws RemoteException when simulator cannot be accessed for listener attachment
+     */
+    public RealTimeControlPanel(final DsolModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator,
+            final RunSpeedSliderPanel runSpeedSliderPanel) throws RemoteException
+    {
+        super(model, simulator);
+        this.runSpeedSliderPanel = runSpeedSliderPanel;
+        add(this.runSpeedSliderPanel);
+    }
+
+    @Override
+    public void addButtons()
+    {
+        super.addButtons();
         getControlButtonsPanel().add(makeButton("fastForwardButton", "/resources/FastForward.png", "FastForward",
                 "Run the simulation as fast as possible", true));
+    }
 
-        this.runSpeedSliderPanel = new RunSpeedSliderPanel(RunSpeedSliderPanel.makeLogScale(0.1, 1000, 3), getSimulator(), 1);
-        add(this.runSpeedSliderPanel);
-
+    @Override
+    public void addListeners() throws RemoteException
+    {
+        super.addListeners();
         getSimulator().addListener(this, DevsRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT);
     }
 

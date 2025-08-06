@@ -49,7 +49,13 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
             throws RemoteException
     {
         super(model, simulator);
+    }
 
+    @Override
+    public void addButtons()
+    {
+        super.addButtons();
+        
         // add the buttons to step the simulation
         getControlButtonsPanel().add(makeButton("stepButton", "/resources/Step.png", "Step", "Execute one event", true));
         getControlButtonsPanel().add(makeButton("nextTimeButton", "/resources/StepTime.png", "NextTime",
