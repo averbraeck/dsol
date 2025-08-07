@@ -173,4 +173,11 @@ public class Feature implements FeatureInterface
         this.lineWidthPx = lineWidthPx;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "Feature [key=" + this.key + ", value=" + this.value + "]";
+    }
+
 }
