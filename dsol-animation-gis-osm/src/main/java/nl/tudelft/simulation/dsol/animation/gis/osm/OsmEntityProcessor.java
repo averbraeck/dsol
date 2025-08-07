@@ -2,6 +2,8 @@ package nl.tudelft.simulation.dsol.animation.gis.osm;
 
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +26,14 @@ import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
  */
 public class OsmEntityProcessor
 {
+    /** the nodes in the OSM file. */
+    private Map<Long, MiniNode> nodes = new HashMap<Long, MiniNode>();
+
     /** the ways in the OSM file. */
     private Map<Long, MiniWay> ways = new HashMap<Long, MiniWay>();
 
-    /** the nodes in the OSM file. */
-    private Map<Long, MiniNode> nodes = new HashMap<Long, MiniNode>();
+    /** the relations in the OSM file. */
+    private Map<Long, MiniRelation> relations = new HashMap<Long, MiniRelation>();
 
     /** the key - value pairs to read. There can be multiple values per key, or '*' for all. */
     private final List<FeatureInterface> featuresToRead;
@@ -103,32 +108,79 @@ public class OsmEntityProcessor
                     break;
                 }
             }
+
+            // store all the ways since they can be used in a Relation. featureToUse can therefore be null.
+            List<MiniNode> wayNodes = new ArrayList<>();
+            for (long nodeId : way.getRefs())
+            {
+                MiniNode node = this.nodes.get(nodeId);
+                if (node == null)
+                    continue;
+                wayNodes.add(node);
+            }
+            MiniWay miniWay = new MiniWay(way.getId(), featureToUse, wayNodes);
+            this.ways.put(miniWay.id, miniWay);
+        }
+
+        else if (entity instanceof Relation relation)
+        {
+            boolean read = false;
+            FeatureInterface featureToUse = null;
+            for (var entry : relation.getTags().entrySet())
+            {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                for (FeatureInterface feature : this.featuresToRead)
+                {
+                    if (feature.getKey().equals("*"))
+                    {
+                        featureToUse = feature;
+                        read = true;
+                        break;
+                    }
+                    if (feature.getKey().equals(key))
+                    {
+                        if (feature.getValue().equals("*") || feature.getValue().equals(value))
+                        {
+                            featureToUse = feature;
+                            read = true;
+                            break;
+                        }
+                    }
+                }
+                if (read)
+                {
+                    break;
+                }
+            }
+
             if (read)
             {
-                List<MiniNode> wayNodes = new ArrayList<>();
-                for (long nodeId : way.getRefs())
+                // For now, just multipolygon
+                if ("multipolygon".equals(relation.getTags().get("type")) || "boundary".equals(relation.getTags().get("type")))
                 {
-                    MiniNode node = this.nodes.get(nodeId);
-                    if (node == null)
-                        continue;
-                    wayNodes.add(node);
+                    List<Long> outerWayIds = new ArrayList<>();
+                    List<Long> innerWayIds = new ArrayList<>();
+                    for (Relation.Member member : relation.getMembers())
+                    {
+                        if (member.type() != Relation.Type.WAY)
+                            continue;
+                        long wayId = member.ref();
+                        if (!this.ways.containsKey(wayId))
+                        {
+                            continue;
+                        }
+                        if ("inner".equals(member.role()))
+                            innerWayIds.add(wayId);
+                        else
+                            outerWayIds.add(wayId);
+                    }
+                    MiniRelation miniRelation = new MiniRelation(relation.getId(), featureToUse, outerWayIds, innerWayIds,
+                            relation.getTags().get("name"));
+                    this.relations.put(miniRelation.id, miniRelation);
                 }
-                MiniWay miniWay = new MiniWay(way.getId(), featureToUse, wayNodes);
-                this.ways.put(miniWay.id, miniWay);
             }
         }
-
-        /*-
-        else if (entity instanceof Relation)
-        {
-            Iterator<Tag> tagint = entity.getTags().iterator();
-            while (tagint.hasNext())
-            {
-                Tag route = tagint.next();
-            }
-        }
-        */
-
     }
 
     /**
@@ -146,9 +198,17 @@ public class OsmEntityProcessor
     {
         for (MiniWay way : this.ways.values())
         {
-            addWay(way);
+            if (way.feature != null) // can be null if only used in a relation
+            {
+                addWay(way);
+            }
         }
-        System.out.println("Nodes read: " + this.nodes.size() + ", ways read: " + this.ways.size());
+        for (MiniRelation relation : this.relations.values())
+        {
+            addRelation(relation);
+        }
+        System.out.println("Nodes read: " + this.nodes.size() + ", ways read: " + this.ways.size() + ", relations read: "
+                + this.relations.size());
     }
 
     /**
@@ -180,6 +240,210 @@ public class OsmEntityProcessor
         }
         String[] att = new String[0];
         way.feature.getShapes().add(new GisObject(path, att));
+    }
+
+    /**
+     * Add a relation to a feature.
+     * @param relation the relation to add to the feature shape list
+     */
+    private void addRelation(final MiniRelation relation)
+    {
+        List<Path2D> outerRings = makeRings(relation.outerWayIds, true);
+        List<Path2D> innerRings = makeRings(relation.innerWayIds, false);
+        SerializablePath multipolygon = new SerializablePath(Path2D.WIND_NON_ZERO);
+        for (Path2D outer : outerRings)
+            multipolygon.append(outer, false);
+        for (Path2D inner : innerRings)
+            multipolygon.append(inner, false);
+        String[] att = new String[0];
+        relation.feature.getShapes().add(new GisObject(multipolygon, att));
+    }
+
+    /**
+     * Make a list of inner or outer rings for the relation.
+     * @param wayIds the inner or outer wayIds to process
+     * @param outer to determine the winding
+     * @return a list of Path2D elements for inner or outer ways
+     */
+    private List<Path2D> makeRings(final List<Long> wayIds, final boolean outer)
+    {
+        var rings = new ArrayList<Path2D>();
+        var partials = new ArrayList<List<FloatXY>>();
+        for (long wayId : wayIds)
+        {
+            MiniWay way = this.ways.get(wayId);
+            boolean started = false;
+            List<FloatXY> ring = new ArrayList<>();
+            FloatXY first = null;
+            FloatXY coordinate = null;
+            for (int i = 0; i < way.wayNodesLat.length; i++)
+            {
+                if (way.wayNodesId[i] != 0)
+                {
+                    MiniNode node = this.nodes.get(way.wayNodesId[i]);
+                    coordinate = this.coordinateTransform.floatTransform(node.lon, node.lat);
+                }
+                else
+                {
+                    coordinate = this.coordinateTransform.floatTransform(way.wayNodesLon[i], way.wayNodesLat[i]);
+                }
+                if (!started)
+                {
+                    first = coordinate;
+                    started = true;
+                }
+                ring.add(coordinate);
+            }
+
+            // Sometimes rings are made from partial ways that still have to be stitched together
+            if (!first.equals(coordinate))
+            {
+                partials.add(ring);
+                continue;
+            }
+
+            Path2D path = makePath(first, ring, outer);
+            rings.add(path);
+        }
+        if (!partials.isEmpty())
+            stitch(partials, outer, rings);
+        return rings;
+    }
+
+    /**
+     * Test whether the ring is clockwise or anticlockwise.
+     * @param ring list of points
+     * @return clockwise or not
+     */
+    protected boolean isClockwise(final List<FloatXY> ring)
+    {
+        double sum = 0;
+        for (int i = 0; i < ring.size() - 1; i++)
+        {
+            FloatXY p1 = ring.get(i);
+            FloatXY p2 = ring.get(i + 1);
+            sum += (p2.x() - p1.x()) * (p2.y() + p1.y());
+        }
+        return sum > 0;
+    }
+
+    /**
+     * Make a path from a ring of coordinates.
+     * @param first the first point
+     * @param ring the list of points
+     * @param outer outer ring or inner ring
+     * @return the path constructed from the points
+     */
+    protected Path2D makePath(final FloatXY first, final List<FloatXY> ring, final boolean outer)
+    {
+        // Outer rings have to be clockwise; inner rings have to be anti-clockwise
+        if (outer)
+        {
+            if (!isClockwise(ring))
+                Collections.reverse(ring);
+        }
+        else
+        {
+            if (isClockwise(ring))
+                Collections.reverse(ring);
+        }
+
+        Path2D path = new Path2D.Float();
+        path.moveTo(first.x(), first.y());
+        boolean started = false;
+        for (var c : ring)
+        {
+            if (!started)
+            {
+                path.moveTo(c.x(), c.y());
+                started = true;
+            }
+            else
+            {
+                path.lineTo(c.x(), c.y());
+            }
+        }
+        path.closePath();
+        return path;
+    }
+
+    /**
+     * Stitch partial rings together into rings if possible.
+     * @param partials partial rings, i.e. the ways that make up one or more rings
+     * @param outer outer or inner ring
+     * @param rings the ring list to which stitched rings need to be added
+     */
+    protected void stitch(final List<List<FloatXY>> partials, final boolean outer, final List<Path2D> rings)
+    {
+        boolean changed;
+        do
+        {
+            changed = false;
+
+            outerLoop: for (int i = 0; i < partials.size(); i++)
+            {
+                List<FloatXY> p1 = partials.get(i);
+
+                for (int j = 0; j < partials.size(); j++)
+                {
+                    if (i == j)
+                        continue;
+
+                    List<FloatXY> p2 = partials.get(j);
+
+                    FloatXY p1Start = p1.get(0);
+                    FloatXY p1End = p1.get(p1.size() - 1);
+                    FloatXY p2Start = p2.get(0);
+                    FloatXY p2End = p2.get(p2.size() - 1);
+
+                    if (p1End.equals(p2Start))
+                    {
+                        // p1 ---> p2
+                        p1.addAll(p2.subList(1, p2.size()));
+                        partials.remove(j);
+                        changed = true;
+                        break outerLoop;
+                    }
+                    else if (p1End.equals(p2End))
+                    {
+                        // p1 ---> reversed(p2)
+                        Collections.reverse(p2);
+                        p1.addAll(p2.subList(1, p2.size()));
+                        partials.remove(j);
+                        changed = true;
+                        break outerLoop;
+                    }
+                    else if (p1Start.equals(p2End))
+                    {
+                        // p2 --> p1
+                        p2.addAll(p1.subList(1, p1.size()));
+                        partials.remove(i);
+                        changed = true;
+                        break outerLoop;
+                    }
+                    else if (p1Start.equals(p2Start))
+                    {
+                        // reversed(p1) --> p2
+                        Collections.reverse(p1);
+                        p1.addAll(p2.subList(1, p2.size()));
+                        partials.remove(j);
+                        changed = true;
+                        break outerLoop;
+                    }
+                }
+            }
+        }
+        while (changed);
+
+        // Convert closed rings to Path2D
+        for (var p : partials)
+        {
+            if (p.size() > 2 && p.get(0).equals(p.get(p.size() - 1)))
+            {
+                Path2D path = makePath(p.get(0), p, outer);
+                rings.add(path);
+            }
+        }
     }
 
     /**
@@ -256,5 +520,57 @@ public class OsmEntityProcessor
                 i++;
             }
         }
+
+        /** {@inheritDoc} */
+        @Override
+        public String toString()
+        {
+            return "MiniWay [id=" + this.id + ", feature=" + this.feature + ", wayNodesLat=" + Arrays.toString(this.wayNodesLat)
+                    + ", wayNodesLon=" + Arrays.toString(this.wayNodesLon) + "]";
+        }
+
     }
+
+    /**
+     * Store the minimum set of features of a Relation to reduce the memory footprint of the Relation storage during parsing.
+     * <br>
+     * <br>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
+     */
+    protected static class MiniRelation
+    {
+        /** the relation id. */
+        protected long id;
+
+        /** the feature that characterizes this relation. */
+        protected FeatureInterface feature;
+
+        /** the way ids of the outer ways. */
+        protected List<Long> outerWayIds;
+
+        /** the way ids of the inner ways. */
+        protected List<Long> innerWayIds;
+
+        /** the name. */
+        protected String name;
+
+        /**
+         * Create a MniniRelation.
+         * @param id the relation id
+         * @param feature the feature that characterizes this relation
+         * @param outerWayIds the way ids of the outer ways
+         * @param innerWayIds the way ids of the inner ways
+         * @param name the name of the relation for debugging
+         */
+        public MiniRelation(final long id, final FeatureInterface feature, final List<Long> outerWayIds,
+                final List<Long> innerWayIds, final String name)
+        {
+            this.id = id;
+            this.feature = feature;
+            this.outerWayIds = outerWayIds;
+            this.innerWayIds = innerWayIds;
+            this.name = name;
+        }
+    }
+
 }

@@ -130,6 +130,35 @@ public class OsmPbfReader
                 Way w = new Way(wayId, refs, tags);
                 processor.process(w);
             }
+
+            for (OSMPBF.Relation relation : group.getRelationsList())
+            {
+                long relationId = relation.getId();
+                Relation rel = new Relation(relationId);
+                long lastId = 0; // note that relation.getMemids(i) contains delta-encoded values, not absolute IDs.
+                for (int i = 0; i < relation.getMemidsCount(); i++)
+                {
+                    long delta = relation.getMemids(i);
+                    long ref = lastId + delta;
+                    lastId = ref;
+                    String role = stringTable.get(relation.getRolesSid(i)).toStringUtf8();
+                    Relation.Type type = switch (relation.getTypes(i))
+                    {
+                        case NODE -> Relation.Type.NODE;
+                        case WAY -> Relation.Type.WAY;
+                        case RELATION -> Relation.Type.RELATION;
+                    };
+                    Relation.Member member = new Relation.Member(type, ref, role);
+                    rel.addMember(member);
+                }
+                for (int i = 0; i < relation.getKeysCount(); i++)
+                {
+                    String k = stringTable.get(relation.getKeys(i)).toStringUtf8();
+                    String v = stringTable.get(relation.getVals(i)).toStringUtf8();
+                    rel.addTag(k, v);
+                }
+                processor.process(rel);
+            }
         }
     }
 }

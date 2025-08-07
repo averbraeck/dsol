@@ -106,6 +106,7 @@ public class OsmXmlReader
         boolean inWay = false;
         List<Long> ndRefs = new ArrayList<>();
         long wayId = 0;
+        Relation currentRelation = null;
         Map<String, String> tags = new HashMap<>();
 
         while (reader.hasNext())
@@ -122,16 +123,39 @@ public class OsmXmlReader
                     tags.clear();
                     wayId = Long.parseLong(reader.getAttributeValue(null, "id"));
                 }
+
                 else if (inWay && name.equals("nd"))
                 {
                     long ref = Long.parseLong(reader.getAttributeValue(null, "ref"));
                     ndRefs.add(ref);
                 }
+
                 else if (inWay && name.equals("tag"))
                 {
                     String k = reader.getAttributeValue(null, "k");
                     String v = reader.getAttributeValue(null, "v");
                     tags.put(k, v);
+                }
+
+                else if (name.equals("relation"))
+                {
+                    long id = Long.parseLong(reader.getAttributeValue(null, "id"));
+                    currentRelation = new Relation(id);
+                }
+
+                else if (name.equals("member") && currentRelation != null)
+                {
+                    long ref = Long.parseLong(reader.getAttributeValue(null, "ref"));
+                    String role = reader.getAttributeValue(null, "role");
+                    String typeStr = reader.getAttributeValue(null, "type");
+                    Relation.Type type = Relation.Type.valueOf(typeStr.toUpperCase());
+                    Relation.Member member = new Relation.Member(type, ref, role);
+                    currentRelation.addMember(member);
+                }
+
+                else if (name.equals("tag") && currentRelation != null)
+                {
+                    currentRelation.addTag(reader.getAttributeValue(null, "k"), reader.getAttributeValue(null, "v"));
                 }
             }
 
@@ -140,6 +164,12 @@ public class OsmXmlReader
                 inWay = false;
                 Way w = new Way(wayId, ndRefs, tags);
                 processor.process(w);
+            }
+
+            if (event == XMLStreamConstants.END_ELEMENT && reader.getLocalName().equals("relation"))
+            {
+                processor.process(currentRelation);
+                currentRelation = null;
             }
         }
     }

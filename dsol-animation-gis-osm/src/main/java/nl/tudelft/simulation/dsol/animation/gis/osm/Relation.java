@@ -17,7 +17,7 @@ import java.util.Map;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class Relation
+public class Relation implements OsmEntity
 {
     /** The type of member of the Relation. */
     public static enum Type
