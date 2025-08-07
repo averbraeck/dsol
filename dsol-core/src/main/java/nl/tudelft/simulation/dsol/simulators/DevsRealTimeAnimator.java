@@ -60,7 +60,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     private Boolean animation = true;
 
     /** Synchronization object. */
-    private Object sync = new Object();
+    private transient Object sync = new Object();
 
     /** the current animation thread; null if none. */
     private AnimationThread animationThread = null;
