@@ -74,6 +74,7 @@ public class OsmYamlSwingApplication extends DsolAnimationApplication
         DsolAnimationGisTab animationTab = new DsolAnimationGisTab(mapBounds, simulator);
         animationTab.getAnimationPanel().setRenderableScale(
                 new RenderableScale(Math.cos(Math.toRadians(mapBounds.midPoint().getY())), 1.0 / 111319.24));
+        animationTab.getAnimationPanel().setShowGrid(false);
         animationTab.addAllToggleGISButtonText("MAP LAYERS", model.getOsmMap(), "hide or show this GIS layer");
         new OsmYamlSwingApplication("OSMYamlSwingApplication", panel, animationTab);
     }

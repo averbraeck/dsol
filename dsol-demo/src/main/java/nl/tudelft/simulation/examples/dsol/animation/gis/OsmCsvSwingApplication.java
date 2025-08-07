@@ -74,6 +74,7 @@ public class OsmCsvSwingApplication extends DsolAnimationApplication
         DsolAnimationGisTab animationTab = new DsolAnimationGisTab(mapBounds, simulator);
         animationTab.getAnimationPanel().setRenderableScale(
                 new RenderableScale(Math.cos(Math.toRadians(mapBounds.midPoint().getY())), 1.0 / 111319.24));
+        animationTab.getAnimationPanel().setShowGrid(false);
         animationTab.addAllToggleGISButtonText("MAP LAYERS", model.getOsmMap(), "hide or show this GIS layer");
         new OsmCsvSwingApplication("OSMCsvSwingApplication", panel, animationTab);
     }
@@ -101,7 +102,7 @@ public class OsmCsvSwingApplication extends DsolAnimationApplication
         {
             URL csvUrl = URLResource.getResource("/resources/osm/tudelft.csv");
             System.out.println("GIS definitions file: " + csvUrl.toString());
-            URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.gz");
+            URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.pbf");
             System.out.println("GIS data file: " + osmUrl.toString());
             try
             {
