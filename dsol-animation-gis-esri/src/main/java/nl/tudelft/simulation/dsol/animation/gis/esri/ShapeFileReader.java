@@ -15,7 +15,6 @@ import nl.tudelft.simulation.dsol.animation.gis.DataSourceInterface;
 import nl.tudelft.simulation.dsol.animation.gis.DoubleXY;
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
-import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisObject;
 import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
 import nl.tudelft.simulation.dsol.animation.gis.SerializableRectangle2d;
@@ -51,9 +50,6 @@ public class ShapeFileReader implements DataSourceInterface
 
     /** the URL for the dbase-III format file with texts to be read. */
     private URL dbfFile = null;
-
-    /** the type of shape we are working on. */
-    private int currentType = GisMapInterface.POLYGON;
 
     /** our DBF reader. */
     private DbfReader dbfReader;
@@ -383,7 +379,6 @@ public class ShapeFileReader implements DataSourceInterface
      */
     private synchronized Object readPoint(final ObjectEndianInputStream input) throws IOException
     {
-        this.currentType = GisMapInterface.POINT;
         input.setEndianness(Endianness.LITTLE_ENDIAN);
         DoubleXY point = this.coordinateTransform.doubleTransform(input.readDouble(), input.readDouble());
         return new Point2D.Double(point.x(), point.y());
@@ -426,7 +421,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readPolyLine(final ObjectEndianInputStream input, final boolean skipBoundingBox)
             throws IOException
     {
-        this.currentType = GisMapInterface.LINE;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -443,16 +437,21 @@ public class ShapeFileReader implements DataSourceInterface
         }
         partBegin[partBegin.length - 1] = numPoints;
 
-        SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
+        SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO);
         for (int i = 0; i < numParts; i++)
         {
+            Path2D path = new Path2D.Float();
             FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf.x(), mf.y());
+            path.moveTo(mf.x(), mf.y());
+            FloatXY lf = null;
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf.x(), lf.y());
+                lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                path.lineTo(lf.x(), lf.y());
             }
+            if (mf.equals(lf))
+                path.closePath();
+            result.append(path, false);
         }
         return result;
     }
@@ -467,7 +466,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readPolygon(final ObjectEndianInputStream input, final boolean skipBoundingBox)
             throws IOException
     {
-        this.currentType = GisMapInterface.POLYGON;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -483,16 +481,21 @@ public class ShapeFileReader implements DataSourceInterface
         }
         partBegin[partBegin.length - 1] = numPoints;
 
-        SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO, numPoints);
+        SerializablePath result = new SerializablePath(Path2D.WIND_NON_ZERO);
         for (int i = 0; i < numParts; i++)
         {
+            Path2D path = new Path2D.Float();
             FloatXY mf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-            result.moveTo(mf.x(), mf.y());
+            path.moveTo(mf.x(), mf.y());
+            FloatXY lf = null;
             for (int ii = (partBegin[i] + 1); ii < partBegin[i + 1]; ii++)
             {
-                FloatXY lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
-                result.lineTo(lf.x(), lf.y());
+                lf = this.coordinateTransform.floatTransform(input.readDouble(), input.readDouble());
+                path.lineTo(lf.x(), lf.y());
             }
+            if (mf.equals(lf))
+                path.closePath();
+            result.append(path, false);
         }
 
         return result;
@@ -508,7 +511,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readMultiPoint(final ObjectEndianInputStream input, final boolean skipBoundingBox)
             throws IOException
     {
-        this.currentType = GisMapInterface.POINT;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -532,7 +534,6 @@ public class ShapeFileReader implements DataSourceInterface
      */
     private synchronized Object readPointZ(final ObjectEndianInputStream input, final int contentLength) throws IOException
     {
-        this.currentType = GisMapInterface.POINT;
         Object point = this.readPoint(input);
         input.skipBytes((contentLength * 2) - 20);
 
@@ -550,7 +551,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readPolyLineZ(final ObjectEndianInputStream input, final int contentLength,
             final boolean skipBoundingBox) throws IOException
     {
-        this.currentType = GisMapInterface.LINE;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -597,7 +597,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readPolygonZ(final ObjectEndianInputStream input, final int contentLength,
             final boolean skipBoundingBox) throws IOException
     {
-        this.currentType = GisMapInterface.POLYGON;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -643,7 +642,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readMultiPointZ(final ObjectEndianInputStream input, final int contentLength,
             final boolean skipBoundingBox) throws IOException
     {
-        this.currentType = GisMapInterface.POINT;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -670,7 +668,6 @@ public class ShapeFileReader implements DataSourceInterface
      */
     private synchronized Object readPointM(final ObjectEndianInputStream input, final int contentLength) throws IOException
     {
-        this.currentType = GisMapInterface.POINT;
         Object point = this.readPoint(input);
         input.skipBytes((contentLength * 2) - 20);
         return point;
@@ -687,7 +684,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readPolyLineM(final ObjectEndianInputStream input, final int contentLength,
             final boolean skipBoundingBox) throws IOException
     {
-        this.currentType = GisMapInterface.LINE;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -732,7 +728,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readPolygonM(final ObjectEndianInputStream input, final int contentLength,
             final boolean skipBoundingBox) throws IOException
     {
-        this.currentType = GisMapInterface.POLYGON;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
@@ -778,7 +773,6 @@ public class ShapeFileReader implements DataSourceInterface
     private synchronized Object readMultiPointM(final ObjectEndianInputStream input, final int contentLength,
             final boolean skipBoundingBox) throws IOException
     {
-        this.currentType = GisMapInterface.POINT;
         if (skipBoundingBox)
         {
             input.skipBytes(32);
