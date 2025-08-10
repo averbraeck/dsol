@@ -26,6 +26,9 @@ public class Layer implements LayerInterface
     /** the name of the layer. */
     private String name;
 
+    /** zIndex for all the features in the layer. */
+    private double zIndex = 0.0;
+    
     /** whether to display the layer. */
     private boolean display = true;
 
@@ -87,6 +90,18 @@ public class Layer implements LayerInterface
     public void setTransform(final boolean transform)
     {
         this.transform = transform;
+    }
+
+    @Override
+    public double getZIndex()
+    {
+        return this.zIndex;
+    }
+
+    @Override
+    public void setZIndex(final double zIndex)
+    {
+        this.zIndex = zIndex;
     }
 
 }

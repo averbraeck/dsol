@@ -68,4 +68,19 @@ public interface LayerInterface extends Serializable
      * @param transform the status for the transformation: should the transform be used for this layer or not?
      */
     void setTransform(boolean transform);
+
+    /**
+     * Set the z-index of an entire layer. The z-index indicates the drawing order, from low to high. Any system can be used to
+     * indicate drawing order.
+     * @param zIndex the z-index of this layer
+     */
+    void setZIndex(double zIndex);
+
+    /**
+     * Return the z-index of the entire layer. The z-index indicates the drawing order, from low to high. Any system can be used
+     * to indicate drawing order.
+     * @return the z-index of this layer
+     */
+    double getZIndex();
+
 }
