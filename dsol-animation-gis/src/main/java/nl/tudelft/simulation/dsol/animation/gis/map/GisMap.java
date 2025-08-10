@@ -105,7 +105,13 @@ public class GisMap implements GisMapInterface
         this.visibleLayers.add(layer);
         for (var feature : layer.getFeatures())
         {
-            this.sortedFeatureMap.getOrDefault(feature.getZIndex(), new ArrayList<>()).add(feature);
+            var featureList = this.sortedFeatureMap.get(feature.getZIndex());
+            if (featureList == null)
+            {
+                featureList = new ArrayList<>();
+                this.sortedFeatureMap.put(feature.getZIndex(), featureList);
+            }
+            featureList.add(feature);
             this.visibleFeatures.add(feature);
         }
         this.same = false;
@@ -131,7 +137,13 @@ public class GisMap implements GisMapInterface
         this.visibleLayers.add(layer);
         for (var feature : layer.getFeatures())
         {
-            this.sortedFeatureMap.getOrDefault(feature.getZIndex(), new ArrayList<>()).add(feature);
+            var featureList = this.sortedFeatureMap.get(feature.getZIndex());
+            if (featureList == null)
+            {
+                featureList = new ArrayList<>();
+                this.sortedFeatureMap.put(feature.getZIndex(), featureList);
+            }
+            featureList.add(feature);
             this.visibleFeatures.add(feature);
         }
         this.same = false;
@@ -162,6 +174,10 @@ public class GisMap implements GisMapInterface
     public void showLayer(final LayerInterface layer)
     {
         this.visibleLayers.add(layer);
+        for (var feature : layer.getFeatures())
+        {
+            this.visibleFeatures.add(feature);
+        }
         this.same = false;
     }
 
@@ -172,10 +188,6 @@ public class GisMap implements GisMapInterface
         {
             var layer = this.layerMap.get(layerName);
             showLayer(layer);
-            for (var feature : layer.getFeatures())
-            {
-                this.visibleFeatures.add(feature);
-            }
         }
         this.same = false;
     }
@@ -221,15 +233,14 @@ public class GisMap implements GisMapInterface
         // we set the rendering hints
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        // We loop over the layers
-        for (Iterator<LayerInterface> i = this.visibleLayers.iterator(); i.hasNext();)
+        // We loop over the features and see if they have to be drawn
+        for (var featureList : this.sortedFeatureMap.values())
         {
-            Layer layer = (Layer) i.next();
-            try
+            for (var feature : featureList)
             {
-                if (layer.isDisplay()) // TODO: && layer.getMaxScale() < scale && layer.getMinScale() > scale)
+                if (this.visibleFeatures.contains(feature) && feature.isDisplay()) // TODO: scale
                 {
-                    for (FeatureInterface feature : layer.getFeatures())
+                    try
                     {
                         List<GisObject> shapes = feature.getShapes(this.extent);
                         SerializablePath shape = null;
@@ -237,7 +248,7 @@ public class GisMap implements GisMapInterface
                         {
                             GisObject gisObject = shapeIterator.next();
                             shape = (SerializablePath) gisObject.getShape();
-                            if (layer.isTransform())
+                            if (feature.isTransform())
                             {
                                 shape.transform(transform);
                             }
@@ -255,18 +266,18 @@ public class GisMap implements GisMapInterface
                                 if (feature.getLineWidthPx() > 1)
                                     graphics.setStroke(new BasicStroke());
                             }
-                            if (layer.isTransform())
+                            if (feature.isTransform())
                             {
                                 shape.transform(antiTransform);
                             }
                         }
                     }
+                    catch (Exception exception)
+                    {
+                        CategoryLogger.always().error(exception);
+                        throw new DsolGisException(exception);
+                    }
                 }
-            }
-            catch (Exception exception)
-            {
-                CategoryLogger.always().error(exception);
-                throw new DsolGisException(exception.getMessage());
             }
         }
         return graphics;
