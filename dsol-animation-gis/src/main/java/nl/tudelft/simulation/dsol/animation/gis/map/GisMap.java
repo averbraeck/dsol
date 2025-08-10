@@ -252,10 +252,22 @@ public class GisMap implements GisMapInterface
             for (var feature : featureList)
             {
                 if (this.visibleFeatures.contains(feature) && feature.isDisplay()
-                        && getMetersPerPixelY() >= feature.getScaleThresholdMetersPerPx())
+                        && getMetersPerPixelY() < feature.getScaleThresholdMetersPerPx())
                 {
                     try
                     {
+                        if (feature.getOutlineColor() != null)
+                        {
+                            if (!Double.isNaN(feature.getLineWidthM()))
+                            {
+                                graphics.setStroke(new BasicStroke(
+                                        Math.max(1, (int) (feature.getLineWidthM() / getMetersPerPixelY()))));
+                            }
+                            else if (feature.getLineWidthPx() > 1)
+                                graphics.setStroke(new BasicStroke(feature.getLineWidthPx()));
+                            else
+                                graphics.setStroke(new BasicStroke(1));
+                        }
                         List<GisObject> shapes = feature.getShapes(this.extent);
                         SerializablePath shape = null;
                         for (Iterator<GisObject> shapeIterator = shapes.iterator(); shapeIterator.hasNext();)
@@ -273,18 +285,15 @@ public class GisMap implements GisMapInterface
                             }
                             if (feature.getOutlineColor() != null)
                             {
-                                if (feature.getLineWidthPx() > 1)
-                                    graphics.setStroke(new BasicStroke(feature.getLineWidthPx()));
                                 graphics.setColor(feature.getOutlineColor());
                                 graphics.draw(shape);
-                                if (feature.getLineWidthPx() > 1)
-                                    graphics.setStroke(new BasicStroke());
                             }
                             if (feature.isTransform())
                             {
                                 shape.transform(antiTransform);
                             }
                         }
+                        graphics.setStroke(new BasicStroke(1));
                     }
                     catch (Exception exception)
                     {
