@@ -11,6 +11,7 @@ import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisObject;
+import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
 import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
 import nl.tudelft.simulation.language.d2.Shape;
 
@@ -30,6 +31,9 @@ public class Feature implements FeatureInterface
     /** */
     private static final long serialVersionUID = 20210201L;
 
+    /** the layer to which this feature belongs. */
+    private final LayerInterface layer;
+
     /** the key that defines a feature in a layer, can be "*" if no features are defined. */
     private String key = "*";
 
@@ -38,10 +42,10 @@ public class Feature implements FeatureInterface
      * have the correct key have to be drawn.
      */
     private String value = "*";
-    
+
     /** the z-index of this feature. The z-index indicates the drawing order, from low to high. */
     private double zIndex = 0.0;
-    
+
     /** the list of shapes that have been retrieved for this feature. */
     private List<GisObject> shapes = new ArrayList<>();
 
@@ -56,6 +60,16 @@ public class Feature implements FeatureInterface
 
     /** whether the shapes have been read or not. */
     private boolean initialized = false;
+
+    /**
+     * Create a feature as part of a layer.
+     * @param layer the layer to which this feature beongs
+     */
+    public Feature(final LayerInterface layer)
+    {
+        super();
+        this.layer = layer;
+    }
 
     @Override
     public final String getKey()
@@ -73,6 +87,12 @@ public class Feature implements FeatureInterface
     public final String getValue()
     {
         return this.value;
+    }
+
+    @Override
+    public LayerInterface getLayer()
+    {
+        return this.layer;
     }
 
     @Override
