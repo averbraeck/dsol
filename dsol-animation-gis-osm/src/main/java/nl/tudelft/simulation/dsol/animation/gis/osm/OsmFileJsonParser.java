@@ -133,7 +133,7 @@ public final class OsmFileJsonParser
                     layerNames.add(layerName);
                 }
 
-                Feature feature = new Feature();
+                Feature feature = new Feature(layer);
                 feature.setKey(key);
                 feature.setValue(value);
                 feature.setOutlineColor(outlineColor);
