@@ -10,8 +10,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.immutablecollections.ImmutableArrayList;
@@ -52,14 +56,20 @@ public class GisMap implements GisMapInterface
     /** the extent of the map. */
     private Bounds2d extent;
 
-    /** the map of layer names to layers. */
+    /** the complete map of layer names to layers. */
     private Map<String, LayerInterface> layerMap = new LinkedHashMap<>();
 
-    /** the total list of layers of the map. */
-    private List<LayerInterface> allLayers = new ArrayList<>();
+    /** the complete list of layer names of the map in the order they are displayed. */
+    private List<String> layerNames = new ArrayList<>();
 
-    /** the visible layers of the map. */
-    private List<LayerInterface> visibleLayers = new ArrayList<>();
+    /** the set of visible layers of the map. */
+    private Set<LayerInterface> visibleLayers = new LinkedHashSet<>();
+
+    /** The z-sorted map of all features. */
+    private SortedMap<Double, List<FeatureInterface>> sortedFeatureMap = new TreeMap<>();
+
+    /** the set of visible features to draw. */
+    private Set<FeatureInterface> visibleFeatures = new LinkedHashSet<>();
 
     /** same set to false after layer change. */
     private boolean same = false;
@@ -90,38 +100,40 @@ public class GisMap implements GisMapInterface
     @Override
     public void addLayer(final LayerInterface layer)
     {
-        this.visibleLayers.add(layer);
-        this.allLayers.add(layer);
         this.layerMap.put(layer.getName(), layer);
+        this.layerNames.add(layer.getName());
+        this.visibleLayers.add(layer);
+        for (var feature : layer.getFeatures())
+        {
+            this.sortedFeatureMap.getOrDefault(feature.getZIndex(), new ArrayList<>()).add(feature);
+            this.visibleFeatures.add(feature);
+        }
         this.same = false;
     }
 
     @Override
     public void setLayers(final List<LayerInterface> layers)
     {
-        this.allLayers = new ArrayList<>(layers);
-        this.visibleLayers = new ArrayList<>(layers);
         this.layerMap.clear();
-        for (LayerInterface layer : layers)
-        {
-            this.layerMap.put(layer.getName(), layer);
-        }
-        this.same = false;
+        this.layerNames.clear();
+        this.visibleLayers.clear();
+        this.sortedFeatureMap.clear();
+        this.visibleFeatures.clear();
+        for (var layer : layers)
+            addLayer(layer);
     }
 
     @Override
     public void setLayer(final int index, final LayerInterface layer)
     {
-        this.allLayers.set(index, layer);
-        if (this.allLayers.size() == this.visibleLayers.size())
-        {
-            this.visibleLayers.add(index, layer);
-        }
-        else
-        {
-            this.visibleLayers.add(layer);
-        }
         this.layerMap.put(layer.getName(), layer);
+        this.layerNames.set(index, layer.getName());
+        this.visibleLayers.add(layer);
+        for (var feature : layer.getFeatures())
+        {
+            this.sortedFeatureMap.getOrDefault(feature.getZIndex(), new ArrayList<>()).add(feature);
+            this.visibleFeatures.add(feature);
+        }
         this.same = false;
     }
 
@@ -129,6 +141,10 @@ public class GisMap implements GisMapInterface
     public void hideLayer(final LayerInterface layer)
     {
         this.visibleLayers.remove(layer);
+        for (var feature : layer.getFeatures())
+        {
+            this.visibleFeatures.remove(feature);
+        }
         this.same = false;
     }
 
@@ -154,7 +170,12 @@ public class GisMap implements GisMapInterface
     {
         if (this.layerMap.keySet().contains(layerName))
         {
-            showLayer(this.layerMap.get(layerName));
+            var layer = this.layerMap.get(layerName);
+            showLayer(layer);
+            for (var feature : layer.getFeatures())
+            {
+                this.visibleFeatures.add(feature);
+            }
         }
         this.same = false;
     }
@@ -174,14 +195,14 @@ public class GisMap implements GisMapInterface
         if (this.drawBackground)
         {
             // We fill the background.
-            graphics.setColor(this.getImage().getBackgroundColor());
-            graphics.fillRect(0, 0, (int) this.getImage().getSize().getWidth(), (int) this.getImage().getSize().getHeight());
+            graphics.setColor(getImage().getBackgroundColor());
+            graphics.fillRect(0, 0, (int) getImage().getSize().getWidth(), (int) getImage().getSize().getHeight());
         }
 
         // We compute the transform of the map
         AffineTransform transform = new AffineTransform();
-        transform.scale(this.getImage().getSize().getWidth() / this.extent.getDeltaX(),
-                -this.getImage().getSize().getHeight() / this.extent.getDeltaY());
+        transform.scale(getImage().getSize().getWidth() / this.extent.getDeltaX(),
+                -getImage().getSize().getHeight() / this.extent.getDeltaY());
         transform.translate(-this.extent.getMinX(), -this.extent.getMinY() - this.extent.getDeltaY());
         AffineTransform antiTransform = null;
         try
@@ -194,7 +215,7 @@ public class GisMap implements GisMapInterface
         }
 
         // we cache the scale
-        double scale = this.getScale();
+        double scale = getScale();
         // XXX: define how we use this -- System.out.println("scale = " + scale);
 
         // we set the rendering hints
@@ -215,22 +236,12 @@ public class GisMap implements GisMapInterface
                         for (Iterator<GisObject> shapeIterator = shapes.iterator(); shapeIterator.hasNext();)
                         {
                             GisObject gisObject = shapeIterator.next();
-                            // if (feature.getDataSource().getType() == POINT)
-                            // {
-                            // shape = new SerializablePath();
-                            // Point2D point = (Point2D) gisObject.getShape();
-                            // shape.moveTo((float) point.getX(), (float) point.getY());
-                            // // TODO: points are not drawn -- we have to do this differently
-                            // }
-                            // else
-                            // {
                             shape = (SerializablePath) gisObject.getShape();
-                            // }
                             if (layer.isTransform())
                             {
                                 shape.transform(transform);
                             }
-                            if (/* feature.getDataSource().getType() == POLYGON && */ feature.getFillColor() != null)
+                            if (feature.getFillColor() != null)
                             {
                                 graphics.setColor(feature.getFillColor());
                                 graphics.fill(shape);
@@ -276,7 +287,7 @@ public class GisMap implements GisMapInterface
     @Override
     public ImmutableList<LayerInterface> getAllLayers()
     {
-        return new ImmutableArrayList<>(this.allLayers);
+        return new ImmutableArrayList<>(this.layerMap.values());
     }
 
     @Override
@@ -300,7 +311,7 @@ public class GisMap implements GisMapInterface
     @Override
     public double getScale()
     {
-        return (this.getImage().getSize().getWidth() / (2.54 * RESOLUTION)) * this.extent.getDeltaX();
+        return (getImage().getSize().getWidth() / (2.54 * RESOLUTION)) * this.extent.getDeltaX();
     }
 
     /**
@@ -349,8 +360,8 @@ public class GisMap implements GisMapInterface
     {
         double correcteddZoomFactor = (zoomFactor == 0) ? 1 : zoomFactor;
 
-        double maxX = (getUnitImageRatio() * this.getImage().getSize().getWidth()) + this.extent.getMinX();
-        double maxY = (getUnitImageRatio() * this.getImage().getSize().getHeight()) + this.extent.getMinY();
+        double maxX = (getUnitImageRatio() * getImage().getSize().getWidth()) + this.extent.getMinX();
+        double maxY = (getUnitImageRatio() * getImage().getSize().getHeight()) + this.extent.getMinY();
 
         double centerX = (maxX - this.extent.getMinX()) / 2 + this.extent.getMinX();
         double centerY = (maxY - this.extent.getMinY()) / 2 + this.extent.getMinY();
@@ -367,15 +378,15 @@ public class GisMap implements GisMapInterface
     {
         double correcteddZoomFactor = (zoomFactor == 0) ? 1 : zoomFactor;
 
-        double maxX = (getUnitImageRatio() * this.getImage().getSize().getWidth()) + this.extent.getMinX();
-        double maxY = (getUnitImageRatio() * this.getImage().getSize().getHeight()) + this.extent.getMinY();
+        double maxX = (getUnitImageRatio() * getImage().getSize().getWidth()) + this.extent.getMinX();
+        double maxY = (getUnitImageRatio() * getImage().getSize().getHeight()) + this.extent.getMinY();
 
-        double centerX = (pixelPosition.getX() / this.getImage().getSize().getWidth()) * (maxX - this.extent.getMinX())
+        double centerX = (pixelPosition.getX() / getImage().getSize().getWidth()) * (maxX - this.extent.getMinX())
                 + this.extent.getMinX();
-        double centerY = maxY - (pixelPosition.getY() / this.getImage().getSize().getHeight()) * (maxY - this.extent.getMinY());
+        double centerY = maxY - (pixelPosition.getY() / getImage().getSize().getHeight()) * (maxY - this.extent.getMinY());
 
         double width = (1.0 / correcteddZoomFactor) * (maxX - this.extent.getMinX());
-        double height = (1.0 / correcteddZoomFactor) * (maxY - this.getExtent().getMinY());
+        double height = (1.0 / correcteddZoomFactor) * (maxY - getExtent().getMinY());
 
         this.extent =
                 new Bounds2d(centerX - 0.5 * width, centerX + 0.5 * width, centerY - 0.5 * height, centerY + 0.5 * height);
@@ -385,20 +396,18 @@ public class GisMap implements GisMapInterface
     public void zoomRectangle(final SerializableRectangle2d rectangle)
     {
 
-        double maxX = (getUnitImageRatio() * this.getImage().getSize().getWidth()) + this.extent.getMinX();
-        double maxY = (getUnitImageRatio() * this.getImage().getSize().getHeight()) + this.extent.getMinY();
+        double maxX = (getUnitImageRatio() * getImage().getSize().getWidth()) + this.extent.getMinX();
+        double maxY = (getUnitImageRatio() * getImage().getSize().getHeight()) + this.extent.getMinY();
 
         double width = maxX - this.extent.getMinX();
         double height = maxY - this.extent.getMinY();
 
-        double minX = this.extent.getMinX() + (rectangle.getMinX() / this.getImage().getSize().getWidth()) * width;
+        double minX = this.extent.getMinX() + (rectangle.getMinX() / getImage().getSize().getWidth()) * width;
         double minY = this.extent.getMinY()
-                + ((this.getImage().getSize().getHeight() - rectangle.getMaxY()) / this.getImage().getSize().getHeight())
-                        * height;
+                + ((getImage().getSize().getHeight() - rectangle.getMaxY()) / getImage().getSize().getHeight()) * height;
 
-        maxX = minX + (rectangle.getWidth() / this.getImage().getSize().getWidth()) * width;
-        maxY = minY + ((this.getImage().getSize().getHeight() - rectangle.getHeight()) / this.getImage().getSize().getHeight())
-                * height;
+        maxX = minX + (rectangle.getWidth() / getImage().getSize().getWidth()) * width;
+        maxY = minY + ((getImage().getSize().getHeight() - rectangle.getHeight()) / getImage().getSize().getHeight()) * height;
         this.extent = new Bounds2d(minX, maxX, minY, maxY);
     }
 
