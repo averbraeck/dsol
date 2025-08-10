@@ -98,7 +98,8 @@ public final class EsriFileCsvParser
                 NamedCsvReader.builder().fieldSeparator(fieldSeparator).quoteCharacter(quoteCharacter).build(reader);
         Set<String> header = csvReader.getHeader();
         if (!header.contains("layer") || !header.contains("shapeFile") || !header.contains("outlineColor")
-                || !header.contains("fillColor") || !header.contains("display") || !header.contains("transform"))
+                || !header.contains("fillColor") || !header.contains("display") || !header.contains("transform")
+                || !header.contains("zIndex"))
         {
             throw new IOException("ESRI GIS map csv-file header row did not contain all column headers\n" + header.toString());
         }
@@ -112,6 +113,7 @@ public final class EsriFileCsvParser
             String shapeFile = row.getField("shapeFile");
             Color outlineColor = ColorParser.parse(row.getField("outlineColor"));
             Color fillColor = ColorParser.parse(row.getField("fillColor"));
+            double zIndex = Double.parseDouble(row.getField("zIndex"));
             boolean display = row.getField("display").toLowerCase().startsWith("t");
             boolean transform = row.getField("transform").toLowerCase().startsWith("t");
 
@@ -130,6 +132,8 @@ public final class EsriFileCsvParser
             feature.setFillColor(fillColor);
             layer.setDisplay(display);
             layer.setTransform(transform);
+            layer.setZIndex(zIndex);
+            feature.setZIndex(zIndex);
 
             ShapeFileReader dataSource = new ShapeFileReader(resource, coordinateTransform, layer.getFeatures());
             dataSource.populateShapes();

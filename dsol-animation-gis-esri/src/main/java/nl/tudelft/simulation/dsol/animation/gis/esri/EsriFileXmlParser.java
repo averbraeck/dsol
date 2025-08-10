@@ -284,6 +284,11 @@ public final class EsriFileXmlParser
                     layer.setMaxScale(nodeInt(layerNode, "maxscale"));
                 }
                 */
+                if (nodeTagExists(layerNode, "zIndex"))
+                {
+                    layer.setZIndex(nodeDouble(layerNode, "zIndex"));
+                    feature.setZIndex(layer.getZIndex());
+                }
                 if (nodeTagExists(layerNode, "fillColor"))
                 {
                     feature.setFillColor(parseColor(nodeTagItem(layerNode, "fillColor", 0)));
