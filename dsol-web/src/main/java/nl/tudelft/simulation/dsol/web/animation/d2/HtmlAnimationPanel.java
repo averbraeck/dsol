@@ -130,7 +130,9 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
         for (Renderable2dInterface<? extends Locatable> element : this.elementList)
         {
             if (isShowElement(element))
-            { element.paintComponent(g2, this.getExtent(), this.getSize(), getRenderableScale(), this); }
+            {
+                element.paintComponent(g2, this.getExtent(), this.getSize(), getRenderableScale(), this);
+            }
         }
 
         // draw drag line if enabled.
@@ -174,7 +176,9 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
                     if (lc.isAssignableFrom(locatableClass))
                     {
                         if (!this.visibilityMap.get(lc))
-                        { show = false; }
+                        {
+                            show = false;
+                        }
                     }
                 }
                 // add to the right cache
@@ -348,7 +352,9 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
     public void toggleClass(final Class<? extends Locatable> locatableClass)
     {
         if (!this.visibilityMap.containsKey(locatableClass))
-        { showClass(locatableClass); }
+        {
+            showClass(locatableClass);
+        }
         this.visibilityMap.put(locatableClass, !this.visibilityMap.get(locatableClass));
         this.shownClasses.clear();
         this.hiddenClasses.clear();
@@ -453,16 +459,9 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
     {
         addToggleText(" ");
         addToggleText(header);
-        try
+        for (String layerName : gisMap.getMap().getLayerMap().keySet())
         {
-            for (String layerName : gisMap.getMap().getLayerMap().keySet())
-            {
-                addToggleGISButtonText(layerName, layerName, gisMap, toolTipText);
-            }
-        }
-        catch (RemoteException exception)
-        {
-            exception.printStackTrace();
+            addToggleGISButtonText(layerName, layerName, gisMap, toolTipText);
         }
     }
 
@@ -491,15 +490,8 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
         GisMapInterface gisMap = this.toggleGISMap.get(layerName);
         if (gisMap != null)
         {
-            try
-            {
-                gisMap.showLayer(layerName);
-                this.toggleGISButtonMap.get(layerName).setVisible(true);
-            }
-            catch (RemoteException exception)
-            {
-                exception.printStackTrace();
-            }
+            gisMap.showLayer(layerName);
+            this.toggleGISButtonMap.get(layerName).setVisible(true);
         }
     }
 
@@ -512,15 +504,8 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
         GisMapInterface gisMap = this.toggleGISMap.get(layerName);
         if (gisMap != null)
         {
-            try
-            {
-                gisMap.hideLayer(layerName);
-                this.toggleGISButtonMap.get(layerName).setVisible(false);
-            }
-            catch (RemoteException exception)
-            {
-                exception.printStackTrace();
-            }
+            gisMap.hideLayer(layerName);
+            this.toggleGISButtonMap.get(layerName).setVisible(false);
         }
     }
 
@@ -533,22 +518,15 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
         GisMapInterface gisMap = this.toggleGISMap.get(layerName);
         if (gisMap != null)
         {
-            try
+            if (gisMap.getVisibleLayers().contains(gisMap.getLayerMap().get(layerName)))
             {
-                if (gisMap.getVisibleLayers().contains(gisMap.getLayerMap().get(layerName)))
-                {
-                    gisMap.hideLayer(layerName);
-                    this.toggleGISButtonMap.get(layerName).setVisible(false);
-                }
-                else
-                {
-                    gisMap.showLayer(layerName);
-                    this.toggleGISButtonMap.get(layerName).setVisible(true);
-                }
+                gisMap.hideLayer(layerName);
+                this.toggleGISButtonMap.get(layerName).setVisible(false);
             }
-            catch (RemoteException exception)
+            else
             {
-                exception.printStackTrace();
+                gisMap.showLayer(layerName);
+                this.toggleGISButtonMap.get(layerName).setVisible(true);
             }
         }
     }

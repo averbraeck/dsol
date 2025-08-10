@@ -97,16 +97,9 @@ public class DsolAnimationGisTab extends DsolAnimationTab
     {
         addToggleText(" ");
         addToggleText(header);
-        try
+        for (String layerName : gisMap.getMap().getLayerMap().keySet())
         {
-            for (String layerName : gisMap.getMap().getLayerMap().keySet())
-            {
-                addToggleGISButtonText(layerName, layerName, gisMap, toolTipText);
-            }
-        }
-        catch (RemoteException exception)
-        {
-            exception.printStackTrace();
+            addToggleGISButtonText(layerName, layerName, gisMap, toolTipText);
         }
     }
 
@@ -148,16 +141,9 @@ public class DsolAnimationGisTab extends DsolAnimationTab
         GisMapInterface gisMap = this.toggleGISMap.get(layerName);
         if (gisMap != null)
         {
-            try
-            {
-                gisMap.showLayer(layerName);
-                this.toggleGISButtons.get(layerName).setSelected(true);
-                getAnimationPanel().repaint();
-            }
-            catch (RemoteException exception)
-            {
-                exception.printStackTrace();
-            }
+            gisMap.showLayer(layerName);
+            this.toggleGISButtons.get(layerName).setSelected(true);
+            getAnimationPanel().repaint();
         }
     }
 
@@ -170,16 +156,9 @@ public class DsolAnimationGisTab extends DsolAnimationTab
         GisMapInterface gisMap = this.toggleGISMap.get(layerName);
         if (gisMap != null)
         {
-            try
-            {
-                gisMap.hideLayer(layerName);
-                this.toggleGISButtons.get(layerName).setSelected(false);
-                getAnimationPanel().repaint();
-            }
-            catch (RemoteException exception)
-            {
-                exception.printStackTrace();
-            }
+            gisMap.hideLayer(layerName);
+            this.toggleGISButtons.get(layerName).setSelected(false);
+            getAnimationPanel().repaint();
         }
     }
 
@@ -192,24 +171,17 @@ public class DsolAnimationGisTab extends DsolAnimationTab
         GisMapInterface gisMap = this.toggleGISMap.get(layerName);
         if (gisMap != null)
         {
-            try
+            if (gisMap.getVisibleLayers().contains(gisMap.getLayerMap().get(layerName)))
             {
-                if (gisMap.getVisibleLayers().contains(gisMap.getLayerMap().get(layerName)))
-                {
-                    gisMap.hideLayer(layerName);
-                    this.toggleGISButtons.get(layerName).setSelected(false);
-                }
-                else
-                {
-                    gisMap.showLayer(layerName);
-                    this.toggleGISButtons.get(layerName).setSelected(true);
-                }
-                getAnimationPanel().repaint();
+                gisMap.hideLayer(layerName);
+                this.toggleGISButtons.get(layerName).setSelected(false);
             }
-            catch (RemoteException exception)
+            else
             {
-                exception.printStackTrace();
+                gisMap.showLayer(layerName);
+                this.toggleGISButtons.get(layerName).setSelected(true);
             }
+            getAnimationPanel().repaint();
         }
     }
 
