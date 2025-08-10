@@ -54,6 +54,12 @@ public interface FeatureInterface extends Serializable
     double getZIndex();
 
     /**
+     * Return the layer to which this feature belongs.
+     * @return the layer to which this feature belongs
+     */
+    LayerInterface getLayer();
+    
+    /**
      * Return whether the data has been initialized for this feature.
      * @return whether the data has been initialized for this feature
      */
@@ -135,5 +141,22 @@ public interface FeatureInterface extends Serializable
      * @param lineWidthPx the fixed line width of the outline in pixels
      */
     void setLineWidthPx(int lineWidthPx);
+
+    /** 
+     * Return whether the shapes in the layer need to be transformed or not.
+     * @return whether the shapes in the layer need to be transformed
+     */
+    default boolean isTransform()
+    {
+        return getLayer().isTransform();
+    }
+    /** 
+     * Return whether the shapes in the layer need to be displayed or not.
+     * @return whether the shapes in the layer need to be displayed
+     */
+    default boolean isDisplay()
+    {
+        return getLayer().isDisplay();
+    }
 
 }
