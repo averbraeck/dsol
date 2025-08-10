@@ -46,7 +46,7 @@ public class EsriParserTest implements Contextualized
         assertNotNull(url);
         GisMapInterface map = EsriFileXmlParser.parseMapFile(url);
         assertEquals("tudelft", map.getName());
-        assertEquals(MapUnits.DECIMAL_DEGREES, map.getUnits());
+        assertEquals(MapUnits.DECIMAL_DEGREES, map.getMapUnits());
 
         GisRenderable2d renderable = new EsriRenderable2d(this, map);
         assertNotNull(renderable);
