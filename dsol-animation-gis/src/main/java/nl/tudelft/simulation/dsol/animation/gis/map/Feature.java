@@ -58,6 +58,12 @@ public class Feature implements FeatureInterface
     /** the line width in px. */
     private int lineWidthPx = 1;
 
+    /** the line width in meters. */
+    private double lineWidthM = Double.NaN;
+    
+    /** the scale threshold in m/px above which the feature should not be drawn. */
+    private double scaleThresholdMetersPerPx = 0.0;
+
     /** whether the shapes have been read or not. */
     private boolean initialized = false;
 
@@ -208,7 +214,30 @@ public class Feature implements FeatureInterface
         this.lineWidthPx = lineWidthPx;
     }
 
-    /** {@inheritDoc} */
+    @Override
+    public double getLineWidthM()
+    {
+        return this.lineWidthM;
+    }
+
+    @Override
+    public void setLineWidthM(final double lineWidthM)
+    {
+        this.lineWidthM = lineWidthM;
+    }
+
+    @Override
+    public double getScaleThresholdMetersPerPx()
+    {
+        return this.scaleThresholdMetersPerPx;
+    }
+
+    @Override
+    public void setScaleThresholdMetersPerPx(final double scaleThresholdMetersPerPx)
+    {
+        this.scaleThresholdMetersPerPx = scaleThresholdMetersPerPx;
+    }
+
     @Override
     public String toString()
     {

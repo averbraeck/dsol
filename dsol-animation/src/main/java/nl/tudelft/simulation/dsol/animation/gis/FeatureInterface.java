@@ -8,7 +8,6 @@ import org.djutils.draw.bounds.Bounds2d;
 
 /**
  * Feature contains an element of a layer, defined by a key value combination, with its own colors.<br>
- * TODO: minimum scale and maximum scale to draw features has to be added again, but first, scale needs to be defined properly.
  * <p>
  * Copyright (c) 2021-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -42,14 +41,14 @@ public interface FeatureInterface extends Serializable
     /**
      * Set the z-index of this feature. The z-index indicates the drawing order, from low to high. Any system can be used to
      * indicate drawing order.
-     * @param zIndex the z-index of this feature 
+     * @param zIndex the z-index of this feature
      */
     void setZIndex(double zIndex);
 
     /**
      * Return the z-index of this feature. The z-index indicates the drawing order, from low to high. Any system can be used to
      * indicate drawing order.
-     * @return the z-index of this feature 
+     * @return the z-index of this feature
      */
     double getZIndex();
 
@@ -58,7 +57,7 @@ public interface FeatureInterface extends Serializable
      * @return the layer to which this feature belongs
      */
     LayerInterface getLayer();
-    
+
     /**
      * Return whether the data has been initialized for this feature.
      * @return whether the data has been initialized for this feature
@@ -142,7 +141,36 @@ public interface FeatureInterface extends Serializable
      */
     void setLineWidthPx(int lineWidthPx);
 
-    /** 
+    /**
+     * Get the line width of the (out)line in meters.
+     * @return the line width of the outline in meters
+     */
+    double getLineWidthM();
+
+    /**
+     * Set the line width of the (out)line in meters.
+     * @param lineWidthM the line width of the outline in meters
+     */
+    void setLineWidthM(double lineWidthM);
+
+    /**
+     * Get the scale value (zoom level) to use as a threshold for drawing as the number of meters per pixel. Suppose, the number
+     * of meters per pixel is 5. When the scale (zoom level) of the map goes <b>below</b> 5 meters per pixel by zooming out, the
+     * feature is no longer drawn.
+     * @return the scale value (zoom level) to use as a threshold for drawing as the number of meters per pixel
+     */
+    double getScaleThresholdMetersPerPx();
+
+    /**
+     * Set the scale value (zoom level) to use as a threshold for drawing as the number of meters per pixel. Suppose, the number
+     * of meters per pixel is 5. When the scale (zoom level) of the map goes <b>below</b> 5 meters per pixel by zooming out, the
+     * feature is no longer drawn.
+     * @param scaleThresholdMetersPerPx the scale value (zoom level) to use as a threshold for drawing as the number of meters
+     *            per pixel
+     */
+    void setScaleThresholdMetersPerPx(double scaleThresholdMetersPerPx);
+
+    /**
      * Return whether the shapes in the layer need to be transformed or not.
      * @return whether the shapes in the layer need to be transformed
      */
@@ -150,7 +178,8 @@ public interface FeatureInterface extends Serializable
     {
         return getLayer().isTransform();
     }
-    /** 
+
+    /**
      * Return whether the shapes in the layer need to be displayed or not.
      * @return whether the shapes in the layer need to be displayed
      */
