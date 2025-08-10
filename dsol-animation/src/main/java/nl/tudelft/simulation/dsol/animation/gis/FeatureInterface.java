@@ -40,6 +40,20 @@ public interface FeatureInterface extends Serializable
     String getValue();
 
     /**
+     * Set the z-index of this feature. The z-index indicates the drawing order, from low to high. Any system can be used to
+     * indicate drawing order.
+     * @param zIndex the z-index of this feature 
+     */
+    void setZIndex(double zIndex);
+
+    /**
+     * Return the z-index of this feature. The z-index indicates the drawing order, from low to high. Any system can be used to
+     * indicate drawing order.
+     * @return the z-index of this feature 
+     */
+    double getZIndex();
+
+    /**
      * Return whether the data has been initialized for this feature.
      * @return whether the data has been initialized for this feature
      */

@@ -38,7 +38,10 @@ public class Feature implements FeatureInterface
      * have the correct key have to be drawn.
      */
     private String value = "*";
-
+    
+    /** the z-index of this feature. The z-index indicates the drawing order, from low to high. */
+    private double zIndex = 0.0;
+    
     /** the list of shapes that have been retrieved for this feature. */
     private List<GisObject> shapes = new ArrayList<>();
 
@@ -135,6 +138,18 @@ public class Feature implements FeatureInterface
     public final void setValue(final String value)
     {
         this.value = value;
+    }
+
+    @Override
+    public double getZIndex()
+    {
+        return this.zIndex;
+    }
+
+    @Override
+    public void setZIndex(final double zIndex)
+    {
+        this.zIndex = zIndex;
     }
 
     @Override
