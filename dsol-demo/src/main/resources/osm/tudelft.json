@@ -11,25 +11,29 @@
           "key": "natural",
           "value": "water",
           "outlineColor": "#99CCFF",
-          "fillColor": "#99CCFF"
+          "fillColor": "#99CCFF",
+          "zIndex": 30
         },
         {
           "key": "landuse",
           "value": "cemetary",
           "outlineColor": "rgb(0,255,0)",
-          "fillColor": "rgb(127,255,197)"
+          "fillColor": "rgb(127,255,197)",
+          "zIndex": 10
         },
         {
           "key": "landuse",
           "value": "grass",
           "outlineColor": "rgb(0,255,0)",
-          "fillColor": "rgb(127,255,197)"
+          "fillColor": "rgb(127,255,197)",
+          "zIndex": 10
         },
         {
           "key": "natural",
           "value": "*",
           "outlineColor": "rgb(0,255,0)",
-          "fillColor": "rgb(127,255,197)"
+          "fillColor": "rgb(127,255,197)",
+          "zIndex": 10
         }
       ]
     },
@@ -38,7 +42,8 @@
       "default": {
         "key": "highway",
         "display": true,
-        "transform": true
+        "transform": true,
+        "zIndex": 50
       },
       "items": [
         {
@@ -141,7 +146,8 @@
           "key": "waterway",
           "value": "*",
           "outlineColor": "#99CCFF",
-          "fillColor": "#99CCFF"
+          "fillColor": "#99CCFF",
+          "zIndex": 50
         }
       ]
     },

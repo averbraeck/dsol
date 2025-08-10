@@ -39,6 +39,7 @@
       <g>255</g>
       <b>0</b>
     </outlineColor>
+    <zIndex>10</zIndex>
     <display>true</display>
     <transform>true</transform>
   </layer>
@@ -52,6 +53,7 @@
 			<g>120</g>
 			<b>120</b>
 		</outlineColor>
+    <zIndex>30</zIndex>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
@@ -70,6 +72,7 @@
 			<g>200</g>
 			<b>200</b>
 		</outlineColor>
+    <zIndex>40</zIndex>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
@@ -83,6 +86,7 @@
 			<g>19</g>
 			<b>127</b>
 		</outlineColor>
+    <zIndex>30</zIndex>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
@@ -96,6 +100,7 @@
 			<g>148</g>
 			<b>255</b>
 		</outlineColor>
+    <zIndex>20</zIndex>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
