@@ -118,7 +118,7 @@ public final class EsriFileCsvParser
             LayerInterface layer = new Layer();
             layerList.add(layer);
             layer.setName(layerName);
-            Feature feature = new Feature();
+            Feature feature = new Feature(layer);
             layer.addFeature(feature); // key and value remain at * and *
 
             URL resource = URLResource.getResource(shapeFile);

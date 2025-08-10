@@ -258,7 +258,7 @@ public final class EsriFileXmlParser
                 LayerInterface layer = new Layer();
                 layerList.add(layer);
                 layer.setName(nodeText(layerNode, "name"));
-                Feature feature = new Feature();
+                Feature feature = new Feature(layer);
                 layer.addFeature(feature); // key and value remain at * and *
 
                 Node dataNode = nodeTagItem(layerNode, "data", 0);
