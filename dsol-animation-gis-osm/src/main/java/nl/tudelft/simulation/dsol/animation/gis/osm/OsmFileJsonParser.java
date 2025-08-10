@@ -31,10 +31,6 @@ import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * <p>
- * The dsol-animation-gis project is based on the gisbeans project that has been part of DSOL since 2002, originally by Peter
- * Jacobs and Paul Jacobs.
- * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public final class OsmFileJsonParser
@@ -119,6 +115,7 @@ public final class OsmFileJsonParser
                 boolean display = parseBoolean("display", item, defaults, true);
                 boolean transform = parseBoolean("transform", item, defaults, true);
                 int lineWidthPx = parseInt("lineWidth", item, defaults, 1);
+                double zIndex = parseDouble("zIndex", item, defaults, 0.0);
 
                 LayerInterface layer = null;
                 if (layerNames.contains(layerName))
@@ -139,6 +136,7 @@ public final class OsmFileJsonParser
                 feature.setOutlineColor(outlineColor);
                 feature.setFillColor(fillColor);
                 feature.setLineWidthPx(lineWidthPx);
+                feature.setZIndex(zIndex);
                 layer.addFeature(feature);
                 featuresToRead.add(feature);
                 layer.setDisplay(display);
@@ -160,7 +158,7 @@ public final class OsmFileJsonParser
      * @param json the current json object
      * @param defaults the fallback defaults
      * @param fallback the fallback value when defaults is null or the field was not found
-     * @return the string in the json object, the defaults, or "null" when not found
+     * @return the string in the json object, the defaults, or the fallback when not found
      */
     protected static String parseString(final String field, final JSONObject json, final JSONObject defaults,
             final String fallback)
@@ -190,7 +188,7 @@ public final class OsmFileJsonParser
      * @param json the current json object
      * @param defaults the fallback defaults
      * @param fallback the fallback value when defaults is null or the field was not found
-     * @return the string in the json object, the defaults, or "null" when not found
+     * @return the boolean in the json object, the defaults, or the fallback when not found
      */
     protected static boolean parseBoolean(final String field, final JSONObject json, final JSONObject defaults,
             final boolean fallback)
@@ -208,7 +206,7 @@ public final class OsmFileJsonParser
      * @param json the current json object
      * @param defaults the fallback defaults
      * @param fallback the fallback value when defaults is null or the field was not found
-     * @return the string in the json object, the defaults, or "null" when not found
+     * @return the int in the json object, the defaults, or the fallback when not found
      */
     protected static int parseInt(final String field, final JSONObject json, final JSONObject defaults, final int fallback)
     {
@@ -216,6 +214,23 @@ public final class OsmFileJsonParser
             return json.getInt(field);
         if (defaults != null && defaults.has(field))
             return defaults.getInt(field);
+        return fallback;
+    }
+
+    /**
+     * Parse a json double from the JSONObject with a fallback value when defaults is null or the field was not found.
+     * @param field the field to search for in the current object
+     * @param json the current json object
+     * @param defaults the fallback defaults
+     * @param fallback the fallback value when defaults is null or the field was not found
+     * @return the double in the json object, the defaults, or the fallback when not found
+     */
+    protected static double parseDouble(final String field, final JSONObject json, final JSONObject defaults, final double fallback)
+    {
+        if (json.has(field))
+            return json.getDouble(field);
+        if (defaults != null && defaults.has(field))
+            return defaults.getDouble(field);
         return fallback;
     }
 

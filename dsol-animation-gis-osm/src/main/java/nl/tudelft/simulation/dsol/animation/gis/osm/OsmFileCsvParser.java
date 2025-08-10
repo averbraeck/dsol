@@ -31,10 +31,6 @@ import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
  * project is distributed under a three-clause BSD-style license, which can be found at
  * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
  * </p>
- * <p>
- * The dsol-animation-gis project is based on the gisbeans project that has been part of DSOL since 2002, originally by Peter
- * Jacobs and Paul Jacobs.
- * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
 public final class OsmFileCsvParser
@@ -104,7 +100,7 @@ public final class OsmFileCsvParser
         Set<String> header = csvReader.getHeader();
         if (!header.contains("layer") || !header.contains("key") || !header.contains("value")
                 || !header.contains("outlineColor") || !header.contains("fillColor") || !header.contains("display")
-                || !header.contains("transform"))
+                || !header.contains("transform") || !header.contains("zIndex"))
         {
             throw new IOException("OSM GIS map csv-file header row did not contain all column headers\n" + header.toString());
         }
@@ -121,6 +117,7 @@ public final class OsmFileCsvParser
             Color fillColor = ColorParser.parse(row.getField("fillColor"));
             boolean display = row.getField("display").toLowerCase().startsWith("t");
             boolean transform = row.getField("transform").toLowerCase().startsWith("t");
+            double zIndex = Double.parseDouble(row.getField("zIndex"));
 
             LayerInterface layer = null;
             if (layerNames.contains(layerName))
@@ -140,6 +137,7 @@ public final class OsmFileCsvParser
             feature.setValue(value);
             feature.setOutlineColor(outlineColor);
             feature.setFillColor(fillColor);
+            feature.setZIndex(zIndex);
             layer.addFeature(feature);
             featuresToRead.add(feature);
             layer.setDisplay(display);
