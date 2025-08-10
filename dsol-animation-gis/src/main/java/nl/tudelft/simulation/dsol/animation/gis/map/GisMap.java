@@ -6,7 +6,6 @@ import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -81,20 +80,38 @@ public class GisMap implements GisMapInterface
     private String name;
 
     /** the map units. */
-    private MapUnits units = MapUnits.METERS;
+    private MapUnits mapUnits = MapUnits.METERS;
 
     /** draw the background? */
     private boolean drawBackground = true;
 
-    /** the screen resolution. */
-    private static final int RESOLUTION = 72;
+    /** the mapping of one map unit to the equivalent number of meters in the x-direction. */
+    private final double metersPerUnitX;
+
+    /** the mapping of one map unit to the equivalent number of meters in the y-direction. */
+    private final double metersPerUnitY;
 
     /**
-     * constructs a new Map.
+     * Construct a new Map, defining the size of a map unit in meters. The size of a map unit can then be used to draw scalable
+     * lines with a certain width, and to make certain features disappear if the meter-to-pixel ratio is passing a certain
+     * threshold. In WGS84 maps, typically the latitude is used, since it does not vary dependent on the location.
+     * @param metersPerUnitX the mapping of one map unit to the equivalent number of meters in the x-direction
+     * @param metersPerUnitY the mapping of one map unit to the equivalent number of meters in the y-direction
+     */
+    public GisMap(final double metersPerUnitX, final double metersPerUnitY)
+    {
+        this.metersPerUnitX = metersPerUnitX;
+        this.metersPerUnitY = metersPerUnitY;
+    }
+
+    /**
+     * Construct a new Map, with WGS84 as the scale definition, with values for the equator. One degree of latitude is
+     * approximately 111,120 meters, while one degree of longitude varies from approximately 111,120 meters at the equator to 0
+     * meters at the poles.
      */
     public GisMap()
     {
-        super();
+        this(111120.0, 111120.0);
     }
 
     @Override
@@ -161,7 +178,7 @@ public class GisMap implements GisMapInterface
     }
 
     @Override
-    public void hideLayer(final String layerName) throws RemoteException
+    public void hideLayer(final String layerName)
     {
         if (this.layerMap.keySet().contains(layerName))
         {
@@ -182,7 +199,7 @@ public class GisMap implements GisMapInterface
     }
 
     @Override
-    public void showLayer(final String layerName) throws RemoteException
+    public void showLayer(final String layerName)
     {
         if (this.layerMap.keySet().contains(layerName))
         {
@@ -193,7 +210,7 @@ public class GisMap implements GisMapInterface
     }
 
     @Override
-    public boolean isSame() throws RemoteException
+    public boolean isSame()
     {
         boolean ret = this.same;
         this.same = true;
@@ -206,12 +223,12 @@ public class GisMap implements GisMapInterface
     {
         if (this.drawBackground)
         {
-            // We fill the background.
+            // fill the background.
             graphics.setColor(getImage().getBackgroundColor());
             graphics.fillRect(0, 0, (int) getImage().getSize().getWidth(), (int) getImage().getSize().getHeight());
         }
 
-        // We compute the transform of the map
+        // compute the transform of the map
         AffineTransform transform = new AffineTransform();
         transform.scale(getImage().getSize().getWidth() / this.extent.getDeltaX(),
                 -getImage().getSize().getHeight() / this.extent.getDeltaY());
@@ -226,19 +243,16 @@ public class GisMap implements GisMapInterface
             CategoryLogger.always().error(e);
         }
 
-        // we cache the scale
-        double scale = getScale();
-        // XXX: define how we use this -- System.out.println("scale = " + scale);
-
-        // we set the rendering hints
+        // set the rendering hints
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        // We loop over the features and see if they have to be drawn
+        // loop over the features and see if they have to be drawn
         for (var featureList : this.sortedFeatureMap.values())
         {
             for (var feature : featureList)
             {
-                if (this.visibleFeatures.contains(feature) && feature.isDisplay()) // TODO: scale
+                if (this.visibleFeatures.contains(feature) && feature.isDisplay()
+                        && getMetersPerPixelY() >= feature.getScaleThresholdMetersPerPx())
                 {
                     try
                     {
@@ -308,7 +322,7 @@ public class GisMap implements GisMapInterface
     }
 
     @Override
-    public ImmutableMap<String, LayerInterface> getLayerMap() throws RemoteException
+    public ImmutableMap<String, LayerInterface> getLayerMap()
     {
         return new ImmutableHashMap<>(this.layerMap);
     }
@@ -320,26 +334,33 @@ public class GisMap implements GisMapInterface
     }
 
     @Override
-    public double getScale()
+    public double getScaleX()
     {
-        return (getImage().getSize().getWidth() / (2.54 * RESOLUTION)) * this.extent.getDeltaX();
-    }
-
-    /**
-     * returns the scale of the Image.
-     * @return double the unitPerPixel
-     */
-    @Override
-    public double getUnitImageRatio()
-    {
-        return Math.min(this.extent.getDeltaX() / this.image.getSize().getWidth(),
-                this.extent.getDeltaY() / this.image.getSize().getHeight());
+        return this.extent.getDeltaX() / getImage().getSize().getWidth();
     }
 
     @Override
-    public MapUnits getUnits()
+    public double getScaleY()
     {
-        return this.units;
+        return this.extent.getDeltaY() / getImage().getSize().getHeight();
+    }
+
+    @Override
+    public double getMetersPerUnitX()
+    {
+        return this.metersPerUnitX;
+    }
+
+    @Override
+    public double getMetersPerUnitY()
+    {
+        return this.metersPerUnitY;
+    }
+
+    @Override
+    public MapUnits getMapUnits()
+    {
+        return this.mapUnits;
     }
 
     @Override
@@ -363,7 +384,7 @@ public class GisMap implements GisMapInterface
     @Override
     public void setUnits(final MapUnits units)
     {
-        this.units = units;
+        this.mapUnits = units;
     }
 
     @Override
@@ -371,8 +392,8 @@ public class GisMap implements GisMapInterface
     {
         double correcteddZoomFactor = (zoomFactor == 0) ? 1 : zoomFactor;
 
-        double maxX = (getUnitImageRatio() * getImage().getSize().getWidth()) + this.extent.getMinX();
-        double maxY = (getUnitImageRatio() * getImage().getSize().getHeight()) + this.extent.getMinY();
+        double maxX = getImage().getSize().getWidth() / getScaleX() + this.extent.getMinX();
+        double maxY = getImage().getSize().getHeight() / getScaleY() + this.extent.getMinY();
 
         double centerX = (maxX - this.extent.getMinX()) / 2 + this.extent.getMinX();
         double centerY = (maxY - this.extent.getMinY()) / 2 + this.extent.getMinY();
@@ -389,8 +410,8 @@ public class GisMap implements GisMapInterface
     {
         double correcteddZoomFactor = (zoomFactor == 0) ? 1 : zoomFactor;
 
-        double maxX = (getUnitImageRatio() * getImage().getSize().getWidth()) + this.extent.getMinX();
-        double maxY = (getUnitImageRatio() * getImage().getSize().getHeight()) + this.extent.getMinY();
+        double maxX = getImage().getSize().getWidth() / getScaleX() + this.extent.getMinX();
+        double maxY = getImage().getSize().getHeight() / getScaleY() + this.extent.getMinY();
 
         double centerX = (pixelPosition.getX() / getImage().getSize().getWidth()) * (maxX - this.extent.getMinX())
                 + this.extent.getMinX();
@@ -407,8 +428,8 @@ public class GisMap implements GisMapInterface
     public void zoomRectangle(final SerializableRectangle2d rectangle)
     {
 
-        double maxX = (getUnitImageRatio() * getImage().getSize().getWidth()) + this.extent.getMinX();
-        double maxY = (getUnitImageRatio() * getImage().getSize().getHeight()) + this.extent.getMinY();
+        double maxX = getImage().getSize().getWidth() / getScaleX() + this.extent.getMinX();
+        double maxY = getImage().getSize().getHeight() / getScaleY() + this.extent.getMinY();
 
         double width = maxX - this.extent.getMinX();
         double height = maxY - this.extent.getMinY();

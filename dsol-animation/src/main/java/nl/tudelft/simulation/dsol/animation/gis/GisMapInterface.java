@@ -65,8 +65,8 @@ public interface GisMapInterface extends Serializable
     double CENTIMETER_PER_INCH = 2.54;
 
     /**
-     * draws the map on a graphics object.
-     * @param graphics the graphics object
+     * Draw the map on a graphics canvas.
+     * @param graphics the graphics canvas
      * @return Graphics2D
      * @throws DsolGisException on drawing failure
      * @throws RemoteException on network failure
@@ -74,175 +74,189 @@ public interface GisMapInterface extends Serializable
     Graphics2D drawMap(Graphics2D graphics) throws DsolGisException, RemoteException;
 
     /**
-     * Getter for property extent.
-     * @return the extent of the map
-     * @throws RemoteException on network exception
+     * Return the extent of the drawn map as a (dx, dy) bounds (world coordinates).
+     * @return the extent of the drawn map as a (dx, dy) bounds
      */
-    Bounds2d getExtent() throws RemoteException;
+    Bounds2d getExtent();
 
     /**
-     * Getter for property image.
-     * @return the value of property image.
-     * @throws RemoteException on network exception
+     * Return the image information of the map (using screen coordinates).
+     * @return the image information of the map (using screen coordinates)
      */
-    MapImageInterface getImage() throws RemoteException;
+    MapImageInterface getImage();
 
     /**
-     * Getter for the map of layer names to property layers.
-     * @return the value of property layers.
-     * @throws RemoteException on network exception
+     * Return the map from layer name to layer.
+     * @return the map from layer name to layer
      */
-    ImmutableMap<String, LayerInterface> getLayerMap() throws RemoteException;
+    ImmutableMap<String, LayerInterface> getLayerMap();
 
     /**
-     * Getter for all the property layers.
-     * @return List the value of property layers.
-     * @throws RemoteException on network exception
+     * Return a list of all layers, sorted by the name of the layer.
+     * @return a list of all layers, sorted by the name of the layer
      */
-    ImmutableList<LayerInterface> getAllLayers() throws RemoteException;
+    ImmutableList<LayerInterface> getAllLayers();
 
     /**
-     * Getter for all the visible property layers.
-     * @return List the value of property layers.
-     * @throws RemoteException on network exception
+     * Return a list of all visible layers, sorted by the name of the layer.
+     * @return a list of all visible layers, sorted by the name of the layer
      */
-    ImmutableList<LayerInterface> getVisibleLayers() throws RemoteException;
+    ImmutableList<LayerInterface> getVisibleLayers();
 
     /**
      * Return whether the map has not been changed, and reset the same parameter to true.
      * @return whether the map has not been changed, and reset the same parameter to true
-     * @throws RemoteException on network exception
      */
-    boolean isSame() throws RemoteException;
+    boolean isSame();
 
     /**
-     * Getter for property name.
-     * @return String the value of property extent.
-     * @throws RemoteException on network exception
+     * Return the name of the map.
+     * @return the name of the map
      */
-    String getName() throws RemoteException;
+    String getName();
 
     /**
-     * returns the scale of the map.
-     * @return double the scale of the map in its units
-     * @throws RemoteException on network exception
+     * Return the x-scale of the map, which is the horizontal extent (dx) divided by the number of horizontal pixels of the
+     * viewport. In other words, the x-scale is the number of horizontal units per pixel. As an example for WGS84, suppose 0.1
+     * degree at the equator is drawn on 1080 pixels, then the x-scale is 1/10800. If one degree at the equator is drawn (map
+     * zoomed OUT by a factor 10), the value is 1/1080. A larger scale is equivalent to a higher zoom factor. A larger scale
+     * means things are 'bigger' on the map.
+     * @return the x-scale of the map as the number of horizontal units per pixel
      */
-    double getScale() throws RemoteException;
+    double getScaleX();
 
     /**
-     * returns the scale of the Image.
-     * @return double the unitPerPixel
-     * @throws RemoteException on network exception
+     * Return the y-scale of the map, which is the vertical extent (dy) divided by the number of vertical pixels of the
+     * viewport. In other words, the y-scale is the number of vertical units per pixel. As an example for WGS84, suppose 0.1
+     * degree at the equator is drawn on 1080 pixels, then the y-scale is 1/10800. If one degree at the equator is drawn (map
+     * zoomed OUT by a factor 10), the value is 1/1080. A larger scale is equivalent to a higher zoom factor. A larger scale
+     * means things are 'bigger' on the map.
+     * @return the y-scale of the map as the number of vertical units per pixel
      */
-    double getUnitImageRatio() throws RemoteException;
+    double getScaleY();
+
+    /**
+     * Return the number of meters of one horizontal unit.
+     * @return the number of meters of one horizontal unit
+     */
+    double getMetersPerUnitX();
+
+    /**
+     * Return the number of meters of one vertical unit.
+     * @return the number of meters of one vertical unit
+     */
+    double getMetersPerUnitY();
+
+    /**
+     * Return the number of meters that one horizontal pixel represents on the map.
+     * @return the number of meters that one horizontal pixel represents on the map
+     */
+    default double getMetersPerPixelX()
+    {
+        return getScaleX() * getMetersPerUnitX();
+    }
+
+    /**
+     * Return the number of meters that one vertical pixel represents on the map.
+     * @return the number of meters that one vertical pixel represents on the map
+     */
+    default double getMetersPerPixelY()
+    {
+        return getScaleY() * getMetersPerUnitY();
+    }
 
     /**
      * Getter for property units.
      * @return MapUnits the value of property units.
-     * @throws RemoteException on network exception
      */
-    MapUnits getUnits() throws RemoteException;
+    MapUnits getMapUnits();
 
     /**
      * Setter for property extent.
      * @param extent New value of the map extent.
-     * @throws RemoteException on network exception
      */
-    void setExtent(Bounds2d extent) throws RemoteException;
+    void setExtent(Bounds2d extent);
 
     /**
      * Setter for the map image, which acts as the basic 'canvas' for the drawing process. The image has a background color, but
      * could also have a background picture or watermark.
      * @param image New value of the map image, which acts as the basic 'canvas' for the drawing process.
-     * @throws RemoteException on network exception
      */
-    void setImage(MapImageInterface image) throws RemoteException;
+    void setImage(MapImageInterface image);
 
     /**
      * Setter for property layers.
      * @param layers New value of property layers.
-     * @throws RemoteException on network exception
      */
-    void setLayers(List<LayerInterface> layers) throws RemoteException;
+    void setLayers(List<LayerInterface> layers);
 
     /**
      * Setter for property layers.
      * @param index Index value of layer
      * @param layer New value of property layers.
-     * @throws RemoteException on network exception
      */
-    void setLayer(int index, LayerInterface layer) throws RemoteException;
+    void setLayer(int index, LayerInterface layer);
 
     /**
      * Setter for property layers.
      * @param layer New value of property layers.
-     * @throws RemoteException on network exception
      */
-    void addLayer(LayerInterface layer) throws RemoteException;
+    void addLayer(LayerInterface layer);
 
     /**
      * Hide a layer.
      * @param layer the layer to hide
-     * @throws RemoteException on network exception
      */
-    void hideLayer(LayerInterface layer) throws RemoteException;
+    void hideLayer(LayerInterface layer);
 
     /**
      * Show a layer.
      * @param layer the layer to show
-     * @throws RemoteException on network exception
      */
-    void showLayer(LayerInterface layer) throws RemoteException;
+    void showLayer(LayerInterface layer);
 
     /**
      * Hide a layer.
      * @param layerName the name of the layer to hide
-     * @throws RemoteException on network exception
      */
-    void hideLayer(String layerName) throws RemoteException;
+    void hideLayer(String layerName);
 
     /**
      * Show a layer.
      * @param layerName the name of the layer to show
-     * @throws RemoteException on network exception
      */
-    void showLayer(String layerName) throws RemoteException;
+    void showLayer(String layerName);
 
     /**
      * Setter for property name.
      * @param name new value of property name.
-     * @throws RemoteException on network exception
      */
-    void setName(String name) throws RemoteException;
+    void setName(String name);
 
     /**
      * Setter for property units.
      * @param units new value of property units.
-     * @throws RemoteException on network exception
      */
-    void setUnits(MapUnits units) throws RemoteException;
+    void setUnits(MapUnits units);
 
     /**
      * zooms the map with a particular factor.
      * @param zoomFactor (0=1)
-     * @throws RemoteException on network exception
      */
-    void zoom(double zoomFactor) throws RemoteException;
+    void zoom(double zoomFactor);
 
     /**
      * zooms the map based on a given position in the image.
      * @param pixelPosition the position in the image
      * @param zoomFactor the zoomFactor (0=1)
-     * @throws RemoteException on network exception
      */
-    void zoomPoint(Point2D pixelPosition, double zoomFactor) throws RemoteException;
+    void zoomPoint(Point2D pixelPosition, double zoomFactor);
 
     /**
      * zooms the map based on a given rectangle.
      * @param rectangle a rectangle in the map (image units)
-     * @throws RemoteException on network exception
      */
-    void zoomRectangle(SerializableRectangle2d rectangle) throws RemoteException;
+    void zoomRectangle(SerializableRectangle2d rectangle);
 
     /**
      * return whether background is drawn or not.
