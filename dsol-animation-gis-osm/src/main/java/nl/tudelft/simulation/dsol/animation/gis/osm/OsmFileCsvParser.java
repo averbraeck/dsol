@@ -7,7 +7,9 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.djutils.exceptions.Throw;
@@ -100,7 +102,7 @@ public final class OsmFileCsvParser
         Set<String> header = csvReader.getHeader();
         if (!header.contains("layer") || !header.contains("key") || !header.contains("value")
                 || !header.contains("outlineColor") || !header.contains("fillColor") || !header.contains("display")
-                || !header.contains("transform") || !header.contains("zIndex"))
+                || !header.contains("transform") || !header.contains("zIndex") || !header.contains("scale"))
         {
             throw new IOException("OSM GIS map csv-file header row did not contain all column headers\n" + header.toString());
         }
@@ -118,6 +120,27 @@ public final class OsmFileCsvParser
             boolean display = row.getField("display").toLowerCase().startsWith("t");
             boolean transform = row.getField("transform").toLowerCase().startsWith("t");
             double zIndex = Double.parseDouble(row.getField("zIndex"));
+            double scaleThresholdMetersPerPx = Double.parseDouble(row.getField("scale"));
+            
+            if (header.contains("filter"))
+            {
+                String filter = row.getField("filter");
+            }
+            
+            Map<String, Number> styleMap = new LinkedHashMap<>();
+            if (header.contains("style"))
+            {
+                String styleStr = row.getField("style");
+                String[] styles = styleStr.split(";");
+                for(var style : styles)
+                {
+                    String[] kv = style.strip().split("=");
+                    String k = kv[0].strip();
+                    String v = kv.length > 1 ? kv[1].strip() : "1";
+                    Number n = Double.valueOf(v);
+                    styleMap.put(k, n);
+                }
+            }
 
             LayerInterface layer = null;
             if (layerNames.contains(layerName))
@@ -138,6 +161,11 @@ public final class OsmFileCsvParser
             feature.setOutlineColor(outlineColor);
             feature.setFillColor(fillColor);
             feature.setZIndex(zIndex);
+            feature.setScaleThresholdMetersPerPx(scaleThresholdMetersPerPx);
+            if (styleMap.containsKey("lineWidthPx"))
+                feature.setLineWidthPx(styleMap.get("lineWidthPx").intValue());
+            if (styleMap.containsKey("lineWidthM"))
+                feature.setLineWidthM(styleMap.get("lineWidthM").doubleValue());
             layer.addFeature(feature);
             featuresToRead.add(feature);
             layer.setDisplay(display);
