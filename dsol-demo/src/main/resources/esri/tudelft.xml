@@ -40,6 +40,7 @@
       <b>0</b>
     </outlineColor>
     <zIndex>10</zIndex>
+    <scale>1000</scale>
     <display>true</display>
     <transform>true</transform>
   </layer>
@@ -54,6 +55,7 @@
 			<b>120</b>
 		</outlineColor>
     <zIndex>30</zIndex>
+    <scale>1000</scale>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
@@ -73,6 +75,7 @@
 			<b>200</b>
 		</outlineColor>
     <zIndex>40</zIndex>
+    <scale>10</scale>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
@@ -87,6 +90,7 @@
 			<b>127</b>
 		</outlineColor>
     <zIndex>30</zIndex>
+    <scale>1000</scale>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
@@ -101,6 +105,7 @@
 			<b>255</b>
 		</outlineColor>
     <zIndex>20</zIndex>
+    <scale>1000</scale>
 		<display>true</display>
 		<transform>true</transform>
 	</layer>
