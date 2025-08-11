@@ -373,13 +373,14 @@
         "display": true,
         "transform": true,
         "zIndex": 60,
-        "scale": 5
+        "scale": 10
       },
       "items": [
         {
           "value": "greenhouse",
           "outlineColor": "rgb(200,200,200)",
-          "fillColor": "#FFCCFF"
+          "fillColor": "#FFCCFF",
+          "scale": 50
         },
         {
           "value": "university",
@@ -405,7 +406,7 @@
         "display": true,
         "transform": true,
         "zIndex": 0,
-        "scale": 0
+        "scale": 1000000
       },
       "items": [
         {

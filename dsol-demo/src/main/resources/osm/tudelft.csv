@@ -39,9 +39,9 @@ roads,highway,proposed,null,null,50,0,FALSE,TRUE,,
 roads,highway,*,"rgb(127,127,127)",null,50,20,TRUE,TRUE,,lineWidthPx=1
 railways,railway,*,"rgb(63,63,63)",null,50,2000,TRUE,TRUE,,lineWidthM=3
 waterways,waterway,*,"rgb(0,148,255)",null,50,2000,TRUE,TRUE,,lineWidthM=4
-buildings,building,greenhouse,"rgb(200,200,200)",#FFCCFF,60,5,TRUE,TRUE,,
-buildings,building,university,#7F00FF,#FF00FF,60,5,TRUE,TRUE,,
-buildings,building,office,"rgb(200,200,200)","rgb(200,200,200)",60,5,TRUE,TRUE,,
-buildings,building,*,"rgb(200,200,200)","rgb(200,200,200)",60,5,TRUE,TRUE,,
-sea,place,ocean,#99CCFF,#99CCFF,0,0,TRUE,TRUE,,
-sea,place,sea,#99CCFF,#99CCFF,0,0,TRUE,TRUE,,
+buildings,building,greenhouse,"rgb(200,200,200)",#FFCCFF,60,50,TRUE,TRUE,,
+buildings,building,university,#7F00FF,#FF00FF,60,10,TRUE,TRUE,,
+buildings,building,office,"rgb(200,200,200)","rgb(200,200,200)",60,10,TRUE,TRUE,,
+buildings,building,*,"rgb(200,200,200)","rgb(200,200,200)",60,10,TRUE,TRUE,,
+sea,place,ocean,#99CCFF,#99CCFF,0,1000000,TRUE,TRUE,,
+sea,place,sea,#99CCFF,#99CCFF,0,1000000,TRUE,TRUE,,
