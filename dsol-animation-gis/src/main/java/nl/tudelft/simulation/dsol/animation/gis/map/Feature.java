@@ -62,7 +62,7 @@ public class Feature implements FeatureInterface
     private double lineWidthM = Double.NaN;
     
     /** the scale threshold in m/px above which the feature should not be drawn. */
-    private double scaleThresholdMetersPerPx = 0.0;
+    private double scaleThresholdMetersPerPx = 1.0E6; // default = draw always
 
     /** whether the shapes have been read or not. */
     private boolean initialized = false;
