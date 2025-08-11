@@ -1,6 +1,63 @@
 {
   "layers": [
     {
+      "layer": "industrial",
+      "default": {
+        "display": true,
+        "transform": true
+      },
+      "items": [
+        {
+          "key": "landuse",
+          "value": "construction",
+          "outlineColor": "rgb(127,127,127)",
+          "fillColor": "#C7C7B4",
+          "zIndex": 10,
+          "scale": 1000
+        },
+        {
+          "key": "landuse",
+          "value": "industrial",
+          "outlineColor": "rgb(127,127,127)",
+          "fillColor": "#EBDBE8",
+          "zIndex": 10,
+          "scale": 1000
+        },
+        {
+          "key": "power",
+          "value": "plant",
+          "outlineColor": "rgb(127,127,127)",
+          "fillColor": "#E3CCDF",
+          "zIndex": 60,
+          "scale": 50
+        },
+        {
+          "key": "power",
+          "value": "substation",
+          "outlineColor": "rgb(127,127,127)",
+          "fillColor": "#E3CCDF",
+          "zIndex": 60,
+          "scale": 50
+        },
+        {
+          "key": "amenity",
+          "value": "parking",
+          "outlineColor": "rgb(127,127,127)",
+          "fillColor": "rgb(200,200,200)",
+          "zIndex": 15,
+          "scale": 100
+        },
+        {
+          "key": "building",
+          "value": "industrial",
+          "outlineColor": "rgb(200,200,200)",
+          "fillColor": "rgb(200,200,200)",
+          "zIndex": 60,
+          "scale": 50
+        }
+      ]
+    },
+    {
       "layer": "natural",
       "default": {
         "display": true,
@@ -10,121 +67,270 @@
         {
           "key": "natural",
           "value": "water",
-          "outlineColor": "#99CCFF",
+          "outlineColor": "null",
           "fillColor": "#99CCFF",
-          "zIndex": 30
+          "zIndex": 30,
+          "scale": 5000
+        },
+        {
+          "key": "natural",
+          "value": "bay",
+          "outlineColor": "null",
+          "fillColor": "#99CCFF",
+          "zIndex": 30,
+          "scale": 5000
+        },
+        {
+          "key": "natural",
+          "value": "beach",
+          "outlineColor": "null",
+          "fillColor": "#FFF1BB",
+          "zIndex": 30,
+          "scale": 100
+        },
+        {
+          "key": "natural",
+          "value": "sand",
+          "outlineColor": "null",
+          "fillColor": "#FFF1BB",
+          "zIndex": 30,
+          "scale": 100
+        },
+        {
+          "key": "natural",
+          "value": "wetland",
+          "outlineColor": "null",
+          "fillColor": "#FFF3CD",
+          "zIndex": 30,
+          "scale": 100
+        },
+        {
+          "key": "natural",
+          "value": "coastline",
+          "outlineColor": "rgb(200,200,200)",
+          "fillColor": "null",
+          "zIndex": 40,
+          "scale": 0
+        },
+        {
+          "key": "natural",
+          "value": "scrub",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "#C8D7AB",
+          "zIndex": 25,
+          "scale": 100
+        },
+        {
+          "key": "natural",
+          "value": "wood",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "#C8D7AB",
+          "zIndex": 25,
+          "scale": 100
+        },
+        {
+          "key": "natural",
+          "value": "grassland",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "rgb(127,255,197)",
+          "zIndex": 25,
+          "scale": 100
         },
         {
           "key": "landuse",
-          "value": "cemetary",
+          "value": "cemetery",
           "outlineColor": "rgb(0,255,0)",
           "fillColor": "rgb(127,255,197)",
-          "zIndex": 10
+          "zIndex": 10,
+          "scale": 10
         },
         {
           "key": "landuse",
           "value": "grass",
           "outlineColor": "rgb(0,255,0)",
           "fillColor": "rgb(127,255,197)",
-          "zIndex": 10
+          "zIndex": 10,
+          "scale": 100
+        },
+        {
+          "key": "landuse",
+          "value": "meadow",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "rgb(127,255,197)",
+          "zIndex": 10,
+          "scale": 1000
+        },
+        {
+          "key": "landuse",
+          "value": "farmland",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "#EEF0D5",
+          "zIndex": 10,
+          "scale": 5000
+        },
+        {
+          "key": "landuse",
+          "value": "forest",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "#C8D7AB",
+          "zIndex": 10,
+          "scale": 100
+        },
+        {
+          "key": "landuse",
+          "value": "orchard",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "#C8D7AB",
+          "zIndex": 10,
+          "scale": 50
+        },
+        {
+          "key": "landuse",
+          "value": "allotments",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "#C8D7AB",
+          "zIndex": 10,
+          "scale": 50
+        },
+        {
+          "key": "leisure",
+          "value": "pitch",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "#88E0BE",
+          "zIndex": 20,
+          "scale": 10
+        },
+        {
+          "key": "tourism",
+          "value": "camp_site",
+          "outlineColor": "rgb(0,255,0)",
+          "fillColor": "rgb(127,255,197)",
+          "zIndex": 25,
+          "scale": 10
+        },
+        {
+          "key": "man_made",
+          "value": "breakwater",
+          "outlineColor": "#AB9C6D",
+          "fillColor": "#AB9C6D",
+          "zIndex": 40,
+          "scale": 100,
+          "filter": "",
+          "style": "noAutoClose"
+        },
+        {
+          "key": "man_made",
+          "value": "pier",
+          "outlineColor": "#D7C487",
+          "fillColor": "#D7C487",
+          "zIndex": 40,
+          "scale": 100
+        },
+        {
+          "key": "man_made",
+          "value": "reinforced_slope",
+          "outlineColor": "#D7C487",
+          "fillColor": "#D7C487",
+          "zIndex": 40,
+          "scale": 100
         },
         {
           "key": "natural",
-          "value": "*",
-          "outlineColor": "rgb(0,255,0)",
-          "fillColor": "rgb(127,255,197)",
-          "zIndex": 10
+          "value": "scree",
+          "outlineColor": "#D7C487",
+          "fillColor": "#D7C487",
+          "zIndex": 40,
+          "scale": 100
         }
       ]
     },
     {
       "layer": "roads",
       "default": {
-        "key": "highway",
         "display": true,
-        "transform": true,
-        "zIndex": 50
+        "transform": true
       },
       "items": [
         {
+          "key": "highway",
           "value": "motorway",
           "outlineColor": "rgb(127,0,0)",
-          "lineWidth": 4
+          "fillColor": "null",
+          "scale": 2000,
+          "lineWidthM": 20
         },
         {
-          "value": "motorway_link",
-          "outlineColor": "rgb(127,0,0)",
-          "lineWidth": 4
-        },
-        {
+          "key": "highway",
           "value": "trunk",
-          "outlineColor": "rgb(0,0,0)",
-          "lineWidth": 3
+          "outlineColor": "rgb(255,0,0)",
+          "fillColor": "null",
+          "scale": 1000,
+          "lineWidthM": 10
         },
         {
-          "value": "trunk_link",
-          "outlineColor": "rgb(0,0,0)",
-          "lineWidth": 3
-        },
-        {
+          "key": "highway",
           "value": "primary",
-          "outlineColor": "rgb(127,127,127)",
-          "lineWidth": 2
+          "outlineColor": "#FF8000",
+          "fillColor": "null",
+          "scale": 100,
+          "lineWidthM": 8
         },
         {
-          "value": "primary_link",
-          "outlineColor": "rgb(127,127,127)",
-          "lineWidth": 2
-        },
-        {
+          "key": "highway",
           "value": "secondary",
-          "outlineColor": "rgb(160,160,160)",
-          "lineWidth": 1
+          "outlineColor": "#FFF800",
+          "fillColor": "null",
+          "scale": 50,
+          "lineWidthM": 4
         },
         {
-          "value": "secondary_link",
-          "outlineColor": "rgb(160,160,160)",
-          "lineWidth": 1
-        },
-        {
-          "value": "tertiary",
-          "outlineColor": "rgb(200,200,200)",
-          "lineWidth": 1
-        },
-        {
-          "value": "tertiary_link",
-          "outlineColor": "rgb(200,200,200)",
-          "lineWidth": 1
-        },
-        {
-          "value": "residential",
-          "outlineColor": "rgb(200,200,200)",
-          "lineWidth": 1
-        },
-        {
-          "value": "living_street",
-          "outlineColor": "rgb(200,200,200)",
-          "lineWidth": 1
-        },
-        {
+          "key": "highway",
           "value": "pedestrian",
           "outlineColor": "#AAAAAA",
-          "lineWidth": 1
+          "fillColor": "null",
+          "scale": 10,
+          "lineWidthM": 1
         },
         {
+          "key": "highway",
           "value": "sidewalk",
           "outlineColor": "#AAAAAA",
-          "lineWidth": 1
+          "fillColor": "null",
+          "scale": 5,
+          "lineWidthM": 1
         },
         {
+          "key": "highway",
           "value": "cycleway",
           "outlineColor": "#999999",
-          "lineWidth": 1
+          "fillColor": "null",
+          "scale": 5,
+          "lineWidthM": 2
         },
         {
-          "value": "unclassified",
-          "outlineColor": "rgb(200,200,200)",
-          "lineWidth": 1
+          "key": "highway",
+          "value": "service",
+          "outlineColor": "rgb(255,0,0)",
+          "fillColor": "null",
+          "scale": 50,
+          "lineWidthM": 2
+        },
+        {
+          "key": "highway",
+          "value": "proposed",
+          "outlineColor": "null",
+          "fillColor": "null",
+          "scale": 0,
+          "display": false,
+          "transform": true
+        },
+        {
+          "key": "highway",
+          "value": "*",
+          "outlineColor": "rgb(127,127,127)",
+          "fillColor": "null",
+          "scale": 20,
+          "lineWidthPx": 1
         }
       ]
     },
@@ -134,8 +340,13 @@
         {
           "key": "railway",
           "value": "*",
-          "outlineColor": "rgb(0,19,127)",
-          "lineWidth": 1
+          "outlineColor": "rgb(63,63,63)",
+          "fillColor": "null",
+          "display": true,
+          "transform": true,
+          "zIndex": 50,
+          "scale": 2000,
+          "style": "lineWidthM=3"
         }
       ]
     },
@@ -145,9 +356,13 @@
         {
           "key": "waterway",
           "value": "*",
-          "outlineColor": "#99CCFF",
-          "fillColor": "#99CCFF",
-          "zIndex": 50
+          "outlineColor": "rgb(0,148,255)",
+          "fillColor": "null",
+          "display": true,
+          "transform": true,
+          "zIndex": 50,
+          "scale": 2000,
+          "lineWidthM": 4
         }
       ]
     },
@@ -156,13 +371,15 @@
       "default": {
         "key": "building",
         "display": true,
-        "transform": true
+        "transform": true,
+        "zIndex": 60,
+        "scale": 5
       },
       "items": [
         {
-          "value": "office",
-          "outlineColor": "#FF00FF",
-          "fillColor": "#FF00FF"
+          "value": "greenhouse",
+          "outlineColor": "rgb(200,200,200)",
+          "fillColor": "#FFCCFF"
         },
         {
           "value": "university",
@@ -170,9 +387,36 @@
           "fillColor": "#FF00FF"
         },
         {
+          "value": "office",
+          "outlineColor": "rgb(200,200,200)",
+          "fillColor": "rgb(200,200,200)"
+        },
+        {
           "value": "*",
           "outlineColor": "rgb(200,200,200)",
           "fillColor": "rgb(200,200,200)"
+        }
+      ]
+    },
+    {
+      "layer": "sea",
+      "default": {
+        "key": "place",
+        "display": true,
+        "transform": true,
+        "zIndex": 0,
+        "scale": 0
+      },
+      "items": [
+        {
+          "value": "ocean",
+          "outlineColor": "#99CCFF",
+          "fillColor": "#99CCFF"
+        },
+        {
+          "value": "sea",
+          "outlineColor": "#99CCFF",
+          "fillColor": "#99CCFF"
         }
       ]
     }
