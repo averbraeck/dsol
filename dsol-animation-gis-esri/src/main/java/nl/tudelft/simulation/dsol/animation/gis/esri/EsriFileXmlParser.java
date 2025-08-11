@@ -273,17 +273,10 @@ public final class EsriFileXmlParser
                     ShapeFileReader dataSource = new ShapeFileReader(resource, coordinateTransform, layer.getFeatures());
                     dataSource.populateShapes();
                 }
-
-                /*-
-                if (nodeTagExists(layerNode, "minScale"))
+                if (nodeTagExists(layerNode, "scale"))
                 {
-                    layer.setMinScale(nodeInt(layerNode, "minscale"));
+                    feature.setScaleThresholdMetersPerPx(nodeDouble(layerNode, "scale"));
                 }
-                if (nodeTagExists(layerNode, "maxScale"))
-                {
-                    layer.setMaxScale(nodeInt(layerNode, "maxscale"));
-                }
-                */
                 if (nodeTagExists(layerNode, "zIndex"))
                 {
                     layer.setZIndex(nodeDouble(layerNode, "zIndex"));

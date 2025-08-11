@@ -99,7 +99,7 @@ public final class EsriFileCsvParser
         Set<String> header = csvReader.getHeader();
         if (!header.contains("layer") || !header.contains("shapeFile") || !header.contains("outlineColor")
                 || !header.contains("fillColor") || !header.contains("display") || !header.contains("transform")
-                || !header.contains("zIndex"))
+                || !header.contains("zIndex") || !header.contains("scale"))
         {
             throw new IOException("ESRI GIS map csv-file header row did not contain all column headers\n" + header.toString());
         }
@@ -116,6 +116,7 @@ public final class EsriFileCsvParser
             double zIndex = Double.parseDouble(row.getField("zIndex"));
             boolean display = row.getField("display").toLowerCase().startsWith("t");
             boolean transform = row.getField("transform").toLowerCase().startsWith("t");
+            double scaleThresholdMetersPerPx = Double.parseDouble(row.getField("scale"));
 
             LayerInterface layer = new Layer();
             layerList.add(layer);
@@ -130,6 +131,7 @@ public final class EsriFileCsvParser
             }
             feature.setOutlineColor(outlineColor);
             feature.setFillColor(fillColor);
+            feature.setScaleThresholdMetersPerPx(scaleThresholdMetersPerPx);
             layer.setDisplay(display);
             layer.setTransform(transform);
             layer.setZIndex(zIndex);
