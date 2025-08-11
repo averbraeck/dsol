@@ -114,8 +114,10 @@ public final class OsmFileJsonParser
                 Color fillColor = ColorParser.parse(parseString("fillColor", item, defaults));
                 boolean display = parseBoolean("display", item, defaults, true);
                 boolean transform = parseBoolean("transform", item, defaults, true);
-                int lineWidthPx = parseInt("lineWidth", item, defaults, 1);
+                int lineWidthPx = parseInt("lineWidthPx", item, defaults, 1);
+                double lineWidthM = parseDouble("lineWidthM", item, defaults, Double.NaN);
                 double zIndex = parseDouble("zIndex", item, defaults, 0.0);
+                double scale = parseDouble("scale", item, defaults, 0.0);
 
                 LayerInterface layer = null;
                 if (layerNames.contains(layerName))
@@ -136,7 +138,9 @@ public final class OsmFileJsonParser
                 feature.setOutlineColor(outlineColor);
                 feature.setFillColor(fillColor);
                 feature.setLineWidthPx(lineWidthPx);
+                feature.setLineWidthM(lineWidthM);
                 feature.setZIndex(zIndex);
+                feature.setScaleThresholdMetersPerPx(scale);
                 layer.addFeature(feature);
                 featuresToRead.add(feature);
                 layer.setDisplay(display);
