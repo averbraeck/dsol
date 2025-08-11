@@ -260,11 +260,13 @@ public class GisMap implements GisMapInterface
                         {
                             if (!Double.isNaN(feature.getLineWidthM()))
                             {
-                                graphics.setStroke(new BasicStroke(
-                                        Math.max(1, (int) (feature.getLineWidthM() / getMetersPerPixelY()))));
+                                graphics.setStroke(
+                                        new BasicStroke(Math.max(1, (int) (feature.getLineWidthM() / getMetersPerPixelY())),
+                                                BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                             }
                             else if (feature.getLineWidthPx() > 1)
-                                graphics.setStroke(new BasicStroke(feature.getLineWidthPx()));
+                                graphics.setStroke(new BasicStroke(feature.getLineWidthPx(), BasicStroke.CAP_ROUND,
+                                        BasicStroke.JOIN_ROUND));
                             else
                                 graphics.setStroke(new BasicStroke(1));
                         }
