@@ -71,4 +71,16 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
      */
     T getWarmupTime();
 
+    /**
+     * Return the stopping condition, or null when not defined.
+     * @return the stopping condition, or null when not defined
+     */
+    Runnable getStoppingCondition();
+
+    /**
+     * Set the stopping condition for the replication or experiment. Set to null to unset.
+     * @param stoppingCondition the stopping condition, or null to unset
+     */
+    void setStoppingCondition(Runnable stoppingCondition);
+
 }

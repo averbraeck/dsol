@@ -128,4 +128,15 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
         return getRunControl().getWarmupTime();
     }
 
+    @Override
+    public Runnable getStoppingCondition()
+    {
+        return getRunControl().getStoppingCondition();
+    }
+
+    @Override
+    public void setStoppingCondition(final Runnable stoppingCondition)
+    {
+        getRunControl().setStoppingCondition(stoppingCondition);
+    }
 }

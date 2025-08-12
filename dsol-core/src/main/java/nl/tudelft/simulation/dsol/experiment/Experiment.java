@@ -472,6 +472,18 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
     }
 
     @Override
+    public Runnable getStoppingCondition()
+    {
+        return getRunControl().getStoppingCondition();
+    }
+
+    @Override
+    public void setStoppingCondition(final Runnable stoppingCondition)
+    {
+        getRunControl().setStoppingCondition(stoppingCondition);
+    }
+    
+    @Override
     public String toString()
     {
         return "Experiment[" + getDescription() + " ; simulator=" + this.simulator.getClass().getTypeName() + "]";

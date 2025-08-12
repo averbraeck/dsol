@@ -37,7 +37,10 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
 
     /** the warmup time of the simulation (included in the total run length). */
     private final T warmupTime;
-
+    
+    /** the stopping condition, if any. */
+    private Runnable stoppingCondition = null;
+    
     /**
      * Construct an object with off-line run control information.
      * @param id the id of the run control that will be used as the id for the replication; should be unique within the
@@ -101,6 +104,18 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
     public T getWarmupTime()
     {
         return this.warmupTime;
+    }
+
+    @Override
+    public Runnable getStoppingCondition()
+    {
+        return this.stoppingCondition;
+    }
+
+    @Override
+    public void setStoppingCondition(final Runnable stoppingCondition)
+    {
+        this.stoppingCondition = stoppingCondition;
     }
 
     @Override
