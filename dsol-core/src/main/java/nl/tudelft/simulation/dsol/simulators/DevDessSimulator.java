@@ -75,6 +75,7 @@ public class DevDessSimulator<T extends Number & Comparable<T>> extends DevsSimu
                 while (!this.eventList.isEmpty() && !isStoppingOrStopped()
                         && runUntil.compareTo(this.eventList.first().getAbsoluteExecutionTime()) >= 0)
                 {
+                    checkStoppingCondition();
                     int cmp = this.eventList.first().getAbsoluteExecutionTime().compareTo(this.runUntilTime);
                     if ((cmp == 0 && !this.runUntilIncluding) || cmp > 0)
                     {

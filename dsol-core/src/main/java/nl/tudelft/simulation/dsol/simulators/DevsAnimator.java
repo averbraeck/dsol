@@ -86,6 +86,7 @@ public class DevsAnimator<T extends Number & Comparable<T>> extends DevsSimulato
                     try
                     {
                         event.execute();
+                        checkStoppingCondition();
                         if (this.eventList.isEmpty())
                         {
                             this.simulatorTime = SimTime.copy(this.runUntilTime);

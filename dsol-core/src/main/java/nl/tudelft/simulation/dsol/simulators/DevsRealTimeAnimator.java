@@ -268,6 +268,7 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
                         try
                         {
                             nextEvent.execute();
+                            checkStoppingCondition();
                             if (this.eventList.isEmpty())
                             {
                                 this.simulatorTime = SimTime.copy(this.runUntilTime);

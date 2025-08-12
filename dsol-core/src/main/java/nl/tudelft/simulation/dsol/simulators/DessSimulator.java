@@ -83,6 +83,7 @@ public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T
             synchronized (super.semaphore)
             {
                 stepImpl();
+                checkStoppingCondition();
             }
         }
     }

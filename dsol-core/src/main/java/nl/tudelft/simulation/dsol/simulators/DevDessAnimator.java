@@ -85,6 +85,7 @@ public class DevDessAnimator<T extends Number & Comparable<T>> extends DevDessSi
             {
                 synchronized (super.semaphore)
                 {
+                    checkStoppingCondition();
                     int cmp = this.eventList.first().getAbsoluteExecutionTime().compareTo(this.runUntilTime);
                     if ((cmp == 0 && !this.runUntilIncluding) || cmp > 0)
                     {

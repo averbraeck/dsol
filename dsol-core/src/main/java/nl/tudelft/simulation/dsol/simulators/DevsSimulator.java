@@ -243,6 +243,7 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
                 try
                 {
                     event.execute();
+                    checkStoppingCondition();
                 }
                 catch (Exception exception)
                 {
