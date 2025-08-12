@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 
 import javax.naming.NamingException;
 
@@ -472,17 +473,17 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
     }
 
     @Override
-    public Runnable getStoppingCondition()
+    public Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition()
     {
         return getRunControl().getStoppingCondition();
     }
 
     @Override
-    public void setStoppingCondition(final Runnable stoppingCondition)
+    public void setStoppingCondition(final Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition)
     {
         getRunControl().setStoppingCondition(stoppingCondition);
     }
-    
+
     @Override
     public String toString()
     {

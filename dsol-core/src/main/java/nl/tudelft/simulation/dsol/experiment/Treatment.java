@@ -1,8 +1,11 @@
 package nl.tudelft.simulation.dsol.experiment;
 
 import java.io.Serializable;
+import java.util.function.Predicate;
 
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
+import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
  * The Treatment is the interface that indicates that you can retrieve the simulation start time, end time, and warmup period,
@@ -75,12 +78,12 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
      * Return the stopping condition, or null when not defined.
      * @return the stopping condition, or null when not defined
      */
-    Runnable getStoppingCondition();
+    Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition();
 
     /**
      * Set the stopping condition for the replication or experiment. Set to null to unset.
      * @param stoppingCondition the stopping condition, or null to unset
      */
-    void setStoppingCondition(Runnable stoppingCondition);
+    void setStoppingCondition(Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition);
 
 }

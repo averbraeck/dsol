@@ -1,11 +1,14 @@
 package nl.tudelft.simulation.dsol.experiment;
 
 import java.io.Serializable;
+import java.util.function.Predicate;
 
 import org.djutils.event.EventType;
 import org.djutils.exceptions.Throw;
 import org.djutils.metadata.MetaData;
 
+import nl.tudelft.simulation.dsol.model.DsolModel;
+import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.Contextualized;
 
@@ -129,13 +132,13 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
     }
 
     @Override
-    public Runnable getStoppingCondition()
+    public Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition()
     {
         return getRunControl().getStoppingCondition();
     }
 
     @Override
-    public void setStoppingCondition(final Runnable stoppingCondition)
+    public void setStoppingCondition(final Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition)
     {
         getRunControl().setStoppingCondition(stoppingCondition);
     }

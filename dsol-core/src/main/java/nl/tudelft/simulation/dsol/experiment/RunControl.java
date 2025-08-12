@@ -1,10 +1,13 @@
 package nl.tudelft.simulation.dsol.experiment;
 
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import org.djutils.exceptions.Throw;
 
+import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
+import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
  * RunControl is a data object that contains off-line run control information. It can be fed to an Experiment or a Replication
@@ -37,10 +40,10 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
 
     /** the warmup time of the simulation (included in the total run length). */
     private final T warmupTime;
-    
+
     /** the stopping condition, if any. */
-    private Runnable stoppingCondition = null;
-    
+    private Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition = null;
+
     /**
      * Construct an object with off-line run control information.
      * @param id the id of the run control that will be used as the id for the replication; should be unique within the
@@ -107,13 +110,13 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
     }
 
     @Override
-    public Runnable getStoppingCondition()
+    public Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition()
     {
         return this.stoppingCondition;
     }
 
     @Override
-    public void setStoppingCondition(final Runnable stoppingCondition)
+    public void setStoppingCondition(final Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition)
     {
         this.stoppingCondition = stoppingCondition;
     }
