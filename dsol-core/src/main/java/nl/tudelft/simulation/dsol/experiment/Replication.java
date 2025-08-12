@@ -132,14 +132,16 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
     }
 
     @Override
-    public Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition()
+    public <M extends DsolModel<T, ? extends SimulatorInterface<T>>> Predicate<? super M> getStoppingCondition()
     {
         return getRunControl().getStoppingCondition();
     }
 
     @Override
-    public void setStoppingCondition(final Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition)
+    public <M extends DsolModel<T, ? extends SimulatorInterface<T>>> void setStoppingCondition(
+            final Predicate<? super M> stoppingCondition)
     {
         getRunControl().setStoppingCondition(stoppingCondition);
     }
+
 }

@@ -80,7 +80,7 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
      * for continue.
      * @return the stopping condition, or null when not defined
      */
-    Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition();
+    <M extends DsolModel<T, ? extends SimulatorInterface<T>>> Predicate<? super M> getStoppingCondition();
 
     /**
      * Set the stopping condition for the replication or experiment. The value should be null to unset. The Predicate functional
@@ -88,6 +88,6 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
      * outputs a boolean: true for stop, false for continue.
      * @param stoppingCondition the stopping condition, or null to unset
      */
-    void setStoppingCondition(Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition);
+    <M extends DsolModel<T, ? extends SimulatorInterface<T>>> void setStoppingCondition(Predicate<? super M> stoppingCondition);
 
 }

@@ -42,7 +42,7 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
     private final T warmupTime;
 
     /** the stopping condition, if any. */
-    private Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition = null;
+    private Predicate<? super DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition = null;
 
     /**
      * Construct an object with off-line run control information.
@@ -110,15 +110,17 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
     }
 
     @Override
-    public Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition()
+    public <M extends DsolModel<T, ? extends SimulatorInterface<T>>> Predicate<? super M> getStoppingCondition()
     {
         return this.stoppingCondition;
     }
 
     @Override
-    public void setStoppingCondition(final Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition)
+    @SuppressWarnings("unchecked")
+    public <M extends DsolModel<T, ? extends SimulatorInterface<T>>> void setStoppingCondition(
+            final Predicate<? super M> stoppingCondition)
     {
-        this.stoppingCondition = stoppingCondition;
+        this.stoppingCondition = (Predicate<? super DsolModel<T, ? extends SimulatorInterface<T>>>) stoppingCondition;
     }
 
     @Override
