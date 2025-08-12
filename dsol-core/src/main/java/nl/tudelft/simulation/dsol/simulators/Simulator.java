@@ -319,7 +319,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             this.runState = RunState.STOPPING;
         }
         this.worker.interrupt(); // just to be sure that the run will end, and the state will be moved to 'ENDED'
-        if (this.simulatorTime.compareTo(this.getReplication().getEndTime()) < 0)
+        if (this.simulatorTime.compareTo(this.getReplication().getEndTime()) < 0
+                && this.replication.getStoppingCondition() == null)
         {
             Logger.warn("endReplication executed, but the simulation time " + this.simulatorTime
                     + " is earlier than the replication length " + this.getReplication().getEndTime());
