@@ -75,13 +75,17 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
     T getWarmupTime();
 
     /**
-     * Return the stopping condition, or null when not defined.
+     * Return the stopping condition, or null when not defined. The Predicate functional interface takes a DsolModel as the
+     * argument (there, we need to find whether the stopping criterion is reached), and outputs a boolean: true for stop, false
+     * for continue.
      * @return the stopping condition, or null when not defined
      */
     Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> getStoppingCondition();
 
     /**
-     * Set the stopping condition for the replication or experiment. Set to null to unset.
+     * Set the stopping condition for the replication or experiment. The value should be null to unset. The Predicate functional
+     * interface takes a DsolModel as the argument (there, we need to find whether the stopping criterion is reached), and
+     * outputs a boolean: true for stop, false for continue.
      * @param stoppingCondition the stopping condition, or null to unset
      */
     void setStoppingCondition(Predicate<? extends DsolModel<T, ? extends SimulatorInterface<T>>> stoppingCondition);
