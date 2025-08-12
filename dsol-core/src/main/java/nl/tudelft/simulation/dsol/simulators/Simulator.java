@@ -329,6 +329,24 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         // see https://github.com/averbraeck/dsol/issues/53
     }
 
+    /**
+     * Check whether the stopping condition has been met, and take appropriate action if it has been met. Note that we only
+     * check the stopping condition after the warmup period has passed.
+     */
+    protected void checkStoppingCondition()
+    {
+        if (getReplication().getStoppingCondition() != null)
+        {
+            if (getSimulatorTime().doubleValue() > getReplication().getWarmupTime().doubleValue())
+            {
+                if (getReplication().getStoppingCondition().test(getModel()))
+                {
+                    endReplication();
+                }
+            }
+        }
+    }
+
     @Override
     public final ErrorStrategy getErrorStrategy()
     {
