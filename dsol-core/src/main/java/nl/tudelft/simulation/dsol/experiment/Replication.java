@@ -68,7 +68,10 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
         this.runControl = runControl;
     }
 
-    @Override
+    /**
+     * Return the RunControl belonging to the replication.
+     * @return the RunControl belonging to the replication
+     */
     public RunControl<T> getRunControl()
     {
         return this.runControl;
@@ -87,6 +90,42 @@ public abstract class Replication<T extends Number & Comparable<T>> implements C
     public ContextInterface getContext()
     {
         return this.context;
+    }
+
+    @Override
+    public String getId()
+    {
+        return getRunControl().getId();
+    }
+
+    @Override
+    public void setDescription(final String description)
+    {
+        getRunControl().setDescription(description);
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return getRunControl().getDescription();
+    }
+
+    @Override
+    public T getStartTime()
+    {
+        return getRunControl().getStartTime();
+    }
+
+    @Override
+    public T getEndTime()
+    {
+        return getRunControl().getEndTime();
+    }
+
+    @Override
+    public T getWarmupTime()
+    {
+        return getRunControl().getWarmupTime();
     }
 
 }

@@ -18,37 +18,22 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
 public interface Treatment<T extends Number & Comparable<T>> extends Serializable
 {
     /**
-     * Return the RunControl object that contains the treatment information.
-     * @return the RunControl object that contains the treatment information
-     */
-    RunControl<T> getRunControl();
-
-    /**
      * Return the id of this replication.
      * @return the id of this replication
      */
-    default String getId()
-    {
-        return getRunControl().getId();
-    }
+    String getId();
 
     /**
      * Sets the description of this replication.
      * @param description the description of this replication
      */
-    default void setDescription(final String description)
-    {
-        getRunControl().setDescription(description);
-    }
+    void setDescription(final String description);
 
     /**
      * Return the description of this replication.
      * @return the description of this replication
      */
-    default String getDescription()
-    {
-        return getRunControl().getDescription();
-    }
+    String getDescription();
 
     /**
      * Return the run length of this replication in relative units.
@@ -72,27 +57,18 @@ public interface Treatment<T extends Number & Comparable<T>> extends Serializabl
      * Return the absolute start time of the simulation.
      * @return the absolute start time of the simulation
      */
-    default T getStartTime()
-    {
-        return getRunControl().getStartTime();
-    }
+    T getStartTime();
 
     /**
      * Return the absolute end time of the simulation.
      * @return the absolute end time of the simulation
      */
-    default T getEndTime()
-    {
-        return getRunControl().getEndTime();
-    }
+    T getEndTime();
 
     /**
      * Return the absolute moment when the warmup event will take place.
      * @return the absolute moment when the warmup event will take place
      */
-    default T getWarmupTime()
-    {
-        return getRunControl().getWarmupTime();
-    }
+    T getWarmupTime();
 
 }

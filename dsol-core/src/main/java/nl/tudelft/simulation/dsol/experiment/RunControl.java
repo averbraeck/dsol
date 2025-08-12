@@ -68,12 +68,6 @@ public class RunControl<T extends Number & Comparable<T>> implements Treatment<T
     }
 
     @Override
-    public RunControl<T> getRunControl()
-    {
-        return this;
-    }
-
-    @Override
     public String getId()
     {
         return this.id;
