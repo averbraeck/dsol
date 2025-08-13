@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
+import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
@@ -46,8 +47,8 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     /** the input field. */
     private final JFormattedTextField textField;
 
-    /** Font used to display the edit field. */
-    private Font timeFont = new Font("SansSerif", Font.BOLD, 18);
+    /** Font used to display the clock. */
+    private Font timeFont;
 
     /** the initial / reset value of the timeUntil field. */
     private String initialValue;
@@ -69,15 +70,19 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
      */
     public RunUntilPanel(final SimulatorInterface<T> simulator, final String initialValue, final String regex)
     {
+        Throw.whenNull(simulator, "simulator");
+        Throw.whenNull(initialValue, "initialValue");
+        Throw.whenNull(regex, "regex");
         this.simulator = simulator;
         this.initialValue = initialValue;
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        setMaximumSize(new Dimension(250, 35));
 
         this.textField = new JFormattedTextField(new RegexFormatter(regex));
-        this.textField.setFont(getTimeFont());
-        this.textField.setPreferredSize(new Dimension(120, 20));
+        setTextFieldSize(new Dimension(120, 20));
         this.textField.setValue(this.initialValue);
+
+        setTimeFont(new Font("SansSerif", Font.BOLD, 18));
+        setPanelSize(new Dimension(250, 35));
 
         Icon runUntilIcon = Icons.loadIcon("/resources/Apply.png");
         this.runUntilButton = new AppearanceControlButton(runUntilIcon);
@@ -190,7 +195,46 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     protected abstract T parseSimulationTime(String simulationTimeString);
 
     /**
-     * @return simulator
+     * Set the size of the run-until panel. The proposed height is 35 pixels.
+     * @param dimension the new dimension of the run-until panel on the screen
+     */
+    public void setPanelSize(final Dimension dimension)
+    {
+        Throw.whenNull(dimension, "dimension");
+        setMinimumSize(dimension);
+        setSize(dimension);
+        setPreferredSize(dimension);
+        setMaximumSize(dimension);
+    }
+
+    /**
+     * Set the size of the text field in the run-until panel. The proposed height is 20 pixels.
+     * @param dimension the new dimension of the text field in the run-until panel
+     */
+    public void setTextFieldSize(final Dimension dimension)
+    {
+        Throw.whenNull(dimension, "dimension");
+        this.textField.setMinimumSize(dimension);
+        this.textField.setSize(dimension);
+        this.textField.setPreferredSize(dimension);
+        this.textField.setMaximumSize(dimension);
+    }
+
+    /**
+     * Set the font to display the run-until time.
+     * @param timeFont the font to display the time
+     */
+    public void setTimeFont(final Font timeFont)
+    {
+        Throw.whenNull(timeFont, "timeFont");
+        this.timeFont = timeFont;
+        setFont(this.timeFont);
+        this.textField.setFont(this.timeFont);
+    }
+
+    /**
+     * Return the simulator.
+     * @return the simulator
      */
     public SimulatorInterface<T> getSimulator()
     {
@@ -198,11 +242,12 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     }
 
     /**
-     * @return timeFont.
+     * Return the text field, e.g. to give it a different size or font.
+     * @return the text field, e.g. to give it a different size or font
      */
-    public Font getTimeFont()
+    public JFormattedTextField getTextField()
     {
-        return this.timeFont;
+        return this.textField;
     }
 
     @Override
