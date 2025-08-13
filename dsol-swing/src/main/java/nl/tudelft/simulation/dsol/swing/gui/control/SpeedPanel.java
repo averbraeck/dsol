@@ -15,6 +15,7 @@ import org.djunits.value.vfloat.scalar.FloatDuration;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
+import nl.tudelft.simulation.dsol.simulators.clock.ClockDevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControlLabel;
 
@@ -381,6 +382,54 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
             double speed = (simulationTime.si - getPrevSimTime().si) / (0.001 * getUpdateIntervalMs());
             setPrevSimTime(simulationTime);
             return String.format("%6.2f x ", speed);
+        }
+    }
+
+    /**
+     * SpeedPanel for a for a djunits Time. The speed calculation can be adjusted.
+     * <p>
+     * Copyright (c) 2020-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
+     * See for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The
+     * DSOL project is distributed under a three-clause BSD-style license, which can be found at
+     * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
+     * </p>
+     * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
+     */
+    public static class ClockTime extends SpeedPanel<Duration>
+    {
+        /** */
+        private static final long serialVersionUID = 20201227L;
+
+        /**
+         * Construct a clock panel with a clock-based time and clock-based simulator.
+         * @param simulator the simulator
+         */
+        public ClockTime(final ClockDevsSimulatorInterface simulator)
+        {
+            super(simulator);
+            setPrevSimTime(Duration.instantiateSI(simulator.getStartClockTime().si));
+            setPanelSize(new Dimension(120, 35));
+        }
+
+        @Override
+        protected String formatSpeed(final Duration simulationTime)
+        {
+            if (simulationTime == null)
+            {
+                return "0.0";
+            }
+            double speed = (simulationTime.si - getPrevSimTime().si) / (0.001 * getUpdateIntervalMs());
+            setPrevSimTime(simulationTime);
+            if (speed < 0.8 * 60.0)
+                return String.format("%6.2f sec/s ", speed);
+            else if (speed < 0.8 * 3600.0)
+                return String.format("%6.2f min/s ", speed / 60.0);
+            else if (speed < 0.8 * 24.0 * 3600.0)
+                return String.format("%6.2f hrs/s ", speed / 3600.0);
+            else if (speed < 0.8 * 7.0 * 24.0 * 3600.0)
+                return String.format("%6.2f day/s ", speed / (24.0 * 3600.0));
+            else
+                return String.format("%6.2f wks/s ", speed / (7.0 * 24.0 * 3600.0));
         }
     }
 
