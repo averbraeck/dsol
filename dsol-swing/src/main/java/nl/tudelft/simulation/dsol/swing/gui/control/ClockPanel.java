@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
+import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.clock.ClockDevsSimulatorInterface;
@@ -68,8 +69,9 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
      */
     public ClockPanel(final SimulatorInterface<T> simulator, final Supplier<String> clockTimeSupplier)
     {
+        Throw.whenNull(simulator, "simulator");
         this.simulator = simulator;
-        this.clockTimeSupplier = clockTimeSupplier;
+        setClockTimeSupplier(clockTimeSupplier);
         setLayout(new FlowLayout(FlowLayout.LEFT));
         this.timeLabel = new AppearanceControlLabel();
         setTimeFont(new Font("SansSerif", Font.BOLD, 18));
@@ -86,10 +88,33 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
      */
     public void setTimeLabelSize(final Dimension dimension)
     {
+        Throw.whenNull(dimension, "dimension");
         setMinimumSize(dimension);
         setSize(dimension);
         setPreferredSize(dimension);
         setMaximumSize(dimension);
+    }
+
+    /**
+     * Set (update) the supplier of the clock time to be printed.
+     * @param clockTimeSupplier the new supplier of the clock time to be printed
+     */
+    public void setClockTimeSupplier(final Supplier<String> clockTimeSupplier)
+    {
+        Throw.whenNull(clockTimeSupplier, "clockTimeSupplier");
+        this.clockTimeSupplier = clockTimeSupplier;
+    }
+
+    /**
+     * Set the font to display the time.
+     * @param timeFont the font to display the time
+     */
+    public void setTimeFont(final Font timeFont)
+    {
+        Throw.whenNull(timeFont, "timeFont");
+        this.timeFont = timeFont;
+        setFont(this.timeFont);
+        this.timeLabel.setFont(this.timeFont);
     }
 
     /**
@@ -140,17 +165,6 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public SimulatorInterface<T> getSimulator()
     {
         return this.simulator;
-    }
-
-    /**
-     * Set the font to display the time.
-     * @param timeFont the font to display the time
-     */
-    public void setTimeFont(final Font timeFont)
-    {
-        this.timeFont = timeFont;
-        setFont(this.timeFont);
-        this.timeLabel.setFont(this.timeFont);
     }
 
     /**
