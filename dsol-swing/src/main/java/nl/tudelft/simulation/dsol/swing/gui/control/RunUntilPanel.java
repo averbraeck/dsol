@@ -2,7 +2,6 @@ package nl.tudelft.simulation.dsol.swing.gui.control;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -47,9 +46,6 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     /** the input field. */
     private final JFormattedTextField textField;
 
-    /** Font used to display the clock. */
-    private Font timeFont;
-
     /** the initial / reset value of the timeUntil field. */
     private String initialValue;
 
@@ -81,7 +77,6 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
         setTextFieldSize(new Dimension(120, 20));
         this.textField.setValue(this.initialValue);
 
-        setTimeFont(new Font("SansSerif", Font.BOLD, 18));
         setPanelSize(new Dimension(250, 35));
 
         Icon runUntilIcon = Icons.loadIcon("/resources/Apply.png");
@@ -218,18 +213,6 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
         this.textField.setSize(dimension);
         this.textField.setPreferredSize(dimension);
         this.textField.setMaximumSize(dimension);
-    }
-
-    /**
-     * Set the font to display the run-until time.
-     * @param timeFont the font to display the time
-     */
-    public void setTimeFont(final Font timeFont)
-    {
-        Throw.whenNull(timeFont, "timeFont");
-        this.timeFont = timeFont;
-        setFont(this.timeFont);
-        this.textField.setFont(this.timeFont);
     }
 
     /**
