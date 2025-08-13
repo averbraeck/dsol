@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Supplier;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -44,7 +45,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     final SimulatorInterface<T> simulator;
 
     /** Font used to display the clock. */
-    private Font timeFont = new Font("SansSerif", Font.BOLD, 18);
+    private Font timeFont;
 
     /** The timer (so we can cancel it). */
     private Timer timer;
@@ -55,22 +56,24 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     /** Simulation time time. */
     private T prevSimTime;
 
+    /** Clock time supplier. */
+    private Supplier<String> clockTimeSupplier;
+
     /**
-     * Construct a clock panel with a given dimension.
+     * Construct a clock panel with an initial dimension of 150x35 pixels. Provide the supplier of the time string as the second
+     * parameter. The supplier can use `getSimulator()` to get access to the time (absolute, relative) and simulator status
+     * (initialized, started, running, stopped).
      * @param simulator the simulator
-     * @param dimension the dimension (width x height) of the ClockPanel
+     * @param clockTimeSupplier the supplier of the clock time to be printed
      */
-    public ClockPanel(final SimulatorInterface<T> simulator, final Dimension dimension)
+    public ClockPanel(final SimulatorInterface<T> simulator, final Supplier<String> clockTimeSupplier)
     {
         this.simulator = simulator;
+        this.clockTimeSupplier = clockTimeSupplier;
         setLayout(new FlowLayout(FlowLayout.LEFT));
-        setFont(getTimeFont());
-
         this.timeLabel = new AppearanceControlLabel();
-        this.timeLabel.setFont(getTimeFont());
-        this.timeLabel.setMinimumSize(dimension);
-        this.timeLabel.setSize(dimension);
-        this.timeLabel.setMaximumSize(dimension);
+        setTimeFont(new Font("SansSerif", Font.BOLD, 18));
+        setTimeLabelSize(new Dimension(150, 35));
         add(this.timeLabel);
 
         this.timer = new Timer();
@@ -78,12 +81,15 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * Construct a clock panel with a default dimension of 150x35 pixels.
-     * @param simulator the simulator
+     * Set the size of the time label on the screen. The proposed height is 35 pixels.
+     * @param dimension the new dimension of the time label on the screen
      */
-    public ClockPanel(final SimulatorInterface<T> simulator)
+    public void setTimeLabelSize(final Dimension dimension)
     {
-        this(simulator, new Dimension(150, 35));
+        setMinimumSize(dimension);
+        setSize(dimension);
+        setPreferredSize(dimension);
+        setMaximumSize(dimension);
     }
 
     /**
@@ -107,8 +113,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         @Override
         public void run()
         {
-            T simulationTime = ClockPanel.this.getSimulator().getSimulatorTime();
-            getTimeLabel().setText(formatSimulationTime(simulationTime));
+            getTimeLabel().setText(ClockPanel.this.clockTimeSupplier.get());
             getTimeLabel().repaint();
         }
 
@@ -120,7 +125,8 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return timeLabel
+     * Return the label in which the time is written.
+     * @return the label in which the time is written
      */
     public JLabel getTimeLabel()
     {
@@ -128,7 +134,8 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return simulator
+     * Return the simulator.
+     * @return the simulator
      */
     public SimulatorInterface<T> getSimulator()
     {
@@ -136,11 +143,14 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return timeFont.
+     * Set the font to display the time.
+     * @param timeFont the font to display the time
      */
-    public Font getTimeFont()
+    public void setTimeFont(final Font timeFont)
     {
-        return this.timeFont;
+        this.timeFont = timeFont;
+        setFont(this.timeFont);
+        this.timeLabel.setFont(this.timeFont);
     }
 
     /**
@@ -167,13 +177,6 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     {
         this.prevSimTime = prevSimTime;
     }
-
-    /**
-     * Returns the formatted simulation time.
-     * @param simulationTime simulation time
-     * @return formatted simulation time
-     */
-    protected abstract String formatSimulationTime(T simulationTime);
 
     @Override
     public boolean isForeground()
@@ -205,28 +208,21 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a double time.
          * @param simulator the simulator
-         * @param dimension the dimension (width x height) of the ClockPanel
+         * @param clockTimeSupplier the supplier of the clock time to be printed
          */
-        public TimeDouble(final SimulatorInterface<Double> simulator, final Dimension dimension)
+        public TimeDouble(final SimulatorInterface<Double> simulator, final Supplier<String> clockTimeSupplier)
         {
-            super(simulator, dimension);
+            super(simulator, clockTimeSupplier);
             setPrevSimTime(0.0);
         }
 
         /**
-         * Construct a clock panel with a double time.
+         * Construct a clock panel with a default supplier for the double time.
          * @param simulator the simulator
          */
         public TimeDouble(final SimulatorInterface<Double> simulator)
         {
-            super(simulator);
-            setPrevSimTime(0.0);
-        }
-
-        @Override
-        protected String formatSimulationTime(final Double simulationTime)
-        {
-            return String.format(" t = %8.2f ", simulationTime);
+            this(simulator, () -> String.format(" t = %8.2f ", simulator.getSimulatorTime()));
         }
     }
 
@@ -248,11 +244,11 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a float time.
          * @param simulator the simulator
-         * @param dimension the dimension (width x height) of the ClockPanel
+         * @param clockTimeSupplier the supplier of the clock time to be printed
          */
-        public TimeFloat(final SimulatorInterface<Float> simulator, final Dimension dimension)
+        public TimeFloat(final SimulatorInterface<Float> simulator, final Supplier<String> clockTimeSupplier)
         {
-            super(simulator, dimension);
+            super(simulator, clockTimeSupplier);
             setPrevSimTime(0.0f);
         }
 
@@ -262,14 +258,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
          */
         public TimeFloat(final SimulatorInterface<Float> simulator)
         {
-            super(simulator);
-            setPrevSimTime(0.0f);
-        }
-
-        @Override
-        protected String formatSimulationTime(final Float simulationTime)
-        {
-            return String.format(" t = %8.2f ", simulationTime);
+            this(simulator, () -> String.format(" t = %8.2f ", simulator.getSimulatorTime()));
         }
     }
 
@@ -291,11 +280,11 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a long time.
          * @param simulator the simulator
-         * @param dimension the dimension (width x height) of the ClockPanel
+         * @param clockTimeSupplier the supplier of the clock time to be printed
          */
-        public TimeLong(final SimulatorInterface<Long> simulator, final Dimension dimension)
+        public TimeLong(final SimulatorInterface<Long> simulator, final Supplier<String> clockTimeSupplier)
         {
-            super(simulator, dimension);
+            super(simulator, clockTimeSupplier);
             setPrevSimTime(0L);
         }
 
@@ -305,14 +294,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
          */
         public TimeLong(final SimulatorInterface<Long> simulator)
         {
-            super(simulator);
-            setPrevSimTime(0L);
-        }
-
-        @Override
-        protected String formatSimulationTime(final Long simulationTime)
-        {
-            return String.format(" t = %8d ", simulationTime);
+            this(simulator, () -> String.format(" t = %8d ", simulator.getSimulatorTime()));
         }
     }
 
@@ -334,11 +316,11 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a double time with unit.
          * @param simulator the simulator
-         * @param dimension the dimension (width x height) of the ClockPanel
+         * @param clockTimeSupplier the supplier of the clock time to be printed
          */
-        public TimeDoubleUnit(final SimulatorInterface<Duration> simulator, final Dimension dimension)
+        public TimeDoubleUnit(final SimulatorInterface<Duration> simulator, final Supplier<String> clockTimeSupplier)
         {
-            super(simulator, dimension);
+            super(simulator, clockTimeSupplier);
             setPrevSimTime(Duration.ZERO);
         }
 
@@ -348,14 +330,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
          */
         public TimeDoubleUnit(final SimulatorInterface<Duration> simulator)
         {
-            super(simulator);
-            setPrevSimTime(Duration.ZERO);
-        }
-
-        @Override
-        protected String formatSimulationTime(final Duration simulationTime)
-        {
-            return "t = " + simulationTime.toString(false, true);
+            this(simulator, () -> simulator.getSimulatorTime().toString(false, true));
         }
     }
 
@@ -377,11 +352,11 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a float time with unit.
          * @param simulator the simulator
-         * @param dimension the dimension (width x height) of the ClockPanel
+         * @param clockTimeSupplier the supplier of the clock time to be printed
          */
-        public TimeFloatUnit(final SimulatorInterface<FloatDuration> simulator, final Dimension dimension)
+        public TimeFloatUnit(final SimulatorInterface<FloatDuration> simulator, final Supplier<String> clockTimeSupplier)
         {
-            super(simulator, dimension);
+            super(simulator, clockTimeSupplier);
             setPrevSimTime(FloatDuration.ZERO);
         }
 
@@ -391,14 +366,8 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
          */
         public TimeFloatUnit(final SimulatorInterface<FloatDuration> simulator)
         {
-            super(simulator);
-            setPrevSimTime(FloatDuration.ZERO);
-        }
+            this(simulator, () -> simulator.getSimulatorTime().toString(false, true));
 
-        @Override
-        protected String formatSimulationTime(final FloatDuration simulationTime)
-        {
-            return "t = " + simulationTime.toString(false, true);
         }
     }
 
@@ -420,11 +389,11 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         /**
          * Construct a clock panel with a clock-based time and clock-based simulator.
          * @param simulator the simulator
-         * @param dimension the dimension (width x height) of the ClockPanel
+         * @param clockTimeSupplier the supplier of the clock time to be printed
          */
-        public ClockTime(final ClockDevsSimulatorInterface simulator, final Dimension dimension)
+        public ClockTime(final ClockDevsSimulatorInterface simulator, final Supplier<String> clockTimeSupplier)
         {
-            super(simulator, dimension);
+            super(simulator, clockTimeSupplier);
             setPrevSimTime(Duration.instantiateSI(simulator.getStartClockTime().si));
         }
 
@@ -434,14 +403,8 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
          */
         public ClockTime(final ClockDevsSimulatorInterface simulator)
         {
-            this(simulator, new Dimension(200, 35));
-        }
-
-        @Override
-        protected String formatSimulationTime(final Duration simulationTime)
-        {
-            var dt = ((ClockDevsSimulatorInterface) getSimulator()).getSimulatorClockTime().localDateTime();
-            return dt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            this(simulator, () -> simulator.getSimulatorClockTime().localDateTime()
+                    .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         }
     }
 
