@@ -52,7 +52,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     private Timer timer;
 
     /** Timer update interval in msec. */
-    private long updateInterval = 1000;
+    private long updateIntervalMs = 1000;
 
     /** Simulation time time. */
     private T prevSimTime;
@@ -79,7 +79,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         add(this.timeLabel);
 
         this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(new TimeUpdateTask(), 0, this.updateInterval);
+        this.timer.scheduleAtFixedRate(new TimeUpdateTask(), 0, this.updateIntervalMs);
     }
 
     /**
@@ -171,9 +171,9 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
      * Return the update interval (in ms).
      * @return the update interval (in ms)
      */
-    public long getUpdateInterval()
+    public long getUpdateIntervalMs()
     {
-        return this.updateInterval;
+        return this.updateIntervalMs;
     }
 
     /**
