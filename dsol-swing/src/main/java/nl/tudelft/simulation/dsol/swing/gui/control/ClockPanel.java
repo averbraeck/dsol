@@ -82,9 +82,41 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         this.timer.scheduleAtFixedRate(new TimeUpdateTask(), 0, this.updateIntervalMs);
     }
 
+    /** Updater for the clock panel. */
+    protected class TimeUpdateTask extends TimerTask implements Serializable
+    {
+        /** */
+        private static final long serialVersionUID = 20140000L;
+
+        @Override
+        public void run()
+        {
+            getTimeLabel().setText(ClockPanel.this.clockTimeSupplier.get());
+            getTimeLabel().repaint();
+        }
+
+        @Override
+        public String toString()
+        {
+            return "TimeUpdateTask of ClockPanel";
+        }
+    }
+
     /**
-     * Set the size of the time label on the screen. The proposed height is 35 pixels.
-     * @param dimension the new dimension of the time label on the screen
+     * Cancel the timer task.
+     */
+    public void cancelTimer()
+    {
+        if (this.timer != null)
+        {
+            this.timer.cancel();
+        }
+        this.timer = null;
+    }
+
+    /**
+     * Set the size of the clock panel on the screen. The proposed height is 35 pixels.
+     * @param dimension the new dimension of the clock panel on the screen
      */
     public void setPanelSize(final Dimension dimension)
     {
@@ -115,38 +147,6 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         this.timeFont = timeFont;
         setFont(this.timeFont);
         this.timeLabel.setFont(this.timeFont);
-    }
-
-    /**
-     * Cancel the timer task.
-     */
-    public void cancelTimer()
-    {
-        if (this.timer != null)
-        {
-            this.timer.cancel();
-        }
-        this.timer = null;
-    }
-
-    /** Updater for the clock panel. */
-    protected class TimeUpdateTask extends TimerTask implements Serializable
-    {
-        /** */
-        private static final long serialVersionUID = 20140000L;
-
-        @Override
-        public void run()
-        {
-            getTimeLabel().setText(ClockPanel.this.clockTimeSupplier.get());
-            getTimeLabel().repaint();
-        }
-
-        @Override
-        public String toString()
-        {
-            return "TimeUpdateTask of ClockPanel";
-        }
     }
 
     /**
