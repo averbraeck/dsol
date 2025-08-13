@@ -75,7 +75,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         setLayout(new FlowLayout(FlowLayout.LEFT));
         this.timeLabel = new AppearanceControlLabel();
         setTimeFont(new Font("SansSerif", Font.BOLD, 18));
-        setTimeLabelSize(new Dimension(150, 35));
+        setPanelSize(new Dimension(150, 35));
         add(this.timeLabel);
 
         this.timer = new Timer();
@@ -86,7 +86,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
      * Set the size of the time label on the screen. The proposed height is 35 pixels.
      * @param dimension the new dimension of the time label on the screen
      */
-    public void setTimeLabelSize(final Dimension dimension)
+    public void setPanelSize(final Dimension dimension)
     {
         Throw.whenNull(dimension, "dimension");
         setMinimumSize(dimension);
@@ -168,7 +168,8 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return updateInterval
+     * Return the update interval (in ms).
+     * @return the update interval (in ms)
      */
     public long getUpdateInterval()
     {
@@ -176,7 +177,8 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return prevSimTime
+     * Return the previous simulation time.
+     * @return the previous simulation time
      */
     public T getPrevSimTime()
     {
