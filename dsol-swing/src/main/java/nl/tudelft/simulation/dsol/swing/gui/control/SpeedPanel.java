@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
+import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
@@ -34,15 +35,13 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
     private static final long serialVersionUID = 20141211L;
 
     /** The JLabel that displays the simulation speed. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    public JLabel speedLabel;
+    private final JLabel speedLabel;
 
     /** the simulator. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    final SimulatorInterface<T> simulator;
+    private final SimulatorInterface<T> simulator;
 
     /** Font used to display the clock. */
-    private Font timeFont = new Font("SansSerif", Font.BOLD, 18);
+    private Font speedFont;
 
     /** The timer (so we can cancel it). */
     private Timer timer;
@@ -54,22 +53,51 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
     private T prevSimTime;
 
     /**
-     * Construct a clock panel.
+     * Construct a simulation speed panel.
      * @param simulator the simulator
      */
     public SpeedPanel(final SimulatorInterface<T> simulator)
     {
+        Throw.whenNull(simulator, "simulator");
         this.simulator = simulator;
-        setLayout(new FlowLayout(FlowLayout.LEFT));
-        setFont(getTimeFont());
 
+        setLayout(new FlowLayout(FlowLayout.LEFT));
         this.speedLabel = new AppearanceControlLabel();
-        this.speedLabel.setFont(getTimeFont());
-        this.speedLabel.setMaximumSize(new Dimension(100, 35));
+        setPanelSize(new Dimension(100, 35));
+        setSpeedFont(new Font("SansSerif", Font.BOLD, 18));
+
         add(this.speedLabel);
 
         this.timer = new Timer();
         this.timer.scheduleAtFixedRate(new TimeUpdateTask(), 0, this.updateIntervalMs);
+    }
+
+    /**
+     * Returns the simulation speed as a String.
+     * @param simulationTime simulation time
+     * @return simulation speed
+     */
+    protected abstract String formatSpeed(T simulationTime);
+
+    /** Updater for the clock panel. */
+    protected class TimeUpdateTask extends TimerTask implements Serializable
+    {
+        /** */
+        private static final long serialVersionUID = 20140000L;
+
+        @Override
+        public void run()
+        {
+            T simulationTime = getSimulator().getSimulatorTime();
+            getSpeedLabel().setText(formatSpeed(simulationTime));
+            getSpeedLabel().repaint();
+        }
+
+        @Override
+        public String toString()
+        {
+            return "TimeUpdateTask of SpeedPanel";
+        }
     }
 
     /**
@@ -84,29 +112,34 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         this.timer = null;
     }
 
-    /** Updater for the clock panel. */
-    protected class TimeUpdateTask extends TimerTask implements Serializable
+    /**
+     * Set the size of the speed panel on the screen. The proposed height is 35 pixels.
+     * @param dimension the new dimension of the speed panel on the screen
+     */
+    public void setPanelSize(final Dimension dimension)
     {
-        /** */
-        private static final long serialVersionUID = 20140000L;
-
-        @Override
-        public void run()
-        {
-            T simulationTime = SpeedPanel.this.getSimulator().getSimulatorTime();
-            getSpeedLabel().setText(formatSpeed(simulationTime));
-            getSpeedLabel().repaint();
-        }
-
-        @Override
-        public String toString()
-        {
-            return "TimeUpdateTask of SpeedPanel";
-        }
+        Throw.whenNull(dimension, "dimension");
+        setMinimumSize(dimension);
+        setSize(dimension);
+        setPreferredSize(dimension);
+        setMaximumSize(dimension);
     }
 
     /**
-     * @return speedLabel
+     * Set the font to display the time.
+     * @param speedFont the font to display the time
+     */
+    public void setSpeedFont(final Font speedFont)
+    {
+        Throw.whenNull(speedFont, "speedFont");
+        this.speedFont = speedFont;
+        setFont(this.speedFont);
+        this.speedLabel.setFont(this.speedFont);
+    }
+
+    /**
+     * Return the label in which the simulation speed is written.
+     * @return the label in which the simulation speed is written
      */
     public JLabel getSpeedLabel()
     {
@@ -114,7 +147,8 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return simulator
+     * Return the simulator.
+     * @return the simulator
      */
     public SimulatorInterface<T> getSimulator()
     {
@@ -122,15 +156,8 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return timeFont.
-     */
-    public Font getTimeFont()
-    {
-        return this.timeFont;
-    }
-
-    /**
-     * @return updateInterval
+     * Return the update interval (in ms).
+     * @return the update interval (in ms)
      */
     public long getUpdateIntervalMs()
     {
@@ -138,7 +165,8 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /**
-     * @return prevSimTime
+     * Return the previous simulation time.
+     * @return the previous simulation time
      */
     public T getPrevSimTime()
     {
@@ -153,13 +181,6 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
     {
         this.prevSimTime = prevSimTime;
     }
-
-    /**
-     * Returns the simulation speed as a String.
-     * @param simulationTime simulation time
-     * @return simulation speed
-     */
-    protected abstract String formatSpeed(T simulationTime);
 
     @Override
     public boolean isForeground()
