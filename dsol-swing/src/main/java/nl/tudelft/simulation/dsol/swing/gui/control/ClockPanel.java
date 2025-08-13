@@ -38,12 +38,10 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     private static final long serialVersionUID = 20141211L;
 
     /** The JLabel that displays the time. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    public JLabel timeLabel;
+    private final JLabel timeLabel;
 
     /** the simulator. */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    final SimulatorInterface<T> simulator;
+    private final SimulatorInterface<T> simulator;
 
     /** Font used to display the clock. */
     private Font timeFont;
