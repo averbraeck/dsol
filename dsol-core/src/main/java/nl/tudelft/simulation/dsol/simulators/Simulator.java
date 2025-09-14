@@ -161,6 +161,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     public void startImpl() throws SimRuntimeException
     {
         Throw.when(isStartingOrRunning(), SimRuntimeException.class, "Cannot start a running simulator");
+        Throw.when(isStopping(), SimRuntimeException.class, "Cannot start a stopping (not stopped yet) simulator");
         Throw.when(this.replication == null, SimRuntimeException.class, "Cannot start a simulator without replication details");
         Throw.when(!isInitialized(), SimRuntimeException.class, "Cannot start an uninitialized simulator");
         Throw.when(
