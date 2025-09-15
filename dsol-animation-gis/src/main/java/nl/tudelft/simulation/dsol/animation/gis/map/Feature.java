@@ -1,23 +1,24 @@
 package nl.tudelft.simulation.dsol.animation.gis.map;
 
-import java.awt.Color;
+import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.logger.CategoryLogger;
+
+import com.carrotsearch.hppc.FloatArrayList;
 
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
-import nl.tudelft.simulation.dsol.animation.gis.GisObject;
 import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
-import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
-import nl.tudelft.simulation.language.d2.Shape;
+import nl.tudelft.simulation.dsol.animation.gis.MarkerInterface;
+import nl.tudelft.simulation.dsol.animation.gis.Style;
 
 /**
- * Feature contains an element of a layer, defined by a key value combination, with its own colors.<br>
- * TODO: minimum scale and maximum scale to draw features has to be added again, but first, scale needs to be defined properly.
+ * Feature contains an element of a layer, defined by a key value combination, with its own colors.
  * <p>
  * Copyright (c) 2021-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
  * for project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL
@@ -43,39 +44,195 @@ public class Feature implements FeatureInterface
      */
     private String value = "*";
 
+    /** the list of shapes that have been retrieved for this feature. */
+    private List<Path2D> shapes = new ArrayList<>();
+
+    /** the shape style. */
+    private Style shapeStyle;
+
+    /** The names of the shape attributes per column. */
+    private List<String> shapeAttributeNames;
+
+    /** the shape attributes. */
+    private List<String[]> shapeAttributes = null;
+
+    /** the list of x-coordinates of the points that have been retrieved for this feature. */
+    private FloatArrayList xList = new FloatArrayList();
+
+    /** the list of y-coordinates of the points that have been retrieved for this feature. */
+    private FloatArrayList yList = new FloatArrayList();
+
+    /** the marker to use to draw points. */
+    private MarkerInterface pointMarker;
+
+    /** the style for the point markers. */
+    private Style markerStyle;
+
+    /** The names of the point attributes per column. */
+    private List<String> pointAttributeNames;
+
+    /** the point attributes. */
+    private List<String[]> pointAttributes = null;
+
     /** the z-index of this feature. The z-index indicates the drawing order, from low to high. */
     private double zIndex = 0.0;
-
-    /** the list of shapes that have been retrieved for this feature. */
-    private List<GisObject> shapes = new ArrayList<>();
-
-    /** the fillColor of the layer, by default no fill. */
-    private Color fillColor = null;
-
-    /** the outlineColor. */
-    private Color outlineColor = Color.BLACK;
-
-    /** the line width in px. */
-    private int lineWidthPx = 1;
-
-    /** the line width in meters. */
-    private double lineWidthM = Double.NaN;
-    
-    /** the scale threshold in m/px above which the feature should not be drawn. */
-    private double scaleThresholdMetersPerPx = 1.0E6; // default = draw always
 
     /** whether the shapes have been read or not. */
     private boolean initialized = false;
 
     /**
      * Create a feature as part of a layer.
-     * @param layer the layer to which this feature beongs
+     * @param layer the layer to which this feature belongs
      */
     public Feature(final LayerInterface layer)
     {
         super();
         this.layer = layer;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////// METHODS FOR SHAPES (Path2D) /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public void clearShapes()
+    {
+        this.shapes.clear();
+    }
+    
+    @Override
+    public void addShape(final Path2D shape)
+    {
+        this.shapes.add(shape);
+    }
+    
+    @Override
+    public void addShape(final Path2D shape, final String[] attributes)
+    {
+        this.shapes.add(shape);
+        this.shapeAttributes.add(attributes);
+    }
+
+    @Override
+    public int getNumShapes()
+    {
+        return this.shapes.size();
+    }
+
+    @Override
+    public Path2D getShape(final int index) throws IndexOutOfBoundsException
+    {
+        return this.shapes.get(index);
+    }
+
+    @Override
+    public Iterator<Path2D> shapeIterator()
+    {
+        return this.shapes.iterator();
+    }
+
+    @Override
+    public Iterator<Path2D> shapeIterator(final Bounds2d rectangle)
+    {
+        final Rectangle2D view2D = rectangle.toRectangle2D();
+        return this.shapes.stream().filter((s) -> view2D.intersects(s.getBounds2D())).iterator();
+    }
+
+    @Override
+    public Style getShapeStyle()
+    {
+        return this.shapeStyle;
+    }
+
+    @Override
+    public void setShapeStyle(final Style shapeStyle)
+    {
+        this.shapeStyle = shapeStyle;
+    }
+
+    @Override
+    public String getShapeAttribute(final int index, final int column) throws IndexOutOfBoundsException
+    {
+        return this.shapeAttributes.get(index)[column];
+    }
+
+    @Override
+    public String[] getShapeAttributes(final int index) throws IndexOutOfBoundsException
+    {
+        return this.shapeAttributes.get(index);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////// METHODS FOR POINTS //////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public int getNumPoints()
+    {
+        return this.xList.size();
+    }
+
+    @Override
+    public Style getMarkerStyle()
+    {
+        return this.markerStyle;
+    }
+
+    @Override
+    public void setMarkerStyle(final Style marker)
+    {
+        this.markerStyle = marker;
+    }
+
+    @Override
+    public MarkerInterface getPointMarker()
+    {
+        return this.pointMarker;
+    }
+
+    @Override
+    public void setPointMarker(final MarkerInterface pointMarker)
+    {
+        this.pointMarker = pointMarker;
+    }
+
+    @Override
+    public Iterator<Point2D> pointIterator()
+    {
+        return IntStream.range(0, getNumPoints() - 1)
+                .mapToObj((i) -> (Point2D) new Point2D.Float(this.xList.get(i), this.yList.get(i))).iterator();
+    }
+
+    @Override
+    public Iterator<Point2D> pointIterator(final Bounds2d rectangle)
+    {
+        final Rectangle2D view2D = rectangle.toRectangle2D();
+        return IntStream.range(0, getNumPoints() - 1)
+                .mapToObj((i) -> (Point2D) new Point2D.Float(this.xList.get(i), this.yList.get(i)))
+                .filter((p) -> view2D.contains(p)).iterator();
+    }
+
+    @Override
+    public Point2D getPoint(final int index) throws IndexOutOfBoundsException
+    {
+        return new Point2D.Float(this.xList.get(index), this.yList.get(index));
+    }
+
+    @Override
+    public String getPointAttribute(final int index, final int column) throws IndexOutOfBoundsException
+    {
+        return this.pointAttributes.get(index)[column];
+    }
+
+    @Override
+    public String[] getPointAttributes(final int index) throws IndexOutOfBoundsException
+    {
+        return this.pointAttributes.get(index);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////// GENERIC METHODS FOR FEATURE /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public final String getKey()
@@ -114,53 +271,6 @@ public class Feature implements FeatureInterface
     }
 
     @Override
-    public int getNumShapes()
-    {
-        return this.shapes.size();
-    }
-
-    @Override
-    public GisObject getShape(final int index) throws IndexOutOfBoundsException
-    {
-        return this.shapes.get(index);
-    }
-
-    @Override
-    public List<GisObject> getShapes()
-    {
-        return this.shapes;
-    }
-
-    @Override
-    public List<GisObject> getShapes(final Bounds2d rectangle)
-    {
-        List<GisObject> result = new ArrayList<>();
-        Rectangle2D rectangle2D = rectangle.toRectangle2D();
-        for (GisObject shape : this.shapes)
-        {
-            if (shape.getShape() instanceof SerializablePath)
-            {
-                if (Shape.overlaps(rectangle2D, ((SerializablePath) shape.getShape()).getBounds2D()))
-                {
-                    result.add(shape);
-                }
-            }
-            else if (shape.getShape() instanceof Point2D)
-            {
-                if (rectangle2D.contains((Point2D) shape.getShape()))
-                {
-                    result.add(shape);
-                }
-            }
-            else
-            {
-                CategoryLogger.always().error("unknown shape in cached content " + shape);
-            }
-        }
-        return result;
-    }
-
-    @Override
     public final void setValue(final String value)
     {
         this.value = value;
@@ -176,66 +286,6 @@ public class Feature implements FeatureInterface
     public void setZIndex(final double zIndex)
     {
         this.zIndex = zIndex;
-    }
-
-    @Override
-    public Color getFillColor()
-    {
-        return this.fillColor;
-    }
-
-    @Override
-    public void setFillColor(final Color fillColor)
-    {
-        this.fillColor = fillColor;
-    }
-
-    @Override
-    public Color getOutlineColor()
-    {
-        return this.outlineColor;
-    }
-
-    @Override
-    public void setOutlineColor(final Color outlineColor)
-    {
-        this.outlineColor = outlineColor;
-    }
-
-    @Override
-    public int getLineWidthPx()
-    {
-        return this.lineWidthPx;
-    }
-
-    @Override
-    public void setLineWidthPx(final int lineWidthPx)
-    {
-        this.lineWidthPx = lineWidthPx;
-    }
-
-    @Override
-    public double getLineWidthM()
-    {
-        return this.lineWidthM;
-    }
-
-    @Override
-    public void setLineWidthM(final double lineWidthM)
-    {
-        this.lineWidthM = lineWidthM;
-    }
-
-    @Override
-    public double getScaleThresholdMetersPerPx()
-    {
-        return this.scaleThresholdMetersPerPx;
-    }
-
-    @Override
-    public void setScaleThresholdMetersPerPx(final double scaleThresholdMetersPerPx)
-    {
-        this.scaleThresholdMetersPerPx = scaleThresholdMetersPerPx;
     }
 
     @Override

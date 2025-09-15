@@ -5,9 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -26,12 +27,9 @@ import org.djutils.logger.CategoryLogger;
 import nl.tudelft.simulation.dsol.animation.gis.DsolGisException;
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
-import nl.tudelft.simulation.dsol.animation.gis.GisObject;
 import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
 import nl.tudelft.simulation.dsol.animation.gis.MapImageInterface;
 import nl.tudelft.simulation.dsol.animation.gis.MapUnits;
-import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
-import nl.tudelft.simulation.dsol.animation.gis.SerializableRectangle2d;
 
 /**
  * Provides the implementation of a Map.
@@ -252,42 +250,41 @@ public class GisMap implements GisMapInterface
             for (var feature : featureList)
             {
                 if (this.visibleFeatures.contains(feature) && feature.isDisplay()
-                        && getMetersPerPixelY() < feature.getScaleThresholdMetersPerPx())
+                        && getMetersPerPixelY() < feature.getShapeStyle().getScaleThresholdMetersPerPx())
                 {
                     try
                     {
-                        if (feature.getOutlineColor() != null)
+                        var shapeStyle = feature.getShapeStyle();
+                        if (shapeStyle.getOutlineColor() != null)
                         {
-                            if (!Double.isNaN(feature.getLineWidthM()))
+                            if (!Double.isNaN(shapeStyle.getLineWidthM()))
                             {
                                 graphics.setStroke(
-                                        new BasicStroke(Math.max(1, (int) (feature.getLineWidthM() / getMetersPerPixelY())),
+                                        new BasicStroke(Math.max(1, (int) (shapeStyle.getLineWidthM() / getMetersPerPixelY())),
                                                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                             }
-                            else if (feature.getLineWidthPx() > 1)
-                                graphics.setStroke(new BasicStroke(feature.getLineWidthPx(), BasicStroke.CAP_ROUND,
+                            else if (shapeStyle.getLineWidthPx() > 1)
+                                graphics.setStroke(new BasicStroke(shapeStyle.getLineWidthPx(), BasicStroke.CAP_ROUND,
                                         BasicStroke.JOIN_ROUND));
                             else
                                 graphics.setStroke(new BasicStroke(1));
                         }
-                        List<GisObject> shapes = feature.getShapes(this.extent);
-                        SerializablePath shape = null;
-                        for (Iterator<GisObject> shapeIterator = shapes.iterator(); shapeIterator.hasNext();)
+                        var shapeIterator = feature.shapeIterator(this.extent);
+                        while (shapeIterator.hasNext())
                         {
-                            GisObject gisObject = shapeIterator.next();
-                            shape = (SerializablePath) gisObject.getShape();
+                            Path2D shape = shapeIterator.next();
                             if (feature.isTransform())
                             {
                                 shape.transform(transform);
                             }
-                            if (feature.getFillColor() != null)
+                            if (shapeStyle.getFillColor() != null)
                             {
-                                graphics.setColor(feature.getFillColor());
+                                graphics.setColor(shapeStyle.getFillColor());
                                 graphics.fill(shape);
                             }
-                            if (feature.getOutlineColor() != null)
+                            if (shapeStyle.getOutlineColor() != null)
                             {
-                                graphics.setColor(feature.getOutlineColor());
+                                graphics.setColor(shapeStyle.getOutlineColor());
                                 graphics.draw(shape);
                             }
                             if (feature.isTransform())
@@ -436,7 +433,7 @@ public class GisMap implements GisMapInterface
     }
 
     @Override
-    public void zoomRectangle(final SerializableRectangle2d rectangle)
+    public void zoomRectangle(final Rectangle2D rectangle)
     {
 
         double maxX = getImage().getSize().getWidth() / getScaleX() + this.extent.getMinX();
