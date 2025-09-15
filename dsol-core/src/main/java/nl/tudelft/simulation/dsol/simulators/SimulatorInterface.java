@@ -235,6 +235,24 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     }
 
     /**
+     * isStarting is true between the moment the start has been triggered, till the moment the run has really started.
+     * @return whether the trigger for Simulator start has been given, but the simulator has not yet started
+     */
+    default boolean isStarting()
+    {
+        return getRunState() == RunState.STARTING;
+    }
+
+    /**
+     * isRunning is true between the moment the run has really started till the moment the stop has been initiated.
+     * @return whether the simulator has started running, but is not yet stopping
+     */
+    default boolean isStarted()
+    {
+        return getRunState() == RunState.STARTED;
+    }
+
+    /**
      * isStartingOrRunning is true between the moment the start has been initiated, till the moment the stop has been initiated.
      * It includes the STARTING state and the STARTED state.
      * @return whether the Simulator has been started or has successfully started, and has not yet been stopped
@@ -242,6 +260,26 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     default boolean isStartingOrRunning()
     {
         return getRunState() == RunState.STARTED || getRunState() == RunState.STARTING;
+    }
+
+    /**
+     * isStopping is true between the moment the stop has been triggered, till the moment the run has really stopped.
+     * @return whether the trigger for Simulator stop has been given, but the simulator has not yet stopped
+     */
+    default boolean isStopping()
+    {
+        return getRunState() == RunState.STOPPING;
+    }
+
+    /**
+     * isStopped is true when the simulator is stopped, (and has not yet been triggered to start again). It includes the states
+     * STOPPED, NOT_INITIALIZED, INITIALIZED, and ENDED. In all these cases, the simulator is truly stopped.
+     * @return whether the simulator has completely stopped (and has not yet been triggered to start again)
+     */
+    default boolean isStopped()
+    {
+        return getRunState() == RunState.STOPPED || getRunState() == RunState.NOT_INITIALIZED
+                || getRunState() == RunState.INITIALIZED || getRunState() == RunState.ENDED;
     }
 
     /**
