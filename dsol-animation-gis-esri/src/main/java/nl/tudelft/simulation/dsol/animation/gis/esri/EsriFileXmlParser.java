@@ -25,6 +25,7 @@ import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
 import nl.tudelft.simulation.dsol.animation.gis.MapImageInterface;
 import nl.tudelft.simulation.dsol.animation.gis.MapUnits;
+import nl.tudelft.simulation.dsol.animation.gis.Style;
 import nl.tudelft.simulation.dsol.animation.gis.map.Feature;
 import nl.tudelft.simulation.dsol.animation.gis.map.GisMap;
 import nl.tudelft.simulation.dsol.animation.gis.map.Layer;
@@ -260,6 +261,8 @@ public final class EsriFileXmlParser
                 layer.setName(nodeText(layerNode, "name"));
                 Feature feature = new Feature(layer);
                 layer.addFeature(feature); // key and value remain at * and *
+                Style shapeStyle = new Style();
+                feature.setShapeStyle(shapeStyle);
 
                 Node dataNode = nodeTagItem(layerNode, "data", 0);
                 if (nodeTagExists(dataNode, "shapeFile"))
@@ -275,7 +278,7 @@ public final class EsriFileXmlParser
                 }
                 if (nodeTagExists(layerNode, "scale"))
                 {
-                    feature.setScaleThresholdMetersPerPx(nodeDouble(layerNode, "scale"));
+                    shapeStyle.setScaleThresholdMetersPerPx(nodeDouble(layerNode, "scale"));
                 }
                 if (nodeTagExists(layerNode, "zIndex"))
                 {
@@ -284,11 +287,11 @@ public final class EsriFileXmlParser
                 }
                 if (nodeTagExists(layerNode, "fillColor"))
                 {
-                    feature.setFillColor(parseColor(nodeTagItem(layerNode, "fillColor", 0)));
+                    shapeStyle.setFillColor(parseColor(nodeTagItem(layerNode, "fillColor", 0)));
                 }
                 if (nodeTagExists(layerNode, "outlineColor"))
                 {
-                    feature.setOutlineColor(parseColor(nodeTagItem(layerNode, "outlineColor", 0)));
+                    shapeStyle.setOutlineColor(parseColor(nodeTagItem(layerNode, "outlineColor", 0)));
                 }
                 if (nodeTagExists(layerNode, "display"))
                 {

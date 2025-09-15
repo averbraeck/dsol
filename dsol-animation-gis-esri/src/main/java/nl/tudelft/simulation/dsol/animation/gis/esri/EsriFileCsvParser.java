@@ -17,6 +17,7 @@ import de.siegmar.fastcsv.reader.NamedCsvReader;
 import de.siegmar.fastcsv.reader.NamedCsvRow;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
+import nl.tudelft.simulation.dsol.animation.gis.Style;
 import nl.tudelft.simulation.dsol.animation.gis.map.Feature;
 import nl.tudelft.simulation.dsol.animation.gis.map.GisMap;
 import nl.tudelft.simulation.dsol.animation.gis.map.Layer;
@@ -129,9 +130,11 @@ public final class EsriFileCsvParser
             {
                 throw new IOException("Cannot locate shapeFile: " + shapeFile);
             }
-            feature.setOutlineColor(outlineColor);
-            feature.setFillColor(fillColor);
-            feature.setScaleThresholdMetersPerPx(scaleThresholdMetersPerPx);
+            Style shapeStyle = new Style();
+            shapeStyle.setOutlineColor(outlineColor);
+            shapeStyle.setFillColor(fillColor);
+            shapeStyle.setScaleThresholdMetersPerPx(scaleThresholdMetersPerPx);
+            feature.setShapeStyle(shapeStyle);
             layer.setDisplay(display);
             layer.setTransform(transform);
             layer.setZIndex(zIndex);
