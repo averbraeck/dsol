@@ -19,6 +19,7 @@ import de.siegmar.fastcsv.reader.NamedCsvRow;
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
 import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
+import nl.tudelft.simulation.dsol.animation.gis.Style;
 import nl.tudelft.simulation.dsol.animation.gis.map.Feature;
 import nl.tudelft.simulation.dsol.animation.gis.map.GisMap;
 import nl.tudelft.simulation.dsol.animation.gis.map.Layer;
@@ -158,14 +159,16 @@ public final class OsmFileCsvParser
             Feature feature = new Feature(layer);
             feature.setKey(key);
             feature.setValue(value);
-            feature.setOutlineColor(outlineColor);
-            feature.setFillColor(fillColor);
+            Style shapeStyle = new Style();
+            feature.setShapeStyle(shapeStyle);
+            shapeStyle.setOutlineColor(outlineColor);
+            shapeStyle.setFillColor(fillColor);
             feature.setZIndex(zIndex);
-            feature.setScaleThresholdMetersPerPx(scaleThresholdMetersPerPx);
+            shapeStyle.setScaleThresholdMetersPerPx(scaleThresholdMetersPerPx);
             if (styleMap.containsKey("lineWidthPx"))
-                feature.setLineWidthPx(styleMap.get("lineWidthPx").intValue());
+                shapeStyle.setLineWidthPx(styleMap.get("lineWidthPx").intValue());
             if (styleMap.containsKey("lineWidthM"))
-                feature.setLineWidthM(styleMap.get("lineWidthM").doubleValue());
+                shapeStyle.setLineWidthM(styleMap.get("lineWidthM").doubleValue());
             layer.addFeature(feature);
             featuresToRead.add(feature);
             layer.setDisplay(display);

@@ -10,8 +10,6 @@ import java.util.Map;
 
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
-import nl.tudelft.simulation.dsol.animation.gis.GisObject;
-import nl.tudelft.simulation.dsol.animation.gis.SerializablePath;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
 
 /**
@@ -217,7 +215,7 @@ public class OsmEntityProcessor
      */
     private void addWay(final MiniWay way)
     {
-        SerializablePath path = new SerializablePath(Path2D.WIND_NON_ZERO, way.wayNodesLat.length);
+        Path2D.Float path = new Path2D.Float(Path2D.WIND_NON_ZERO, way.wayNodesLat.length);
         boolean start = false;
         for (int i = 0; i < way.wayNodesLat.length; i++)
         {
@@ -238,8 +236,7 @@ public class OsmEntityProcessor
             }
             path.lineTo(coordinate.x(), coordinate.y());
         }
-        String[] att = new String[0];
-        way.feature.getShapes().add(new GisObject(path, att));
+        way.feature.addShape(path);
     }
 
     /**
@@ -250,13 +247,12 @@ public class OsmEntityProcessor
     {
         List<Path2D> outerRings = makeRings(relation.outerWayIds, true);
         List<Path2D> innerRings = makeRings(relation.innerWayIds, false);
-        SerializablePath multipolygon = new SerializablePath(Path2D.WIND_NON_ZERO);
+        Path2D.Float multipolygon = new Path2D.Float(Path2D.WIND_NON_ZERO);
         for (Path2D outer : outerRings)
             multipolygon.append(outer, false);
         for (Path2D inner : innerRings)
             multipolygon.append(inner, false);
-        String[] att = new String[0];
-        relation.feature.getShapes().add(new GisObject(multipolygon, att));
+        relation.feature.addShape(multipolygon);
     }
 
     /**
