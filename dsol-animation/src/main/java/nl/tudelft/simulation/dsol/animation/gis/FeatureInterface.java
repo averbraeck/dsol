@@ -1,8 +1,9 @@
 package nl.tudelft.simulation.dsol.animation.gis;
 
-import java.awt.Color;
+import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Iterator;
 
 import org.djutils.draw.bounds.Bounds2d;
 
@@ -18,6 +19,10 @@ import org.djutils.draw.bounds.Bounds2d;
  */
 public interface FeatureInterface extends Serializable
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////// GENERIC METHODS FOR FEATURE /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * Return the key that defines a feature in a layer, can be "*" if no features are defined.
      * @return the key that defines a feature in a layer, can be "*" if no features are defined
@@ -39,11 +44,12 @@ public interface FeatureInterface extends Serializable
     String getValue();
 
     /**
-     * Set the z-index of this feature. The z-index indicates the drawing order, from low to high. Any system can be used to
-     * indicate drawing order.
-     * @param zIndex the z-index of this feature
+     * Set the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data source
+     * that have the correct key have to be drawn.
+     * @param value the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data
+     *            source that have the correct key have to be drawn.
      */
-    void setZIndex(double zIndex);
+    void setValue(String value);
 
     /**
      * Return the z-index of this feature. The z-index indicates the drawing order, from low to high. Any system can be used to
@@ -51,6 +57,13 @@ public interface FeatureInterface extends Serializable
      * @return the z-index of this feature
      */
     double getZIndex();
+
+    /**
+     * Set the z-index of this feature. The z-index indicates the drawing order, from low to high. Any system can be used to
+     * indicate drawing order.
+     * @param zIndex the z-index of this feature
+     */
+    void setZIndex(double zIndex);
 
     /**
      * Return the layer to which this feature belongs.
@@ -71,108 +84,8 @@ public interface FeatureInterface extends Serializable
     void setInitialized(boolean initialized);
 
     /**
-     * Return the number of shapes for this feature at this moment.
-     * @return the number of shapes in the data source
-     */
-    int getNumShapes();
-
-    /**
-     * Return a GisObject.
-     * @param index the number of the shape to be returned for this feature
-     * @return GisObject returns a <code>nl.tudelft.simulation.dsol.animation.gis.GisObject</code>
-     * @throws IndexOutOfBoundsException whenever index &gt; numShapes or index &lt; 0
-     */
-    GisObject getShape(int index) throws IndexOutOfBoundsException;
-
-    /**
-     * Return all the shapes of the particular data source for this feature.
-     * @return List the resulting List of <code>nl.tudelft.simulation.dsol.animation.gis.GisObject</code>
-     */
-    List<GisObject> getShapes();
-
-    /**
-     * Return the shapes of the particular data source for this feature, bound to a particular extent.
-     * @param rectangle the extent of the box (in geo-coordinates)
-     * @return List the resulting List of <code>nl.tudelft.simulation.dsol.animation.gis.GisObject</code>
-     */
-    List<GisObject> getShapes(Bounds2d rectangle);
-
-    /**
-     * Set the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data source
-     * that have the correct key have to be drawn.
-     * @param value the value belonging to the key that defines the feature in a layer, can be "*" if all elements in the data
-     *            source that have the correct key have to be drawn.
-     */
-    void setValue(String value);
-
-    /**
-     * Return the fill color for the layer.
-     * @return the rgb(a) fill color for the layer
-     */
-    Color getFillColor();
-
-    /**
-     * Set the fill color for the layer.
-     * @param fillColor the rgb(a) fill color for the layer
-     */
-    void setFillColor(Color fillColor);
-
-    /**
-     * Return the outline (line) color for the layer.
-     * @return the rgb(a) outline (line) color for the layer
-     */
-    Color getOutlineColor();
-
-    /**
-     * Set the outline (line) color for the layer.
-     * @param outlineColor the rgb(a) outline (line) color for the layer
-     */
-    void setOutlineColor(Color outlineColor);
-
-    /**
-     * Get the fixed line width of the (out)line in pixels.
-     * @return the fixed line width of the outline in pixels
-     */
-    int getLineWidthPx();
-
-    /**
-     * Set the fixed line width of the (out)line in pixels.
-     * @param lineWidthPx the fixed line width of the outline in pixels
-     */
-    void setLineWidthPx(int lineWidthPx);
-
-    /**
-     * Get the line width of the (out)line in meters.
-     * @return the line width of the outline in meters
-     */
-    double getLineWidthM();
-
-    /**
-     * Set the line width of the (out)line in meters.
-     * @param lineWidthM the line width of the outline in meters
-     */
-    void setLineWidthM(double lineWidthM);
-
-    /**
-     * Get the scale value (zoom level) to use as a threshold for drawing as the number of meters per pixel. Suppose, the number
-     * of meters per pixel is 5. When the scale (zoom level) of the map goes <b>below</b> 5 meters per pixel by zooming out, the
-     * feature is no longer drawn.
-     * @return the scale value (zoom level) to use as a threshold for drawing as the number of meters per pixel
-     */
-    double getScaleThresholdMetersPerPx();
-
-    /**
-     * Set the scale value (zoom level) to use as a threshold for drawing as the number of meters per pixel. Suppose, the number
-     * of meters per pixel is 5. When the scale (zoom level) of the map goes <b>below</b> 5 meters per pixel by zooming out, the
-     * feature is no longer drawn.
-     * @param scaleThresholdMetersPerPx the scale value (zoom level) to use as a threshold for drawing as the number of meters
-     *            per pixel
-     */
-    void setScaleThresholdMetersPerPx(double scaleThresholdMetersPerPx);
-
-    /**
-     * Return whether the shapes in the layer need to be transformed or not.
-     * @return whether the shapes in the layer need to be transformed
+     * Return whether the shapes for this feature need to be transformed or not.
+     * @return whether the shapes for this feature need to be transformed
      */
     default boolean isTransform()
     {
@@ -180,12 +93,162 @@ public interface FeatureInterface extends Serializable
     }
 
     /**
-     * Return whether the shapes in the layer need to be displayed or not.
-     * @return whether the shapes in the layer need to be displayed
+     * Return whether the shapes for this feature need to be displayed or not.
+     * @return whether the shapes for this feature need to be displayed
      */
     default boolean isDisplay()
     {
         return getLayer().isDisplay();
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////// METHODS FOR SHAPES (Path2D) /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * claar the collection of shapes for this feature.
+     */
+    void clearShapes();
+    
+    /**
+     * Add a shape for this feature.
+     * @param shape the shape to add
+     */
+    void addShape(Path2D shape);
+    
+    /**
+     * Add a shape and array of attributes for this feature.
+     * @param shape the shape to add
+     * @param attributes the attributes to add
+     */
+    void addShape(Path2D shape, String[] attributes);
+    
+    /**
+     * Return the number of shapes for this feature.
+     * @return the number of shapes for this feature
+     */
+    int getNumShapes();
+
+    /**
+     * Return an iterator for the complete list of shapes for this feature.
+     * @return an iterator for the complete list of shapes for this feature
+     */
+    Iterator<Path2D> shapeIterator();
+
+    /**
+     * Return an iterator for the list of shapes for this feature that might have an overlap with the given rectangle.
+     * @param rectangle the bounds in world coordinates for which to check the shapes
+     * @return an iterator for the list of shapes for this feature that might have an overlap with the given rectangle
+     */
+    Iterator<Path2D> shapeIterator(Bounds2d rectangle);
+
+    /**
+     * Return the shape with the given index number for this feature.
+     * @param index the index number
+     * @return the shape with the given index number for this feature
+     * @throws IndexOutOfBoundsException when index not in in the valid range
+     */
+    Path2D getShape(int index) throws IndexOutOfBoundsException;
+
+    /**
+     * Return the shape attribute with the given column number and index number for this feature.
+     * @param index the index number
+     * @param column the column number
+     * @return the column attribute with the given index number for this feature
+     * @throws IndexOutOfBoundsException when index or column are not in in their valid range
+     */
+    String getShapeAttribute(int index, int column) throws IndexOutOfBoundsException;
+
+    /**
+     * Return an array with all shape attributes of the shape with the given index number for this feature.
+     * @param index the index number
+     * @return the array of attributes for the shape with the given index number for this feature
+     * @throws IndexOutOfBoundsException when index is not in in the valid range
+     */
+    String[] getShapeAttributes(int index) throws IndexOutOfBoundsException;
+
+    /**
+     * Return the style to apply for all shapes in this feature.
+     * @return the style to apply for the shapes in this feature
+     */
+    Style getShapeStyle();
+
+    /**
+     * Set the style to apply for all shapes in this feature.
+     * @param shapeStyle the style to apply for the shapes in this feature
+     */
+    void setShapeStyle(Style shapeStyle);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////// METHODS FOR POINTS //////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Return the number of point for this feature.
+     * @return the number of points for this feature
+     */
+    int getNumPoints();
+
+    /**
+     * Return an iterator for the complete list of points for this feature.
+     * @return an iterator for the complete list of points for this feature
+     */
+    Iterator<Point2D> pointIterator();
+
+    /**
+     * Return an iterator for the list of points for this feature that might have an overlap with the given rectangle.
+     * @param rectangle the bounds in world coordinates for which to check the points
+     * @return an iterator for the list of points for this feature that might have an overlap with the given rectangle
+     */
+    Iterator<Point2D> pointIterator(Bounds2d rectangle);
+
+    /**
+     * Return the point with the given index number for this feature.
+     * @param index the index number
+     * @return the point with the given index number for this feature
+     * @throws IndexOutOfBoundsException when index not in in the valid range
+     */
+    Point2D getPoint(int index) throws IndexOutOfBoundsException;
+
+    /**
+     * Return the point attribute with the given column number and index number for this feature.
+     * @param index the index number
+     * @param column the column number
+     * @return the column attribute with the given index number for this feature
+     * @throws IndexOutOfBoundsException when index or column are not in in their valid range
+     */
+    String getPointAttribute(int index, int column) throws IndexOutOfBoundsException;
+
+    /**
+     * Return an array with all point attributes of the point with the given index number for this feature.
+     * @param index the index number
+     * @return the array of attributes for the point with the given index number for this feature
+     * @throws IndexOutOfBoundsException when index is not in in the valid range
+     */
+    String[] getPointAttributes(int index) throws IndexOutOfBoundsException;
+
+    /**
+     * Return the point marker to display point elements for this feature.
+     * @return the point marker to display point elements for this feature
+     */
+    MarkerInterface getPointMarker();
+
+    /**
+     * Set the point marker to display point elements for this feature.
+     * @param pointMarker the point marker to display point elements for this feature
+     */
+    void setPointMarker(MarkerInterface pointMarker);
+
+    /**
+     * Return the style to apply for all point markers in this feature.
+     * @return the style to apply for the point markers in this feature
+     */
+    Style getMarkerStyle();
+
+    /**
+     * Set the style to apply for all point markers in this feature.
+     * @param markerStyle the style to apply for the point markers in this feature
+     */
+    void setMarkerStyle(Style markerStyle);
 
 }

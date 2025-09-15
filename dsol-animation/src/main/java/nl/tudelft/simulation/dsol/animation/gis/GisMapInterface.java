@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.animation.gis;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -256,7 +257,7 @@ public interface GisMapInterface extends Serializable
      * zooms the map based on a given rectangle.
      * @param rectangle a rectangle in the map (image units)
      */
-    void zoomRectangle(SerializableRectangle2d rectangle);
+    void zoomRectangle(Rectangle2D rectangle);
 
     /**
      * return whether background is drawn or not.
