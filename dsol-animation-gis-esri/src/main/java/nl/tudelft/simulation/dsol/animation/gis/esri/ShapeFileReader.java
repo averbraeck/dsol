@@ -191,85 +191,101 @@ public class ShapeFileReader implements DataSourceInterface
             if (shape != null) // skip Null Shape type 0
             {
                 if (shape instanceof Path2D path2D)
-                feature.addShape(path2D);
-                // TODO feature.addShapeAttributes(attributes[i]);
+                {
+                    feature.addShape(path2D);
+                    // TODO feature.addShapeAttributes(attributes[i]);
+                }
+                else if (shape instanceof Point2D point2D)
+                {
+                    feature.addPoint(point2D);
+                    // TODO feature.addPointAttributes(attributes[i]);
+                }
+                else if (shape instanceof Point2D[] point2Darray)
+                {
+                    for (Point2D point : point2Darray)
+                    {
+                        feature.addPoint(point);
+                        // TODO feature.addPointAttributes(attributes[i]); // same for all points
+                    }
+                }
             }
         }
         shapeInput.close();
     }
 
-//    /**
-//     * Read all shapes for a certain extent directly from the shape file, without caching (the cache is stored at the Features).
-//     * @param extent the extent for which to read the shapes
-//     * @return the shapes for the given extent that are directly read from the shape file
-//     * @throws IOException when there is a problem reading the ESRI files.
-//     */
-//    public synchronized List<GisObject> readShapes(final Bounds2d extent) throws IOException
-//    {
-//        ObjectEndianInputStream shapeInput = new ObjectEndianInputStream(this.shpFile.openStream());
-//
-//        shapeInput.skipBytes(100);
-//        ArrayList<GisObject> results = new ArrayList<>();
-//
-//        String[][] attributes = this.dbfReader.getRows();
-//        for (int i = 0; i < this.numShapes; i++)
-//        {
-//            shapeInput.setEndianness(Endianness.BIG_ENDIAN);
-//            int shapeNumber = shapeInput.readInt();
-//            int contentLength = shapeInput.readInt();
-//            shapeInput.setEndianness(Endianness.LITTLE_ENDIAN);
-//
-//            // the null type is properly skipped
-//            int type = shapeInput.readInt();
-//            if (type != 0 && type != 1 && type != 11 && type != 21)
-//            {
-//                DoubleXY min = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
-//                DoubleXY max = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
-//                double minX = Math.min(min.x(), max.x());
-//                double minY = Math.min(min.y(), max.y());
-//                double width = Math.max(min.x(), max.x()) - minX;
-//                double height = Math.max(min.y(), max.y()) - minY;
-//                SerializableRectangle2d bounds = new SerializableRectangle2d.Double(minX, minY, width, height);
-//                if (Shape.overlaps(extent.toRectangle2D(), bounds))
-//                {
-//                    results.add(
-//                            new GisObject(this.readShape(shapeInput, shapeNumber, contentLength, type, false), attributes[i]));
-//                }
-//                else
-//                {
-//                    shapeInput.skipBytes((2 * contentLength) - 36);
-//                }
-//            }
-//            else if (type != 0)
-//            {
-//                Point2D temp = (Point2D) this.readShape(shapeInput, shapeNumber, contentLength, type, false);
-//                if (extent.toRectangle2D().contains(temp))
-//                {
-//                    results.add(new GisObject(temp, attributes[i]));
-//                }
-//            }
-//        }
-//        shapeInput.close();
-//        return results;
-//    }
-//
-//    /**
-//     * Return the shapes based on a particular value of the attributes.
-//     * @param attribute the value of the attribute
-//     * @param columnName the columnName
-//     * @return List the resulting ArrayList of <code>nl.tudelft.simulation.dsol.animation.gis.GisObject</code>
-//     * @throws IOException on file IO or database connection failure
-//     */
-//    public synchronized List<GisObject> getShapes(final String attribute, final String columnName) throws IOException
-//    {
-//        List<GisObject> result = new ArrayList<>();
-//        int[] shapeNumbers = this.dbfReader.getRowNumbers(attribute, columnName);
-//        for (int i = 0; i < shapeNumbers.length; i++)
-//        {
-//            result.add(this.readShape(i));
-//        }
-//        return result;
-//    }
+    // /**
+    // * Read all shapes for a certain extent directly from the shape file, without caching (the cache is stored at the
+    // Features).
+    // * @param extent the extent for which to read the shapes
+    // * @return the shapes for the given extent that are directly read from the shape file
+    // * @throws IOException when there is a problem reading the ESRI files.
+    // */
+    // public synchronized List<GisObject> readShapes(final Bounds2d extent) throws IOException
+    // {
+    // ObjectEndianInputStream shapeInput = new ObjectEndianInputStream(this.shpFile.openStream());
+    //
+    // shapeInput.skipBytes(100);
+    // ArrayList<GisObject> results = new ArrayList<>();
+    //
+    // String[][] attributes = this.dbfReader.getRows();
+    // for (int i = 0; i < this.numShapes; i++)
+    // {
+    // shapeInput.setEndianness(Endianness.BIG_ENDIAN);
+    // int shapeNumber = shapeInput.readInt();
+    // int contentLength = shapeInput.readInt();
+    // shapeInput.setEndianness(Endianness.LITTLE_ENDIAN);
+    //
+    // // the null type is properly skipped
+    // int type = shapeInput.readInt();
+    // if (type != 0 && type != 1 && type != 11 && type != 21)
+    // {
+    // DoubleXY min = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
+    // DoubleXY max = this.coordinateTransform.doubleTransform(shapeInput.readDouble(), shapeInput.readDouble());
+    // double minX = Math.min(min.x(), max.x());
+    // double minY = Math.min(min.y(), max.y());
+    // double width = Math.max(min.x(), max.x()) - minX;
+    // double height = Math.max(min.y(), max.y()) - minY;
+    // SerializableRectangle2d bounds = new SerializableRectangle2d.Double(minX, minY, width, height);
+    // if (Shape.overlaps(extent.toRectangle2D(), bounds))
+    // {
+    // results.add(
+    // new GisObject(this.readShape(shapeInput, shapeNumber, contentLength, type, false), attributes[i]));
+    // }
+    // else
+    // {
+    // shapeInput.skipBytes((2 * contentLength) - 36);
+    // }
+    // }
+    // else if (type != 0)
+    // {
+    // Point2D temp = (Point2D) this.readShape(shapeInput, shapeNumber, contentLength, type, false);
+    // if (extent.toRectangle2D().contains(temp))
+    // {
+    // results.add(new GisObject(temp, attributes[i]));
+    // }
+    // }
+    // }
+    // shapeInput.close();
+    // return results;
+    // }
+    //
+    // /**
+    // * Return the shapes based on a particular value of the attributes.
+    // * @param attribute the value of the attribute
+    // * @param columnName the columnName
+    // * @return List the resulting ArrayList of <code>nl.tudelft.simulation.dsol.animation.gis.GisObject</code>
+    // * @throws IOException on file IO or database connection failure
+    // */
+    // public synchronized List<GisObject> getShapes(final String attribute, final String columnName) throws IOException
+    // {
+    // List<GisObject> result = new ArrayList<>();
+    // int[] shapeNumbers = this.dbfReader.getRowNumbers(attribute, columnName);
+    // for (int i = 0; i < shapeNumbers.length; i++)
+    // {
+    // result.add(this.readShape(i));
+    // }
+    // return result;
+    // }
 
     /**
      * Read a shape.
@@ -528,7 +544,8 @@ public class ShapeFileReader implements DataSourceInterface
      * @return the java2D PointShape
      * @throws IOException on file IO or database connection failure
      */
-    private synchronized Point2D.Float readPointZ(final ObjectEndianInputStream input, final int contentLength) throws IOException
+    private synchronized Point2D.Float readPointZ(final ObjectEndianInputStream input, final int contentLength)
+            throws IOException
     {
         Point2D.Float point = this.readPoint(input);
         input.skipBytes((contentLength * 2) - 20);
