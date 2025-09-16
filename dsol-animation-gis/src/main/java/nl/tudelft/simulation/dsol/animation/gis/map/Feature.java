@@ -54,7 +54,7 @@ public class Feature implements FeatureInterface
     private List<String> shapeAttributeNames;
 
     /** the shape attributes. */
-    private List<String[]> shapeAttributes = null;
+    private List<String[]> shapeAttributes = new ArrayList<>();
 
     /** the list of x-coordinates of the points that have been retrieved for this feature. */
     private FloatArrayList xList = new FloatArrayList();
@@ -72,7 +72,7 @@ public class Feature implements FeatureInterface
     private List<String> pointAttributeNames;
 
     /** the point attributes. */
-    private List<String[]> pointAttributes = null;
+    private List<String[]> pointAttributes = new ArrayList<>();
 
     /** the z-index of this feature. The z-index indicates the drawing order, from low to high. */
     private double zIndex = 0.0;
@@ -170,6 +170,20 @@ public class Feature implements FeatureInterface
     public int getNumPoints()
     {
         return this.xList.size();
+    }
+
+    @Override
+    public void addPoint(final Point2D point)
+    {
+        this.xList.add((float) point.getX());
+        this.yList.add((float) point.getY());
+    }
+
+    @Override
+    public void addPoint(final Point2D point, final String[] attributes)
+    {
+        addPoint(point);
+        this.pointAttributes.add(attributes);
     }
 
     @Override
