@@ -190,6 +190,19 @@ public interface FeatureInterface extends Serializable
     int getNumPoints();
 
     /**
+     * Add a point for this feature.
+     * @param point the point to add
+     */
+    void addPoint(Point2D point);
+    
+    /**
+     * Add a shape and array of attributes for this feature.
+     * @param point the point to add
+     * @param attributes the attributes to add
+     */
+    void addPoint(Point2D point, String[] attributes);
+    
+    /**
      * Return an iterator for the complete list of points for this feature.
      * @return an iterator for the complete list of points for this feature
      */
