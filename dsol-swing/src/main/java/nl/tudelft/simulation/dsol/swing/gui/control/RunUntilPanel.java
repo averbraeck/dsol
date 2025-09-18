@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
 import org.djutils.exceptions.Throw;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
@@ -119,14 +120,14 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
         }
         catch (Exception exception)
         {
-            getSimulator().getLogger().always().warn(exception);
+            CategoryLogger.always().warn(exception);
             try
             {
                 cancel();
             }
             catch (Exception e)
             {
-                getSimulator().getLogger().always().warn(e);
+                CategoryLogger.always().warn(e);
             }
         }
     }

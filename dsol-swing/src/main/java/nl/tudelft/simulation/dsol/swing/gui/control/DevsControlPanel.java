@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
@@ -90,7 +91,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
                 }
                 catch (SimRuntimeException exception)
                 {
-                    getSimulator().getLogger().always()
+                    CategoryLogger.always()
                             .error("Caught an exception while trying to schedule an autoPauseSimulator event "
                                     + "at the current simulator time");
                 }
@@ -171,7 +172,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
                 }
                 catch (SimRuntimeException exception)
                 {
-                    getSimulator().getLogger().always()
+                    CategoryLogger.always()
                             .error("Caught an exception while trying to re-schedule an autoPauseEvent at the next real event");
                 }
             }

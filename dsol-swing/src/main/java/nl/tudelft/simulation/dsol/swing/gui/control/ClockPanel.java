@@ -408,7 +408,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
         public ClockTime(final ClockDevsSimulatorInterface simulator, final Supplier<String> clockTimeSupplier)
         {
             super(simulator, clockTimeSupplier);
-            setPrevSimTime(Duration.instantiateSI(simulator.getStartClockTime().si));
+            setPrevSimTime(Duration.ofSI(simulator.getStartClockTime().si));
         }
 
         /**

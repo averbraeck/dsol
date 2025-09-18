@@ -407,7 +407,7 @@ public abstract class SpeedPanel<T extends Number & Comparable<T>> extends JPane
         public ClockTime(final ClockDevsSimulatorInterface simulator)
         {
             super(simulator);
-            setPrevSimTime(Duration.instantiateSI(simulator.getStartClockTime().si));
+            setPrevSimTime(Duration.ofSI(simulator.getStartClockTime().si));
             setPanelSize(new Dimension(120, 35));
         }
 
