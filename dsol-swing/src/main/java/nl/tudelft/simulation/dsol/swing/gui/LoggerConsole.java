@@ -2,8 +2,7 @@ package nl.tudelft.simulation.dsol.swing.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.UUID;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,17 +13,17 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import org.djutils.logger.CategoryLogger;
-import org.pmw.tinylog.Configuration;
-import org.pmw.tinylog.Configurator;
-import org.pmw.tinylog.Level;
-import org.pmw.tinylog.LogEntry;
-import org.pmw.tinylog.writers.LogEntryValue;
-import org.pmw.tinylog.writers.Writer;
+import org.djutils.logger.CategoryLogger.CategoryAppenderFactory;
+import org.djutils.logger.LogCategory;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.PatternLayout;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.Appender;
+import ch.qos.logback.core.AppenderBase;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
 
 /**
@@ -37,76 +36,100 @@ import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
  * </p>
  * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
  */
-public class ConsoleLogger extends JPanel implements AppearanceControl
+public class LoggerConsole extends JPanel implements AppearanceControl
 {
     /** */
     private static final long serialVersionUID = 1L;
 
-    /** */
-    @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected ConsoleLogWriter consoleLogWriter;
+    /** the document to write to. */
+    private StyledDocument doc;
 
-    /** current message format. */
-    private String messageFormat = CategoryLogger.DEFAULT_MESSAGE_FORMAT;
+    /** the color style. */
+    private Style style;
 
-    /** the current logging level. */
-    private Level level = Level.INFO;
+    /** number of lines. */
+    private int nrLines = 0;
+
+    /** the maximum number of lines before the first lines will be erased. */
+    private int maxLines = 20000;
 
     /** the text pane. */
     private JTextPane textPane;
 
+    /** the appender factory with its id. */
+    JConsoleAppender appender;
+
     /**
-     * Constructor for Logger Console.
-     * @param logLevel the log level
+     * Constructor for LoggerConsole.
      */
-    public ConsoleLogger(final Level logLevel)
     {
-        this.level = logLevel;
         setLayout(new BorderLayout());
         this.textPane = new JTextPane();
         this.textPane.setEditable(false);
         this.textPane.setBackground(Color.WHITE);
         this.textPane.setOpaque(true);
-        this.consoleLogWriter = new ConsoleLogWriter(this.textPane);
-        Configurator.currentConfig().addWriter(this.consoleLogWriter, this.level, this.messageFormat).activate();
+        var appenderFactory = new JConsoleAppenderFactory(this);
+        String id = UUID.randomUUID().toString();
+        CategoryLogger.addAppender(id, appenderFactory);
         JScrollPane scrollPane = new JScrollPane(this.textPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBackground(Color.WHITE);
         scrollPane.setOpaque(true);
         add(scrollPane, BorderLayout.CENTER);
+        this.doc = this.textPane.getStyledDocument();
+        this.style = this.textPane.addStyle("colorStyle", null);
     }
 
     /**
-     * Set a new logging format for the message lines of the Console writer. The default message format is:<br>
-     * {class_name}.{method}:{line} {message|indent=4}<br>
-     * <br>
-     * A few popular placeholders that can be used:<br>
-     * - {class} Fully-qualified class name where the logging request is issued<br>
-     * - {class_name} Class name (without package) where the logging request is issued<br>
-     * - {date} Date and time of the logging request, e.g. {date:yyyy-MM-dd HH:mm:ss} [SimpleDateFormat]<br>
-     * - {level} Logging level of the created log entry<br>
-     * - {line} Line number from where the logging request is issued<br>
-     * - {message} Associated message of the created log entry<br>
-     * - {method} Method name from where the logging request is issued<br>
-     * - {package} Package where the logging request is issued<br>
-     * @see <a href="https://tinylog.org/configuration#format">https://tinylog.org/configuration</a>
-     * @param newMessageFormat the new formatting pattern to use
+     * Write one or more log lines to the document. Note that the log line can be split into multiple lines.
+     * @param logLines the lines to write to the document
      */
-    public void setLogMessageFormat(final String newMessageFormat)
+    protected void addLine(final String logLines)
     {
-        Configurator.currentConfig().removeWriter(this.consoleLogWriter).activate();
-        this.messageFormat = newMessageFormat;
-        Configurator.currentConfig().addWriter(this.consoleLogWriter, this.level, this.messageFormat).activate();
-    }
+        Runnable runnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                String[] lines = logLines.split("\\r?\\n");
 
-    /**
-     * @param newLevel the new log level for the Console
-     */
-    public void setLogLevel(final Level newLevel)
-    {
-        Configurator.currentConfig().removeWriter(this.consoleLogWriter).activate();
-        this.level = newLevel;
-        Configurator.currentConfig().addWriter(this.consoleLogWriter, this.level, this.messageFormat).activate();
+                while (LoggerConsole.this.nrLines > Math.max(0, LoggerConsole.this.maxLines - lines.length))
+                {
+                    Document document = LoggerConsole.this.doc;
+                    Element root = document.getDefaultRootElement();
+                    Element line = root.getElement(0);
+                    int end = line.getEndOffset();
+
+                    try
+                    {
+                        document.remove(0, end);
+                        LoggerConsole.this.nrLines--;
+                    }
+                    catch (BadLocationException exception)
+                    {
+                        // we cannot log this -- that would generate an infinite loop
+                        System.err.println("Was not able to remove lines from the document");
+                        break;
+                    }
+                }
+                try
+                {
+                    for (String line : lines)
+                    {
+                        LoggerConsole.this.doc.insertString(LoggerConsole.this.doc.getLength(), line + "\n",
+                                LoggerConsole.this.style);
+                        LoggerConsole.this.nrLines++;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    // we cannot log this -- that would generate an infinite loop
+                    System.err.println("Was not able to insert text in the Console");
+                }
+                LoggerConsole.this.textPane.setCaretPosition(LoggerConsole.this.doc.getLength());
+            }
+        };
+        SwingUtilities.invokeLater(runnable);
     }
 
     /**
@@ -116,7 +139,7 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
      */
     public void setMaxLines(final int maxLines)
     {
-        this.consoleLogWriter.maxLines = Math.max(1, maxLines);
+        this.maxLines = Math.max(1, maxLines);
     }
 
     @Override
@@ -126,141 +149,76 @@ public class ConsoleLogger extends JPanel implements AppearanceControl
     }
 
     /**
-     * LogWriter takes care of writing the log records to the console. <br>
-     * <br>
-     * Copyright (c) 2003-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
-     * See for project information <a href="https://www.simulation.tudelft.nl/" target="_blank"> www.simulation.tudelft.nl</a>.
-     * The source code and binary code of this software is proprietary information of Delft University of Technology.
-     * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
+     * The in-memory StringAppender class for testing whether the correct information has been logged.
      */
-    public static class ConsoleLogWriter implements Writer
+    protected static class JConsoleAppender extends AppenderBase<ILoggingEvent>
     {
-        /** the text pane. */
-        @SuppressWarnings("checkstyle:visibilitymodifier")
-        JTextPane textPane;
+        /** the last used pattern. */
+        private final String pattern;
 
-        /** the document to write to. */
-        @SuppressWarnings("checkstyle:visibilitymodifier")
-        StyledDocument doc;
+        /** The logger context. */
+        private final LoggerContext ctx;
 
-        /** the color style. */
-        @SuppressWarnings("checkstyle:visibilitymodifier")
-        Style style;
-
-        /** number of lines. */
-        @SuppressWarnings("checkstyle:visibilitymodifier")
-        int nrLines = 0;
-
-        /** the maximum number of lines before the first lines will be erased. */
-        @SuppressWarnings("checkstyle:visibilitymodifier")
-        protected int maxLines = 20000;
+        /** The LoggerConsole for this factory. */
+        private final LoggerConsole loggerConsole;
 
         /**
-         * @param textPane the text area to write the messages to.
+         * Create a new Appender.
+         * @param loggerConsole the LoggerConsole for this appender for the addLine() method
+         * @param pattern the formatting pattern
+         * @param ctx the logger context
          */
-        public ConsoleLogWriter(final JTextPane textPane)
+        public JConsoleAppender(final LoggerConsole loggerConsole, final String pattern, final LoggerContext ctx)
         {
-            this.textPane = textPane;
-            this.doc = textPane.getStyledDocument();
-            this.style = textPane.addStyle("colorStyle", null);
+            this.loggerConsole = loggerConsole;
+            this.pattern = pattern;
+            this.ctx = ctx;
         }
 
         @Override
-        public Set<LogEntryValue> getRequiredLogEntryValues()
+        protected void append(final ILoggingEvent event)
         {
-            return EnumSet.of(LogEntryValue.RENDERED_LOG_ENTRY); // Only the final rendered log entry is required
+            PatternLayout layout = new PatternLayout();
+            layout.setContext(this.ctx);
+            layout.setPattern(this.pattern);
+            layout.start();
+            String logLine = layout.doLayout(event);
+            this.loggerConsole.addLine(logLine);
         }
-
-        @Override
-        public void init(final Configuration configuration) throws Exception
-        {
-            // nothing to do
-        }
-
-        @Override
-        public synchronized void write(final LogEntry logEntry) throws Exception
-        {
-            Runnable runnable = new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    String[] lines = logEntry.getRenderedLogEntry().split("\\r?\\n");
-
-                    while (ConsoleLogWriter.this.nrLines > Math.max(0, ConsoleLogWriter.this.maxLines - lines.length))
-                    {
-                        Document document = ConsoleLogWriter.this.doc;
-                        Element root = document.getDefaultRootElement();
-                        Element line = root.getElement(0);
-                        int end = line.getEndOffset();
-
-                        try
-                        {
-                            document.remove(0, end);
-                            ConsoleLogWriter.this.nrLines--;
-                        }
-                        catch (BadLocationException exception)
-                        {
-                            CategoryLogger.always().error(exception);
-                            break;
-                        }
-                    }
-                    switch (logEntry.getLevel())
-                    {
-                        case TRACE:
-                            StyleConstants.setForeground(ConsoleLogWriter.this.style, Color.DARK_GRAY);
-                            break;
-
-                        case DEBUG:
-                            StyleConstants.setForeground(ConsoleLogWriter.this.style, Color.BLUE);
-                            break;
-
-                        case INFO:
-                            StyleConstants.setForeground(ConsoleLogWriter.this.style, Color.BLACK);
-                            break;
-
-                        case WARNING:
-                            StyleConstants.setForeground(ConsoleLogWriter.this.style, Color.MAGENTA);
-                            break;
-
-                        case ERROR:
-                            StyleConstants.setForeground(ConsoleLogWriter.this.style, Color.RED);
-                            break;
-
-                        default:
-                            break;
-                    }
-                    try
-                    {
-                        for (String line : lines)
-                        {
-                            ConsoleLogWriter.this.doc.insertString(ConsoleLogWriter.this.doc.getLength(), line + "\n",
-                                    ConsoleLogWriter.this.style);
-                            ConsoleLogWriter.this.nrLines++;
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        // we cannot log this -- that would generate an infinite loop
-                        System.err.println("Was not able to insert text in the Console");
-                    }
-                    ConsoleLogWriter.this.textPane.setCaretPosition(ConsoleLogWriter.this.doc.getLength());
-                }
-            };
-            SwingUtilities.invokeLater(runnable);
-        }
-
-        @Override
-        public void flush() throws Exception
-        {
-            // nothing to do
-        }
-
-        @Override
-        public void close() throws Exception
-        {
-            // nothing to do
-        }
-
     }
+
+    /**
+     * The Factory return an appender that can log messages to the console.
+     */
+    protected static class JConsoleAppenderFactory implements CategoryAppenderFactory
+    {
+        /** The LoggerConsole for this factory. */
+        private final LoggerConsole loggerConsole;
+
+        /**
+         * Instantiate the AppenderFactory.
+         * @param loggerConsole the LoggerConsole for this factory
+         */
+        public JConsoleAppenderFactory(final LoggerConsole loggerConsole)
+        {
+            this.loggerConsole = loggerConsole;
+        }
+
+        @Override
+        public Appender<ILoggingEvent> create(final String id, final LogCategory category, final String pattern,
+                final LoggerContext ctx)
+        {
+            JConsoleAppender app = new JConsoleAppender(this.loggerConsole, pattern, ctx);
+            app.setContext(ctx);
+            app.setName(id + "@" + category.toString());
+            return app;
+        }
+
+        @Override
+        public String id()
+        {
+            return "jconsole";
+        }
+    }
+
 }
