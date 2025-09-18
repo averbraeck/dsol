@@ -17,6 +17,7 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.d2.Renderable2dComparator;
@@ -242,7 +243,7 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
                 }
                 catch (Exception exception)
                 {
-                    this.simulator.getLogger().always().warn(exception, "notify");
+                    CategoryLogger.always().warn(exception, "notify");
                 }
             }
         }

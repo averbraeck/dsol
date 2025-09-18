@@ -20,6 +20,7 @@ import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.TimedEvent;
 import org.djutils.io.URLResource;
+import org.djutils.logger.CategoryLogger;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
@@ -168,7 +169,7 @@ public abstract class DsolWebServer implements EventListener
         }
         catch (SimRuntimeException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "Problem starting Simulator");
+            CategoryLogger.always().warn(exception, "Problem starting Simulator");
         }
         if (getSimulator().isStartingOrRunning())
         { return true; }
@@ -191,7 +192,7 @@ public abstract class DsolWebServer implements EventListener
         }
         catch (SimRuntimeException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "Problem stopping Simulator");
+            CategoryLogger.always().warn(exception, "Problem stopping Simulator");
         }
         if (!getSimulator().isStartingOrRunning())
         { return true; }
@@ -387,7 +388,7 @@ public abstract class DsolWebServer implements EventListener
                             }
                             catch (Exception exception)
                             {
-                                this.webServer.simulator.getLogger().always().warn(exception, "getSelectedObjects");
+                                CategoryLogger.always().warn(exception, "getSelectedObjects");
                             }
                             if (targets.size() > 0)
                             {

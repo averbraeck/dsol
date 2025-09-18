@@ -18,6 +18,7 @@ import org.djutils.draw.point.Point2d;
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.TimedEvent;
+import org.djutils.logger.CategoryLogger;
 import org.eclipse.jetty.server.Request;
 
 import jakarta.servlet.ServletException;
@@ -129,7 +130,7 @@ public class DsolWebModel implements EventListener
         }
         catch (SimRuntimeException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "Problem starting Simulator");
+            CategoryLogger.always().warn(exception, "Problem starting Simulator");
         }
         if (getSimulator().isStartingOrRunning())
         { return true; }
@@ -152,7 +153,7 @@ public class DsolWebModel implements EventListener
         }
         catch (SimRuntimeException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "Problem stopping Simulator");
+            CategoryLogger.always().warn(exception, "Problem stopping Simulator");
         }
         if (!getSimulator().isStartingOrRunning())
         { return true; }
@@ -328,7 +329,7 @@ public class DsolWebModel implements EventListener
                         }
                         catch (Exception exception)
                         {
-                            this.simulator.getLogger().always().warn(exception, "getSelectedObjects");
+                            CategoryLogger.always().warn(exception, "getSelectedObjects");
                         }
                         if (targets.size() > 0)
                         {

@@ -179,7 +179,7 @@ public abstract class AbstractTestDemoServer
                     try
                     {
                         Replication<Duration> newReplication = new SingleReplication<Duration>("rep 1", Duration.ZERO,
-                                Duration.ZERO, Duration.instantiateSI(3600.0));
+                                Duration.ZERO, Duration.ofSI(3600.0));
                         simulator.initialize(model, newReplication);
                         DsolWebModel webModel = new DsolWebModel(model.toString(), simulator);
                         AbstractTestDemoServer.this.sessionWebModelMap.put(sessionId, webModel);
