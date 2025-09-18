@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
+import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 import org.djutils.reflection.ClassUtil;
@@ -215,7 +216,7 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
             }
             catch (IllegalAccessException exception)
             {
-                this.simulator.getLogger().always().error("Tried to fire update for variable {} but got an exception.",
+                CategoryLogger.always().error("Tried to fire update for variable {} but got an exception.",
                         field.getName());
                 System.err.println(this.getModelName() + " - fireUpdateState: Tried to fire update for variable "
                         + field.getName() + " but got an exception.");

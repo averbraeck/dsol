@@ -2,6 +2,8 @@ package nl.tudelft.simulation.dsol.formalisms.devs;
 
 import java.rmi.RemoteException;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.AbstractDevsPortModel;
 import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.CoupledModel;
@@ -178,7 +180,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
             }
             catch (SimRuntimeException exception)
             {
-                this.simulator.getLogger().always().error(exception, "initialize");
+                CategoryLogger.always().error(exception, "initialize");
             }
         }
         else
@@ -217,14 +219,14 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
                             new SimEvent<T>((SimTime.plus(SimTime.minus(this.simulator.getSimulatorTime(), this.timeAdvance()),
                                     this.elapsedTime)), this, "deltaInternalEventHandler", null);
                     this.timeLastEvent = this.simulator.getSimulatorTime();
-                    this.simulator.getLogger().filter(Cat.DSOL).trace("schedule {}", this.nextEvent.toString());
+                    CategoryLogger.filter(Cat.DSOL).trace("schedule {}", this.nextEvent.toString());
                     this.simulator.scheduleEvent(this.nextEvent);
                     // this.simulator.setAuthorization(false);
                 }
             }
             catch (Exception e1)
             {
-                this.simulator.getLogger().always().error(e1);
+                CategoryLogger.always().error(e1);
             }
         }
         else
@@ -252,7 +254,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      */
     public void deltaConfluent(final T e, final Object value)
     {
-        this.simulator.getLogger().filter(Cat.DSOL).debug("deltaConfluent: CONFLUENT");
+        CategoryLogger.filter(Cat.DSOL).debug("deltaConfluent: CONFLUENT");
         if (this.conflictStrategy == AtomicModel.INTERNAL_FIRST)
         {
             this.deltaInternalEventHandler();

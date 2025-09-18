@@ -8,6 +8,7 @@ import java.util.Set;
 import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
 import org.djutils.event.reference.Reference;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions.PortNotFoundException;
@@ -151,7 +152,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         }
         catch (Exception e)
         {
-            this.simulator.getLogger().always().error(e);
+            CategoryLogger.always().error(e);
         }
 
     }
@@ -191,7 +192,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         }
         catch (Exception e)
         {
-            this.simulator.getLogger().always().error(e);
+            CategoryLogger.always().error(e);
         }
     }
 
@@ -230,7 +231,7 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         }
         catch (Exception e)
         {
-            this.simulator.getLogger().always().error(e);
+            CategoryLogger.always().error(e);
         }
     }
 

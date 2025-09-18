@@ -2,6 +2,8 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
 import java.rmi.RemoteException;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.devs.AtomicModel;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
@@ -65,7 +67,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
             AtomicModel<T> atomicModel = (AtomicModel<T>) this.model;
             while (atomicModel.getActivePort() != null)
             {
-                this.model.getSimulator().getLogger().filter(Cat.DSOL)
+                CategoryLogger.filter(Cat.DSOL)
                         .trace("receive: Waiting for event treatement // Another input is being processed");
                 try
                 {
@@ -82,7 +84,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                 atomicModel.setActivePort(this);
                 boolean passivity = true;
                 SimEvent<T> nextEventCopy = null;
-                this.model.getSimulator().getLogger().filter(Cat.DSOL).debug("receive: TIME IS {}",
+                CategoryLogger.filter(Cat.DSOL).debug("receive: TIME IS {}",
                         this.model.getSimulator().getSimulatorTime());
 
                 // Original: if (elapsedTime(time) - 0.000001 > timeAdvance())
@@ -90,9 +92,9 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                         atomicModel.timeAdvance().doubleValue());
                 if (etminta == 1)
                 {
-                    this.model.getSimulator().getLogger().always().error("receive: {} - {}", atomicModel.elapsedTime(time),
+                    CategoryLogger.always().error("receive: {} - {}", atomicModel.elapsedTime(time),
                             atomicModel.timeAdvance());
-                    this.model.getSimulator().getLogger().always()
+                    CategoryLogger.always()
                             .error("receive - IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM {}", atomicModel.toString());
                     System.err.println("IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM " + atomicModel.toString());
                 }
@@ -149,7 +151,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                     }
                     catch (SimRuntimeException e)
                     {
-                        this.model.getSimulator().getLogger().always().error(e);
+                        CategoryLogger.always().error(e);
                     }
                 }
             }
