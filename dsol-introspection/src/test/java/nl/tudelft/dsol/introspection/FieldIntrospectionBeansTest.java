@@ -1,6 +1,6 @@
 package nl.tudelft.dsol.introspection;
 
-import org.pmw.tinylog.Logger;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.dsol.introspection.beans.SubTestBean2;
 import nl.tudelft.simulation.introspection.Property;
@@ -34,16 +34,16 @@ public final class FieldIntrospectionBeansTest
     {
         try
         {
-            Logger.info("Running field introspector test");
+            CategoryLogger.always().info("Running field introspector test");
             Property[] props = (new FieldIntrospector()).getProperties(new SubTestBean2());
             for (int i = 0; i < props.length; i++)
             {
-                Logger.info("Prop name: {}", props[i].getName());
-                Logger.info("Prop class: {}", props[i].getType());
-                Logger.info("Prop value: {}", props[i].getValue());
-                Logger.info("Setting Possible? ");
+                CategoryLogger.always().info("Prop name: {}", props[i].getName());
+                CategoryLogger.always().info("Prop class: {}", props[i].getType());
+                CategoryLogger.always().info("Prop value: {}", props[i].getValue());
+                CategoryLogger.always().info("Setting Possible? ");
                 props[i].setValue("TEST");
-                Logger.info("If so, 'TEST' should be retrieved: {}", props[i].getValue());
+                CategoryLogger.always().info("If so, 'TEST' should be retrieved: {}", props[i].getValue());
             }
         }
         catch (Throwable throwable)

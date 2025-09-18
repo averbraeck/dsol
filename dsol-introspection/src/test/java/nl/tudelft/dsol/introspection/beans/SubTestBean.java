@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.Serializable;
 
-import org.pmw.tinylog.Logger;
+import org.djutils.logger.CategoryLogger;
 
 /**
  * @author (c) 2003 <a href="http://www.tudelft.nl">Delft University of Technology </a>, Delft, the Netherlands <br>
@@ -50,7 +50,7 @@ public class SubTestBean implements Serializable
      */
     public String getFirstProperty()
     {
-        Logger.info(this.firstProperty + "requested.");
+        CategoryLogger.always().info(this.firstProperty + "requested.");
         return this.firstProperty;
     }
 
@@ -60,7 +60,7 @@ public class SubTestBean implements Serializable
      */
     public void setFirstProperty(final String firstProperty)
     {
-        Logger.info(this.firstProperty + "set.");
+        CategoryLogger.always().info(this.firstProperty + "set.");
         this.firstProperty = firstProperty;
     }
 
@@ -70,7 +70,7 @@ public class SubTestBean implements Serializable
      */
     public String getSecondProperty()
     {
-        Logger.info(this.secondProperty + "requested.");
+        CategoryLogger.always().info(this.secondProperty + "requested.");
         return this.secondProperty;
     }
 
@@ -80,7 +80,7 @@ public class SubTestBean implements Serializable
      */
     public void setSecondProperty(final String secondProperty)
     {
-        Logger.info(this.secondProperty + "set.");
+        CategoryLogger.always().info(this.secondProperty + "set.");
         this.secondProperty = secondProperty;
     }
 
@@ -90,7 +90,7 @@ public class SubTestBean implements Serializable
      */
     public int getIntProp()
     {
-        Logger.info(this.intProp + "requested.");
+        CategoryLogger.always().info(this.intProp + "requested.");
         return this.intProp;
     }
 
@@ -100,7 +100,7 @@ public class SubTestBean implements Serializable
      */
     public void setIntProp(final int intProp)
     {
-        Logger.info(this.intProp + "set.");
+        CategoryLogger.always().info(this.intProp + "set.");
         this.intProp = intProp;
     }
 

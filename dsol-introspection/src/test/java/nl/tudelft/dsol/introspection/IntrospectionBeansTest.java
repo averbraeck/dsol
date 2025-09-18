@@ -1,6 +1,6 @@
 package nl.tudelft.dsol.introspection;
 
-import org.pmw.tinylog.Logger;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.dsol.introspection.beans.SubTestBean2;
 import nl.tudelft.simulation.introspection.Property;
@@ -38,9 +38,9 @@ public final class IntrospectionBeansTest
         Property[] props = (new BeanIntrospector()).getProperties(new SubTestBean2());
         for (int i = 0; i < props.length; i++)
         {
-            Logger.info("main - Prop name: {}", props[i].getName());
-            Logger.info("main - Prop class: {}", props[i].getType());
-            Logger.info("main - Prop value: {}", props[i].getValue());
+            CategoryLogger.always().info("main - Prop name: {}", props[i].getName());
+            CategoryLogger.always().info("main - Prop class: {}", props[i].getType());
+            CategoryLogger.always().info("main - Prop value: {}", props[i].getValue());
         }
     }
 }

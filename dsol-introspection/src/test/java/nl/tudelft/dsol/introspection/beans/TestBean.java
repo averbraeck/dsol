@@ -2,7 +2,7 @@ package nl.tudelft.dsol.introspection.beans;
 
 import java.awt.Font;
 
-import org.pmw.tinylog.Logger;
+import org.djutils.logger.CategoryLogger;
 
 /**
  * @author (c) 2003 <a href="http://www.tudelft.nl">Delft University of Technology </a>, Delft, the Netherlands <br>
@@ -47,7 +47,7 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      */
     public String getFirstProperty()
     {
-        // Logger.info(this + this.firstProperty + "requested.");
+        // CategoryLogger.always().info(this + this.firstProperty + "requested.");
         return this.firstProperty;
     }
 
@@ -55,9 +55,9 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      * Setter for property firstProperty.
      * @param firstProperty New value of property firstProperty.
      */
-    public void setFirstProperty(String firstProperty)
+    public void setFirstProperty(final String firstProperty)
     {
-        Logger.info(this + firstProperty + "set.");
+        CategoryLogger.always().info(this + firstProperty + "set.");
         this.firstProperty = firstProperty;
     }
 
@@ -67,7 +67,7 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      */
     public String getSecondProperty()
     {
-        // Logger.info(this + this.secondProperty + "requested.");
+        // CategoryLogger.always().info(this + this.secondProperty + "requested.");
         return this.secondProperty;
     }
 
@@ -75,9 +75,9 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      * Setter for property secondProperty.
      * @param secondProperty New value of property secondProperty.
      */
-    public void setSecondProperty(String secondProperty)
+    public void setSecondProperty(final String secondProperty)
     {
-        Logger.info(this + secondProperty + "set.");
+        CategoryLogger.always().info(this + secondProperty + "set.");
         this.secondProperty = secondProperty;
     }
 
@@ -87,7 +87,7 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      */
     public int getIntProp()
     {
-        // Logger.info(this +"" + this.intProp + "requested");
+        // CategoryLogger.always().info(this +"" + this.intProp + "requested");
         return this.intProp;
     }
 
@@ -95,9 +95,9 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      * Setter for property intProp.
      * @param intProp New value of property intProp.
      */
-    public void setIntProp(int intProp)
+    public void setIntProp(final int intProp)
     {
-        Logger.info(this + "intProp set to " + intProp);
+        CategoryLogger.always().info(this + "intProp set to " + intProp);
         this.intProp = intProp;
     }
 
@@ -114,7 +114,7 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      * Setter for property color.
      * @param color New value of property color.
      */
-    public void setColor(java.awt.Color color)
+    public void setColor(final java.awt.Color color)
     {
         this.color = color;
     }
@@ -132,7 +132,7 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      * Setter for property font.
      * @param font New value of property font.
      */
-    public void setFont(Font font)
+    public void setFont(final Font font)
     {
         this.font = font;
     }
@@ -150,7 +150,7 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      * Setter for property subBean.
      * @param subBean New value of property subBean.
      */
-    public void setSubBean(SubTestBean subBean)
+    public void setSubBean(final SubTestBean subBean)
     {
         this.subBean = subBean;
     }
@@ -176,7 +176,7 @@ public class TestBean extends java.lang.Object implements java.io.Serializable
      * Setter for property testBean2.
      * @param testBean2 New value of property testBean2.
      */
-    public void setTestBean2(SubTestBean2Interface testBean2)
+    public void setTestBean2(final SubTestBean2Interface testBean2)
     {
         this.testBean2 = testBean2;
     }
