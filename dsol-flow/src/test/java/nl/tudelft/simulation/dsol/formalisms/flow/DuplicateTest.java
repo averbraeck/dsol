@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -115,24 +115,24 @@ public class DuplicateTest extends FlowTest
             @Override
             public void constructModel() throws SimRuntimeException
             {
-                Try.testFail(() -> new Duplicate<Double>(null, this.simulator), NullPointerException.class);
-                Try.testFail(() -> new Duplicate<Double>("d", null), NullPointerException.class);
+                UnitTest.testFail(() -> new Duplicate<Double>(null, this.simulator), NullPointerException.class);
+                UnitTest.testFail(() -> new Duplicate<Double>("d", null), NullPointerException.class);
 
                 var d2 = new Duplicate<Double>("d2", this.simulator);
 
                 // duplicate block does not have a distribution for the number of copies
-                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), NullPointerException.class);
+                UnitTest.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), NullPointerException.class);
 
                 // number of copies distribution should not be null
-                Try.testFail(() -> d2.setNumberCopiesDist(null), NullPointerException.class);
+                UnitTest.testFail(() -> d2.setNumberCopiesDist(null), NullPointerException.class);
 
                 // number of copies distribution should not be negative
-                Try.testFail(() -> d2.setNumberCopies(-2), IllegalArgumentException.class);
+                UnitTest.testFail(() -> d2.setNumberCopies(-2), IllegalArgumentException.class);
 
                 // number of copies distribution should not have a distribution with negative numbers
                 StreamInterface stream = getSimulator().getModel().getDefaultStream();
                 d2.setNumberCopiesDist(new DistDiscreteConstant(stream, -2));
-                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), IllegalArgumentException.class);
+                UnitTest.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), IllegalArgumentException.class);
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

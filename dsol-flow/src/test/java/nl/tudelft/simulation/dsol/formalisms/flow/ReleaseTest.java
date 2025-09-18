@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -78,8 +78,8 @@ public class ReleaseTest extends FlowTest
                 assertTrue(Double.isNaN(release.getFixedCapacityRelease()));
                 release.setFixedCapacityRelease(2.0);
                 assertEquals(2.0, release.getFixedCapacityRelease());
-                Try.testFail(() -> release.setFixedCapacityRelease(-1.0));
-                Try.testFail(() -> release.setFlexibleCapacityRelease(null));
+                UnitTest.testFail(() -> release.setFixedCapacityRelease(-1.0));
+                UnitTest.testFail(() -> release.setFlexibleCapacityRelease(null));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
@@ -129,8 +129,8 @@ public class ReleaseTest extends FlowTest
                 assertEquals(-1, release.getFixedCapacityRelease());
                 release.setFixedCapacityRelease(2);
                 assertEquals(2, release.getFixedCapacityRelease());
-                Try.testFail(() -> release.setFixedCapacityRelease(-1));
-                Try.testFail(() -> release.setFlexibleCapacityRelease(null));
+                UnitTest.testFail(() -> release.setFixedCapacityRelease(-1));
+                UnitTest.testFail(() -> release.setFlexibleCapacityRelease(null));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

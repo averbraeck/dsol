@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -139,16 +139,16 @@ public class DelayTest extends FlowTest
             @Override
             public void constructModel() throws SimRuntimeException
             {
-                Try.testFail(() -> new Delay<Double>(null, this.simulator), NullPointerException.class);
-                Try.testFail(() -> new Delay<Double>("d", null), NullPointerException.class);
+                UnitTest.testFail(() -> new Delay<Double>(null, this.simulator), NullPointerException.class);
+                UnitTest.testFail(() -> new Delay<Double>("d", null), NullPointerException.class);
 
                 var d2 = new Delay<Double>("d2", this.simulator);
 
                 // delay block does not have a delay distribution
-                Try.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), NullPointerException.class);
+                UnitTest.testFail(() -> d2.receiveEntity(new Entity<Double>("e", this.simulator)), NullPointerException.class);
 
                 // delay distribution should not be null
-                Try.testFail(() -> d2.setDelayDistribution(null), NullPointerException.class);
+                UnitTest.testFail(() -> d2.setDelayDistribution(null), NullPointerException.class);
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

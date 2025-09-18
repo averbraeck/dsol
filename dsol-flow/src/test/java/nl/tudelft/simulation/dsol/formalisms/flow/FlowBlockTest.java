@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -61,7 +61,7 @@ public class FlowBlockTest extends FlowTest
                 delay2.setDelayFunction((e) -> 1.0);
 
                 // see where null is allowed
-                Try.testFail(() -> delay.executeFunction(null), NullPointerException.class);
+                UnitTest.testFail(() -> delay.executeFunction(null), NullPointerException.class);
                 delay.setReceiveFunction(null);
                 delay.setReleaseFunction(null);
 

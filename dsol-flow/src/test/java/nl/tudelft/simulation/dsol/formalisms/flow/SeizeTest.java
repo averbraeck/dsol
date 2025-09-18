@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -83,8 +83,8 @@ public class SeizeTest extends FlowTest
                 assertTrue(Double.isNaN(seize.getFixedCapacityClaim()));
                 seize.setFixedCapacityClaim(2.0);
                 assertEquals(2.0, seize.getFixedCapacityClaim());
-                Try.testFail(() -> seize.setFixedCapacityClaim(-1.0));
-                Try.testFail(() -> seize.setFlexibleCapacityClaim(null));
+                UnitTest.testFail(() -> seize.setFixedCapacityClaim(-1.0));
+                UnitTest.testFail(() -> seize.setFlexibleCapacityClaim(null));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
@@ -140,8 +140,8 @@ public class SeizeTest extends FlowTest
                 assertEquals(-1, seize.getFixedCapacityClaim());
                 seize.setFixedCapacityClaim(2);
                 assertEquals(2, seize.getFixedCapacityClaim());
-                Try.testFail(() -> seize.setFixedCapacityClaim(-1));
-                Try.testFail(() -> seize.setFlexibleCapacityClaim(null));
+                UnitTest.testFail(() -> seize.setFixedCapacityClaim(-1));
+                UnitTest.testFail(() -> seize.setFlexibleCapacityClaim(null));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

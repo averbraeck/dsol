@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -65,8 +65,8 @@ public class ResourceTest extends FlowTest
                 resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
                 assertEquals(ReleaseType.ENTIRE_QUEUE, resource.getReleaseType());
                 resource.setReleaseType(ReleaseType.FIRST_ONLY);
-                Try.testFail(() -> resource.requestCapacity(entity, -1.0, null));
-                Try.testFail(() -> resource.releaseCapacity(entity, -1.0));
+                UnitTest.testFail(() -> resource.requestCapacity(entity, -1.0, null));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity, -1.0));
 
                 assertNotNull(resource.getRequestQueue());
                 Queue<Double> queue = resource.getRequestQueue();
@@ -76,7 +76,7 @@ public class ResourceTest extends FlowTest
                 assertEquals(0, queue.getNumberRequestsInQueue());
                 assertNull(queue.getQueueLengthStatistic());
                 assertNull(queue.getTimeInQueueStatistic());
-                Try.testFail(() -> queue.peek());
+                UnitTest.testFail(() -> queue.peek());
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
@@ -391,8 +391,8 @@ public class ResourceTest extends FlowTest
                 resource.setReleaseType(ReleaseType.ENTIRE_QUEUE);
                 assertEquals(ReleaseType.ENTIRE_QUEUE, resource.getReleaseType());
                 resource.setReleaseType(ReleaseType.FIRST_ONLY);
-                Try.testFail(() -> resource.requestCapacity(entity, -1, null));
-                Try.testFail(() -> resource.releaseCapacity(entity, -1));
+                UnitTest.testFail(() -> resource.requestCapacity(entity, -1, null));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity, -1));
 
                 assertNotNull(resource.getRequestQueue());
                 Queue<Double> queue = resource.getRequestQueue();
@@ -402,7 +402,7 @@ public class ResourceTest extends FlowTest
                 assertEquals(0, queue.getNumberRequestsInQueue());
                 assertNull(queue.getQueueLengthStatistic());
                 assertNull(queue.getTimeInQueueStatistic());
-                Try.testFail(() -> queue.peek());
+                UnitTest.testFail(() -> queue.peek());
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
@@ -719,17 +719,17 @@ public class ResourceTest extends FlowTest
                 assertEquals(0.5, resource.getClaimedCapacity());
                 assertEquals(0.5, resource.getAvailableCapacity());
 
-                Try.testFail(() -> resource.releaseCapacity(entity1, 5.0));
-                Try.testFail(() -> resource.releaseCapacity(null, 0.1));
-                Try.testFail(() -> resource.releaseCapacity(entity2, 0.5));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity1, 5.0));
+                UnitTest.testFail(() -> resource.releaseCapacity(null, 0.1));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity2, 0.5));
 
                 resource.releaseCapacity(entity1, 0.5);
                 assertEquals(1.0, resource.getCapacity());
                 assertEquals(0.0, resource.getClaimedCapacity());
                 assertEquals(1.0, resource.getAvailableCapacity());
 
-                Try.testFail(() -> resource.releaseCapacity(entity1, 0.5));
-                Try.testFail(() -> resource.releaseCapacity(entity2, 0.5));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity1, 0.5));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity2, 0.5));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
@@ -778,17 +778,17 @@ public class ResourceTest extends FlowTest
                 assertEquals(1, resource.getClaimedCapacity());
                 assertEquals(1, resource.getAvailableCapacity());
                 
-                Try.testFail(() -> resource.releaseCapacity(entity1, 5));
-                Try.testFail(() -> resource.releaseCapacity(null, 1));
-                Try.testFail(() -> resource.releaseCapacity(entity2, 1));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity1, 5));
+                UnitTest.testFail(() -> resource.releaseCapacity(null, 1));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity2, 1));
                
                 resource.releaseCapacity(entity1, 1);
                 assertEquals(2, resource.getCapacity());
                 assertEquals(0, resource.getClaimedCapacity());
                 assertEquals(2, resource.getAvailableCapacity());
 
-                Try.testFail(() -> resource.releaseCapacity(entity1, 1));
-                Try.testFail(() -> resource.releaseCapacity(entity2, 1));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity1, 1));
+                UnitTest.testFail(() -> resource.releaseCapacity(entity2, 1));
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

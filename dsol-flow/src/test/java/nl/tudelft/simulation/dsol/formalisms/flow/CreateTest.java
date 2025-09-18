@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -174,13 +174,13 @@ public class CreateTest extends FlowTest
         assertEquals(4, createBlock[0].getCountStatistic().getCount());
 
         // startTime distribution cannot be changed after entities have been created
-        Try.testFail(
+        UnitTest.testFail(
                 () -> createBlock[0].setStartTimeDist(
                         new DistContinuousSimulationTime.TimeDouble(new DistExponential(model.getDefaultStream(), 2.0))),
                 IllegalStateException.class);
 
         // startTime distribution cannot be changed after entities have been created
-        Try.testFail(() -> createBlock[0].setStartTime(2.0), IllegalStateException.class);
+        UnitTest.testFail(() -> createBlock[0].setStartTime(2.0), IllegalStateException.class);
 
         cleanUp(simulator);
     }
@@ -203,21 +203,21 @@ public class CreateTest extends FlowTest
                 var c2 = new Create<Double>("c2", this.simulator);
 
                 // generator does not have an interval distribution, nor an entity supplier
-                Try.testFail(() -> c2.generate(), NullPointerException.class);
+                UnitTest.testFail(() -> c2.generate(), NullPointerException.class);
 
                 // batch size distribution should not be null
-                Try.testFail(() -> c2.setBatchSizeDist(null), NullPointerException.class);
+                UnitTest.testFail(() -> c2.setBatchSizeDist(null), NullPointerException.class);
 
                 // batch size should be >= 0
-                Try.testFail(() -> c2.setBatchSize(-1), IllegalArgumentException.class);
+                UnitTest.testFail(() -> c2.setBatchSize(-1), IllegalArgumentException.class);
 
                 // generator does not have a generator
                 c2.setIntervalDist(new DistContinuousSimulationTime.TimeDouble(
                         new DistExponential(getSimulator().getModel().getDefaultStream(), 2.5)));
-                Try.testFail(() -> c2.generate(), NullPointerException.class);
+                UnitTest.testFail(() -> c2.generate(), NullPointerException.class);
 
                 // Create block should not receive any entities
-                Try.testFail(() -> c2.receiveEntity(new Entity<Double>("e", this.simulator)), SimRuntimeException.class);
+                UnitTest.testFail(() -> c2.receiveEntity(new Entity<Double>("e", this.simulator)), SimRuntimeException.class);
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));

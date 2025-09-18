@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.formalisms.flow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -84,7 +84,7 @@ public class FlowModelTest extends FlowTest
                 assertEquals(2, getBlockMap().size());
                 assertTrue(getBlockMap().containsKey("create2"));
                 assertEquals(create2, getBlockMap().get("create2"));
-                Try.testFail(() -> new Create<>("create2", this.simulator));
+                UnitTest.testFail(() -> new Create<>("create2", this.simulator));
                 var entity = new Entity<Double>("entity345", this.simulator);
                 assertEquals(3, getBlockMap().size());
                 assertTrue(getBlockMap().containsKey("entity345"));
@@ -101,7 +101,7 @@ public class FlowModelTest extends FlowTest
     {
         var simulator = new DevsSimulator<Double>("sim");
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
-        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null)
+        UnitTest.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null)
         {
             private static final long serialVersionUID = 1L;
 
@@ -112,7 +112,7 @@ public class FlowModelTest extends FlowTest
         });
 
         var streamInfo = new StreamInformation(new MersenneTwister(10L));
-        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, streamInfo, null)
+        UnitTest.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, streamInfo, null)
         {
             private static final long serialVersionUID = 1L;
 
@@ -122,7 +122,7 @@ public class FlowModelTest extends FlowTest
             }
         });
 
-        Try.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(null, BlockNamingType.AUTOMATIC)
+        UnitTest.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(null, BlockNamingType.AUTOMATIC)
         {
             private static final long serialVersionUID = 1L;
 
@@ -132,7 +132,7 @@ public class FlowModelTest extends FlowTest
             }
         });
 
-        Try.testFail(
+        UnitTest.testFail(
                 () -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(null, streamInfo, BlockNamingType.AUTOMATIC)
                 {
                     private static final long serialVersionUID = 1L;
@@ -143,7 +143,7 @@ public class FlowModelTest extends FlowTest
                     }
                 });
 
-        Try.testFail(
+        UnitTest.testFail(
                 () -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null, BlockNamingType.AUTOMATIC)
                 {
                     private static final long serialVersionUID = 1L;

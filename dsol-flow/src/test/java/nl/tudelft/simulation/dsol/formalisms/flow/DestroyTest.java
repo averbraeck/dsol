@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -93,8 +93,8 @@ public class DestroyTest extends FlowTest
             @Override
             public void constructModel() throws SimRuntimeException
             {
-                Try.testFail(() -> new Destroy<Double>(null, this.simulator), NullPointerException.class);
-                Try.testFail(() -> new Destroy<Double>("d", null), NullPointerException.class);
+                UnitTest.testFail(() -> new Destroy<Double>(null, this.simulator), NullPointerException.class);
+                UnitTest.testFail(() -> new Destroy<Double>("d", null), NullPointerException.class);
             }
         };
         simulator.initialize(model, new SingleReplication<Double>("rep", 0.0, 0.0, 100.0));
