@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -97,7 +97,7 @@ public class ColorParserTest
     public void testColorParserRGBExceptions()
     {
         // wrong number of arguments
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -106,7 +106,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -115,7 +115,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -124,7 +124,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -133,7 +133,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -142,7 +142,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -151,7 +151,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -160,7 +160,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -169,7 +169,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -178,7 +178,7 @@ public class ColorParserTest
             }
         }, NumberFormatException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -193,7 +193,7 @@ public class ColorParserTest
     @Test
     public void testColorParserHexExceptions()
     {
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -202,7 +202,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -211,7 +211,7 @@ public class ColorParserTest
             }
         }, NumberFormatException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -220,7 +220,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -229,7 +229,7 @@ public class ColorParserTest
             }
         }, IllegalArgumentException.class);
 
-        Try.testFail(new Try.Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
