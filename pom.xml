@@ -44,17 +44,16 @@
     <maven.compiler.release>${jdk.version}</maven.compiler.release>
 
     <dsol-version>${project.version}</dsol-version>
-    <junit.version>5.13.0</junit.version>
-    <tinylog.version>1.3.6</tinylog.version>
+    <junit.version>5.13.4</junit.version>
     <jcommon.version>1.0.24</jcommon.version>
     <jfreechart.version>1.5.6</jfreechart.version>
-    <djunits.version>5.2.2</djunits.version>
-    <djutils.version>2.3.2</djutils.version>
+    <djunits.version>5.4.0</djunits.version>
+    <djutils.version>2.4.0</djutils.version>
     <jetty.version>11.0.25</jetty.version>
     <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
     <fastcsv.version>2.2.2</fastcsv.version>
-    <commons-compress.version>1.27.1</commons-compress.version>
-    <protobuf.version>4.31.1</protobuf.version>
+    <commons-compress.version>1.28.0</commons-compress.version>
+    <protobuf.version>4.32.1</protobuf.version>
 
     <maven.compiler.version>3.14.0</maven.compiler.version>
     <maven.site.version>3.21.0</maven.site.version>
@@ -94,15 +93,16 @@
     </dependency>
 
     <dependency>
-      <groupId>org.tinylog</groupId>
-      <artifactId>tinylog</artifactId>
-      <version>${tinylog.version}</version>
+      <groupId>org.djutils</groupId>
+      <artifactId>djutils-base</artifactId>
+      <version>${djutils.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.djutils</groupId>
-      <artifactId>djutils-base</artifactId>
+      <artifactId>djutils-test</artifactId>
       <version>${djutils.version}</version>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>
@@ -391,7 +391,6 @@
         <configuration>
           <offlineLinks>
             <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
-            <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
             <offlineLink><url>https://djunits.org/docs/latest/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-cli/apidocs/</url></offlineLink>
@@ -638,7 +637,6 @@
         <configuration>
           <offlineLinks>
             <offlineLink><url>https://www.jfree.org/jfreechart/api/javadoc/</url></offlineLink>
-            <offlineLink><url>https://tinylog.org/v1/javadoc/</url></offlineLink>
             <offlineLink><url>https://djunits.org/docs/latest/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/apidocs/</url></offlineLink>
             <offlineLink><url>https://djutils.org/docs/latest/djutils-cli/apidocs/</url></offlineLink>
