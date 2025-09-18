@@ -2,8 +2,7 @@ package nl.tudelft.simulation.language.concurrent;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.djutils.exceptions.Try;
-import org.djutils.exceptions.Try.Execution;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,7 +29,7 @@ public class MonitorTest
     {
         Monitor.lock(this.lock1);
         Monitor.unlock(this.lock1);
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -70,7 +69,7 @@ public class MonitorTest
             @Override
             public void run()
             {
-                Try.testFail(new Execution()
+                UnitTest.testFail(new UnitTest.Execution()
                 {
                     @Override
                     public void execute() throws Throwable

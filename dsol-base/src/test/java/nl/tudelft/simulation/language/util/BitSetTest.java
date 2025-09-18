@@ -6,8 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.BitSet;
 
-import org.djutils.exceptions.Try;
-import org.djutils.exceptions.Try.Execution;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -69,7 +68,7 @@ public class BitSetTest
         bs2 = BitUtil.fromString("{}");
         assertEquals(0, BitUtil.toInt(bs2, 8));
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -78,7 +77,7 @@ public class BitSetTest
             }
         }, "BitUtil.toInt max 31 bits");
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -87,7 +86,7 @@ public class BitSetTest
             }
         }, "BitUtil.toInt positive number of bits");
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -96,7 +95,7 @@ public class BitSetTest
             }
         }, "BitUtil.toInt max 31 bits");
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -105,7 +104,7 @@ public class BitSetTest
             }
         }, "BitUtil.fromInt positive number of bits");
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -114,7 +113,7 @@ public class BitSetTest
             }
         }, "BitUtil.fromInt positive value only");
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -123,7 +122,7 @@ public class BitSetTest
             }
         }, "BitUtil.fromInt positive value only");
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable

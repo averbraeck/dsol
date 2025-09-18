@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -74,7 +74,7 @@ public class FilterTest
         assertEquals(1, CompositeFilter.Operator.OR.getValue());
 
         // test illegal and/or
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new CompositeFilter(filter1, filter2, null);
         }, IllegalArgumentException.class);

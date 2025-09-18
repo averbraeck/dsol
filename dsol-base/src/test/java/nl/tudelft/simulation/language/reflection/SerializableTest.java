@@ -12,8 +12,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import org.djutils.exceptions.Try;
-import org.djutils.exceptions.Try.Execution;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.language.DsolException;
@@ -123,7 +122,7 @@ public class SerializableTest
         StateSaver.restoreState(tc2, state);
         assertEquals(tc1, tc2);
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
@@ -134,7 +133,7 @@ public class SerializableTest
             }
         }, "restoring state from random byte array should have failed");
 
-        Try.testFail(new Execution()
+        UnitTest.testFail(new UnitTest.Execution()
         {
             @Override
             public void execute() throws Throwable
