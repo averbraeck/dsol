@@ -3,7 +3,7 @@ package nl.tudelft.simulation.dsol.logger;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
- * DefaultSimTimeFormatter of which the format(String) method can be overridden. <br>
+ * SimTimeFormatter for Double simulator time.
  * <p>
  * Copyright (c) 2018 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See for
  * project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL project is
@@ -12,34 +12,21 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * </p>
  * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
  */
-public class DefaultSimTimeFormatter implements SimTimeFormatter
+public class DoubleSimTimeFormatter extends SimTimeFormatter<Double>
 {
-    /** The simulator of which to include the time in the log messages. */
-    private SimulatorInterface<?> simulator;
-
     /**
-     * Create a default simulation time formatter with a simulator.
-     * @param simulator the simulator to use for the formatting
+     * Make a SimTimeFormatter for a specific simulator instance.
+     * @param simulator the simulator
      */
-    public DefaultSimTimeFormatter(final SimulatorInterface<?> simulator)
+    public DoubleSimTimeFormatter(final SimulatorInterface<Double> simulator)
     {
-        this.simulator = simulator;
+        super(simulator);
     }
 
     @Override
-    public void setSimulator(final SimulatorInterface<?> simulator)
+    public String formattedSimTime()
     {
-        this.simulator = simulator;
-    }
-
-    @Override
-    public String format(final String message)
-    {
-        if (this.simulator == null)
-        {
-            return message;
-        }
-        return "[T=" + this.simulator.getSimulatorTime() + "] " + message;
+        return "[T=" + getSimulator().getSimulatorTime() + "]";
     }
 
 }
