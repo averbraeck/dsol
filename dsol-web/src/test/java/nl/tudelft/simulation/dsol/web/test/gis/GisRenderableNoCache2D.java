@@ -84,7 +84,9 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
             final CoordinateTransform coordinateTransform, final double z)
     {
         if (!(simulator instanceof AnimatorInterface))
-        { return; }
+        {
+            return;
+        }
         try
         {
             this.map = EsriFileXmlParser.parseMapFile(mapFile, coordinateTransform);
@@ -97,7 +99,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
         }
         catch (Exception exception)
         {
-            simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -112,7 +114,9 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
             final CoordinateTransform coordinateTransform, final double z)
     {
         if (!(simulator instanceof AnimatorInterface))
-        { return; }
+        {
+            return;
+        }
         try
         {
             this.map = map;
@@ -125,7 +129,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
         }
         catch (Exception exception)
         {
-            simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -144,7 +148,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
         }
         catch (NamingException | RemoteException exception)
         {
-            simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 

@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
@@ -62,9 +64,9 @@ public class WebMM1Application
     /** stop the simulation. */
     public void terminate()
     {
-        this.simulator.getLogger().always().info("average queue length = " + this.model.qN.getWeightedSampleMean());
-        this.simulator.getLogger().always().info("average queue wait   = " + this.model.dN.getSampleMean());
-        this.simulator.getLogger().always().info("average utilization  = " + this.model.uN.getWeightedSampleMean());
+        CategoryLogger.always().info("average queue length = " + this.model.qN.getWeightedSampleMean());
+        CategoryLogger.always().info("average queue wait   = " + this.model.dN.getSampleMean());
+        CategoryLogger.always().info("average utilization  = " + this.model.uN.getWeightedSampleMean());
 
         System.exit(0);
     }

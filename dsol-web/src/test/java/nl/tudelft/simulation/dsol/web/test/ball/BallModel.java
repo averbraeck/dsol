@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.DirectedPoint2d;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
@@ -48,7 +49,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
             }
             catch (RemoteException exception)
             {
-                getSimulator().getLogger().always().error(exception);
+                CategoryLogger.always().error(exception);
             }
         }
 
