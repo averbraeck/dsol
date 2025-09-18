@@ -11,13 +11,14 @@ import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
 import org.djutils.logger.CategoryLogger;
-import org.pmw.tinylog.Level;
-import org.pmw.tinylog.Logger;
 
+import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
+import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
+import nl.tudelft.simulation.dsol.logger.SimTimeFormatter;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 
 /**
@@ -73,8 +74,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected transient Object semaphore = new Object();
 
-    /** the logger. */
-    private transient SimLogger logger;
+    /** the simulation time formatter. */
+    private transient SimTimeFormatter<T> simTimeFormatter;
 
     /** the simulator id. */
     private Serializable id;
@@ -100,7 +101,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     {
         Throw.whenNull(id, "id cannot be null");
         this.id = id;
-        this.logger = new SimLogger(this);
+        new SimLogger(this);
     }
 
     @Override
@@ -323,7 +324,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         if (this.simulatorTime.compareTo(this.getReplication().getEndTime()) < 0
                 && this.replication.getStoppingCondition() == null)
         {
-            Logger.warn("endReplication executed, but the simulation time " + this.simulatorTime
+            CategoryLogger.filter(Cat.DSOL).warn("endReplication executed, but the simulation time " + this.simulatorTime
                     + " is earlier than the replication length " + this.getReplication().getEndTime());
             this.simulatorTime = this.getReplication().getEndTime();
         }
@@ -389,21 +390,21 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     protected void handleSimulationException(final Exception exception)
     {
         String s = "Exception during simulation at t=" + getSimulatorTime() + ": " + exception.getMessage();
-        switch (this.errorLogLevel)
+        switch (this.errorLogLevel.levelInt)
         {
-            case DEBUG:
+            case Level.DEBUG_INT:
                 CategoryLogger.always().debug(s);
                 break;
-            case TRACE:
+            case Level.TRACE_INT:
                 CategoryLogger.always().trace(s);
                 break;
-            case INFO:
+            case Level.INFO_INT:
                 CategoryLogger.always().info(s);
                 break;
-            case WARNING:
+            case Level.WARN_INT:
                 CategoryLogger.always().warn(s);
                 break;
-            case ERROR:
+            case Level.ERROR_INT:
                 CategoryLogger.always().error(s);
                 break;
             default:
@@ -431,6 +432,18 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         {
             System.exit(-1);
         }
+    }
+
+    @Override
+    public SimTimeFormatter<T> getSimTimeFormatter()
+    {
+        return this.simTimeFormatter;
+    }
+
+    @Override
+    public void setSimTimeFormatter(final SimTimeFormatter<T> simTimeFormatter)
+    {
+        this.simTimeFormatter = simTimeFormatter;
     }
 
     /**
@@ -461,12 +474,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     public DsolModel<T, ? extends SimulatorInterface<T>> getModel()
     {
         return this.model;
-    }
-
-    @Override
-    public SimLogger getLogger()
-    {
-        return this.logger;
     }
 
     @Override
@@ -517,7 +524,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
             this.replication = (Replication<T>) in.readObject();
             this.semaphore = new Object();
             this.worker = new SimulatorWorkerThread(this.id.toString(), this);
-            this.logger = new SimLogger(this);
         }
         catch (Exception exception)
         {

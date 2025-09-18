@@ -79,7 +79,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         }
         catch (NamingException | RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -101,7 +101,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -118,7 +118,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
             }
             catch (RemoteException exception)
             {
-                this.simulator.getLogger().always().warn(exception, "initialize()");
+                CategoryLogger.always().warn(exception, "initialize()");
             }
         }
     }
@@ -155,7 +155,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         }
         else
         {
-            this.simulator.getLogger().always().warn("SimPersistent: event not a TimedEvent");
+            CategoryLogger.always().warn("SimPersistent: event not a TimedEvent");
         }
     }
 
@@ -169,7 +169,7 @@ public class SimTally<T extends Number & Comparable<T>> extends EventBasedTally 
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "register()");
+            CategoryLogger.always().warn(exception, "register()");
         }
         return value;
     }

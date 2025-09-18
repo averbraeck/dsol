@@ -6,11 +6,11 @@ import java.rmi.Remote;
 import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
-import org.pmw.tinylog.Level;
 
+import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.logger.SimLogger;
+import nl.tudelft.simulation.dsol.logger.SimTimeFormatter;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 
 /**
@@ -212,13 +212,6 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     void endReplication() throws SimRuntimeException;
 
     /**
-     * Get the logger for a simulator. Since the loggers display the simulator time, each logger that runs in the same JVM needs
-     * to have its own logger.
-     * @return the logger that is specific for this simulator
-     */
-    SimLogger getLogger();
-
-    /**
      * Get the run state of the simulator.
      * @return the run state of the simulator
      */
@@ -328,5 +321,17 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
      * @param errorLogLevel the error log level to use in the logger for simulation execution errors
      */
     void setErrorLogLevel(Level errorLogLevel);
+
+    /**
+     * Return the active simulation time formatter.
+     * @return the active simulation time formatter
+     */
+    SimTimeFormatter<T> getSimTimeFormatter();
+
+    /**
+     * Set a new simulation time formatter.
+     * @param simTimeFormatter the new simulation time formatter
+     */
+    void setSimTimeFormatter(SimTimeFormatter<T> simTimeFormatter);
 
 }

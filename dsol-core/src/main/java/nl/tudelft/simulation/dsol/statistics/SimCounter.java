@@ -81,7 +81,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
         catch (NamingException | RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -103,7 +103,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -120,7 +120,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
             }
             catch (RemoteException exception)
             {
-                this.simulator.getLogger().always().warn(exception, "initialize()");
+                CategoryLogger.always().warn(exception, "initialize()");
             }
         }
     }
@@ -135,7 +135,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "register()");
+            CategoryLogger.always().warn(exception, "register()");
         }
         return result;
     }

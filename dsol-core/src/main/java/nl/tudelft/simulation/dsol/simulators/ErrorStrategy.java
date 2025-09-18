@@ -1,6 +1,6 @@
 package nl.tudelft.simulation.dsol.simulators;
 
-import org.pmw.tinylog.Level;
+import ch.qos.logback.classic.Level;
 
 /**
  * ErrorStrategy indicates what to do when there is an error in the execution of the simulation. In order to set the error
@@ -21,7 +21,7 @@ public enum ErrorStrategy
      * Send the error to the logger as WARNING. Both RunState and ReplicationState remain in the RUNNING state. The
      * Simulator.run() continues as if the error did not occur.
      */
-    LOG_AND_CONTINUE(Level.WARNING),
+    LOG_AND_CONTINUE(Level.WARN),
 
     /**
      * Send the error to logger as ERROR and print the exception on stderr. Both RunState and ReplicationState remain in the

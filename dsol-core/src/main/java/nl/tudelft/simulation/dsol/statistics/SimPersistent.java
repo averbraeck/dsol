@@ -89,7 +89,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
         catch (NamingException | RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -111,7 +111,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 
@@ -129,7 +129,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
             }
             catch (RemoteException exception)
             {
-                this.simulator.getLogger().always().warn(exception, "initialize()");
+                CategoryLogger.always().warn(exception, "initialize()");
             }
         }
     }
@@ -144,7 +144,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "register()");
+            CategoryLogger.always().warn(exception, "register()");
         }
         return super.register(timestamp, value);
     }
@@ -160,7 +160,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "endReplication()");
+            CategoryLogger.always().warn(exception, "endReplication()");
         }
         super.register(this.simulator.getSimulatorTime(), 0.0);
     }
@@ -176,7 +176,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         }
         catch (RemoteException exception)
         {
-            this.simulator.getLogger().always().warn(exception, "endReplication()");
+            CategoryLogger.always().warn(exception, "endReplication()");
         }
         super.register(this.simulator.getSimulatorTime(), super.getLastValue());
     }
@@ -226,7 +226,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
             }
             else
             {
-                this.simulator.getLogger().always().warn("SimPersistent: event not a TimedEvent");
+                CategoryLogger.always().warn("SimPersistent: event not a TimedEvent");
             }
         }
     }
