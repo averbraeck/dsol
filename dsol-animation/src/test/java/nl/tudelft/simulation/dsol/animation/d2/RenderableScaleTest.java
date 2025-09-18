@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point2d;
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -45,19 +45,19 @@ public class RenderableScaleTest
         scale = new RenderableScale(1.0, 0.5);
         assertEquals(0.5, scale.getObjectScaleFactor(), 0.0001);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new RenderableScale(0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new RenderableScale(-10.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new RenderableScale(1.0, 0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new RenderableScale(1.0, -10.0);
         }, IllegalArgumentException.class);

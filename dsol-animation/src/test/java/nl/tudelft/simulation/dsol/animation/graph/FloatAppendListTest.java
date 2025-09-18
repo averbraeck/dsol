@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Iterator;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -31,11 +31,11 @@ public class FloatAppendListTest
         list.add(1.0f);
         assertEquals(1, list.size());
         assertEquals(1.0, list.get(0), 0.0001);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             list.get(1);
         }, IndexOutOfBoundsException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             list.get(-1);
         }, IndexOutOfBoundsException.class);
