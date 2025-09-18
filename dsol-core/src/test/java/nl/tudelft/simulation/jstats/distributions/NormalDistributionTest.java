@@ -3,8 +3,8 @@ package nl.tudelft.simulation.jstats.distributions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
 import org.djutils.stats.summarizers.Tally;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.math.ProbMath;
@@ -133,15 +133,15 @@ public class NormalDistributionTest
         assertEquals(4.0, dist.getInverseCumulativeProbability(dist.getCumulativeProbability(4.0)), 0.05);
         assertEquals(8.0, dist.getInverseCumulativeProbability(dist.getCumulativeProbability(8.0)), 0.05);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistLogNormal(null, 1.0, 2.0);
         }, NullPointerException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistLogNormal(NormalDistributionTest.this.stream, 2.0, 0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistLogNormal(NormalDistributionTest.this.stream, 2.0, -1.0);
         }, IllegalArgumentException.class);
@@ -225,15 +225,15 @@ public class NormalDistributionTest
             assertEquals(p, stdDist.getInverseCumulativeProbability(c), 0.0001);
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormal(null, 1.0, 2.0);
         }, NullPointerException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormal(NormalDistributionTest.this.stream, 2.0, 0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormal(NormalDistributionTest.this.stream, 2.0, -1.0);
         }, IllegalArgumentException.class);
@@ -440,27 +440,27 @@ public class NormalDistributionTest
     public void testTruncatedNormalExceptions()
     {
         this.stream = new MersenneTwister(20L);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormalTrunc(null, 1.0, 2.0);
         }, NullPointerException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.0, 1, 2);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, -1.0, 1, 2);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 1.0, 1, 1);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 1.0, 1, 0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.1, 20, 21);
         }, IllegalArgumentException.class);
@@ -468,11 +468,11 @@ public class NormalDistributionTest
         DistNormalTrunc dist = new DistNormalTrunc(NormalDistributionTest.this.stream, 2.0, 0.1, 1.0, 2.0);
         assertEquals(1.0, dist.getInverseCumulativeProbability(0), 0.0001);
         assertEquals(2.0, dist.getInverseCumulativeProbability(1), 0.0001);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             dist.getInverseCumulativeProbability(-0.1);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             dist.getInverseCumulativeProbability(1.1);
         }, IllegalArgumentException.class);

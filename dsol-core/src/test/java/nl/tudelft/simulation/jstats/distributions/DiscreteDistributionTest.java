@@ -3,8 +3,8 @@ package nl.tudelft.simulation.jstats.distributions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
 import org.djutils.stats.summarizers.Tally;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.math.ProbMath;
@@ -99,15 +99,15 @@ public class DiscreteDistributionTest
         assertEquals(0.25, dist.probability(1), 0.0001);
         assertEquals(0.0, dist.probability(2), 0.0001);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistBernoulli(null, 0.1);
         }, NullPointerException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistBernoulli(DiscreteDistributionTest.this.stream, -0.1);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistBernoulli(DiscreteDistributionTest.this.stream, 2.0);
         }, IllegalArgumentException.class);
@@ -142,19 +142,19 @@ public class DiscreteDistributionTest
         assertEquals(0.0, dist.probability(5), 0.0001);
         assertEquals(0.0, dist.probability(-1), 0.0001);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistBinomial(null, 4, 0.1);
         }, NullPointerException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistBinomial(DiscreteDistributionTest.this.stream, -4, 0.1);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistBinomial(DiscreteDistributionTest.this.stream, 2, -0.1);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistBinomial(DiscreteDistributionTest.this.stream, 2, 1.1);
         }, IllegalArgumentException.class);
@@ -183,7 +183,7 @@ public class DiscreteDistributionTest
         assertEquals(0.0, dist.probability(1), 0.0001);
         assertEquals(1.0, dist.probability(7), 0.0001);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistDiscreteConstant(null, 2);
         }, NullPointerException.class);
@@ -218,11 +218,11 @@ public class DiscreteDistributionTest
         assertEquals(1. / 6., dist.probability(6), 0.0001);
         assertEquals(0.0, dist.probability(7), 0.0001);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistDiscreteUniform(null, 2, 4);
         }, NullPointerException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistDiscreteUniform(DiscreteDistributionTest.this.stream, 4, 2);
         }, IllegalArgumentException.class);
@@ -256,15 +256,15 @@ public class DiscreteDistributionTest
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistGeometric(DiscreteDistributionTest.this.stream, 0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistGeometric(DiscreteDistributionTest.this.stream, -1.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistGeometric(DiscreteDistributionTest.this.stream, 1.01);
         }, IllegalArgumentException.class);
@@ -304,23 +304,23 @@ public class DiscreteDistributionTest
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNegBinomial(DiscreteDistributionTest.this.stream, 0, 2.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNegBinomial(DiscreteDistributionTest.this.stream, -1, 2.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNegBinomial(DiscreteDistributionTest.this.stream, 2, 0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNegBinomial(DiscreteDistributionTest.this.stream, 2, -1.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistNegBinomial(DiscreteDistributionTest.this.stream, 2, 1.01);
         }, IllegalArgumentException.class);
@@ -354,11 +354,11 @@ public class DiscreteDistributionTest
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistPoisson(DiscreteDistributionTest.this.stream, 0.0);
         }, IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new DistPoisson(DiscreteDistributionTest.this.stream, -1.0);
         }, IllegalArgumentException.class);

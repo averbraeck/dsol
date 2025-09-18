@@ -3,6 +3,8 @@ package nl.tudelft.simulation.dsol.serialize;
 import java.rmi.MarshalledObject;
 import java.rmi.RemoteException;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
@@ -55,7 +57,7 @@ public class Model extends AbstractDsolModel<Double, DevsSimulatorInterface<Doub
         }
         catch (Exception exception)
         {
-            this.simulator.getLogger().always().warn(exception, "pause");
+            CategoryLogger.always().warn(exception, "pause");
         }
     }
 }

@@ -3,7 +3,7 @@ package nl.tudelft.simulation.jstats.math;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -34,19 +34,19 @@ public class ProbMathTest
         assertTrue(ProbMath.factorial(170) > 0.0);
         assertTrue(ProbMath.fac(20) > 0L);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.factorial(-1);
         }, "factorial(-1)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.fac(-1);
         }, "fac(-1)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.factorial(171);
         }, "factorial(171)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.fac(21);
         }, "fac(21)", IllegalArgumentException.class);
@@ -61,19 +61,19 @@ public class ProbMathTest
         assertTrue(ProbMath.factorial(170L) > 0.0);
         assertTrue(ProbMath.fac(20L) > 0L);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.factorial(-1L);
         }, "factorial(-1)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.fac(-1L);
         }, "fac(-1)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.factorial(171L);
         }, "factorial(171)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.fac(21L);
         }, "fac(21)", IllegalArgumentException.class);
@@ -91,11 +91,11 @@ public class ProbMathTest
         assertEquals(336.0, ProbMath.permutations(8, 3), 0.0001);
         assertEquals(336L, ProbMath.perm(8, 3));
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.permutations(2, 5);
         }, "permutations(2, 5)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.perm(2, 5);
         }, "perm(2, 5)", IllegalArgumentException.class);
@@ -105,11 +105,11 @@ public class ProbMathTest
         assertEquals(336.0, ProbMath.permutations(8L, 3L), 0.0001);
         assertEquals(336L, ProbMath.perm(8L, 3L));
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.permutations(2L, 5L);
         }, "permutations(2, 5)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.perm(2L, 5L);
         }, "perm(2, 5)", IllegalArgumentException.class);
@@ -126,11 +126,11 @@ public class ProbMathTest
         assertEquals(56.0, ProbMath.combinations(8, 3), 0.0001);
         assertEquals(56L, ProbMath.comb(8, 3));
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.combinations(2, 5);
         }, "combinations(2, 5)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.comb(2, 5);
         }, "comb(2, 5)", IllegalArgumentException.class);
@@ -140,11 +140,11 @@ public class ProbMathTest
         assertEquals(56.0, ProbMath.combinations(8L, 3L), 0.0001);
         assertEquals(56L, ProbMath.comb(8L, 3L));
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.combinations(2L, 5L);
         }, "combinations(2, 5)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.comb(2L, 5L);
         }, "comb(2, 5)", IllegalArgumentException.class);
@@ -214,15 +214,15 @@ public class ProbMathTest
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.gamma(-1);
         }, "gamma(-1)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.beta(-1, 1);
         }, "beta(-1, 1)", IllegalArgumentException.class);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ProbMath.beta(1, -1);
         }, "beta(1, -1)", IllegalArgumentException.class);

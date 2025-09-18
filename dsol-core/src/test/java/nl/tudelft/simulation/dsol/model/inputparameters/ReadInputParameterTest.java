@@ -14,7 +14,7 @@ import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.Speed;
 import org.djunits.value.vdouble.scalar.Time;
 import org.djunits.value.vfloat.scalar.FloatDuration;
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.model.inputparameters.reader.ReadInputParameters;
@@ -50,7 +50,7 @@ public class ReadInputParameterTest
         InputParameterBoolean ip1 = new InputParameterBoolean("bool", "boolean", "boolean value", true, 1.0);
         InputParameterDouble ip2 = new InputParameterDouble("double", "double", "double value", 0.0, 2.0);
         InputParameterDoubleScalar<DurationUnit, Duration> ip3 =
-                new InputParameterDoubleScalar<>("duration", "duration", "duration value", Duration.instantiateSI(0.0), 3.0);
+                new InputParameterDoubleScalar<>("duration", "duration", "duration value", Duration.ofSI(0.0), 3.0);
         InputParameterString ip4 = new InputParameterString("string", "string", "string value", "abc", 4.0);
         InputParameterMap map = new InputParameterMap("map", "map", "map", 1.0);
         map.add(ip1);
@@ -86,7 +86,7 @@ public class ReadInputParameterTest
         assertEquals(5, ip5.getCalculatedValue().intValue());
 
         final String[] args1 = new String[] {"int=-10"};
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ReadInputParameters.loadFromArgs(args1, map);
         }, "int=-10 should have given an error", InputParameterException.class);
@@ -101,7 +101,7 @@ public class ReadInputParameterTest
         assertEquals(-5L, ip6.getCalculatedValue().intValue());
 
         final String[] args2 = new String[] {"int=200"};
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ReadInputParameters.loadFromArgs(args2, map);
         }, "int=200 should have given an error", InputParameterException.class);
@@ -118,7 +118,7 @@ public class ReadInputParameterTest
         InputParameterBoolean ip1 = new InputParameterBoolean("bool", "boolean", "boolean value", true, 1.0);
         InputParameterFloat ip2 = new InputParameterFloat("float", "float", "float value", 0.0f, 2.0);
         InputParameterFloatScalar<DurationUnit, FloatDuration> ip3 = new InputParameterFloatScalar<>("duration", "duration",
-                "duration value", FloatDuration.instantiateSI(0.0f), 3.0);
+                "duration value", FloatDuration.ofSI(0.0f), 3.0);
         InputParameterString ip4 = new InputParameterString("string", "string", "string value", "abc", 4.0);
         InputParameterMap map = new InputParameterMap("map", "map", "map", 1.0);
         InputParameterMap nest = new InputParameterMap("nest", "nest", "nested map", 1.0);
@@ -160,7 +160,7 @@ public class ReadInputParameterTest
         assertEquals("NL", ip.getCalculatedValue());
 
         final String[] args1 = new String[] {"list=XY"};
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ReadInputParameters.loadFromArgs(args1, map);
         }, "list=XY should have given an error", InputParameterException.class);
@@ -222,7 +222,7 @@ public class ReadInputParameterTest
 
         // wrong nr of args
         final String[] args1 = new String[] {"dc=TRIA(10,20)"};
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ReadInputParameters.loadFromArgs(args1, map);
         }, "dc=TRIA(10,20) should have given an error");

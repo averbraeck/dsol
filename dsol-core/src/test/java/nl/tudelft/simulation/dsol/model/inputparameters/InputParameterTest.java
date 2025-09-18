@@ -14,8 +14,8 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vfloat.scalar.FloatLength;
-import org.djutils.exceptions.Try;
 import org.djutils.reflection.ClassUtil;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -64,7 +64,7 @@ public class InputParameterTest
         assertFalse(ip.isReadOnly());
         ip.setReadOnly(true);
         assertTrue(ip.isReadOnly());
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setValue(false);
         });
@@ -84,38 +84,38 @@ public class InputParameterTest
         assertEquals(false, ipClone.getDefaultValue());
 
         // null and NaN
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterBoolean(null, "y", "z", false, 2.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterBoolean("x", null, "z", false, 2.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterBoolean("x", "y", null, false, 2.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterBoolean("x", "y", "z", false, Double.NaN);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterString("x", "y", "z", null, 2.0);
         });
         InputParameterString ips = new InputParameterString("x", "y", "z", "xyz", 1.0);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ips.setDefaultValue(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ips.setValue(null);
         });
 
         // no period in key
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterBoolean("x.y", "y", "z", true, 2.0);
         });
@@ -176,7 +176,7 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.setDoubleValue(0.0);
                     });
@@ -188,28 +188,28 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.setDoubleValue(20.0);
                     });
                 }
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setDoubleValue(Double.NaN);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setDoubleValue(Double.POSITIVE_INFINITY);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setDoubleValue(Double.NEGATIVE_INFINITY);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setDoubleValue(-50.0);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setDoubleValue(50.0);
                 });
@@ -226,22 +226,22 @@ public class InputParameterTest
                 assertEquals(100.0, ipmm.getMaximumValue(), 1E-6);
                 ipmm.setValue(-50.0);
                 ipmm.setValue(50.0);
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setDoubleValue(-150.0);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setDoubleValue(150.0);
                 });
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setFormat(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterDouble("d", "d", "d", 12.34, 0.0, 20.0, false, false, null, 3.0);
         });
@@ -291,7 +291,7 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.setFloatValue(0.0f);
                     });
@@ -303,28 +303,28 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.setFloatValue(20.0f);
                     });
                 }
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setFloatValue(Float.NaN);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setFloatValue(Float.POSITIVE_INFINITY);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setFloatValue(Float.NEGATIVE_INFINITY);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setFloatValue(-50.0f);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setFloatValue(50.0f);
                 });
@@ -341,22 +341,22 @@ public class InputParameterTest
                 assertEquals(100.0, ipmm.getMaximumValue(), 1E-6);
                 ipmm.setValue(-50.0f);
                 ipmm.setValue(50.0f);
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setFloatValue(-150.0f);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.setFloatValue(150.0f);
                 });
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setFormat(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterFloat("f", "f", "f", 12.34f, 0.0f, 20.0f, false, false, null, 3.0);
         });
@@ -392,11 +392,11 @@ public class InputParameterTest
         assertEquals("%6d", ipmm.getFormat());
         ipmm.setIntValue(0);
         ipmm.setIntValue(20);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setIntValue(-50);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setIntValue(50);
         });
@@ -409,20 +409,20 @@ public class InputParameterTest
         assertEquals(100, ipmm.getMaximumValue().intValue());
         ipmm.setValue(-50);
         ipmm.setValue(50);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setIntValue(-150);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setIntValue(150);
         });
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setFormat(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterInteger("i", "i", "i", 12, 0, 20, null, 3.0);
         });
@@ -458,11 +458,11 @@ public class InputParameterTest
         assertEquals("%6d", ipmm.getFormat());
         ipmm.setLongValue(0L);
         ipmm.setLongValue(20L);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setLongValue(-50L);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setLongValue(50L);
         });
@@ -475,20 +475,20 @@ public class InputParameterTest
         assertEquals(100L, ipmm.getMaximumValue().longValue());
         ipmm.setValue(-50L);
         ipmm.setValue(50L);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setLongValue(-150L);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmm.setLongValue(150);
         });
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setFormat(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterLong("L", "L", "L", 12L, 0L, 20L, null, 3.0);
         });
@@ -523,15 +523,15 @@ public class InputParameterTest
         assertEquals("abc", ip.getDefaultValue());
         assertEquals("def", ip.getCalculatedValue());
         assertEquals("def", ip.getValue());
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setValue(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setStringValue(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setDefaultValue(null);
         });
@@ -539,7 +539,7 @@ public class InputParameterTest
         assertFalse(ip == ipClone);
         assertEquals(ip.getCalculatedValue(), ipClone.getCalculatedValue());
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterString("s", "string", "string value", null, 2.0);
         });
@@ -610,7 +610,7 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.getDoubleParameter().setDoubleValue(0.0);
                         ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
@@ -627,38 +627,38 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.getDoubleParameter().setDoubleValue(20.0);
                         ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
                         ipmm.setCalculatedValue();
                     });
                 }
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(Double.NaN);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(Double.POSITIVE_INFINITY);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(Double.NEGATIVE_INFINITY);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(-50.0);
                     ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(50.0);
                     ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
@@ -683,13 +683,13 @@ public class InputParameterTest
                 ipmm.getDoubleParameter().setValue(50.0);
                 ipmm.getUnitParameter().setValue(LengthUnit.METER);
                 ipmm.setCalculatedValue();
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(-150.0);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(150.0);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
@@ -703,22 +703,22 @@ public class InputParameterTest
                 assertEquals(100.0, ipmm.getDoubleParameter().getMaximumValue(), 1E-6);
                 ipmm.getDoubleParameter().setValue(-50.0);
                 ipmm.getDoubleParameter().setValue(50.0);
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(-150.0);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getDoubleParameter().setDoubleValue(150.0);
                 });
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.getDoubleParameter().setFormat(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterDoubleScalar<LengthUnit, Length>("len", "len", "len", new Length(12.34, LengthUnit.CENTIMETER),
                     new Length(0.0, LengthUnit.CENTIMETER), new Length(20.0, LengthUnit.CENTIMETER), false, false, null, 3.0);
@@ -730,42 +730,42 @@ public class InputParameterTest
         InputParameterDoubleScalar<LengthUnit, Length> ipmmff = new InputParameterDoubleScalar<>("d", "double", "double value",
                 new Length(12.34, LengthUnit.CENTIMETER), 0.0, 20.0, false, false, "%6.2f", 3.0);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getDoubleParameter().setDoubleValue(0.0);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.HECTOMETER);
             ipmmff.setCalculatedValue();
         }, "Set value to 0.0 hm should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getDoubleParameter().setDoubleValue(0.0);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to 20.0 m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getDoubleParameter().setDoubleValue(Double.NaN);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to NaN m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getDoubleParameter().setDoubleValue(Double.POSITIVE_INFINITY);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to Inf m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getDoubleParameter().setDoubleValue(50.0);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to 50 m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getDoubleParameter().setDoubleValue(1.0);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.KILOMETER);
@@ -793,7 +793,7 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak1.setCalculatedValue();
         });
@@ -811,7 +811,7 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak2.setCalculatedValue();
         });
@@ -822,11 +822,11 @@ public class InputParameterTest
         SortedMap<String, InputParameter<?, ?>> ipMap = ipBreak3.getValue();
         ipMap.remove("value");
         ipMap.remove("unit");
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak3.getDoubleParameter();
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak3.getUnitParameter();
         });
@@ -897,7 +897,7 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.getFloatParameter().setFloatValue(0.0f);
                         ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
@@ -914,38 +914,38 @@ public class InputParameterTest
                 }
                 else
                 {
-                    Try.testFail(() ->
+                    UnitTest.testFail(() ->
                     {
                         ipmm.getFloatParameter().setFloatValue(20.0f);
                         ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
                         ipmm.setCalculatedValue();
                     });
                 }
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(Float.NaN);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(Float.POSITIVE_INFINITY);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(Float.NEGATIVE_INFINITY);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(-50.0f);
                     ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(50.0f);
                     ipmm.getUnitParameter().setValue(LengthUnit.CENTIMETER);
@@ -970,13 +970,13 @@ public class InputParameterTest
                 ipmm.getFloatParameter().setValue(50.0f);
                 ipmm.getUnitParameter().setValue(LengthUnit.METER);
                 ipmm.setCalculatedValue();
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(-150.0f);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
                     ipmm.setCalculatedValue();
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(150.0f);
                     ipmm.getUnitParameter().setValue(LengthUnit.METER);
@@ -990,22 +990,22 @@ public class InputParameterTest
                 assertEquals(100.0f, ipmm.getFloatParameter().getMaximumValue(), 1E-6);
                 ipmm.getFloatParameter().setValue(-50.0f);
                 ipmm.getFloatParameter().setValue(50.0f);
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(-150.0f);
                 });
-                Try.testFail(() ->
+                UnitTest.testFail(() ->
                 {
                     ipmm.getFloatParameter().setFloatValue(150.0f);
                 });
             }
         }
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.getFloatParameter().setFormat(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterFloatScalar<LengthUnit, FloatLength>("len", "len", "len",
                     new FloatLength(12.34, LengthUnit.CENTIMETER), new FloatLength(0.0, LengthUnit.CENTIMETER),
@@ -1018,42 +1018,42 @@ public class InputParameterTest
         InputParameterFloatScalar<LengthUnit, FloatLength> ipmmff = new InputParameterFloatScalar<>("d", "double",
                 "double value", new FloatLength(12.34f, LengthUnit.CENTIMETER), 0.0f, 20.0f, false, false, "%6.2f", 3.0);
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getFloatParameter().setFloatValue(0.0f);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.HECTOMETER);
             ipmmff.setCalculatedValue();
         }, "Set value to 0.0 hm should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getFloatParameter().setFloatValue(0.0f);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to 20.0 m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getFloatParameter().setFloatValue(Float.NaN);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to NaN m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getFloatParameter().setFloatValue(Float.POSITIVE_INFINITY);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to Inf m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getFloatParameter().setFloatValue(50.0f);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.METER);
             ipmmff.setCalculatedValue();
         }, "Set value to 50 m should have thrown exception");
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipmmff.getFloatParameter().setFloatValue(1.0f);
             ipmmff.getUnitParameter().setMapValue(LengthUnit.KILOMETER);
@@ -1081,7 +1081,7 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak1.setCalculatedValue();
         });
@@ -1099,7 +1099,7 @@ public class InputParameterTest
         {
             fail(e.getMessage());
         }
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak2.setCalculatedValue();
         });
@@ -1110,11 +1110,11 @@ public class InputParameterTest
         SortedMap<String, InputParameter<?, ?>> ipMap = ipBreak3.getValue();
         ipMap.remove("value");
         ipMap.remove("unit");
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak3.getFloatParameter();
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ipBreak3.getUnitParameter();
         });
@@ -1147,15 +1147,15 @@ public class InputParameterTest
         assertEquals(DurationUnit.HOUR, ip.getDefaultValue());
         assertEquals(DurationUnit.MINUTE, ip.getCalculatedValue());
         assertEquals(DurationUnit.MINUTE, ip.getValue());
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setValue(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setObjectValue(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setDefaultValue(null);
         });
@@ -1167,19 +1167,19 @@ public class InputParameterTest
 
         SortedMap<String, DurationUnit> optionMap = ip.getOptions();
         optionMap.remove("second");
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setMapValue(DurationUnit.SECOND);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setKeyforValue("second");
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setKeyforValue("xyz");
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             ip.setKeyforValue(null);
         });
@@ -1188,7 +1188,7 @@ public class InputParameterTest
 
         SortedMap<String, String> stringMap = new TreeMap<>();
         stringMap.put("a", "a");
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new InputParameterSelectionMap<String, String>("s", "s", "s", stringMap, "zz", 1.0);
         });

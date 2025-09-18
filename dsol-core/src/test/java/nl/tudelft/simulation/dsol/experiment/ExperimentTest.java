@@ -14,7 +14,7 @@ import java.util.TreeMap;
 
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -81,47 +81,47 @@ public class ExperimentTest
         expd.removeFromContext();
 
         // errors
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>(null, simulator, model, 0.0, 10.0, 20.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", null, model, 0.0, 10.0, 20.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, null, 0.0, 10.0, 20.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, (Double) null, 10.0, 20.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, (Double) null, 20.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, (Double) null, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, -10.0, 20.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 0.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, -20.0, 10);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, 0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new Experiment<Double, DevsSimulatorInterface<Double>>("exp1", simulator, model, 0.0, 10.0, 20.0, -10);
         });
@@ -212,7 +212,7 @@ public class ExperimentTest
                     }
                 };
         Experiment<Duration, DevsSimulatorInterface<Duration>> du1 = new Experiment<Duration, DevsSimulatorInterface<Duration>>(
-                "du1", simdu, moddu, Duration.ZERO, Duration.ZERO, Duration.instantiateSI(1000.0), 10);
+                "du1", simdu, moddu, Duration.ZERO, Duration.ZERO, Duration.ofSI(1000.0), 10);
         assertEquals(1000.0, du1.getEndTime().doubleValue(), 1E-6);
         assertEquals(moddu, du1.getModel());
         du1.makeExperimentReplication();
@@ -233,7 +233,7 @@ public class ExperimentTest
                     }
                 };
         Experiment<FloatDuration, DevsSimulatorInterface<FloatDuration>> fu1 = new Experiment<>("du1", simfu, modfu,
-                FloatDuration.ZERO, FloatDuration.ZERO, FloatDuration.instantiateSI(1000.0f), 10);
+                FloatDuration.ZERO, FloatDuration.ZERO, FloatDuration.ofSI(1000.0f), 10);
         assertEquals(1000.0f, fu1.getEndTime().floatValue(), 1E-6);
         assertEquals(modfu, fu1.getModel());
         fu1.makeExperimentReplication();
@@ -268,8 +268,8 @@ public class ExperimentTest
         }
 
         // test failure
-        Try.testFail(() -> expd.start());
-        Try.testFail(() -> expd.startNextReplication());
+        UnitTest.testFail(() -> expd.start());
+        UnitTest.testFail(() -> expd.startNextReplication());
 
         // reset and do again
         dataCollector.clear();

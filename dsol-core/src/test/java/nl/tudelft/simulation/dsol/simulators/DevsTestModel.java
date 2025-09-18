@@ -1,5 +1,7 @@
 package nl.tudelft.simulation.dsol.simulators;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 
 /**
@@ -40,7 +42,7 @@ public class DevsTestModel extends TestModel
             }
             catch (Exception exception)
             {
-                this.simulator.getLogger().always().warn(exception, "constructModel");
+                CategoryLogger.always().warn(exception, "constructModel");
             }
         }
     }

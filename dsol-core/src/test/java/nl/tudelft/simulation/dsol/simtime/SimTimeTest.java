@@ -31,9 +31,9 @@ public class SimTimeTest
         assertEquals(8.0, SimTime.plus(5.0, 3.0), 1E-6);
         assertEquals(8.0f, SimTime.plus(5.0f, 3.0f), 1E-6);
         assertEquals(Long.valueOf(8L), SimTime.plus(5L, 3L));
-        assertEquals(Duration.instantiateSI(8.0), SimTime.plus(Duration.instantiateSI(5.0), Duration.instantiateSI(3.0)));
-        assertEquals(FloatDuration.instantiateSI(8.0f),
-                SimTime.plus(FloatDuration.instantiateSI(5.0f), FloatDuration.instantiateSI(3.0f)));
+        assertEquals(Duration.ofSI(8.0), SimTime.plus(Duration.ofSI(5.0), Duration.ofSI(3.0)));
+        assertEquals(FloatDuration.ofSI(8.0f),
+                SimTime.plus(FloatDuration.ofSI(5.0f), FloatDuration.ofSI(3.0f)));
     }
 
     /**
@@ -48,9 +48,9 @@ public class SimTimeTest
         assertEquals(2.0, SimTime.minus(5.0, 3.0), 1E-6);
         assertEquals(2.0f, SimTime.minus(5.0f, 3.0f), 1E-6);
         assertEquals(Long.valueOf(2L), SimTime.minus(5L, 3L));
-        assertEquals(Duration.instantiateSI(2.0), SimTime.minus(Duration.instantiateSI(5.0), Duration.instantiateSI(3.0)));
-        assertEquals(FloatDuration.instantiateSI(2.0f),
-                SimTime.minus(FloatDuration.instantiateSI(5.0f), FloatDuration.instantiateSI(3.0f)));
+        assertEquals(Duration.ofSI(2.0), SimTime.minus(Duration.ofSI(5.0), Duration.ofSI(3.0)));
+        assertEquals(FloatDuration.ofSI(2.0f),
+                SimTime.minus(FloatDuration.ofSI(5.0f), FloatDuration.ofSI(3.0f)));
     }
 
     /**
@@ -65,8 +65,8 @@ public class SimTimeTest
         assertEquals(5.0, SimTime.copy(5.0), 1E-6);
         assertEquals(5.0f, SimTime.copy(5.0f), 1E-6);
         assertEquals(Long.valueOf(5L), SimTime.copy(5L));
-        assertEquals(Duration.instantiateSI(5.0), SimTime.copy(Duration.instantiateSI(5.0)));
-        assertEquals(FloatDuration.instantiateSI(5.0f), SimTime.copy(FloatDuration.instantiateSI(5.0f)));
+        assertEquals(Duration.ofSI(5.0), SimTime.copy(Duration.ofSI(5.0)));
+        assertEquals(FloatDuration.ofSI(5.0f), SimTime.copy(FloatDuration.ofSI(5.0f)));
     }
 
     /**
@@ -81,8 +81,8 @@ public class SimTimeTest
         assertEquals(0.0, SimTime.zero(5.0), 1E-6);
         assertEquals(0.0f, SimTime.zero(5.0f), 1E-6);
         assertEquals(Long.valueOf(0L), SimTime.zero(5L));
-        assertEquals(Duration.instantiateSI(0.0), SimTime.zero(Duration.instantiateSI(5.0)));
-        assertEquals(FloatDuration.instantiateSI(0.0f), SimTime.zero(FloatDuration.instantiateSI(5.0f)));
+        assertEquals(Duration.ofSI(0.0), SimTime.zero(Duration.ofSI(5.0)));
+        assertEquals(FloatDuration.ofSI(0.0f), SimTime.zero(FloatDuration.ofSI(5.0f)));
     }
 
 }

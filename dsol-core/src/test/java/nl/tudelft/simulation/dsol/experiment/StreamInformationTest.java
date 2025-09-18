@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.jstats.streams.MersenneTwister;
@@ -49,19 +49,19 @@ public class StreamInformationTest
         assertEquals(2, si.getStreams().size());
         assertEquals(202L, si.getStream("stream").getSeed());
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new StreamInformation(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.getStream(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.addStream(null, new MersenneTwister(1L));
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.addStream("xyz", null);
         });
@@ -94,59 +94,59 @@ public class StreamInformationTest
         assertEquals(10L, si.getSeedMap("default").get(0).longValue());
 
         // failures
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new StreamSeedInformation(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.getStream(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.addStream(null, new MersenneTwister(1L));
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.addStream("xyz", null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.getSeedMap(null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedArray(null, new long[] {1L, 2L});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedList(null, new ArrayList<Long>());
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedMap(null, new LinkedHashMap<Integer, Long>());
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedArray("default", (long[]) null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedList("default", (List<Long>) null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedMap("default", (Map<Integer, Long>) null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedArray("d", new long[] {1L, 2L});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedList("d", new ArrayList<Long>());
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             si.putSeedMap("d", new LinkedHashMap<Integer, Long>());
         });

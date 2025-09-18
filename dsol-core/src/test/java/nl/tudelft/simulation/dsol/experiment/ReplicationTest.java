@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.djunits.unit.DurationUnit;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -46,41 +46,41 @@ public class ReplicationTest
         assertNotNull(srd.getContext());
 
         // errors
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>(null, 10.0, 1.0, 12.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("x", (Double) null, 1.0, 12.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("x", 10.0, (Double) null, 12.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("x", 10.0, 1.0, (Double) null);
         });
         new SingleReplication<Double>("xyz1", 10.0, 0.0, 20.0);
         new SingleReplication<Double>("xyz2", -10.0, 0.0, 20.0);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("xyz", 10.0, -1.0, 20.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("xyz", 10.0, 1.0, 0.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("xyz", 10.0, 1.0, -20.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("xyz", 10.0, 10.0, 5.0);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             new SingleReplication<Double>("xyz", 10.0, 10.0, 10.0);
         });

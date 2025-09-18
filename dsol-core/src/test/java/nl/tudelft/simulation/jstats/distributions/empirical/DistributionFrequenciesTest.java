@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.djutils.exceptions.Try;
+import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -70,35 +70,35 @@ public class DistributionFrequenciesTest
         assertEquals(new DistributionEntry(4.0, 1.0), de.getCeilingEntryForValue(3.5));
         DistributionFrequencies.createDiscreteDistribution(new Double[] {10.0}, new double[] {1.0});
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new double[] {-0.1, 0.2, 0.5, 1.0});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new double[] {0.0, 0.2, 0.5, 1.0});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((double[]) null, wd);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, (double[]) null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new double[] {0.1, 0.2, 1.0});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new double[] {});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(new double[] {}, wd);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(new double[] {}, new double[] {});
         });
@@ -147,35 +147,35 @@ public class DistributionFrequenciesTest
         assertEquals(new DistributionEntry(4.0, 1.0), de.getCeilingEntryForValue(4.0));
         DistributionFrequencies.createDiscreteDistribution(new double[] {10.0}, new long[] {100L});
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new long[] {-10L, 20L, 50L, 80L});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new long[] {0L, 20L, 50L, 80L});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((double[]) null, fl);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, (long[]) null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new long[] {10L, 20L, 10L});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new long[] {});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(new double[] {}, fl);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(new double[] {}, new long[] {});
         });
@@ -224,35 +224,35 @@ public class DistributionFrequenciesTest
         assertEquals(new DistributionEntry(4.0, 1.0), de.getCeilingEntryForValue(4.0));
         DistributionFrequencies.createDiscreteDistribution(new double[] {10.0}, new int[] {100});
 
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new int[] {-10, 20, 50, 80});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new int[] {0, 20, 50, 80});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((double[]) null, fi);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, (int[]) null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new int[] {10, 20, 10});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, new int[] {});
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(new double[] {}, fi);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(new double[] {}, new int[] {});
         });
@@ -281,11 +281,11 @@ public class DistributionFrequenciesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(4.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((Double[]) null, wd);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, (double[]) null);
         });
@@ -314,11 +314,11 @@ public class DistributionFrequenciesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1L, de.getLowestValue().longValue());
         assertEquals(4L, de.getHighestValue().longValue());
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((long[]) null, fd);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vl, (double[]) null);
         });
@@ -347,11 +347,11 @@ public class DistributionFrequenciesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1L, de.getLowestValue().longValue());
         assertEquals(4L, de.getHighestValue().longValue());
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((long[]) null, fl);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vl, (double[]) null);
         });
@@ -380,11 +380,11 @@ public class DistributionFrequenciesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1L, de.getLowestValue().longValue());
         assertEquals(4L, de.getHighestValue().longValue());
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((long[]) null, fi);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vl, (double[]) null);
         });
@@ -413,23 +413,23 @@ public class DistributionFrequenciesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(4.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution((List<Double>) null, fd);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, (List<Double>) null);
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, Arrays.asList(10.0, 0.0, 30.0, 20.0));
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, Arrays.asList(10.0, 40.0, -30.0, 20.0));
         });
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(vd, Arrays.asList(10.0, 30.0, 20.0));
         });
@@ -461,7 +461,7 @@ public class DistributionFrequenciesTest
         assertNull(de.getCeilingEntry(1.1));
         assertEquals(1.0, de.getLowestValue().doubleValue(), 1E-6);
         assertEquals(6.0, de.getHighestValue().doubleValue(), 1E-6);
-        Try.testFail(() ->
+        UnitTest.testFail(() ->
         {
             DistributionFrequencies.createDiscreteDistribution(null);
         });
