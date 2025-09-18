@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.swing.BorderFactory;
 import javax.swing.border.EtchedBorder;
 
+import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.event.EventBasedTally;
 import org.djutils.stats.summarizers.event.EventBasedTimestampWeightedTally;
 import org.djutils.stats.summarizers.event.EventBasedWeightedTally;
@@ -72,7 +73,7 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
         }
         catch (NamingException | RemoteException exception)
         {
-            simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 

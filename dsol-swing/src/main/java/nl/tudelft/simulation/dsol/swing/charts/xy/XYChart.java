@@ -14,6 +14,7 @@ import org.djutils.event.EventProducer;
 import org.djutils.event.EventType;
 import org.djutils.event.LocalEventProducer;
 import org.djutils.event.reference.ReferenceType;
+import org.djutils.logger.CategoryLogger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -146,7 +147,7 @@ public class XYChart implements Swingable, Serializable
         }
         catch (NamingException | RemoteException exception)
         {
-            simulator.getLogger().always().warn(exception, "<init>");
+            CategoryLogger.always().warn(exception, "<init>");
         }
     }
 

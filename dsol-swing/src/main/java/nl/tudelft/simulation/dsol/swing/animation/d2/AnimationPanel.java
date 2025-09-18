@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.event.Event;
 import org.djutils.exceptions.Throw;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
@@ -76,7 +77,7 @@ public class AnimationPanel extends VisualizationPanel
                 }
                 catch (Exception exception)
                 {
-                    this.simulator.getLogger().always().warn(exception, "notify");
+                    CategoryLogger.always().warn(exception, "notify");
                 }
             }
         }

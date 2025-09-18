@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import org.pmw.tinylog.Level;
-
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
@@ -98,18 +96,17 @@ public class DsolPanel extends JPanel implements AppearanceControl
             if (tabTitle.equals(title))
             {
                 this.tabbedPane.removeTabAt(i);
-                break; 
+                break;
             }
         }
     }
 
     /**
      * Adds a console tab for the Logger.
-     * @param logLevel the log level
      */
-    public void addConsoleLogger(final Level logLevel)
+    public void addConsoleLogger()
     {
-        addTab("logger", new ConsoleLogger(logLevel));
+        addTab("logger", new LoggerConsole());
     }
 
     /**
