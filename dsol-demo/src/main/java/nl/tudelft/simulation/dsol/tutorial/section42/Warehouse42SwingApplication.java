@@ -4,8 +4,8 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
+import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.event.StatisticsEvents;
-import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
@@ -95,7 +95,7 @@ public class Warehouse42SwingApplication extends DsolApplication
             TablePanel charts = new TablePanel(2, 1);
             getTabbedPane().addTab("statistics", charts);
             getTabbedPane().setSelectedIndex(0);
-            addConsoleLogger(Level.INFO);
+            addConsoleLogger();
             addConsoleOutput();
 
             try
@@ -112,7 +112,7 @@ public class Warehouse42SwingApplication extends DsolApplication
             }
             catch (RemoteException exception)
             {
-                getSimulator().getLogger().always().error(exception);
+                CategoryLogger.always().error(exception);
             }
         }
     }

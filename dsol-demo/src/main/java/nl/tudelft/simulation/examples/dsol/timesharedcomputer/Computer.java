@@ -3,6 +3,7 @@ package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 import java.rmi.RemoteException;
 
 import org.djutils.event.Event;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.formalisms.flow.FlowBlock;
@@ -119,7 +120,7 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
                 }
                 catch (SimRuntimeException exception)
                 {
-                    getSimulator().getLogger().always().error(exception);
+                    CategoryLogger.always().error(exception);
                 }
             }
         }

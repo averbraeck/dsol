@@ -5,8 +5,8 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import org.djutils.logger.CategoryLogger;
-import org.pmw.tinylog.Level;
 
+import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
@@ -46,7 +46,7 @@ public class MM1SwingApplication extends DsolApplication
         }
         catch (SimRuntimeException exception)
         {
-            simulator.getLogger().always().error(exception, "<init>");
+            CategoryLogger.always().error(exception, "<init>");
         }
     }
 
@@ -62,7 +62,7 @@ public class MM1SwingApplication extends DsolApplication
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DsolException
     {
-        CategoryLogger.setAllLogLevel(Level.TRACE);
+        CategoryLogger.setLogLevelAll(Level.TRACE);
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("MM1SwingApplication");
         MM1Model model = new MM1Model(simulator);
         Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000.0);

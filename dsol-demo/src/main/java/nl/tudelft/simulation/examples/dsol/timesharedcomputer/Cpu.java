@@ -7,6 +7,7 @@ import java.util.List;
 import org.djutils.draw.bounds.Bounds3d;
 import org.djutils.draw.point.OrientedPoint3d;
 import org.djutils.event.EventType;
+import org.djutils.logger.CategoryLogger;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
 
@@ -92,7 +93,7 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
             }
             catch (SimRuntimeException exception)
             {
-                getSimulator().getLogger().always().error(exception);
+                CategoryLogger.always().error(exception);
             }
         }
     }
@@ -109,7 +110,7 @@ public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
         }
         catch (SimRuntimeException exception)
         {
-            getSimulator().getLogger().always().error(exception);
+            CategoryLogger.always().error(exception);
         }
     }
 

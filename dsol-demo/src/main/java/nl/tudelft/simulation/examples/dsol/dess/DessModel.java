@@ -1,5 +1,7 @@
 package nl.tudelft.simulation.examples.dsol.dess;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
 import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -47,7 +49,7 @@ public class DessModel extends AbstractDsolModel<Double, DessSimulatorInterface<
         }
         catch (Exception exception)
         {
-            getSimulator().getLogger().always().error(exception);
+            CategoryLogger.always().error(exception);
         }
     }
 

@@ -1,5 +1,7 @@
 package nl.tudelft.simulation.dsol.tutorial.section42;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.jstats.distributions.DistContinuous;
@@ -55,7 +57,7 @@ public class Customer implements BuyerInterface
     @Override
     public void receiveProduct(final long amount)
     {
-        this.simulator.getLogger().filter(Cat.DSOL).trace("receiveProduct: received " + amount);
+        CategoryLogger.filter(Cat.DSOL).trace("receiveProduct: received " + amount);
     }
 
     /**

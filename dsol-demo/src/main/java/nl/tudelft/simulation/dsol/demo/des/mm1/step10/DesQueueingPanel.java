@@ -2,17 +2,17 @@ package nl.tudelft.simulation.dsol.demo.des.mm1.step10;
 
 import java.rmi.RemoteException;
 
+import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.event.StatisticsEvents;
-import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.table.PersistentTableModel;
 import nl.tudelft.simulation.dsol.statistics.table.TallyTableModel;
 import nl.tudelft.simulation.dsol.swing.charts.boxwhisker.BoxAndWhiskerChart;
 import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
-import nl.tudelft.simulation.dsol.swing.gui.ConsoleLogger;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleOutput;
 import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
+import nl.tudelft.simulation.dsol.swing.gui.LoggerConsole;
 import nl.tudelft.simulation.dsol.swing.gui.TablePanel;
 import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 import nl.tudelft.simulation.dsol.swing.statistics.StatisticsTable;
@@ -129,10 +129,10 @@ public class DesQueueingPanel extends DsolPanel
         }
         catch (RemoteException exception)
         {
-            model.getSimulator().getLogger().always().error(exception);
+            CategoryLogger.always().error(exception);
         }
 
-        ConsoleLogger logConsole = new ConsoleLogger(Level.INFO);
+        LoggerConsole logConsole = new LoggerConsole();
         getTabbedPane().addTab("logger", logConsole);
         getTabbedPane().addTab("console", new ConsoleOutput());
     }

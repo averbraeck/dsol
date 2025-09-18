@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
@@ -121,7 +122,7 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
             }
             catch (SimRuntimeException exception)
             {
-                getSimulator().getLogger().always().error(exception);
+                CategoryLogger.always().error(exception);
             }
         }
     }

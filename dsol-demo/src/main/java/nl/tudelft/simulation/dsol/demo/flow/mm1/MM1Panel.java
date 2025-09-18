@@ -2,8 +2,8 @@ package nl.tudelft.simulation.dsol.demo.flow.mm1;
 
 import java.rmi.RemoteException;
 
+import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.event.StatisticsEvents;
-import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 import nl.tudelft.simulation.dsol.statistics.table.PersistentTableModel;
@@ -52,7 +52,7 @@ public class MM1Panel extends DsolPanel
         TablePanel charts = new TablePanel(4, 3);
         getTabbedPane().addTab("statistics", charts);
         getTabbedPane().setSelectedIndex(0);
-        addConsoleLogger(Level.TRACE);
+        addConsoleLogger();
         addConsoleOutput();
 
         try
@@ -111,7 +111,7 @@ public class MM1Panel extends DsolPanel
         }
         catch (RemoteException exception)
         {
-            model.getSimulator().getLogger().always().error(exception);
+            CategoryLogger.always().error(exception);
         }
     }
 

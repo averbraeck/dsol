@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import org.djutils.draw.point.OrientedPoint3d;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
@@ -61,7 +62,7 @@ public class DiscreteBall extends Ball
         }
         catch (NamingException exception)
         {
-            this.simulator.getLogger().always().error(exception);
+            CategoryLogger.always().error(exception);
         }
         this.next();
     }

@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import org.djutils.draw.point.OrientedPoint3d;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.examples.dsol.animation.BallAnimation;
@@ -55,7 +56,7 @@ public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
         }
         catch (RemoteException exception)
         {
-            simulator.getLogger().always().error(exception);
+            CategoryLogger.always().error(exception);
         }
     }
 

@@ -5,8 +5,8 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import org.djutils.logger.CategoryLogger;
-import org.pmw.tinylog.Level;
 
+import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
@@ -65,7 +65,7 @@ public class MM1Application
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
-        CategoryLogger.setAllLogLevel(Level.WARNING);
+        CategoryLogger.setLogLevelAll(Level.WARN);
         new MM1Application();
     }
 

@@ -1,15 +1,14 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.pmw.tinylog.Level;
 
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
-import nl.tudelft.simulation.dsol.swing.gui.ConsoleLogger;
 import nl.tudelft.simulation.dsol.swing.gui.ConsoleOutput;
 import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
+import nl.tudelft.simulation.dsol.swing.gui.LoggerConsole;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationApplication;
 import nl.tudelft.simulation.dsol.swing.gui.animation.DsolAnimationTab;
 import nl.tudelft.simulation.dsol.swing.gui.animation.panel.SearchPanel.ObjectKind;
@@ -39,7 +38,7 @@ public class BallSwingApplication
             Replication<Double> replication = new SingleReplication<Double>("rep1", 0.0, 0.0, 1000000.0);
             simulator.initialize(model, replication);
             DsolPanel panel = new DsolPanel(new RealTimeControlPanel.TimeDouble(model, simulator));
-            panel.addTab("logger", new ConsoleLogger(Level.INFO));
+            panel.addTab("logger", new LoggerConsole());
             panel.addTab("console", new ConsoleOutput());
             var frame = new DsolAnimationApplication(panel, "BallSwingApplication",
                     DsolAnimationTab.createAutoPanTab(new Bounds2d(-120, 120, -120, 120), panel.getSimulator()));

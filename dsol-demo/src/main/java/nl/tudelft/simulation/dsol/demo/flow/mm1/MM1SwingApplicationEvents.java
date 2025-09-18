@@ -7,12 +7,11 @@ import javax.naming.NamingException;
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.logger.CategoryLogger;
-import org.pmw.tinylog.Level;
 
+import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
-import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
@@ -35,9 +34,6 @@ public class MM1SwingApplicationEvents extends DsolApplication
     /** the model. */
     private MM1Model model;
 
-    /** logger. */
-    private SimLogger logger;
-
     /**
      * @param panel the panel
      * @param model the model
@@ -47,14 +43,13 @@ public class MM1SwingApplicationEvents extends DsolApplication
     {
         super(panel, "MM1SwingApplicationEvents");
         this.model = model;
-        this.logger = devsSimulator.getLogger();
         try
         {
             devsSimulator.scheduleEventAbs(1000.0, () -> terminate());
         }
         catch (SimRuntimeException exception)
         {
-            this.logger.always().error(exception, "<init>");
+            CategoryLogger.always().error(exception, "<init>");
         }
     }
 
@@ -70,7 +65,7 @@ public class MM1SwingApplicationEvents extends DsolApplication
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException, DsolException
     {
-        CategoryLogger.setAllLogLevel(Level.TRACE);
+        CategoryLogger.setLogLevelAll(Level.TRACE);
         DevsSimulator<Double> devsSimulator = new DevsSimulator<Double>("MM1SwingApplicationEvents");
         MM1Model model = new MM1Model(devsSimulator);
         new SimulatorEventLogger(devsSimulator);
@@ -97,15 +92,11 @@ public class MM1SwingApplicationEvents extends DsolApplication
         /** */
         private static final long serialVersionUID = 1L;
 
-        /** */
-        private final DevsSimulator<Double> devsSimulator;
-
         /**
          * @param devsSimulator the simulator to provide the events
          */
         SimulatorEventLogger(final DevsSimulator<Double> devsSimulator)
         {
-            this.devsSimulator = devsSimulator;
             devsSimulator.addListener(this, Replication.START_REPLICATION_EVENT);
             devsSimulator.addListener(this, Replication.END_REPLICATION_EVENT);
             devsSimulator.addListener(this, SimulatorInterface.START_EVENT);
@@ -117,7 +108,7 @@ public class MM1SwingApplicationEvents extends DsolApplication
         @Override
         public void notify(final Event event) throws RemoteException
         {
-            this.devsSimulator.getLogger().always().info(event.getType().toString());
+            CategoryLogger.always().info(event.getType().toString());
         }
 
     }

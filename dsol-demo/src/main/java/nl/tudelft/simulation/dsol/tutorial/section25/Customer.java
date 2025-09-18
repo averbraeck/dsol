@@ -1,6 +1,7 @@
 package nl.tudelft.simulation.dsol.tutorial.section25;
 
-import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 
@@ -45,7 +46,7 @@ public class Customer
         }
         catch (Exception exception)
         {
-            this.simulator.getLogger().always().error(exception);
+            CategoryLogger.always().error(exception);
         }
     }
 }

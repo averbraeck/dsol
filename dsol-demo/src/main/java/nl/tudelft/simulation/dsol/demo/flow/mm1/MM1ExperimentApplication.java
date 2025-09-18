@@ -10,8 +10,8 @@ import org.djutils.event.EventListener;
 import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.Tally;
 import org.djutils.stats.summarizers.TimestampWeightedTally;
-import org.pmw.tinylog.Level;
 
+import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Experiment;
 import nl.tudelft.simulation.dsol.experiment.Replication;
@@ -116,7 +116,7 @@ public class MM1ExperimentApplication implements EventListener
      */
     public static void main(final String[] args) throws SimRuntimeException, RemoteException, NamingException
     {
-        CategoryLogger.setAllLogLevel(Level.WARNING);
+        CategoryLogger.setLogLevelAll(Level.WARN);
         new MM1ExperimentApplication();
     }
 
