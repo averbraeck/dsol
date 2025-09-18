@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.swing.introspection.mapping;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Map;
