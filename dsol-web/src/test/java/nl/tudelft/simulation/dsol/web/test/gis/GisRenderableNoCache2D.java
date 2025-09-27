@@ -234,4 +234,76 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
     {
         return -1; // in case of same z-values make sure map is drawn first
     }
+
+    @Override
+    public boolean isFlip()
+    {
+        return false;
+    }
+
+    @Override
+    public void setFlip(final boolean flip)
+    {
+        // ignore
+    }
+
+    @Override
+    public boolean isRotate()
+    {
+        return false;
+    }
+
+    @Override
+    public void setRotate(final boolean rotate)
+    {
+        // ignore
+    }
+
+    @Override
+    public boolean isScale()
+    {
+        return false;
+    }
+
+    @Override
+    public void setScale(final boolean scale)
+    {
+        // ignore
+    }
+
+    @Override
+    public boolean isScaleY()
+    {
+        return false;
+    }
+
+    @Override
+    public void setScaleY(final boolean scaleY)
+    {
+        // ignore
+    }
+
+    @Override
+    public boolean isScaleObject()
+    {
+        return false;
+    }
+
+    @Override
+    public void setScaleObject(final boolean scaleY)
+    {
+        // ignore
+    }
+
+    @Override
+    public boolean isTranslate()
+    {
+        return false;
+    }
+
+    @Override
+    public void setTranslate(final boolean translate)
+    {
+        // ignore
+    }
 }
