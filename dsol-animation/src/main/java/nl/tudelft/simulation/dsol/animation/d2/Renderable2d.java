@@ -49,24 +49,6 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      */
     private byte flags = 0x0B;
 
-    /** whether to scale the X/Y-value with the value of RenderableScale.OnjectScaleFactor. Flag is 00100000 */
-    private static final byte SCALE_OBJECT_FLAG = 0x20;
-
-    /** whether to scale the Y-value in case of a compressed Y-axis. Flag is 00010000 */
-    private static final byte SCALE_Y_FLAG = 0x10;
-
-    /** whether to rotate the renderable. Flag is 1000 */
-    private static final byte ROTATE_FLAG = 0x08;
-
-    /** whether to flip the renderable after rotating 180 degrees. Flag is 0100 */
-    private static final byte FLIP_FLAG = 0x04;
-
-    /** whether to scale the renderable when zooming in or out. Flag is 0010 */
-    private static final byte SCALE_FLAG = 0x02;
-
-    /** whether to translate the renderable when panning. Flag is 0001 */
-    private static final byte TRANSLATE_FLAG = 0x01;
-
     /** the source of the renderable. */
     private L source;
 

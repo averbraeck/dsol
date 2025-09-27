@@ -30,9 +30,26 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  */
 public interface Renderable2dInterface<L extends Locatable> extends Serializable
 {
-
     /** the object number counter for a unique id. */
     AtomicInteger ANIMATION_OBJECT_COUNTER = new AtomicInteger(0);
+
+    /** whether to scale the X/Y-value with the value of RenderableScale.OnjectScaleFactor. Flag is 0010 0000 */
+    byte SCALE_OBJECT_FLAG = 0x20;
+
+    /** whether to scale the Y-value in case of a compressed Y-axis. Flag is 0001 0000 */
+    byte SCALE_Y_FLAG = 0x10;
+
+    /** whether to rotate the renderable. Flag is 0000 1000 */
+    byte ROTATE_FLAG = 0x08;
+
+    /** whether to flip the renderable after rotating 180 degrees. Flag is 0000 0100 */
+    byte FLIP_FLAG = 0x04;
+
+    /** whether to scale the renderable when zooming in or out. Flag is 0000 0010 */
+    byte SCALE_FLAG = 0x02;
+
+    /** whether to translate the renderable when panning. Flag is 0000 0001 */
+    byte TRANSLATE_FLAG = 0x01;
 
     /**
      * the overarching method that is called when painting, usually redirecting to paint(...) but possibly retrieving the
@@ -94,4 +111,77 @@ public interface Renderable2dInterface<L extends Locatable> extends Serializable
      * @return the id of the renderable component
      */
     int getId();
+
+    /**
+     * Return whether to flip the renderable, if the direction is 'left' or not.
+     * @return whether to flip the renderable, if the direction is 'left' or not
+     */
+    boolean isFlip();
+
+    /**
+     * Set whether to flip the renderable, if the direction is 'left' or not.
+     * @param flip whether to flip the renderable, if the direction is 'left' or not
+     */
+    void setFlip(boolean flip);
+
+    /**
+     * Return whether to rotate the renderable or not.
+     * @return whether to rotate the renderable or not
+     */
+    boolean isRotate();
+
+    /**
+     * Set whether to rotate the renderable or not.
+     * @param rotate whether to rotate the renderable or not
+     */
+    void setRotate(boolean rotate);
+
+    /**
+     * Return whether to scale the renderable or not.
+     * @return whether to scale the renderable or not
+     */
+    boolean isScale();
+
+    /**
+     * Set whether to scale the renderable or not.
+     * @param scale whether to scale the renderable or not
+     */
+    void setScale(boolean scale);
+
+    /**
+     * Return whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not.
+     * @return whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
+     */
+    boolean isScaleY();
+
+    /**
+     * Set whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not.
+     * @param scaleY whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
+     */
+    void setScaleY(boolean scaleY);
+
+    /**
+     * Return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
+     * @return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not
+     */
+    boolean isScaleObject();
+
+    /**
+     * Set whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
+     * @param scaleY whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or
+     *            not
+     */
+    void setScaleObject(boolean scaleY);
+
+    /**
+     * Return whether to translate the renderable to its position or not (false means absolute position).
+     * @return whether to translate the renderable to its position or not (false means absolute position)
+     */
+    boolean isTranslate();
+
+    /**
+     * Set whether to translate the renderable to its position or not (false means absolute position).
+     * @param translate whether to translate the renderable to its position or not (false means absolute position)
+     */
+    void setTranslate(boolean translate);
 }
