@@ -437,7 +437,7 @@ public class HtmlGraphics2D extends Graphics2D
      */
     protected void drawFillShape(final Shape shape, final boolean fill)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.draw(shape: {})", shape.getClass().getSimpleName());
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.draw(shape: {})", shape.getClass().getSimpleName());
         if (shape instanceof Ellipse2D.Double)
         {
             Ellipse2D.Double ellipse = (Ellipse2D.Double) shape;
@@ -500,112 +500,112 @@ public class HtmlGraphics2D extends Graphics2D
     @Override
     public boolean drawImage(final Image img, final AffineTransform xform, final ImageObserver obs)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return true;
     }
 
     @Override
     public void drawImage(final BufferedImage img, final BufferedImageOp op, final int x, final int y)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
     }
 
     @Override
     public void drawRenderedImage(final RenderedImage img, final AffineTransform xform)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawRenderedImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawRenderedImage()");
     }
 
     @Override
     public void drawRenderableImage(final RenderableImage img, final AffineTransform xform)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawRenderableImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawRenderableImage()");
     }
 
     @Override
     public void drawString(final String str, final int x, final int y)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawString()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawString()");
         addTransformText("drawString", x, y, str);
     }
 
     @Override
     public void drawString(final String str, final float x, final float y)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawString()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawString()");
         addTransformText("drawString", x, y, str);
     }
 
     @Override
     public void drawString(final AttributedCharacterIterator iterator, final int x, final int y)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawString()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawString()");
     }
 
     @Override
     public void drawString(final AttributedCharacterIterator iterator, final float x, final float y)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawString()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawString()");
     }
 
     @Override
     public void drawGlyphVector(final GlyphVector g, final float x, final float y)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawGlyphVector()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawGlyphVector()");
     }
 
     @Override
     public void fill(final Shape shape)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fill()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fill()");
         drawFillShape(shape, true);
     }
 
     @Override
     public boolean hit(final Rectangle rect, final Shape s, final boolean onStroke)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.hit()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.hit()");
         return false;
     }
 
     @Override
     public GraphicsConfiguration getDeviceConfiguration()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getDeviceConfiguration()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getDeviceConfiguration()");
         return null;
     }
 
     @Override
     public void setComposite(final Composite comp)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setComposite()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setComposite()");
     }
 
     @Override
     public void setPaint(final Paint paint)
     {
         this.paint = paint;
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setPaint()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setPaint()");
     }
 
     @Override
     public void setStroke(final Stroke s)
     {
         this.stroke = s;
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setStroke()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setStroke()");
     }
 
     @Override
     public void setRenderingHint(final Key hintKey, final Object hintValue)
     {
         this.renderingHints.put(hintKey, hintValue);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setRenderingHint()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setRenderingHint()");
     }
 
     @Override
     public Object getRenderingHint(final Key hintKey)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getRenderingHint()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getRenderingHint()");
         return this.renderingHints.get(hintKey);
     }
 
@@ -614,20 +614,20 @@ public class HtmlGraphics2D extends Graphics2D
     {
         this.renderingHints.clear();
         this.renderingHints.putAll(hints);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setRenderingHints()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setRenderingHints()");
     }
 
     @Override
     public void addRenderingHints(final Map<?, ?> hints)
     {
         this.renderingHints.putAll(hints);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.addRenderingHints()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.addRenderingHints()");
     }
 
     @Override
     public RenderingHints getRenderingHints()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getRenderingHints()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getRenderingHints()");
         return this.renderingHints;
     }
 
@@ -635,75 +635,75 @@ public class HtmlGraphics2D extends Graphics2D
     public void translate(final int x, final int y)
     {
         this.affineTransform.translate(x, y);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.translate()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.translate()");
     }
 
     @Override
     public void translate(final double tx, final double ty)
     {
         this.affineTransform.translate(tx, ty);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.translate()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.translate()");
     }
 
     @Override
     public void rotate(final double theta)
     {
         this.affineTransform.rotate(theta);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.rotate()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.rotate()");
     }
 
     @Override
     public void rotate(final double theta, final double x, final double y)
     {
         this.affineTransform.rotate(theta, x, y);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.rotate()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.rotate()");
     }
 
     @Override
     public void scale(final double sx, final double sy)
     {
         this.affineTransform.scale(sx, sy);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.scale()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.scale()");
     }
 
     @Override
     public void shear(final double shx, final double shy)
     {
         this.affineTransform.shear(shx, shy);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.shear()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.shear()");
     }
 
     @Override
     public void transform(final AffineTransform Tx)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.transform()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.transform()");
     }
 
     @Override
     public void setTransform(final AffineTransform Tx)
     {
         this.affineTransform = (AffineTransform) Tx.clone();
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setTransform()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setTransform()");
     }
 
     @Override
     public AffineTransform getTransform()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getTransform()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getTransform()");
         return this.affineTransform;
     }
 
     @Override
     public Paint getPaint()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getPaint()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getPaint()");
         return this.paint;
     }
 
     @Override
     public Composite getComposite()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getComposite()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getComposite()");
         return this.composite;
     }
 
@@ -711,47 +711,47 @@ public class HtmlGraphics2D extends Graphics2D
     public void setBackground(final Color color)
     {
         this.background = color;
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setBackground()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setBackground()");
     }
 
     @Override
     public Color getBackground()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getBackground()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getBackground()");
         return this.background;
     }
 
     @Override
     public Stroke getStroke()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getStroke()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getStroke()");
         return this.stroke;
     }
 
     @Override
     public void clip(final Shape s)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.clip()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.clip()");
     }
 
     @Override
     public FontRenderContext getFontRenderContext()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getFontRenderContext()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getFontRenderContext()");
         return new FontRenderContext(this.affineTransform, true, true);
     }
 
     @Override
     public Graphics create()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.create()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.create()");
         return new HtmlGraphics2D(); // TODO: clone
     }
 
     @Override
     public Color getColor()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getColor()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getColor()");
         return this.color;
     }
 
@@ -760,25 +760,25 @@ public class HtmlGraphics2D extends Graphics2D
     {
         this.color = c;
         this.paint = c; // TODO see how difference between paint and color should be handled
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setColor()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setColor()");
     }
 
     @Override
     public void setPaintMode()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setPaintMode()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setPaintMode()");
     }
 
     @Override
     public void setXORMode(final Color c1)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setXORMode()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setXORMode()");
     }
 
     @Override
     public Font getFont()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getFont()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getFont()");
         return this.font;
     }
 
@@ -787,156 +787,156 @@ public class HtmlGraphics2D extends Graphics2D
     {
         this.font = font;
         this.fontMetrics = this.canvas.getFontMetrics(this.font);
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setFont()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setFont()");
     }
 
     @Override
     public FontMetrics getFontMetrics(final Font f)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getFontMetrics()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getFontMetrics()");
         return this.fontMetrics;
     }
 
     @Override
     public Rectangle getClipBounds()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getClipBounds()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getClipBounds()");
         return null;
     }
 
     @Override
     public void clipRect(final int x, final int y, final int width, final int height)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.clipRect()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.clipRect()");
     }
 
     @Override
     public void setClip(final int x, final int y, final int width, final int height)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setClip()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setClip()");
     }
 
     @Override
     public Shape getClip()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.getClip()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.getClip()");
         return null;
     }
 
     @Override
     public void setClip(final Shape clip)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.setClip()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.setClip()");
     }
 
     @Override
     public void copyArea(final int x, final int y, final int width, final int height, final int dx, final int dy)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.copyArea()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.copyArea()");
     }
 
     @Override
     public void drawLine(final int x1, final int y1, final int x2, final int y2)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawLine()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawLine()");
         addTransformDraw("drawLine", x1, y1, x2, y2);
     }
 
     @Override
     public void fillRect(final int x, final int y, final int width, final int height)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillRect()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fillRect()");
         addTransformFill("fillRect", x, y, width, height);
     }
 
     @Override
     public void clearRect(final int x, final int y, final int width, final int height)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.clearRect()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.clearRect()");
         addTransformDraw("clearRect", x, y, width, height);
     }
 
     @Override
     public void drawRoundRect(final int x, final int y, final int width, final int height, final int arcWidth, final int arcHeight)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawRoundRect()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawRoundRect()");
     }
 
     @Override
     public void fillRoundRect(final int x, final int y, final int width, final int height, final int arcWidth, final int arcHeight)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillRoundRect()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fillRoundRect()");
     }
 
     @Override
     public void drawOval(final int x, final int y, final int width, final int height)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawOval()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawOval()");
         addTransformDraw("drawOval", x, y, width, height);
     }
 
     @Override
     public void fillOval(final int x, final int y, final int width, final int height)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillOval()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fillOval()");
         addTransformFill("fillOval", x, y, width, height);
     }
 
     @Override
     public void drawArc(final int x, final int y, final int width, final int height, final int startAngle, final int arcAngle)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawArc()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawArc()");
     }
 
     @Override
     public void fillArc(final int x, final int y, final int width, final int height, final int startAngle, final int arcAngle)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillArc()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fillArc()");
     }
 
     @Override
     public void drawPolyline(final int[] xPoints, final int[] yPoints, final int nPoints)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillPolyline()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fillPolyline()");
     }
 
     @Override
     public void drawPolygon(final int[] xPoints, final int[] yPoints, final int nPoints)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawPolygon()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawPolygon()");
     }
 
     @Override
     public void fillPolygon(final int[] xPoints, final int[] yPoints, final int nPoints)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.fillPolygon()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fillPolygon()");
     }
 
     @Override
     public boolean drawImage(final Image img, final int x, final int y, final ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;
     }
 
     @Override
     public boolean drawImage(final Image img, final int x, final int y, final int width, final int height, final ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;
     }
 
     @Override
     public boolean drawImage(final Image img, final int x, final int y, final Color bgcolor, final ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;
     }
 
     @Override
     public boolean drawImage(final Image img, final int x, final int y, final int width, final int height, final Color bgcolor, final ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;
     }
 
@@ -944,7 +944,7 @@ public class HtmlGraphics2D extends Graphics2D
     public boolean drawImage(final Image img, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1, final int sy1, final int sx2, final int sy2,
             final ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;
     }
 
@@ -952,14 +952,14 @@ public class HtmlGraphics2D extends Graphics2D
     public boolean drawImage(final Image img, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1, final int sy1, final int sx2, final int sy2, final Color bgcolor,
             final ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;
     }
 
     @Override
     public void dispose()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphics2D.dispose()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.dispose()");
     }
 
 }

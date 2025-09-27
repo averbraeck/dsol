@@ -36,13 +36,13 @@ public class HtmlGraphicsConfiguration extends GraphicsConfiguration
      */
     public HtmlGraphicsConfiguration()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.<init>");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.<init>");
     }
 
     @Override
     public GraphicsDevice getDevice()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getDevice()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.getDevice()");
         return this.htmlDevice;
     }
 
@@ -53,42 +53,42 @@ public class HtmlGraphicsConfiguration extends GraphicsConfiguration
      */
     public void setDevice(final HtmlDevice htmlDevice)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.setDevice()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.setDevice()");
         this.htmlDevice = htmlDevice;
     }
 
     @Override
     public ColorModel getColorModel()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getColorModel()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.getColorModel()");
         return ColorModel.getRGBdefault();
     }
 
     @Override
     public ColorModel getColorModel(final int transparency)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getColorModel()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.getColorModel()");
         return ColorModel.getRGBdefault();
     }
 
     @Override
     public AffineTransform getDefaultTransform()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getDefaultTransform()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.getDefaultTransform()");
         return this.identityTransform;
     }
 
     @Override
     public AffineTransform getNormalizingTransform()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getNormalizingTransform()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.getNormalizingTransform()");
         return this.identityTransform;
     }
 
     @Override
     public Rectangle getBounds()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsConfiguration.getRelativeBounds()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsConfiguration.getRelativeBounds()");
         return this.bounds;
     }
 

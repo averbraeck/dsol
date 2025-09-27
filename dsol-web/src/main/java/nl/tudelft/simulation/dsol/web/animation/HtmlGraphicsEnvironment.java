@@ -36,7 +36,7 @@ public class HtmlGraphicsEnvironment extends GraphicsEnvironment
      */
     public HtmlGraphicsEnvironment()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsEnvironment.<init>");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.<init>");
         this.graphics2D = new HtmlGraphics2D();
         this.graphicsConfiguration = new HtmlGraphicsConfiguration();
         this.htmlDevice = new HtmlDevice(this.graphicsConfiguration);
@@ -46,42 +46,42 @@ public class HtmlGraphicsEnvironment extends GraphicsEnvironment
     @Override
     public GraphicsDevice[] getScreenDevices() throws HeadlessException
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsEnvironment.getScreenDevices()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.getScreenDevices()");
         return new GraphicsDevice[] {this.htmlDevice};
     }
 
     @Override
     public GraphicsDevice getDefaultScreenDevice() throws HeadlessException
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsEnvironment.getDefaultScreenDevice()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.getDefaultScreenDevice()");
         return this.htmlDevice;
     }
 
     @Override
     public Graphics2D createGraphics(BufferedImage img)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsEnvironment.createGraphics()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.createGraphics()");
         return this.graphics2D;
     }
 
     @Override
     public Font[] getAllFonts()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsEnvironment.getAllFonts()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.getAllFonts()");
         return new Font[] {};
     }
 
     @Override
     public String[] getAvailableFontFamilyNames()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsEnvironment.getAvailableFontFamilyNames()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.getAvailableFontFamilyNames()");
         return new String[] {};
     }
 
     @Override
     public String[] getAvailableFontFamilyNames(Locale l)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlGraphicsEnvironment.getAvailableFontFamilyNames()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.getAvailableFontFamilyNames()");
         return new String[] {};
     }
 

@@ -48,124 +48,124 @@ public abstract class HtmlToolkit extends Toolkit
     @Override
     public Dimension getScreenSize() throws HeadlessException
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getScreenSize()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getScreenSize()");
         return null;
     }
 
     @Override
     public int getScreenResolution() throws HeadlessException
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getScreenResolution()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getScreenResolution()");
         return 0;
     }
 
     @Override
     public ColorModel getColorModel() throws HeadlessException
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getColorModel()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getColorModel()");
         return null;
     }
 
     @Override
     public String[] getFontList()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getFontList()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getFontList()");
         return null;
     }
 
     @Override
     public FontMetrics getFontMetrics(Font font)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getFontMetrics()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getFontMetrics()");
         return null;
     }
 
     @Override
     public void sync()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.sync()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.sync()");
     }
 
     @Override
     public Image getImage(String filename)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getImage()");
         return null;
     }
 
     @Override
     public Image getImage(URL url)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getImage()");
         return null;
     }
 
     @Override
     public Image createImage(String filename)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.createImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
     public Image createImage(URL url)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.createImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
     public boolean prepareImage(Image image, int width, int height, ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.prepareImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.prepareImage()");
         return false;
     }
 
     @Override
     public int checkImage(Image image, int width, int height, ImageObserver observer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.checkImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.checkImage()");
         return 0;
     }
 
     @Override
     public Image createImage(ImageProducer producer)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.createImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
     public Image createImage(byte[] imagedata, int imageoffset, int imagelength)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.createImage()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
     public PrintJob getPrintJob(Frame frame, String jobtitle, Properties props)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getPrintJob()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getPrintJob()");
         return null;
     }
 
     @Override
     public void beep()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.beep()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.beep()");
     }
 
     @Override
     public Clipboard getSystemClipboard() throws HeadlessException
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.getSystemClipboard()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getSystemClipboard()");
         return null;
     }
 
     @Override
     protected EventQueue getSystemEventQueueImpl()
     {
-        CategoryLogger.filter(Cat.WEB)
+        CategoryLogger.with(Cat.WEB)
                 .trace("HtmlToolkit.getSystemEventQueueImpl() -- next event is " + this.eventQueue.peekEvent());
         return this.eventQueue;
     }
@@ -173,21 +173,21 @@ public abstract class HtmlToolkit extends Toolkit
     @Override
     public boolean isModalityTypeSupported(ModalityType modalityType)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.isModalityTypeSupported()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.isModalityTypeSupported()");
         return false;
     }
 
     @Override
     public boolean isModalExclusionTypeSupported(ModalExclusionType modalExclusionType)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.isModalExclusionTypeSupported()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.isModalExclusionTypeSupported()");
         return false;
     }
 
     @Override
     public Map<TextAttribute, ?> mapInputMethodHighlight(InputMethodHighlight highlight) throws HeadlessException
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlToolkit.mapInputMethodHighlight()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.mapInputMethodHighlight()");
         return null;
     }
 

@@ -25,35 +25,35 @@ public class HtmlDevice extends GraphicsDevice
      */
     public HtmlDevice(GraphicsConfiguration htmlGraphicsConfiguration)
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlDevice.<init>");
+        CategoryLogger.with(Cat.WEB).trace("HtmlDevice.<init>");
         this.htmlGraphicsConfigurations = new GraphicsConfiguration[] {htmlGraphicsConfiguration};
     }
 
     @Override
     public int getType()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlDevice.getType()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlDevice.getType()");
         return GraphicsDevice.TYPE_RASTER_SCREEN;
     }
 
     @Override
     public String getIDstring()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlDevice.getIDString()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlDevice.getIDString()");
         return "HtmlDevice";
     }
 
     @Override
     public GraphicsConfiguration[] getConfigurations()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlDevice.getConfiguration()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlDevice.getConfiguration()");
         return this.htmlGraphicsConfigurations;
     }
 
     @Override
     public GraphicsConfiguration getDefaultConfiguration()
     {
-        CategoryLogger.filter(Cat.WEB).trace("HtmlDevice.getDefaultConfiguration()");
+        CategoryLogger.with(Cat.WEB).trace("HtmlDevice.getDefaultConfiguration()");
         return this.htmlGraphicsConfigurations[0];
     }
 
