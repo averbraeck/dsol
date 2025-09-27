@@ -60,7 +60,7 @@ public class HtmlPanel extends JEditorPane
         }
         catch (Exception e)
         {
-            CategoryLogger.filter(Cat.SWING).warn(e.getMessage());
+            CategoryLogger.with(Cat.SWING).warn(e.getMessage());
         }
     }
 

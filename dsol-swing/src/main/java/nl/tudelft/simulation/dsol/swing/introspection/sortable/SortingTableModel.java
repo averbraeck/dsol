@@ -201,7 +201,7 @@ public class SortingTableModel implements TableModel, Sortable
                         }
                         catch (ClassCastException exception)
                         {
-                            CategoryLogger.filter(Cat.SWING).info(exception, "sortSubList - Could not compare {} and {}",
+                            CategoryLogger.with(Cat.SWING).info(exception, "sortSubList - Could not compare {} and {}",
                                     current, resultValue);
                         }
                     }
