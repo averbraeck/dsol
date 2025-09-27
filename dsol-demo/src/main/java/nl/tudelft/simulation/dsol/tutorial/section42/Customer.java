@@ -57,7 +57,7 @@ public class Customer implements BuyerInterface
     @Override
     public void receiveProduct(final long amount)
     {
-        CategoryLogger.filter(Cat.DSOL).trace("receiveProduct: received " + amount);
+        CategoryLogger.with(Cat.DSOL).trace("receiveProduct: received " + amount);
     }
 
     /**
