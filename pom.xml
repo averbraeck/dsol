@@ -47,13 +47,14 @@
     <junit.version>5.13.4</junit.version>
     <jcommon.version>1.0.24</jcommon.version>
     <jfreechart.version>1.5.6</jfreechart.version>
-    <djunits.version>5.4.0</djunits.version>
-    <djutils.version>2.4.0</djutils.version>
+    <djunits.version>5.4.1</djunits.version>
+    <djutils.version>2.4.1</djutils.version>
     <jetty.version>11.0.25</jetty.version>
     <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
     <fastcsv.version>2.2.2</fastcsv.version>
     <commons-compress.version>1.28.0</commons-compress.version>
     <protobuf.version>4.32.1</protobuf.version>
+    <hppc.version>0.10.0</hppc.version>
 
     <maven.compiler.version>3.14.0</maven.compiler.version>
     <maven.site.version>3.21.0</maven.site.version>
@@ -270,6 +271,12 @@
         <groupId>de.siegmar</groupId>
         <artifactId>fastcsv</artifactId>
         <version>${fastcsv.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.carrotsearch</groupId>
+        <artifactId>hppc</artifactId>
+        <version>${hppc.version}</version>
       </dependency>
 
     </dependencies>
