@@ -2,7 +2,6 @@ package nl.tudelft.simulation.dsol.animation.gis.osm;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.rmi.RemoteException;
@@ -12,7 +11,6 @@ import javax.naming.NamingException;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.bounds.Bounds3d;
 import org.djutils.draw.point.OrientedPoint3d;
-import org.djutils.draw.point.Point2d;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
@@ -207,25 +205,6 @@ public class OsmRenderable2d implements GisRenderable2d
         {
             CategoryLogger.always().warn(throwable, "finalize");
         }
-    }
-
-    @Override
-    public boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
-    {
-        return false;
-    }
-
-    @Override
-    public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
-            final RenderableScale scale, final double worldMargin, final double pixelMargin)
-    {
-        return false;
-    }
-
-    @Override
-    public int getId()
-    {
-        return -1; // drawn before the rest in case all z-values are the same
     }
 
 }

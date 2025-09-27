@@ -2,6 +2,7 @@ package nl.tudelft.simulation.dsol.animation.gis;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 
 import org.djutils.draw.bounds.Bounds2d;
@@ -46,15 +47,94 @@ public interface GisRenderable2d extends Renderable2dInterface<GisRenderable2d>,
     void destroy(Contextualized contextProvider);
 
     @Override
+    default int getId()
+    {
+        return -1; // drawn before the rest in case all z-values are the same
+    }
+
+    @Override
     default boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
     {
         return false;
     }
 
     @Override
-    default int getId()
+    default boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+            final RenderableScale scale, final double worldMargin, final double pixelMargin)
     {
-        return -1; // drawn before the rest in case all z-values are the same
+        return false;
+    }
+
+    @Override
+    default boolean isFlip()
+    {
+        return false;
+    }
+
+    @Override
+    default void setFlip(final boolean flip)
+    {
+        // ignore
+    }
+
+    @Override
+    default boolean isRotate()
+    {
+        return false;
+    }
+
+    @Override
+    default void setRotate(final boolean rotate)
+    {
+        // ignore
+    }
+
+    @Override
+    default boolean isScale()
+    {
+        return false;
+    }
+
+    @Override
+    default void setScale(final boolean scale)
+    {
+        // ignore
+    }
+
+    @Override
+    default boolean isScaleY()
+    {
+        return false;
+    }
+
+    @Override
+    default void setScaleY(final boolean scaleY)
+    {
+        // ignore
+    }
+
+    @Override
+    default boolean isScaleObject()
+    {
+        return false;
+    }
+
+    @Override
+    default void setScaleObject(final boolean scaleY)
+    {
+        // ignore
+    }
+
+    @Override
+    default boolean isTranslate()
+    {
+        return false;
+    }
+
+    @Override
+    default void setTranslate(final boolean translate)
+    {
+        // ignore
     }
 
 }
