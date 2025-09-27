@@ -6,6 +6,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.naming.NamingException;
 
@@ -29,6 +30,10 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  */
 public interface Renderable2dInterface<L extends Locatable> extends Serializable
 {
+
+    /** the object number counter for a unique id. */
+    AtomicInteger ANIMATION_OBJECT_COUNTER = new AtomicInteger(0);
+
     /**
      * the overarching method that is called when painting, usually redirecting to paint(...) but possibly retrieving the
      * drawing from a cache.
@@ -73,8 +78,8 @@ public interface Renderable2dInterface<L extends Locatable> extends Serializable
      *            click can be pointed to a very small object.
      * @return whether the point is in the shape or in a margin around the shape
      */
-    boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
-            final RenderableScale scale, final double worldMargin, final double pixelMargin);
+    boolean contains(Point2D pointScreenCoordinates, Bounds2d extent, Dimension screenSize, RenderableScale scale,
+            double worldMargin, double pixelMargin);
 
     /**
      * destroys this editable. How to do this must be implemented by the modeler.
@@ -88,5 +93,5 @@ public interface Renderable2dInterface<L extends Locatable> extends Serializable
      * return the id of the renderable component.
      * @return the id of the renderable component
      */
-    long getId();
+    int getId();
 }

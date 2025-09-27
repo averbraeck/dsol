@@ -52,7 +52,7 @@ public interface GisRenderable2d extends Renderable2dInterface<GisRenderable2d>,
     }
 
     @Override
-    default long getId()
+    default int getId()
     {
         return -1; // drawn before the rest in case all z-values are the same
     }

@@ -6,7 +6,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.rmi.RemoteException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.naming.NamingException;
 
@@ -71,9 +70,6 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     /** the source of the renderable. */
     private L source;
 
-    /** the object number counter for a unique id. */
-    private static AtomicInteger animationObjectCounter = new AtomicInteger(0);
-
     /** the unique id of this animation object. */
     private int id;
 
@@ -98,7 +94,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     {
         try
         {
-            this.id = animationObjectCounter.incrementAndGet();
+            this.id = ANIMATION_OBJECT_COUNTER.incrementAndGet();
             ContextUtil.lookupOrCreateSubContext(contextProvider.getContext(), "animation/2D").bind(Integer.toString(this.id),
                     this);
         }
@@ -429,7 +425,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     }
 
     @Override
-    public long getId()
+    public int getId()
     {
         return this.id;
     }
