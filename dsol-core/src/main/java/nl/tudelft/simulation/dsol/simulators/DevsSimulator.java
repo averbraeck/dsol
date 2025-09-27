@@ -3,6 +3,7 @@ package nl.tudelft.simulation.dsol.simulators;
 import java.io.Serializable;
 
 import org.djutils.exceptions.Throw;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.eventlists.EventListInterface;
@@ -12,6 +13,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.Executable;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.LambdaSimEvent;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
+import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simtime.SimTime;
 
@@ -87,6 +89,7 @@ public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T
                 throw new SimRuntimeException("cannot schedule event " + event.toString() + " in past " + this.simulatorTime
                         + ">" + event.getAbsoluteExecutionTime());
             }
+            CategoryLogger.with(Cat.DSOL).trace("new event: {}", event.toString());
             this.eventList.add(event);
             return event;
         }

@@ -17,6 +17,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
+import nl.tudelft.simulation.dsol.logger.DefaultSimTimeFormatter;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.logger.SimTimeFormatter;
 import nl.tudelft.simulation.dsol.model.DsolModel;
@@ -102,6 +103,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         Throw.whenNull(id, "id cannot be null");
         this.id = id;
         new SimLogger(this);
+        this.simTimeFormatter = new DefaultSimTimeFormatter(this);
     }
 
     @Override
@@ -324,7 +326,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         if (this.simulatorTime.compareTo(this.getReplication().getEndTime()) < 0
                 && this.replication.getStoppingCondition() == null)
         {
-            CategoryLogger.filter(Cat.DSOL).warn("endReplication executed, but the simulation time " + this.simulatorTime
+            CategoryLogger.with(Cat.DSOL).warn("endReplication executed, but the simulation time " + this.simulatorTime
                     + " is earlier than the replication length " + this.getReplication().getEndTime());
             this.simulatorTime = this.getReplication().getEndTime();
         }
