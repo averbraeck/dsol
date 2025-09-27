@@ -219,7 +219,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
                             new SimEvent<T>((SimTime.plus(SimTime.minus(this.simulator.getSimulatorTime(), this.timeAdvance()),
                                     this.elapsedTime)), this, "deltaInternalEventHandler", null);
                     this.timeLastEvent = this.simulator.getSimulatorTime();
-                    CategoryLogger.filter(Cat.DSOL).trace("schedule {}", this.nextEvent.toString());
+                    CategoryLogger.with(Cat.DSOL).trace("schedule {}", this.nextEvent.toString());
                     this.simulator.scheduleEvent(this.nextEvent);
                     // this.simulator.setAuthorization(false);
                 }
@@ -254,7 +254,7 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      */
     public void deltaConfluent(final T e, final Object value)
     {
-        CategoryLogger.filter(Cat.DSOL).debug("deltaConfluent: CONFLUENT");
+        CategoryLogger.with(Cat.DSOL).debug("deltaConfluent: CONFLUENT");
         if (this.conflictStrategy == AtomicModel.INTERNAL_FIRST)
         {
             this.deltaInternalEventHandler();

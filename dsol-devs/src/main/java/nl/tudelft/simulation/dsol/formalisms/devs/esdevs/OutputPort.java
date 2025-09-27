@@ -55,7 +55,7 @@ public class OutputPort<T extends Number & Comparable<T>, TYPE> implements Outpu
         {
             try
             {
-                CategoryLogger.filter(Cat.DSOL).debug("send: TIME IS {}",
+                CategoryLogger.with(Cat.DSOL).debug("send: TIME IS {}",
                         this.model.getSimulator().getSimulatorTime());
                 this.model.parentModel.transfer(this, value);
             }

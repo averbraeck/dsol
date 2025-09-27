@@ -67,7 +67,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
             AtomicModel<T> atomicModel = (AtomicModel<T>) this.model;
             while (atomicModel.getActivePort() != null)
             {
-                CategoryLogger.filter(Cat.DSOL)
+                CategoryLogger.with(Cat.DSOL)
                         .trace("receive: Waiting for event treatement // Another input is being processed");
                 try
                 {
@@ -84,7 +84,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                 atomicModel.setActivePort(this);
                 boolean passivity = true;
                 SimEvent<T> nextEventCopy = null;
-                CategoryLogger.filter(Cat.DSOL).debug("receive: TIME IS {}",
+                CategoryLogger.with(Cat.DSOL).debug("receive: TIME IS {}",
                         this.model.getSimulator().getSimulatorTime());
 
                 // Original: if (elapsedTime(time) - 0.000001 > timeAdvance())
