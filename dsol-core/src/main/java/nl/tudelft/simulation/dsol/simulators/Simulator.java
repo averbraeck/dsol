@@ -615,7 +615,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                             catch (Exception exception)
                             {
                                 CategoryLogger.always().error(exception);
-                                exception.printStackTrace();
                             }
                         }
                         this.running.set(false);
