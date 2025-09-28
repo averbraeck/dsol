@@ -135,4 +135,24 @@ public final class SimTime
 
         throw new DsolRuntimeException("SimTime.copy called for unknown time class: " + a.getClass().getSimpleName());
     }
+
+    /**
+     * Return a formatted simulation time.
+     * @param simTime the simulation time to format
+     * @return a String representation of the simulation time
+     */
+    public static <T extends Number & Comparable<T>> String format(final T simTime)
+    {
+        if (simTime instanceof Double d)
+            return String.format("%13g", d);
+        if (simTime instanceof Float f)
+            return String.format("%12g", f);
+        if (simTime instanceof Long l)
+            return String.format("%10d", l);
+        if (simTime instanceof Duration duration)
+            return duration.toString();
+        if (simTime instanceof FloatDuration duration)
+            return duration.toString();
+        return simTime.toString();
+    }
 }
