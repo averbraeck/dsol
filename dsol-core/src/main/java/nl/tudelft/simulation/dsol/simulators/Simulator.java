@@ -537,7 +537,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     protected static class SimulatorWorkerThread extends Thread
     {
         /** the job to execute. */
-        private Simulator<?> job = null;
+        private Simulator<?> simulator = null;
 
         /** finalized. */
         private boolean finalized = false;
@@ -553,7 +553,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         protected SimulatorWorkerThread(final String name, final Simulator<?> job)
         {
             super(name);
-            this.job = job;
+            this.simulator = job;
             this.setDaemon(false);
             this.setPriority(Thread.NORM_PRIORITY);
             this.start();
@@ -601,16 +601,16 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                 {
                     if (!this.finalized)
                     {
-                        if (this.job.replicationState != ReplicationState.ENDING)
+                        if (this.simulator.replicationState != ReplicationState.ENDING)
                         {
                             this.running.set(true);
                             try
                             {
-                                this.job.runState = RunState.STARTED;
-                                this.job.fireTimedEvent(SimulatorInterface.START_EVENT);
-                                this.job.run();
-                                this.job.runState = RunState.STOPPED;
-                                this.job.fireTimedEvent(SimulatorInterface.STOP_EVENT);
+                                this.simulator.runState = RunState.STARTED;
+                                this.simulator.fireTimedEvent(SimulatorInterface.START_EVENT);
+                                this.simulator.run();
+                                this.simulator.runState = RunState.STOPPED;
+                                this.simulator.fireTimedEvent(SimulatorInterface.STOP_EVENT);
                             }
                             catch (Exception exception)
                             {
@@ -619,11 +619,11 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                             }
                         }
                         this.running.set(false);
-                        if (this.job.replicationState == ReplicationState.ENDING)
+                        if (this.simulator.replicationState == ReplicationState.ENDING)
                         {
-                            this.job.replicationState = ReplicationState.ENDED;
-                            this.job.runState = RunState.ENDED;
-                            this.job.fireTimedEvent(Replication.END_REPLICATION_EVENT);
+                            this.simulator.replicationState = ReplicationState.ENDED;
+                            this.simulator.runState = RunState.ENDED;
+                            this.simulator.fireTimedEvent(Replication.END_REPLICATION_EVENT);
                             this.finalized = true;
                         }
                     }
