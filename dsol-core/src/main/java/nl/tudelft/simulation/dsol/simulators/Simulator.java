@@ -260,8 +260,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         }
         finally
         {
-            fireTimedEvent(SimulatorInterface.STOP_EVENT, null, getSimulatorTime());
             this.runState = RunState.STOPPED;
+            fireTimedEvent(SimulatorInterface.STOP_EVENT, null, getSimulatorTime());
         }
     }
 
@@ -606,11 +606,11 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                             this.running.set(true);
                             try
                             {
-                                this.job.fireTimedEvent(SimulatorInterface.START_EVENT);
                                 this.job.runState = RunState.STARTED;
+                                this.job.fireTimedEvent(SimulatorInterface.START_EVENT);
                                 this.job.run();
-                                this.job.fireTimedEvent(SimulatorInterface.STOP_EVENT);
                                 this.job.runState = RunState.STOPPED;
+                                this.job.fireTimedEvent(SimulatorInterface.STOP_EVENT);
                             }
                             catch (Exception exception)
                             {
