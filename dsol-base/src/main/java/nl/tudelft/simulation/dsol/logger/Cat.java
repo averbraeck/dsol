@@ -22,20 +22,5 @@ public final class Cat
 
     /** DSOL project. Category is used for dsol-base, dsol-core, dsol-demo, dsol-interpreter, dsol-introspection. */
     public static final LogCategory DSOL = new LogCategory("DSOL");
-
-    /** DSOL-NAMING project. */
-    public static final LogCategory NAMING = new LogCategory("NAMING");
-
-    /** DSOL-EVENT project. */
-    public static final LogCategory EVENT = new LogCategory("EVENT");
-
-    /** DSOL-SWING project. */
-    public static final LogCategory SWING = new LogCategory("SWING");
-
-    /** DSOL-WEB project. */
-    public static final LogCategory WEB = new LogCategory("WEB");
-
-    /** DSOL-HLA project. */
-    public static final LogCategory HLA = new LogCategory("HLA");
-
+    
 }
