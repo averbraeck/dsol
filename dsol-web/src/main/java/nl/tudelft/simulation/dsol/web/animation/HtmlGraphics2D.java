@@ -36,7 +36,7 @@ import java.util.Map;
 
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.logger.Cat;
+import nl.tudelft.simulation.dsol.web.Cat;
 
 /**
  * HtmlGraphics.java. <br>
@@ -857,13 +857,15 @@ public class HtmlGraphics2D extends Graphics2D
     }
 
     @Override
-    public void drawRoundRect(final int x, final int y, final int width, final int height, final int arcWidth, final int arcHeight)
+    public void drawRoundRect(final int x, final int y, final int width, final int height, final int arcWidth,
+            final int arcHeight)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawRoundRect()");
     }
 
     @Override
-    public void fillRoundRect(final int x, final int y, final int width, final int height, final int arcWidth, final int arcHeight)
+    public void fillRoundRect(final int x, final int y, final int width, final int height, final int arcWidth,
+            final int arcHeight)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.fillRoundRect()");
     }
@@ -920,7 +922,8 @@ public class HtmlGraphics2D extends Graphics2D
     }
 
     @Override
-    public boolean drawImage(final Image img, final int x, final int y, final int width, final int height, final ImageObserver observer)
+    public boolean drawImage(final Image img, final int x, final int y, final int width, final int height,
+            final ImageObserver observer)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;
@@ -934,14 +937,7 @@ public class HtmlGraphics2D extends Graphics2D
     }
 
     @Override
-    public boolean drawImage(final Image img, final int x, final int y, final int width, final int height, final Color bgcolor, final ImageObserver observer)
-    {
-        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
-        return false;
-    }
-
-    @Override
-    public boolean drawImage(final Image img, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1, final int sy1, final int sx2, final int sy2,
+    public boolean drawImage(final Image img, final int x, final int y, final int width, final int height, final Color bgcolor,
             final ImageObserver observer)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
@@ -949,8 +945,16 @@ public class HtmlGraphics2D extends Graphics2D
     }
 
     @Override
-    public boolean drawImage(final Image img, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1, final int sy1, final int sx2, final int sy2, final Color bgcolor,
-            final ImageObserver observer)
+    public boolean drawImage(final Image img, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1,
+            final int sy1, final int sx2, final int sy2, final ImageObserver observer)
+    {
+        CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
+        return false;
+    }
+
+    @Override
+    public boolean drawImage(final Image img, final int dx1, final int dy1, final int dx2, final int dy2, final int sx1,
+            final int sy1, final int sx2, final int sy2, final Color bgcolor, final ImageObserver observer)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlGraphics2D.drawImage()");
         return false;

@@ -12,8 +12,6 @@ import javax.swing.WindowConstants;
 
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.logger.Cat;
-
 /**
  * A simple Swing component to show HTML content from a URL.
  * <p>
@@ -60,7 +58,7 @@ public class HtmlPanel extends JEditorPane
         }
         catch (Exception e)
         {
-            CategoryLogger.with(Cat.SWING).warn(e.getMessage());
+            CategoryLogger.always().warn(e.getMessage());
         }
     }
 

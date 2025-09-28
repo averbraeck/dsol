@@ -23,7 +23,7 @@ import java.util.Properties;
 
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.logger.Cat;
+import nl.tudelft.simulation.dsol.web.Cat;
 
 /**
  * HtmlToolkit.java. <br>
@@ -74,7 +74,7 @@ public abstract class HtmlToolkit extends Toolkit
     }
 
     @Override
-    public FontMetrics getFontMetrics(Font font)
+    public FontMetrics getFontMetrics(final Font font)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getFontMetrics()");
         return null;
@@ -87,63 +87,63 @@ public abstract class HtmlToolkit extends Toolkit
     }
 
     @Override
-    public Image getImage(String filename)
+    public Image getImage(final String filename)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getImage()");
         return null;
     }
 
     @Override
-    public Image getImage(URL url)
+    public Image getImage(final URL url)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getImage()");
         return null;
     }
 
     @Override
-    public Image createImage(String filename)
+    public Image createImage(final String filename)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
-    public Image createImage(URL url)
+    public Image createImage(final URL url)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
-    public boolean prepareImage(Image image, int width, int height, ImageObserver observer)
+    public boolean prepareImage(final Image image, final int width, final int height, final ImageObserver observer)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.prepareImage()");
         return false;
     }
 
     @Override
-    public int checkImage(Image image, int width, int height, ImageObserver observer)
+    public int checkImage(final Image image, final int width, final int height, final ImageObserver observer)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.checkImage()");
         return 0;
     }
 
     @Override
-    public Image createImage(ImageProducer producer)
+    public Image createImage(final ImageProducer producer)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
-    public Image createImage(byte[] imagedata, int imageoffset, int imagelength)
+    public Image createImage(final byte[] imagedata, final int imageoffset, final int imagelength)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.createImage()");
         return null;
     }
 
     @Override
-    public PrintJob getPrintJob(Frame frame, String jobtitle, Properties props)
+    public PrintJob getPrintJob(final Frame frame, final String jobtitle, final Properties props)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.getPrintJob()");
         return null;
@@ -171,21 +171,21 @@ public abstract class HtmlToolkit extends Toolkit
     }
 
     @Override
-    public boolean isModalityTypeSupported(ModalityType modalityType)
+    public boolean isModalityTypeSupported(final ModalityType modalityType)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.isModalityTypeSupported()");
         return false;
     }
 
     @Override
-    public boolean isModalExclusionTypeSupported(ModalExclusionType modalExclusionType)
+    public boolean isModalExclusionTypeSupported(final ModalExclusionType modalExclusionType)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.isModalExclusionTypeSupported()");
         return false;
     }
 
     @Override
-    public Map<TextAttribute, ?> mapInputMethodHighlight(InputMethodHighlight highlight) throws HeadlessException
+    public Map<TextAttribute, ?> mapInputMethodHighlight(final InputMethodHighlight highlight) throws HeadlessException
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlToolkit.mapInputMethodHighlight()");
         return null;

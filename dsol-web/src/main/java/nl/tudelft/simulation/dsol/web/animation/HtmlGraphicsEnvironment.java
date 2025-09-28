@@ -10,7 +10,7 @@ import java.util.Locale;
 
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.logger.Cat;
+import nl.tudelft.simulation.dsol.web.Cat;
 
 /**
  * HtmlGraphicsEnvironment.java. <br>
@@ -58,7 +58,7 @@ public class HtmlGraphicsEnvironment extends GraphicsEnvironment
     }
 
     @Override
-    public Graphics2D createGraphics(BufferedImage img)
+    public Graphics2D createGraphics(final BufferedImage img)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.createGraphics()");
         return this.graphics2D;
@@ -79,7 +79,7 @@ public class HtmlGraphicsEnvironment extends GraphicsEnvironment
     }
 
     @Override
-    public String[] getAvailableFontFamilyNames(Locale l)
+    public String[] getAvailableFontFamilyNames(final Locale l)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlGraphicsEnvironment.getAvailableFontFamilyNames()");
         return new String[] {};

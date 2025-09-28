@@ -5,7 +5,7 @@ import java.awt.GraphicsDevice;
 
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.logger.Cat;
+import nl.tudelft.simulation.dsol.web.Cat;
 
 /**
  * HtmlDevice.java. <br>
@@ -23,7 +23,7 @@ public class HtmlDevice extends GraphicsDevice
     /**
      * @param htmlGraphicsConfiguration the GraphicsConfiguration to add to the HtmlDevice
      */
-    public HtmlDevice(GraphicsConfiguration htmlGraphicsConfiguration)
+    public HtmlDevice(final GraphicsConfiguration htmlGraphicsConfiguration)
     {
         CategoryLogger.with(Cat.WEB).trace("HtmlDevice.<init>");
         this.htmlGraphicsConfigurations = new GraphicsConfiguration[] {htmlGraphicsConfiguration};

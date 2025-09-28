@@ -8,7 +8,7 @@ import java.awt.image.ColorModel;
 
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.logger.Cat;
+import nl.tudelft.simulation.dsol.web.Cat;
 
 /**
  * The <code>HtmlGraphicsConfiguration</code> class describes the characteristics of the HTML canvas in the browser, as a

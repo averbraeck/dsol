@@ -14,8 +14,6 @@ import javax.swing.table.TableModel;
 
 import org.djutils.logger.CategoryLogger;
 
-import nl.tudelft.simulation.dsol.logger.Cat;
-
 /**
  * The SortingTableModel.
  * <p>
@@ -201,7 +199,7 @@ public class SortingTableModel implements TableModel, Sortable
                         }
                         catch (ClassCastException exception)
                         {
-                            CategoryLogger.with(Cat.SWING).info(exception, "sortSubList - Could not compare {} and {}",
+                            CategoryLogger.always().info(exception, "sortSubList - Could not compare {} and {}",
                                     current, resultValue);
                         }
                     }
