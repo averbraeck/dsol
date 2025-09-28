@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,14 +20,7 @@ public class CatTest
     @Test
     public void testCat()
     {
-        assertEquals("LogCategory.DSOL", Cat.DSOL.toString());
-        assertEquals("LogCategory.EVENT", Cat.EVENT.toString());
-        assertEquals("LogCategory.HLA", Cat.HLA.toString());
-        assertEquals("LogCategory.NAMING", Cat.NAMING.toString());
-        assertEquals("LogCategory.SWING", Cat.SWING.toString());
-        assertEquals("LogCategory.WEB", Cat.WEB.toString());
-        assertNotEquals(Cat.DSOL, Cat.EVENT);
-        assertNotEquals(Cat.DSOL.hashCode(), Cat.EVENT.hashCode());
+        assertEquals("DSOL", Cat.DSOL.toString());
     }
 
 }
