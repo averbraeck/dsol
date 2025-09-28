@@ -10,7 +10,7 @@ import org.djutils.metadata.MetaData;
 import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.logger.SimTimeFormatter;
+import nl.tudelft.simulation.dsol.logger.SimLogger;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 
 /**
@@ -323,15 +323,8 @@ public interface SimulatorInterface<T extends Number & Comparable<T>> extends Re
     void setErrorLogLevel(Level errorLogLevel);
 
     /**
-     * Return the active simulation time formatter.
-     * @return the active simulation time formatter
+     * Return the logger helper class that provides the simulation time and time formatting for Cat.DSOL.
+     * @return the logger helper class that provides the simulation time and time formatting for Cat.DSOL
      */
-    SimTimeFormatter<T> getSimTimeFormatter();
-
-    /**
-     * Set a new simulation time formatter.
-     * @param simTimeFormatter the new simulation time formatter
-     */
-    void setSimTimeFormatter(SimTimeFormatter<T> simTimeFormatter);
-
+    SimLogger<T> getSimLogger();
 }

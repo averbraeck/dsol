@@ -17,9 +17,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
 import nl.tudelft.simulation.dsol.logger.Cat;
-import nl.tudelft.simulation.dsol.logger.DefaultSimTimeFormatter;
 import nl.tudelft.simulation.dsol.logger.SimLogger;
-import nl.tudelft.simulation.dsol.logger.SimTimeFormatter;
 import nl.tudelft.simulation.dsol.model.DsolModel;
 
 /**
@@ -75,9 +73,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected transient Object semaphore = new Object();
 
-    /** the simulation time formatter. */
-    private transient SimTimeFormatter<T> simTimeFormatter;
-
     /** the simulator id. */
     private Serializable id;
 
@@ -94,6 +89,9 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected boolean runflag = false;
 
+    /** the logger helper class that provides the simulation time and time formatting for Cat.DSOL. */
+    private SimLogger<T> simLogger;
+
     /**
      * Constructs a new Simulator.
      * @param id the id of the simulator, used in logging and firing of events.
@@ -102,8 +100,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     {
         Throw.whenNull(id, "id cannot be null");
         this.id = id;
-        new SimLogger(this);
-        this.simTimeFormatter = new DefaultSimTimeFormatter(this);
+        this.simLogger = new SimLogger<T>(this);
     }
 
     @Override
@@ -196,6 +193,10 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                 {
                     // ignore
                 }
+            }
+            if (count >= 1000)
+            {
+                CategoryLogger.with(Cat.DSOL).warn("Simulator did not start, but startImpl() was called");
             }
             // clear the flag
             this.runflag = false;
@@ -407,7 +408,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                 CategoryLogger.always().warn(s);
                 break;
             case Level.ERROR_INT:
-                CategoryLogger.always().error(s);
+                CategoryLogger.always().error(exception, s);
                 break;
             default:
                 break;
@@ -416,8 +417,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         {
             return;
         }
-        System.err.println(s);
-        exception.printStackTrace();
         if (this.errorStrategy.equals(ErrorStrategy.WARN_AND_PAUSE))
         {
             stop();
@@ -436,18 +435,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
         }
     }
 
-    @Override
-    public SimTimeFormatter<T> getSimTimeFormatter()
-    {
-        return this.simTimeFormatter;
-    }
-
-    @Override
-    public void setSimTimeFormatter(final SimTimeFormatter<T> simTimeFormatter)
-    {
-        this.simTimeFormatter = simTimeFormatter;
-    }
-
     /**
      * The run method defines the actual time step mechanism of the simulator. The implementation of this method depends on the
      * formalism. Where discrete event formalisms loop over an event list, continuous simulators take predefined time steps.
@@ -455,7 +442,8 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
      * - SimulatorInterface.TIME_CHANGED_EVENT is fired when the time of the simulator changes<br>
      * - the warmup() method is called when the warmup period has expired (through an event or based on simulation time)<br>
      * - the endReplication() method is called when the replication has ended<br>
-     * - the simulator runs until the runUntil time, which is also set by the start() method.
+     * - the simulator runs until the runUntil time, which is also set by the start() method.<br>
+     * - the first line of the run() method is thus.runflag = true;
      */
     @Override
     public abstract void run();
@@ -488,6 +476,12 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
     public ReplicationState getReplicationState()
     {
         return this.replicationState;
+    }
+
+    @Override
+    public SimLogger<T> getSimLogger()
+    {
+        return this.simLogger;
     }
 
     /**
@@ -606,18 +600,23 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                             this.running.set(true);
                             try
                             {
-                                this.simulator.runState = RunState.STARTED;
-                                this.simulator.fireTimedEvent(SimulatorInterface.START_EVENT);
-                                this.simulator.run();
-                                this.simulator.runState = RunState.STOPPED;
-                                this.simulator.fireTimedEvent(SimulatorInterface.STOP_EVENT);
+                                while (this.running.get())
+                                {
+                                    this.simulator.runState = RunState.STARTED;
+                                    this.simulator.fireTimedEvent(SimulatorInterface.START_EVENT);
+                                    this.simulator.run();
+                                    this.simulator.runState = RunState.STOPPED;
+                                    this.simulator.fireTimedEvent(SimulatorInterface.STOP_EVENT);
+                                    if (!this.simulator.isStarting()) // the STOP_EVENT has restarted the simulator
+                                        this.running.set(false);
+                                }
                             }
                             catch (Exception exception)
                             {
                                 CategoryLogger.always().error(exception);
+                                this.running.set(false);
                             }
                         }
-                        this.running.set(false);
                         if (this.simulator.replicationState == ReplicationState.ENDING)
                         {
                             this.simulator.replicationState = ReplicationState.ENDED;
@@ -629,6 +628,7 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                     Thread.interrupted(); // clear the interrupted flag
                 }
             }
+            System.out.println("worker.run() ended");
         }
     }
 }

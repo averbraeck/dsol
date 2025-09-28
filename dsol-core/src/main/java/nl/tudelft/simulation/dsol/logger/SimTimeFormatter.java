@@ -1,45 +1,26 @@
 package nl.tudelft.simulation.dsol.logger;
 
-import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
+import java.util.function.Function;
+
+import nl.tudelft.simulation.dsol.simtime.SimTime;
 
 /**
- * SimTimeFormatter formats the simulation time to include the simulation time in the logger.
+ * SimTimeSupplier formats the simulation time as a String.
  * <p>
- * Copyright (c) 2018 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See for
- * project information <a href="https://simulation.tudelft.nl/dsol/manual/" target="_blank">DSOL Manual</a>. The DSOL project is
- * distributed under a three-clause BSD-style license, which can be found at
- * <a href="https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">DSOL License</a>.
+ * Copyright (c) 2025-2025 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
+ * for project information <a href="https://simulation.tudelft.nl/" target="_blank"> https://simulation.tudelft.nl</a>. The DSOL
+ * project is distributed under a three-clause BSD-style license, which can be found at
+ * <a href="https://https://simulation.tudelft.nl/dsol/docs/latest/license.html" target="_blank">
+ * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
- * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
- * @param <T> The time type
+ * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @param <T> the simulation time type
  */
-public abstract class SimTimeFormatter<T extends Number & Comparable<T>>
+public class SimTimeFormatter<T extends Number & Comparable<T>> implements Function<T, String>
 {
-    /** the simulator. */
-    private final SimulatorInterface<T> simulator;
-
-    /**
-     * Instantiate a formatter.
-     * @param simulator the simulator
-     */
-    public SimTimeFormatter(final SimulatorInterface<T> simulator)
+    @Override
+    public String apply(final T simTime)
     {
-        this.simulator = simulator;
+        return SimTime.format(simTime);
     }
-
-    /**
-     * Format the current simulation time.
-     * @return the formatted simulation time.
-     */
-    public abstract String formattedSimTime();
-
-    /**
-     * Return the simulator for which this is the formatter.
-     * @return the simulator for which this is the formatter.
-     */
-    SimulatorInterface<T> getSimulator()
-    {
-        return this.simulator;
-    }
-
 }

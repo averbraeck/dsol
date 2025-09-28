@@ -1,16 +1,10 @@
 package nl.tudelft.simulation.dsol.logger;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.function.Function;
 
-import org.slf4j.LoggerFactory;
+import org.djutils.logger.CategoryLogger;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
-import ch.qos.logback.classic.pattern.ClassicConverter;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.ConsoleAppender;
-import ch.qos.logback.core.CoreConstants;
+import ch.qos.logback.classic.Level;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 
 /**
@@ -23,57 +17,42 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * https://https://simulation.tudelft.nl/dsol/docs/latest/license.html</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * @param <T> the simulator time type
  */
-public class SimLogger
+public class SimLogger<T extends Number & Comparable<T>>
 {
     /** the simulator. */
-    private final SimulatorInterface<?> simulator;
+    private final SimulatorInterface<T> simulator;
+
+    /** the simulation time formatter. */
+    private Function<T, String> formatter = new SimTimeFormatter<>();
 
     /**
      * Register a logger for a simulator with time.
      * @param simulator the simulator for which to register a logger with time
      */
-    public SimLogger(final SimulatorInterface<?> simulator)
+    public SimLogger(final SimulatorInterface<T> simulator)
     {
         this.simulator = simulator;
-
-        LoggerContext ctx = (LoggerContext) LoggerFactory.getILoggerFactory();
-
-        // 1) Register custom conversion word -> converter class
-        @SuppressWarnings("unchecked")
-        Map<String, String> registry = (Map<String, String>) ctx.getObject(CoreConstants.PATTERN_RULE_REGISTRY);
-        if (registry == null)
-        {
-            registry = new HashMap<>();
-            ctx.putObject(CoreConstants.PATTERN_RULE_REGISTRY, registry);
-        }
-        registry.put("simTime", "nl.tudelft.simulation.dsol.logger.SimLogger.SimTimeConverter");
-
-        // 2) Build appender/encoder programmatically
-        // TODO: This has to be left to the standard CategoryLogger methods
-        PatternLayoutEncoder enc = new PatternLayoutEncoder();
-        enc.setContext(ctx);
-        enc.setPattern("[%XsimTime] %-5level %logger{36} - %msg%n");
-        enc.start();
-
-        ConsoleAppender<ILoggingEvent> console = new ConsoleAppender<>();
-        console.setContext(ctx);
-        console.setEncoder(enc);
-        console.start();
-
-        ch.qos.logback.classic.Logger root =
-                (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
-        root.addAppender(console);
-        root.setAdditive(false);
+        Level oldLevel = CategoryLogger.getLogLevel(Cat.DSOL);
+        String oldPattern = CategoryLogger.getPattern(Cat.DSOL);
+        CategoryLogger.removeLogCategory(Cat.DSOL);
+        CategoryLogger.addLogCategory(Cat.DSOL);
+        CategoryLogger.setLogLevel(Cat.DSOL, oldLevel);
+        if (oldPattern.contains("%X{simTime}"))
+            CategoryLogger.setPattern(Cat.DSOL, oldPattern);
+        else
+            CategoryLogger.setPattern(Cat.DSOL, "%X{simTime} %-5level %-6logger{0} %class.%method:%line - %msg%n");
+        CategoryLogger.addFormatter(Cat.DSOL, "simTime", () -> this.formatter.apply(this.simulator.getSimulatorTime()));
     }
 
-    /** */
-    public class SimTimeConverter extends ClassicConverter
+    /**
+     * Set a new formatter for the simulator time.
+     * @param formatter the new formatter
+     */
+    public void setFormatter(final Function<T, String> formatter)
     {
-        @Override
-        public String convert(final ILoggingEvent event)
-        {
-            return SimLogger.this.simulator.getSimTimeFormatter().formattedSimTime();
-        }
+        this.formatter = formatter;
     }
+
 }
