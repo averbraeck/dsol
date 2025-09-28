@@ -628,7 +628,6 @@ public abstract class Simulator<T extends Number & Comparable<T>> extends LocalE
                     Thread.interrupted(); // clear the interrupted flag
                 }
             }
-            System.out.println("worker.run() ended");
         }
     }
 }

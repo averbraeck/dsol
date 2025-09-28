@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.djutils.exceptions.Throw;
+import org.djutils.logger.CategoryLogger;
 import org.djutils.reflection.ClassUtil;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
+import nl.tudelft.simulation.dsol.logger.Cat;
 
 /**
  * The SimEvent forms the essential scheduling mechanism for D-SOL. Objects do not invoke methods directly on eachother; they
@@ -95,8 +97,8 @@ public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent
         }
         catch (Exception exception)
         {
-            System.err.println(exception.toString() + " calling " + printTarget() + "." + this.methodName + " with arguments "
-                    + printArgs());
+            CategoryLogger.with(Cat.DSOL).error(exception,
+                    "calling " + printTarget() + "." + this.methodName + " with arguments " + printArgs());
             throw new SimRuntimeException(exception);
         }
     }

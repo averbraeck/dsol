@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.animation.gis.DataSourceInterface;
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
@@ -89,7 +91,7 @@ public class OsmFileReader implements DataSourceInterface
         {
             try
             {
-                System.out.println("osm pbf map to read: " + filename);
+                CategoryLogger.always().info("osm pbf map to read: " + filename);
                 processor.initialize();
                 new OsmPbfReader(inputFile, processor);
                 processor.complete();
@@ -103,7 +105,7 @@ public class OsmFileReader implements DataSourceInterface
         {
             try
             {
-                System.out.println("osm xml map to read: " + filename);
+                CategoryLogger.always().info("osm xml map to read: " + filename);
                 processor.initialize();
                 new OsmXmlReader(inputFile, processor, osmFormat);
                 processor.complete();
@@ -113,7 +115,7 @@ public class OsmFileReader implements DataSourceInterface
                 throw new IOException("Error during reading of OSM file " + filename, exception);
             }
         }
-        System.out.println("OSM layer has been read");
+        CategoryLogger.always().info("OSM layer has been read");
     }
 
     @Override

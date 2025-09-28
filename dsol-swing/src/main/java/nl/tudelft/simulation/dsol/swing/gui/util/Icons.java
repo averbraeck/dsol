@@ -7,6 +7,8 @@ import javax.swing.GrayFilter;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+import org.djutils.logger.CategoryLogger;
+
 /**
  * Icons contains static methods to load a icon from disk.
  * <p>
@@ -38,7 +40,7 @@ public final class Icons
         }
         catch (NullPointerException | IOException npe)
         {
-            System.err.println("Could not load icon from path " + iconPath);
+            CategoryLogger.always().error("Could not load icon from path " + iconPath);
             return null;
         }
     }
@@ -56,7 +58,7 @@ public final class Icons
         }
         catch (NullPointerException | IOException e)
         {
-            System.err.println("Could not load icon from path " + iconPath);
+            CategoryLogger.always().error("Could not load icon from path " + iconPath);
             return null;
         }
     }

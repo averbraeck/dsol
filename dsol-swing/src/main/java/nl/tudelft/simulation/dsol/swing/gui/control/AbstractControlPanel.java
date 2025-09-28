@@ -21,6 +21,7 @@ import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.EventProducer;
 import org.djutils.exceptions.Throw;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.Replication;
@@ -274,7 +275,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
         }
         catch (Exception exception)
         {
-            exception.printStackTrace();
+            CategoryLogger.always().error(exception);
         }
     }
 
@@ -338,7 +339,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
         }
         catch (Throwable exception)
         {
-            exception.printStackTrace();
+            CategoryLogger.always().error(exception);
         }
     }
 
@@ -543,7 +544,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
             }
             catch (SimRuntimeException exception)
             {
-                exception.printStackTrace();
+                CategoryLogger.always().error(exception);
             }
         }
     }

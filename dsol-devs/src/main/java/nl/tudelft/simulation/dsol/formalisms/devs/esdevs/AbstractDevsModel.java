@@ -99,12 +99,16 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
     {
         this.modelName = modelName;
         if (parentModel != null)
-        { this.fullName = parentModel.getFullName() + "."; }
+        {
+            this.fullName = parentModel.getFullName() + ".";
+        }
         this.fullName += this.modelName;
         this.simulator = simulator;
         this.parentModel = parentModel;
         if (!AbstractDevsModel.stateFieldMap.containsKey(this.getClass()))
-        { this.createStateFieldSet(); }
+        {
+            this.createStateFieldSet();
+        }
         this.stateFieldSet = AbstractDevsModel.stateFieldMap.get(this.getClass());
     }
 
@@ -216,10 +220,8 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
             }
             catch (IllegalAccessException exception)
             {
-                CategoryLogger.always().error("Tried to fire update for variable {} but got an exception.",
-                        field.getName());
-                System.err.println(this.getModelName() + " - fireUpdateState: Tried to fire update for variable "
-                        + field.getName() + " but got an exception.");
+                CategoryLogger.always().error(
+                        this.getModelName() + ": tried to fire update for variable {} but got an exception", field.getName());
             }
         }
     }

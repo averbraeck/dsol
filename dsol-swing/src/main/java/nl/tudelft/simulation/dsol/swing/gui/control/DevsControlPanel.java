@@ -100,7 +100,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
         }
         catch (Exception exception)
         {
-            exception.printStackTrace();
+            CategoryLogger.always().error(exception);
         }
         super.actionPerformed(actionEvent); // includes fixButtons()
     }
@@ -155,7 +155,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
             }
             catch (SimRuntimeException exception1)
             {
-                exception1.printStackTrace();
+                CategoryLogger.always().error(exception1);
             }
             T currentTick = getSimulator().getSimulatorTime();
             T nextTick = getSimulator().getEventList().first().getAbsoluteExecutionTime();
@@ -199,11 +199,11 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
                     {
                         if (e instanceof InterruptedException)
                         {
-                            System.out.println("Caught " + e);
+                            CategoryLogger.always().info("Caught InterruptedException in autoPauseSimulator");
                         }
                         else
                         {
-                            e.printStackTrace();
+                            CategoryLogger.always().error(e);
                         }
                     }
                 }

@@ -96,7 +96,6 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                             atomicModel.timeAdvance());
                     CategoryLogger.always()
                             .error("receive - IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM {}", atomicModel.toString());
-                    System.err.println("IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM " + atomicModel.toString());
                 }
                 else
                 {

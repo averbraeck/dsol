@@ -12,6 +12,7 @@ import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits.value.vfloat.scalar.base.FloatScalar;
 import org.djutils.io.URLResource;
+import org.djutils.logger.CategoryLogger;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
@@ -112,7 +113,7 @@ public abstract class AbstractTestDemoServer
             }
             catch (Exception exception)
             {
-                exception.printStackTrace();
+                CategoryLogger.always().error(exception);
             }
         }
     }
@@ -131,7 +132,7 @@ public abstract class AbstractTestDemoServer
             }
             catch (IOException exception)
             {
-                exception.printStackTrace();
+                CategoryLogger.always().error(exception);
                 return null;
             }
         }
@@ -186,7 +187,7 @@ public abstract class AbstractTestDemoServer
                     }
                     catch (Exception exception)
                     {
-                        exception.printStackTrace();
+                        CategoryLogger.always().error(exception);
                     }
                 }
             }

@@ -122,7 +122,7 @@ public abstract class DsolWebServer implements EventListener
             }
             catch (Exception exception)
             {
-                exception.printStackTrace();
+                CategoryLogger.always().error(exception);
             }
         }
     }

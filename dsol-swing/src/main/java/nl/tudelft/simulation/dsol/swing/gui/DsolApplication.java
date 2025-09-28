@@ -31,6 +31,8 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.Appearance;
 import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
@@ -113,7 +115,7 @@ public class DsolApplication extends JFrame
                 }
                 catch (IOException exception)
                 {
-                    System.err.println("Could not store properties at " + propertiesFile + ".");
+                    CategoryLogger.always().error(exception, "Could not store properties at " + propertiesFile + ".");
                 }
             }
         });

@@ -379,7 +379,6 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      * Subscribe to the context to receive object added and object removed events.
      * @throws RemoteException on network error
      */
-    @SuppressWarnings("unchecked")
     protected void subscribeToContext() throws RemoteException
     {
         this.context.addListener(this, ContextInterface.OBJECT_ADDED_EVENT);
@@ -392,13 +391,12 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
             }
             else
             {
-                System.err.println("odd object in context: " + element);
+                CategoryLogger.always().warn("odd object in context: " + element);
             }
         }
         this.repaint();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void notify(final Event event) throws RemoteException
     {

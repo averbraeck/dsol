@@ -21,9 +21,11 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.TimedEvent;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.experiment.Replication;
+import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
@@ -327,7 +329,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
         }
         catch (Exception exception)
         {
-            exception.printStackTrace();
+            CategoryLogger.always().error(exception);
         }
     }
 

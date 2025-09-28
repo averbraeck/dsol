@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vfloat.scalar.FloatDuration;
 import org.djutils.event.Event;
+import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.model.DsolModel;
 import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
@@ -114,7 +115,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         }
         catch (Exception exception)
         {
-            exception.printStackTrace();
+            CategoryLogger.always().error(exception);
         }
         super.actionPerformed(actionEvent); // includes fixButtons()
     }

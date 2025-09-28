@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.djutils.logger.CategoryLogger;
+
 import nl.tudelft.simulation.dsol.animation.gis.FeatureInterface;
 import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
@@ -205,8 +207,8 @@ public class OsmEntityProcessor
         {
             addRelation(relation);
         }
-        System.out.println("Nodes read: " + this.nodes.size() + ", ways read: " + this.ways.size() + ", relations read: "
-                + this.relations.size());
+        CategoryLogger.always().info("Nodes read: {}, ways read: {}, relations read: {}", this.nodes.size(), this.ways.size(),
+                this.relations.size());
     }
 
     /**
