@@ -90,6 +90,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Return whether to flip the renderable, if the direction is 'left' or not.
      * @return whether to flip the renderable, if the direction is 'left' or not
      */
+    @Override
     public boolean isFlip()
     {
         return (this.flags & FLIP_FLAG) != 0;
@@ -99,6 +100,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Set whether to flip the renderable, if the direction is 'left' or not.
      * @param flip whether to flip the renderable, if the direction is 'left' or not
      */
+    @Override
     @SuppressWarnings("checkstyle:needbraces")
     public void setFlip(final boolean flip)
     {
@@ -112,6 +114,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Return whether to rotate the renderable or not.
      * @return whether to rotate the renderable or not
      */
+    @Override
     public boolean isRotate()
     {
         return (this.flags & ROTATE_FLAG) != 0;
@@ -121,6 +124,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Set whether to rotate the renderable or not.
      * @param rotate whether to rotate the renderable or not
      */
+    @Override
     @SuppressWarnings("checkstyle:needbraces")
     public void setRotate(final boolean rotate)
     {
@@ -134,6 +138,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Return whether to scale the renderable or not.
      * @return whether to scale the renderable or not
      */
+    @Override
     public boolean isScale()
     {
         return (this.flags & SCALE_FLAG) != 0;
@@ -143,6 +148,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Set whether to scale the renderable or not.
      * @param scale whether to scale the renderable or not
      */
+    @Override
     @SuppressWarnings("checkstyle:needbraces")
     public void setScale(final boolean scale)
     {
@@ -156,6 +162,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Return whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not.
      * @return whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
      */
+    @Override
     public boolean isScaleY()
     {
         return (this.flags & SCALE_Y_FLAG) != 0;
@@ -166,6 +173,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * @param scaleY whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or
      *            not
      */
+    @Override
     @SuppressWarnings("checkstyle:needbraces")
     public void setScaleObject(final boolean scaleY)
     {
@@ -179,6 +187,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not.
      * @return whether to scale the renderable in the X/Y-direction with the value of RenderableScale.objectScaleFactor or not
      */
+    @Override
     public boolean isScaleObject()
     {
         return (this.flags & SCALE_OBJECT_FLAG) != 0;
@@ -188,6 +197,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Set whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not.
      * @param scaleY whether to scale the renderable in the Y-direction when there is a compressed Y-axis or not
      */
+    @Override
     @SuppressWarnings("checkstyle:needbraces")
     public void setScaleY(final boolean scaleY)
     {
@@ -201,6 +211,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Return whether to translate the renderable to its position or not (false means absolute position).
      * @return whether to translate the renderable to its position or not (false means absolute position)
      */
+    @Override
     public boolean isTranslate()
     {
         return (this.flags & TRANSLATE_FLAG) != 0;
@@ -210,6 +221,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * Set whether to translate the renderable to its position or not (false means absolute position).
      * @param translate whether to translate the renderable to its position or not (false means absolute position)
      */
+    @Override
     @SuppressWarnings("checkstyle:needbraces")
     public void setTranslate(final boolean translate)
     {
@@ -313,7 +325,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     }
 
     @Override
-    public boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
+    public synchronized boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
     {
         try
         {
@@ -332,7 +344,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     }
 
     @Override
-    public boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
+    public synchronized boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
             final RenderableScale scale, final double worldMargin, final double pixelMargin)
     {
         try
@@ -369,7 +381,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
      * @param yScale the ratio between a world y-coordinate and a pixel
      * @return whether the point is in the shape or in a margin around the shape
      */
-    public boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double worldMargin,
+    public synchronized boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double worldMargin,
             final double pixelMargin, final double xScale, final double yScale)
     {
         try
@@ -392,7 +404,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     }
 
     @Override
-    public void destroy(final Contextualized contextProvider)
+    public synchronized void destroy(final Contextualized contextProvider)
     {
         try
         {
