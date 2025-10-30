@@ -197,7 +197,7 @@ public final class InitialEventContext implements EventContext
         // (4) content of the /resources/jndi.properties file
         try
         {
-            InputStream stream = ResourceResolver.resolve("/resources/jndi.properties").openStream();
+            InputStream stream = ResourceResolver.resolve("/jndi.properties").openStream();
             if (stream != null)
             {
                 Properties jndiProps = new Properties();
