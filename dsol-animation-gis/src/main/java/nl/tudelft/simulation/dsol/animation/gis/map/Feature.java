@@ -135,6 +135,7 @@ public class Feature implements FeatureInterface
     public Iterator<Path2D> shapeIterator(final Bounds2d rectangle)
     {
         final Rectangle2D view2D = rectangle.toRectangle2D();
+        // return this.shapes.iterator();
         return this.shapes.stream().filter((s) -> view2D.intersects(s.getBounds2D())).iterator();
     }
 
