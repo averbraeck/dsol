@@ -8,7 +8,7 @@ import java.net.URL;
 
 import javax.naming.NamingException;
 
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
@@ -42,7 +42,7 @@ public class EsriParserTest implements Contextualized
     public void testXmlParser() throws IOException, NamingException
     {
         this.context = new JvmContext(null, "rootXml");
-        URL url = URLResource.getResource("/resources/esri/tudelft.xml");
+        URL url = ResourceResolver.resolve("/resources/esri/tudelft.xml").asUrl();
         assertNotNull(url);
         GisMapInterface map = EsriFileXmlParser.parseMapFile(url);
         assertEquals("tudelft", map.getName());
@@ -65,7 +65,7 @@ public class EsriParserTest implements Contextualized
     public void testCsvParser() throws IOException, NamingException
     {
         this.context = new JvmContext(null, "rootCsv");
-        URL url = URLResource.getResource("/resources/esri/tudelft.csv");
+        URL url = ResourceResolver.resolve("/resources/esri/tudelft.csv").asUrl();
         assertNotNull(url);
         GisMapInterface map = EsriFileCsvParser.parseMapFile(url, "tudelft");
         assertEquals("tudelft", map.getName());

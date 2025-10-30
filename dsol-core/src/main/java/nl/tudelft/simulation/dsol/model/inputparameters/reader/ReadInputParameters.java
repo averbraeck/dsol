@@ -91,7 +91,7 @@ import org.djunits.value.vfloat.scalar.FloatTime;
 import org.djunits.value.vfloat.scalar.FloatTorque;
 import org.djunits.value.vfloat.scalar.FloatVolume;
 import org.djunits.value.vfloat.scalar.base.FloatScalar;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameter;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterBoolean;
@@ -164,7 +164,7 @@ public final class ReadInputParameters
     /**
      * Read the input parameters from a properties file. Note: the input parameter map given as input will be used to store the
      * values read.
-     * @param filename the file to read (URLResource is used to resolve the file), with one key=value entry per line
+     * @param filename the file to read (ResourceResolver is used to resolve the file), with one key=value entry per line
      * @param map the map of input parameters to be read
      * @throws InputParameterException when the parameter cannot be found or is given an illegal value
      * @throws FileNotFoundException when the file cannot be found
@@ -173,7 +173,7 @@ public final class ReadInputParameters
     public static void loadfromProperties(final String filename, final InputParameterMap map)
             throws InputParameterException, FileNotFoundException, IOException
     {
-        InputStream stream = URLResource.getResourceAsStream(filename);
+        InputStream stream = ResourceResolver.resolve(filename).openStream();
         if (stream == null)
         {
             throw new FileNotFoundException("Loading InputParameters from properties file; could not find file: " + filename);

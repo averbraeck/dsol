@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
@@ -95,7 +95,7 @@ public class EsriCsvSwingApplication extends DsolAnimationApplication
         @Override
         public void constructModel() throws SimRuntimeException
         {
-            URL csvUrl = URLResource.getResource("/resources/esri/tudelft.csv");
+            URL csvUrl = ResourceResolver.resolve("/resources/esri/tudelft.csv").asUrl();
             System.out.println("ESRI-map file: " + csvUrl.toString());
             try
             {

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.djutils.exceptions.Throw;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import de.siegmar.fastcsv.reader.NamedCsvReader;
 import de.siegmar.fastcsv.reader.NamedCsvRow;
@@ -125,7 +125,7 @@ public final class EsriFileCsvParser
             Feature feature = new Feature(layer);
             layer.addFeature(feature); // key and value remain at * and *
 
-            URL resource = URLResource.getResource(shapeFile);
+            URL resource = ResourceResolver.resolve(shapeFile).asUrl();
             if (resource == null)
             {
                 throw new IOException("Cannot locate shapeFile: " + shapeFile);

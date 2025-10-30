@@ -12,7 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -49,7 +49,7 @@ import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
 public final class EsriFileXmlParser
 {
     /** the default mapfile. */
-    public static final URL MAPFILE_SCHEMA = URLResource.getResource("/resources/mapfile.xsd");
+    public static final URL MAPFILE_SCHEMA = ResourceResolver.resolve("/resources/mapfile.xsd").asUrl();
 
     /** Utility class, no constructor. */
     private EsriFileXmlParser()
@@ -268,7 +268,7 @@ public final class EsriFileXmlParser
                 if (nodeTagExists(dataNode, "shapeFile"))
                 {
                     String resourceName = nodeText(dataNode, "shapeFile");
-                    URL resource = URLResource.getResource(resourceName);
+                    URL resource = ResourceResolver.resolve(resourceName).asUrl();
                     if (resource == null)
                     {
                         throw new IOException("Cannot locate shapeFile: " + resourceName);

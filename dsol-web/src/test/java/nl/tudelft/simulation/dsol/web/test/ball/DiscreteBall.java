@@ -50,7 +50,7 @@ public class DiscreteBall extends Ball
     {
         super(nr);
         this.simulator = simulator;
-        // URL image = URLResource.getResource("/nl/tudelft/simulation/examples/dsol/animation/images/customer.jpg");
+        // URL image = ResourceResolver.resolve("/nl/tudelft/simulation/examples/dsol/animation/images/customer.jpg").asUrl();
         // new SingleImageRenderable(this, simulator, image);
         try
         {

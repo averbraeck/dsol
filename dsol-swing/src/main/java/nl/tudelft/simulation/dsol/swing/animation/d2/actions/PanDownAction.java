@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import nl.tudelft.simulation.dsol.swing.animation.d2.VisualizationPanel;
 
@@ -38,7 +38,7 @@ public class PanDownAction extends AbstractAction
         super("PanDown");
         this.panel = panel;
         this.putValue(Action.SMALL_ICON,
-                new ImageIcon(URLResource.getResource("/toolbarButtonGraphics/navigation/Down16.gif")));
+                new ImageIcon(ResourceResolver.resolve("/toolbarButtonGraphics/navigation/Down16.gif").asUrl()));
         this.setEnabled(true);
     }
 

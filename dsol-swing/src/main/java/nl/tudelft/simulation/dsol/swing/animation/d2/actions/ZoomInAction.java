@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import nl.tudelft.simulation.dsol.swing.animation.d2.VisualizationPanel;
 
@@ -36,7 +36,8 @@ public class ZoomInAction extends AbstractAction
     {
         super("ZoomIn");
         this.panel = panel;
-        this.putValue(Action.SMALL_ICON, new ImageIcon(URLResource.getResource("/toolbarButtonGraphics/general/ZoomIn16.gif")));
+        this.putValue(Action.SMALL_ICON,
+                new ImageIcon(ResourceResolver.resolve("/toolbarButtonGraphics/general/ZoomIn16.gif").asUrl()));
         this.setEnabled(true);
     }
 

@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
@@ -96,9 +96,9 @@ public class OsmCsvSwingApplication extends DsolAnimationApplication
         @Override
         public void constructModel() throws SimRuntimeException
         {
-            URL csvUrl = URLResource.getResource("/resources/osm/tudelft.csv");
+            URL csvUrl = ResourceResolver.resolve("/resources/osm/tudelft.csv").asUrl();
             System.out.println("GIS definitions file: " + csvUrl.toString());
-            URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.pbf");
+            URL osmUrl = ResourceResolver.resolve("/resources/osm/tudelft.osm.pbf").asUrl();
             System.out.println("GIS data file: " + osmUrl.toString());
             try
             {

@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 
 import org.djutils.draw.bounds.Bounds2d;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.animation.d2.RenderableScale;
@@ -48,7 +48,7 @@ public class OsmYamlSwingApplication extends DsolAnimationApplication
      * @throws IllegalArgumentException for illegal bounds
      */
     public OsmYamlSwingApplication(final String title, final DsolPanel panel, final DsolAnimationGisTab animationTab)
-           throws IllegalArgumentException, DsolException
+            throws IllegalArgumentException, DsolException
     {
         super(panel, title, animationTab);
         panel.enableSimulationControlButtons();
@@ -96,9 +96,9 @@ public class OsmYamlSwingApplication extends DsolAnimationApplication
         @Override
         public void constructModel() throws SimRuntimeException
         {
-            URL yamlUrl = URLResource.getResource("/resources/osm/tudelft.yaml");
+            URL yamlUrl = ResourceResolver.resolve("/resources/osm/tudelft.yaml").asUrl();
             System.out.println("GIS definitions file: " + yamlUrl.toString());
-            URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.gz");
+            URL osmUrl = ResourceResolver.resolve("/resources/osm/tudelft.osm.gz").asUrl();
             System.out.println("GIS data file: " + osmUrl.toString());
             try
             {

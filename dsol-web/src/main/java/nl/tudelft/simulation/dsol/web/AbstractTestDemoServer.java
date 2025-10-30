@@ -11,7 +11,7 @@ import org.djunits.unit.Unit;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits.value.vfloat.scalar.base.FloatScalar;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 import org.djutils.logger.CategoryLogger;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Request;
@@ -85,7 +85,7 @@ public abstract class AbstractTestDemoServer
             ResourceHandler resourceHandler = new MyResourceHandler();
 
             // root folder; to work in Eclipse, as an external jar, and in an embedded jar
-            URL homeFolder = URLResource.getResource("/resources/home");
+            URL homeFolder = ResourceResolver.resolve("/resources/home").asUrl();
             String webRoot = homeFolder.toExternalForm();
             System.out.println("webRoot is " + webRoot);
 
@@ -179,8 +179,8 @@ public abstract class AbstractTestDemoServer
                     SimulatorInterface<Duration> simulator = model.getSimulator();
                     try
                     {
-                        Replication<Duration> newReplication = new SingleReplication<Duration>("rep 1", Duration.ZERO,
-                                Duration.ZERO, Duration.ofSI(3600.0));
+                        Replication<Duration> newReplication =
+                                new SingleReplication<Duration>("rep 1", Duration.ZERO, Duration.ZERO, Duration.ofSI(3600.0));
                         simulator.initialize(model, newReplication);
                         DsolWebModel webModel = new DsolWebModel(model.toString(), simulator);
                         AbstractTestDemoServer.this.sessionWebModelMap.put(sessionId, webModel);
@@ -250,22 +250,26 @@ public abstract class AbstractTestDemoServer
 
                         switch (command)
                         {
-                            case "getTitle": {
+                            case "getTitle":
+                            {
                                 answer = "<title>" + model.toString() + "</title>";
                                 break;
                             }
 
-                            case "getParameterMap": {
+                            case "getParameterMap":
+                            {
                                 answer = makeParameterMap(model);
                                 break;
                             }
 
-                            case "setParameters": {
+                            case "setParameters":
+                            {
                                 answer = setParameters(model, message);
                                 break;
                             }
 
-                            default: {
+                            default:
+                            {
                                 System.err.println("Got unknown message from client: " + command);
                                 answer = "<message>" + request.getParameter("message") + "</message>";
                                 break;
@@ -485,7 +489,9 @@ public abstract class AbstractTestDemoServer
                 String type = parts[i + 1].trim();
                 String val = parts[i + 2].trim();
                 if (type.equals("UNIT"))
-                { unitMap.put(id, val); }
+                {
+                    unitMap.put(id, val);
+                }
             }
             for (int i = 1; i < parts.length - 3; i += 3)
             {

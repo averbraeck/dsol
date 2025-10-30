@@ -7,7 +7,7 @@ import java.util.Properties;
 import org.djutils.draw.bounds.Bounds3d;
 import org.djutils.draw.point.OrientedPoint3d;
 import org.djutils.event.LocalEventProducer;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
@@ -38,7 +38,7 @@ public abstract class Editable extends LocalEventProducer implements Locatable
         try
         {
             Properties properties = new Properties();
-            properties.load(URLResource.getResourceAsStream("/editable.properties"));
+            properties.load(ResourceResolver.resolve("/editable.properties").openStream());
             Editable.editables.putAll(properties);
         }
         catch (Exception exception)

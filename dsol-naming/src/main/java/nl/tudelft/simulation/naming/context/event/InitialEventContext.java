@@ -22,7 +22,7 @@ import org.djutils.event.EventListenerMap;
 import org.djutils.event.EventType;
 import org.djutils.event.reference.ReferenceType;
 import org.djutils.exceptions.Throw;
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.naming.context.ContextFactory;
@@ -195,12 +195,12 @@ public final class InitialEventContext implements EventContext
         }
 
         // (4) content of the /resources/jndi.properties file
-        InputStream stream = URLResource.getResourceAsStream("/resources/jndi.properties");
-        if (stream != null)
+        try
         {
-            Properties jndiProps = new Properties();
-            try
+            InputStream stream = ResourceResolver.resolve("/resources/jndi.properties").openStream();
+            if (stream != null)
             {
+                Properties jndiProps = new Properties();
                 jndiProps.load(stream);
                 for (String key : keys)
                 {
@@ -210,10 +210,10 @@ public final class InitialEventContext implements EventContext
                     }
                 }
             }
-            catch (IOException exception)
-            {
-                CategoryLogger.always().error(exception);
-            }
+        }
+        catch (IOException exception)
+        {
+            CategoryLogger.always().error(exception);
         }
 
         // (5) the provided environment (if provided)

@@ -2,7 +2,7 @@ package nl.tudelft.simulation.dsol.web.test.gis;
 
 import java.net.URL;
 
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
@@ -30,7 +30,7 @@ public class GISModel extends AbstractDsolModel<Double, DevsRealTimeAnimator.Tim
     @Override
     public void constructModel() throws SimRuntimeException
     {
-        URL gisURL = URLResource.getResource("/resources/gis/map.xml");
+        URL gisURL = ResourceResolver.resolve("/resources/gis/map.xml").asUrl();
         System.err.println("GIS-map file: " + gisURL.toString());
         new GisRenderableNoCache2D(this.simulator, gisURL);
     }

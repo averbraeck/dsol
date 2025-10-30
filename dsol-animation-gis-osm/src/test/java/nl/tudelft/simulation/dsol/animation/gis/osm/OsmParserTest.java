@@ -8,7 +8,7 @@ import java.net.URL;
 
 import javax.naming.NamingException;
 
-import org.djutils.io.URLResource;
+import org.djutils.io.ResourceResolver;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.animation.gis.GisMapInterface;
@@ -41,8 +41,8 @@ public class OsmParserTest implements Contextualized
     public void testOsmPbfParser() throws IOException, NamingException
     {
         this.context = new JvmContext(null, "rootPbf");
-        URL csvUrl = URLResource.getResource("/resources/osm/tudelft.csv");
-        URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.pbf");
+        URL csvUrl = ResourceResolver.resolve("/resources/osm/tudelft.csv").asUrl();
+        URL osmUrl = ResourceResolver.resolve("/resources/osm/tudelft.osm.pbf").asUrl();
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");
         assertEquals("tudelft", map.getName());
 
@@ -63,8 +63,8 @@ public class OsmParserTest implements Contextualized
     public void testOsmGzipParser() throws IOException, NamingException
     {
         this.context = new JvmContext(null, "rootCsv");
-        URL csvUrl = URLResource.getResource("/resources/osm/tudelft.csv");
-        URL osmUrl = URLResource.getResource("/resources/osm/tudelft.osm.gz");
+        URL csvUrl = ResourceResolver.resolve("/resources/osm/tudelft.csv").asUrl();
+        URL osmUrl = ResourceResolver.resolve("/resources/osm/tudelft.osm.gz").asUrl();
         GisMapInterface map = OsmFileCsvParser.parseMapFile(csvUrl, osmUrl, "tudelft");
         assertEquals("tudelft", map.getName());
 
