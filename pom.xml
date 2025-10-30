@@ -414,7 +414,7 @@
           <show>package</show>
           <detectJavaApiLink>true</detectJavaApiLink>
           <detectOfflineLinks>true</detectOfflineLinks>
-          <detectLinks>false</detectLinks>
+          <detectLinks>true</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
         <executions>
@@ -660,7 +660,7 @@
           <show>package</show>
           <detectJavaApiLink>true</detectJavaApiLink>
           <detectOfflineLinks>true</detectOfflineLinks>
-          <detectLinks>false</detectLinks>
+          <detectLinks>true</detectLinks>
           <release>${jdk.version}</release>
         </configuration>
         <reportSets>
