@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
-import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
@@ -77,7 +76,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
             ContextUtil.lookupOrCreateSubContext(contextProvider.getContext(), "animation/2D").bind(Integer.toString(this.id),
                     this);
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             CategoryLogger.always().warn(exception);
         }
@@ -384,7 +383,7 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
                     .unbind(Integer.toString(this.id));
             this.source = null; // to indicate the animation is destroyed. Remove pointer to source for GC.
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             CategoryLogger.always().warn(exception);
         }

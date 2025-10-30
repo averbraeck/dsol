@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
@@ -361,7 +360,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
             }
             return this.context;
         }
-        catch (RemoteException | NamingException exception)
+        catch (NamingException exception)
         {
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }
@@ -380,7 +379,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
                 ContextUtil.destroySubContext(rootContext, this.runControl.getId());
             }
         }
-        catch (RemoteException | NamingException exception)
+        catch (NamingException exception)
         {
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }

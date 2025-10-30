@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
@@ -114,7 +113,7 @@ public class EsriRenderable2d implements GisRenderable2d
             ContextUtil.lookupOrCreateSubContext(contextProvider.getContext(), "animation/2D")
                     .bindObject(Integer.toString(System.identityHashCode(this)), this);
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             CategoryLogger.always().warn(exception, "<init>");
         }

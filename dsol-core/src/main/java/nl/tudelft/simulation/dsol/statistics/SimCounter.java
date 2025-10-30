@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.statistics;
 
-import java.rmi.RemoteException;
-
 import javax.naming.NamingException;
 
 import org.djutils.event.Event;
@@ -76,7 +74,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
                     ContextUtil.lookupOrCreateSubContext(this.simulator.getReplication().getContext(), "statistics");
             context.bindObject(key);
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             CategoryLogger.always().warn(exception, "<init>");
         }

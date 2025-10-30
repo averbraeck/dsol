@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.swing.charts.xy;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GradientPaint;
-import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 import javax.swing.BorderFactory;
@@ -141,7 +140,7 @@ public class XYChart implements Swingable
             ContextInterface context = ContextUtil.lookupOrCreateSubContext(simulator.getReplication().getContext(), "charts");
             context.bindObject(this);
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             CategoryLogger.always().warn(exception, "<init>");
         }

@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 import javax.swing.BorderFactory;
@@ -67,7 +66,7 @@ public class BoxAndWhiskerChart implements Swingable
             ContextInterface context = ContextUtil.lookupOrCreateSubContext(simulator.getReplication().getContext(), "charts");
             context.bindObject(this);
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             CategoryLogger.always().warn(exception, "<init>");
         }

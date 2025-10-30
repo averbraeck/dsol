@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import java.rmi.RemoteException;
-
 import javax.naming.NamingException;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
@@ -58,7 +56,7 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Replica
             ContextInterface rootContext = InitialEventContext.instantiate("root");
             setContext(ContextUtil.lookupOrCreateSubContext(rootContext, getId()));
         }
-        catch (RemoteException | NamingException exception)
+        catch (NamingException exception)
         {
             throw new IllegalArgumentException(
                     "Cannot lookup or create context for experiment. Error is: " + exception.getMessage());
@@ -79,7 +77,7 @@ public class SingleReplication<T extends Number & Comparable<T>> extends Replica
                 setContext(null); // to avoid removing twice
             }
         }
-        catch (RemoteException | NamingException exception)
+        catch (NamingException exception)
         {
             throw new IllegalArgumentException("Cannot destroy context for replication. Error is: " + exception.getMessage());
         }

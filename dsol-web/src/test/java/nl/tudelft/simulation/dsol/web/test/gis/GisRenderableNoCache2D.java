@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.net.URL;
-import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
@@ -143,7 +142,7 @@ public class GisRenderableNoCache2D implements Renderable2dInterface<GisRenderab
             ContextUtil.lookupOrCreateSubContext(simulator.getReplication().getContext(), "animation/2D")
                     .bindObject(Integer.toString(System.identityHashCode(this)));
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             CategoryLogger.always().warn(exception, "<init>");
         }
