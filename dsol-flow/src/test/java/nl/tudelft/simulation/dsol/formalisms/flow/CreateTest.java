@@ -56,8 +56,6 @@ public class CreateTest extends FlowTest
         final Create<Double>[] createBlock = new Create[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -145,8 +143,6 @@ public class CreateTest extends FlowTest
 
                 c1.setDestination(new Destroy<Double>("receiver", this.simulator)
                 {
-                    private static final long serialVersionUID = 1L;
-
                     @Override
                     public void receiveEntity(final Entity<Double> entity)
                     {
@@ -195,8 +191,6 @@ public class CreateTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -236,8 +230,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -278,8 +270,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -320,8 +310,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -361,8 +349,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -401,8 +387,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -442,8 +426,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -485,8 +467,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -526,8 +506,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -577,8 +555,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -623,8 +599,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -673,8 +647,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -718,8 +690,6 @@ public class CreateTest extends FlowTest
         final AtomicInteger counter = new AtomicInteger(0);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {

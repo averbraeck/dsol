@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.statistics.table;
 
-import java.rmi.RemoteException;
-
 import org.djutils.event.Event;
 import org.djutils.event.EventType;
 
@@ -20,7 +18,7 @@ import nl.tudelft.simulation.dsol.statistics.SimCounter;
 public class CounterTableModel extends StatisticsTableModel
 {
     /** */
-    private static final long serialVersionUID = 20200307L;
+    private static final long serialVersionUID = 1L;
 
     /** the column names. */
     private static final String[] COLUMN_NAMES = {"field", "value"};
@@ -31,9 +29,8 @@ public class CounterTableModel extends StatisticsTableModel
     /**
      * Constructor.
      * @param counter the counter for which the table is created
-     * @throws RemoteException when communication with the counter fails
      */
-    public CounterTableModel(final SimCounter<?> counter) throws RemoteException
+    public CounterTableModel(final SimCounter<?> counter)
     {
         super(COLUMN_NAMES, 3, counter,
                 new EventType[] {SimCounter.TIMED_INITIALIZED_EVENT, SimCounter.TIMED_OBSERVATION_ADDED_EVENT});
@@ -42,7 +39,7 @@ public class CounterTableModel extends StatisticsTableModel
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         setValueAt("name", 0, 0);
         setValueAt("n", 1, 0);

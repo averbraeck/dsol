@@ -24,9 +24,6 @@ import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
  */
 public class OsmFileReader implements DataSourceInterface
 {
-    /** */
-    private static final long serialVersionUID = 20220130L;
-
     /** the URL for the osm file to be read. */
     private URL osmURL = null;
 

@@ -7,7 +7,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.Point;
 import org.djutils.draw.point.Point2d;
 import org.djutils.event.Event;
-import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.d2.Renderable2dInterface;
@@ -38,7 +36,7 @@ import nl.tudelft.simulation.language.DsolException;
 public class AutoPanAnimationPanel extends AnimationPanel
 {
     /** */
-    private static final long serialVersionUID = 20180430L;
+    private static final long serialVersionUID = 1L;
 
     /** Last Object that was followed. */
     private Object lastFollowedObject;
@@ -59,11 +57,9 @@ public class AutoPanAnimationPanel extends AnimationPanel
      * Constructor for the AutoPanAnimationPanel.
      * @param homeExtent home extent
      * @param simulator simulator
-     * @throws RemoteException on remote animation error
      * @throws DsolException when simulator does not implement AnimatorInterface
      */
-    public AutoPanAnimationPanel(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DsolException
+    public AutoPanAnimationPanel(final Bounds2d homeExtent, final SimulatorInterface<?> simulator) throws DsolException
     {
         super(homeExtent, simulator);
         MouseListener[] listeners = getMouseListeners();
@@ -164,22 +160,13 @@ public class AutoPanAnimationPanel extends AnimationPanel
             Locatable locatable = this.autoPanKind.searchObject(this.autoPanId);
             if (null != locatable)
             {
-                try
+                Point<?> point = locatable.getLocation();
+                if (point != null) // Center extent around point
                 {
-                    Point<?> point = locatable.getLocation();
-                    if (point != null) // Center extent around point
-                    {
-                        double w = getExtent().getDeltaX();
-                        double h = getExtent().getDeltaY();
-                        setExtent(new Bounds2d(point.getX() - w / 2, point.getX() + w / 2, point.getY() - h / 2,
-                                point.getY() + h / 2));
-                    }
-                }
-                catch (RemoteException exception)
-                {
-                    CategoryLogger.always().warn("Caught RemoteException trying to locate {} with id {}.", this.autoPanKind,
-                            this.autoPanId);
-                    return;
+                    double w = getExtent().getDeltaX();
+                    double h = getExtent().getDeltaY();
+                    setExtent(new Bounds2d(point.getX() - w / 2, point.getX() + w / 2, point.getY() - h / 2,
+                            point.getY() + h / 2));
                 }
             }
         }
@@ -187,7 +174,7 @@ public class AutoPanAnimationPanel extends AnimationPanel
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(SearchPanel.ANIMATION_SEARCH_OBJECT_EVENT))
         {

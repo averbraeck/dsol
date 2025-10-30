@@ -16,9 +16,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class Agv extends IntResource<Double>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** AGV time delay. */
     private final DistContinuous agvTime;
 

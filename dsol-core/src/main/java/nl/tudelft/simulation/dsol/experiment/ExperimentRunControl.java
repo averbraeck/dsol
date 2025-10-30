@@ -15,9 +15,6 @@ import org.djutils.exceptions.Throw;
  */
 public class ExperimentRunControl<T extends Number & Comparable<T>> extends RunControl<T>
 {
-    /** */
-    private static final long serialVersionUID = 20210410L;
-
     /** The number of replications to execute. */
     private final int numberOfReplications;
 

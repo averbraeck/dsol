@@ -14,9 +14,6 @@ import javax.swing.JLabel;
  */
 public class AppearanceControlLabel extends JLabel implements AppearanceControl
 {
-    /** */
-    private static final long serialVersionUID = 20180207L;
-
     /**
      * Generate an empty label with appearance control.
      */

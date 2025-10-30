@@ -14,9 +14,6 @@ package nl.tudelft.simulation.language.filters;
  */
 public abstract class AbstractFilter implements FilterInterface
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** is this filter inverted. */
     protected boolean inverted = false;
 

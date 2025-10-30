@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousEquivalentDose extends DistContinuousUnit<EquivalentDoseUnit, EquivalentDose>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws EquivalentDose scalars.
      * @param wrappedDistribution the wrapped continuous distribution

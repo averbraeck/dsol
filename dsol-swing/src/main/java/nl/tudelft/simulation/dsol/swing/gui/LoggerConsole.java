@@ -38,9 +38,6 @@ import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
  */
 public class LoggerConsole extends JPanel implements AppearanceControl
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the document to write to. */
     private StyledDocument doc;
 

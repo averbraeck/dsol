@@ -27,9 +27,6 @@ import nl.tudelft.simulation.dsol.statistics.SimCounter;
  */
 public abstract class FlowBlock<T extends Number & Comparable<T>, F extends FlowBlock<T, F>> extends Block<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** the next flow object in the process-model chain. */
     private FlowBlock<T, ?> destination;
 

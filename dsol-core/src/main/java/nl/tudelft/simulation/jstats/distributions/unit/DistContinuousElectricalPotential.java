@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousElectricalPotential extends DistContinuousUnit<ElectricalPotentialUnit, ElectricalPotential>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws ElectricalPotential scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -178,9 +178,6 @@ public class StreamInformationTest
         // fallback
         ssu.setFallbackStreamUpdater(new StreamUpdater()
         {
-            /** */
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void updateSeed(final String streamId, final StreamInterface stream, final int replicationNumber)
             {

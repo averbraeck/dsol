@@ -37,7 +37,9 @@ public class RemoteContextFactory implements ContextFactory
     {
         // If the context is already looked up, let's return immediately
         if (RemoteContextFactory.context != null)
-        { return RemoteContextFactory.context; }
+        {
+            return RemoteContextFactory.context;
+        }
 
         // Let's look for our remote partner
         try
@@ -58,7 +60,9 @@ public class RemoteContextFactory implements ContextFactory
                 if (!(url.getHost().equals("localhost") || url.getHost().equals("127.0.0.1")
                         || url.getHost().equals(InetAddress.getLocalHost().getHostName())
                         || url.getHost().equals(InetAddress.getLocalHost().getHostAddress())))
-                { throw new IllegalArgumentException("cannot create registry on remote host"); }
+                {
+                    throw new IllegalArgumentException("cannot create registry on remote host");
+                }
                 registry = LocateRegistry.createRegistry(url.getPort());
             }
             // We now have a registry. Let's resolve the context object
@@ -77,7 +81,9 @@ public class RemoteContextFactory implements ContextFactory
                 {
                     String key = iterator.next().toString();
                     if (key.equals(InitialEventContext.WRAPPED_CONTEXT_FACTORY))
-                    { wrappedEnvironment.put(InitialEventContext.INITIAL_CONTEXT_FACTORY, environment.get(key)); }
+                    {
+                        wrappedEnvironment.put(InitialEventContext.INITIAL_CONTEXT_FACTORY, environment.get(key));
+                    }
                 }
                 if (wrappedEnvironment.isEmpty())
                 {

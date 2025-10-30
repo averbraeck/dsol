@@ -27,9 +27,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class InputParameterDistDiscreteSelection extends InputParameterSelectionMap<String, InputParameterMapDistDiscrete>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the options for the distribution functions. */
     private static SortedMap<String, InputParameterMapDistDiscrete> distOptions;
 
@@ -111,9 +108,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
     /** InputParameterDistDiscrete.Bernoulli class. */
     public static class Bernoulli extends InputParameterMapDistDiscrete
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Bernoulli distribution.
          * @throws InputParameterException on error with the distribution
@@ -137,9 +131,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
     /** InputParameterDistDiscrete.Binomial class. */
     public static class Binomial extends InputParameterMapDistDiscrete
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Binomial distribution.
          * @throws InputParameterException on error with the distribution
@@ -167,9 +158,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
     /** InputParameterDistDiscrete.DiscreteConstant class. */
     public static class DiscreteConstant extends InputParameterMapDistDiscrete
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the DiscreteConstant distribution.
          * @throws InputParameterException on error with the distribution
@@ -190,9 +178,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
     /** InputParameterDistDiscrete.DiscreteUniform class. */
     public static class DiscreteUniform extends InputParameterMapDistDiscrete
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the DiscreteUniform distribution.
          * @throws InputParameterException on error with the distribution
@@ -218,9 +203,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
     /** InputParameterDistDiscrete.Geometric class. */
     public static class Geometric extends InputParameterMapDistDiscrete
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Geometric distribution.
          * @throws InputParameterException on error with the distribution
@@ -244,9 +226,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
     /** InputParameterDistDiscrete.NegBinomial class. */
     public static class NegBinomial extends InputParameterMapDistDiscrete
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the NegBinomial distribution.
          * @throws InputParameterException on error with the distribution
@@ -274,9 +253,6 @@ public class InputParameterDistDiscreteSelection extends InputParameterSelection
     /** InputParameterDistDiscrete.Poisson class. */
     public static class Poisson extends InputParameterMapDistDiscrete
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Poisson distribution.
          * @throws InputParameterException on error with the distribution

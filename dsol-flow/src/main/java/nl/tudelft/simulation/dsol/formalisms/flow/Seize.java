@@ -36,9 +36,6 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  */
 public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<T, Seize<T>> implements CapacityRequestor<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140911L;
-
     /** Storage for waiting entities with their arrival time. */
     protected final Set<StoredEntity<T>> storage = Collections.synchronizedSet(new HashSet<>());
 
@@ -135,9 +132,6 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
     public static class DoubleCapacity<T extends Number & Comparable<T>> extends Seize<T>
             implements CapacityRequestor.DoubleCapacity<T>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** The resource that is claimed by entities in this Seize block. */
         protected final Resource.DoubleCapacity<T> resource;
 
@@ -263,9 +257,6 @@ public abstract class Seize<T extends Number & Comparable<T>> extends FlowBlock<
     public static class IntegerCapacity<T extends Number & Comparable<T>> extends Seize<T>
             implements CapacityRequestor.IntegerCapacity<T>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** The resource that is claimed by entities in this Seize block. */
         protected final Resource.IntegerCapacity<T> resource;
 

@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistDiscreteConstant extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** value is the value of the distribution. */
     private final long constant;
 

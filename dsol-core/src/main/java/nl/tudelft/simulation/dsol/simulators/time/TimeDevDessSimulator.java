@@ -21,9 +21,6 @@ import nl.tudelft.simulation.dsol.simulators.DevDessSimulator;
  */
 public class TimeDevDessSimulator extends DevDessSimulator<Duration> implements TimeDevsSimulatorInterface
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The absolute startTime of the simulator. */
     private final Time startTime;
 

@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.swing.gui.control;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -81,11 +80,8 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     }
 
     /** Updater for the clock panel. */
-    protected class TimeUpdateTask extends TimerTask implements Serializable
+    protected class TimeUpdateTask extends TimerTask
     {
-        /** */
-        private static final long serialVersionUID = 20140000L;
-
         @Override
         public void run()
         {
@@ -217,7 +213,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public static class TimeDouble extends ClockPanel<Double>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a double time.
@@ -253,7 +249,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public static class TimeFloat extends ClockPanel<Float>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a float time.
@@ -289,7 +285,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public static class TimeLong extends ClockPanel<Long>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a long time.
@@ -325,7 +321,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public static class TimeDoubleUnit extends ClockPanel<Duration>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a double time with unit.
@@ -361,7 +357,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public static class TimeFloatUnit extends ClockPanel<FloatDuration>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a float time with unit.
@@ -398,7 +394,7 @@ public abstract class ClockPanel<T extends Number & Comparable<T>> extends JPane
     public static class ClockTime extends ClockPanel<Duration>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a clock-based time and clock-based simulator.

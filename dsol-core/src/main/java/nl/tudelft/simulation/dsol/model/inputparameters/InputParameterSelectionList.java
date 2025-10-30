@@ -20,9 +20,6 @@ import org.djutils.exceptions.Throw;
  */
 public class InputParameterSelectionList<T> extends AbstractInputParameter<T, T>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The options of the selection list. */
     private List<T> options;
 

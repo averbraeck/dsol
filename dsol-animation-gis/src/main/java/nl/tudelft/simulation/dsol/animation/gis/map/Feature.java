@@ -29,9 +29,6 @@ import nl.tudelft.simulation.dsol.animation.gis.Style;
  */
 public class Feature implements FeatureInterface
 {
-    /** */
-    private static final long serialVersionUID = 20210201L;
-
     /** the layer to which this feature belongs. */
     private final LayerInterface layer;
 

@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousSolidAngle extends DistContinuousUnit<SolidAngleUnit, SolidAngle>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws SolidAngle scalars.
      * @param wrappedDistribution the wrapped continuous distribution

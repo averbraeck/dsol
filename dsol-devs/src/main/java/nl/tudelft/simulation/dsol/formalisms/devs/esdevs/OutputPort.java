@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
-import java.rmi.RemoteException;
-
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -55,11 +53,10 @@ public class OutputPort<T extends Number & Comparable<T>, TYPE> implements Outpu
         {
             try
             {
-                CategoryLogger.with(Cat.DSOL).debug("send: TIME IS {}",
-                        this.model.getSimulator().getSimulatorTime());
+                CategoryLogger.with(Cat.DSOL).debug("send: TIME IS {}", this.model.getSimulator().getSimulatorTime());
                 this.model.parentModel.transfer(this, value);
             }
-            catch (RemoteException | SimRuntimeException e)
+            catch (SimRuntimeException e)
             {
                 CategoryLogger.always().error(e);
             }

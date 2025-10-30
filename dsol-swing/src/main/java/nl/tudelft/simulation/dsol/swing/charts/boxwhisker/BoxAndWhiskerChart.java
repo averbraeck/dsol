@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
@@ -36,11 +35,8 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @author <a href="mailto:a.verbraeck@tudelft.nl"> Alexander Verbraeck </a>
  */
-public class BoxAndWhiskerChart implements Swingable, Serializable
+public class BoxAndWhiskerChart implements Swingable
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /** TITLE_FONT refers to the font to be used for the title of the plot. */
     public static final Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 18);
 
@@ -80,9 +76,8 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a tally to the chart.
      * @param tally the tally to be added
-     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedTally tally) throws RemoteException
+    public void add(final EventBasedTally tally)
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }
@@ -90,9 +85,8 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a weighted tally to the chart.
      * @param tally the tally to be added
-     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedWeightedTally tally) throws RemoteException
+    public void add(final EventBasedWeightedTally tally)
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }
@@ -100,9 +94,8 @@ public class BoxAndWhiskerChart implements Swingable, Serializable
     /**
      * adds a weighted tally to the chart.
      * @param tally the tally to be added
-     * @throws RemoteException on network failure
      */
-    public void add(final EventBasedTimestampWeightedTally tally) throws RemoteException
+    public void add(final EventBasedTimestampWeightedTally tally)
     {
         ((BoxAndWhiskerPlot) this.chart.getPlot()).add(tally);
     }

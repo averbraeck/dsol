@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousAbsorbedDose extends DistContinuousUnit<AbsorbedDoseUnit, AbsorbedDose>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws AbsorbedDose scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs;
 
-import java.io.Serializable;
-
 /**
  * Phase class. The Phase is used in phase explicit DEVS models. Phases partition the state space into regions, where events are
  * used to transfer the state from one phase to another phase. An example is a machine that can be in three different phases:
@@ -16,11 +14,8 @@ import java.io.Serializable;
  * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a><br>
  */
-public class Phase implements Serializable
+public class Phase
 {
-    /** the default serial version UId. */
-    private static final long serialVersionUID = 1L;
-
     /** the identifier of the phase. */
     private final String name;
 

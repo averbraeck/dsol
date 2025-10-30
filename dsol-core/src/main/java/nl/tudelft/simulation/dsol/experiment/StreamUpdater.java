@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
@@ -15,7 +14,7 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public interface StreamUpdater extends Serializable
+public interface StreamUpdater
 {
     /**
      * Update all seeds for the given replication number. The method should be fully reproducible, and can be based on the
@@ -23,7 +22,7 @@ public interface StreamUpdater extends Serializable
      * @param streams the map of the streams for the replication
      * @param replicationNumber the replication number for which to set the seed values
      */
-    default void updateSeeds(Map<String, StreamInterface> streams, int replicationNumber)
+    default void updateSeeds(final Map<String, StreamInterface> streams, final int replicationNumber)
     {
         for (Map.Entry<String, StreamInterface> entry : streams.entrySet())
         {

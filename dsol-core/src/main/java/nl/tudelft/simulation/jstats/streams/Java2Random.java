@@ -2,9 +2,6 @@ package nl.tudelft.simulation.jstats.streams;
 
 import java.util.Random;
 
-import nl.tudelft.simulation.language.DsolException;
-import nl.tudelft.simulation.language.reflection.StateSaver;
-
 /**
  * The Java2Random is an extension of the <code>java.util.Random</code> class which implements the StreamInterface.
  * <p>
@@ -19,7 +16,7 @@ import nl.tudelft.simulation.language.reflection.StateSaver;
 public class Java2Random extends Random implements StreamInterface
 {
     /** */
-    private static final long serialVersionUID = 20140831L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Seed is a link to the current seed value. The reason to store the seed in this variable is that there is no getSeed() on
@@ -78,32 +75,6 @@ public class Java2Random extends Random implements StreamInterface
     public long getSeed()
     {
         return this.seed;
-    }
-
-    @Override
-    public byte[] saveState() throws StreamException
-    {
-        try
-        {
-            return StateSaver.saveState(this);
-        }
-        catch (DsolException exception)
-        {
-            throw new StreamException(exception);
-        }
-    }
-
-    @Override
-    public void restoreState(final byte[] state) throws StreamException
-    {
-        try
-        {
-            StateSaver.restoreState(this, state);
-        }
-        catch (DsolException exception)
-        {
-            throw new StreamException(exception);
-        }
     }
 
 }

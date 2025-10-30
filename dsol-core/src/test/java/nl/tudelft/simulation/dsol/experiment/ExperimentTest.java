@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -142,9 +141,6 @@ public class ExperimentTest
         DsolModel<Double, DevsSimulatorInterface<Double>> modd =
                 new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simd)
                 {
-                    /** */
-                    private static final long serialVersionUID = 1L;
-
                     @Override
                     public void constructModel() throws SimRuntimeException
                     {
@@ -160,10 +156,6 @@ public class ExperimentTest
         DevsSimulator<Float> simf = new DevsSimulator<Float>("simulator");
         DsolModel<Float, DevsSimulatorInterface<Float>> modf = new AbstractDsolModel<Float, DevsSimulatorInterface<Float>>(simf)
         {
-
-            /** */
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -180,10 +172,6 @@ public class ExperimentTest
         DevsSimulator<Long> siml = new DevsSimulator<Long>("simulator");
         DsolModel<Long, DevsSimulatorInterface<Long>> modl = new AbstractDsolModel<Long, DevsSimulatorInterface<Long>>(siml)
         {
-
-            /** */
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -201,10 +189,6 @@ public class ExperimentTest
         DsolModel<Duration, DevsSimulatorInterface<Duration>> moddu =
                 new AbstractDsolModel<Duration, DevsSimulatorInterface<Duration>>(simdu)
                 {
-
-                    /** */
-                    private static final long serialVersionUID = 1L;
-
                     @Override
                     public void constructModel() throws SimRuntimeException
                     {
@@ -222,18 +206,14 @@ public class ExperimentTest
         DsolModel<FloatDuration, DevsSimulatorInterface<FloatDuration>> modfu =
                 new AbstractDsolModel<FloatDuration, DevsSimulatorInterface<FloatDuration>>(simfu)
                 {
-
-                    /** */
-                    private static final long serialVersionUID = 1L;
-
                     @Override
                     public void constructModel() throws SimRuntimeException
                     {
                         //
                     }
                 };
-        Experiment<FloatDuration, DevsSimulatorInterface<FloatDuration>> fu1 = new Experiment<>("du1", simfu, modfu,
-                FloatDuration.ZERO, FloatDuration.ZERO, FloatDuration.ofSI(1000.0f), 10);
+        Experiment<FloatDuration, DevsSimulatorInterface<FloatDuration>> fu1 =
+                new Experiment<>("du1", simfu, modfu, FloatDuration.ZERO, FloatDuration.ZERO, FloatDuration.ofSI(1000.0f), 10);
         assertEquals(1000.0f, fu1.getEndTime().floatValue(), 1E-6);
         assertEquals(modfu, fu1.getModel());
         fu1.makeExperimentReplication();
@@ -241,10 +221,9 @@ public class ExperimentTest
 
     /**
      * test the execution of an experiment with 10 replications.
-     * @throws RemoteException on error
      */
     @Test
-    public void testExperimentRun() throws RemoteException
+    public void testExperimentRun()
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
@@ -291,10 +270,9 @@ public class ExperimentTest
 
     /**
      * test the execution of an experiment with 10 replications and the use of a seed updater.
-     * @throws RemoteException on error
      */
     @Test
-    public void testExperimentRunSeedUpdater() throws RemoteException
+    public void testExperimentRunSeedUpdater()
     {
         SortedMap<Integer, Integer> dataCollector = new TreeMap<>();
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
@@ -333,10 +311,9 @@ public class ExperimentTest
 
     /**
      * test the calculation of a summary statistic foran experiment with 10 replications.
-     * @throws RemoteException on error
      */
     @Test
-    public void testSummaryStatistics() throws RemoteException
+    public void testSummaryStatistics()
     {
         DevsSimulator<Double> simulator = new DevsSimulator<Double>("simulator");
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new MM1Model(simulator);
@@ -361,9 +338,6 @@ public class ExperimentTest
      */
     public static class CountModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** counter. */
         private int count;
 
@@ -405,9 +379,6 @@ public class ExperimentTest
      */
     public static class MM1Model extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** queue. */
         private List<Entity> queue;
 

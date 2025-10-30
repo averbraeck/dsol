@@ -37,23 +37,22 @@ import nl.tudelft.simulation.language.DsolException;
  */
 public class OsmCsvSwingApplication extends DsolAnimationApplication
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * @param title the title
      * @param panel the panel
      * @param animationTab the (custom) animation tab
      * @throws DsolException when simulator is not an animator
      * @throws IllegalArgumentException for illegal bounds
-     * @throws RemoteException on network error
      */
     public OsmCsvSwingApplication(final String title, final DsolPanel panel, final DsolAnimationGisTab animationTab)
-            throws RemoteException, IllegalArgumentException, DsolException
+            throws IllegalArgumentException, DsolException
     {
         super(panel, title, animationTab);
         panel.enableSimulationControlButtons();
     }
-
-    /** */
-    private static final long serialVersionUID = 1L;
 
     /**
      * @param args arguments, expected to be empty
@@ -82,9 +81,6 @@ public class OsmCsvSwingApplication extends DsolAnimationApplication
     /** The empty model -- this demo is just to show a map on the screen. */
     static class EmptyModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
-        /** The default serial version UID for serializable classes. */
-        private static final long serialVersionUID = 1L;
-
         /** the GIS map. */
         private OsmRenderable2d gisMap;
 

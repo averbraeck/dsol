@@ -26,9 +26,6 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
  */
 public class TableModelEventList<T extends Number & Comparable<T>> extends RedBlackTree<T>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** The EVENTLIST_CHANGED_EVENT. */
     public static final EventType EVENTLIST_CHANCED_EVENT = null;
 

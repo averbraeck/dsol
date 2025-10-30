@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.language.util;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.BitSet;
 
@@ -17,11 +16,8 @@ import org.djutils.exceptions.Throw;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
  */
-public final class BitUtil implements Serializable
+public final class BitUtil
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** Constructor is not called for utility class. */
     private BitUtil()
     {

@@ -23,9 +23,6 @@ import org.djutils.logger.CategoryLogger;
  */
 public class FileContext extends JvmContext
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 20200101L;
-
     /** file links to the file. */
     private File file;
 

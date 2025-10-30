@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public abstract class InputParameterMapDistContinuous extends InputParameterMap
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the random number stream to use for the distribution. */
     private StreamInterface stream;
 

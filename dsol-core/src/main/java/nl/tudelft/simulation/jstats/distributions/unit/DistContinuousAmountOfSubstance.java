@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousAmountOfSubstance extends DistContinuousUnit<AmountOfSubstanceUnit, AmountOfSubstance>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws AmountOfSubstance scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -18,9 +18,6 @@ import nl.tudelft.simulation.dsol.animation.gis.MapImageInterface;
  */
 public class MapImage implements MapImageInterface
 {
-    /** */
-    private static final long serialVersionUID = 20201015L;
-
     /** background color; default is fully transparent. */
     private Color backgroundColor = new Color(255, 255, 255, 127);
 

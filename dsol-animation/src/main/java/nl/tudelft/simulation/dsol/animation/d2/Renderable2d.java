@@ -40,9 +40,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public abstract class Renderable2d<L extends Locatable> implements Renderable2dInterface<L>
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /**
      * Storage of the boolean flags, to prevent each flag from taking 32 bits... The initial value is binary 1011 = 0B: rotate =
      * true, flip = false, scale = true, translate = true, scaleY = false; scaleObject = false.
@@ -327,45 +324,29 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     @Override
     public synchronized boolean contains(final Point2d pointWorldCoordinates, final Bounds2d extent)
     {
-        try
+        if (pointWorldCoordinates == null || this.source == null || this.source.getLocation() == null)
         {
-            if (pointWorldCoordinates == null || this.source == null || this.source.getLocation() == null)
-            {
-                return false;
-            }
-            Bounds2d intersect = BoundsUtil.projectBounds(this.source.getLocation(), this.source.getRelativeBounds());
-            return intersect.contains(pointWorldCoordinates);
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "contains (world coordinates)");
             return false;
         }
+        Bounds2d intersect = BoundsUtil.projectBounds(this.source.getLocation(), this.source.getRelativeBounds());
+        return intersect.contains(pointWorldCoordinates);
     }
 
     @Override
-    public synchronized boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent, final Dimension screenSize,
-            final RenderableScale scale, final double worldMargin, final double pixelMargin)
+    public synchronized boolean contains(final Point2D pointScreenCoordinates, final Bounds2d extent,
+            final Dimension screenSize, final RenderableScale scale, final double worldMargin, final double pixelMargin)
     {
-        try
-        {
-            Point2d screenLocation = scale.getScreenCoordinatesAsPoint2d(getSource().getLocation(), extent, screenSize);
-            Transform2d transformation = new Transform2d();
-            transformation.reflectY();
-            double xScale = scale.getXScale(extent, screenSize);
-            double yScale = scale.getYScale(extent, screenSize);
-            transformation.scale(xScale, yScale);
-            transformation.rotation(getSource().getDirZ());
-            transformation.translate(screenLocation.neg());
-            Point2d pointRelativeTo00 =
-                    transformation.transform(new Point2d(pointScreenCoordinates.getX(), pointScreenCoordinates.getY()));
-            return contains(pointRelativeTo00, scale, worldMargin, pixelMargin, xScale, yScale);
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "contains (screen coordinates)");
-            return false;
-        }
+        Point2d screenLocation = scale.getScreenCoordinatesAsPoint2d(getSource().getLocation(), extent, screenSize);
+        Transform2d transformation = new Transform2d();
+        transformation.reflectY();
+        double xScale = scale.getXScale(extent, screenSize);
+        double yScale = scale.getYScale(extent, screenSize);
+        transformation.scale(xScale, yScale);
+        transformation.rotation(getSource().getDirZ());
+        transformation.translate(screenLocation.neg());
+        Point2d pointRelativeTo00 =
+                transformation.transform(new Point2d(pointScreenCoordinates.getX(), pointScreenCoordinates.getY()));
+        return contains(pointRelativeTo00, scale, worldMargin, pixelMargin, xScale, yScale);
     }
 
     /**
@@ -384,23 +365,14 @@ public abstract class Renderable2d<L extends Locatable> implements Renderable2dI
     public synchronized boolean contains(final Point2d pointRelativeTo00, final RenderableScale scale, final double worldMargin,
             final double pixelMargin, final double xScale, final double yScale)
     {
-        try
-        {
-            Bounds<?, ?> b = getSource().getRelativeBounds();
-            Bounds2d bounds =
-                    new Bounds2d(b.getMinX() * scale.getObjectScaleFactor(), b.getMaxX() * scale.getObjectScaleFactor(),
-                            b.getMinY() * scale.getObjectScaleFactor(), b.getMaxY() * scale.getObjectScaleFactor());
-            double xMarginWorld = Math.max(worldMargin * scale.getObjectScaleFactor(), pixelMargin * xScale);
-            double yMarginWorld = Math.max(worldMargin * scale.getObjectScaleFactor(), pixelMargin * yScale);
-            Bounds2d marginBounds = new Bounds2d(bounds.getMinX() - xMarginWorld, bounds.getMaxX() + xMarginWorld,
-                    bounds.getMinY() - yMarginWorld, bounds.getMaxY() + yMarginWorld);
-            return marginBounds.covers(pointRelativeTo00);
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "contains");
-            return false;
-        }
+        Bounds<?, ?> b = getSource().getRelativeBounds();
+        Bounds2d bounds = new Bounds2d(b.getMinX() * scale.getObjectScaleFactor(), b.getMaxX() * scale.getObjectScaleFactor(),
+                b.getMinY() * scale.getObjectScaleFactor(), b.getMaxY() * scale.getObjectScaleFactor());
+        double xMarginWorld = Math.max(worldMargin * scale.getObjectScaleFactor(), pixelMargin * xScale);
+        double yMarginWorld = Math.max(worldMargin * scale.getObjectScaleFactor(), pixelMargin * yScale);
+        Bounds2d marginBounds = new Bounds2d(bounds.getMinX() - xMarginWorld, bounds.getMaxX() + xMarginWorld,
+                bounds.getMinY() - yMarginWorld, bounds.getMaxY() + yMarginWorld);
+        return marginBounds.covers(pointRelativeTo00);
     }
 
     @Override

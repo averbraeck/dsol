@@ -16,7 +16,7 @@ import java.awt.geom.Point2D;
  */
 public class DirectionalLine extends Line2D.Double
 {
-    /** the default serialVersionUId. */
+    /** the default serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /** different values for the side a point can be at w.r.t. the line. */

@@ -7,7 +7,6 @@ import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.rmi.RemoteException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.bounds.Bounds3d;
 import org.djutils.draw.point.OrientedPoint3d;
 import org.djutils.draw.point.Point3d;
-import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.animation.StaticLocation3d;
@@ -37,9 +35,6 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  */
 public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<L>
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /** the cache of imageIcons. */
     private static transient Map<URL, ImageIcon> cache = new LinkedHashMap<URL, ImageIcon>();
 
@@ -149,31 +144,24 @@ public abstract class ImageRenderable<L extends Locatable> extends Renderable2d<
     @Override
     public void paint(final Graphics2D graphics, final ImageObserver observer)
     {
-        try
+        if (getSource().getLocation() == null)
         {
-            if (getSource().getLocation() == null)
-            {
-                return;
-            }
-            int image = this.selectImage();
-            if (this.imageIcons == null || this.imageIcons[image] == null
-                    || this.imageIcons[image].getImageLoadStatus() != MediaTracker.COMPLETE)
-            {
-                return;
-            }
-            Bounds2d size = BoundsUtil.projectBounds(getSource().getLocation(), getSource().getRelativeBounds());
-            Point2D origin = this.resolveOrigin(this.orientation, size);
-            graphics.translate(origin.getX(), origin.getY());
-            graphics.scale(0.001, 0.001);
-            graphics.drawImage(this.imageIcons[image].getImage(), 0, 0, (int) (1000 * size.getDeltaX()),
-                    (int) (1000 * size.getDeltaY()), observer);
-            graphics.scale(1000, 1000);
-            graphics.translate(-origin.getX(), -origin.getY());
+            return;
         }
-        catch (RemoteException exception)
+        int image = this.selectImage();
+        if (this.imageIcons == null || this.imageIcons[image] == null
+                || this.imageIcons[image].getImageLoadStatus() != MediaTracker.COMPLETE)
         {
-            CategoryLogger.always().warn(exception);
+            return;
         }
+        Bounds2d size = BoundsUtil.projectBounds(getSource().getLocation(), getSource().getRelativeBounds());
+        Point2D origin = this.resolveOrigin(this.orientation, size);
+        graphics.translate(origin.getX(), origin.getY());
+        graphics.scale(0.001, 0.001);
+        graphics.drawImage(this.imageIcons[image].getImage(), 0, 0, (int) (1000 * size.getDeltaX()),
+                (int) (1000 * size.getDeltaY()), observer);
+        graphics.scale(1000, 1000);
+        graphics.translate(-origin.getX(), -origin.getY());
     }
 
     /**

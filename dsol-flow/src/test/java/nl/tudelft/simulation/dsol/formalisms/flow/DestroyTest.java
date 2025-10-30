@@ -48,8 +48,6 @@ public class DestroyTest extends FlowTest
         var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -88,8 +86,6 @@ public class DestroyTest extends FlowTest
         var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -113,8 +109,6 @@ public class DestroyTest extends FlowTest
         final Destroy<Double>[] destroyBlock = new Destroy[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {

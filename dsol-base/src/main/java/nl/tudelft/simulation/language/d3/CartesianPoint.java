@@ -16,9 +16,6 @@ import org.djutils.draw.point.Point3d;
  */
 public class CartesianPoint extends Point3d
 {
-    /** */
-    private static final long serialVersionUID = 20191116L;
-
     /**
      * constructs a new CartesianPoint.
      * @param x x

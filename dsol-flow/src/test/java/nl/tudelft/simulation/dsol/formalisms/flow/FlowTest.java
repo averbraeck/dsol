@@ -47,9 +47,6 @@ public class FlowTest
     {
         return new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            /** */
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {

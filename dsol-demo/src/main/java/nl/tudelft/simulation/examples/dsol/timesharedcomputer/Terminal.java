@@ -19,9 +19,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class Terminal extends FlowBlock<Double, Terminal>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** SERVICE_TIME is fired on job completion. */
     public static final EventType SERVICE_TIME = new EventType("SERVICE_TIME");
 

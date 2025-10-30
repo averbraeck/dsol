@@ -16,9 +16,6 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  */
 public class Gill extends NumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** constant: sqrt(2). */
     private static final double SQRT2 = Math.sqrt(2.0d);
 

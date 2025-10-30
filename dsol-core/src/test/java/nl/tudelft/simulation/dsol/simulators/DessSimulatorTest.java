@@ -22,9 +22,6 @@ import net.jodah.concurrentunit.Waiter;
  */
 public class DessSimulatorTest implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the Waiter from ConcurrentUnit that catches AssertionErrors in other threads. */
     private Waiter waiter;
 
@@ -47,7 +44,7 @@ public class DessSimulatorTest implements EventListener
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         this.waiter.resume();
     }

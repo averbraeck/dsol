@@ -16,9 +16,6 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  */
 public class Adams extends CachingNumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new Adams integrator.
      * @param stepSize the stepSize to use in the estimation.

@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.gui.animation;
 
-import java.rmi.RemoteException;
-
 import org.djutils.draw.bounds.Bounds2d;
 
 import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
@@ -23,7 +21,7 @@ import nl.tudelft.simulation.language.DsolException;
 public class DsolAnimationApplication extends DsolApplication
 {
     /** */
-    private static final long serialVersionUID = 20190118L;
+    private static final long serialVersionUID = 1L;
 
     /** the animation panel in a tab. */
     private DsolAnimationTab animationTab;
@@ -33,11 +31,9 @@ public class DsolAnimationApplication extends DsolApplication
      * @param panel this should be the tabbed panel of the simulation
      * @param title the title of the window
      * @param homeExtent the home extent of the animation
-     * @throws RemoteException on network error
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
-    public DsolAnimationApplication(final DsolPanel panel, final String title, final Bounds2d homeExtent)
-            throws RemoteException, DsolException
+    public DsolAnimationApplication(final DsolPanel panel, final String title, final Bounds2d homeExtent) throws DsolException
     {
         super(panel, title);
         this.animationTab = new DsolAnimationTab(homeExtent, panel.getSimulator());
@@ -51,11 +47,10 @@ public class DsolAnimationApplication extends DsolApplication
      * @param panel this should be the tabbed panel of the simulation
      * @param title the title of the window
      * @param animationTab the animation tab to add, e.g. one containing GIS
-     * @throws RemoteException on network error
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
     public DsolAnimationApplication(final DsolPanel panel, final String title, final DsolAnimationTab animationTab)
-            throws RemoteException, DsolException
+            throws DsolException
     {
         super(panel, title);
         this.animationTab = animationTab;

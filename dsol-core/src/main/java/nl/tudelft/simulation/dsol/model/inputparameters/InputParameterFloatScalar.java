@@ -21,9 +21,6 @@ import org.djutils.reflection.ClassUtil;
  */
 public class InputParameterFloatScalar<U extends Unit<U>, T extends FloatScalar<U, T>> extends AbstractInputParameterTypedMap<T>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The minimum value of the input parameter (SI units). */
     private float minimumValueSI = -Float.MAX_VALUE;
 

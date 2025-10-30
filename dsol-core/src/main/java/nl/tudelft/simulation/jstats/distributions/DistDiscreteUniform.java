@@ -18,9 +18,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistDiscreteUniform extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** min is the minimum value of this distribution. */
     private final long min;
 

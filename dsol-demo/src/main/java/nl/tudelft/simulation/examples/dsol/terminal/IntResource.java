@@ -29,9 +29,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public class IntResource<T extends Number & Comparable<T>> extends LocalEventProducer
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** the counter counting the requests. package visibility, so Request can access it. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     static AtomicLong counter = new AtomicLong(0); // XXX: OUCH

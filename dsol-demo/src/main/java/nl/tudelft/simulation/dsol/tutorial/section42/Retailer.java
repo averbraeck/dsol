@@ -21,9 +21,6 @@ import nl.tudelft.simulation.dsol.tutorial.section42.policies.StationaryPolicy;
  */
 public class Retailer extends LocalEventProducer implements BuyerInterface, SellerInterface
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** TOTAL_ORDERING_COST_EVENT is fired whenever ordering occurs. */
     public static final EventType TOTAL_ORDERING_COST_EVENT = new EventType("TOTAL_ORDERING_COST_EVENT");
 

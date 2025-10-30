@@ -29,9 +29,6 @@ import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
  */
 public class Create<T extends Number & Comparable<T>> extends FlowBlock<T, Create<T>>
 {
-    /** */
-    public static final long serialVersionUID = 20140805L;
-
     /** CREATE_EVENT is fired on creation. */
     public static final EventType CREATE_EVENT = new EventType(new MetaData("CREATE_EVENT", "Created entities)",
             new ObjectDescriptor("numberCreated", "number of entities created", Integer.class)));

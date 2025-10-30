@@ -46,9 +46,6 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterString;
  */
 public class TabbedParameterDialog extends JDialog implements ActionListener
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The parameter map. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     public InputParameterMap inputParameterMap;

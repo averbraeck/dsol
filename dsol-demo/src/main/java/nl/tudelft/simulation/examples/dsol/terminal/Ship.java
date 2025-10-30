@@ -15,9 +15,6 @@ import org.djutils.event.LocalEventProducer;
  */
 public class Ship extends LocalEventProducer
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the number of loaded containers. */
     private int containers = 0;
 

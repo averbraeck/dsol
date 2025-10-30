@@ -21,9 +21,6 @@ import org.djutils.exceptions.Throw;
  */
 public abstract class AbstractEmpiricalDistribution implements EmpiricalDistributionInterface
 {
-    /** */
-    private static final long serialVersionUID = 20210402L;
-
     /** the map from cumulative probabilities to values. */
     private final TreeMap<Double, Number> cumulativeProbabilityMap = new TreeMap<>();
 

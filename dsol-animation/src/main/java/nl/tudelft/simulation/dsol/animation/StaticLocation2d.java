@@ -17,9 +17,6 @@ import org.djutils.draw.point.DirectedPoint2d;
  */
 public class StaticLocation2d extends DirectedPoint2d implements Locatable
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the bounds. */
     private Bounds2d bounds = null;
 

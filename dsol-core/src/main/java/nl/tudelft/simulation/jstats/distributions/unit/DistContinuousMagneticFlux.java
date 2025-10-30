@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousMagneticFlux extends DistContinuousUnit<MagneticFluxUnit, MagneticFlux>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws MagneticFlux scalars.
      * @param wrappedDistribution the wrapped continuous distribution

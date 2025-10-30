@@ -21,9 +21,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public class SingleReplication<T extends Number & Comparable<T>> extends Replication<T>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 20210404L;
-
     /**
      * construct a stand-alone replication.
      * @param id the id of the replication; should be unique within the experiment.

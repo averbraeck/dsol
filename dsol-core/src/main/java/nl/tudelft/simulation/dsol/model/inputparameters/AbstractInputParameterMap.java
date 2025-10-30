@@ -19,9 +19,6 @@ import java.util.TreeSet;
  */
 public abstract class AbstractInputParameterMap<CT> extends AbstractInputParameter<SortedMap<String, InputParameter<?, ?>>, CT>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Construct a new AbstractInputParameterMap.
      * @param key unique (within the parent's input parameter map) name of the new InputParameterMap

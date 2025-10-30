@@ -27,9 +27,6 @@ import nl.tudelft.simulation.language.d3.CartesianPoint;
  */
 public abstract class Editable extends LocalEventProducer implements Locatable
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the static map of editables. */
     private static Map<Object, Object> editables = new LinkedHashMap<Object, Object>();
 

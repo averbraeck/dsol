@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.statistics.table;
 
-import java.rmi.RemoteException;
-
 import org.djutils.event.Event;
 import org.djutils.event.EventType;
 
@@ -20,7 +18,7 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
 public class TallyTableModel extends StatisticsTableModel
 {
     /** */
-    private static final long serialVersionUID = 20200307L;
+    private static final long serialVersionUID = 1L;
 
     /** the column names. */
     private static final String[] COLUMN_NAMES = {"field", "value"};
@@ -31,9 +29,8 @@ public class TallyTableModel extends StatisticsTableModel
     /**
      * Constructor.
      * @param tally the tally for which the table is created
-     * @throws RemoteException when communication with the tally fails
      */
-    public TallyTableModel(final SimTally<?> tally) throws RemoteException
+    public TallyTableModel(final SimTally<?> tally)
     {
         super(COLUMN_NAMES, 10, tally,
                 new EventType[] {SimTally.TIMED_INITIALIZED_EVENT, SimTally.TIMED_OBSERVATION_ADDED_EVENT});
@@ -42,7 +39,7 @@ public class TallyTableModel extends StatisticsTableModel
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         setValueAt("name", 0, 0);
         setValueAt("n", 1, 0);

@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.jstats.ode.integrators;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
 
 /**
@@ -15,11 +13,8 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public abstract class NumericalIntegrator implements Serializable
+public abstract class NumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the step size to use. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected double stepSize = Double.NaN;

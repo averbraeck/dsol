@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
-import java.rmi.RemoteException;
-
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -59,7 +57,7 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
      */
     @SuppressWarnings("unchecked")
     @Override
-    public synchronized void receive(final TYPE value, final T time) throws RemoteException, SimRuntimeException
+    public synchronized void receive(final TYPE value, final T time) throws SimRuntimeException
     {
         if (this.atomic)
         {
@@ -84,18 +82,16 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                 atomicModel.setActivePort(this);
                 boolean passivity = true;
                 SimEvent<T> nextEventCopy = null;
-                CategoryLogger.with(Cat.DSOL).debug("receive: TIME IS {}",
-                        this.model.getSimulator().getSimulatorTime());
+                CategoryLogger.with(Cat.DSOL).debug("receive: TIME IS {}", this.model.getSimulator().getSimulatorTime());
 
                 // Original: if (elapsedTime(time) - 0.000001 > timeAdvance())
                 int etminta = DoubleCompare.compare(atomicModel.elapsedTime(time).doubleValue(),
                         atomicModel.timeAdvance().doubleValue());
                 if (etminta == 1)
                 {
-                    CategoryLogger.always().error("receive: {} - {}", atomicModel.elapsedTime(time),
-                            atomicModel.timeAdvance());
-                    CategoryLogger.always()
-                            .error("receive - IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM {}", atomicModel.toString());
+                    CategoryLogger.always().error("receive: {} - {}", atomicModel.elapsedTime(time), atomicModel.timeAdvance());
+                    CategoryLogger.always().error("receive - IMPOSSIBLE !!! TIME SYNCHRONIZATION PROBLEM {}",
+                            atomicModel.toString());
                 }
                 else
                 {
@@ -130,7 +126,9 @@ public class InputPort<T extends Number & Comparable<T>, TYPE> implements InputP
                             SimTime.minus(this.model.getSimulator().getSimulatorTime(), atomicModel.getTimeLastEvent()), value);
                 }
                 if (!passivity)
-                { this.model.getSimulator().cancelEvent(nextEventCopy); }
+                {
+                    this.model.getSimulator().cancelEvent(nextEventCopy);
+                }
             }
             atomicModel.setActivePort(null);
         }

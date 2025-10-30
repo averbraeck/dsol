@@ -17,9 +17,6 @@ import org.djutils.draw.point.OrientedPoint3d;
  */
 public class StaticLocation3d extends OrientedPoint3d implements Locatable
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the bounds. */
     private Bounds3d bounds = null;
 

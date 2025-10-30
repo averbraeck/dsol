@@ -22,9 +22,6 @@ import org.djutils.reflection.ClassUtil;
 public class InputParameterDoubleScalar<U extends Unit<U>, T extends DoubleScalar<U, T>>
         extends AbstractInputParameterTypedMap<T>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The minimum value of the input parameter (SI units). */
     private double minimumValueSI = -Double.MAX_VALUE;
 

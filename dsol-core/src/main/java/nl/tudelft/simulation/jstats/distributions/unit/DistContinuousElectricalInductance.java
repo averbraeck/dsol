@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousElectricalInductance extends DistContinuousUnit<ElectricalInductanceUnit, ElectricalInductance>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws ElectricalInductance scalars.
      * @param wrappedDistribution the wrapped continuous distribution

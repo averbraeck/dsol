@@ -18,9 +18,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistEmpiricalInterpolated extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 20210403L;
-
     /** is the distribution grouped? */
     private final InterpolatedEmpiricalDistribution empiricalDistribution;
 

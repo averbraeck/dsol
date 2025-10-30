@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousElectricalCapacitance extends DistContinuousUnit<ElectricalCapacitanceUnit, ElectricalCapacitance>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws ElectricalCapacitance scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section43;
 
-import java.rmi.RemoteException;
-
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.LocalEventProducer;
@@ -24,9 +22,6 @@ import nl.tudelft.simulation.dsol.swing.charts.xy.XYChart;
  */
 public class PredatorPreyModel extends AbstractDsolModel<Double, DessSimulator<Double>>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the chart. */
     private XYChart chart;
 
@@ -90,9 +85,6 @@ public class PredatorPreyModel extends AbstractDsolModel<Double, DessSimulator<D
     static class SkipEventProducer extends LocalEventProducer implements EventListener
     {
         /** */
-        private static final long serialVersionUID = 1L;
-
-        /** */
         private int count = 0;
 
         /** */
@@ -108,7 +100,7 @@ public class PredatorPreyModel extends AbstractDsolModel<Double, DessSimulator<D
         }
 
         @Override
-        public void notify(final Event event) throws RemoteException
+        public void notify(final Event event)
         {
             if (this.count % this.skip == 0)
             {

@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Insets;
-import java.rmi.RemoteException;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -29,7 +28,7 @@ import nl.tudelft.simulation.dsol.swing.gui.control.AbstractControlPanel;
 public class DsolPanel extends JPanel implements AppearanceControl
 {
     /** */
-    private static final long serialVersionUID = 20150617L;
+    private static final long serialVersionUID = 1L;
 
     /** The control panel to control start/stop, speed of the simulation. */
     private AbstractControlPanel<?, ?> controlPanel;
@@ -46,9 +45,8 @@ public class DsolPanel extends JPanel implements AppearanceControl
     /**
      * Construct a panel for an interactive simulation model.
      * @param controlPanel the control panel to use (especially with relation to time control)
-     * @throws RemoteException when communications to a remote machine fails
      */
-    public DsolPanel(final AbstractControlPanel<?, ?> controlPanel) throws RemoteException
+    public DsolPanel(final AbstractControlPanel<?, ?> controlPanel)
     {
         setPreferredSize(new Dimension(1024, 768));
         this.tabbedPane = new AppearanceControlTabbedContentPane(SwingConstants.BOTTOM);
@@ -197,7 +195,7 @@ public class DsolPanel extends JPanel implements AppearanceControl
     static class AppearanceControlTabbedContentPane extends TabbedContentPane implements AppearanceControl
     {
         /** */
-        private static final long serialVersionUID = 20180206L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * @param tabPlacement tabPlacement

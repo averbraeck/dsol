@@ -20,9 +20,6 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  */
 public class DessSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DessSimulatorInterface<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** timeStep represents the timestep of the DESS simulator. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected T timeStep;

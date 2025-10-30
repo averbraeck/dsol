@@ -19,9 +19,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  */
 public class ClockDevsSimulator extends DevsSimulator<Duration> implements ClockDevsSimulatorInterface
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The absolute startTime of the simulator. */
     private final ClockTime startTime;
 

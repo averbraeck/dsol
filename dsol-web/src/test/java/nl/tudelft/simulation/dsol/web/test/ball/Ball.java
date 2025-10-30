@@ -39,7 +39,7 @@ public abstract class Ball implements Locatable
     }
 
     @Override
-    public Bounds3d getRelativeBounds() throws RemoteException
+    public Bounds3d getRelativeBounds()
     {
         return new Bounds3d(2.0 * Ball.RADIUS, 2.0 * Ball.RADIUS, 2.0 * Ball.RADIUS);
     }

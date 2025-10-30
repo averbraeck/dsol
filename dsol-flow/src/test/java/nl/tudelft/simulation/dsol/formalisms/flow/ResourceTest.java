@@ -43,8 +43,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -91,8 +89,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -221,8 +217,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @SuppressWarnings("unchecked")
             @Override
             public void constructModel() throws SimRuntimeException
@@ -298,8 +292,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -369,8 +361,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -417,8 +407,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -528,8 +516,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -685,8 +671,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -708,12 +692,12 @@ public class ResourceTest extends FlowTest
                 assertEquals(1.0, resource.getCapacity());
                 assertEquals(0.0, resource.getClaimedCapacity());
                 assertEquals(1.0, resource.getAvailableCapacity());
-                
+
                 resource.requestCapacity(entity1, 1.0, requestor);
                 assertEquals(1.0, resource.getCapacity());
                 assertEquals(1.0, resource.getClaimedCapacity());
                 assertEquals(0.0, resource.getAvailableCapacity());
-                
+
                 resource.releaseCapacity(entity1, 0.5);
                 assertEquals(1.0, resource.getCapacity());
                 assertEquals(0.5, resource.getClaimedCapacity());
@@ -744,8 +728,6 @@ public class ResourceTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -767,21 +749,21 @@ public class ResourceTest extends FlowTest
                 assertEquals(2, resource.getCapacity());
                 assertEquals(0, resource.getClaimedCapacity());
                 assertEquals(2, resource.getAvailableCapacity());
-                
+
                 resource.requestCapacity(entity1, 2, requestor);
                 assertEquals(2, resource.getCapacity());
                 assertEquals(2, resource.getClaimedCapacity());
                 assertEquals(0, resource.getAvailableCapacity());
-                
+
                 resource.releaseCapacity(entity1, 1);
                 assertEquals(2, resource.getCapacity());
                 assertEquals(1, resource.getClaimedCapacity());
                 assertEquals(1, resource.getAvailableCapacity());
-                
+
                 UnitTest.testFail(() -> resource.releaseCapacity(entity1, 5));
                 UnitTest.testFail(() -> resource.releaseCapacity(null, 1));
                 UnitTest.testFail(() -> resource.releaseCapacity(entity2, 1));
-               
+
                 resource.releaseCapacity(entity1, 1);
                 assertEquals(2, resource.getCapacity());
                 assertEquals(0, resource.getClaimedCapacity());

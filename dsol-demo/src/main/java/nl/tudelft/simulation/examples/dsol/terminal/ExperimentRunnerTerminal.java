@@ -28,9 +28,6 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  */
 public class ExperimentRunnerTerminal implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** number of running simulations. */
     private int numruns = 0;
 
@@ -112,7 +109,7 @@ public class ExperimentRunnerTerminal implements EventListener
     }
 
     @Override
-    public synchronized void notify(final Event event) throws RemoteException
+    public synchronized void notify(final Event event)
     {
         if (event.getType().equals(Terminal.READY_EVENT))
         {

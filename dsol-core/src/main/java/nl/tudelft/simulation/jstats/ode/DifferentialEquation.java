@@ -18,9 +18,6 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
  */
 public abstract class DifferentialEquation extends LocalEventProducer implements DifferentialEquationInterface
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the numerical integrator for the differential equations. */
     private NumericalIntegrator integrator = null;
 

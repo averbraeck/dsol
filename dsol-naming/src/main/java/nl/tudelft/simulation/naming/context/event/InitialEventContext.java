@@ -45,9 +45,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 @SuppressWarnings("checkstyle:needbraces")
 public final class InitialEventContext implements EventContext
 {
-    /** */
-    private static final long serialVersionUID = 20200101L;
-
     /**
      * Constant that holds the name of the environment property for specifying the initial context factory to use. The value of
      * the property should be the fully qualified class name of the factory class that will create an initial context. This
@@ -141,7 +138,9 @@ public final class InitialEventContext implements EventContext
             throws NamingException, RemoteException
     {
         if (INSTANCE != null)
-        { return INSTANCE; }
+        {
+            return INSTANCE;
+        }
 
         INSTANCE = new InitialEventContext(environment, atomicName);
         INSTANCE.init(environment == null ? null : (Hashtable<?, ?>) environment.clone(), atomicName);
@@ -159,7 +158,9 @@ public final class InitialEventContext implements EventContext
     {
         this.properties = buildEnvironment(environment);
         if (this.properties.get(Context.INITIAL_CONTEXT_FACTORY) != null)
-        { getDefaultInitCtx(atomicName); }
+        {
+            getDefaultInitCtx(atomicName);
+        }
     }
 
     /**
@@ -184,7 +185,9 @@ public final class InitialEventContext implements EventContext
         for (String key : keys)
         {
             if (sysEnv.containsKey(key))
-            { result.put(key, sysEnv.get(key)); }
+            {
+                result.put(key, sysEnv.get(key));
+            }
         }
 
         // (3) Java system properties
@@ -192,7 +195,9 @@ public final class InitialEventContext implements EventContext
         for (String key : keys)
         {
             if (javaProps.containsKey(key))
-            { result.put(key, javaProps.get(key).toString()); }
+            {
+                result.put(key, javaProps.get(key).toString());
+            }
         }
 
         // (4) content of the /resources/jndi.properties file
@@ -206,7 +211,9 @@ public final class InitialEventContext implements EventContext
                 for (String key : keys)
                 {
                     if (jndiProps.containsKey(key))
-                    { result.put(key, jndiProps.get(key).toString()); }
+                    {
+                        result.put(key, jndiProps.get(key).toString());
+                    }
                 }
             }
             catch (IOException exception)
@@ -221,7 +228,9 @@ public final class InitialEventContext implements EventContext
             for (String key : keys)
             {
                 if (environment.containsKey(key))
-                { result.put(key, environment.get(key).toString()); }
+                {
+                    result.put(key, environment.get(key).toString());
+                }
             }
         }
 
@@ -253,7 +262,9 @@ public final class InitialEventContext implements EventContext
                 this.gotDefault = true;
             }
             if (this.defaultInitCtx == null)
-            { throw new NoInitialContextException(); }
+            {
+                throw new NoInitialContextException();
+            }
             return this.defaultInitCtx;
         }
         catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
@@ -285,7 +296,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public String getAtomicName() throws RemoteException
+    public String getAtomicName()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.getAtomicName();
@@ -293,7 +304,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public ContextInterface getParent() throws RemoteException
+    public ContextInterface getParent()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.getParent();
@@ -302,7 +313,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public ContextInterface getRootContext() throws RemoteException
+    public ContextInterface getRootContext()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.getRootContext();
@@ -310,7 +321,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public String getAbsolutePath() throws RemoteException
+    public String getAbsolutePath()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.getAbsolutePath();
@@ -350,7 +361,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public boolean hasObject(final Object object) throws RemoteException
+    public boolean hasObject(final Object object)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.hasObject(object);
@@ -358,7 +369,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public boolean isEmpty() throws RemoteException
+    public boolean isEmpty()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.isEmpty();
@@ -465,7 +476,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public Set<String> keySet() throws RemoteException
+    public Set<String> keySet()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.keySet();
@@ -473,7 +484,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public Collection<Object> values() throws RemoteException
+    public Collection<Object> values()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.values();
@@ -481,7 +492,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public Map<String, Object> bindings() throws RemoteException
+    public Map<String, Object> bindings()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.bindings();
@@ -517,10 +528,12 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public String toString(final boolean verbose) throws RemoteException
+    public String toString(final boolean verbose)
     {
         if (!verbose)
-        { return "InitialEventContext[" + getAtomicName() + "]"; }
+        {
+            return "InitialEventContext[" + getAtomicName() + "]";
+        }
         return ContextUtil.toText(this);
     }
 
@@ -529,7 +542,7 @@ public final class InitialEventContext implements EventContext
     /* ***************************************************************************************************************** */
 
     @Override
-    public synchronized boolean addListener(final EventListener listener, final EventType eventType) throws RemoteException
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType);
@@ -538,7 +551,7 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType,
-            final ReferenceType referenceType) throws RemoteException
+            final ReferenceType referenceType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, referenceType);
@@ -547,7 +560,7 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position)
-            throws RemoteException
+
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, position);
@@ -556,7 +569,7 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position,
-            final ReferenceType referenceType) throws RemoteException
+            final ReferenceType referenceType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.addListener(listener, eventType, position, referenceType);
@@ -564,7 +577,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public synchronized boolean removeListener(final EventListener listener, final EventType eventType) throws RemoteException
+    public synchronized boolean removeListener(final EventListener listener, final EventType eventType)
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.removeListener(listener, eventType);
@@ -572,7 +585,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public EventListenerMap getEventListenerMap() throws RemoteException
+    public EventListenerMap getEventListenerMap()
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.getEventListenerMap();
@@ -585,8 +598,7 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
-            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
-            NullPointerException
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope);
@@ -595,8 +607,8 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
-            final ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
-            NotContextException, NamingException, NullPointerException
+            final ReferenceType referenceType)
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, referenceType);
@@ -605,8 +617,8 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
-            final int position) throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException,
-            NamingException, NullPointerException
+            final int position)
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position);
@@ -615,8 +627,8 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
-            final int position, final ReferenceType referenceType) throws RemoteException, NameNotFoundException,
-            InvalidNameException, NotContextException, NamingException, NullPointerException
+            final int position, final ReferenceType referenceType)
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.addListener(listener, absolutePath, contextScope, position, referenceType);
@@ -625,7 +637,7 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public boolean removeListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
-            throws RemoteException, InvalidNameException, NullPointerException
+            throws InvalidNameException, NullPointerException
     {
         if (this.defaultInitCtx != null)
             return this.contextEventProducerImpl.removeListener(listener, absolutePath, contextScope);

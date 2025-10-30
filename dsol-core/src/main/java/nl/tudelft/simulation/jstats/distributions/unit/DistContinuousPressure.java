@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousPressure extends DistContinuousUnit<PressureUnit, Pressure>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Pressure scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -21,9 +21,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistBinomial extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** n is the number of independent experiments for the Binomial distribution. */
     private final int n;
 

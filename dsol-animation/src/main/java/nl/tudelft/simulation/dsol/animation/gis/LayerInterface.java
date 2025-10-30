@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.animation.gis;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public interface LayerInterface extends Serializable
+public interface LayerInterface
 {
     /**
      * Return the feature definitions for elements that belong to this Layer.

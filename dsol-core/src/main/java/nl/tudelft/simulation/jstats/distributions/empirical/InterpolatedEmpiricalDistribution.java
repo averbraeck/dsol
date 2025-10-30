@@ -17,9 +17,6 @@ import org.djutils.exceptions.Throw;
  */
 public class InterpolatedEmpiricalDistribution extends AbstractEmpiricalDistribution
 {
-    /** */
-    private static final long serialVersionUID = 20210405L;
-
     /**
      * Construct the empirical distribution based on two arrays of the same length, one with sorted values, and one with
      * corresponding sorted cumulative probabilities. This constructor assumes that the arrays have been properly cloned to

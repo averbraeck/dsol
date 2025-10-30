@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousDuration extends DistContinuousUnit<DurationUnit, Duration>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Duration scalars.
      * @param wrappedDistribution the wrapped continuous distribution

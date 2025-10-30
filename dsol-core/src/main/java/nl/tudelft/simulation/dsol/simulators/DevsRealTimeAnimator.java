@@ -28,9 +28,6 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
 public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> extends DevsAnimator<T>
         implements DevsSimulatorInterface<T>, RealTime<T>
 {
-    /** */
-    private static final long serialVersionUID = 20150428L;
-
     // TODO: Fire the BACKLOG_EVENT when we are behind in the run thread
     /** the backlog event. */
     public static final EventType BACKLOG_EVENT =
@@ -405,9 +402,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     /** Easy access class RealTimeClock&lt;Double&gt;. */
     public static class TimeDouble extends DevsRealTimeAnimator<Double> implements DevsSimulatorInterface<Double>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * the translation from a millisecond on the wall clock to '1.0' in the simulation time. This means that if the wall
          * clock runs in seconds, the factor should be 0.001.
@@ -436,9 +430,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     /** Easy access class RealTimeClock&lt;Float&gt;. */
     public abstract static class TimeFloat extends DevsRealTimeAnimator<Float> implements DevsSimulatorInterface<Float>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * the translation from a millisecond on the wall clock to '1.0' in the simulation time. This means that if the wall
          * clock runs in seconds, the factor should be 0.001.
@@ -468,9 +459,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     /** Easy access class RealTimeClock&lt;Long&gt;. */
     public abstract static class TimeLong extends DevsRealTimeAnimator<Long> implements DevsSimulatorInterface<Long>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * the translation from a millisecond on the wall clock to '1' in the simulation time. This means that if the wall clock
          * runs in seconds, the factor should be 0.001.
@@ -499,9 +487,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     /** Easy access class RealTimeClock&lt;Duration&gt;. */
     public static class TimeDoubleUnit extends DevsRealTimeAnimator<Duration> implements DevsSimulatorInterface<Duration>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * Construct a DevsRealTimeClock&lt;Duration&gt;.
          * @param id the id of the simulator, used in logging and firing of events.
@@ -522,9 +507,6 @@ public abstract class DevsRealTimeAnimator<T extends Number & Comparable<T>> ext
     public static class TimeFloatUnit extends DevsRealTimeAnimator<FloatDuration>
             implements DevsSimulatorInterface<FloatDuration>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * Construct a DevsRealTimeClock&lt;FloatDuration&gt;.
          * @param id the id of the simulator, used in logging and firing of events.

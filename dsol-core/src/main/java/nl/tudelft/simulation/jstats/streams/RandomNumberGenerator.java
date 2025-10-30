@@ -1,8 +1,5 @@
 package nl.tudelft.simulation.jstats.streams;
 
-import nl.tudelft.simulation.language.DsolException;
-import nl.tudelft.simulation.language.reflection.StateSaver;
-
 /**
  * The RandomNumberGenerator class provides an abstract basis for all pseudo random number generators.
  * <p>
@@ -16,9 +13,6 @@ import nl.tudelft.simulation.language.reflection.StateSaver;
  */
 public abstract class RandomNumberGenerator implements StreamInterface
 {
-    /** */
-    private static final long serialVersionUID = 20150426L;
-
     /** The seed of the generator. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected long seed;
@@ -122,32 +116,6 @@ public abstract class RandomNumberGenerator implements StreamInterface
     public String toString()
     {
         return this.getClass().toString() + "[" + this.seed + "]";
-    }
-
-    @Override
-    public byte[] saveState() throws StreamException
-    {
-        try
-        {
-            return StateSaver.saveState(this);
-        }
-        catch (DsolException exception)
-        {
-            throw new StreamException(exception);
-        }
-    }
-
-    @Override
-    public void restoreState(final byte[] state) throws StreamException
-    {
-        try
-        {
-            StateSaver.restoreState(this, state);
-        }
-        catch (DsolException exception)
-        {
-            throw new StreamException(exception);
-        }
     }
 
 }

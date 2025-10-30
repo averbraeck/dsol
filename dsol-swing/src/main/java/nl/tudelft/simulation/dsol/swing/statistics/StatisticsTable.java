@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.swing.statistics;
 
 import java.awt.Container;
-import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
@@ -40,10 +39,9 @@ public class StatisticsTable implements Swingable
     /**
      * represents this statisticsObject as Container.
      * @return the result
-     * @throws RemoteException on network failure
      */
     @Override
-    public Container getSwingPanel() throws RemoteException
+    public Container getSwingPanel()
     {
         JTable jTable = new JTable(this.table);
         jTable.setEnabled(false);

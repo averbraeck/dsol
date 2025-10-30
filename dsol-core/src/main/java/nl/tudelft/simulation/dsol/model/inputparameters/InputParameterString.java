@@ -12,9 +12,6 @@ import org.djutils.exceptions.Throw;
  */
 public class InputParameterString extends AbstractInputParameter<String, String>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Construct a new InputParameterString.
      * @param key unique (within the parent's input parameter map) name of the new InputParameterString

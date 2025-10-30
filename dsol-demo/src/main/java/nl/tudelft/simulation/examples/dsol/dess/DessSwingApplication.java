@@ -22,6 +22,9 @@ import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
  */
 public class DessSwingApplication extends DsolApplication
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * @param title the title
      * @param panel the panel
@@ -31,9 +34,6 @@ public class DessSwingApplication extends DsolApplication
         super(panel, title);
         panel.enableSimulationControlButtons();
     }
-
-    /** */
-    private static final long serialVersionUID = 1L;
 
     /**
      * @param args arguments, expected to be empty

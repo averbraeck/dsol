@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.animation.d2;
 
-import java.rmi.RemoteException;
-
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.value.vdouble.scalar.Frequency;
 import org.djutils.event.EventListener;
@@ -25,9 +23,6 @@ import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
  */
 public class AnimationUpdaterThread extends Thread implements EventProducer
 {
-    /** */
-    private static final long serialVersionUID = 20230305L;
-
     /** Delegate object that sends the UPDATE_ANIMATION_EVENTs. */
     private final EventProducer eventProducer;
 
@@ -68,14 +63,7 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
             {
                 // okay -- the pause() method interrupts the sleep
             }
-            try
-            {
-                this.eventProducer.fireEvent(AnimatorInterface.UPDATE_ANIMATION_EVENT);
-            }
-            catch (RemoteException exception)
-            {
-                // ignore when event cannot be sent due to e.g., network problems
-            }
+            this.eventProducer.fireEvent(AnimatorInterface.UPDATE_ANIMATION_EVENT);
         }
     }
 
@@ -91,9 +79,8 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
     /**
      * Add another listener for the UPDATE_ANIMATION_EVENT.
      * @param listener a panel that listen to this UpdaterThread
-     * @throws RemoteException on network error for remote listener
      */
-    void addListener(final EventListener listener) throws RemoteException
+    void addListener(final EventListener listener)
     {
         this.eventProducer.addListener(listener, AnimatorInterface.UPDATE_ANIMATION_EVENT);
     }
@@ -117,7 +104,7 @@ public class AnimationUpdaterThread extends Thread implements EventProducer
     }
 
     @Override
-    public EventListenerMap getEventListenerMap() throws RemoteException
+    public EventListenerMap getEventListenerMap()
     {
         return this.eventProducer.getEventListenerMap();
     }

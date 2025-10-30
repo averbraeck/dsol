@@ -25,9 +25,6 @@ import org.djutils.logger.CategoryLogger;
  */
 public class HtmlPanel extends JEditorPane
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Construct an HTML panel for the user interface.
      */

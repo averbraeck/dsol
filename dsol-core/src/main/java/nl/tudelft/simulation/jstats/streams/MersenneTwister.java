@@ -24,9 +24,6 @@ package nl.tudelft.simulation.jstats.streams;
  */
 public class MersenneTwister extends RandomNumberGenerator
 {
-    /** */
-    private static final long serialVersionUID = 20150426L;
-
     /** Period parameter N. */
     private static final int N = 624;
 

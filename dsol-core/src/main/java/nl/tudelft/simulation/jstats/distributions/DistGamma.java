@@ -22,9 +22,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistGamma extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the shape parameter of the distribution, also often called &alpha; or k. */
     private final double shape;
 

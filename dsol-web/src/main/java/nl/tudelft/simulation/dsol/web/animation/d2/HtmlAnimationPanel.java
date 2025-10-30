@@ -2,7 +2,6 @@ package nl.tudelft.simulation.dsol.web.animation.d2;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -45,9 +44,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /** the elements of this panel. */
     private SortedSet<Renderable2dInterface<? extends Locatable>> elements =
             new TreeSet<Renderable2dInterface<? extends Locatable>>(new Renderable2dComparator());
@@ -99,10 +95,9 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
      * @param extent the extent of the panel
      * @param size the size of the panel.
      * @param simulator the simulator of which we want to know the events for animation
-     * @throws RemoteException on network error for one of the listeners
      */
     public HtmlAnimationPanel(final Bounds2d extent, final Dimension size, final SimulatorInterface<?> simulator)
-            throws RemoteException
+
     {
         super(extent, size);
         super.showGrid = true;
@@ -198,7 +193,7 @@ public class HtmlAnimationPanel extends HtmlGridPanel implements EventListener
 
     @SuppressWarnings("unchecked")
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(ContextInterface.OBJECT_ADDED_EVENT))
         {

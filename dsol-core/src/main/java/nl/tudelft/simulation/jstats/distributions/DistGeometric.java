@@ -22,9 +22,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistGeometric extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** p is the the probability of success for each individual trial. */
     private final double p;
 

@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.animation.gis.esri;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -22,11 +21,8 @@ import nl.tudelft.simulation.dsol.animation.gis.io.ObjectEndianInputStream;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public class DbfReader implements Serializable
+public class DbfReader
 {
-    /** */
-    private static final long serialVersionUID = 20201223L;
-
     /** the FBFFile. */
     private URL dbfFile;
 

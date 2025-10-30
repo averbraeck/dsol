@@ -47,9 +47,6 @@ import nl.tudelft.simulation.dsol.animation.gis.MapUnits;
  */
 public class GisMap implements GisMapInterface
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the extent of the map. */
     private Bounds2d extent;
 

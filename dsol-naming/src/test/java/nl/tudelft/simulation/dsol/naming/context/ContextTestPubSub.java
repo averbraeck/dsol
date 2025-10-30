@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.rmi.AlreadyBoundException;
@@ -237,9 +236,6 @@ public class ContextTestPubSub
     /** EventListener to test received events. */
     protected static class TestEventListener implements EventListener
     {
-        /** */
-        private static final long serialVersionUID = 20191230L;
-
         /** expect notification or not. */
         private boolean expectingNotification = true;
 
@@ -264,20 +260,19 @@ public class ContextTestPubSub
         }
 
         @Override
-        public void notify(final Event event) throws RemoteException
+        public void notify(final Event event)
         {
             if (!this.expectingNotification)
-            { fail("Received event " + event + " unexpectedly"); }
+            {
+                fail("Received event " + event + " unexpectedly");
+            }
             this.receivedEvent = event;
         }
     }
 
     /** Test object with ToString() method. */
-    protected static class TestObject implements Serializable
+    protected static class TestObject
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** */
         private String field;
 

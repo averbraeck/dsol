@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousAcceleration extends DistContinuousUnit<AccelerationUnit, Acceleration>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Acceleration scalars.
      * @param wrappedDistribution the wrapped continuous distribution

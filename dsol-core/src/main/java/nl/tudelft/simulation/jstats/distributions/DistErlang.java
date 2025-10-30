@@ -22,9 +22,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistErlang extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * k is the shape parameter of the Erlang distribution. The shape k is the number of times a drawing is done from the
      * exponential distribution, where the Erlang distribution is the sum of these k independent exponential variables.

@@ -20,9 +20,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistPearson6 extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** dist1 is the first gamma distribution. */
     private final DistGamma dist1;
 

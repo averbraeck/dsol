@@ -26,9 +26,6 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class ArrayRenderer extends DefaultTableCellRenderer
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /**
      * A LABEL is returned, preventing users from editing the array contents directly.
      * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object,

@@ -26,9 +26,6 @@ import nl.tudelft.simulation.jstats.distributions.DistDiscreteConstant;
  */
 public class Duplicate<T extends Number & Comparable<T>> extends FlowBlock<T, Duplicate<T>>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The destination of the duplicates. */
     private FlowBlock<T, ?> duplicateDestination;
 

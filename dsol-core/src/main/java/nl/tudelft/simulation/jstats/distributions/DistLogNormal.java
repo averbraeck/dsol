@@ -18,9 +18,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistLogNormal extends DistNormal
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the constant in the lognormal calculation: SQRT(2 * pi * sigma^2). */
     private final double c2pisigma2;
 

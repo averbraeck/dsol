@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.animation.gis;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -21,7 +20,7 @@ import org.djutils.immutablecollections.ImmutableMap;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public interface GisMapInterface extends Serializable
+public interface GisMapInterface
 {
     /** TEXT. */
     byte TEXT = 0;

@@ -19,9 +19,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistPoisson extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** lambda is the lambda parameter. */
     private final double lambda;
 

@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  */
 public class RungeKutta4 extends NumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new RungeKutta4.
      * @param stepSize the stepSize

@@ -33,9 +33,6 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  */
 public class DevsSimulator<T extends Number & Comparable<T>> extends Simulator<T> implements DevsSimulatorInterface<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /** eventList represents the future event list. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected EventListInterface<T> eventList = new RedBlackTree<T>();

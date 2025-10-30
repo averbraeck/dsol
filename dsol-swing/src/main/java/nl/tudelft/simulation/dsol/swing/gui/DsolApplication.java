@@ -51,9 +51,6 @@ import nl.tudelft.simulation.dsol.swing.gui.appearance.AppearanceControl;
  */
 public class DsolApplication extends JFrame
 {
-    /** */
-    private static final long serialVersionUID = 20190118L;
-
     /** the content pane of this application. */
     private final DsolPanel panel;
 
@@ -398,9 +395,6 @@ public class DsolApplication extends JFrame
      */
     private static class StayOpenCheckBoxMenuItem extends JCheckBoxMenuItem implements AppearanceControl
     {
-        /** */
-        private static final long serialVersionUID = 20180206L;
-
         /** Stored selection path. */
         private static MenuElement[] path;
 

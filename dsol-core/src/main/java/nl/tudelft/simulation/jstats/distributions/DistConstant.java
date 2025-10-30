@@ -17,9 +17,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistConstant extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** value is the value of the constant distribution. */
     private final double constant;
 

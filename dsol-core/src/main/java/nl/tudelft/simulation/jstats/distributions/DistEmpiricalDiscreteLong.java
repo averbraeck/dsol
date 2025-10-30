@@ -19,9 +19,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistEmpiricalDiscreteLong extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 20210403L;
-
     /** the empirical distribution. */
     private final DiscreteEmpiricalDistribution empiricalDistribution;
 

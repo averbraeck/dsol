@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
-import java.rmi.RemoteException;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 
 /**
@@ -24,10 +22,9 @@ public interface InputPortInterface<T extends Number & Comparable<T>, TYPE>
      * Receive and handle an event on the port.
      * @param value the value that is received of type &lt;T&gt;
      * @param time the time on which the value is received
-     * @throws RemoteException a remote exception occurred
      * @throws SimRuntimeException a simulation run time exception occurred
      */
-    void receive(TYPE value, T time) throws RemoteException, SimRuntimeException;
+    void receive(TYPE value, T time) throws SimRuntimeException;
 
     /**
      * @return the model to which the port belongs.

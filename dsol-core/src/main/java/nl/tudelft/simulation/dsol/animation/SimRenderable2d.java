@@ -16,9 +16,6 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  */
 public abstract class SimRenderable2d<L extends Locatable> extends Renderable2d<L>
 {
-    /** */
-    private static final long serialVersionUID = 20220205L;
-
     /**
      * Constructs a new Renderable2D.
      * @param source the Locatable source type that provides the location and bounds

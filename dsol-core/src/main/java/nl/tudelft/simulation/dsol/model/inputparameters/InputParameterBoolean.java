@@ -10,9 +10,6 @@ package nl.tudelft.simulation.dsol.model.inputparameters;
  */
 public class InputParameterBoolean extends AbstractInputParameter<Boolean, Boolean>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Construct a new InputParameterBoolean.
      * @param key unique (within the parent's input parameter map) name of the new InputParameterBoolean

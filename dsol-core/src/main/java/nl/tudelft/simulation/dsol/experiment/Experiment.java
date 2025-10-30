@@ -45,9 +45,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends LocalEventProducer
         implements EventListener, Treatment<T>, Contextualized
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** START_EXPERIMENT_EVENT is fired when the experiment starts. */
     public static final EventType START_EXPERIMENT_EVENT =
             new EventType(new MetaData("START_EXPERIMENT_EVENT", "Start of experiment"));
@@ -168,10 +165,9 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
 
     /**
      * Start the extire experiment on a simulator, and execute ehe replications one by one.
-     * @throws RemoteException on network error if started by RMI
      * @throws IllegalArgumentException when there are no more replications to run, or when the simulator is already running
      */
-    public synchronized void start() throws RemoteException
+    public synchronized void start()
     {
         Throw.when(this.currentReplicationNumber >= getNumberOfReplications() - 1, IllegalArgumentException.class,
                 "Experiment: No more replications");
@@ -186,9 +182,8 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
     /**
      * Start the next replication from the list of replications, or fire END_EXPERIMENT_EVENT when there are no more
      * non-executed replications.
-     * @throws RemoteException on network error if started by RMI
      */
-    protected void startNextReplication() throws RemoteException
+    protected void startNextReplication()
     {
         Throw.when(this.currentReplicationNumber >= getNumberOfReplications() - 1, IllegalArgumentException.class,
                 "Trying to run replication beyond given number");
@@ -220,7 +215,7 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         {
@@ -521,11 +516,6 @@ public class Experiment<T extends Number & Comparable<T>, S extends SimulatorInt
                     {
                         this.experiment.startNextReplication();
                         wait(); // wait for END_REPLICATION event
-                    }
-                    catch (RemoteException e)
-                    {
-                        CategoryLogger.always().error(e);
-                        break;
                     }
                     catch (InterruptedException ie)
                     {

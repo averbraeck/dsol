@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.demo.des.experiment;
 
-import java.rmi.RemoteException;
 import java.util.SortedMap;
 
 import org.djutils.event.Event;
@@ -27,9 +26,6 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  */
 class DesExperimentApplication implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the model. */
     private DesExperimentModel model;
 
@@ -38,9 +34,8 @@ class DesExperimentApplication implements EventListener
 
     /**
      * Constructor for the discrete event queueing application.
-     * @throws RemoteException when one or more remote components cannot be reached
      */
-    DesExperimentApplication() throws RemoteException
+    DesExperimentApplication()
     {
         var simulator = new DevsSimulator<Double>("MM1.Simulator");
         this.model = new DesExperimentModel(simulator);
@@ -53,22 +48,23 @@ class DesExperimentApplication implements EventListener
     /**
      * Main program to start the discrete-event queueing application.
      * @param args not used
-     * @throws RemoteException when one or more remote components cannot be reached
      */
-    public static void main(final String[] args) throws RemoteException
+    public static void main(final String[] args)
     {
         new DesExperimentApplication();
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         {
             reportStats();
         }
         else if (event.getType().equals(Experiment.END_EXPERIMENT_EVENT))
-        { reportFinalStats(); }
+        {
+            reportFinalStats();
+        }
     }
 
     /**

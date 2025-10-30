@@ -20,9 +20,6 @@ import nl.tudelft.simulation.dsol.simtime.SimTime;
  */
 public class DevsAnimator<T extends Number & Comparable<T>> extends DevsSimulator<T> implements AnimatorInterface
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /**
      * Create a new DevsAnimator.
      * @param id the id of the simulator, used in logging and firing of events.

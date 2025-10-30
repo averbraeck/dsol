@@ -31,9 +31,6 @@ import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialo
 public class MM1ExperimentApplication implements EventListener
 {
     /** */
-    private static final long serialVersionUID = 20230114L;
-
-    /** */
     private DevsSimulator<Double> simulator;
 
     /** */
@@ -60,7 +57,7 @@ public class MM1ExperimentApplication implements EventListener
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         { reportReplicationStatistics(); }

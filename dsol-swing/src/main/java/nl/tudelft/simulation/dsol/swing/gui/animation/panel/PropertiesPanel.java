@@ -19,9 +19,6 @@ import org.djutils.event.EventListener;
  */
 public class PropertiesPanel extends JPanel implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 20210214L;
-
     /**
      * Create a properties panel to display properties of one or more selected objects. The actual creation of the panel is left
      * to the init method.
@@ -40,7 +37,7 @@ public class PropertiesPanel extends JPanel implements EventListener
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         // nothing yet
     }

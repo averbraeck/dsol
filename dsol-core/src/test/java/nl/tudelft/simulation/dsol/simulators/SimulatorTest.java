@@ -54,9 +54,6 @@ public class SimulatorTest
     /** */
     static class TestModel extends AbstractDsolModel<Double, DevsSimulator<Double>>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** var for testing. */
         private int value = 0;
 

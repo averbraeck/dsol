@@ -32,9 +32,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class InputParameterDistContinuousSelection extends InputParameterSelectionMap<String, InputParameterMapDistContinuous>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the options for the distribution functions. */
     private static SortedMap<String, InputParameterMapDistContinuous> distOptions;
 
@@ -121,9 +118,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Beta class. */
     public static class Beta extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Beta distribution.
          * @throws InputParameterException on error with the distribution
@@ -149,9 +143,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Constant class. */
     public static class Constant extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Constant distribution.
          * @throws InputParameterException on error with the distribution
@@ -173,9 +164,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Erlang class. */
     public static class Erlang extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Erlang distribution.
          * @throws InputParameterException on error with the distribution
@@ -201,9 +189,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Exponential class. */
     public static class Exponential extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Exponential distribution.
          * @throws InputParameterException on error with the distribution
@@ -227,9 +212,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Gamma class. */
     public static class Gamma extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Gamma distribution.
          * @throws InputParameterException on error with the distribution
@@ -255,9 +237,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.LogNormal class. */
     public static class LogNormal extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the LogNormal distribution.
          * @throws InputParameterException on error with the distribution
@@ -283,9 +262,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Normal class. */
     public static class Normal extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Normal distribution.
          * @throws InputParameterException on error with the distribution
@@ -310,9 +286,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Pearson5 class. */
     public static class Pearson5 extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Pearson5 distribution.
          * @throws InputParameterException on error with the distribution
@@ -336,9 +309,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Pearson6 class. */
     public static class Pearson6 extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Pearson6 distribution.
          * @throws InputParameterException on error with the distribution
@@ -367,9 +337,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Triangular class. */
     public static class Triangular extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Triangular distribution.
          * @throws InputParameterException on error with the distribution
@@ -404,9 +371,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Uniform class. */
     public static class Uniform extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Uniform distribution.
          * @throws InputParameterException on error with the distribution
@@ -432,9 +396,6 @@ public class InputParameterDistContinuousSelection extends InputParameterSelecti
     /** InputParameterDistContinuous.Weibull class. */
     public static class Weibull extends InputParameterMapDistContinuous
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * Construct the input for the Weibull distribution.
          * @throws InputParameterException on error with the distribution

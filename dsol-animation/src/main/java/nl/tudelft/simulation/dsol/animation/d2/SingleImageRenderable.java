@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.animation.d2;
 
 import java.net.URL;
-import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
@@ -26,19 +25,14 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  */
 public class SingleImageRenderable<L extends Locatable> extends ImageRenderable<L>
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /**
      * constructs a new SingleImageRenderable.
      * @param source the moving source
      * @param contextProvider the object that can provide the context to store the animation objects
      * @param image the image to animate
      * @throws NamingException when animation context cannot be created or retrieved
-     * @throws RemoteException when remote context cannot be found
      */
-    public SingleImageRenderable(final L source, final Contextualized contextProvider, final URL image)
-            throws RemoteException, NamingException
+    public SingleImageRenderable(final L source, final Contextualized contextProvider, final URL image) throws NamingException
     {
         super(source, contextProvider, new URL[] {image});
     }
@@ -50,10 +44,9 @@ public class SingleImageRenderable<L extends Locatable> extends ImageRenderable<
      * @param contextProvider the object that can provide the context to store the animation objects
      * @param image the image
      * @throws NamingException when animation context cannot be created or retrieved
-     * @throws RemoteException when remote context cannot be found
      */
     public SingleImageRenderable(final Point3d staticLocation, final Bounds3d size, final Contextualized contextProvider,
-            final URL image) throws RemoteException, NamingException
+            final URL image) throws NamingException
     {
         super(staticLocation, size, contextProvider, new URL[] {image});
     }
@@ -65,10 +58,9 @@ public class SingleImageRenderable<L extends Locatable> extends ImageRenderable<
      * @param contextProvider the object that can provide the context to store the animation objects
      * @param image the image
      * @throws NamingException when animation context cannot be created or retrieved
-     * @throws RemoteException when remote context cannot be found
      */
     public SingleImageRenderable(final OrientedPoint3d staticLocation, final Bounds3d size,
-            final Contextualized contextProvider, final URL image) throws RemoteException, NamingException
+            final Contextualized contextProvider, final URL image) throws NamingException
     {
         super(staticLocation, size, contextProvider, new URL[] {image});
     }

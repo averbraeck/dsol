@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.animation.gis;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import java.util.List;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public interface DataSourceInterface extends Serializable
+public interface DataSourceInterface
 {
     /**
      * Return the URL of the data source. Note that the data source can be a 'live' data source, with updates between queries

@@ -15,9 +15,6 @@ package nl.tudelft.simulation.jstats.streams;
  */
 public class DX120Generator extends RandomNumberGenerator
 {
-    /** */
-    private static final long serialVersionUID = 20150426L;
-
     /** the k value of the DX-120 Generator. */
     private static final int K = 120;
 

@@ -27,9 +27,6 @@ import javax.swing.table.TableModel;
  */
 public class SortingTableHeader extends JTableHeader
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the definitions of the tableHeader. */
     protected List<Sortable.Definition> definitions = new ArrayList<Sortable.Definition>(5);
 

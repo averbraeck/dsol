@@ -36,9 +36,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
 public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedTimestampWeightedTally
         implements SimulationStatistic<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /** simulator. */
     private SimulatorInterface<T> simulator = null;
 
@@ -105,14 +102,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
             final EventProducer target, final EventType eventType)
     {
         this(key, description, model);
-        try
-        {
-            target.addListener(this, eventType, ReferenceType.STRONG);
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "<init>");
-        }
+        target.addListener(this, eventType, ReferenceType.STRONG);
     }
 
     @Override
@@ -122,15 +112,8 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
         // note that when initialize() is called from the (super) constructor, there cannot be listeners yet
         if (this.simulator != null)
         {
-            try
-            {
-                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
-                register(this.simulator.getSimulatorTime(), 0.0);
-            }
-            catch (RemoteException exception)
-            {
-                CategoryLogger.always().warn(exception, "initialize()");
-            }
+            fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+            register(this.simulator.getSimulatorTime(), 0.0);
         }
     }
 
@@ -138,14 +121,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     @Override
     public double register(final Number timestamp, final double value)
     {
-        try
-        {
-            fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, (T) timestamp);
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "register()");
-        }
+        fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, (T) timestamp);
         return super.register(timestamp, value);
     }
 
@@ -154,14 +130,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
      */
     public void startReplication()
     {
-        try
-        {
-            fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, 0.0, this.simulator.getSimulatorTime());
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "endReplication()");
-        }
+        fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, 0.0, this.simulator.getSimulatorTime());
         super.register(this.simulator.getSimulatorTime(), 0.0);
     }
 
@@ -170,14 +139,7 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
      */
     public void endReplication()
     {
-        try
-        {
-            fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, super.getLastValue(), this.simulator.getSimulatorTime());
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "endReplication()");
-        }
+        fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, super.getLastValue(), this.simulator.getSimulatorTime());
         super.register(this.simulator.getSimulatorTime(), super.getLastValue());
     }
 
@@ -187,18 +149,11 @@ public class SimPersistent<T extends Number & Comparable<T>> extends EventBasedT
     {
         if (event.getType().equals(Replication.WARMUP_EVENT))
         {
-            try
-            {
-                this.simulator.removeListener(this, Replication.WARMUP_EVENT);
-                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
-                super.initialize();
-                register(this.simulator.getSimulatorTime(), 0.0);
-                return;
-            }
-            catch (RemoteException exception)
-            {
-                CategoryLogger.always().warn(exception);
-            }
+            this.simulator.removeListener(this, Replication.WARMUP_EVENT);
+            fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
+            super.initialize();
+            register(this.simulator.getSimulatorTime(), 0.0);
+            return;
         }
         else if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         {

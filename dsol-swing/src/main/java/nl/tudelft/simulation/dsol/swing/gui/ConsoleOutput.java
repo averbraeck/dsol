@@ -32,9 +32,6 @@ import javax.swing.text.StyledDocument;
  */
 public class ConsoleOutput extends JPanel
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The text area for the output. */
     private JTextPane textPane;
 

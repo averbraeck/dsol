@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.swing.charts.xy;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GradientPaint;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
@@ -38,11 +37,8 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class XYChart implements Swingable, Serializable
+public class XYChart implements Swingable
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /** x-axis is linear y-axis is linear. */
     public static final short XLINEAR_YLINEAR = 0;
 
@@ -245,9 +241,8 @@ public class XYChart implements Swingable, Serializable
     /**
      * adds a tally to the xyChart.
      * @param persistent the persistent
-     * @throws RemoteException on network failure
      */
-    public void add(final SimPersistent<?> persistent) throws RemoteException
+    public void add(final SimPersistent<?> persistent)
     {
         XYSeries set = new XYSeries(persistent.getDescription(), this.simulator, this.axisType, this.period);
         persistent.addListener(set, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT, ReferenceType.STRONG);
@@ -259,9 +254,8 @@ public class XYChart implements Swingable, Serializable
      * @param description the description of the eventProducer
      * @param source the source
      * @param eventType the event
-     * @throws RemoteException on network failure
      */
-    public void add(final String description, final EventProducer source, final EventType eventType) throws RemoteException
+    public void add(final String description, final EventProducer source, final EventType eventType)
     {
         XYSeries set = new XYSeries(description, this.simulator, this.axisType, this.period);
         source.addListener(set, eventType, LocalEventProducer.FIRST_POSITION, ReferenceType.STRONG);

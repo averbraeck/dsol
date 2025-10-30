@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
-import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.naming.NamingException;
@@ -28,7 +26,7 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @param <L> the Locatable class of the source that indicates the location of the Renderable on the screen
  */
-public interface Renderable2dInterface<L extends Locatable> extends Serializable
+public interface Renderable2dInterface<L extends Locatable>
 {
     /** the object number counter for a unique id. */
     AtomicInteger ANIMATION_OBJECT_COUNTER = new AtomicInteger(0);
@@ -101,10 +99,9 @@ public interface Renderable2dInterface<L extends Locatable> extends Serializable
     /**
      * destroys this editable. How to do this must be implemented by the modeler.
      * @param contextProvider the object that can provide the context to bind and unbind the animation objects
-     * @throws RemoteException RemoteException when the (remote) Context cannot be accessed
      * @throws NamingException when there is a problem retrieving the animation object from the Context
      */
-    void destroy(Contextualized contextProvider) throws RemoteException, NamingException;
+    void destroy(Contextualized contextProvider) throws NamingException;
 
     /**
      * return the id of the renderable component.

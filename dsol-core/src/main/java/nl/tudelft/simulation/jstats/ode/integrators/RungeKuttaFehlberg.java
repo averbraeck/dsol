@@ -14,9 +14,6 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  */
 public class RungeKuttaFehlberg extends NumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the parameters for a_i, in f(x_n + a_i h, .). */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected static double[] a = new double[] {0d, 1d / 4d, 3d / 8d, 12d / 13d, 1d, 1d / 2d};

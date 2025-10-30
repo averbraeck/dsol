@@ -23,9 +23,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  */
 public final class CustomerOrderApp implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Create the simulation.
      * @throws NamingException on Context error
@@ -41,7 +38,7 @@ public final class CustomerOrderApp implements EventListener
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
         { System.exit(0); }

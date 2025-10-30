@@ -24,9 +24,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public class ExperimentReplication<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends Replication<T>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 20210404L;
-
     /** the experiment to which this replication belongs. */
     private final Experiment<T, S> experiment;
 

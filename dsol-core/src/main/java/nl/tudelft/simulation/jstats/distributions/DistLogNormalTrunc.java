@@ -12,9 +12,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistLogNormalTrunc extends DistLogNormal
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** minimum x-value of the distribution. */
     private final double min;
 

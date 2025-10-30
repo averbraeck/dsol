@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.swing;
 
 import java.awt.Container;
-import java.rmi.RemoteException;
 
 /**
  * An interface implemented by all charts and statistics objects defining their capability to present themselves as Swing
@@ -21,7 +20,6 @@ public interface Swingable
     /**
      * represents this statisticsObject as Swing Container.
      * @return a Container representation of an object
-     * @throws RemoteException on network failure
      */
-    Container getSwingPanel() throws RemoteException;
+    Container getSwingPanel();
 }

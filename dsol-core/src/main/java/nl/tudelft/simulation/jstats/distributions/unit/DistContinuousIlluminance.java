@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousIlluminance extends DistContinuousUnit<IlluminanceUnit, Illuminance>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Illuminance scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -36,9 +36,6 @@ import nl.tudelft.simulation.introspection.DelegateIntrospection;
  */
 public class IntrospectionDialog extends JDialog
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the table, set during initialization. */
     private JTable table;
 
@@ -190,9 +187,6 @@ public class IntrospectionDialog extends JDialog
      */
     class ButtonPanel extends JPanel
     {
-        /** */
-        private static final long serialVersionUID = 20140831L;
-
         /** model. */
         private DynamicTableModel model;
 

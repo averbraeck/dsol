@@ -18,9 +18,6 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
  */
 public class LambdaSimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /** executable is the lambda expression tghat takes care of the state change. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Executable executable = null;

@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.timesharedcomputer;
 
-import java.rmi.RemoteException;
-
 import org.djutils.event.Event;
 import org.djutils.logger.CategoryLogger;
 
@@ -30,9 +28,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the number of jobs. */
     public static final long NUMBER_OF_JOBS = 1000;
 
@@ -57,30 +52,23 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
         DistContinuous thinkDelay = new DistExponential(stream, 25);
         DistContinuous processDelay = new DistExponential(stream, 0.8);
 
-        try
+        // First the statistics
+        SimPersistent<Double> persistent = new SimPersistent<>("tS", "service time", this);
+        ExitCounter exitCounter = new ExitCounter("exit", "counter", this);
+
+        // Now the charts
+        Histogram histogram = new Histogram(this.simulator, "service time", new double[] {0, 200}, 200);
+        histogram.add("serviceTime", persistent, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
+
+        BoxAndWhiskerChart boxAndWhisker = new BoxAndWhiskerChart(this.simulator, "serviceTime");
+        boxAndWhisker.add(persistent);
+
+        // Now we start the action
+        for (int i = 0; i < NUMBER_OF_TERMINALS; i++)
         {
-            // First the statistics
-            SimPersistent<Double> persistent = new SimPersistent<>("tS", "service time", this);
-            ExitCounter exitCounter = new ExitCounter("exit", "counter", this);
-
-            // Now the charts
-            Histogram histogram = new Histogram(this.simulator, "service time", new double[] {0, 200}, 200);
-            histogram.add("serviceTime", persistent, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
-
-            BoxAndWhiskerChart boxAndWhisker = new BoxAndWhiskerChart(this.simulator, "serviceTime");
-            boxAndWhisker.add(persistent);
-
-            // Now we start the action
-            for (int i = 0; i < NUMBER_OF_TERMINALS; i++)
-            {
-                Terminal terminal = new Terminal(this.simulator, cpu, thinkDelay, processDelay);
-                terminal.addListener(exitCounter, FlowBlock.RELEASE_EVENT);
-                terminal.addListener(persistent, Terminal.SERVICE_TIME);
-            }
-        }
-        catch (RemoteException exception)
-        {
-            throw new SimRuntimeException(exception);
+            Terminal terminal = new Terminal(this.simulator, cpu, thinkDelay, processDelay);
+            terminal.addListener(exitCounter, FlowBlock.RELEASE_EVENT);
+            terminal.addListener(persistent, Terminal.SERVICE_TIME);
         }
     }
 
@@ -89,18 +77,13 @@ public class Computer extends AbstractDsolModel<Double, DevsSimulator<Double>>
      */
     public static class ExitCounter extends SimCounter<Double>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * constructs a new ExitCounter.
          * @param key the unique key for the statistic
          * @param description the description of the counter
          * @param model the model to register the OutputStatistics
-         * @throws RemoteException on network failure
          */
         public ExitCounter(final String key, final String description, final DsolModel<Double, DevsSimulator<Double>> model)
-                throws RemoteException
         {
             super(key, description, model);
         }

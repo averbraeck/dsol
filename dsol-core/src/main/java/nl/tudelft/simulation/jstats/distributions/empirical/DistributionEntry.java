@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.jstats.distributions.empirical;
 
-import java.io.Serializable;
-
 /**
  * The Entry contains an actual cumulative probability - value pair.
  * <p>
@@ -12,11 +10,8 @@ import java.io.Serializable;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public class DistributionEntry implements Serializable
+public class DistributionEntry
 {
-    /** */
-    private static final long serialVersionUID = 20210403L;
-
     /** the value belonging to the cumulative probability. */
     private final Number value;
 

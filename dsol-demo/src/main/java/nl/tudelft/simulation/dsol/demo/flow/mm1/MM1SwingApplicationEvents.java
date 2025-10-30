@@ -31,6 +31,9 @@ import nl.tudelft.simulation.language.DsolException;
  */
 public class MM1SwingApplicationEvents extends DsolApplication
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** the model. */
     private MM1Model model;
 
@@ -52,9 +55,6 @@ public class MM1SwingApplicationEvents extends DsolApplication
             CategoryLogger.always().error(exception, "<init>");
         }
     }
-
-    /** */
-    private static final long serialVersionUID = 1L;
 
     /**
      * @param args arguments, expected to be empty
@@ -89,9 +89,6 @@ public class MM1SwingApplicationEvents extends DsolApplication
      */
     protected static class SimulatorEventLogger implements EventListener
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * @param devsSimulator the simulator to provide the events
          */
@@ -106,7 +103,7 @@ public class MM1SwingApplicationEvents extends DsolApplication
         }
 
         @Override
-        public void notify(final Event event) throws RemoteException
+        public void notify(final Event event)
         {
             CategoryLogger.always().info(event.getType().toString());
         }

@@ -31,19 +31,18 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
 public class DemoServer extends RmiObject implements EventProducer
 {
     /** */
-    private static final long serialVersionUID = 20200210L;
+    private static final long serialVersionUID = 1L;
 
     /** */
     private final EventListenerMap eventListenerMap;
 
     /**
-     * @throws RemoteException on network error
      * @throws AlreadyBoundException on two demo servers being started
      * @throws NamingException on context error
      * @throws IOException on error reading from stdin
      * @throws InterruptedException on sleep
      */
-    public DemoServer() throws RemoteException, AlreadyBoundException, NamingException, IOException, InterruptedException
+    public DemoServer() throws AlreadyBoundException, NamingException, IOException, InterruptedException
     {
         super("127.0.0.1", 1099, "demoserver");
         this.eventListenerMap = new EventListenerMap();
@@ -90,7 +89,9 @@ public class DemoServer extends RmiObject implements EventProducer
             }
 
             if (c == 'x')
-            { continue; }
+            {
+                continue;
+            }
 
             if (c == 'd')
             {
@@ -133,7 +134,9 @@ public class DemoServer extends RmiObject implements EventProducer
             }
 
             if (c == 'l')
-            { print(remoteContext, 0); }
+            {
+                print(remoteContext, 0);
+            }
         }
         fireEvent(DemoServerInterface.EXIT_EVENT);
         s.close();
@@ -158,9 +161,8 @@ public class DemoServer extends RmiObject implements EventProducer
      * recursively print the context to stdout.
      * @param ctx the context to print
      * @param indent the indentation on the screen
-     * @throws RemoteException on network error
      */
-    public static void print(final ContextInterface ctx, final int indent) throws RemoteException
+    public static void print(final ContextInterface ctx, final int indent)
     {
         try
         {
@@ -198,7 +200,7 @@ public class DemoServer extends RmiObject implements EventProducer
     }
 
     @Override
-    public EventListenerMap getEventListenerMap() throws RemoteException
+    public EventListenerMap getEventListenerMap()
     {
         return this.eventListenerMap;
     }

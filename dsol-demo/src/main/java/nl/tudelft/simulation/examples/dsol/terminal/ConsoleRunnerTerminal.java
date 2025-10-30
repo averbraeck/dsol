@@ -28,9 +28,6 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
  */
 public final class ConsoleRunnerTerminal implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 20220110L;
-
     /**
      * Construct the terminal experiment.
      * @throws NamingException on error
@@ -70,7 +67,7 @@ public final class ConsoleRunnerTerminal implements EventListener
     }
 
     @Override
-    public synchronized void notify(final Event event) throws RemoteException
+    public synchronized void notify(final Event event)
     {
         if (event.getType().equals(Terminal.READY_EVENT))
         {

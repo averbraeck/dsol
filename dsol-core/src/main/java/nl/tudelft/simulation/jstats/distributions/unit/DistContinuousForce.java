@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousForce extends DistContinuousUnit<ForceUnit, Force>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Force scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -21,9 +21,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public abstract class Release<T extends Number & Comparable<T>> extends FlowBlock<T, Release<T>>
 {
-    /** */
-    private static final long serialVersionUID = 20151028L;
-
     /**
      * Construct a Release flow object to release seized resource units.
      * @param id the id of the FlowObject
@@ -69,9 +66,6 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
      */
     public static class DoubleCapacity<T extends Number & Comparable<T>> extends Release<T>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** The resource that is released by entities in this Seize block. */
         protected final Resource.DoubleCapacity<T> resource;
 
@@ -170,9 +164,6 @@ public abstract class Release<T extends Number & Comparable<T>> extends FlowBloc
      */
     public static class IntegerCapacity<T extends Number & Comparable<T>> extends Release<T>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** The resource that is claimed by entities in this Seize block. */
         protected final Resource.IntegerCapacity<T> resource;
 

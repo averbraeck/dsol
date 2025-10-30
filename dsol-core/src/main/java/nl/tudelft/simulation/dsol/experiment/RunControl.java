@@ -23,9 +23,6 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  */
 public class RunControl<T extends Number & Comparable<T>> implements Treatment<T>
 {
-    /** */
-    private static final long serialVersionUID = 20210409L;
-
     /** the id of the replication. */
     private final String id;
 

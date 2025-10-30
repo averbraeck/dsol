@@ -34,9 +34,6 @@ import nl.tudelft.simulation.dsol.model.DsolModel;
 public abstract class Simulator<T extends Number & Comparable<T>> extends LocalEventProducer
         implements SimulatorInterface<T>, Runnable
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** simulatorTime represents the simulationTime. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected T simulatorTime;

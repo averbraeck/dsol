@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.statistics.table;
 
-import java.rmi.RemoteException;
-
 import javax.swing.table.DefaultTableModel;
 
 import org.djutils.event.EventListener;
@@ -32,10 +30,9 @@ public abstract class StatisticsTableModel extends DefaultTableModel implements 
      * @param rows the number of rows
      * @param dataProducer the statistic that produces the updates to the table
      * @param eventTypes the eventTypes after which the StatisticsTable should update its content
-     * @throws RemoteException when there is a problem communicating with the data producing table
      */
     public StatisticsTableModel(final Object[] columnNames, final int rows, final EventProducer dataProducer,
-            final EventType[] eventTypes) throws RemoteException
+            final EventType[] eventTypes)
     {
         super(columnNames, rows);
         for (EventType eventType : eventTypes)

@@ -44,9 +44,6 @@ import nl.tudelft.simulation.dsol.swing.introspection.sortable.SortingTableHeade
  */
 public class ObjectJTable extends JTable implements ObjectJTableInterface, ICellPresentationConfigProvider
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the updateTimer. */
     private static UpdateTimer updateTimer = new UpdateTimer(100L);
 

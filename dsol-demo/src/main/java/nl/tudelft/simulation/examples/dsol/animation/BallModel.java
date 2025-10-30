@@ -1,13 +1,11 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
 import java.awt.Color;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.point.DirectedPoint2d;
-import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
@@ -23,9 +21,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the balls for 'search'. */
     private List<Ball> ballList = new ArrayList<>();
 
@@ -44,14 +39,7 @@ public class BallModel extends AbstractDsolModel<Double, DevsSimulatorInterface<
         makeAnimation();
         for (int i = 1; i <= 10; i++)
         {
-            try
-            {
-                this.ballList.add(new DiscreteBall(i, this.simulator));
-            }
-            catch (RemoteException exception)
-            {
-                CategoryLogger.always().error(exception);
-            }
+            this.ballList.add(new DiscreteBall(i, this.simulator));
         }
     }
 

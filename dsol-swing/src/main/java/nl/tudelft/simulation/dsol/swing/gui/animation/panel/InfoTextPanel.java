@@ -26,9 +26,6 @@ import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
  */
 public class InfoTextPanel extends JPanel
 {
-    /** */
-    private static final long serialVersionUID = 20210214L;
-
     /** the animation panel that has the latest mouse coordinate. */
     private final AnimationPanel animationPanel;
 

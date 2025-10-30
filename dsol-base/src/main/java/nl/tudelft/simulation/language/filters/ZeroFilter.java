@@ -12,9 +12,6 @@ package nl.tudelft.simulation.language.filters;
  */
 public class ZeroFilter extends AbstractFilter
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new ZeroFilte.
      */

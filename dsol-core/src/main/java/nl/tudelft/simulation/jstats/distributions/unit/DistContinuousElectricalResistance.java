@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousElectricalResistance extends DistContinuousUnit<ElectricalResistanceUnit, ElectricalResistance>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws ElectricalResistance scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
-import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.event.StatisticsEvents;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -31,6 +30,9 @@ import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialo
  */
 public class Warehouse42SwingApplication extends DsolApplication
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /**
      * @param title the title
      * @param panel the panel
@@ -40,9 +42,6 @@ public class Warehouse42SwingApplication extends DsolApplication
         super(panel, title);
         panel.enableSimulationControlButtons();
     }
-
-    /** */
-    private static final long serialVersionUID = 1L;
 
     /**
      * @param args arguments, expected to be empty
@@ -78,9 +77,8 @@ public class Warehouse42SwingApplication extends DsolApplication
         /**
          * @param model the model
          * @param simulator the simulator
-         * @throws RemoteException on error
          */
-        Warehouse42Panel(final Warehouse42Model model, final DevsSimulator<Double> simulator) throws RemoteException
+        Warehouse42Panel(final Warehouse42Model model, final DevsSimulator<Double> simulator)
         {
             super(new DevsControlPanel.TimeDouble(model, simulator));
             addTabs(model);
@@ -98,22 +96,14 @@ public class Warehouse42SwingApplication extends DsolApplication
             addConsoleLogger();
             addConsoleOutput();
 
-            try
-            {
-                XYChart chart = new XYChart(getSimulator(), "Inventory Levels");
-                chart.add("inventory", model.inventory, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
-                chart.add("backlog", model.backlog, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
-                charts.setCell(chart.getSwingPanel(), 0, 0);
+            XYChart chart = new XYChart(getSimulator(), "Inventory Levels");
+            chart.add("inventory", model.inventory, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
+            chart.add("backlog", model.backlog, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
+            charts.setCell(chart.getSwingPanel(), 0, 0);
 
-                XYChart orderChart =
-                        new XYChart(getSimulator(), "Ordering costs").setLabelXAxis("time (s)").setLabelYAxis("cost");
-                orderChart.add("ordering costs", model.orderingCosts, StatisticsEvents.OBSERVATION_ADDED_EVENT);
-                charts.setCell(orderChart.getSwingPanel(), 1, 0);
-            }
-            catch (RemoteException exception)
-            {
-                CategoryLogger.always().error(exception);
-            }
+            XYChart orderChart = new XYChart(getSimulator(), "Ordering costs").setLabelXAxis("time (s)").setLabelYAxis("cost");
+            orderChart.add("ordering costs", model.orderingCosts, StatisticsEvents.OBSERVATION_ADDED_EVENT);
+            charts.setCell(orderChart.getSwingPanel(), 1, 0);
         }
     }
 }

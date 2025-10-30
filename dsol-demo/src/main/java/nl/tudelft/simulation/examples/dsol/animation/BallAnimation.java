@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
-import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
 
@@ -29,9 +28,6 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  */
 public class BallAnimation extends SimRenderable2d<Ball>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * the color of the ballAnimation.
      */
@@ -42,9 +38,8 @@ public class BallAnimation extends SimRenderable2d<Ball>
      * @param source the source
      * @param simulator the simulator
      * @throws NamingException on registration error
-     * @throws RemoteException on remote animation error
      */
-    public BallAnimation(final Ball source, final SimulatorInterface<Double> simulator) throws RemoteException, NamingException
+    public BallAnimation(final Ball source, final SimulatorInterface<Double> simulator) throws NamingException
     {
         super(source, simulator);
         setScaleObject(true);
@@ -87,18 +82,13 @@ public class BallAnimation extends SimRenderable2d<Ball>
     /** Separately animating text without a ScaleY. */
     public class BallTextAnimation extends SimRenderable2d<Ball>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * constructs a new BallTextAnimation, possibly without a ScaleY.
          * @param source the source
          * @param simulator the simulator
          * @throws NamingException on registration error
-         * @throws RemoteException on remote animation error
          */
-        public BallTextAnimation(final Ball source, final SimulatorInterface<Double> simulator)
-                throws RemoteException, NamingException
+        public BallTextAnimation(final Ball source, final SimulatorInterface<Double> simulator) throws NamingException
         {
             super(source, simulator);
             setScaleObject(true);

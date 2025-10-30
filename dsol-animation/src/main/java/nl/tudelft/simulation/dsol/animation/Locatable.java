@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.animation;
 
-import java.rmi.RemoteException;
-
 import org.djutils.draw.Directed;
 import org.djutils.draw.bounds.Bounds;
 import org.djutils.draw.point.Point;
@@ -25,16 +23,14 @@ public interface Locatable
      * returns the location of an object. This value may be null, e.g., when the object is still being constructed or being
      * destroyed.
      * @return the location
-     * @throws RemoteException on network failure
      */
-    Point<?> getLocation() throws RemoteException;
+    Point<?> getLocation();
 
     /**
      * Return the z-value of the location, or 0.0 when the location is in 2 dimensions.
      * @return the z-value of the location, or 0.0 when the location is in 2 dimensions, or when getLocation() returns null
-     * @throws RemoteException on network failure
      */
-    default double getZ() throws RemoteException
+    default double getZ()
     {
         Point<?> p = getLocation();
         return p == null ? 0.0 : p instanceof Point3d ? ((Point3d) p).getZ() : 0.0;
@@ -44,9 +40,8 @@ public interface Locatable
      * Return the z-direction of the location in radians, or 0.0 when the location has no direction.
      * @return the z-direction of the location in radians, or 0.0 when the location has no direction, or when getLocation()
      *         returns null
-     * @throws RemoteException on network failure
      */
-    default double getDirZ() throws RemoteException
+    default double getDirZ()
     {
         Point<?> p = getLocation();
         return p == null ? 0.0 : p instanceof Directed ? ((Directed) p).getDirZ() : 0.0;
@@ -56,7 +51,6 @@ public interface Locatable
      * returns the bounds of the locatable object. The bounds is the not rotated bounds around [0;0;0]. In contrast to the
      * getLocation() method the getRelativeBounds() method should never return null.
      * @return the bounds of the object around getLocation() as center of the box.
-     * @throws RemoteException on network failure
      */
-    Bounds<?, ?> getRelativeBounds() throws RemoteException;
+    Bounds<?, ?> getRelativeBounds();
 }

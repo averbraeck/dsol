@@ -21,9 +21,6 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  */
 public class Destroy<T extends Number & Comparable<T>> extends FlowBlock<T, Destroy<T>>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** TIME_IN_SYSTEM_EVENT is fired when an entity leaves the system. */
     public static final EventType TIME_IN_SYSTEM_EVENT = new EventType(new MetaData("TIME_IN_SYSTEM_EVENT", "Time in system",
             new ObjectDescriptor("Time in system", "time in system", Double.class)));

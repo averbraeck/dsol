@@ -23,9 +23,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public abstract class Block<T extends Number & Comparable<T>> extends LocalEventProducer implements Identifiable
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The simulator on which behavior is scheduled. */
     private DevsSimulatorInterface<T> simulator;
 

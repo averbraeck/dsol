@@ -12,9 +12,6 @@ package nl.tudelft.simulation.language.filters;
  */
 public class MaxPointFilter extends AbstractFilter
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the maxPoints to use. */
     private long maxPoints = -1;
 

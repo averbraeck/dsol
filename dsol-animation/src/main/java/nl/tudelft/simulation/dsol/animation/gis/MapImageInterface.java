@@ -2,7 +2,6 @@ package nl.tudelft.simulation.dsol.animation.gis;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.io.Serializable;
 
 /**
  * This interface defines the map image, which acts as the basic 'canvas' for the drawing process. The size does not matter that
@@ -15,7 +14,7 @@ import java.io.Serializable;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public interface MapImageInterface extends Serializable
+public interface MapImageInterface
 {
     /**
      * Return the backgroundColor.

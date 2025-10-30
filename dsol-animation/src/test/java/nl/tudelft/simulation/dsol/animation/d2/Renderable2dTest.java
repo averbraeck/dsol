@@ -43,18 +43,15 @@ public class Renderable2dTest
     /**
      * Test the flags for a Rendeable2D.
      * @throws NamingException when context cannot be created or found
-     * @throws RemoteException when context is remote and cannot be reached
+     * @throws RemoteException on network error
      */
     @Test
-    public void testFlags() throws RemoteException, NamingException
+    public void testFlags() throws NamingException, RemoteException
     {
         LocatableAngle locatable = new LocatableAngle();
         ContextProvider contextProvider = new ContextProvider();
         Renderable2d<Locatable> renderable = new Renderable2d<Locatable>(locatable, contextProvider)
         {
-            /** */
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void paint(final Graphics2D graphics, final ImageObserver observer)
             {
@@ -125,13 +122,13 @@ public class Renderable2dTest
         private double angle;
 
         @Override
-        public Point<?> getLocation() throws RemoteException
+        public Point<?> getLocation()
         {
             return new OrientedPoint3d(10, 20, 0, 0, 0, this.angle);
         }
 
         @Override
-        public Bounds<?, ?> getRelativeBounds() throws RemoteException
+        public Bounds<?, ?> getRelativeBounds()
         {
             return new Bounds3d(4, 4, 4);
         }
@@ -154,19 +151,19 @@ public class Renderable2dTest
         return new Locatable()
         {
             @Override
-            public Point<?> getLocation() throws RemoteException
+            public Point<?> getLocation()
             {
                 return new Point3d(10, 20, 10);
             }
 
             @Override
-            public Bounds<?, ?> getRelativeBounds() throws RemoteException
+            public Bounds<?, ?> getRelativeBounds()
             {
                 return new Bounds3d(4, 4, 4);
             }
 
             @Override
-            public double getZ() throws RemoteException
+            public double getZ()
             {
                 return -10.0;
             }
@@ -181,8 +178,8 @@ public class Renderable2dTest
 
         /**
          * Create the InitialContext for the provider.
+         * @throws RemoteException on network error
          * @throws NamingException when context cannot be created or found
-         * @throws RemoteException when context is remote and cannot be reached
          */
         ContextProvider() throws RemoteException, NamingException
         {

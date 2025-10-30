@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.demo.des.mm1.step09;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +32,6 @@ import nl.tudelft.simulation.jstats.distributions.DistExponential;
  */
 class DesQueueingModel9 extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>> implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the queue in which entities might be placed. */
     private List<QueueEntry<Entity>> queue = new ArrayList<>();;
 
@@ -93,10 +89,6 @@ class DesQueueingModel9 extends AbstractDsolModel<Double, DevsSimulatorInterface
         catch (InputParameterException e)
         {
             throw new SimRuntimeException("Error defining parameters for the model", e);
-        }
-        catch (RemoteException e)
-        {
-            throw new SimRuntimeException("Error adding listener for the model", e);
         }
     }
 
@@ -205,10 +197,12 @@ class DesQueueingModel9 extends AbstractDsolModel<Double, DevsSimulatorInterface
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(Replication.END_REPLICATION_EVENT))
-        { reportStats(); }
+        {
+            reportStats();
+        }
     }
 
 }

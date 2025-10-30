@@ -13,7 +13,6 @@ package nl.tudelft.simulation.dsol.formalisms.devs.esdevs.exceptions;
  */
 public class PortAlreadyDefinedException extends Exception
 {
-
     /** the default serial version UId. */
     private static final long serialVersionUID = 1L;
 

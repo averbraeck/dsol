@@ -27,9 +27,6 @@ import org.djutils.immutablecollections.ImmutableMap;
  */
 public class ImmutableMapRenderer extends DefaultTableCellRenderer
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     @Override
     public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected,
             final boolean hasFocus, final int row, final int column)

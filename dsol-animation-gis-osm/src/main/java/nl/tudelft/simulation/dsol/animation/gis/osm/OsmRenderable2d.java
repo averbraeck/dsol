@@ -32,9 +32,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public class OsmRenderable2d implements GisRenderable2d
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /** the map to display. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected GisMapInterface map = null;

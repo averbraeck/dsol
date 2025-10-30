@@ -20,9 +20,6 @@ import javax.swing.text.DefaultFormatter;
  */
 public class RegexFormatter extends DefaultFormatter
 {
-    /** */
-    private static final long serialVersionUID = 20141212L;
-
     /** The regular expression pattern. */
     private Pattern pattern;
 

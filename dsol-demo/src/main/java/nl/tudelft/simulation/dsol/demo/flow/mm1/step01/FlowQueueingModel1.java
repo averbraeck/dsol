@@ -25,9 +25,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class FlowQueueingModel1 extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the distribution of the interarrival time between entities. */
     private final DistContinuousSimulationTime<Double> interArrivalTime;
 
@@ -84,8 +81,6 @@ public class FlowQueueingModel1 extends AbstractDsolModel<Double, DevsSimulatorI
         // depart from the model
         var destroy = new Destroy<Double>("destroy", getSimulator())
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public synchronized void receiveEntity(final Entity<Double> entity)
             {

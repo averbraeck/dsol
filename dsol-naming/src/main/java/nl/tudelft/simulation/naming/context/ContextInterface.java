@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.naming.context;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Map;
@@ -43,7 +42,7 @@ import org.djutils.metadata.ObjectDescriptor;
  * </p>
  * @author <a href="https://github.com/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface ContextInterface extends EventProducer, Serializable
+public interface ContextInterface extends EventProducer
 {
     /** The default root sign for a context. */
     public static final String ROOT = "/";
@@ -91,30 +90,26 @@ public interface ContextInterface extends EventProducer, Serializable
     /**
      * Retrieves the atomic name of this context.
      * @return the atomic name of this context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    String getAtomicName() throws RemoteException;
+    String getAtomicName();
 
     /**
      * Retrieves the parent context for this context, or null when this is the root context.
      * @return parent context for this context, or null when this is the root context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    ContextInterface getParent() throws RemoteException;
+    ContextInterface getParent();
 
     /**
      * Retrieves the root context for this context, or the current context when this is the root context.
      * @return the root context for this context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    ContextInterface getRootContext() throws RemoteException;
+    ContextInterface getRootContext();
 
     /**
      * Returns the absolute path for this context, or an empty string when this is the root context.
      * @return the absolute path for this context, or an empty string when this is the root context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    String getAbsolutePath() throws RemoteException;
+    String getAbsolutePath();
 
     /**
      * Retrieves the named object from the Context. The name may be a compound name where parts are separated by separation
@@ -168,16 +163,14 @@ public interface ContextInterface extends EventProducer, Serializable
      * Indicates whether the object has been registered (once or more) in the current Context. The object may be null.
      * @param object the object to look up; mey be null
      * @return whether an object with the given key has been registered once or more in the current context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    boolean hasObject(Object object) throws RemoteException;
+    boolean hasObject(Object object);
 
     /**
      * Indicates whether the current context is empty.
      * @return whether the current context is empty
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    boolean isEmpty() throws RemoteException;
+    boolean isEmpty();
 
     /**
      * Binds an object into the Context using the name. The name may be a compound name where parts are separated by separation
@@ -368,24 +361,21 @@ public interface ContextInterface extends EventProducer, Serializable
     /**
      * Returns a set of registered keys in the current context.
      * @return a set of registered keys in the current context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    Set<String> keySet() throws RemoteException;
+    Set<String> keySet();
 
     /**
      * Returns a (raw) collection of registered values in the current context.
      * @return a raw set of registered objects in the current context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    Collection<Object> values() throws RemoteException;
+    Collection<Object> values();
 
     /**
      * Returns a (raw) map of bindings in the current context, mapping the name on the registered objects. Both regular objects
      * and subcontexts are returned. Mappings to null objects can exist.
      * @return a map of registered names and their bound (possibly null) object in the current context
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    Map<String, Object> bindings() throws RemoteException;
+    Map<String, Object> bindings();
 
     /**
      * Check whether a circular reference would occur when the object would be inserted into the current context. Insertion
@@ -408,7 +398,6 @@ public interface ContextInterface extends EventProducer, Serializable
      * Return a String with the hierarchical content of the Context in case verbose is true; otherwise return the atomic name.
      * @param verbose whether the information is exhaustive or very brief
      * @return formatted content of the context when verbose is true; otherwise the atomic name
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    String toString(final boolean verbose) throws RemoteException;
+    String toString(final boolean verbose);
 }

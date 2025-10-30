@@ -17,9 +17,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public abstract class DistContinuous extends Dist
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /**
      * constructs a new continuous distribution.
      * @param stream the stream

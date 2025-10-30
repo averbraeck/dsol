@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.animation;
 
-import java.rmi.RemoteException;
-
 import javax.naming.NamingException;
 
 import org.djutils.draw.point.OrientedPoint3d;
@@ -46,11 +44,9 @@ public class DiscreteBall extends Ball
      * constructs a new Ball.
      * @param nr the ball number
      * @param simulator the simulator
-     * @throws RemoteException on remote failure
      * @throws SimRuntimeException on schedule failure
      */
-    public DiscreteBall(final int nr, final DevsSimulatorInterface<Double> simulator)
-            throws RemoteException, SimRuntimeException
+    public DiscreteBall(final int nr, final DevsSimulatorInterface<Double> simulator) throws SimRuntimeException
     {
         super(nr);
         this.simulator = simulator;
@@ -80,7 +76,7 @@ public class DiscreteBall extends Ball
     }
 
     @Override
-    public OrientedPoint3d getLocation() throws RemoteException
+    public OrientedPoint3d getLocation()
     {
         double fraction = (this.simulator.getSimulatorTime() - this.startTime) / (this.stopTime - this.startTime);
         double x = this.origin.getX() + (this.destination.getX() - this.origin.getX()) * fraction;

@@ -18,9 +18,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsRealTimeAnimator;
  */
 public class GISModel extends AbstractDsolModel<Double, DevsRealTimeAnimator.TimeDouble>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new GISModel.
      * @param simulator the simulator

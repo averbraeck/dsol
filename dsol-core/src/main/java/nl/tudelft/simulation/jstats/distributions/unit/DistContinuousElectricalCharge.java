@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousElectricalCharge extends DistContinuousUnit<ElectricalChargeUnit, ElectricalCharge>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws ElectricalCharge scalars.
      * @param wrappedDistribution the wrapped continuous distribution

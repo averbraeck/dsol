@@ -1,14 +1,11 @@
 package nl.tudelft.simulation.dsol.demo.des.mm1.step10;
 
-import java.rmi.RemoteException;
-
 import nl.tudelft.simulation.dsol.experiment.SingleReplication;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.swing.gui.DsolApplication;
 import nl.tudelft.simulation.dsol.swing.gui.control.DevsControlPanel;
 import nl.tudelft.simulation.dsol.swing.gui.inputparameters.TabbedParameterDialog;
-import nl.tudelft.simulation.language.DsolRuntimeException;
 
 /**
  * Discrete event queueing application.
@@ -31,37 +28,29 @@ class DesQueueingApplication10
      */
     public void build()
     {
-        try
+        var simulator = new DevsSimulator<Double>("MM1.Simulator");
+        var model = new DesQueueingModel10(simulator);
+        model.setResetApplicationExecutable(() -> build());
+        var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
+        if (this.inputParameterMap == null)
         {
-            var simulator = new DevsSimulator<Double>("MM1.Simulator");
-            var model = new DesQueueingModel10(simulator);
-            model.setResetApplicationExecutable(() -> build());
-            var replication = new SingleReplication<>("rep1", 0.0, 0.0, 1000.0);
-            if (this.inputParameterMap == null)
-            {
-                new TabbedParameterDialog(model.getInputParameterMap());
-                this.inputParameterMap = model.getInputParameterMap();
-            }
-            else
-            {
-                model.setInputParameterMap(this.inputParameterMap);
-            }
-            model.getSimulator().initialize(model, replication);
-            DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, model.getSimulator());
-            new DsolApplication(new DesQueueingPanel(controlPanel), "MM1 queuing model");
+            new TabbedParameterDialog(model.getInputParameterMap());
+            this.inputParameterMap = model.getInputParameterMap();
         }
-        catch (RemoteException e)
+        else
         {
-            throw new DsolRuntimeException(e);
+            model.setInputParameterMap(this.inputParameterMap);
         }
+        model.getSimulator().initialize(model, replication);
+        DevsControlPanel.TimeDouble controlPanel = new DevsControlPanel.TimeDouble(model, model.getSimulator());
+        new DsolApplication(new DesQueueingPanel(controlPanel), "MM1 queuing model");
     }
 
     /**
      * Main program to start the discrete-event queueing application.
      * @param args not used
-     * @throws RemoteException on network error when there are remote components
      */
-    public static void main(final String[] args) throws RemoteException
+    public static void main(final String[] args)
     {
         var app = new DesQueueingApplication10();
         app.build();

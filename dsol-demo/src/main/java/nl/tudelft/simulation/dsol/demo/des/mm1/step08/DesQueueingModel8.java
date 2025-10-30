@@ -28,9 +28,6 @@ import nl.tudelft.simulation.jstats.distributions.DistExponential;
  */
 class DesQueueingModel8 extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the queue in which entities might be placed. */
     private List<QueueEntry<Entity>> queue = new ArrayList<>();;
 

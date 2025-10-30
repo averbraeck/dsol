@@ -22,9 +22,6 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
  */
 public class RedBlackTree<T extends Number & Comparable<T>> implements EventListInterface<T>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** The embedded event list. */
     private TreeSet<SimEventInterface<T>> eventList;
 

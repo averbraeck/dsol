@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.swing.animation.d2;
 
-import java.rmi.RemoteException;
-
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.event.Event;
 import org.djutils.exceptions.Throw;
@@ -41,11 +39,9 @@ public class AnimationPanel extends VisualizationPanel
      * constructs a new AnimationPanel.
      * @param homeExtent the home (initial) extent of the panel
      * @param simulator the simulator of which we want to know the events for animation
-     * @throws RemoteException on network error for one of the listeners
      * @throws DsolException when the simulator is not implementing the AnimatorInterface
      */
-    public AnimationPanel(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DsolException
+    public AnimationPanel(final Bounds2d homeExtent, final SimulatorInterface<?> simulator) throws DsolException
     {
         super(homeExtent, simulator);
         Throw.when(!(simulator instanceof AnimatorInterface), DsolException.class,
@@ -55,7 +51,7 @@ public class AnimationPanel extends VisualizationPanel
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         super.notify(event);
 

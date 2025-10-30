@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.simulators;
 
-import java.io.Serializable;
 import java.rmi.Remote;
 
 import org.djutils.event.EventProducer;
@@ -65,7 +64,7 @@ import nl.tudelft.simulation.dsol.model.DsolModel;
  * @param <T> the extended simulation time type to be able to implement a comparator on the simulation time.
  */
 @SuppressWarnings("checkstyle:linelength")
-public interface SimulatorInterface<T extends Number & Comparable<T>> extends Remote, Serializable, EventProducer
+public interface SimulatorInterface<T extends Number & Comparable<T>> extends Remote, EventProducer
 {
     /** STARTING_EVENT is fired when the simulator.start() method is called (the run() method still needs to start). */
     EventType STARTING_EVENT = new EventType(new MetaData("STARTING_EVENT", "simulator starting"));

@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.animation.graph;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,11 +16,8 @@ import java.util.List;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public class FloatAppendList implements Iterable<Float>, Serializable
+public class FloatAppendList implements Iterable<Float>
 {
-    /** */
-    private static final long serialVersionUID = 20210103L;
-
     /** the chunk size. */
     private static final int CHUNK_SIZE = 256;
 

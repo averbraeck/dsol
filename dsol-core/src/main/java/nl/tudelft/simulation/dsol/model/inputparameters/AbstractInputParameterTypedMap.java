@@ -18,9 +18,6 @@ import org.djutils.exceptions.Throw;
  */
 public abstract class AbstractInputParameterTypedMap<T> extends AbstractInputParameterMap<T>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the value based on the input. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected T typedValue;

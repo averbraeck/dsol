@@ -17,9 +17,6 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEvent;
  */
 public class DevsTestModel extends TestModel
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new DEVSTestModel.
      * @param simulator the simulator

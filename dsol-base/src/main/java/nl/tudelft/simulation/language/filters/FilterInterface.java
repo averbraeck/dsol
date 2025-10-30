@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.language.filters;
 
-import java.io.Serializable;
-
 /**
  * The FilterInterface is a general interface for all filters in DSOL. Filters can be based on xY combinations, class
  * information ,etc. etc. The API of implementing filters will explain what it expects as input.
@@ -14,7 +12,7 @@ import java.io.Serializable;
  * @author <a href="http://web.eur.nl/fbk/dep/dep1/Introduction/Staff/People/Lang" >Niels Lang </a>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public interface FilterInterface extends Serializable
+public interface FilterInterface
 {
     /**
      * a filter defines whether to accept a value in a chart.

@@ -61,7 +61,6 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
      * @throws AlreadyBoundException when there is already another object bound to the bindingKey
      * @throws NullPointerException when host, path, or bindingKey is null
      * @throws IllegalArgumentException when port &lt; 0 or port &gt; 65535
-     * @throws AccessException when there is an attempt to create a registry on a remote host
      */
     public RemoteContext(final String host, final int port, final String bindingKey, final ContextInterface embeddedContext,
             final String eventProducerBindingKey) throws RemoteException, AlreadyBoundException
@@ -83,7 +82,6 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
      * @throws RemoteException when there is a problem with the RMI registry
      * @throws AlreadyBoundException when there is already another object bound to the bindingKey
      * @throws NullPointerException when registryURL, bindingKey, or embeddedContext is null
-     * @throws AccessException when there is an attempt to create a registry on a remote host
      */
     public RemoteContext(final URL registryURL, final ContextInterface embeddedContext, final String eventProducerBindingKey)
             throws RemoteException, AlreadyBoundException
@@ -97,25 +95,25 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     }
 
     @Override
-    public String getAtomicName() throws RemoteException
+    public String getAtomicName()
     {
         return this.embeddedContext.getAtomicName();
     }
 
     @Override
-    public ContextInterface getParent() throws RemoteException
+    public ContextInterface getParent()
     {
         return this.embeddedContext.getParent();
     }
 
     @Override
-    public ContextInterface getRootContext() throws RemoteException
+    public ContextInterface getRootContext()
     {
         return this.embeddedContext.getRootContext();
     }
 
     @Override
-    public String getAbsolutePath() throws RemoteException
+    public String getAbsolutePath()
     {
         return this.embeddedContext.getAbsolutePath();
     }
@@ -145,13 +143,13 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     }
 
     @Override
-    public boolean hasObject(final Object object) throws RemoteException
+    public boolean hasObject(final Object object)
     {
         return this.embeddedContext.hasObject(object);
     }
 
     @Override
-    public boolean isEmpty() throws RemoteException
+    public boolean isEmpty()
     {
         return this.embeddedContext.isEmpty();
     }
@@ -217,19 +215,19 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     }
 
     @Override
-    public Set<String> keySet() throws RemoteException
+    public Set<String> keySet()
     {
         return new LinkedHashSet<String>(this.embeddedContext.keySet());
     }
 
     @Override
-    public Collection<Object> values() throws RemoteException
+    public Collection<Object> values()
     {
         return new LinkedHashSet<Object>(this.embeddedContext.values());
     }
 
     @Override
-    public Map<String, Object> bindings() throws RemoteException
+    public Map<String, Object> bindings()
     {
         return this.embeddedContext.bindings();
     }
@@ -263,7 +261,9 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
                 "key [%s] is the empty string or key contains '/'", key);
         if (!hasKey(key))
-        { throw new NameNotFoundException("Could not find object with key " + key + " for fireObjectChangedEvent"); }
+        {
+            throw new NameNotFoundException("Could not find object with key " + key + " for fireObjectChangedEvent");
+        }
         try
         {
             this.remoteEventProducer.fireChangedEvent(ContextInterface.OBJECT_CHANGED_EVENT,
@@ -294,10 +294,12 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     }
 
     @Override
-    public String toString(final boolean verbose) throws RemoteException
+    public String toString(final boolean verbose)
     {
         if (!verbose)
-        { return "RemoteContext[" + getAtomicName() + "]"; }
+        {
+            return "RemoteContext[" + getAtomicName() + "]";
+        }
         return ContextUtil.toText(this);
     }
 
@@ -306,58 +308,58 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
     /* ***************************************************************************************************************** */
 
     @Override
-    public synchronized boolean addListener(final EventListener listener, final EventType eventType) throws RemoteException
+    public synchronized boolean addListener(final EventListener listener, final EventType eventType)
     {
         return this.embeddedContext.addListener(listener, eventType);
     }
 
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType,
-            final ReferenceType referenceType) throws RemoteException
+            final ReferenceType referenceType)
     {
         return this.embeddedContext.addListener(listener, eventType, referenceType);
     }
 
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position)
-            throws RemoteException
+
     {
         return this.embeddedContext.addListener(listener, eventType, position);
     }
 
     @Override
     public synchronized boolean addListener(final EventListener listener, final EventType eventType, final int position,
-            final ReferenceType referenceType) throws RemoteException
+            final ReferenceType referenceType)
     {
         return this.embeddedContext.addListener(listener, eventType, position, referenceType);
     }
 
     @Override
-    public synchronized int removeAllListeners() throws RemoteException
+    public synchronized int removeAllListeners()
     {
         return this.remoteEventProducer.removeAllListeners();
     }
 
     @Override
-    public synchronized int removeAllListeners(final Class<?> ofClass) throws RemoteException
+    public synchronized int removeAllListeners(final Class<?> ofClass)
     {
         return this.remoteEventProducer.removeAllListeners(ofClass);
     }
 
     @Override
-    public synchronized boolean removeListener(final EventListener listener, final EventType eventType) throws RemoteException
+    public synchronized boolean removeListener(final EventListener listener, final EventType eventType)
     {
         return this.embeddedContext.removeListener(listener, eventType);
     }
 
     @Override
-    public List<Reference<EventListener>> getListenerReferences(final EventType eventType) throws RemoteException
+    public List<Reference<EventListener>> getListenerReferences(final EventType eventType)
     {
         return this.remoteEventProducer.getListenerReferences(eventType);
     }
 
     @Override
-    public EventListenerMap getEventListenerMap() throws RemoteException
+    public EventListenerMap getEventListenerMap()
     {
         return this.remoteEventProducer.getEventListenerMap();
     }
@@ -380,9 +382,6 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
      */
     protected class RemoteChangeEventProducer extends RmiEventProducer
     {
-        /** */
-        private static final long serialVersionUID = 20200208L;
-
         /** the stored binding key that acts as the source id. */
         private final String bindingKey;
 
@@ -410,9 +409,8 @@ public class RemoteContext extends RmiObject implements RemoteContextInterface, 
          * Transmit an changed event with a serializable object as payload to all interested listeners.
          * @param eventType the eventType of the event
          * @param value the object sent with the event
-         * @throws RemoteException on network error
          */
-        protected void fireChangedEvent(final EventType eventType, final Serializable value) throws RemoteException
+        protected void fireChangedEvent(final EventType eventType, final Serializable value)
         {
             super.fireEvent(eventType, value);
         }

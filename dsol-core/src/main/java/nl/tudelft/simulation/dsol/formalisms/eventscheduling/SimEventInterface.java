@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.eventscheduling;
 
-import java.io.Serializable;
-
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 
 /**
@@ -16,7 +14,7 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
  * @param <T> the time type, e.g., Double, Long, Duration
  * @since 1.5
  */
-public interface SimEventInterface<T extends Number & Comparable<T>> extends Serializable, Comparable<SimEventInterface<T>>
+public interface SimEventInterface<T extends Number & Comparable<T>> extends Comparable<SimEventInterface<T>>
 {
     /** MAX_PRIORITY is a constant reflecting the maximum priority. */
     short MAX_PRIORITY = 10;

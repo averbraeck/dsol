@@ -27,9 +27,6 @@ import javax.swing.table.TableCellEditor;
  */
 public class MyColorEditor extends AbstractCellEditor implements TableCellEditor
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the color. */
     protected Color color;
 

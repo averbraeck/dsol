@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -134,9 +133,8 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
     /**
      * Text field ok -- make green and show cancel button.
-     * @throws RemoteException on network error
      */
-    private void apply() throws RemoteException
+    private void apply()
     {
         synchronized (this.textField)
         {
@@ -161,9 +159,8 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
 
     /**
      * Text field not ok, or runUntil time reached -- reset field, make field white, and show apply button.
-     * @throws RemoteException on network error
      */
-    protected void cancel() throws RemoteException
+    protected void cancel()
     {
         synchronized (this.textField)
         {
@@ -259,7 +256,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     public static class TimeDouble extends RunUntilPanel<Double>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a double time.
@@ -304,7 +301,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     public static class TimeFloat extends RunUntilPanel<Float>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a float time.
@@ -349,7 +346,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     public static class TimeLong extends RunUntilPanel<Long>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a long time.
@@ -394,7 +391,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     public static class TimeDoubleUnit extends RunUntilPanel<Duration>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a double djunits Time.
@@ -442,7 +439,7 @@ public abstract class RunUntilPanel<T extends Number & Comparable<T>> extends JP
     public static class TimeFloatUnit extends RunUntilPanel<FloatDuration>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a clock panel with a djunits FloatDuration.

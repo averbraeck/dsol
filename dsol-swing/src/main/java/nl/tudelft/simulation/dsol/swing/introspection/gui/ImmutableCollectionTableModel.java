@@ -33,9 +33,6 @@ import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
  */
 public class ImmutableCollectionTableModel extends AbstractTableModel implements IntrospectingTableModelInterface
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the instances of the collection. */
     protected Map<Integer, Object> instances = Collections.synchronizedMap(new LinkedHashMap<Integer, Object>(20));
 

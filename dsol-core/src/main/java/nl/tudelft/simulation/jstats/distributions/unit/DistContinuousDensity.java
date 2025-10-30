@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousDensity extends DistContinuousUnit<DensityUnit, Density>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Density scalars.
      * @param wrappedDistribution the wrapped continuous distribution

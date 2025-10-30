@@ -28,9 +28,6 @@ import nl.tudelft.simulation.dsol.logger.Cat;
  */
 public class SimEvent<T extends Number & Comparable<T>> extends AbstractSimEvent<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /** target the target on which a state change is scheduled. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Object target = null;

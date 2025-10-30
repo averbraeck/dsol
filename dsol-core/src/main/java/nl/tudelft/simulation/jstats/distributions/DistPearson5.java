@@ -21,9 +21,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistPearson5 extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** dist is the internal gamma distribution for calculation. */
     private final DistGamma dist;
 

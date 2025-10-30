@@ -23,9 +23,6 @@ import javax.swing.table.TableCellEditor;
  */
 public class SwingCellEditor extends AbstractCellEditor implements TableCellEditor
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the value to edit. */
     private JComponent component = new JPanel();
 

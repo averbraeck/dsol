@@ -38,9 +38,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 public class SimPersistentTest extends LocalEventProducer
 {
 
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** update event. */
     private static final EventType UPDATE_EVENT =
             new EventType("update", new MetaData("update", "update", new ObjectDescriptor("value", "value", Double.class)));
@@ -146,8 +143,6 @@ public class SimPersistentTest extends LocalEventProducer
         var simulator = new DevsSimulator<Double>("sim");
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             public SimPersistent<Double> persistent;
 
             static EventType EVENT = new EventType("event",

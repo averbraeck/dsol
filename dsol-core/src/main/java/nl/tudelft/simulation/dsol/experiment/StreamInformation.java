@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,11 +18,8 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public class StreamInformation implements Serializable
+public class StreamInformation
 {
-    /** */
-    private static final long serialVersionUID = 20210408L;
-
     /** streams used in the replication. */
     private Map<String, StreamInterface> streams = new LinkedHashMap<String, StreamInterface>();
 

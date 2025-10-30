@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.jstats.streams;
 
-import java.io.Serializable;
-
 /**
  * The StreamInterface defines the streams to be used within the JSTATS package. Potential implementations include the pseudo
  * random stream, the fully one-time random stream, etc.
@@ -14,7 +12,7 @@ import java.io.Serializable;
  * @author <a href="https://github.com/averbraeck" target="_blank"> Alexander Verbraeck</a>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public interface StreamInterface extends Serializable
+public interface StreamInterface
 {
     /**
      * Return the next pseudo-random, uniformly distributed boolean value.
@@ -78,18 +76,4 @@ public interface StreamInterface extends Serializable
      * Reset the stream to use the original seed with which it was initialized.
      */
     void reset();
-
-    /**
-     * Save the state of the RNG into an object, e.g. to roll it back to this state.
-     * @return the state as an object specific to the RNG.
-     * @throws StreamException when getting the state fails.
-     */
-    byte[] saveState() throws StreamException;
-
-    /**
-     * Restore the state to an earlier saved state object.
-     * @param state the earlier saved state to which the RNG rolls back.
-     * @throws StreamException when resetting the state fails.
-     */
-    void restoreState(byte[] state) throws StreamException;
 }

@@ -14,9 +14,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class SimpleStreamUpdater implements StreamUpdater
 {
-    /** */
-    private static final long serialVersionUID = 20210405L;
-
     @Override
     public void updateSeed(final String streamId, final StreamInterface stream, final int replicationNumber)
     {

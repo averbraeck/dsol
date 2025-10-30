@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.eventlists;
 
-import java.io.Serializable;
 import java.util.Iterator;
 
 import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
@@ -18,7 +17,7 @@ import nl.tudelft.simulation.dsol.formalisms.eventscheduling.SimEventInterface;
  * @param <T> The time type, e.g., Double, Long, Duration
  * @since 1.5
  */
-public interface EventListInterface<T extends Number & Comparable<T>> extends Serializable, Iterable<SimEventInterface<T>>
+public interface EventListInterface<T extends Number & Comparable<T>> extends Iterable<SimEventInterface<T>>
 {
     /**
      * Add an event to the event list.

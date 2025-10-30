@@ -14,9 +14,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public class DummyModel extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * @param simulator the simulator
      */

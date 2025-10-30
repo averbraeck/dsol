@@ -85,7 +85,7 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
 public class VisualizationPanel extends JPanel implements EventProducer, EventListener
 {
     /** */
-    private static final long serialVersionUID = 20230305L;
+    private static final long serialVersionUID = 1L;
 
     /** the UP directions for moving/zooming. */
     public static final int UP = 1;
@@ -222,9 +222,8 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      * constructs a new VisualizationPanel.
      * @param homeExtent the initial extent.
      * @param producer the object firing animation update events
-     * @throws RemoteException on error when remote panel and producer cannot connect
      */
-    public VisualizationPanel(final Bounds2d homeExtent, final EventProducer producer) throws RemoteException
+    public VisualizationPanel(final Bounds2d homeExtent, final EventProducer producer)
     {
         setPreferredSize(new Dimension(1024, 768));
         this.animationEventProducer = new AnimationEventProducer();
@@ -377,9 +376,8 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
 
     /**
      * Subscribe to the context to receive object added and object removed events.
-     * @throws RemoteException on network error
      */
-    protected void subscribeToContext() throws RemoteException
+    protected void subscribeToContext()
     {
         this.context.addListener(this, ContextInterface.OBJECT_ADDED_EVENT);
         this.context.addListener(this, ContextInterface.OBJECT_REMOVED_EVENT);
@@ -398,7 +396,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(AnimatorInterface.UPDATE_ANIMATION_EVENT) && this.isShowing())
         {
@@ -1051,22 +1049,15 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     protected Object getSelectedObject(final List<Locatable> targets)
     {
         Object selectedObject = null;
-        try
+        double zValue = -Double.MAX_VALUE;
+        for (Locatable next : targets)
         {
-            double zValue = -Double.MAX_VALUE;
-            for (Locatable next : targets)
+            double z = next.getZ();
+            if (z > zValue)
             {
-                double z = next.getZ();
-                if (z > zValue)
-                {
-                    zValue = z;
-                    selectedObject = next;
-                }
+                zValue = z;
+                selectedObject = next;
             }
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "getSelectedObject");
         }
         return selectedObject;
     }
@@ -1134,9 +1125,6 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
      */
     class AnimationEventProducer extends LocalEventProducer
     {
-        /** */
-        private static final long serialVersionUID = 20210213L;
-
         @Override
         public void fireEvent(final Event event)
         {
@@ -1191,7 +1179,7 @@ public class VisualizationPanel extends JPanel implements EventProducer, EventLi
     }
 
     @Override
-    public EventListenerMap getEventListenerMap() throws RemoteException
+    public EventListenerMap getEventListenerMap()
     {
         return this.animationEventProducer.getEventListenerMap();
     }

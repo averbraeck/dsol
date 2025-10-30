@@ -44,10 +44,10 @@ public class VisualizationDemo implements Contextualized
 
     /**
      * Construct a new VisualizationDemo.
-     * @throws RemoteException on remote error
      * @throws NamingException when context cannot be created
+     * @throws RemoteException on network error
      */
-    public VisualizationDemo() throws RemoteException, NamingException
+    public VisualizationDemo() throws NamingException, RemoteException
     {
         ContextInterface rootContext = InitialEventContext.instantiate("root");
         this.context = ContextUtil.lookupOrCreateSubContext(rootContext, "visdemo");
@@ -122,9 +122,6 @@ public class VisualizationDemo implements Contextualized
     /** DrawObject to draw an object on the screen. */
     static class DrawObject extends Renderable2d<StaticLocation2d>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * @param contextProvider the context in which drawing objects will be placed
          * @param x x coordinate

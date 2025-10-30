@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.flow;
 
-import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -31,11 +30,8 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the time type
  */
-public class Entity<T extends Number & Comparable<T>> extends Block<T> implements Serializable
+public class Entity<T extends Number & Comparable<T>> extends Block<T>
 {
-    /** */
-    private static final long serialVersionUID = 20230524L;
-
     /** the creation time. */
     private final T creationTime;
 

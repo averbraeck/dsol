@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.jstats.distributions.empirical;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ import java.util.List;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public interface EmpiricalDistributionInterface extends Serializable
+public interface EmpiricalDistributionInterface
 {
     /**
      * Returns the number of probability-value mappings in this structure.

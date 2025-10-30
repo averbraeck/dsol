@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.rmi.AlreadyBoundException;
@@ -253,7 +252,8 @@ public class ContextTest
         context.unbind(absrel + "key2");
 
         // get an non-existing object
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.get(absrel + "key2");
         });
 
@@ -262,7 +262,9 @@ public class ContextTest
         {
             assertEquals(expectedRootContext, context.get(""));
             if (context.getParent() == null)
-            { assertEquals(expectedRootContext, context.get("/")); }
+            {
+                assertEquals(expectedRootContext, context.get("/"));
+            }
         }
         assertTrue(context.exists(""));
         assertTrue(context.exists("/"));
@@ -279,13 +281,15 @@ public class ContextTest
         assertEquals("value2", context.get(absrel + "key2"));
 
         // test already bound exception
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.bind(absrel + "key2", "newobject");
         }, NameAlreadyBoundException.class);
 
         // create a name clash for rename
         context.bind(absrel + "key1", "value1");
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.rename(absrel + "key1", absrel + "key2");
         }, NameAlreadyBoundException.class);
 
@@ -323,7 +327,8 @@ public class ContextTest
         // Checking empty name, null name, slash for get
         for (String wrong : new String[] {"//", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 subContext.get(wrong);
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -331,7 +336,8 @@ public class ContextTest
         // Checking empty name, null name, slash for exists
         for (String wrong : new String[] {"//", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 subContext.exists(wrong);
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -339,7 +345,8 @@ public class ContextTest
         // Checking empty name, null name, slash for hasKey
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 subContext.hasKey(wrong);
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -347,7 +354,8 @@ public class ContextTest
         // Checking empty name, null name, slash for getObject
         for (String wrong : new String[] {"", "//", "/", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 subContext.getObject(wrong);
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -355,7 +363,8 @@ public class ContextTest
         // Checking empty name, null name, slash for bindObject
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 subContext.bindObject(wrong, "newobject");
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -363,7 +372,8 @@ public class ContextTest
         // Checking empty name, null name, slash for rebindObject
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 subContext.rebindObject(wrong, "newobject");
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -371,7 +381,8 @@ public class ContextTest
         // Checking empty name, null name, slash for unbindObject
         for (String wrong : new String[] {"", "//", "/", "/xyz/abc", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 subContext.unbindObject(wrong);
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -411,30 +422,35 @@ public class ContextTest
         assertTrue(level1.toString().contains("atomicName=level1"));
 
         // name clash with existing subcontext
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.createSubcontext("/level1");
         });
 
         // try to remove non-existing subcontext
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.destroySubcontext("/level3");
         });
 
         // name clash with existing key
         context.bind("key1", "value1");
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.createSubcontext("/key1");
         }, NameAlreadyBoundException.class);
 
         // try to remove subcontext that points to key
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.destroySubcontext("/key1");
         }, NotContextException.class);
 
         // Checking empty name, null name, slash for createSubcontext
         for (String wrong : new String[] {"", "//", "/", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 context.createSubcontext(wrong);
             }, "test should have failed for name [" + wrong + "]");
         }
@@ -442,13 +458,15 @@ public class ContextTest
         // Checking empty name, null name, slash for destroySubcontext
         for (String wrong : new String[] {"", "//", "/", null})
         {
-            UnitTest.testFail(() -> {
+            UnitTest.testFail(() ->
+            {
                 context.destroySubcontext(wrong);
             }, "test should have failed for name [" + wrong + "]");
         }
 
         // use a key as part of the path
-        UnitTest.testFail(() -> {
+        UnitTest.testFail(() ->
+        {
             context.get("/key1/level2");
         }, NameNotFoundException.class);
 
@@ -497,11 +515,8 @@ public class ContextTest
     }
 
     /** Test object with ToString() method. */
-    protected class TestObject implements Serializable
+    protected class TestObject
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** */
         private final String field;
 

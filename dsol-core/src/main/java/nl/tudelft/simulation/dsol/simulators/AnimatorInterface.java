@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.simulators;
 
-import java.rmi.RemoteException;
-
 import org.djutils.event.EventType;
 import org.djutils.metadata.MetaData;
 import org.djutils.metadata.ObjectDescriptor;
@@ -32,16 +30,14 @@ public interface AnimatorInterface
     /**
      * returns the animation delay in milliseconds between each consecutive animation update.
      * @return the animation delay in milliseconds of wallclock time
-     * @throws RemoteException on network failure
      */
-    long getAnimationDelay() throws RemoteException;
+    long getAnimationDelay();
 
     /**
      * sets the animationDelay using wallclock time in milliseconds.
      * @param milliseconds the animation delay in milliseconds
-     * @throws RemoteException on network failure
      */
-    void setAnimationDelay(long milliseconds) throws RemoteException;
+    void setAnimationDelay(long milliseconds);
 
     /**
      * updateAnimation takes care of firing the UPDATE_ANIMATION_EVENT.
@@ -92,10 +88,6 @@ public interface AnimatorInterface
                 catch (InterruptedException exception)
                 {
                     // if interrupted by stopAnimation, this.running is false and the animation stops.
-                    this.running = false;
-                }
-                catch (RemoteException exception)
-                {
                     this.running = false;
                 }
             }

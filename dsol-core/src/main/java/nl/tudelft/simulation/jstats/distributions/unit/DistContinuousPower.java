@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousPower extends DistContinuousUnit<PowerUnit, Power>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Power scalars.
      * @param wrappedDistribution the wrapped continuous distribution

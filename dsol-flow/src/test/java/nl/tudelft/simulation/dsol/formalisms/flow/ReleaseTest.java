@@ -40,8 +40,6 @@ public class ReleaseTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -96,8 +94,6 @@ public class ReleaseTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -147,8 +143,6 @@ public class ReleaseTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -218,8 +212,6 @@ public class ReleaseTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {

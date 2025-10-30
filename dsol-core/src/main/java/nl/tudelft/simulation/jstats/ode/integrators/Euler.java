@@ -16,9 +16,6 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  */
 public class Euler extends NumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new Euler.
      * @param stepSize the stepSize

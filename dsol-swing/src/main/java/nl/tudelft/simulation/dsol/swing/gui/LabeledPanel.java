@@ -16,9 +16,6 @@ import javax.swing.border.TitledBorder;
  */
 public class LabeledPanel extends JPanel
 {
-    /** */
-    private static final long serialVersionUID = 20141222L;
-
     /**
      * Create a JPanel with border and caption.
      * @param caption the caption of the LabeledPanel

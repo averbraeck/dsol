@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousElectricalCurrent extends DistContinuousUnit<ElectricalCurrentUnit, ElectricalCurrent>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws ElectricalCurrent scalars.
      * @param wrappedDistribution the wrapped continuous distribution

@@ -28,9 +28,6 @@ import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
  */
 public class MapTableModel extends AbstractTableModel implements IntrospectingTableModelInterface
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the keys of the map entries. */
     protected Map<Integer, Object> keyMap = Collections.synchronizedMap(new LinkedHashMap<Integer, Object>(20));
 

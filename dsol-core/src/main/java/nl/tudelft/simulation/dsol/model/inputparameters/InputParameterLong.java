@@ -12,9 +12,6 @@ import org.djutils.exceptions.Throw;
  */
 public class InputParameterLong extends AbstractInputParameter<Long, Long>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** Format string to display the value of the input parameter. */
     private String format = "%d";
 

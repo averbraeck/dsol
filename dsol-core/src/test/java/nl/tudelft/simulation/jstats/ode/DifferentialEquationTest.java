@@ -77,9 +77,6 @@ public class DifferentialEquationTest
     /** ODE. */
     class ODE extends DifferentialEquation
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * constructs a new Function.
          * @param stepSize the stepSize
@@ -101,9 +98,6 @@ public class DifferentialEquationTest
     /** Stiff ODE. */
     class StiffODE extends DifferentialEquation
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * constructs a new Function.
          * @param stepSize the stepSize

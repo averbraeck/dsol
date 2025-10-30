@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.terminal;
 
-import java.io.Serializable;
-
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
@@ -26,9 +24,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>> implements EventListener
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** the ship-full event. */
     public static final EventType READY_EVENT = new EventType("READY_EVENT");
 
@@ -128,11 +123,8 @@ public class Terminal extends AbstractDsolModel<Double, DevsSimulatorInterface<D
     }
 
     /** */
-    public static class Output implements Serializable
+    public static class Output
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** QCs. */
         private final int numQC;
 

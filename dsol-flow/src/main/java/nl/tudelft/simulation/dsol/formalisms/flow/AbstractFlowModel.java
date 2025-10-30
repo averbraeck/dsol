@@ -27,9 +27,6 @@ import nl.tudelft.simulation.language.DsolRuntimeException;
 public abstract class AbstractFlowModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>>
         extends AbstractDsolModel<T, S> implements FlowModel<T, S>
 {
-    /** */
-    private static final long serialVersionUID = 20250323L;
-
     /** counter of the blocks when automatic naming is used. */
     protected Map<String, AtomicInteger> countMap = new HashMap<>();
 

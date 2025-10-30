@@ -15,9 +15,6 @@ import nl.tudelft.simulation.language.filters.AbstractFilter;
  */
 public class MaxDiffFilter extends AbstractFilter
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the snippet representing the xRange for this filter. */
     private double acceptedDifferencePercentage = Double.NaN;
 

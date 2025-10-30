@@ -22,9 +22,6 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  */
 public class Warehouse42Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** ordering costs statistic. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     SimTally<Double> orderingCosts;

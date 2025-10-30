@@ -22,9 +22,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistExponential extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** mean is the mean value of the exponential distribution. */
     private final double mean;
 

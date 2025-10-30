@@ -33,11 +33,10 @@ public class FlowModelTest extends FlowTest
     @Test
     public void testFlowModelAutomaticId()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var model = new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, BlockNamingType.AUTOMATIC)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -65,12 +64,11 @@ public class FlowModelTest extends FlowTest
     @Test
     public void testFlowModelById()
     {
-        var simulator = new DevsSimulator<Double>("sim");        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
+        var simulator = new DevsSimulator<Double>("sim");
+        simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         var streamInfo = new StreamInformation(new MersenneTwister(10L));
         var model = new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, streamInfo, BlockNamingType.BY_ID)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -103,8 +101,6 @@ public class FlowModelTest extends FlowTest
         simulator.setErrorStrategy(ErrorStrategy.WARN_AND_THROW);
         UnitTest.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -114,8 +110,6 @@ public class FlowModelTest extends FlowTest
         var streamInfo = new StreamInformation(new MersenneTwister(10L));
         UnitTest.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, streamInfo, null)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -124,8 +118,6 @@ public class FlowModelTest extends FlowTest
 
         UnitTest.testFail(() -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(null, BlockNamingType.AUTOMATIC)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {
@@ -135,8 +127,6 @@ public class FlowModelTest extends FlowTest
         UnitTest.testFail(
                 () -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(null, streamInfo, BlockNamingType.AUTOMATIC)
                 {
-                    private static final long serialVersionUID = 1L;
-
                     @Override
                     public void constructModel() throws SimRuntimeException
                     {
@@ -146,8 +136,6 @@ public class FlowModelTest extends FlowTest
         UnitTest.testFail(
                 () -> new AbstractFlowModel<Double, DevsSimulatorInterface<Double>>(simulator, null, BlockNamingType.AUTOMATIC)
                 {
-                    private static final long serialVersionUID = 1L;
-
                     @Override
                     public void constructModel() throws SimRuntimeException
                     {

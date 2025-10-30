@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  */
 public abstract class CachingNumericalIntegrator extends NumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the number of cachePlaces to store, e.g for k-1, k-2 set it to 2. */
     private int cachePlaces = 0;
 

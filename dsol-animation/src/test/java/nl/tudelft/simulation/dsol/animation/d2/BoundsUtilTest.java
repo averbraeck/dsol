@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.rmi.RemoteException;
-
 import org.djutils.draw.Transform3d;
 import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.draw.bounds.Bounds3d;
@@ -30,13 +28,6 @@ import nl.tudelft.simulation.dsol.animation.Locatable;
  */
 public class BoundsUtilTest
 {
-
-    /** */
-    private BoundsUtilTest()
-    {
-        // do not instantiate the test class
-    }
-
     /**
      * test transform method.
      */
@@ -91,10 +82,9 @@ public class BoundsUtilTest
 
     /**
      * Test the projectBounds and bounds transformation for an OrientedPoint3d.
-     * @throws RemoteException on network error
      */
     @Test
-    public void testProjectBoundsOrientedPoint3d() throws RemoteException
+    public void testProjectBoundsOrientedPoint3d()
     {
         Bounds3d box000 = new Bounds3d(new Point3d[] {new Point3d(-2, -2, -2), new Point3d(2, 2, 2)});
         OrientedPoint3d location = new OrientedPoint3d(4, 4, 4);
@@ -113,13 +103,13 @@ public class BoundsUtilTest
             }
 
             @Override
-            public OrientedPoint3d getLocation() throws RemoteException
+            public OrientedPoint3d getLocation()
             {
                 return new OrientedPoint3d(this.x, this.y, 0, 0, 0, this.dirZ);
             }
 
             @Override
-            public Bounds3d getRelativeBounds() throws RemoteException
+            public Bounds3d getRelativeBounds()
             {
                 return new Bounds3d(-4, 4, -4, 4, -4, 4);
             }
@@ -175,10 +165,9 @@ public class BoundsUtilTest
 
     /**
      * Test the projectBounds and bounds transformation for a Point3d.
-     * @throws RemoteException on network error
      */
     @Test
-    public void testProjectBoundsPoint3d() throws RemoteException
+    public void testProjectBoundsPoint3d()
     {
         Bounds3d box000 = new Bounds3d(new Point3d[] {new Point3d(-2, -2, -2), new Point3d(2, 2, 2)});
         Point3d location = new Point3d(4, 4, 4);
@@ -188,10 +177,9 @@ public class BoundsUtilTest
 
     /**
      * Test the projectBounds and bounds transformation for an DirectedPoint2d.
-     * @throws RemoteException on network error
      */
     @Test
-    public void testProjectBoundsDirectedPoint2d() throws RemoteException
+    public void testProjectBoundsDirectedPoint2d()
     {
         Bounds2d box00 = new Bounds2d(new Point2d[] {new Point2d(-2, -2), new Point2d(2, 2)});
         DirectedPoint2d location = new DirectedPoint2d(4, 4, 0);
@@ -210,13 +198,13 @@ public class BoundsUtilTest
             }
 
             @Override
-            public DirectedPoint2d getLocation() throws RemoteException
+            public DirectedPoint2d getLocation()
             {
                 return new DirectedPoint2d(this.x, this.y, this.dirZ);
             }
 
             @Override
-            public Bounds2d getRelativeBounds() throws RemoteException
+            public Bounds2d getRelativeBounds()
             {
                 return new Bounds2d(-4, 4, -4, 4);
             }
@@ -263,10 +251,9 @@ public class BoundsUtilTest
 
     /**
      * Test the projectBounds and bounds transformation for a Point2d.
-     * @throws RemoteException on network error
      */
     @Test
-    public void testProjectBoundsPoint2d() throws RemoteException
+    public void testProjectBoundsPoint2d()
     {
         Bounds2d box00 = new Bounds2d(new Point2d[] {new Point2d(-2, -2), new Point2d(2, 2)});
         Point2d location = new Point2d(4, 4);

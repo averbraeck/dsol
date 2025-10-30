@@ -19,9 +19,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistWeibull extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** alpha is the shape parameter &alpha;. */
     private final double alpha;
 

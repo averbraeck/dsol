@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -34,9 +33,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extends LocalEventProducer
 {
-    /** the default serial version UId. */
-    private static final long serialVersionUID = 1L;
-
     /** the parent model we are part of. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected CoupledModel<T> parentModel;
@@ -238,11 +234,8 @@ public abstract class AbstractDevsModel<T extends Number & Comparable<T>> extend
      * @author <a href="http://tudelft.nl/mseck">Mamadou Seck</a><br>
      * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a><br>
      */
-    public static class StateUpdate implements Serializable
+    public static class StateUpdate
     {
-        /** the default serial version UId. */
-        private static final long serialVersionUID = 1L;
-
         /** the name of the model. */
         private String model;
 

@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import java.io.Serializable;
 import java.util.function.Predicate;
 
 import org.djutils.event.EventType;
@@ -23,11 +22,8 @@ import nl.tudelft.simulation.naming.context.Contextualized;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a> relative types are the same.
  * @param <T> the time type
  */
-public abstract class Replication<T extends Number & Comparable<T>> implements Contextualized, Treatment<T>, Serializable
+public abstract class Replication<T extends Number & Comparable<T>> implements Contextualized, Treatment<T>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 20210404L;
-
     /** START_REPLICATION_EVENT is fired when a replication is started. */
     public static final EventType START_REPLICATION_EVENT =
             new EventType(new MetaData("START_REPLICATION_EVENT", "Replication started"));

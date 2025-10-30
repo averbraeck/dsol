@@ -14,9 +14,6 @@ import java.util.SortedMap;
  */
 public class InputParameterMap extends AbstractInputParameterMap<SortedMap<String, InputParameter<?, ?>>>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Construct a new InputParameterMap.
      * @param key unique (within the parent's input parameter map) name of the new InputParameterMap

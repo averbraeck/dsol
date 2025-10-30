@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.statistics.table;
 
-import java.rmi.RemoteException;
-
 import org.djutils.event.Event;
 import org.djutils.event.EventType;
 
@@ -20,7 +18,7 @@ import nl.tudelft.simulation.dsol.statistics.SimPersistent;
 public class PersistentTableModel extends StatisticsTableModel
 {
     /** */
-    private static final long serialVersionUID = 20200307L;
+    private static final long serialVersionUID = 1L;
 
     /** the column names. */
     private static final String[] COLUMN_NAMES = {"field", "value"};
@@ -31,9 +29,8 @@ public class PersistentTableModel extends StatisticsTableModel
     /**
      * Constructor.
      * @param persistent the persistent for which the table is created
-     * @throws RemoteException when communication with the persistent fails
      */
-    public PersistentTableModel(final SimPersistent<?> persistent) throws RemoteException
+    public PersistentTableModel(final SimPersistent<?> persistent)
     {
         super(COLUMN_NAMES, 8, persistent,
                 new EventType[] {SimPersistent.TIMED_INITIALIZED_EVENT, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT});
@@ -42,7 +39,7 @@ public class PersistentTableModel extends StatisticsTableModel
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         setValueAt("name", 0, 0);
         setValueAt("n", 1, 0);

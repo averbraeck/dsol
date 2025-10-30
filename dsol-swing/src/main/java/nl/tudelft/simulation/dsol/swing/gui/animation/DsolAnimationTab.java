@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,7 +24,6 @@ import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.animation.Locatable;
 import nl.tudelft.simulation.dsol.experiment.Replication;
-import nl.tudelft.simulation.dsol.logger.Cat;
 import nl.tudelft.simulation.dsol.simulators.AnimatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.swing.animation.d2.AnimationPanel;
@@ -95,11 +93,9 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
      * Construct a tab with an AnimationPanel for the animation of a DsolModel.
      * @param homeExtent initial extent of the animation
      * @param simulator the simulator
-     * @throws RemoteException on network error in case of a distributed simulation
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
-    public DsolAnimationTab(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DsolException
+    public DsolAnimationTab(final Bounds2d homeExtent, final SimulatorInterface<?> simulator) throws DsolException
     {
         this(simulator, new AnimationPanel(homeExtent, simulator));
     }
@@ -108,11 +104,9 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
      * Construct a tab with an AnimationPanel for the animation of a DsolModel.
      * @param simulator the simulator
      * @param animationPanel the animation panel to use, e.g. the AutoPanAnimationPanel
-     * @throws RemoteException on network error in case of a distributed simulation
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
-    public DsolAnimationTab(final SimulatorInterface<?> simulator, final AnimationPanel animationPanel)
-            throws RemoteException, DsolException
+    public DsolAnimationTab(final SimulatorInterface<?> simulator, final AnimationPanel animationPanel) throws DsolException
     {
         setPreferredSize(new Dimension(1024, 768));
         if (!(simulator instanceof AnimatorInterface))
@@ -132,11 +126,10 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
      * @param homeExtent initial extent of the animation
      * @param simulator the simulator
      * @return a tab with an AutoPanAnimationPanel and a linked SearchPanel
-     * @throws RemoteException on network error in case of a distributed simulation
      * @throws DsolException when simulator does not implement the AnimatorInterface
      */
     public static DsolAnimationTab createAutoPanTab(final Bounds2d homeExtent, final SimulatorInterface<?> simulator)
-            throws RemoteException, DsolException
+            throws DsolException
     {
         DsolAnimationTab tab = new DsolAnimationTab(simulator, new AutoPanAnimationPanel(homeExtent, simulator));
         tab.setSearchPanel(new SearchPanel());
@@ -145,10 +138,9 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
 
     /**
      * This method makes the lay-out for the AnimationTab and can be overridden to create another lay-out.
-     * @throws RemoteException on network error in case of a distributed simulation
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public void init() throws RemoteException
+    public void init()
     {
         // Add the animation panel in the CENTER.
         this.animationPanel.showGrid(true);
@@ -384,7 +376,7 @@ public class DsolAnimationTab extends JPanel implements ActionListener, EventLis
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         // At the moment there are no notifications for this tab.
     }

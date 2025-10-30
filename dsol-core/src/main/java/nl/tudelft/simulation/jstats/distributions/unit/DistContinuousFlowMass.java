@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousFlowMass extends DistContinuousUnit<FlowMassUnit, FlowMass>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws FlowMass scalars.
      * @param wrappedDistribution the wrapped continuous distribution

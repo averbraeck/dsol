@@ -21,9 +21,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class StreamSeedInformation extends StreamInformation
 {
-    /** */
-    private static final long serialVersionUID = 20210408L;
-
     /** the mapping of replication numbers to seeds for each of the streams, identified by id. */
     private Map<String, Map<Integer, Long>> streamSeedMap = new LinkedHashMap<>();
 

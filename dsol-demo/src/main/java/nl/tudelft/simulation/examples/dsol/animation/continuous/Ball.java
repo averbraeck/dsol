@@ -1,11 +1,8 @@
 package nl.tudelft.simulation.examples.dsol.animation.continuous;
 
-import java.rmi.RemoteException;
-
 import javax.naming.NamingException;
 
 import org.djutils.draw.point.OrientedPoint3d;
-import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.examples.dsol.animation.BallAnimation;
@@ -41,41 +38,34 @@ public class Ball extends nl.tudelft.simulation.examples.dsol.animation.Ball
      * constructs a new Ball.
      * @param nr the ball number
      * @param simulator the simulator
-     * @throws RemoteException on network exception
      * @throws NamingException on animation error
      */
-    public Ball(final int nr, final DessSimulatorInterface<Double> simulator) throws RemoteException, NamingException
+    public Ball(final int nr, final DessSimulatorInterface<Double> simulator) throws NamingException
     {
         super(nr);
         this.simulator = simulator;
         this.positioner = new Positioner(simulator);
         new BallAnimation(this, simulator);
-        try
-        {
-            this.next();
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().error(exception);
-        }
+        this.next();
     }
 
     @Override
-    public OrientedPoint3d getLocation() throws RemoteException
+    public OrientedPoint3d getLocation()
     {
         double x = Math.cos(this.angle) * this.positioner.y(this.simulator.getSimulatorTime())[1] + this.origin.getX();
         double y = Math.sin(this.angle) * this.positioner.y(this.simulator.getSimulatorTime())[1] + this.origin.getY();
         if (Math.abs(x - this.origin.getX()) > Math.abs(this.destination.getX() - this.origin.getX())
                 || Math.abs(y - this.origin.getY()) > Math.abs(this.destination.getY() - this.origin.getY()))
-        { this.next(); }
+        {
+            this.next();
+        }
         return new OrientedPoint3d(x, y, 0, 0.0, 0.0, this.theta);
     }
 
     /**
      * next move.
-     * @throws RemoteException on network failure
      */
-    public void next() throws RemoteException
+    public void next()
     {
         StreamInterface stream = this.simulator.getModel().getStream("default");
         this.origin = this.destination;

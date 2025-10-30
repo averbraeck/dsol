@@ -15,11 +15,8 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public abstract class Dist implements java.io.Serializable
+public abstract class Dist
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** stream is the random number generator from which to draw. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected StreamInterface stream;

@@ -28,9 +28,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
 public class DevsRealTimeClockDoubleTest implements EventListener
 {
     /** */
-    private static final long serialVersionUID = 1L;
-
-    /** */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected DevsSimulatorInterface<Double> devsSimulator;
 
@@ -72,7 +69,7 @@ public class DevsRealTimeClockDoubleTest implements EventListener
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         this.waiter.resume();
     }
@@ -209,9 +206,6 @@ public class DevsRealTimeClockDoubleTest implements EventListener
      */
     public static class ModelDouble extends AbstractDsolModel<Double, DevsSimulatorInterface<Double>>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /**
          * @param simulator the simulator.
          */

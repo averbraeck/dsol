@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs;
 
-import java.rmi.RemoteException;
-
 import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -28,9 +26,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public abstract class AtomicModel<T extends Number & Comparable<T>> extends AbstractDevsPortModel<T>
 {
-    /** the default serialVersionUId. */
-    private static final long serialVersionUID = 1L;
-
     /** future Execution of the Internal Transition. */
     private SimEvent<T> nextEvent;
 
@@ -197,9 +192,8 @@ public abstract class AtomicModel<T extends Number & Comparable<T>> extends Abst
      * Return the elapsed time (e) since the last event.
      * @param eventTime the time of the event for which we want to calculate the elapsed time.
      * @return the elapsed time (e) since the last event.
-     * @throws RemoteException a remote exception occurred
      */
-    public T elapsedTime(final T eventTime) throws RemoteException
+    public T elapsedTime(final T eventTime)
     {
         return (SimTime.minus(eventTime, this.timeLastEvent));
     }

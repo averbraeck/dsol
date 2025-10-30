@@ -33,9 +33,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCounter implements SimulationStatistic<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /** the simulator to subscribe to and from. */
     private SimulatorInterface<T> simulator = null;
 
@@ -97,14 +94,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
             final EventProducer target, final EventType eventType)
     {
         this(key, description, model);
-        try
-        {
-            target.addListener(this, eventType, ReferenceType.STRONG);
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "<init>");
-        }
+        target.addListener(this, eventType, ReferenceType.STRONG);
     }
 
     @Override
@@ -114,14 +104,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         // note that when initialize() is called from the (super) constructor, there cannot be listeners yet
         if (this.simulator != null)
         {
-            try
-            {
-                fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
-            }
-            catch (RemoteException exception)
-            {
-                CategoryLogger.always().warn(exception, "initialize()");
-            }
+            fireTimedEvent(TIMED_INITIALIZED_EVENT, this, this.simulator.getSimulatorTime());
         }
     }
 
@@ -129,14 +112,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
     public long register(final long value)
     {
         long result = super.register(value);
-        try
-        {
-            fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception, "register()");
-        }
+        fireTimedEvent(TIMED_OBSERVATION_ADDED_EVENT, value, this.simulator.getSimulatorTime());
         return result;
     }
 
@@ -149,14 +125,7 @@ public class SimCounter<T extends Number & Comparable<T>> extends EventBasedCoun
         }
         if (event.getType().equals(Replication.WARMUP_EVENT))
         {
-            try
-            {
-                this.simulator.removeListener(this, Replication.WARMUP_EVENT);
-            }
-            catch (RemoteException exception)
-            {
-                CategoryLogger.always().warn(exception);
-            }
+            this.simulator.removeListener(this, Replication.WARMUP_EVENT);
             super.initialize();
             return;
         }

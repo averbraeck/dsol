@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.swing.gui.control;
 
 import java.awt.event.ActionEvent;
-import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -32,7 +31,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
         extends AbstractControlPanel<T, S>
 {
     /** */
-    private static final long serialVersionUID = 20201227L;
+    private static final long serialVersionUID = 1L;
 
     /** The currently registered stop at event. */
     private SimEvent<T> stopAtEvent = null;
@@ -44,10 +43,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
      * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of the
      *            simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator, whereas
      *            the panel needs a RealTimeControlAnimator)
-     * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
     public DevsControlPanel(final DsolModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator)
-            throws RemoteException
+
     {
         super(model, simulator);
     }
@@ -56,7 +54,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
     public void addButtons()
     {
         super.addButtons();
-        
+
         // add the buttons to step the simulation
         getControlButtonsPanel().add(makeButton("stepButton", "/resources/Step.png", "Step", "Execute one event", true));
         getControlButtonsPanel().add(makeButton("nextTimeButton", "/resources/StepTime.png", "NextTime",
@@ -91,9 +89,8 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
                 }
                 catch (SimRuntimeException exception)
                 {
-                    CategoryLogger.always()
-                            .error("Caught an exception while trying to schedule an autoPauseSimulator event "
-                                    + "at the current simulator time");
+                    CategoryLogger.always().error("Caught an exception while trying to schedule an autoPauseSimulator event "
+                            + "at the current simulator time");
                 }
                 getSimulator().start();
             }
@@ -224,7 +221,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
     public static class TimeDouble extends DevsControlPanel<Double, DevsSimulatorInterface<Double>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a DEVS control panel for a Double time unit, with a different set of control buttons. The control panel
@@ -233,10 +230,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeDouble(final DsolModel<Double, ? extends DevsSimulatorInterface<Double>> model,
-                final DevsSimulatorInterface<Double> simulator) throws RemoteException
+                final DevsSimulatorInterface<Double> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDouble(getSimulator()));
@@ -258,7 +254,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
     public static class TimeFloat extends DevsControlPanel<Float, DevsSimulatorInterface<Float>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a DEVS control panel for a Float time unit, with a different set of control buttons. The control panel
@@ -267,10 +263,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeFloat(final DsolModel<Float, ? extends DevsSimulatorInterface<Float>> model,
-                final DevsSimulatorInterface<Float> simulator) throws RemoteException
+                final DevsSimulatorInterface<Float> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloat(getSimulator()));
@@ -292,7 +287,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
     public static class TimeLong extends DevsControlPanel<Long, DevsSimulatorInterface<Long>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a DEVS control panel for a Long time unit, with a different set of control buttons. The control panel
@@ -301,10 +296,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeLong(final DsolModel<Long, ? extends DevsSimulatorInterface<Long>> model,
-                final DevsSimulatorInterface<Long> simulator) throws RemoteException
+                final DevsSimulatorInterface<Long> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeLong(getSimulator()));
@@ -326,7 +320,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
     public static class TimeDoubleUnit extends DevsControlPanel<Duration, DevsSimulatorInterface<Duration>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a DEVS control panel for a djunits double time unit, with a different set of control buttons. The control
@@ -335,10 +329,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeDoubleUnit(final DsolModel<Duration, ? extends DevsSimulatorInterface<Duration>> model,
-                final DevsSimulatorInterface<Duration> simulator) throws RemoteException
+                final DevsSimulatorInterface<Duration> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDoubleUnit(getSimulator()));
@@ -360,7 +353,7 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
     public static class TimeFloatUnit extends DevsControlPanel<FloatDuration, DevsSimulatorInterface<FloatDuration>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a DEVS control panel for a djunits float time unit, with a different set of control buttons. The control
@@ -369,10 +362,9 @@ public class DevsControlPanel<T extends Number & Comparable<T>, S extends DevsSi
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeFloatUnit(final DsolModel<FloatDuration, ? extends DevsSimulatorInterface<FloatDuration>> model,
-                final DevsSimulatorInterface<FloatDuration> simulator) throws RemoteException
+                final DevsSimulatorInterface<FloatDuration> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloatUnit(getSimulator()));

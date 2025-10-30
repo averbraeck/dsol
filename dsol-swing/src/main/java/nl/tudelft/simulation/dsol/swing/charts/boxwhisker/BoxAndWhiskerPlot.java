@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.rmi.RemoteException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,9 +73,8 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
     /**
      * adds a tally to the array of targets.
      * @param tally the tally to be summarized
-     * @throws RemoteException on network failure
      */
-    public synchronized void add(final EventBasedTally tally) throws RemoteException
+    public synchronized void add(final EventBasedTally tally)
     {
         tally.addListener(this, StatisticsEvents.SAMPLE_MEAN_EVENT, ReferenceType.STRONG);
         this.tallies.add(tally);
@@ -85,9 +83,8 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
     /**
      * adds a tally to the array of targets.
      * @param tally the tally to be summarized
-     * @throws RemoteException on network failure
      */
-    public synchronized void add(final EventBasedWeightedTally tally) throws RemoteException
+    public synchronized void add(final EventBasedWeightedTally tally)
     {
         tally.addListener(this, StatisticsEvents.WEIGHTED_SAMPLE_MEAN_EVENT, ReferenceType.STRONG);
         this.tallies.add(tally);
@@ -96,9 +93,8 @@ public class BoxAndWhiskerPlot extends Plot implements EventListener
     /**
      * adds a tally to the array of targets.
      * @param tally the tally to be summarized
-     * @throws RemoteException on network failure
      */
-    public synchronized void add(final EventBasedTimestampWeightedTally tally) throws RemoteException
+    public synchronized void add(final EventBasedTimestampWeightedTally tally)
     {
         tally.addListener(this, StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT, ReferenceType.STRONG);
         this.tallies.add(tally);

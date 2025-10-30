@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.tutorial.section43;
 
-import java.rmi.RemoteException;
-
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
 import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
@@ -19,9 +17,6 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
  */
 public class Population extends DifferentialEquation<Double>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** Lotka-Volterra parameters. */
     private double a;
 
@@ -37,9 +32,8 @@ public class Population extends DifferentialEquation<Double>
     /**
      * constructs a new Population.
      * @param simulator the simulator
-     * @throws RemoteException on networn error for the listeners
      */
-    public Population(final DessSimulatorInterface<Double> simulator) throws RemoteException
+    public Population(final DessSimulatorInterface<Double> simulator)
     {
         super(simulator, simulator.getTimeStep(), NumericalIntegratorType.ADAMS, 2);
         double predator = 10;

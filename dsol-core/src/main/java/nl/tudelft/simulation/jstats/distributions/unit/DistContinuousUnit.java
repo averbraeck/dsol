@@ -18,9 +18,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public abstract class DistContinuousUnit<U extends Unit<U>, S extends DoubleScalar<U, S>> extends Dist
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the wrapped distribution. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     public DistContinuous wrappedDistribution;

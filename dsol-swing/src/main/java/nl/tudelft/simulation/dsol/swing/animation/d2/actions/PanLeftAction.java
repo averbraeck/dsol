@@ -23,7 +23,7 @@ import nl.tudelft.simulation.dsol.swing.animation.d2.VisualizationPanel;
 public class PanLeftAction extends AbstractAction
 {
     /** */
-    private static final long serialVersionUID = 20140909L;
+    private static final long serialVersionUID = 1L;
 
     /** the panel to pan left. */
     private VisualizationPanel panel = null;

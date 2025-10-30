@@ -20,9 +20,6 @@ import nl.tudelft.simulation.dsol.animation.gis.LayerInterface;
  */
 public class Layer implements LayerInterface
 {
-    /** */
-    private static final long serialVersionUID = 20201015L;
-
     /** the name of the layer. */
     private String name;
 

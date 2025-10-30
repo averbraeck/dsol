@@ -5,10 +5,8 @@ import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.djutils.draw.bounds.Bounds2d;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.animation.gis.DataSourceInterface;
@@ -18,7 +16,6 @@ import nl.tudelft.simulation.dsol.animation.gis.FloatXY;
 import nl.tudelft.simulation.dsol.animation.gis.io.Endianness;
 import nl.tudelft.simulation.dsol.animation.gis.io.ObjectEndianInputStream;
 import nl.tudelft.simulation.dsol.animation.gis.transform.CoordinateTransform;
-import nl.tudelft.simulation.language.d2.Shape;
 
 /**
  * This class reads ESRI-shapefiles and returns the shape objects.
@@ -36,9 +33,6 @@ import nl.tudelft.simulation.language.d2.Shape;
  */
 public class ShapeFileReader implements DataSourceInterface
 {
-    /** */
-    private static final long serialVersionUID = 20201223L;
-
     /** the URL for the shape file to be read. */
     private URL shpFile = null;
 

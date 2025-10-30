@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.naming.context.event;
 
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 
 import javax.naming.InvalidNameException;
 import javax.naming.NameNotFoundException;
@@ -38,10 +37,9 @@ public interface EventContextInterface extends Remote
      *             ordinary object
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs.
      */
-    boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope) throws RemoteException,
-            NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException;
+    boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope)
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException;
 
     /**
      * Add a listener for the provided scope to the BEGINNING of a queue of listeners.
@@ -57,11 +55,9 @@ public interface EventContextInterface extends Remote
      *             ordinary object
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs.
      */
     boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope, ReferenceType referenceType)
-            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
-            NullPointerException;
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException;
 
     /**
      * Add a listener for the provided scope as strong reference to the specified position of a queue of listeners.
@@ -78,11 +74,9 @@ public interface EventContextInterface extends Remote
      *             ordinary object
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs.
      */
     boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope, int position)
-            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
-            NullPointerException;
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException;
 
     /**
      * Add a listener for the provided scope to the specified position of a queue of listeners.
@@ -100,11 +94,10 @@ public interface EventContextInterface extends Remote
      *             ordinary object
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs.
      */
     boolean addListener(EventListener listener, String absolutePath, ContextScope contextScope, int position,
-            ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
-            NotContextException, NamingException, NullPointerException;
+            ReferenceType referenceType)
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException;
 
     /**
      * Remove the subscription of a listener for the provided scope for a specific event.
@@ -114,9 +107,8 @@ public interface EventContextInterface extends Remote
      * @return the success of removing the listener. If a listener was not subscribed false is returned.
      * @throws InvalidNameException when the path does not start with a slash
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs
      */
     boolean removeListener(EventListener listener, String absolutePath, ContextScope contextScope)
-            throws RemoteException, InvalidNameException, NullPointerException;
+            throws InvalidNameException, NullPointerException;
 
 }

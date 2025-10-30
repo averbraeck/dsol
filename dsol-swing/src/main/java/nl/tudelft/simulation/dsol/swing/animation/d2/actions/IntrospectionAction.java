@@ -21,7 +21,7 @@ import nl.tudelft.simulation.introspection.DelegateIntrospection;
 public class IntrospectionAction extends AbstractAction
 {
     /** */
-    private static final long serialVersionUID = 20140909L;
+    private static final long serialVersionUID = 1L;
 
     /** the target to introspect. */
     private Object target = null;

@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.model;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +26,14 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  * @param <T> the time type
  * @param <S> the simulator to use
  */
-public interface DsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>> extends Serializable
+public interface DsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>>
 {
     /**
      * Construct a model on a simulator.
      * @throws SimRuntimeException on model construction failure
      */
     void constructModel() throws SimRuntimeException;
-    
+
     /**
      * Set the executable code for resetting the application at a 'reset' command in the GUI.
      * @param resetApplicationExecutable the executable code for resetting the application
@@ -51,7 +50,7 @@ public interface DsolModel<T extends Number & Comparable<T>, S extends Simulator
      * Reset the application.
      */
     void resetApplication();
-    
+
     /**
      * Return the simulator for this model.
      * @return the simulator for the model

@@ -19,9 +19,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistBernoulli extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** p is the probability for success (X=1) of the Bernouilli distribution. */
     private final double p;
 

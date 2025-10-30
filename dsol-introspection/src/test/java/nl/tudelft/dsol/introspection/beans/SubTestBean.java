@@ -6,7 +6,6 @@ package nl.tudelft.dsol.introspection.beans;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.Serializable;
 
 import org.djutils.logger.CategoryLogger;
 
@@ -18,11 +17,8 @@ import org.djutils.logger.CategoryLogger;
  *         Assistant researchers <a href="https://www.linkedin.com/in/peterhmjacobs">Ir. P.H.M. Jacobs </a> and
  *         <a href="http://www.tbm.tudelft.nl/webstaf/nielsl">Ir. N.A. Lang </a>
  */
-public class SubTestBean implements Serializable
+public class SubTestBean
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** Holds value of property firstProperty. */
     private String firstProperty = "First ;-)";
 

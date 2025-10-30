@@ -33,9 +33,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class WebMM1Model extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /** tally dN. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     SimTally<Double> dN;

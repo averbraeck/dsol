@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousAbsoluteTemperature extends DistContinuousUnit<AbsoluteTemperatureUnit, AbsoluteTemperature>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws AbsoluteTemperature scalars.
      * @param wrappedDistribution the wrapped continuous distribution

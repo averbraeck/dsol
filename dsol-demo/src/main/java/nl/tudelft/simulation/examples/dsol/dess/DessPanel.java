@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.dess;
 
-import java.rmi.RemoteException;
-
 import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.table.PersistentTableModel;
 import nl.tudelft.simulation.dsol.swing.gui.DsolPanel;
@@ -26,9 +24,8 @@ public class DessPanel extends DsolPanel
     /**
      * @param model the model
      * @param simulator the simulator
-     * @throws RemoteException on error
      */
-    public DessPanel(final DessModel model, final DessSimulatorInterface<Double> simulator) throws RemoteException
+    public DessPanel(final DessModel model, final DessSimulatorInterface<Double> simulator)
     {
         super(new GenericControlPanel<>(model, simulator));
 

@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousDimensionless extends DistContinuousUnit<DimensionlessUnit, Dimensionless>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Dimensionless scalars.
      * @param wrappedDistribution the wrapped continuous distribution

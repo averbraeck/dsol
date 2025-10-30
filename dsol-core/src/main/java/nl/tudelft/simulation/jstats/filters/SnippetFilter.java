@@ -15,9 +15,6 @@ import nl.tudelft.simulation.language.filters.AbstractFilter;
  */
 public class SnippetFilter extends AbstractFilter
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the snippet representing the xRange for this filter. */
     private double snippet = Double.NaN;
 

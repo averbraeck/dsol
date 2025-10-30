@@ -29,9 +29,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public class Cpu extends FlowBlock<Double, Cpu> implements Locatable
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** UTILIZATION_EVENT are fired on utilization. */
     public static final EventType UTILIZATION_EVENT = new EventType(new MetaData("UTILIZATION_EVENT", "Utilization change",
             new ObjectDescriptor("utilization", "Current utilization", Double.class)));

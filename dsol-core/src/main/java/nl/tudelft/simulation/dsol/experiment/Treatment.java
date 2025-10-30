@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.experiment;
 
-import java.io.Serializable;
 import java.util.function.Predicate;
 
 import nl.tudelft.simulation.dsol.model.DsolModel;
@@ -18,7 +17,7 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  * @param <T> the simulation time type to be able to implement a comparator on the simulation time.
  */
-public interface Treatment<T extends Number & Comparable<T>> extends Serializable
+public interface Treatment<T extends Number & Comparable<T>>
 {
     /**
      * Return the id of this replication.

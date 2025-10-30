@@ -17,9 +17,6 @@ import org.djunits.unit.Unit;
  */
 public class InputParameterUnit<U extends Unit<U>> extends InputParameterSelectionMap<String, U>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Construct a new InputParameterUnit.
      * @param key unique (within the parent's input parameter map) name of the new InputParameterUnit

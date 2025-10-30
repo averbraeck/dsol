@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousLuminousFlux extends DistContinuousUnit<LuminousFluxUnit, LuminousFlux>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws LuminousFlux scalars.
      * @param wrappedDistribution the wrapped continuous distribution

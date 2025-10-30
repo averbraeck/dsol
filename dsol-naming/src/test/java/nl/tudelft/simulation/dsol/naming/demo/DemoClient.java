@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -32,7 +31,7 @@ import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
 public class DemoClient extends RmiObject implements EventListener
 {
     /** */
-    private static final long serialVersionUID = 20200210L;
+    private static final long serialVersionUID = 1L;
 
     /** exit the program? */
     private boolean exit = false;
@@ -41,15 +40,13 @@ public class DemoClient extends RmiObject implements EventListener
     private RemoteEventContextInterface remoteContext;
 
     /**
-     * @throws RemoteException on network error
      * @throws AlreadyBoundException when object was aleady registered in RMI
      * @throws NamingException on context error
      * @throws IOException on error reading from stdin
      * @throws NotBoundException when server is not running
      * @throws InterruptedException for sleep
      */
-    public DemoClient()
-            throws RemoteException, AlreadyBoundException, NamingException, IOException, NotBoundException, InterruptedException
+    public DemoClient() throws AlreadyBoundException, NamingException, IOException, NotBoundException, InterruptedException
     {
         super("127.0.0.1", 1099, "democlient");
 
@@ -72,7 +69,7 @@ public class DemoClient extends RmiObject implements EventListener
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(DemoServerInterface.EXIT_EVENT))
         {

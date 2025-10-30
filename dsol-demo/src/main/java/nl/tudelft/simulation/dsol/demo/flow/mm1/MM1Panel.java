@@ -1,8 +1,5 @@
 package nl.tudelft.simulation.dsol.demo.flow.mm1;
 
-import java.rmi.RemoteException;
-
-import org.djutils.logger.CategoryLogger;
 import org.djutils.stats.summarizers.event.StatisticsEvents;
 
 import nl.tudelft.simulation.dsol.statistics.SimPersistent;
@@ -34,9 +31,8 @@ public class MM1Panel extends DsolPanel
      * @param controlPanel the control panel
      * @param model the model
      * @throws DsolException on error
-     * @throws RemoteException on error
      */
-    public MM1Panel(final DevsControlPanel.TimeDouble controlPanel, final MM1Model model) throws RemoteException, DsolException
+    public MM1Panel(final DevsControlPanel.TimeDouble controlPanel, final MM1Model model) throws DsolException
     {
         super(controlPanel);
         addTabs(model);
@@ -55,64 +51,57 @@ public class MM1Panel extends DsolPanel
         addConsoleLogger();
         addConsoleOutput();
 
-        try
-        {
-            // dN
+        // dN
 
-            XYChart dNVal = new XYChart(getSimulator(), "time in queue (dN)").setLabelXAxis("time (s)").setLabelYAxis("dN");
-            dNVal.add("dN value", model.dN, StatisticsEvents.OBSERVATION_ADDED_EVENT);
-            charts.setCell(dNVal.getSwingPanel(), 0, 0);
+        XYChart dNVal = new XYChart(getSimulator(), "time in queue (dN)").setLabelXAxis("time (s)").setLabelYAxis("dN");
+        dNVal.add("dN value", model.dN, StatisticsEvents.OBSERVATION_ADDED_EVENT);
+        charts.setCell(dNVal.getSwingPanel(), 0, 0);
 
-            XYChart dN = new XYChart(getSimulator(), "avg time in queue").setLabelXAxis("time (s)").setLabelYAxis("avg dN");
-            dN.add("dN mean", model.dN, StatisticsEvents.SAMPLE_MEAN_EVENT);
-            charts.setCell(dN.getSwingPanel(), 1, 0);
+        XYChart dN = new XYChart(getSimulator(), "avg time in queue").setLabelXAxis("time (s)").setLabelYAxis("avg dN");
+        dN.add("dN mean", model.dN, StatisticsEvents.SAMPLE_MEAN_EVENT);
+        charts.setCell(dN.getSwingPanel(), 1, 0);
 
-            BoxAndWhiskerChart bwdN = new BoxAndWhiskerChart(getSimulator(), "dN boxplot");
-            bwdN.add(model.dN);
-            charts.setCell(bwdN.getSwingPanel(), 2, 0);
+        BoxAndWhiskerChart bwdN = new BoxAndWhiskerChart(getSimulator(), "dN boxplot");
+        bwdN.add(model.dN);
+        charts.setCell(bwdN.getSwingPanel(), 2, 0);
 
-            StatisticsTable dNTable = new StatisticsTable(new TallyTableModel(model.dN));
-            charts.setCell(dNTable.getSwingPanel(), 3, 0);
+        StatisticsTable dNTable = new StatisticsTable(new TallyTableModel(model.dN));
+        charts.setCell(dNTable.getSwingPanel(), 3, 0);
 
-            // qN
+        // qN
 
-            XYChart qNVal = new XYChart(getSimulator(), "queue length (qN)").setLabelXAxis("time (s)").setLabelYAxis("qN");
-            qNVal.add("qN value", model.qN, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
-            charts.setCell(qNVal.getSwingPanel(), 0, 1);
+        XYChart qNVal = new XYChart(getSimulator(), "queue length (qN)").setLabelXAxis("time (s)").setLabelYAxis("qN");
+        qNVal.add("qN value", model.qN, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
+        charts.setCell(qNVal.getSwingPanel(), 0, 1);
 
-            XYChart qN = new XYChart(getSimulator(), "avg queue length").setLabelXAxis("time (s)").setLabelYAxis("avg qN");
-            qN.add("qN mean", model.qN, StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT);
-            charts.setCell(qN.getSwingPanel(), 1, 1);
+        XYChart qN = new XYChart(getSimulator(), "avg queue length").setLabelXAxis("time (s)").setLabelYAxis("avg qN");
+        qN.add("qN mean", model.qN, StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT);
+        charts.setCell(qN.getSwingPanel(), 1, 1);
 
-            BoxAndWhiskerChart bwqN = new BoxAndWhiskerChart(getSimulator(), "qN boxplot");
-            bwqN.add(model.qN);
-            charts.setCell(bwqN.getSwingPanel(), 2, 1);
+        BoxAndWhiskerChart bwqN = new BoxAndWhiskerChart(getSimulator(), "qN boxplot");
+        bwqN.add(model.qN);
+        charts.setCell(bwqN.getSwingPanel(), 2, 1);
 
-            StatisticsTable qNTable = new StatisticsTable(new PersistentTableModel(model.qN));
-            charts.setCell(qNTable.getSwingPanel(), 3, 1);
+        StatisticsTable qNTable = new StatisticsTable(new PersistentTableModel(model.qN));
+        charts.setCell(qNTable.getSwingPanel(), 3, 1);
 
-            // uN
+        // uN
 
-            XYChart utilization = new XYChart(getSimulator(), "utilization").setLabelXAxis("time (s)").setLabelYAxis("uN");
-            utilization.add("utilization", model.uN, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
-            charts.setCell(utilization.getSwingPanel(), 0, 2);
+        XYChart utilization = new XYChart(getSimulator(), "utilization").setLabelXAxis("time (s)").setLabelYAxis("uN");
+        utilization.add("utilization", model.uN, SimPersistent.TIMED_OBSERVATION_ADDED_EVENT);
+        charts.setCell(utilization.getSwingPanel(), 0, 2);
 
-            XYChart meanUtilization =
-                    new XYChart(getSimulator(), "avg utilization (uN)").setLabelXAxis("time (s)").setLabelYAxis("avg uN");
-            meanUtilization.add("mean utilization", model.uN, StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT);
-            charts.setCell(meanUtilization.getSwingPanel(), 1, 2);
+        XYChart meanUtilization =
+                new XYChart(getSimulator(), "avg utilization (uN)").setLabelXAxis("time (s)").setLabelYAxis("avg uN");
+        meanUtilization.add("mean utilization", model.uN, StatisticsEvents.TIMED_WEIGHTED_SAMPLE_MEAN_EVENT);
+        charts.setCell(meanUtilization.getSwingPanel(), 1, 2);
 
-            BoxAndWhiskerChart bwuN = new BoxAndWhiskerChart(getSimulator(), "uN boxplot");
-            bwuN.add(model.uN);
-            charts.setCell(bwuN.getSwingPanel(), 2, 2);
+        BoxAndWhiskerChart bwuN = new BoxAndWhiskerChart(getSimulator(), "uN boxplot");
+        bwuN.add(model.uN);
+        charts.setCell(bwuN.getSwingPanel(), 2, 2);
 
-            StatisticsTable uNTable = new StatisticsTable(new PersistentTableModel(model.uN));
-            charts.setCell(uNTable.getSwingPanel(), 3, 2);
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().error(exception);
-        }
+        StatisticsTable uNTable = new StatisticsTable(new PersistentTableModel(model.uN));
+        charts.setCell(uNTable.getSwingPanel(), 3, 2);
     }
 
 }

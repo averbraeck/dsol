@@ -19,9 +19,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistNormal extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** mu refers to the mean of the normal distribution. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     public double mu;

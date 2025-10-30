@@ -28,9 +28,6 @@ import nl.tudelft.simulation.dsol.statistics.SimPersistent;
  */
 public class Delay<T extends Number & Comparable<T>> extends FlowBlock<T, Delay<T>>
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** the distribution defining the delay. */
     private DistContinuousSimulationTime<T> delayDistribution = null;
 

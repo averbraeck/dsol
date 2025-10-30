@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.swing.charts.histogram;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GradientPaint;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 
 import javax.naming.NamingException;
@@ -39,11 +38,8 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  *         <a href="https://www.linkedin.com/in/peterhmjacobs"> Peter Jacobs </a>
  * @since 1.5
  */
-public class Histogram implements Swingable, Serializable
+public class Histogram implements Swingable
 {
-    /** */
-    private static final long serialVersionUID = 20200108L;
-
     /** LABEL_X_AXIS is the label on the X-axis. */
     public static final String LABEL_X_AXIS = "X";
 
@@ -138,9 +134,8 @@ public class Histogram implements Swingable, Serializable
      * adds a counter to the histogramdataset. This histogram then subscribes its dataset to the
      * <code>Counter.COUNT_EVENT</code>.
      * @param counter the counter to add.
-     * @throws RemoteException on network failure
      */
-    public synchronized void add(final SimCounter<?> counter) throws RemoteException
+    public synchronized void add(final SimCounter<?> counter)
     {
         HistogramSeries set = this.getDataset().addSeries(counter.getDescription());
         counter.addListener(set, SimCounter.TIMED_OBSERVATION_ADDED_EVENT, ReferenceType.STRONG);
@@ -152,10 +147,9 @@ public class Histogram implements Swingable, Serializable
      * @param description the description of the eventProducer
      * @param source the eventproducer which functions as source for this histogram.
      * @param eventType the eventType.
-     * @throws RemoteException on network error for the (possibly remote) event listener
      */
     public synchronized void add(final String description, final EventProducer source, final EventType eventType)
-            throws RemoteException
+
     {
         HistogramSeries set = this.getDataset().addSeries(description);
         source.addListener(set, eventType, ReferenceType.STRONG);

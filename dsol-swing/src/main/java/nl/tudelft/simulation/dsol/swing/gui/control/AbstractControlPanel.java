@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +48,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
         implements ActionListener, WindowListener, EventListener
 {
     /** */
-    private static final long serialVersionUID = 20150617L;
+    private static final long serialVersionUID = 1L;
 
     /** The simulator. */
     private S simulator;
@@ -87,10 +86,9 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
      * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of the
      *            simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator, whereas
      *            the panel needs a RealTimeControlAnimator)
-     * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
     public AbstractControlPanel(final DsolModel<T, ? extends SimulatorInterface<T>> model, final S simulator)
-            throws RemoteException
+
     {
         Throw.whenNull(model, "model cannot be null");
         Throw.whenNull(simulator, "simulator cannot be null");
@@ -122,9 +120,8 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     /**
      * Add the listeners for the control panel. This method can be overridden to add more listeners (call super.addListeners()
      * in that case), or to have completely different listeners.
-     * @throws RemoteException in case the (remote) simulator cannot be reached
      */
-    public void addListeners() throws RemoteException
+    public void addListeners()
     {
         this.simulator.addListener(this, Replication.END_REPLICATION_EVENT);
         this.simulator.addListener(this, SimulatorInterface.START_EVENT);
@@ -580,7 +577,7 @@ public abstract class AbstractControlPanel<T extends Number & Comparable<T>, S e
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(SimulatorInterface.START_EVENT) || event.getType().equals(SimulatorInterface.STOP_EVENT))
         {

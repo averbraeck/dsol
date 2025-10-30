@@ -21,9 +21,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistEmpiricalDiscreteDouble extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 20210403L;
-
     /** is the distribution grouped? */
     private final DiscreteEmpiricalDistribution empiricalDistribution;
 

@@ -12,9 +12,6 @@ import org.djutils.exceptions.Throw;
  */
 public class InputParameterDouble extends AbstractInputParameter<Double, Double>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** Format string to display the value of the input parameter. */
     private String format = "%f";
 

@@ -249,9 +249,6 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
      */
     class SearchPanelEventProducer extends LocalEventProducer
     {
-        /** */
-        private static final long serialVersionUID = 20210213L;
-
         @Override
         public void fireEvent(final Event event)
         {
@@ -307,7 +304,7 @@ public class SearchPanel extends JPanel implements ActionListener, FocusListener
     }
 
     @Override
-    public EventListenerMap getEventListenerMap() throws RemoteException
+    public EventListenerMap getEventListenerMap()
     {
         return this.searchPanelEventProducer.getEventListenerMap();
     }

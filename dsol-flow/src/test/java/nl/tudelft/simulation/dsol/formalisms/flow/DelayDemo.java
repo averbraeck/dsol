@@ -36,8 +36,6 @@ public class DelayDemo
         final Delay<Double>[] delayBlock = new Delay[1];
         var model = new AbstractDsolModel<Double, DevsSimulatorInterface<Double>>(simulator)
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void constructModel() throws SimRuntimeException
             {

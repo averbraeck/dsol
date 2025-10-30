@@ -16,9 +16,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class QuayCrane extends IntResource<Double>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** QC time delay. */
     private final DistContinuous qcTime;
 

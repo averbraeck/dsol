@@ -27,9 +27,6 @@ import nl.tudelft.simulation.dsol.statistics.SimTally;
  */
 public class Queue<T extends Number & Comparable<T>> extends Block<T> implements Iterable<CapacityRequest<T>>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The sorted set of capacity requests. */
     private SortedSet<CapacityRequest<T>> queue = new TreeSet<>(new FcfsPriorityRequestComparator<T>());
 

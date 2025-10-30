@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.rmi.RemoteException;
@@ -433,9 +432,6 @@ public class EventContextTest
     /** EventListener to test received events. */
     protected static class TestEventListener implements EventListener
     {
-        /** */
-        private static final long serialVersionUID = 20191230L;
-
         /** expect notification or not. */
         private boolean expectingNotification = true;
 
@@ -471,20 +467,19 @@ public class EventContextTest
         }
 
         @Override
-        public void notify(final Event event) throws RemoteException
+        public void notify(final Event event)
         {
             if (!this.expectingNotification)
-            { fail("Received event " + event + " unexpectedly for scope " + this.contextScope); }
+            {
+                fail("Received event " + event + " unexpectedly for scope " + this.contextScope);
+            }
             this.receivedEvent = event;
         }
     }
 
     /** Test object with ToString() method. */
-    protected static class TestObject implements Serializable
+    protected static class TestObject
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** */
         private String field;
 

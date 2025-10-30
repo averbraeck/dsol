@@ -22,9 +22,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public abstract class AbstractDevsPortModel<T extends Number & Comparable<T>> extends AbstractDevsModel<T>
 {
-    /** the default serial version UId. */
-    private static final long serialVersionUID = 1L;
-
     /** the map of input port names to input ports. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Map<String, InputPortInterface<T, ?>> inputPortMap = new LinkedHashMap<>();

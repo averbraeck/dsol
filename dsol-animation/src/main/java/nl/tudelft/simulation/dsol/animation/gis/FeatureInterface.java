@@ -2,7 +2,6 @@ package nl.tudelft.simulation.dsol.animation.gis;
 
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
-import java.io.Serializable;
 import java.util.Iterator;
 
 import org.djutils.draw.bounds.Bounds2d;
@@ -17,7 +16,7 @@ import org.djutils.draw.bounds.Bounds2d;
  * </p>
  * @author <a href="https://github.com/averbraeck">Alexander Verbraeck</a>
  */
-public interface FeatureInterface extends Serializable
+public interface FeatureInterface
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////// GENERIC METHODS FOR FEATURE /////////////////////////////////////////
@@ -109,20 +108,20 @@ public interface FeatureInterface extends Serializable
      * claar the collection of shapes for this feature.
      */
     void clearShapes();
-    
+
     /**
      * Add a shape for this feature.
      * @param shape the shape to add
      */
     void addShape(Path2D shape);
-    
+
     /**
      * Add a shape and array of attributes for this feature.
      * @param shape the shape to add
      * @param attributes the attributes to add
      */
     void addShape(Path2D shape, String[] attributes);
-    
+
     /**
      * Return the number of shapes for this feature.
      * @return the number of shapes for this feature
@@ -194,14 +193,14 @@ public interface FeatureInterface extends Serializable
      * @param point the point to add
      */
     void addPoint(Point2D point);
-    
+
     /**
      * Add a shape and array of attributes for this feature.
      * @param point the point to add
      * @param attributes the attributes to add
      */
     void addPoint(Point2D point, String[] attributes);
-    
+
     /**
      * Return an iterator for the complete list of points for this feature.
      * @return an iterator for the complete list of points for this feature

@@ -28,9 +28,6 @@ import nl.tudelft.simulation.jstats.streams.MersenneTwister;
 public abstract class AbstractDsolModel<T extends Number & Comparable<T>, S extends SimulatorInterface<T>>
         extends LocalEventProducer implements DsolModel<T, S>
 {
-    /** */
-    private static final long serialVersionUID = 20181117L;
-
     /** the simulator. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected S simulator;

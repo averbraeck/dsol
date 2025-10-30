@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class InputParameterDistDiscrete extends AbstractInputParameter<DistDiscrete, DistDiscrete>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the random number stream to use for the distribution. */
     private StreamInterface stream;
 

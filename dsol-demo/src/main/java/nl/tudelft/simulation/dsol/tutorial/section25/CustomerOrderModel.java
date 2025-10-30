@@ -15,9 +15,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
  */
 public class CustomerOrderModel extends AbstractDsolModel<Double, DevsSimulator<Double>>
 {
-    /** The default serial version UID for serializable classes. */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Construct a new customer ordering model.
      * @param simulator the simulator

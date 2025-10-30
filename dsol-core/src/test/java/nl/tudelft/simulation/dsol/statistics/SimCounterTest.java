@@ -3,8 +3,6 @@ package nl.tudelft.simulation.dsol.statistics;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.rmi.RemoteException;
-
 import javax.naming.NamingException;
 
 import org.djutils.event.Event;
@@ -35,16 +33,12 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public class SimCounterTest extends LocalEventProducer
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Test the counter.
-     * @throws RemoteException on remote error (should not happen)
      * @throws NamingException on statistics registration error
      */
     @Test
-    public void test() throws RemoteException, NamingException
+    public void test() throws NamingException
     {
         DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
@@ -66,9 +60,6 @@ public class SimCounterTest extends LocalEventProducer
 
         counter.addListener(new EventListener()
         {
-            /** */
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void notify(final Event event)
             {

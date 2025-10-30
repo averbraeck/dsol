@@ -16,9 +16,6 @@ import org.djutils.exceptions.Throw;
  */
 public abstract class AbstractInputParameter<VT, CT> implements InputParameter<VT, CT>
 {
-    /** */
-    private static final long serialVersionUID = 20150000L;
-
     /** Key of this input parameter. */
     private final String key;
 

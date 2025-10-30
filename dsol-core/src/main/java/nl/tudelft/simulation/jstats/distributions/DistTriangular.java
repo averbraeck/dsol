@@ -19,9 +19,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistTriangular extends DistContinuous
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** the minimum. */
     private final double min;
 

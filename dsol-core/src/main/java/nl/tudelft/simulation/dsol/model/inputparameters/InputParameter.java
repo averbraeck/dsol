@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.model.inputparameters;
 
-import java.io.Serializable;
-
 /**
  * User readable and settable properties.
  * <p>
@@ -15,7 +13,7 @@ import java.io.Serializable;
  * @param <VT> Value type of the input parameter
  * @param <CT> Calculated type of the input parameter (often the same as VT, except in complex maps)
  */
-public interface InputParameter<VT, CT> extends Serializable, Cloneable
+public interface InputParameter<VT, CT> extends Cloneable
 {
     /**
      * Retrieve the key of this InputParameter. The key is set at time of construction and it is immutable.

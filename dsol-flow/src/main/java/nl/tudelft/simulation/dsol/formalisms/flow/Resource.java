@@ -27,9 +27,6 @@ import nl.tudelft.simulation.dsol.statistics.SimPersistent;
  */
 public abstract class Resource<T extends Number & Comparable<T>, R extends Resource<T, R>> extends Block<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** persistent statistic for the resource utilization. */
     private SimPersistent<T> utilizationStatistic = null;
 
@@ -139,9 +136,6 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
      */
     public static class DoubleCapacity<T extends Number & Comparable<T>> extends Resource<T, DoubleCapacity<T>>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** capacity defines the maximum capacity of the resource. */
         private double capacity;
 
@@ -306,9 +300,6 @@ public abstract class Resource<T extends Number & Comparable<T>, R extends Resou
      */
     public static class IntegerCapacity<T extends Number & Comparable<T>> extends Resource<T, IntegerCapacity<T>>
     {
-        /** */
-        private static final long serialVersionUID = 1L;
-
         /** capacity defines the maximum capacity of the resource. */
         private int capacity;
 

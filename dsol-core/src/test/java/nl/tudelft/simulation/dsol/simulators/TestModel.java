@@ -20,9 +20,6 @@ import nl.tudelft.simulation.dsol.model.AbstractDsolModel;
  */
 public class TestModel extends AbstractDsolModel<Double, SimulatorInterface<Double>> implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new TestModel.
      * @param simulator the simulator

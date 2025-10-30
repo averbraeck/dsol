@@ -3,7 +3,6 @@ package nl.tudelft.simulation.dsol.swing.gui.control;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 
@@ -33,7 +32,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
         extends DevsControlPanel<T, S> implements PropertyChangeListener
 {
     /** */
-    private static final long serialVersionUID = 20201227L;
+    private static final long serialVersionUID = 1L;
 
     /** The timeWarpPanel to control the speed. */
     private RunSpeedSliderPanel runSpeedSliderPanel;
@@ -49,10 +48,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
      * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of the
      *            simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator, whereas
      *            the panel needs a RealTimeControlAnimator)
-     * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
     public RealTimeControlPanel(final DsolModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator)
-            throws RemoteException
+
     {
         this(model, simulator, new RunSpeedSliderPanel(RunSpeedSliderPanel.makeLogScale(0.1, 1000, 3), simulator, 1));
     }
@@ -66,10 +64,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
      *            simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator, whereas
      *            the panel needs a RealTimeControlAnimator)
      * @param runSpeedSliderPanel the SpeedSliderPanel to add to the ControlPanel
-     * @throws RemoteException when simulator cannot be accessed for listener attachment
      */
     public RealTimeControlPanel(final DsolModel<T, ? extends DevsSimulatorInterface<T>> model, final S simulator,
-            final RunSpeedSliderPanel runSpeedSliderPanel) throws RemoteException
+            final RunSpeedSliderPanel runSpeedSliderPanel)
     {
         super(model, simulator);
         this.runSpeedSliderPanel = runSpeedSliderPanel;
@@ -85,7 +82,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     }
 
     @Override
-    public void addListeners() throws RemoteException
+    public void addListeners()
     {
         super.addListeners();
         getSimulator().addListener(this, DevsRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT);
@@ -156,7 +153,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         if (event.getType().equals(DevsRealTimeAnimator.CHANGE_SPEED_FACTOR_EVENT))
         {
@@ -179,7 +176,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     public static class TimeDouble extends RealTimeControlPanel<Double, DevsRealTimeAnimator<Double>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a real time control panel for a Double time unit, with a different set of control buttons. The control
@@ -189,10 +186,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
          * @param simulator DevsRealTimeAnimator.TimeDouble; the simulator. Specified separately, because the model can have
          *            been specified with a superclass of the simulator that the ControlPanel actually needs (e.g., model has
          *            been specified with a DevsAnimator, whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeDouble(final DsolModel<Double, ? extends DevsSimulatorInterface<Double>> model,
-                final DevsRealTimeAnimator<Double> simulator) throws RemoteException
+                final DevsRealTimeAnimator<Double> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDouble(getSimulator()));
@@ -214,7 +210,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     public static class TimeFloat extends RealTimeControlPanel<Float, DevsRealTimeAnimator<Float>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a real time control panel for a Float time unit, with a different set of control buttons. The control panel
@@ -224,10 +220,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeFloat(final DsolModel<Float, ? extends DevsSimulatorInterface<Float>> model,
-                final DevsRealTimeAnimator<Float> simulator) throws RemoteException
+                final DevsRealTimeAnimator<Float> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloat(getSimulator()));
@@ -249,7 +244,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     public static class TimeLong extends RealTimeControlPanel<Long, DevsRealTimeAnimator<Long>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a real time control panel for a Long time unit, with a different set of control buttons. The control panel
@@ -259,10 +254,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeLong(final DsolModel<Long, ? extends DevsSimulatorInterface<Long>> model,
-                final DevsRealTimeAnimator<Long> simulator) throws RemoteException
+                final DevsRealTimeAnimator<Long> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeLong(getSimulator()));
@@ -284,7 +278,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     public static class TimeDoubleUnit extends RealTimeControlPanel<Duration, DevsRealTimeAnimator<Duration>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a real time control panel for a djunits double time unit, with a different set of control buttons. The
@@ -294,10 +288,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeDoubleUnit(final DsolModel<Duration, ? extends DevsSimulatorInterface<Duration>> model,
-                final DevsRealTimeAnimator<Duration> simulator) throws RemoteException
+                final DevsRealTimeAnimator<Duration> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeDoubleUnit(getSimulator()));
@@ -319,7 +312,7 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
     public static class TimeFloatUnit extends RealTimeControlPanel<FloatDuration, DevsRealTimeAnimator<FloatDuration>>
     {
         /** */
-        private static final long serialVersionUID = 20201227L;
+        private static final long serialVersionUID = 1L;
 
         /**
          * Construct a real time control panel for a djunits float time unit, with a different set of control buttons. The
@@ -329,10 +322,9 @@ public class RealTimeControlPanel<T extends Number & Comparable<T>, S extends De
          * @param simulator the simulator. Specified separately, because the model can have been specified with a superclass of
          *            the simulator that the ControlPanel actually needs (e.g., model has been specified with a DevsAnimator,
          *            whereas the panel needs a RealTimeControlAnimator)
-         * @throws RemoteException when simulator cannot be accessed for listener attachment
          */
         public TimeFloatUnit(final DsolModel<FloatDuration, ? extends DevsSimulatorInterface<FloatDuration>> model,
-                final DevsRealTimeAnimator<FloatDuration> simulator) throws RemoteException
+                final DevsRealTimeAnimator<FloatDuration> simulator)
         {
             super(model, simulator);
             setClockPanel(new ClockPanel.TimeFloatUnit(getSimulator()));

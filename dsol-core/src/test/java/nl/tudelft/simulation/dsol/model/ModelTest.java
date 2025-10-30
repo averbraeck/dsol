@@ -41,9 +41,6 @@ public class ModelTest
         DsolModel<Double, SimulatorInterface<Double>> model =
                 new AbstractDsolModel<Double, SimulatorInterface<Double>>(simulator)
                 {
-                    /** */
-                    private static final long serialVersionUID = 1L;
-
                     @Override
                     public void constructModel() throws SimRuntimeException
                     {

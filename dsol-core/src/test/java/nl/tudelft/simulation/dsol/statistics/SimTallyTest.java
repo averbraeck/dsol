@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.rmi.RemoteException;
-
 import javax.naming.NamingException;
 
 import org.djutils.event.EventType;
@@ -36,20 +34,16 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public class SimTallyTest extends LocalEventProducer
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** update event. */
     private static final EventType UPDATE_EVENT =
             new EventType("update", new MetaData("update", "update", new ObjectDescriptor("value", "value", Double.class)));
 
     /**
      * Test the tally.
-     * @throws RemoteException on remote error (should not happen)
      * @throws NamingException on failure registering the replication or statistic in the Context
      */
     @Test
-    public void testTallTimeDouble() throws RemoteException, NamingException
+    public void testTallTimeDouble() throws NamingException
     {
         DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);
@@ -81,11 +75,10 @@ public class SimTallyTest extends LocalEventProducer
 
     /**
      * Test the tally.
-     * @throws RemoteException on remote error (should not happen)
      * @throws NamingException on failure registering the replication or statistic in the Context
      */
     @Test
-    public void testTallyEventProduceTimeDouble() throws RemoteException, NamingException
+    public void testTallyEventProduceTimeDouble() throws NamingException
     {
         DevsSimulatorInterface<Double> simulator = new DevsSimulator<Double>("sim");
         DsolModel<Double, DevsSimulatorInterface<Double>> model = new DummyModel(simulator);

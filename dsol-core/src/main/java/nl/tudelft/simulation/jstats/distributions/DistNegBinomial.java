@@ -22,9 +22,6 @@ import nl.tudelft.simulation.jstats.streams.StreamInterface;
  */
 public class DistNegBinomial extends DistDiscrete
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** s is the number of successes in the sequence of (x+n) trials, where trial (x+n) is a success. */
     private int s;
 

@@ -34,7 +34,9 @@ public final class ContextTestUtil
     public static void destroyInitialEventContext(final InitialEventContext ctx)
     {
         if (ctx == null)
-        { return; }
+        {
+            return;
+        }
         try
         {
             // get the instance objects INSTANCE and defaultInitCtx, and set to null

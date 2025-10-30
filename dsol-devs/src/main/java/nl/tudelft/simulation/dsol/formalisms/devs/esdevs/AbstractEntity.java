@@ -17,9 +17,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public class AbstractEntity<T extends Number & Comparable<T>> extends AbstractDevsModel<T>
 {
-    /** the default serial version UId. */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructor for an abstract entity: we have to indicate the simulator for reporting purposes, and the parent model we are
      * part of. A parent model of null means that we are the top model.

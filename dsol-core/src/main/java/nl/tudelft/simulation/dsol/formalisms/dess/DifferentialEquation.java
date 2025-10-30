@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.dess;
 
-import java.rmi.RemoteException;
-
 import org.djutils.event.Event;
 import org.djutils.event.EventListener;
 import org.djutils.event.EventType;
@@ -29,9 +27,6 @@ import nl.tudelft.simulation.jstats.ode.integrators.NumericalIntegratorType;
 public abstract class DifferentialEquation<T extends Number & Comparable<T>>
         extends nl.tudelft.simulation.jstats.ode.DifferentialEquation implements DifferentialEquationInterface, EventListener
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /** VALUE_CHANGED_EVENT is fired on value changes. The array is initialized in the ODE's constructor. */
     @SuppressWarnings({"checkstyle:visibilitymodifier", "checkstyle:membername"})
     public EventType[] VALUE_CHANGED_EVENT;
@@ -61,9 +56,8 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
      * integrator. Indicate the number of variables that the differential qquation will use.
      * @param simulator the simulator
      * @param numberOfVariables the number of variables in the equation
-     * @throws RemoteException on remote network exception for the listener
      */
-    public DifferentialEquation(final DessSimulatorInterface<T> simulator, final int numberOfVariables) throws RemoteException
+    public DifferentialEquation(final DessSimulatorInterface<T> simulator, final int numberOfVariables)
     {
         this(simulator, simulator.getTimeStep().doubleValue(), NumericalIntegratorType.RUNGEKUTTA4, numberOfVariables);
     }
@@ -73,10 +67,9 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
      * @param simulator the simulator
      * @param numericalIntegrator the actual integrator to be used.
      * @param numberOfVariables the number of variables in the equation
-     * @throws RemoteException on remote network exception for the listener
      */
     public DifferentialEquation(final DessSimulatorInterface<T> simulator, final NumericalIntegratorType numericalIntegrator,
-            final int numberOfVariables) throws RemoteException
+            final int numberOfVariables)
     {
         this(simulator, simulator.getTimeStep().doubleValue(), numericalIntegrator, numberOfVariables);
     }
@@ -87,10 +80,9 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
      * @param timeStep the timeStep for ODE estimation.
      * @param numericalIntegrator the actual integrator to be used.
      * @param numberOfVariables the number of variables in the equation
-     * @throws RemoteException on remote network exception for the listener
      */
     public DifferentialEquation(final DessSimulatorInterface<T> simulator, final double timeStep,
-            final NumericalIntegratorType numericalIntegrator, final int numberOfVariables) throws RemoteException
+            final NumericalIntegratorType numericalIntegrator, final int numberOfVariables)
     {
         super(timeStep, numericalIntegrator);
         this.simulator = simulator;
@@ -106,7 +98,7 @@ public abstract class DifferentialEquation<T extends Number & Comparable<T>>
     }
 
     @Override
-    public synchronized void notify(final Event event) throws RemoteException
+    public synchronized void notify(final Event event)
     {
         if (event.getType().equals(SimulatorInterface.TIME_CHANGED_EVENT))
         {

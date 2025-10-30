@@ -135,7 +135,9 @@ public class ContextUtil
             }
             // no else; we might be looking for an object that implements ContextInterface
             if ((value == null && object == null) || (value != null && value.equals(object)))
-            { result.add(partialKey + ContextInterface.SEPARATOR + binding.getKey()); }
+            {
+                result.add(partialKey + ContextInterface.SEPARATOR + binding.getKey());
+            }
         }
     }
 

@@ -20,9 +20,6 @@ import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
  */
 public class WallAnimation extends SimRenderable2d<Wall>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * @param source wall
      * @param simulator simulator

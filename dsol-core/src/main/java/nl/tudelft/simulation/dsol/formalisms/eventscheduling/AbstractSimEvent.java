@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.eventscheduling;
 
-import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
@@ -18,11 +17,8 @@ import nl.tudelft.simulation.dsol.SimRuntimeException;
  * @param <T> the type of simulation time, e.g. Double, Long or Duration
  * @since 1.5
  */
-public abstract class AbstractSimEvent<T extends Number & Comparable<T>> implements SimEventInterface<T>, Serializable
+public abstract class AbstractSimEvent<T extends Number & Comparable<T>> implements SimEventInterface<T>
 {
-    /** */
-    private static final long serialVersionUID = 20140804L;
-
     /** a counter counting the number of constructed simEvents. */
     private static AtomicLong constructorCounter = new AtomicLong();
 

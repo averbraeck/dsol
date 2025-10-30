@@ -22,9 +22,6 @@ import nl.tudelft.simulation.introspection.beans.BeanIntrospector;
  */
 public class ObjectTableModel extends AbstractTableModel implements IntrospectingTableModelInterface
 {
-    /** */
-    private static final long serialVersionUID = 20140831L;
-
     /** the properties. */
     protected Property[] properties = new Property[0];
 

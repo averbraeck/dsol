@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.dsol.formalisms.devs.esdevs;
 
-import java.rmi.RemoteException;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,9 +29,6 @@ import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
  */
 public abstract class CoupledModel<T extends Number & Comparable<T>> extends AbstractDevsPortModel<T>
 {
-    /** the default serialVersionUId. */
-    private static final long serialVersionUID = 1L;
-
     /** the internal couplings (from internal models to internal models). */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected Set<InternalCoupling<T, ?>> internalCouplingSet = new LinkedHashSet<InternalCoupling<T, ?>>();
@@ -71,7 +67,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
     {
         super(modelName, parentModel.getSimulator(), parentModel);
         if (this.parentModel != null)
-        { this.parentModel.addModelComponent(this); }
+        {
+            this.parentModel.addModelComponent(this);
+        }
     }
 
     /**
@@ -114,21 +112,24 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
      * @param <TYPE> the type of message / event being transferred
      * @param x the output port through which the transfer takes place
      * @param y the value being transferred
-     * @throws RemoteException remote exception
      * @throws SimRuntimeException simulation run time exception
      */
     @SuppressWarnings("unchecked")
-    public <TYPE> void transfer(final OutputPortInterface<T, TYPE> x, final TYPE y) throws RemoteException, SimRuntimeException
+    public <TYPE> void transfer(final OutputPortInterface<T, TYPE> x, final TYPE y) throws SimRuntimeException
     {
         for (InternalCoupling<T, ?> o : this.internalCouplingSet)
         {
             if (o.getFromPort() == x)
-            { ((InternalCoupling<T, TYPE>) o).getToPort().receive(y, this.simulator.getSimulatorTime()); }
+            {
+                ((InternalCoupling<T, TYPE>) o).getToPort().receive(y, this.simulator.getSimulatorTime());
+            }
         }
         for (ExternalOutputCoupling<T, ?> o : this.externalOutputCouplingSet)
         {
             if (o.getFromPort() == x)
-            { ((ExternalOutputCoupling<T, TYPE>) o).getToPort().send(y); }
+            {
+                ((ExternalOutputCoupling<T, TYPE>) o).getToPort().send(y);
+            }
         }
     }
 
@@ -170,7 +171,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort().getModel() == fromPort && ic.getToPort().getModel() == toPort)
-            { this.internalCouplingSet.remove(ic); }
+            {
+                this.internalCouplingSet.remove(ic);
+            }
         }
 
     }
@@ -210,7 +213,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort() == fromPort && eic.getToPort() == toPort)
-            { this.externalInputCouplingSet.remove(eic); }
+            {
+                this.externalInputCouplingSet.remove(eic);
+            }
         }
     }
 
@@ -249,7 +254,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort() == fromPort && eoc.getToPort() == toPort)
-            { this.externalOutputCouplingSet.remove(eoc); }
+            {
+                this.externalOutputCouplingSet.remove(eoc);
+            }
         }
     }
 
@@ -268,7 +275,9 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         List<Reference<EventListener>> elis = getListenerReferences(AbstractDevsModel.STATE_UPDATE);
 
         if (elis == null)
-        { return; }
+        {
+            return;
+        }
 
         for (Reference<EventListener> eli : elis)
         {
@@ -285,19 +294,25 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort().getModel() == model || eoc.getToPort().getModel() == model)
-            { this.externalOutputCouplingSet.remove(eoc); }
+            {
+                this.externalOutputCouplingSet.remove(eoc);
+            }
         }
 
         for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort().getModel() == model || eic.getToPort().getModel() == model)
-            { this.externalInputCouplingSet.remove(eic); }
+            {
+                this.externalInputCouplingSet.remove(eic);
+            }
         }
 
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort().getModel() == model || ic.getToPort().getModel() == model)
-            { this.internalCouplingSet.remove(ic); }
+            {
+                this.internalCouplingSet.remove(ic);
+            }
         }
 
         // this will also take care of the removal of the ports as they are not
@@ -318,13 +333,17 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalInputCoupling<T, ?> eic : this.externalInputCouplingSet)
         {
             if (eic.getFromPort() == inputPort || eic.getToPort() == inputPort)
-            { this.externalInputCouplingSet.remove(eic); }
+            {
+                this.externalInputCouplingSet.remove(eic);
+            }
         }
 
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getToPort() == inputPort)
-            { this.internalCouplingSet.remove(ic); }
+            {
+                this.internalCouplingSet.remove(ic);
+            }
         }
     }
 
@@ -340,13 +359,17 @@ public abstract class CoupledModel<T extends Number & Comparable<T>> extends Abs
         for (ExternalOutputCoupling<T, ?> eoc : this.externalOutputCouplingSet)
         {
             if (eoc.getFromPort() == outputPort || eoc.getToPort() == outputPort)
-            { this.externalOutputCouplingSet.remove(eoc); }
+            {
+                this.externalOutputCouplingSet.remove(eoc);
+            }
         }
 
         for (InternalCoupling<T, ?> ic : this.internalCouplingSet)
         {
             if (ic.getFromPort() == outputPort)
-            { this.internalCouplingSet.remove(ic); }
+            {
+                this.internalCouplingSet.remove(ic);
+            }
         }
     }
 

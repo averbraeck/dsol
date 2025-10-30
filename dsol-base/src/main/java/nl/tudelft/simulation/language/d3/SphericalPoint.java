@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.language.d3;
 
-import java.io.Serializable;
-
 /**
  * A spherical point as defined in <a href="https://mathworld.wolfram.com/SphericalCoordinates.html">
  * https://mathworld.wolfram.com/SphericalCoordinates.html </a>. Also according to ISO 31-11
@@ -13,11 +11,8 @@ import java.io.Serializable;
  * </p>
  * @author <a href="https://www.linkedin.com/in/peterhmjacobs">Peter Jacobs </a>
  */
-public class SphericalPoint implements Serializable
+public class SphericalPoint
 {
-    /** */
-    private static final long serialVersionUID = 20191116L;
-
     /** radius. */
     private double radius = 0.0;
 

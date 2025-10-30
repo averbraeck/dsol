@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.naming.context.event;
 
-import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -77,9 +75,6 @@ import nl.tudelft.simulation.naming.context.ContextInterface;
  */
 public class ContextEventProducerImpl extends LocalEventProducer implements EventListener
 {
-    /** */
-    private static final long serialVersionUID = 20200209L;
-
     /**
      * The registry for the listeners. The key of the map is made from the given path to listen followed by a hash sign and the
      * toString of the used ContextScope enum. String has a cached hash.
@@ -98,9 +93,8 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
     /**
      * Create the ContextEventProducerImpl and link to the parent class.
      * @param parent the EventContext for which we do the work
-     * @throws RemoteException on network error
      */
-    public ContextEventProducerImpl(final EventContext parent) throws RemoteException
+    public ContextEventProducerImpl(final EventContext parent)
     {
         super();
         this.parent = parent;
@@ -112,7 +106,7 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
     }
 
     @Override
-    public void notify(final Event event) throws RemoteException
+    public void notify(final Event event)
     {
         Object[] content = (Object[]) event.getContent();
         if (event.getType().equals(ContextInterface.OBJECT_ADDED_EVENT))
@@ -128,7 +122,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
             {
                 String path = (String) content[0] + ContextInterface.SEPARATOR + (String) content[1];
                 if (entry.getValue().getPattern().matcher(path).matches())
-                { entry.getValue().getListener().notify(event); }
+                {
+                    entry.getValue().getListener().notify(event);
+                }
             }
         }
         else if (event.getType().equals(ContextInterface.OBJECT_REMOVED_EVENT))
@@ -144,7 +140,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
             {
                 String path = (String) content[0] + ContextInterface.SEPARATOR + (String) content[1];
                 if (entry.getValue().getPattern().matcher(path).matches())
-                { entry.getValue().getListener().notify(event); }
+                {
+                    entry.getValue().getListener().notify(event);
+                }
             }
         }
         else if (event.getType().equals(ContextInterface.OBJECT_CHANGED_EVENT))
@@ -153,7 +151,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
             {
                 String path = (String) content[0] + ContextInterface.SEPARATOR + (String) content[1];
                 if (entry.getValue().getPattern().matcher(path).matches())
-                { entry.getValue().getListener().notify(event); }
+                {
+                    entry.getValue().getListener().notify(event);
+                }
             }
         }
     }
@@ -170,7 +170,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
     {
         String key = absolutePath;
         if (key.endsWith("/"))
-        { key = key.substring(0, key.length() - 1); }
+        {
+            key = key.substring(0, key.length() - 1);
+        }
         key += "#" + contextScope.name();
         return key;
     }
@@ -202,7 +204,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
     {
         String key = absolutePath;
         if (key.endsWith("/"))
-        { key = key.substring(0, key.length() - 1); }
+        {
+            key = key.substring(0, key.length() - 1);
+        }
         switch (contextScope)
         {
             case LEVEL_SCOPE:
@@ -236,11 +240,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      *             ordinary object
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs.
      */
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
-            throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException, NamingException,
-            NullPointerException
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         return addListener(listener, absolutePath, contextScope, LocalEventProducer.FIRST_POSITION, ReferenceType.STRONG);
     }
@@ -259,11 +261,10 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      *             ordinary object
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs.
      */
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
-            final ReferenceType referenceType) throws RemoteException, NameNotFoundException, InvalidNameException,
-            NotContextException, NamingException, NullPointerException
+            final ReferenceType referenceType)
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         return addListener(listener, absolutePath, contextScope, LocalEventProducer.FIRST_POSITION, referenceType);
     }
@@ -283,11 +284,10 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      *             ordinary object
      * @throws NamingException as an overarching exception for context errors
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs.
      */
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
-            final int position) throws RemoteException, NameNotFoundException, InvalidNameException, NotContextException,
-            NamingException, NullPointerException
+            final int position)
+            throws NameNotFoundException, InvalidNameException, NotContextException, NamingException, NullPointerException
     {
         return addListener(listener, absolutePath, contextScope, position, ReferenceType.STRONG);
     }
@@ -303,11 +303,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      *         returned.
      * @throws InvalidNameException when the path does not start with a slash
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs
      */
     public boolean addListener(final EventListener listener, final String absolutePath, final ContextScope contextScope,
-            final int position, final ReferenceType referenceType)
-            throws RemoteException, InvalidNameException, NullPointerException
+            final int position, final ReferenceType referenceType) throws InvalidNameException, NullPointerException
     {
         Throw.when(listener == null, NullPointerException.class, "listener cannot be null");
         Throw.when(absolutePath == null, NullPointerException.class, "absolutePath cannot be null");
@@ -333,10 +331,9 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * @return the success of removing the listener. If a listener was not subscribed false is returned.
      * @throws InvalidNameException when the path does not start with a slash
      * @throws NullPointerException when one of the arguments is null
-     * @throws RemoteException if a network connection failure occurs
      */
     public boolean removeListener(final EventListener listener, final String absolutePath, final ContextScope contextScope)
-            throws RemoteException, InvalidNameException, NullPointerException
+            throws InvalidNameException, NullPointerException
     {
         Throw.when(listener == null, NullPointerException.class, "listener cannot be null");
         Throw.when(absolutePath == null, NullPointerException.class, "absolutePath cannot be null");
@@ -362,11 +359,8 @@ public class ContextEventProducerImpl extends LocalEventProducer implements Even
      * </p>
      * @author <a href="https://github.com/averbraeck" target="_blank">Alexander Verbraeck</a>
      */
-    public class PatternListener implements Serializable
+    public class PatternListener
     {
-        /** */
-        private static final long serialVersionUID = 20200210L;
-
         /** the compiled regular expression pattern. */
         private final Pattern pattern;
 

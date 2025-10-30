@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.examples.dsol.animation.continuous;
 
-import java.rmi.RemoteException;
-
 import nl.tudelft.simulation.dsol.formalisms.dess.DifferentialEquation;
 import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
 
@@ -17,15 +15,11 @@ import nl.tudelft.simulation.dsol.simulators.DessSimulatorInterface;
  */
 public class Positioner extends DifferentialEquation<Double>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new Positioner.
      * @param simulator the simulator
-     * @throws RemoteException on remote error
      */
-    public Positioner(final DessSimulatorInterface<Double> simulator) throws RemoteException
+    public Positioner(final DessSimulatorInterface<Double> simulator)
     {
         super(simulator, 2);
         this.initialize(0.0, new double[] {0.0, 0.0});

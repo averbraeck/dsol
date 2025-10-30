@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousEnergy extends DistContinuousUnit<EnergyUnit, Energy>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Energy scalars.
      * @param wrappedDistribution the wrapped continuous distribution

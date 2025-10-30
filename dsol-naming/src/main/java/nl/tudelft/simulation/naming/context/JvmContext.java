@@ -15,7 +15,6 @@ import javax.naming.NotContextException;
 
 import org.djutils.event.LocalEventProducer;
 import org.djutils.exceptions.Throw;
-import org.djutils.logger.CategoryLogger;
 
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
 
@@ -31,9 +30,6 @@ import nl.tudelft.simulation.naming.context.util.ContextUtil;
  */
 public class JvmContext extends LocalEventProducer implements ContextInterface
 {
-    /** */
-    private static final long serialVersionUID = 20200101L;
-
     /** the parent context. */
     protected ContextInterface parent;
 
@@ -68,31 +64,23 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
                 ContextInterface.SEPARATOR);
         this.parent = parent;
         this.atomicName = atomicName;
-        try
-        {
-            this.absolutePath = parent == null ? "" : parent.getAbsolutePath() + ContextInterface.SEPARATOR + this.atomicName;
-        }
-        catch (RemoteException exception)
-        {
-            CategoryLogger.always().warn(exception);
-            throw new RuntimeException(exception);
-        }
+        this.absolutePath = parent == null ? "" : parent.getAbsolutePath() + ContextInterface.SEPARATOR + this.atomicName;
     }
 
     @Override
-    public String getAtomicName() throws RemoteException
+    public String getAtomicName()
     {
         return this.atomicName;
     }
 
     @Override
-    public ContextInterface getParent() throws RemoteException
+    public ContextInterface getParent()
     {
         return this.parent;
     }
 
     @Override
-    public ContextInterface getRootContext() throws RemoteException
+    public ContextInterface getRootContext()
     {
         ContextInterface result = this;
         while (result.getParent() != null)
@@ -103,7 +91,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public String getAbsolutePath() throws RemoteException
+    public String getAbsolutePath()
     {
         return this.absolutePath;
     }
@@ -115,7 +103,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
                 "key [%s] is the empty string or key contains '/'", key);
         if (!this.elements.containsKey(key))
-        { throw new NameNotFoundException("key " + key + " does not exist in Context"); }
+        {
+            throw new NameNotFoundException("key " + key + " does not exist in Context");
+        }
         // can be null -- null objects are allowed in the context tree
         return this.elements.get(key);
     }
@@ -125,7 +115,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     {
         ContextName contextName = lookup(name);
         if (contextName.getName().length() == 0)
-        { return contextName.getContext(); }
+        {
+            return contextName.getContext();
+        }
         Object result = contextName.getContext().getObject(contextName.getName());
         return result;
     }
@@ -135,7 +127,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     {
         ContextName contextName = lookup(name);
         if (contextName.getName().length() == 0)
-        { return true; }
+        {
+            return true;
+        }
         return contextName.getContext().hasKey(contextName.getName());
     }
 
@@ -154,13 +148,13 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
      * @return whether an object with the given key has been registered once or more in the current context
      */
     @Override
-    public boolean hasObject(final Object object) throws RemoteException
+    public boolean hasObject(final Object object)
     {
         return this.elements.containsValue(object);
     }
 
     @Override
-    public boolean isEmpty() throws RemoteException
+    public boolean isEmpty()
     {
         return this.elements.isEmpty();
     }
@@ -172,7 +166,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
                 "key [%s] is the empty string or key contains '/'", key);
         if (this.elements.containsKey(key))
-        { throw new NameAlreadyBoundException("key " + key + " already bound to object in Context"); }
+        {
+            throw new NameAlreadyBoundException("key " + key + " already bound to object in Context");
+        }
         checkCircular(object);
         this.elements.put(key, object);
         fireEvent(ContextInterface.OBJECT_ADDED_EVENT, new Object[] {getAbsolutePath(), key, object});
@@ -241,7 +237,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         ContextName contextNameOld = lookup(oldName);
         ContextName contextNameNew = lookup(newName);
         if (contextNameNew.getContext().hasKey(contextNameNew.getName()))
-        { throw new NameAlreadyBoundException("key " + newName + " already bound to object in Context"); }
+        {
+            throw new NameAlreadyBoundException("key " + newName + " already bound to object in Context");
+        }
         Object object = contextNameOld.getContext().getObject(contextNameOld.getName());
         contextNameNew.getContext().checkCircular(object);
         contextNameOld.getContext().unbindObject(contextNameOld.getName());
@@ -260,7 +258,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         ContextName contextName = lookup(name);
         Object object = contextName.getContext().getObject(contextName.getName());
         if (!(object instanceof ContextInterface))
-        { throw new NotContextException("name " + name + " is bound but does not name a context"); }
+        {
+            throw new NotContextException("name " + name + " is bound but does not name a context");
+        }
         destroy((ContextInterface) object);
         contextName.getContext().unbindObject(contextName.getName());
     }
@@ -281,7 +281,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
 
         // Handle current context lookup
         if (name.length() == 0 || name.equals(ContextInterface.SEPARATOR))
-        { throw new NamingException("the terminal reference is '/' or empty"); }
+        {
+            throw new NamingException("the terminal reference is '/' or empty");
+        }
 
         // determine absolute or relative path
         String reference;
@@ -354,25 +356,27 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         for (String key : copyKeySet)
         {
             if (context.getObject(key) instanceof ContextInterface)
-            { throw new NamingException("Tree inconsistent -- Context not removed or added during destroy operation"); }
+            {
+                throw new NamingException("Tree inconsistent -- Context not removed or added during destroy operation");
+            }
             context.unbindObject(key);
         }
     }
 
     @Override
-    public Set<String> keySet() throws RemoteException
+    public Set<String> keySet()
     {
         return this.elements.keySet();
     }
 
     @Override
-    public Collection<Object> values() throws RemoteException
+    public Collection<Object> values()
     {
         return this.elements.values();
     }
 
     @Override
-    public Map<String, Object> bindings() throws RemoteException
+    public Map<String, Object> bindings()
     {
         return this.elements;
     }
@@ -393,7 +397,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
                 "key [%s] is the empty string or key contains '/'", key);
         if (!hasKey(key))
-        { throw new NameNotFoundException("Could not find object with key " + key + " for fireObjectChangedEvent"); }
+        {
+            throw new NameNotFoundException("Could not find object with key " + key + " for fireObjectChangedEvent");
+        }
         try
         {
             fireEvent(ContextInterface.OBJECT_CHANGED_EVENT, new Object[] {getAbsolutePath(), key, getObject(key)});
@@ -441,22 +447,17 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     public String toString()
     {
         String parentName;
-        try
-        {
-            parentName = this.parent == null ? "null" : this.parent.getAtomicName();
-        }
-        catch (RemoteException exception)
-        {
-            parentName = "unreachable";
-        }
+        parentName = this.parent == null ? "null" : this.parent.getAtomicName();
         return "JvmContext[parent=" + parentName + ", atomicName=" + this.atomicName + "]";
     }
 
     @Override
-    public String toString(final boolean verbose) throws RemoteException
+    public String toString(final boolean verbose)
     {
         if (!verbose)
-        { return "JvmContext[" + getAtomicName() + "]"; }
+        {
+            return "JvmContext[" + getAtomicName() + "]";
+        }
         return ContextUtil.toText(this);
     }
 
@@ -476,7 +477,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
 
         // Handle current context lookup
         if (name.length() == 0)
-        { return new ContextName(this, ""); }
+        {
+            return new ContextName(this, "");
+        }
 
         // determine absolute or relative path
         String reference;
@@ -496,7 +499,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
         {
             int index = reference.indexOf(ContextInterface.SEPARATOR);
             if (index == -1)
-            { break; }
+            {
+                break;
+            }
             String sub = reference.substring(0, index);
             reference = reference.substring(index + ContextInterface.SEPARATOR.length());
             Object subObject = subContext.getObject(sub); // can throw NameNotFoundException

@@ -28,6 +28,9 @@ import nl.tudelft.simulation.language.DsolException;
  */
 public class MM1SwingApplication extends DsolApplication
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** the model. */
     private MM1Model model;
 
@@ -49,9 +52,6 @@ public class MM1SwingApplication extends DsolApplication
             CategoryLogger.always().error(exception, "<init>");
         }
     }
-
-    /** */
-    private static final long serialVersionUID = 1L;
 
     /**
      * @param args arguments, expected to be empty

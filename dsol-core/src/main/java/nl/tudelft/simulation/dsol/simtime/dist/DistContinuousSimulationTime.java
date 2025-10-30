@@ -21,9 +21,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public abstract class DistContinuousSimulationTime<T extends Number & Comparable<T>> extends Dist
 {
-    /** */
-    private static final long serialVersionUID = 20140805L;
-
     /** the wrapped distribution. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     public DistContinuous wrappedDistribution;
@@ -61,9 +58,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
     /** Easy access class DistContinuousTime.Double. */
     public static class TimeDouble extends DistContinuousSimulationTime<Double>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * @param wrappedDistribution the wrapped continuous distribution
          */
@@ -82,9 +76,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
     /** Easy access class DistContinuousTime.Float. */
     public static class TimeFloat extends DistContinuousSimulationTime<Float>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * @param wrappedDistribution the wrapped continuous distribution
          */
@@ -103,9 +94,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
     /** Easy access class DistContinuousTime.Long. */
     public static class TimeLong extends DistContinuousSimulationTime<Long>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /**
          * @param wrappedDistribution the wrapped continuous distribution
          */
@@ -124,9 +112,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
     /** Easy access class DistContinuousTime.DoubleUnit. */
     public static class TimeDoubleUnit extends DistContinuousSimulationTime<Duration>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /** the time unit. */
         private final DurationUnit unit;
 
@@ -150,9 +135,6 @@ public abstract class DistContinuousSimulationTime<T extends Number & Comparable
     /** Easy access class DistContinuousTime.FloatUnit. */
     public static class TimeFloatUnit extends DistContinuousSimulationTime<FloatDuration>
     {
-        /** */
-        private static final long serialVersionUID = 20140805L;
-
         /** the time unit. */
         private final DurationUnit unit;
 

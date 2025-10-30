@@ -16,9 +16,6 @@ import nl.tudelft.simulation.jstats.ode.DifferentialEquationInterface;
  */
 public class Milne extends CachingNumericalIntegrator
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * constructs a new Milne integrator.
      * @param stepSize the stepSize to use in the estimation.

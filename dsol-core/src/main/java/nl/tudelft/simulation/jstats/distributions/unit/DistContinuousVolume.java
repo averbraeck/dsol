@@ -15,9 +15,6 @@ import nl.tudelft.simulation.jstats.distributions.DistContinuous;
  */
 public class DistContinuousVolume extends DistContinuousUnit<VolumeUnit, Volume>
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /**
      * Constructs a new continuous distribution that draws Volume scalars.
      * @param wrappedDistribution the wrapped continuous distribution
