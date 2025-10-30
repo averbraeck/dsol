@@ -44,41 +44,40 @@
     <maven.compiler.release>${jdk.version}</maven.compiler.release>
 
     <dsol-version>${project.version}</dsol-version>
-    <junit.version>5.13.4</junit.version>
+    <junit.version>5.14.0</junit.version>
     <jcommon.version>1.0.24</jcommon.version>
     <jfreechart.version>1.5.6</jfreechart.version>
-    <djunits.version>5.4.1</djunits.version>
-    <djutils.version>2.4.1</djutils.version>
-    <jetty.version>11.0.25</jetty.version>
+    <djunits.version>5.4.2</djunits.version>
+    <djutils.version>2.4.2</djutils.version>
+    <jetty.version>11.0.26</jetty.version>
     <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
     <fastcsv.version>2.2.2</fastcsv.version>
     <commons-compress.version>1.28.0</commons-compress.version>
-    <protobuf.version>4.32.1</protobuf.version>
+    <protobuf.version>4.33.0</protobuf.version>
     <hppc.version>0.10.0</hppc.version>
 
-    <maven.compiler.version>3.14.0</maven.compiler.version>
+    <maven.compiler.version>3.14.1</maven.compiler.version>
     <maven.site.version>3.21.0</maven.site.version>
     <maven.install.version>3.1.4</maven.install.version>
     <maven.source.version>3.3.1</maven.source.version>
-    <maven.javadoc.version>3.11.2</maven.javadoc.version>
+    <maven.javadoc.version>3.12.0</maven.javadoc.version>
     <maven.resources.version>3.3.1</maven.resources.version>
     <maven.checkstyle.version>3.6.0</maven.checkstyle.version>
-    <checkstyle.version>10.21.3</checkstyle.version>
-    <maven.surefire.version>3.5.2</maven.surefire.version>
-    <maven.surefire-report.version>3.5.3</maven.surefire-report.version>
-    <maven.failsafe.version>3.5.3</maven.failsafe.version>
-    <maven.jacoco.version>0.8.13</maven.jacoco.version>
-    <maven.spotbugs.version>4.9.1.0</maven.spotbugs.version>
-    <spotbugs.version>4.9.3</spotbugs.version>
+    <checkstyle.version>12.1.1</checkstyle.version>
+    <maven.surefire.version>3.5.4</maven.surefire.version>
+    <maven.surefire-report.version>3.5.4</maven.surefire-report.version>
+    <maven.failsafe.version>3.5.4</maven.failsafe.version>
+    <maven.jacoco.version>0.8.14</maven.jacoco.version>
+    <maven.spotbugs.version>4.9.8.0</maven.spotbugs.version>
+    <spotbugs.version>4.9.8</spotbugs.version>
     <maven.project-info-reports.version>3.9.0</maven.project-info-reports.version>
     <maven.jxr.version>3.6.0</maven.jxr.version>
     <maven.taglist.version>3.2.1</maven.taglist.version>
-    <maven.pmd.version>3.26.0</maven.pmd.version>
-    <!--maven.changes.version>2.12.1</maven.changes.version-->
-    <flatten.maven.version>1.7.0</flatten.maven.version>
+    <maven.pmd.version>3.28.0</maven.pmd.version>
+    <flatten.maven.version>1.7.3</flatten.maven.version>
     <maven.deploy.version>3.1.4</maven.deploy.version>
-    <central-maven.version>0.8.0</central-maven.version>
-    <maven.gpg.version>3.2.7</maven.gpg.version>
+    <central-maven.version>0.9.0</central-maven.version>
+    <maven.gpg.version>3.2.8</maven.gpg.version>
   </properties>
 
 
@@ -787,19 +786,6 @@
           <skipEmptyReport>false</skipEmptyReport>
         </configuration>
       </plugin>
-
-      <!--plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>${maven.changes.version}</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>changes-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin-->
 
     </plugins>
   </reporting>
