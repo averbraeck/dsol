@@ -1,7 +1,5 @@
 package nl.tudelft.simulation.naming.context.event;
 
-import java.rmi.Remote;
-
 import javax.naming.InvalidNameException;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
@@ -9,6 +7,8 @@ import javax.naming.NotContextException;
 
 import org.djutils.event.EventListener;
 import org.djutils.event.reference.ReferenceType;
+
+import nl.tudelft.simulation.naming.context.ContextInterface;
 
 /**
  * EventContextInterface specifies the subscription methods for a part of the context tree. The ContextScope in each method
@@ -22,7 +22,7 @@ import org.djutils.event.reference.ReferenceType;
  * </p>
  * @author <a href="https://github.com/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public interface EventContextInterface extends Remote
+public interface EventContextInterface extends ContextInterface
 {
     /**
      * Add a listener for the provided scope as strong reference to the BEGINNING of a queue of listeners.

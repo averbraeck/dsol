@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
@@ -105,10 +104,8 @@ public final class InitialEventContext implements EventContext
      * @param environment the overriding environment variables for the Factory that constructs the wrapped Context
      * @param atomicName the name under which the root context will be registered
      * @throws NamingException if a naming exception is encountered
-     * @throws RemoteException if a network connection failure occurs
      */
-    private InitialEventContext(final Hashtable<?, ?> environment, final String atomicName)
-            throws NamingException, RemoteException
+    private InitialEventContext(final Hashtable<?, ?> environment, final String atomicName) throws NamingException
     {
         init(environment, atomicName);
         this.contextEventProducerImpl = new ContextEventProducerImpl(this);
@@ -119,9 +116,8 @@ public final class InitialEventContext implements EventContext
      * @param atomicName the name under which the root context will be registered
      * @return a singleton instance of InitialEventContext
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
-     * @throws RemoteException if a network connection failure occurs
      */
-    public static InitialEventContext instantiate(final String atomicName) throws NamingException, RemoteException
+    public static InitialEventContext instantiate(final String atomicName) throws NamingException
     {
         return instantiate(null, atomicName);
     }
@@ -132,10 +128,9 @@ public final class InitialEventContext implements EventContext
      * @param atomicName the name under which the root context will be registered
      * @return a singleton instance of InitialEventContext
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
-     * @throws RemoteException if a network connection failure occurs
      */
     public static InitialEventContext instantiate(final Hashtable<?, ?> environment, final String atomicName)
-            throws NamingException, RemoteException
+            throws NamingException
     {
         if (INSTANCE != null)
         {
@@ -152,9 +147,8 @@ public final class InitialEventContext implements EventContext
      * @param environment environment used to create the initial context. Null indicates an empty environment.
      * @param atomicName the name under which the root context will be registered
      * @throws NamingException when the provided ContextFactory was not able to instantiate the wrapped context
-     * @throws RemoteException if a network connection failure occurs
      */
-    protected void init(final Hashtable<?, ?> environment, final String atomicName) throws NamingException, RemoteException
+    protected void init(final Hashtable<?, ?> environment, final String atomicName) throws NamingException
     {
         this.properties = buildEnvironment(environment);
         if (this.properties.get(Context.INITIAL_CONTEXT_FACTORY) != null)
@@ -243,9 +237,8 @@ public final class InitialEventContext implements EventContext
      * @param atomicName the name under which the root context will be registered
      * @return The non-null cached initial context.
      * @throws NamingException if a naming exception was encountered
-     * @throws RemoteException if a network connection failure occurs
      */
-    protected ContextInterface getDefaultInitCtx(final String atomicName) throws NamingException, RemoteException
+    protected ContextInterface getDefaultInitCtx(final String atomicName) throws NamingException
     {
         try
         {
@@ -284,7 +277,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void close() throws NamingException, RemoteException
+    public void close() throws NamingException
     {
         this.properties = null;
         if (this.defaultInitCtx != null)
@@ -329,7 +322,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public Object get(final String name) throws NamingException, RemoteException
+    public Object get(final String name) throws NamingException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.get(name);
@@ -337,7 +330,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public Object getObject(final String key) throws NamingException, RemoteException
+    public Object getObject(final String key) throws NamingException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.getObject(key);
@@ -345,7 +338,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public boolean exists(final String name) throws NamingException, RemoteException
+    public boolean exists(final String name) throws NamingException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.exists(name);
@@ -353,7 +346,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public boolean hasKey(final String key) throws NamingException, RemoteException
+    public boolean hasKey(final String key) throws NamingException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.hasKey(key);
@@ -377,7 +370,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void bind(final String name, final Object object) throws NamingException, RemoteException
+    public void bind(final String name, final Object object) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.bind(name, object);
@@ -386,7 +379,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void bindObject(final String key, final Object object) throws NamingException, RemoteException
+    public void bindObject(final String key, final Object object) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.bindObject(key, object);
@@ -395,7 +388,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void bindObject(final Object object) throws NamingException, RemoteException
+    public void bindObject(final Object object) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.bindObject(object);
@@ -404,7 +397,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void unbind(final String name) throws NamingException, RemoteException
+    public void unbind(final String name) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.unbind(name);
@@ -413,7 +406,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void unbindObject(final String key) throws NamingException, RemoteException
+    public void unbindObject(final String key) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.unbindObject(key);
@@ -422,7 +415,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void rebind(final String name, final Object object) throws NamingException, RemoteException
+    public void rebind(final String name, final Object object) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.rebind(name, object);
@@ -431,7 +424,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void rebindObject(final String key, final Object object) throws NamingException, RemoteException
+    public void rebindObject(final String key, final Object object) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.rebindObject(key, object);
@@ -440,7 +433,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void rename(final String oldName, final String newName) throws NamingException, RemoteException
+    public void rename(final String oldName, final String newName) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.rename(oldName, newName);
@@ -449,7 +442,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public ContextInterface createSubcontext(final String name) throws NamingException, RemoteException
+    public ContextInterface createSubcontext(final String name) throws NamingException
     {
         if (this.defaultInitCtx != null)
             return this.defaultInitCtx.createSubcontext(name);
@@ -458,7 +451,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void destroySubcontext(final String name) throws NamingException, RemoteException
+    public void destroySubcontext(final String name) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.destroySubcontext(name);
@@ -467,7 +460,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void checkCircular(final Object newObject) throws NamingException, RemoteException
+    public void checkCircular(final Object newObject) throws NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.checkCircular(newObject);
@@ -501,7 +494,7 @@ public final class InitialEventContext implements EventContext
 
     @Override
     public void fireObjectChangedEventValue(final Object object)
-            throws NameNotFoundException, NullPointerException, NamingException, RemoteException
+            throws NameNotFoundException, NullPointerException, NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.fireObjectChangedEventValue(object);
@@ -510,8 +503,7 @@ public final class InitialEventContext implements EventContext
     }
 
     @Override
-    public void fireObjectChangedEventKey(final String key)
-            throws NameNotFoundException, NullPointerException, NamingException, RemoteException
+    public void fireObjectChangedEventKey(final String key) throws NameNotFoundException, NullPointerException, NamingException
     {
         if (this.defaultInitCtx != null)
             this.defaultInitCtx.fireObjectChangedEventKey(key);

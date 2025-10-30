@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.naming.context;
 
-import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -120,9 +119,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException as a placeholder overarching exception
      * @throws NameNotFoundException if an intermediate context or the reference does not exist
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    Object get(String name) throws NamingException, RemoteException;
+    Object get(String name) throws NamingException;
 
     /**
      * Retrieves the named object from the Context. The key is <b>not</b> compound. Key cannot be empty or contain "/".
@@ -131,9 +129,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException when key is the empty string or when key contains "/"
      * @throws NameNotFoundException if the key does not exist in the current context
      * @throws NullPointerException when key is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    Object getObject(String key) throws NamingException, RemoteException;
+    Object getObject(String key) throws NamingException;
 
     /**
      * Indicates whether an object with the given name has been registered in the Context. The name may be a compound name where
@@ -144,9 +141,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException as a placeholder overarching exception
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    boolean exists(String name) throws NamingException, RemoteException;
+    boolean exists(String name) throws NamingException;
 
     /**
      * Indicates whether the key has been registered in the current Context. The name is <b>not</b> compound. When name is the
@@ -155,9 +151,8 @@ public interface ContextInterface extends EventProducer
      * @return whether an object with the given key has been registered in the current context
      * @throws NamingException when key is the empty string or when key contains "/"
      * @throws NullPointerException when key is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    boolean hasKey(String key) throws NamingException, RemoteException;
+    boolean hasKey(String key) throws NamingException;
 
     /**
      * Indicates whether the object has been registered (once or more) in the current Context. The object may be null.
@@ -185,9 +180,8 @@ public interface ContextInterface extends EventProducer
      * @throws NameAlreadyBoundException if name is already bound to an object
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void bind(String name, Object object) throws NamingException, RemoteException;
+    void bind(String name, Object object) throws NamingException;
 
     /**
      * Binds an object into this Context using the key. The key is <b>not </b> compound. The key cannot be empty or "/". An
@@ -198,9 +192,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException when key is the empty string or when key contains "/"
      * @throws NameAlreadyBoundException if key is already bound to an object
      * @throws NullPointerException when key is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void bindObject(String key, Object object) throws NamingException, RemoteException;
+    void bindObject(String key, Object object) throws NamingException;
 
     /**
      * Binds an object into the Context using the toString() method of the object as the key. All "/" characters in the
@@ -211,9 +204,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException when the toString() of the object results in an empty string
      * @throws NameAlreadyBoundException if key is already bound to an object
      * @throws NullPointerException when object is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void bindObject(Object object) throws NamingException, RemoteException;
+    void bindObject(Object object) throws NamingException;
 
     /**
      * Removes the binding for an object in the Context with the given name. The name may be a compound name where parts are
@@ -225,9 +217,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException when the reference is "/" or empty
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void unbind(String name) throws NamingException, RemoteException;
+    void unbind(String name) throws NamingException;
 
     /**
      * Removes the binding for an object in this Context with the given key. The key is <b>not</b> compound. The key cannot be
@@ -237,9 +228,8 @@ public interface ContextInterface extends EventProducer
      * @param key the key of the object that has to be removed; NOT a compound name
      * @throws NamingException when key is the empty string or when key contains "/"
      * @throws NullPointerException when key is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void unbindObject(String key) throws NamingException, RemoteException;
+    void unbindObject(String key) throws NamingException;
 
     /**
      * Replaces an object in the Context with the given name, or registers the object when a registration with the name does not
@@ -256,9 +246,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException when the reference is "/" or empty
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void rebind(String name, Object object) throws NamingException, RemoteException;
+    void rebind(String name, Object object) throws NamingException;
 
     /**
      * Replaces an object in this Context with the given key, or registers the object when a registration with the key does not
@@ -271,9 +260,8 @@ public interface ContextInterface extends EventProducer
      *            allowed
      * @throws NamingException when key is the empty string or when key contains "/"
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void rebindObject(String key, Object object) throws NamingException, RemoteException;
+    void rebindObject(String key, Object object) throws NamingException;
 
     /**
      * Replaces the name under which an object has been registered in the Context. Both names are relative to the current
@@ -291,9 +279,8 @@ public interface ContextInterface extends EventProducer
      *             registration at the oldName reference
      * @throws NameAlreadyBoundException if newName is already bound to an object
      * @throws NullPointerException when oldName or newName is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void rename(String oldName, String newName) throws NamingException, RemoteException;
+    void rename(String oldName, String newName) throws NamingException;
 
     /**
      * Creates and binds a new context into the current Context using the name. The name may be a compound name where parts are
@@ -309,9 +296,8 @@ public interface ContextInterface extends EventProducer
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NameAlreadyBoundException if name is already bound to an object or context
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    ContextInterface createSubcontext(String name) throws NamingException, RemoteException;
+    ContextInterface createSubcontext(String name) throws NamingException;
 
     /**
      * Removes the binding for an existing, empty subcontext with the given name, and recursively unbinds all objects and
@@ -327,9 +313,8 @@ public interface ContextInterface extends EventProducer
      * @throws NameNotFoundException when an intermediate context does not exist, or when no object is registered with the
      *             terminating atomic reference
      * @throws NullPointerException when name is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void destroySubcontext(String name) throws NamingException, RemoteException;
+    void destroySubcontext(String name) throws NamingException;
 
     /**
      * Fire an OBJECT_CHANGED_EVENT for an object within the current context. Look up if the the object exists using the
@@ -339,10 +324,8 @@ public interface ContextInterface extends EventProducer
      * @throws NamingException on general error in the method, e.g., a problem with remote connections
      * @throws NameNotFoundException when no object is registered with object.toString() as the key
      * @throws NullPointerException when object is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void fireObjectChangedEventValue(final Object object)
-            throws NameNotFoundException, NullPointerException, NamingException, RemoteException;
+    void fireObjectChangedEventValue(final Object object) throws NameNotFoundException, NullPointerException, NamingException;
 
     /**
      * Fire an OBJECT_CHANGED_EVENT for an object with the given key in the current context. If the the key does not exist
@@ -353,10 +336,8 @@ public interface ContextInterface extends EventProducer
      *             a problem with remote connections
      * @throws NameNotFoundException when no object is registered with the key in the given context
      * @throws NullPointerException when key is null
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void fireObjectChangedEventKey(final String key)
-            throws NameNotFoundException, NullPointerException, NamingException, RemoteException;
+    void fireObjectChangedEventKey(final String key) throws NameNotFoundException, NullPointerException, NamingException;
 
     /**
      * Returns a set of registered keys in the current context.
@@ -382,17 +363,15 @@ public interface ContextInterface extends EventProducer
      * potentially causes a problem when the object to be inserted is a Context.
      * @param newObject the object to be inserted
      * @throws NamingException when a circular reference would occur
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void checkCircular(Object newObject) throws NamingException, RemoteException;
+    void checkCircular(Object newObject) throws NamingException;
 
     /**
      * Closes the context and removes all content from the context. No events will be fired that the content of the context has
      * been removed. Some contexts, such as the FileContext could have to be really closed as well.
      * @throws NamingException when a problem occurs during closing (e.g., of a FileContext)
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    void close() throws NamingException, RemoteException;
+    void close() throws NamingException;
 
     /**
      * Return a String with the hierarchical content of the Context in case verbose is true; otherwise return the atomic name.

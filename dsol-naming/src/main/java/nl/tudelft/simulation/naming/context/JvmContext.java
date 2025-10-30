@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.naming.context;
 
-import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -97,7 +96,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public Object getObject(final String key) throws NamingException, RemoteException
+    public Object getObject(final String key) throws NamingException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -111,7 +110,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public Object get(final String name) throws NamingException, RemoteException
+    public Object get(final String name) throws NamingException
     {
         ContextName contextName = lookup(name);
         if (contextName.getName().length() == 0)
@@ -123,7 +122,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public boolean exists(final String name) throws NamingException, RemoteException
+    public boolean exists(final String name) throws NamingException
     {
         ContextName contextName = lookup(name);
         if (contextName.getName().length() == 0)
@@ -134,7 +133,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public boolean hasKey(final String key) throws NamingException, RemoteException
+    public boolean hasKey(final String key) throws NamingException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -160,7 +159,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public void bindObject(final String key, final Object object) throws NamingException, RemoteException
+    public void bindObject(final String key, final Object object) throws NamingException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -175,21 +174,21 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public void bindObject(final Object object) throws NamingException, RemoteException
+    public void bindObject(final Object object) throws NamingException
     {
         Throw.whenNull(object, "object cannot be null");
         bindObject(makeObjectKey(object), object);
     }
 
     @Override
-    public void bind(final String name, final Object object) throws NamingException, RemoteException
+    public void bind(final String name, final Object object) throws NamingException
     {
         ContextName contextName = lookup(name);
         contextName.getContext().bindObject(contextName.getName(), object);
     }
 
     @Override
-    public void unbindObject(final String key) throws NamingException, RemoteException
+    public void unbindObject(final String key) throws NamingException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -202,14 +201,14 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public void unbind(final String name) throws NamingException, RemoteException
+    public void unbind(final String name) throws NamingException
     {
         ContextName contextName = lookup(name);
         contextName.getContext().unbindObject(contextName.getName());
     }
 
     @Override
-    public void rebindObject(final String key, final Object object) throws NamingException, RemoteException
+    public void rebindObject(final String key, final Object object) throws NamingException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -225,14 +224,14 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public void rebind(final String name, final Object object) throws NamingException, RemoteException
+    public void rebind(final String name, final Object object) throws NamingException
     {
         ContextName contextName = lookup(name);
         contextName.getContext().rebindObject(contextName.getName(), object);
     }
 
     @Override
-    public void rename(final String oldName, final String newName) throws NamingException, RemoteException
+    public void rename(final String oldName, final String newName) throws NamingException
     {
         ContextName contextNameOld = lookup(oldName);
         ContextName contextNameNew = lookup(newName);
@@ -247,13 +246,13 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public ContextInterface createSubcontext(final String name) throws NamingException, RemoteException
+    public ContextInterface createSubcontext(final String name) throws NamingException
     {
         return lookupAndBuild(name);
     }
 
     @Override
-    public void destroySubcontext(final String name) throws NamingException, RemoteException
+    public void destroySubcontext(final String name) throws NamingException
     {
         ContextName contextName = lookup(name);
         Object object = contextName.getContext().getObject(contextName.getName());
@@ -271,11 +270,10 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
      * @param name the (possibly compound) name
      * @return the context, possibly built new
      * @throws NamingException as a placeholder overarching exception
-     * @throws RemoteException when the JVM context is used over a network and a network error occurs
      * @throws NameNotFoundException when an intermediate context does not exist
      * @throws NullPointerException when name is null
      */
-    protected ContextInterface lookupAndBuild(final String name) throws NamingException, RemoteException
+    protected ContextInterface lookupAndBuild(final String name) throws NamingException
     {
         Throw.whenNull(name, "name cannot be null");
 
@@ -336,9 +334,8 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
      * an OBJECT_REMOVED event, depth first.
      * @param context the context to empty
      * @throws NamingException on tree inconsistencies
-     * @throws RemoteException on RMI error
      */
-    protected void destroy(final ContextInterface context) throws RemoteException, NamingException
+    protected void destroy(final ContextInterface context) throws NamingException
     {
         // depth-first subcontext removal
         Set<String> copyKeySet = new LinkedHashSet<>(context.keySet());
@@ -383,15 +380,14 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
 
     @Override
     public void fireObjectChangedEventValue(final Object object)
-            throws NameNotFoundException, NullPointerException, NamingException, RemoteException
+            throws NameNotFoundException, NullPointerException, NamingException
     {
         Throw.whenNull(object, "object cannot be null");
         fireObjectChangedEventKey(makeObjectKey(object));
     }
 
     @Override
-    public void fireObjectChangedEventKey(final String key)
-            throws NameNotFoundException, NullPointerException, NamingException, RemoteException
+    public void fireObjectChangedEventKey(final String key) throws NameNotFoundException, NullPointerException, NamingException
     {
         Throw.whenNull(key, "key cannot be null");
         Throw.when(key.length() == 0 || key.contains(ContextInterface.SEPARATOR), NamingException.class,
@@ -421,7 +417,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public void checkCircular(final Object newObject) throws NamingException, RemoteException
+    public void checkCircular(final Object newObject) throws NamingException
     {
         if (!(newObject instanceof ContextInterface))
             return;
@@ -436,7 +432,7 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
     }
 
     @Override
-    public void close() throws NamingException, RemoteException
+    public void close() throws NamingException
     {
         this.elements.clear();
         this.atomicName = "";
@@ -468,10 +464,9 @@ public class JvmContext extends LocalEventProducer implements ContextInterface
      * @return a ContextName combination string the subcontext and final reference name
      * @throws NamingException as a placeholder overarching exception
      * @throws NameNotFoundException when an intermediate context does not exist
-     * @throws RemoteException when the JVM context is used over a network and a network error occurs
      * @throws NullPointerException when name is null
      */
-    protected ContextName lookup(final String name) throws NamingException, RemoteException
+    protected ContextName lookup(final String name) throws NamingException
     {
         Throw.whenNull(name, "name cannot be null");
 

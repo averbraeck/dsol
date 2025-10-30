@@ -1,6 +1,5 @@
 package nl.tudelft.simulation.naming.context.util;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,10 +29,9 @@ public class ContextUtil
      * @param name the name to register the new subcontext
      * @return the newly created subcontext
      * @throws NamingException when terminating key in the name is blank or contains "/" character(s)
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
     public static ContextInterface lookupOrCreateSubContext(final ContextInterface parentContext, final String name)
-            throws NamingException, RemoteException
+            throws NamingException
     {
         try
         {
@@ -60,10 +58,9 @@ public class ContextUtil
      * @param name the name to register the new subcontext
      * @return the newly created subcontext
      * @throws NamingException when terminating key in the name is blank or contains "/" character(s)
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
     public static ContextInterface lookupSubContext(final ContextInterface parentContext, final String name)
-            throws NamingException, RemoteException
+            throws NamingException
     {
         if (parentContext.exists(name))
         {
@@ -82,10 +79,8 @@ public class ContextUtil
      * @param parentContext the parent context
      * @param name the name to use to find the subcontext to remove
      * @throws NamingException when terminating key in the name is blank or contains "/" character(s)
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    public static void destroySubContext(final ContextInterface parentContext, final String name)
-            throws NamingException, RemoteException
+    public static void destroySubContext(final ContextInterface parentContext, final String name) throws NamingException
     {
         parentContext.destroySubcontext(name);
     }
@@ -99,10 +94,8 @@ public class ContextUtil
      * @param object the object to look up in the tree under the startContext
      * @return the list of keys that are bound to the object, or an empty list if no bindings for the object were found
      * @throws NamingException when an error occurs during searching
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
-    public static List<String> resolveKeys(final ContextInterface startContext, final Object object)
-            throws NamingException, RemoteException
+    public static List<String> resolveKeys(final ContextInterface startContext, final Object object) throws NamingException
     {
         List<String> result = new ArrayList<>();
         resolveKeys(startContext, object, result, "");
@@ -120,10 +113,9 @@ public class ContextUtil
      *            found yet
      * @param partialKey the key of the current level in the tree, relative to the original start context of the search
      * @throws NamingException when an error occurs during searching
-     * @throws RemoteException on a network error when the Context is used over RMI
      */
     private static void resolveKeys(final ContextInterface context, final Object object, final List<String> result,
-            final String partialKey) throws NamingException, RemoteException
+            final String partialKey) throws NamingException
     {
         for (Entry<String, Object> binding : context.bindings().entrySet())
         {
@@ -188,7 +180,7 @@ public class ContextUtil
                 }
             }
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             sb.append("ERR " + exception.getMessage() + "\n");
         }
