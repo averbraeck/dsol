@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.rmi.RemoteException;
 import java.util.Hashtable;
 
 import javax.naming.NamingException;
@@ -150,7 +149,7 @@ public class EventContextTest
             assertFalse("root/simulation1/sub1/object".matches(regExpObject));
             assertFalse("sub1/object".matches(regExpObject));
         }
-        catch (NamingException | RemoteException | NoSuchFieldException | SecurityException | IllegalArgumentException
+        catch (NamingException | NoSuchFieldException | SecurityException | IllegalArgumentException
                 | IllegalAccessException exception)
         {
             throw exception;
@@ -419,7 +418,7 @@ public class EventContextTest
             context.removeListener(listenerSubTree, "/1/11", ContextScope.SUBTREE_SCOPE);
 
         }
-        catch (NamingException | RemoteException | SecurityException | IllegalArgumentException exception)
+        catch (NamingException | SecurityException | IllegalArgumentException exception)
         {
             throw exception;
         }

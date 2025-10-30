@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.util.Properties;
@@ -23,7 +20,6 @@ import org.djutils.event.reference.ReferenceType;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
-import nl.tudelft.simulation.naming.context.FileContext;
 import nl.tudelft.simulation.naming.context.JvmContext;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 
@@ -57,13 +53,6 @@ public class ContextTestPubSub
         assertEquals("", jvmContext.getAbsolutePath());
         testContextEvents(jvmContext);
 
-        // test FileContext directly
-        Path path = Files.createTempFile("context-file", ".jpo");
-        File file = path.toFile();
-        file.deleteOnExit();
-        ContextInterface fileContext = new FileContext(file, "root");
-        testContextEvents(fileContext);
-
         // test InitialEventContext
         Properties properties = new Properties();
         properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
@@ -73,18 +62,6 @@ public class ContextTestPubSub
         testContextEvents(eventContext);
         eventContext.close();
         ContextTestUtil.destroyInitialEventContext(eventContext);
-
-        // test FileContext via FileContextFactory
-        Path fcPath = Files.createTempFile("factory-context-file", ".jpo");
-        File fcFile = fcPath.toFile();
-        fcFile.delete(); // should not exist yet -- only the name and handle.
-        fcFile.deleteOnExit();
-        String fcName = fcPath.toUri().toURL().toString();
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.FileContextFactory");
-        properties.put("java.naming.provider.url", fcName);
-        InitialEventContext factoryFileContext = InitialEventContext.instantiate(properties, "root");
-        testContextEvents(factoryFileContext);
-        ContextTestUtil.destroyInitialEventContext(factoryFileContext);
     }
 
     /**

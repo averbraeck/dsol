@@ -16,7 +16,7 @@ import org.djutils.rmi.RmiObject;
 import org.djutils.rmi.RmiRegistry;
 
 import nl.tudelft.simulation.naming.context.event.ContextScope;
-import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
+import nl.tudelft.simulation.naming.context.event.EventContextInterface;
 
 /**
  * DemoClient sets up a connection to the remote context at DemoServer and periodically prints the results.
@@ -37,7 +37,7 @@ public class DemoClient extends RmiObject implements EventListener
     private boolean exit = false;
 
     /** the remote context. */
-    private RemoteEventContextInterface remoteContext;
+    private EventContextInterface remoteContext;
 
     /**
      * @throws AlreadyBoundException when object was aleady registered in RMI
@@ -55,7 +55,7 @@ public class DemoClient extends RmiObject implements EventListener
 
         URL url = new URL("http://127.0.0.1:1099/remoteContext");
         Registry registry = LocateRegistry.getRegistry(url.getHost(), url.getPort());
-        this.remoteContext = (RemoteEventContextInterface) registry.lookup(url.getFile());
+        this.remoteContext = (EventContextInterface) registry.lookup(url.getFile());
 
         this.remoteContext.addListener(this, "/", ContextScope.SUBTREE_SCOPE);
 

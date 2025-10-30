@@ -7,12 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.rmi.AlreadyBoundException;
-import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -25,15 +21,11 @@ import javax.naming.NoInitialContextException;
 import javax.naming.NotContextException;
 
 import org.djutils.event.reference.ReferenceType;
-import org.djutils.rmi.RmiRegistry;
 import org.djutils.test.UnitTest;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
-import nl.tudelft.simulation.naming.context.FileContext;
 import nl.tudelft.simulation.naming.context.JvmContext;
-import nl.tudelft.simulation.naming.context.RemoteContext;
-import nl.tudelft.simulation.naming.context.RemoteContextInterface;
 import nl.tudelft.simulation.naming.context.event.ContextScope;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 
@@ -69,27 +61,6 @@ public class ContextTest
         assertEquals(jvmContext, jvmContext.getRootContext());
         testContext(jvmContext, jvmContext, true);
 
-        // test FileContext directly
-        Path path = Files.createTempFile("context-file", ".jpo");
-        File file = path.toFile();
-        file.deleteOnExit();
-        ContextInterface fileContext = new FileContext(file, "root");
-        testContext(fileContext, fileContext, true);
-
-        // test RemoteContext directly
-        ContextInterface embeddedContext = new JvmContext(null, "root");
-        RemoteContext remoteContext =
-                new RemoteContext("127.0.0.1", 1099, "remoteContextKey", embeddedContext, "remoteEventProducerKey");
-        testContext(remoteContext, embeddedContext, true);
-        try
-        {
-            RmiRegistry.closeRegistry(remoteContext.getRegistry());
-        }
-        catch (NoSuchObjectException e)
-        {
-            System.err.println(e.getMessage());
-        }
-
         // test InitialEventContext
         Properties properties = new Properties();
         properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
@@ -110,26 +81,6 @@ public class ContextTest
         assertEquals("root", eventContext3.getAtomicName());
         testContext(eventContext3, eventContext3.getRootContext(), true);
         ContextTestUtil.destroyInitialEventContext(eventContext3);
-
-        // test FileContext via FileContextFactory
-        Path fcPath = Files.createTempFile("factory-context-file", ".jpo");
-        File fcFile = fcPath.toFile();
-        fcFile.delete(); // should not exist yet -- only the name and handle.
-        fcFile.deleteOnExit();
-        String fcName = fcPath.toUri().toURL().toString();
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.FileContextFactory");
-        properties.put("java.naming.provider.url", fcName);
-        InitialEventContext factoryFileContext = InitialEventContext.instantiate(properties, "root");
-        testContext(factoryFileContext, factoryFileContext.getRootContext(), true);
-        ContextTestUtil.destroyInitialEventContext(factoryFileContext);
-
-        // test RemoteEventContext
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.RemoteContextFactory");
-        properties.put("java.naming.provider.url", "http://localhost:1099/remoteContext");
-        properties.put("wrapped.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
-        InitialEventContext remoteEventContext = InitialEventContext.instantiate(properties, "root");
-        testContext(remoteEventContext, remoteEventContext.getRootContext(), false);
-        ContextTestUtil.destroyInitialEventContext(remoteEventContext);
     }
 
     /**
@@ -159,7 +110,6 @@ public class ContextTest
         context.destroySubcontext("level1");
         assertTrue(context.toString(false).contains(context.getAtomicName()));
 
-        // TODO: make sure testSubContext also runs for RemoteContext
         if (testSub)
             testSubContext(context, expectedRootContext);
     }
@@ -258,13 +208,10 @@ public class ContextTest
         });
 
         // test the current context and root context
-        if (!(expectedRootContext instanceof RemoteContextInterface))
+        assertEquals(expectedRootContext, context.get(""));
+        if (context.getParent() == null)
         {
-            assertEquals(expectedRootContext, context.get(""));
-            if (context.getParent() == null)
-            {
-                assertEquals(expectedRootContext, context.get("/"));
-            }
+            assertEquals(expectedRootContext, context.get("/"));
         }
         assertTrue(context.exists(""));
         assertTrue(context.exists("/"));

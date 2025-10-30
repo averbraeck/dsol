@@ -1,7 +1,6 @@
 package nl.tudelft.simulation.dsol.naming.demo;
 
 import java.io.IOException;
-import java.net.URL;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.util.Collections;
@@ -15,8 +14,6 @@ import org.djutils.rmi.RmiObject;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
 import nl.tudelft.simulation.naming.context.JvmContext;
-import nl.tudelft.simulation.naming.context.event.RemoteEventContext;
-import nl.tudelft.simulation.naming.context.event.RemoteEventContextInterface;
 
 /**
  * DemoServer sets up a context with a few items and subcontexts to which a DemoClient can subscribe.
@@ -46,9 +43,7 @@ public class DemoServer extends RmiObject implements EventProducer
     {
         super("127.0.0.1", 1099, "demoserver");
         this.eventListenerMap = new EventListenerMap();
-        URL url = new URL("http://127.0.0.1:1099/remoteContext");
-        RemoteEventContextInterface remoteContext =
-                new RemoteEventContext(url, new JvmContext("root"), "remoteContext.producer");
+        ContextInterface remoteContext = new JvmContext("root");
 
         remoteContext.bind("key1", "string1");
         remoteContext.bind("key2", "string2");
@@ -180,7 +175,7 @@ public class DemoServer extends RmiObject implements EventProducer
                 }
             }
         }
-        catch (NamingException | RemoteException exception)
+        catch (NamingException exception)
         {
             System.err.println("ERR " + exception.getMessage());
         }

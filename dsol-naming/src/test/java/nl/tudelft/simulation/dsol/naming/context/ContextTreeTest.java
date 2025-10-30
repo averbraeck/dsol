@@ -4,25 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.rmi.AlreadyBoundException;
-import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Properties;
 
 import javax.naming.NamingException;
 
-import org.djutils.rmi.RmiRegistry;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.naming.context.ContextInterface;
-import nl.tudelft.simulation.naming.context.FileContext;
 import nl.tudelft.simulation.naming.context.JvmContext;
-import nl.tudelft.simulation.naming.context.RemoteContext;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 import nl.tudelft.simulation.naming.context.util.ContextUtil;
 
@@ -54,44 +47,6 @@ public class ContextTreeTest
         jvmContext = new JvmContext(null, "root");
         testContextUtil(jvmContext);
 
-        // test FileContext directly
-        Path path = Files.createTempFile("context-file", ".jpo");
-        File file = path.toFile();
-        file.deleteOnExit();
-        ContextInterface fileContext = new FileContext(file, "root");
-        testContextTree(fileContext);
-        path = Files.createTempFile("context-file", ".jpo");
-        file = path.toFile();
-        file.deleteOnExit();
-        fileContext = new FileContext(file, "root");
-        testContextUtil(fileContext);
-
-        // test RemoteContext directly
-        RemoteContext remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JvmContext(null, "root"),
-                "remoteEventProducerKey");
-        testContextTree(remoteContext);
-        try
-        {
-            RmiRegistry.closeRegistry(remoteContext.getRegistry());
-        }
-        catch (NoSuchObjectException e)
-        {
-            // TODO: research why RmiRegistry.closeRegistry(remoteContext.getRegistry()) gives an error
-            System.err.println(e.getMessage());
-        }
-        remoteContext = new RemoteContext("127.0.0.1", 1099, "remoteContextKey", new JvmContext(null, "root"),
-                "remoteEventProducerKey");
-        testContextUtil(remoteContext);
-        try
-        {
-            RmiRegistry.closeRegistry(remoteContext.getRegistry());
-        }
-        catch (NoSuchObjectException e)
-        {
-            // TODO: research why RmiRegistry.closeRegistry(remoteContext.getRegistry()) gives an error
-            System.err.println(e.getMessage());
-        }
-
         // test InitialEventContext
         Properties properties = new Properties();
         properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
@@ -102,26 +57,6 @@ public class ContextTreeTest
         eventContext = InitialEventContext.instantiate(properties, "root");
         testContextUtil(eventContext);
         eventContext.close();
-        ContextTestUtil.destroyInitialEventContext(eventContext);
-
-        // test FileContext via FileContextFactory
-        Path fcPath = Files.createTempFile("factory-context-file", ".jpo");
-        File fcFile = fcPath.toFile();
-        fcFile.delete(); // should not exist yet -- only the name and handle.
-        fcFile.deleteOnExit();
-        String fcName = fcPath.toUri().toURL().toString();
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.FileContextFactory");
-        properties.put("java.naming.provider.url", fcName);
-        InitialEventContext factoryFileContext = InitialEventContext.instantiate(properties, "root");
-        testContextTree(factoryFileContext);
-        ContextTestUtil.destroyInitialEventContext(eventContext);
-
-        // test RemoteContext
-        properties.put("java.naming.factory.initial", "nl.tudelft.simulation.naming.context.RemoteContextFactory");
-        properties.put("java.naming.provider.url", "http://localhost:1099/remoteContext");
-        properties.put("wrapped.naming.factory.initial", "nl.tudelft.simulation.naming.context.JvmContextFactory");
-        InitialEventContext remoteEventContext = InitialEventContext.instantiate(properties, "root");
-        testContextTree(remoteEventContext);
         ContextTestUtil.destroyInitialEventContext(eventContext);
     }
 

@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 
-import nl.tudelft.simulation.naming.context.FileContextFactory;
 import nl.tudelft.simulation.naming.context.JvmContextFactory;
-import nl.tudelft.simulation.naming.context.RemoteContextFactory;
 import nl.tudelft.simulation.naming.context.event.InitialEventContext;
 
 /**
@@ -65,16 +63,6 @@ public final class ContextTestUtil
             jvmContext.setAccessible(true);
             jvmContext.set(null, null);
             jvmContext.setAccessible(false);
-
-            Field fileContext = FileContextFactory.class.getDeclaredField("context");
-            fileContext.setAccessible(true);
-            fileContext.set(null, null);
-            fileContext.setAccessible(false);
-
-            Field remoteContext = RemoteContextFactory.class.getDeclaredField("context");
-            remoteContext.setAccessible(true);
-            remoteContext.set(null, null);
-            remoteContext.setAccessible(false);
         }
         catch (Exception e)
         {
