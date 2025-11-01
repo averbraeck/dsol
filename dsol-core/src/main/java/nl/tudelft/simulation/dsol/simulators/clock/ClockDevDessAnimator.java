@@ -3,6 +3,7 @@ package nl.tudelft.simulation.dsol.simulators.clock;
 import java.io.Serializable;
 
 import org.djunits.value.vdouble.scalar.Duration;
+import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.simulators.DevDessAnimator;
@@ -21,7 +22,7 @@ import nl.tudelft.simulation.dsol.simulators.DevDessAnimator;
 public class ClockDevDessAnimator extends DevDessAnimator<Duration> implements ClockDevsSimulatorInterface
 {
     /** The absolute startTime of the simulator. */
-    private final ClockTime startTime;
+    private ClockTime startTime;
 
     /**
      * Instantiate a ClockDevDessAnimator.
@@ -41,6 +42,13 @@ public class ClockDevDessAnimator extends DevDessAnimator<Duration> implements C
     public ClockTime getStartClockTime()
     {
         return this.startTime;
+    }
+
+    @Override
+    public void setStartClockTime(final ClockTime startTime)
+    {
+        Throw.when(isInitialized(), SimRuntimeException.class, "Start time cannot be set after initialization");
+        this.startTime = startTime;
     }
 
 }

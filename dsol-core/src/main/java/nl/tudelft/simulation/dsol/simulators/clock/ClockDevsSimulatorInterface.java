@@ -28,6 +28,13 @@ public interface ClockDevsSimulatorInterface extends DevsSimulatorInterface<Dura
     ClockTime getStartClockTime();
 
     /**
+     * Set the start time of the simulator as a 'calendar-aware' ClockTime. Throw an exception when the simulator has already
+     * been initialized.
+     * @param startTime the start time of the simulator as a 'calendar-aware' ClockTime
+     */
+    void setStartClockTime(ClockTime startTime);
+
+    /**
      * Return the simulator time as a 'ClockTime' object rather than a 'Duration' object.
      * @return the simulator time as a 'ClockTime' object rather than a 'Duration' object
      */

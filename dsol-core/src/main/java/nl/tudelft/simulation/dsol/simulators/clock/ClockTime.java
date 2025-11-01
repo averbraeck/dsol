@@ -27,6 +27,9 @@ import org.djunits.value.vdouble.scalar.Time;
  */
 public class ClockTime extends Time
 {
+    /** */
+    private static final long serialVersionUID = 20251101L;
+
     /**
      * Create a clock time as an extension of a djunits Time.
      * @param value the Time to store in this ClockTime.
