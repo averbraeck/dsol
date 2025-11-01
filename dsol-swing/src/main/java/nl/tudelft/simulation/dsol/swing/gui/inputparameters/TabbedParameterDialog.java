@@ -30,6 +30,7 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDoubleScal
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloat;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloatScalar;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterLocalDateTime;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterLong;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterSelectionList;
@@ -46,6 +47,9 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterString;
  */
 public class TabbedParameterDialog extends JDialog implements ActionListener
 {
+    /** */
+    private static final long serialVersionUID = 1L;
+
     /** The parameter map. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     public InputParameterMap inputParameterMap;
@@ -187,6 +191,10 @@ public class TabbedParameterDialog extends JDialog implements ActionListener
         {
             this.fields.add(new InputFieldInteger(panel, (InputParameterInteger) parameter));
         }
+        else if (parameter instanceof InputParameterLocalDateTime)
+        {
+            this.fields.add(new InputFieldLocalDateTime(panel, (InputParameterLocalDateTime) parameter));
+        }
         else if (parameter instanceof InputParameterString)
         {
             this.fields.add(new InputFieldString(panel, parameter));
@@ -249,6 +257,11 @@ public class TabbedParameterDialog extends JDialog implements ActionListener
                 {
                     InputFieldLong f = (InputFieldLong) field;
                     f.getParameter().setLongValue(f.getLongValue());
+                }
+                else if (field instanceof InputFieldLocalDateTime)
+                {
+                    InputFieldLocalDateTime f = (InputFieldLocalDateTime) field;
+                    f.getParameter().setValue(f.getDateTimeValue());
                 }
                 else if (field instanceof InputFieldString)
                 {
