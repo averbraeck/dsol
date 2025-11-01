@@ -3,6 +3,7 @@ package nl.tudelft.simulation.dsol.model.inputparameters.reader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.Properties;
 
 import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
@@ -191,6 +192,28 @@ public final class ReadInputParameters
             }
             String value = properties.getProperty(key.toString());
             setParameter(parameter, value);
+        }
+    }
+
+    /**
+     * Update the defaults for the parameters to be displayed to the loaded values from the properties file and the command
+     * line. This ensures that the editing takes place on the basis of the provided information in the properties file and the
+     * command line.
+     * @param map InputParameterMap; the input parameters
+     * @throws InputParameterException when the default value could not be set
+     */
+    @SuppressWarnings("unchecked")
+    public static void setInputParametersDefaults(final InputParameterMap map) throws InputParameterException
+    {
+        for (Map.Entry<String, InputParameter<?, ?>> entry : map.getValue().entrySet())
+        {
+            @SuppressWarnings("rawtypes")
+            InputParameter parameter = entry.getValue();
+            if (parameter instanceof InputParameterMap)
+            {
+                setInputParametersDefaults((InputParameterMap) parameter);
+            }
+            parameter.setDefaultValue(parameter.getCalculatedValue());
         }
     }
 
