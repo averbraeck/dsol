@@ -1,16 +1,24 @@
 package nl.tudelft.simulation.dsol.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Map;
 
+import org.djunits.unit.LengthUnit;
+import org.djunits.value.vdouble.scalar.Length;
+import org.djunits.value.vfloat.scalar.FloatLength;
 import org.junit.jupiter.api.Test;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.StreamInformation;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterBoolean;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDouble;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDoubleScalar;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloatScalar;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterString;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulator;
 import nl.tudelft.simulation.dsol.simulators.DevsSimulatorInterface;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
@@ -77,6 +85,25 @@ public class ModelTest
         assertNotNull(model.getInputParameterMap());
         model.getInputParameterMap().add(new InputParameterDouble("double", "double", "double", 10.0, 1.0));
         assertEquals(10.0, (double) model.getInputParameterMap().get("double").getDefaultValue(), 1E-6);
+        assertEquals(10.0, model.getInputParameterDouble("double"));
+        assertEquals(10, model.getInputParameterInteger("double"));
+        assertEquals(10L, model.getInputParameterLong("double"));
+        assertEquals(10.0f, model.getInputParameterFloat("double"));
+        model.getInputParameterMap().add(new InputParameterBoolean("b", "b", "b", false, 1.5));
+        assertFalse(model.getInputParameterBoolean("b"));
+        model.getInputParameterMap().add(new InputParameterString("s", "s", "s", "abc", 1.6));
+        assertEquals("abc", model.getInputParameterString("s"));
+
+        model.getInputParameterMap().add(new InputParameterDoubleScalar<LengthUnit, Length>("length", "length", "length value",
+                new Length(12.0, LengthUnit.KILOMETER), 2.0));
+        assertEquals(new Length(12.0, LengthUnit.KILOMETER), model.getInputParameterDoubleScalar("length", Length.class));
+        assertEquals(LengthUnit.KILOMETER, model.getInputParameterUnit("length.unit", LengthUnit.class));
+
+        model.getInputParameterMap().add(new InputParameterFloatScalar<LengthUnit, FloatLength>("flength", "flength",
+                "flength value", new FloatLength(12.0f, LengthUnit.KILOMETER), 2.5));
+        assertEquals(new FloatLength(12.0f, LengthUnit.KILOMETER),
+                model.getInputParameterFloatScalar("flength", FloatLength.class));
+
     }
 
 }

@@ -3,14 +3,21 @@ package nl.tudelft.simulation.dsol.model;
 import java.util.List;
 import java.util.Map;
 
+import org.djunits.unit.Unit;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 import org.djutils.exceptions.Throw;
 
 import nl.tudelft.simulation.dsol.SimRuntimeException;
 import nl.tudelft.simulation.dsol.experiment.StreamInformation;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterDoubleScalar;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloatScalar;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.simulators.SimulatorInterface;
 import nl.tudelft.simulation.dsol.statistics.SimulationStatistic;
 import nl.tudelft.simulation.jstats.streams.StreamInterface;
+import nl.tudelft.simulation.language.DsolRuntimeException;
 
 /**
  * The model interface defines the model object. Since version 2.1.0 of DSOL, the DsolModel now knows its simulator and can
@@ -68,6 +75,184 @@ public interface DsolModel<T extends Number & Comparable<T>, S extends Simulator
      * @param inputParameterMap the new input parameter map for this model
      */
     void setInputParameterMap(InputParameterMap inputParameterMap);
+
+    /**
+     * Get the double value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @return the double value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    default double getInputParameterDouble(final String key)
+    {
+        try
+        {
+            return ((Number) getInputParameterMap().get(key).getCalculatedValue()).doubleValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterDouble cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the float value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @return the float value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    default float getInputParameterFloat(final String key)
+    {
+        try
+        {
+            return ((Number) getInputParameterMap().get(key).getCalculatedValue()).floatValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterFloat cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the long value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @return the long value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    default long getInputParameterLong(final String key)
+    {
+        try
+        {
+            return ((Number) getInputParameterMap().get(key).getCalculatedValue()).longValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterLong cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the int value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @return the int value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    default int getInputParameterInteger(final String key)
+    {
+        try
+        {
+            return ((Number) getInputParameterMap().get(key).getCalculatedValue()).intValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterInteger cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the String value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @return the String value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    default String getInputParameterString(final String key)
+    {
+        try
+        {
+            return (String) getInputParameterMap().get(key).getCalculatedValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterString cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the boolean value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @return the boolean value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    default boolean getInputParameterBoolean(final String key)
+    {
+        try
+        {
+            return (boolean) getInputParameterMap().get(key).getCalculatedValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterBoolean cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the double scalar value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @param scalarClass the scalar class to retrieve the value for
+     * @param <U> the unit class
+     * @param <V> the scalar class
+     * @return the double scalar value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    @SuppressWarnings("unchecked")
+    default <U extends Unit<U>, V extends DoubleScalar<U, V>> V getInputParameterDoubleScalar(final String key,
+            final Class<V> scalarClass)
+    {
+        try
+        {
+            InputParameterDoubleScalar<U, V> ip = (InputParameterDoubleScalar<U, V>) getInputParameterMap().get(key);
+            ip.setCalculatedValue();
+            return ip.getCalculatedValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterDoubleScalar cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the float scalar value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @param scalarClass the scalar class to retrieve the value for
+     * @param <U> the unit class
+     * @param <V> the scalar class
+     * @return the float scalar value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    @SuppressWarnings("unchecked")
+    default <U extends Unit<U>, V extends FloatScalar<U, V>> V getInputParameterFloatScalar(final String key,
+            final Class<V> scalarClass)
+    {
+        try
+        {
+            InputParameterFloatScalar<U, V> ip = (InputParameterFloatScalar<U, V>) getInputParameterMap().get(key);
+            ip.setCalculatedValue();
+            return ip.getCalculatedValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterFloatScalar cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the unit value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @param unitClass the unit class to retrieve the value for
+     * @return the unit value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    @SuppressWarnings("unchecked")
+    default <U extends Unit<U>> U getInputParameterUnit(final String key, final Class<U> unitClass)
+    {
+        try
+        {
+            return (U) getInputParameterMap().get(key).getCalculatedValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterUnit cannot retrieve or cast value", exception);
+        }
+    }
 
     /**
      * Get the output statistics for this model.
