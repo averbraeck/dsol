@@ -1,5 +1,6 @@
 package nl.tudelft.simulation.dsol.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -251,6 +252,24 @@ public interface DsolModel<T extends Number & Comparable<T>, S extends Simulator
         catch (InputParameterException | ClassCastException exception)
         {
             throw new DsolRuntimeException("getInputParameterUnit cannot retrieve or cast value", exception);
+        }
+    }
+
+    /**
+     * Get the LocalDateTime value for an input parameter.
+     * @param key the name of the parameter to retrieve, with dot-notation to indicate sub-maps
+     * @return the LocalDateTime value for an input parameter
+     * @throws DsolRuntimeException when the parameter could not be retrieved or casted
+     */
+    default LocalDateTime getInputParameterLocalDateTime(final String key)
+    {
+        try
+        {
+            return (LocalDateTime) getInputParameterMap().get(key).getCalculatedValue();
+        }
+        catch (InputParameterException | ClassCastException exception)
+        {
+            throw new DsolRuntimeException("getInputParameterLocalDateTime cannot retrieve or cast value", exception);
         }
     }
 
