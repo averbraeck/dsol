@@ -3,6 +3,7 @@ package nl.tudelft.simulation.dsol.model.inputparameters.reader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Properties;
 
@@ -104,6 +105,7 @@ import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterException;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloat;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterFloatScalar;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterInteger;
+import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterLocalDateTime;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterLong;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterMap;
 import nl.tudelft.simulation.dsol.model.inputparameters.InputParameterSelectionList;
@@ -320,6 +322,11 @@ public final class ReadInputParameters
         {
             InputParameterLong param = (InputParameterLong) parameter;
             param.setLongValue(Long.valueOf(value));
+        }
+        else if (parameter instanceof InputParameterLocalDateTime)
+        {
+            InputParameterLocalDateTime param = (InputParameterLocalDateTime) parameter;
+            param.setValue(LocalDateTime.parse(value));
         }
         else if (parameter instanceof InputParameterString)
         {
